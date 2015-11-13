@@ -5,16 +5,22 @@
 //  Created by 杨春霞 on 12.11.15.
 //  Copyright © 2015 Chunxia Yang. All rights reserved.
 //
+// Thema: Entwurf und Implementierung eines Algorithmus zum Loesen des Rubrik-Cube Problems
 
 #include <fcntl.h>
 #include <stdio.h>
 #include <sys/mman.h>
+
+#ifdef __linux__
 #include "lms2012.h"
+#endif
+
 #include <unistd.h>
 #include <stdlib.h>
-
 #include "Arm_motor.h"
 
+
+#ifdef __linux__
 const int MOTOR_SPEED=20;//power:0~100
 const char MOTOR_PORT_A = 0x01; //Ausfahrbarer Greifarm Motor;
 MOTORDATA *pMotorData;
@@ -23,11 +29,12 @@ int encoder_file;
 int arm_referenz=0;
 int arm_ist=0;
 const int arm_winkel[]={-4,-83,-132,-231,-320};//-85   231
+#endif
 
 
 int arm_init()
 {
-    
+#ifdef __linux__
     if ((motor_file = open(PWM_DEVICE_NAME, O_WRONLY))== -1)
     {
         printf("Failed to open device\n");
@@ -74,6 +81,8 @@ int arm_init()
     printf("Arm_referenzPosition angefahren %d\n\r",arm_referenz);
     
     arm_setpos(0);
+#endif
+    return 0;
 }
 
 
@@ -81,7 +90,7 @@ int arm_init()
 
 int arm_setpos(int arm_soll)
 {
-    
+#ifdef __linux__
     char motor_command[4];
     
     motor_command[0]=opOUTPUT_SPEED;
@@ -125,14 +134,15 @@ int arm_setpos(int arm_soll)
     write(motor_file,motor_command,3); //Motor stopppen
     
     arm_ist=arm_soll;
-    
+#endif
+    return 0;
 }
 
 
 int arm_close()
 {
+#ifdef __linux__
     char motor_command[4];
-    
     
     motor_command[0] = opOUTPUT_STOP;
     motor_command[1] = MOTOR_PORT_A;
@@ -141,5 +151,6 @@ int arm_close()
     
     close(encoder_file);
     close(motor_file);
+#endif
     return 0;
 }

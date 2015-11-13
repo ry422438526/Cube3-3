@@ -9,9 +9,12 @@
 #include <fcntl.h>
 #include <stdio.h>
 #include <sys/mman.h>
+#ifdef __linux__
 #include "lms2012.h"
+#endif
 #include "Dreh_motor.h"
 
+#ifdef __linux__
 const int MOTOR_SPEED_B=30;
 const char MOTOR_PORT_B=0x02; //Drehteller Motor;
 MOTORDATA *pMotorData;
@@ -21,10 +24,12 @@ int Tel_ist=0;
 int Tel_referenz=0;
 const int dreh_winkel[]={0*90*3,1*90*3,-1*90*3,2*90*3,-2*90*3};//274
 const int dreh_Korr_Winkel=10;  //Korrigieren Winkel
+#endif
 
 
 int DrehTel_init()
 {
+#ifdef __linux__
     if ((motor_file = open(PWM_DEVICE_NAME, O_WRONLY))== -1)
     {
         printf("Failed to open device\n");
@@ -42,11 +47,14 @@ int DrehTel_init()
     printf("DrehTeller_referenz Position angefahren: %d\n\r",Tel_referenz);
     Tel_ist=0;
     DrehTel_setpos(0);
+#endif
+    return 0;
 }
 
 
 int DrehTel_setpos(int Tel_soll)
 {
+#ifdef __linux__
     char motor_command[4];
     
     motor_command[0]=opOUTPUT_SPEED;
@@ -142,10 +150,12 @@ int DrehTel_setpos(int Tel_soll)
     printf("Tel_referenz:%d \n\r",Tel_referenz);
     printf("pMotorData[1].TachoSensor: %d\n\r",pMotorData[1].TachoSensor);
     printf("Tel_ist: %d\n\r",Tel_ist);
+#endif
+    return 0;
 }
 
 int DrehTel_dreh(){
-    
+#ifdef __linux__
     char motor_command[4];
     
     motor_command[0]=opOUTPUT_SPEED;
@@ -176,5 +186,6 @@ int DrehTel_close(){
     write(motor_file,motor_command,3);
     close(encoder_file);
     close(motor_file);
+#endif
     return 0;
 }

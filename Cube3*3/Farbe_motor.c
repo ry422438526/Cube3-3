@@ -9,12 +9,15 @@
 #include <fcntl.h>
 #include <stdio.h>
 #include <sys/mman.h>
+#ifdef __linux__
 #include "lms2012.h"
+#endif
 #include <unistd.h>
 #include <stdlib.h>
 
 #include "Farbe_motor.h"
 
+#ifdef __linux__
 const int MOTOR_SPEED_D=30; //power:0~100
 const char MOTOR_PORT_D = 0x08; //Schwenkbarer Farbensensor Motor;
 MOTORDATA *pMotorData;
@@ -23,11 +26,11 @@ int encoder_file;
 int Farbe_referenz=0;
 int Farbe_ist=0;
 const int Farbe_winkel[]={4,-690,-580,-560,-400};
-
+#endif
 
 int Farbe_init()
 {
-    
+#ifdef __linux__
     if ((motor_file = open(PWM_DEVICE_NAME, O_WRONLY))== -1)
     {
         printf("Failed to open device\n");
@@ -77,12 +80,14 @@ int Farbe_init()
     printf("Farbe_referenzPosition angefahren %d\n\r",Farbe_referenz);
     
     //Farbe_setpos(0);
+#endif
+    return 0;
 }
 
 
 int Farbe_setpos(int Farbe_soll)
 {
-    
+#ifdef __linux__
     char motor_command[4];
     motor_command[0]=opOUTPUT_SPEED;
     motor_command[1]=MOTOR_PORT_D;
@@ -123,12 +128,14 @@ int Farbe_setpos(int Farbe_soll)
     write(motor_file,motor_command,2); //Motor stopppen
     
     Farbe_ist=Farbe_soll;
-    
+#endif
+    return 0;
 }
 
 
 int Farbe_close()
 {
+#ifdef __linux__
     char motor_command[4];
     
     
@@ -139,6 +146,7 @@ int Farbe_close()
     
     close(encoder_file);
     close(motor_file);
+#endif
     return 0;
 }
 

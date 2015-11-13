@@ -10,6 +10,7 @@
 #define print_mode_h
 
 #include <stdio.h>
+#include "main.h"
 
 void reset_terminal_mode();
 void set_conio_terminal_mode();

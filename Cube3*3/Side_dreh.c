@@ -26,13 +26,13 @@ int Surface=-1;
 
 void klappen()
 {
-    //#ifdef __ARMEL__
+//#ifdef __ARMEL__
 #ifdef __linux__
-    //Code zur Ansteuerung der Hardware
-#endif
     arm_setpos(3);
     arm_setpos(2);
     arm_setpos(3);
+    //Code zur Ansteuerung der Hardware
+#endif
     int i,j;
     unsigned char temp_color_data[6][9];
     for(i=0;i<3;i++)
@@ -60,65 +60,74 @@ void klappen()
 }
 
 
-void drehen_unter(int dir)
+void drehen_unter(int dir,int dreh_Angel)
 {
-    int i,j;
+#ifdef __linux__
+    if(dir==1)
+    {
+        DrehTel_setpos(2*dreh_Angel*3/270);
+    }else{
+        DrehTel_setpos(dreh_Angel*3/270);
+    }
+#endif
+    int i,j,k;
     unsigned char temp_color_data[6][9];
-    if (dir==1)
-    {
-        for(i=0;i<3;i++)
+    for (k=0; k< dreh_Angel/90 ;k++) {
+        if (dir==1)
         {
-            temp_color_data[5][3*0+i]=color_data[1][3*2+(2-i)];
-            temp_color_data[5][3*1+i]=color_data[5][3*1+i];
-            temp_color_data[5][3*2+i]=color_data[5][3*2+i];
-            
-            temp_color_data[1][3*0+i]=color_data[1][3*0+i];
-            temp_color_data[1][3*1+i]=color_data[1][3*1+i];
-            temp_color_data[1][3*2+(2-i)]=color_data[4][3*0+i];
-            
-            temp_color_data[4][3*0+i]=color_data[3][3*0+i];
-            temp_color_data[4][3*1+i]=color_data[4][3*1+i];
-            temp_color_data[4][3*2+i]=color_data[4][3*2+i];
-            
-            temp_color_data[3][3*0+i]=color_data[5][3*0+i];
-            temp_color_data[3][3*1+i]=color_data[3][3*1+i];
-            temp_color_data[3][3*2+i]=color_data[3][3*2+i];
-            
-            for (j=0; j<3; j++) {
-                temp_color_data[2][3*i+j]=color_data[2][3*(2-j)+i];
-                temp_color_data[0][3*i+j]=color_data[0][3*i+j];
-            }
-        }
-    }
-    else
-    {
-        for(i=0;i<3;i++)
-        {
-            temp_color_data[5][3*0+i]=color_data[3][3*0+i];
-            temp_color_data[5][3*1+i]=color_data[5][3*1+i];
-            temp_color_data[5][3*2+i]=color_data[5][3*2+i];
-            
-            temp_color_data[3][3*0+i]=color_data[4][3*0+i];
-            temp_color_data[3][3*1+i]=color_data[3][3*1+i];
-            temp_color_data[3][3*2+i]=color_data[3][3*2+i];
-            
-            temp_color_data[4][3*0+i]=color_data[1][3*2+2-i];
-            temp_color_data[4][3*1+i]=color_data[4][3*1+i];
-            temp_color_data[4][3*2+i]=color_data[4][3*2+i];
-            
-            temp_color_data[1][3*0+i]=color_data[1][3*0+i];
-            temp_color_data[1][3*1+i]=color_data[1][3*1+i];
-            temp_color_data[1][3*2+2-i]=color_data[5][3*0+i];
-            
-            for (j=0; j<3; j++)
+            for(i=0;i<3;i++)
             {
-                temp_color_data[2][3*i+j]=color_data[2][3*j+(2-i)];
-                temp_color_data[0][3*i+j]=color_data[0][3*i+j];
+                temp_color_data[5][3*0+i]=color_data[1][3*2+(2-i)];
+                temp_color_data[5][3*1+i]=color_data[5][3*1+i];
+                temp_color_data[5][3*2+i]=color_data[5][3*2+i];
+                
+                temp_color_data[1][3*0+i]=color_data[1][3*0+i];
+                temp_color_data[1][3*1+i]=color_data[1][3*1+i];
+                temp_color_data[1][3*2+(2-i)]=color_data[4][3*0+i];
+                
+                temp_color_data[4][3*0+i]=color_data[3][3*0+i];
+                temp_color_data[4][3*1+i]=color_data[4][3*1+i];
+                temp_color_data[4][3*2+i]=color_data[4][3*2+i];
+                
+                temp_color_data[3][3*0+i]=color_data[5][3*0+i];
+                temp_color_data[3][3*1+i]=color_data[3][3*1+i];
+                temp_color_data[3][3*2+i]=color_data[3][3*2+i];
+                
+                for (j=0; j<3; j++) {
+                    temp_color_data[2][3*i+j]=color_data[2][3*(2-j)+i];
+                    temp_color_data[0][3*i+j]=color_data[0][3*i+j];
+                }
             }
         }
-        
+        else
+        {
+            for(i=0;i<3;i++)
+            {
+                temp_color_data[5][3*0+i]=color_data[3][3*0+i];
+                temp_color_data[5][3*1+i]=color_data[5][3*1+i];
+                temp_color_data[5][3*2+i]=color_data[5][3*2+i];
+                
+                temp_color_data[3][3*0+i]=color_data[4][3*0+i];
+                temp_color_data[3][3*1+i]=color_data[3][3*1+i];
+                temp_color_data[3][3*2+i]=color_data[3][3*2+i];
+                
+                temp_color_data[4][3*0+i]=color_data[1][3*2+2-i];
+                temp_color_data[4][3*1+i]=color_data[4][3*1+i];
+                temp_color_data[4][3*2+i]=color_data[4][3*2+i];
+                
+                temp_color_data[1][3*0+i]=color_data[1][3*0+i];
+                temp_color_data[1][3*1+i]=color_data[1][3*1+i];
+                temp_color_data[1][3*2+2-i]=color_data[5][3*0+i];
+                
+                for (j=0; j<3; j++)
+                {
+                    temp_color_data[2][3*i+j]=color_data[2][3*j+(2-i)];
+                    temp_color_data[0][3*i+j]=color_data[0][3*i+j];
+                }
+            }
+            
+        }
     }
-    
     int a,b;
     for (a=0;a<6;a++)
     {
@@ -131,6 +140,14 @@ void drehen_unter(int dir)
 
 void drehen(int dir)                       //drehen 90 Grad
 {
+#ifdef __linux__
+    if(dir==1)
+    {
+        DrehTel_setpos(2);
+    }else{
+        DrehTel_setpos(1);
+    }
+#endif
     int i,j;
     unsigned char temp_color_data[6][9];
     if(dir==1)
@@ -173,23 +190,14 @@ void us_dreh(int dir,int dreh_Angel_u)                        //Oben_Schicht
     sleep(1);
     klappen();
     sleep(1);
-    if(dir==1)
-    {
-        DrehTel_setpos(2*dreh_Angel_u*3/270);
-    }else{
-        DrehTel_setpos(dreh_Angel_u*3/270); // 90,180,270 gegen Uhrzeigersinn drehen
-    }
+    drehen_unter(dir, dreh_Angel_u);
 }
 
 void ds_dreh(int dir,int dreh_Angel_d)                        //Untern_Schicht
 {
     arm_setpos(2);
     arm_setpos(3);
-    if (dir==1) {
-        DrehTel_setpos(2*dreh_Angel_d*3/270);// 90,180,270 gegen Uhrzeigersinn drehen
-    }else{
-        DrehTel_setpos(dreh_Angel_d*3/270);
-    }
+    drehen_unter(dir, dreh_Angel_d);
     
 }
 
@@ -202,11 +210,7 @@ void fs_dreh(int dir,int dreh_Angel_f)                         //Vornen_Schicht
     sleep(1);
     klappen();
     sleep(1);
-    if(dir==1){
-        DrehTel_setpos(2*dreh_Angel_f*3/270);
-    }else{
-        DrehTel_setpos(dreh_Angel_f*3/270); // 90,180,270 im Uhrzeigersinn drehen
-    }
+    drehen_unter(dir, dreh_Angel_f);
     
 }
 
@@ -219,11 +223,7 @@ void bs_dreh(int dir,int dreh_Angel_b)                         //Hintern_Schicht
     sleep(1);
     klappen();
     sleep(1);
-    if (dir==1) {
-        DrehTel_setpos(2*dreh_Angel_b*3/270); // 90,180,270 gegen Uhrzeigersinn drehen
-    }else{
-        DrehTel_setpos(dreh_Angel_b*3/270);
-    }
+    drehen_unter(dir, dreh_Angel_b);
     
 }
 
@@ -231,11 +231,7 @@ void ls_dreh(int dir,int dreh_Angel_l)                         //linken_Schicht
 {
     klappen();
     sleep(1);
-    if(dir==1){
-        DrehTel_setpos(2*dreh_Angel_l*3/270); // 90,180,270 gegen Uhrzeigersinn drehen
-    }else{
-        DrehTel_setpos(dreh_Angel_l*3/270);
-    }
+    drehen_unter(dir, dreh_Angel_l);
     
 }
 
@@ -249,63 +245,8 @@ void rs_dreh(int dir,int dreh_Angel_r)                          //rechten_Schich
     sleep(1);
     klappen();
     sleep(1);
-    if(dir==1){
-        DrehTel_setpos(2*dreh_Angel_r*3/270); // 90,180,270 gegen Uhrzeigersinn drehen
-    }else{
-        DrehTel_setpos(dreh_Angel_r*3/270);
-    }
+    drehen_unter(dir, dreh_Angel_r);
 }
-
-
-void wuefel_dreh(int achse,int dir,int dreh_Angel)
-{
-    int i;
-    switch (achse)
-    {
-        case 0:
-            us_dreh(dir,dreh_Angel);
-            for (i=0; i<dreh_Angel/90; i++) {
-                drehen_unter(dir);
-            }
-            break;
-        case 1:
-            rs_dreh(dir,dreh_Angel);
-            for (i=0; i<dreh_Angel/90; i++) {
-                drehen_unter(dir);
-            }
-            break;
-        case 2:
-            ds_dreh(dir,dreh_Angel);
-            for (i=0; i<dreh_Angel/90; i++) {
-                drehen_unter(dir);
-            }
-            break;
-        case 3:
-            ls_dreh(dir,dreh_Angel);
-            for (i=0; i<dreh_Angel/90; i++) {
-                drehen_unter(dir);
-            }
-            break;
-        case 4:
-            fs_dreh(dir,dreh_Angel);
-            for (i=0; i<dreh_Angel/90; i++) {
-                drehen_unter(dir);
-            }
-            break;
-        case 5:
-            bs_dreh(dir,dreh_Angel);
-            for (i=0; i<dreh_Angel/90; i++) {
-                drehen_unter(dir);
-            }
-            break;
-            
-        default:
-            break;
-    }
-    
-}
-
-
 
 void change_topface(int center_color)
 {   int i;

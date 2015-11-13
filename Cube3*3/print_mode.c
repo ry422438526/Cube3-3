@@ -7,21 +7,21 @@
 //
 
 #include "print_mode.h"
+#include "main.h"
 
 #include <stdlib.h>
 #include <stdio.h>
+#include "Top_Cross.h"
 #include <string.h>
 #include <unistd.h>
 #include <sys/select.h>
 #include <termios.h>
 
-//#define RUN_MACOS  1
-#define RUN_EV3    1
+#define RUN_MACOS  1
+//#define RUN_EV3    1
 
-//0- weiss 1-blau 2-gelb 3-gruen 4-rot 5-orga
-//0- weiss 1-blau 2-gelb 3-gruen 4-rot 5-orga
-unsigned char color_data[6][9];
-const  char print_mode[4][12][9];
+
+//0 =Weisse 1 =Balu 2 =Gelb 3 =Gruen 4 =Rot 5 =Orangen
 
 struct termios orig_termios;
 
@@ -75,13 +75,16 @@ void wuerfel_print(int mode)
     setenv("XcodeColor", "YES", 0);
     
     printf("\n");
+    printf(".........................................");
+    printf("\n");
+    printf("\n");
     for(zeile=0;zeile<12;zeile++)
     {
         for(spalte=0;spalte<9;spalte++)
         {
             char tmp=print_mode[mode][zeile][spalte];
             if(tmp==-1)
-                printf("   ");
+                printf("    ");
             else
                 switch(color_data[tmp/9][tmp%9])
             {

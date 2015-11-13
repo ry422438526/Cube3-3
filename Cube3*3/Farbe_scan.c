@@ -10,7 +10,9 @@
 #include <stdio.h>
 #include <sys/ioctl.h>
 #include <sys/mman.h>
+#ifdef __linux__
 #include "lms2012.h"
+#endif
 
 #include "Farbe_scan.h"
 #include "Farbe_motor.h"

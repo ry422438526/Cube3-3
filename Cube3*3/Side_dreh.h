@@ -14,7 +14,7 @@
 void change_topface(int center_color);
 void change_rightface(int rightface);
 void klappen();
-void drehen_unter(int dir);
+void drehen_unter(int dir,int dreh_Angel);
 void drehen(int dir);
 void rs_dreh(int dir,int dreh_Angel_r);
 void ls_dreh(int dir,int dreh_Angel_l);

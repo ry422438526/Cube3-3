@@ -13,23 +13,34 @@
 #include <stdio.h>
 #include <sys/ioctl.h>
 #include <sys/mman.h>
+#ifdef __linux__
 #include "lms2012.h"
+#endif
 #include "main.h"
-
-
+typedef enum
+{
+    WEISS=0,
+    BLAU=1,
+    GELB=2,
+    GRUEN=3,
+    ROT=4,
+    ORANGE=5
+}FABER;
 
 const char PORT=0x0;
 const char RGB_RAW=4;     //color mode
 const char COLOR_SENSOR_TYPE=29;
 const int MAX_SAMPLES =10;
-
 int file;
+#ifdef __linux__
 UART *pColorSensor;
 DEVCON DevCon;   //Configuration parameters
+#endif
 
 
 int ColSen_init()
 {
+#ifdef __linux__
     if((file = open(UART_DEVICE_NAME, O_RDWR | O_SYNC)) == -1)
     {
         printf("Failed to open device\n");
@@ -49,26 +60,26 @@ int ColSen_init()
     DevCon.Type[PORT]=COLOR_SENSOR_TYPE;
     ioctl(file,UART_SET_CONN,&DevCon);
     printf("Device is ready \n");
+#endif
     return 0;
 }
 
-int i;
-int Color_data_r=0;
-int Color_data_g=0;
-int Color_data_b=0;
-
 int ColSen_getData()   //Center:zenteral Position
 {
-    
+#ifdef __linux__
+    int MAX_Werte=0;
+    float rot,gruen,blau;
+    int Color_color;
+    int i;
+    int Color_data_r=0;
+    int Color_data_g=0;
+    int Color_data_b=0;
     Color_data_r=(unsigned char)pColorSensor->Raw[PORT][0][0]+(unsigned char)(pColorSensor->Raw[PORT][0][1]<<8);
     Color_data_g=(unsigned char)pColorSensor->Raw[PORT][0][2]+(unsigned char)(pColorSensor->Raw[PORT][0][3]<<8);
     Color_data_b=(unsigned char)pColorSensor->Raw[PORT][0][4]+(unsigned char)(pColorSensor->Raw[PORT][0][5]<<8);
+
     printf("color_data is (%d, %d, %d) \n\r", Color_data_r,Color_data_g,Color_data_b);
     // usleep(10000);
-    
-    int MAX_Werte=0;
-    float rot,gruen,blau;
-    int Color_color=0;
     MAX_Werte=MAX_RGB(MAX_RGB(Color_data_r, Color_data_g),Color_data_b);
     printf("color_max is %d ",MAX_Werte);
     rot=Color_data_r/MAX_Werte;
@@ -77,19 +88,27 @@ int ColSen_getData()   //Center:zenteral Position
     Color_color=Color_col(rot,gruen,blau);
     
     printf("Color is %d",Color_color);
+
     return Color_color;
     // senden daten zu PC
+#endif
+    
+#ifndef __linux__
+    return 0;
+#endif
 }
 
 int ColSen_close()
 {
     printf("Close the Color Sensor");
+#ifdef __linux__
     close(file);
+#endif
     return 0;
 }
 
 
-int Max_RGB(int a,int b)
+int MAX_RGB(int a,int b)
 {
     if (a>=b) {
         return a;
@@ -98,7 +117,7 @@ int Max_RGB(int a,int b)
     }
 }
 
-COLOR Color_col(float rot, float gruen,float blau)
+FARBE Color_col(float rot, float gruen,float blau)
 {
     
     int Color_col=0;
@@ -116,11 +135,11 @@ COLOR Color_col(float rot, float gruen,float blau)
     {
         if(rot<0.2)
         {
-            Color_col=3;
+            Color_col=GRUEN;
         }else if (blau>0.8){
-            Color_col=1;
+            Color_col=BLAU;
         }else{
-            Color_col=0;
+            Color_col=WEISS;
         }
     }
     return Color_col;
