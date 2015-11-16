@@ -22,6 +22,5 @@ void fs_dreh(int dir,int dreh_Angel_f);
 void bs_dreh(int dir,int dreh_Angel_b);
 void us_dreh(int dir,int dreh_Angel_u);
 void ds_dreh(int dir,int dreh_Angel_d);
-void wuefel_dreh(int achse,int dir,int dreh_Angel);
 
 #endif /* Side_dreh_h */

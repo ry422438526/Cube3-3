@@ -7,8 +7,6 @@
 //
 
 #include "Farbe_sen.h"
-
-#include "Farbe_sen.h"
 #include <fcntl.h>
 #include <stdio.h>
 #include <sys/ioctl.h>
@@ -27,20 +25,20 @@ typedef enum
     ORANGE=5
 }FABER;
 
+#ifdef __linux__
 const char PORT=0x0;
 const char RGB_RAW=4;     //color mode
 const char COLOR_SENSOR_TYPE=29;
 const int MAX_SAMPLES =10;
 int file;
-#ifdef __linux__
 UART *pColorSensor;
 DEVCON DevCon;   //Configuration parameters
 #endif
 
-
+#ifdef __linux__
 int ColSen_init()
 {
-#ifdef __linux__
+
     if((file = open(UART_DEVICE_NAME, O_RDWR | O_SYNC)) == -1)
     {
         printf("Failed to open device\n");
@@ -60,9 +58,9 @@ int ColSen_init()
     DevCon.Type[PORT]=COLOR_SENSOR_TYPE;
     ioctl(file,UART_SET_CONN,&DevCon);
     printf("Device is ready \n");
-#endif
     return 0;
 }
+#endif
 
 int ColSen_getData()   //Center:zenteral Position
 {

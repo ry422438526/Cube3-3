@@ -23,6 +23,7 @@
 
 //0 =Weisse 1 =Balu 2 =Gelb 3 =Gruen 4 =Rot 5 =Orangen
 
+#ifndef __linux__
 struct termios orig_termios;
 
 void reset_terminal_mode()
@@ -65,7 +66,7 @@ int getch()
         return c;
     }
 }
-
+#endif
 void wuerfel_print(int mode)
 {
     

@@ -8,10 +8,16 @@
 
 #include <stdio.h>
 #include "Side_dreh.h"
+
+#ifdef __linux__
 #include "Arm_motor.h"
 #include "Dreh_motor.h"
+#endif
+
 #include "unistd.h"
 #include "main.h"
+#include "print_mode.h"
+
 typedef enum
 {
     U=0,
@@ -72,7 +78,8 @@ void drehen_unter(int dir,int dreh_Angel)
 #endif
     int i,j,k;
     unsigned char temp_color_data[6][9];
-    for (k=0; k< dreh_Angel/90 ;k++) {
+    for (k=0; k<dreh_Angel/90;k++)
+    {
         if (dir==1)
         {
             for(i=0;i<3;i++)
@@ -93,7 +100,8 @@ void drehen_unter(int dir,int dreh_Angel)
                 temp_color_data[3][3*1+i]=color_data[3][3*1+i];
                 temp_color_data[3][3*2+i]=color_data[3][3*2+i];
                 
-                for (j=0; j<3; j++) {
+                for (j=0; j<3; j++)
+                {
                     temp_color_data[2][3*i+j]=color_data[2][3*(2-j)+i];
                     temp_color_data[0][3*i+j]=color_data[0][3*i+j];
                 }
@@ -125,15 +133,15 @@ void drehen_unter(int dir,int dreh_Angel)
                     temp_color_data[0][3*i+j]=color_data[0][3*i+j];
                 }
             }
-            
         }
-    }
-    int a,b;
-    for (a=0;a<6;a++)
-    {
-        for (b=0;b<9;b++)
+        
+        int a,b;
+        for (a=0;a<6;a++)
         {
-            color_data[a][b]=temp_color_data[a][b];
+            for (b=0;b<9;b++)
+            {
+                color_data[a][b]=temp_color_data[a][b];
+            }
         }
     }
 }
@@ -187,51 +195,73 @@ void drehen(int dir)                       //drehen 90 Grad
 void us_dreh(int dir,int dreh_Angel_u)                        //Oben_Schicht
 {
     klappen();
+#ifdef __linux__
     sleep(1);
+#endif
     klappen();
+#ifdef __linux__
     sleep(1);
+#endif
     drehen_unter(dir, dreh_Angel_u);
+    wuerfel_print(1);
 }
 
 void ds_dreh(int dir,int dreh_Angel_d)                        //Untern_Schicht
 {
+#ifdef __linux__
     arm_setpos(2);
     arm_setpos(3);
+#endif
     drehen_unter(dir, dreh_Angel_d);
+    wuerfel_print(1);
     
 }
 
 void fs_dreh(int dir,int dreh_Angel_f)                         //Vornen_Schicht
 {
+#ifdef __linux__
     arm_setpos(4);
     sleep(1);
-    DrehTel_setpos(1); //90 im Uhrzeigersinn drehen
+#endif
     drehen(1);
+#ifdef __linux__
     sleep(1);
+#endif
     klappen();
+#ifdef __linux__
     sleep(1);
+#endif
     drehen_unter(dir, dreh_Angel_f);
-    
+    wuerfel_print(1);
 }
 
 void bs_dreh(int dir,int dreh_Angel_b)                         //Hintern_Schicht
 {
+#ifdef __linux__
     arm_setpos(4);
     sleep(1);
-    DrehTel_setpos(2); //90 gegen Uhrzeigersinn drehen
+#endif
     drehen(-1);
+#ifdef __linux__
     sleep(1);
+#endif
     klappen();
+#ifdef __linux__
     sleep(1);
+#endif
     drehen_unter(dir, dreh_Angel_b);
+    wuerfel_print(1);
     
 }
 
 void ls_dreh(int dir,int dreh_Angel_l)                         //linken_Schicht
 {
     klappen();
+#ifdef __linux__
     sleep(1);
+#endif
     drehen_unter(dir, dreh_Angel_l);
+    wuerfel_print(1);
     
 }
 
@@ -240,12 +270,19 @@ void rs_dreh(int dir,int dreh_Angel_r)                          //rechten_Schich
     
     
     klappen();
+#ifdef __linux__
     sleep(1);
+#endif
     klappen();
+#ifdef __linux__
     sleep(1);
+#endif
     klappen();
+#ifdef __linux__
     sleep(1);
+#endif
     drehen_unter(dir, dreh_Angel_r);
+    wuerfel_print(1);
 }
 
 void change_topface(int center_color)

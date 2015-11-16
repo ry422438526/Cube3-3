@@ -153,9 +153,8 @@ int DrehTel_setpos(int Tel_soll)
 #endif
     return 0;
 }
-
-int DrehTel_dreh(){
 #ifdef __linux__
+int DrehTel_dreh(){
     char motor_command[4];
     
     motor_command[0]=opOUTPUT_SPEED;
@@ -169,15 +168,15 @@ int DrehTel_dreh(){
     
     int oldTachosensor=pMotorData[1].TachoSensor;
     while (pMotorData[1].TachoSensor-oldTachosensor<135) {
-        // printf("Spd/Cnt/Snr: A=%d/%d/%d\n", pMotorData[1].Speed, pMotorData[1].TachoCounts, pMotorData[1].TachoSensor-Tel_referenz);
-        usleep(10000);
+        usleep(100);
     }
-    
     motor_command[0]=opOUTPUT_STOP;
     motor_command[1]=MOTOR_PORT_B;
     motor_command[2]=1;  //break
     write(motor_file,motor_command,3);
 }
+
+
 int DrehTel_close(){
     char motor_command[4];
     motor_command[0] = opOUTPUT_STOP;
@@ -186,6 +185,7 @@ int DrehTel_close(){
     write(motor_file,motor_command,3);
     close(encoder_file);
     close(motor_file);
-#endif
+
     return 0;
 }
+#endif

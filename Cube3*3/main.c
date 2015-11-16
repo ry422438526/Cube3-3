@@ -12,11 +12,14 @@
 #include "Color_search.h"
 #include "stdio.h"
 #include "main.h"
+#ifdef  __linux__
 #include "Arm_motor.h"
 #include "Dreh_motor.h"
 #include "Farbe_motor.h"
 #include "Farbe_scan.h"
 #include "Side_dreh.h"
+#include "Farbe_sen.h"
+#endif
 
 const  char print_mode[][12][9]=
 {
@@ -95,12 +98,12 @@ unsigned char color_data[6][9]={
     {4,4,5,1,5,3,2,0,4},
     {3,2,5,3,4,3,4,5,2}  //105-140-101-150
     
-    /*{2,1,4,2,0,5,5,3,0},
+     /*{2,1,4,2,0,5,5,3,0},
      {0,0,3,5,4,4,2,5,0},
      {4,3,1,4,2,3,5,1,2},
      {2,4,4,5,5,2,3,0,0},
      {1,3,1,0,3,1,3,4,5},
-     {3,2,5,1,1,0,1,2,4}*/   // 130-332-235-324
+     {3,2,5,1,1,0,1,2,4}*/  // 130-332-235-324
     
     /*{0,0,3,1,0,0,1,2,5},
      {5,4,0,0,4,5,0,5,5},
@@ -253,19 +256,27 @@ unsigned char color_data[6][9]={
 #endif
 
 int main(int argc, const char * argv[]) {
+#ifndef __linux__
     set_conio_terminal_mode();
+#endif
+    
 #ifdef __linux__
     arm_init();
     DrehTel_init();
     Farbe_init();
+    ColSen_init();
     farbe_scan();
+    arm_close();
+    Farbe_close();
+    
 #endif
-    change_topface(0);
-    change_rightface(5);
-    wuerfel_print(1);
-    Top_Cross();
-    F2L();
-    wuerfel_print(1);
+    //change_topface(0);
+    //change_rightface(5);
+    //wuerfel_print(1);
+    //Top_Cross();
+    //F2L();
+    //wuerfel_print(1);
+#ifndef __linux__
     while(1)
     {
         if(kbhit())
@@ -293,5 +304,6 @@ int main(int argc, const char * argv[]) {
         }
         
     }
+#endif
     return 0;
 }

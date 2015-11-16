@@ -28,7 +28,7 @@ int motor_file;
 int encoder_file;
 int arm_referenz=0;
 int arm_ist=0;
-const int arm_winkel[]={-4,-83,-132,-231,-320};//-85   231
+const int arm_winkel[]={-4,-83,-231,-330};//-85   231
 #endif
 
 
