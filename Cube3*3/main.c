@@ -6,6 +6,9 @@
 //  Copyright © 2015 Chunxia Yang. All rights reserved.
 //
 
+// Thema: Entwurf und Implementierung eines Algorithmus zum Loesen des Rubrik-Cube Problems
+
+
 #include "Top_Cross.h"
 #include "F2L.h"
 #include "print_mode.h"
@@ -265,7 +268,8 @@ int main(int argc, const char * argv[]) {
     DrehTel_init();
     Farbe_init();
     ColSen_init();
-    farbe_scan();
+    color_data[6][9]=farbe_scan();
+    wuerfel_print(1);
     arm_close();
     Farbe_close();
     

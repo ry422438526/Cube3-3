@@ -148,6 +148,7 @@ void drehen_unter(int dir,int dreh_Angel)
 
 void drehen(int dir)                       //drehen 90 Grad
 {
+    arm_setpos(4);
 #ifdef __linux__
     if(dir==1)
     {

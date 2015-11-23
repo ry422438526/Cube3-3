@@ -167,7 +167,30 @@ int DrehTel_dreh(){
     write(motor_file,motor_command,2);
     
     int oldTachosensor=pMotorData[1].TachoSensor;
-    while (pMotorData[1].TachoSensor-oldTachosensor<135) {
+    while (pMotorData[1].TachoSensor-oldTachosensor<135+30) {
+        usleep(100);
+    }
+    motor_command[0]=opOUTPUT_STOP;
+    motor_command[1]=MOTOR_PORT_B;
+    motor_command[2]=1;  //break
+    write(motor_file,motor_command,3);
+    
+    
+    
+    Tel_referenz=pMotorData[1].TachoSensor;
+    
+    motor_command[0]=opOUTPUT_SPEED;
+    motor_command[1]=MOTOR_PORT_B;
+    motor_command[2]=-MOTOR_SPEED_B;
+    write(motor_file,motor_command,3);
+    
+    motor_command[0]=opOUTPUT_START;
+    motor_command[1]=MOTOR_PORT_B;
+    write(motor_file,motor_command,2);
+    
+    while(pMotorData[1].TachoSensor-Tel_referenz>-30)
+    {
+        /*printf("Spd/Cnt/Snr: A=%d/%d/%d\n", pMotorData[1].Speed, pMotorData[1].TachoCounts, pMotorData[1].TachoSensor-dreh_winkel[Tel_ist]-Tel_referenz);*/
         usleep(100);
     }
     motor_command[0]=opOUTPUT_STOP;

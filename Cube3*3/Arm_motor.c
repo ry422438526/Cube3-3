@@ -5,7 +5,7 @@
 //  Created by 杨春霞 on 12.11.15.
 //  Copyright © 2015 Chunxia Yang. All rights reserved.
 //
-// Thema: Entwurf und Implementierung eines Algorithmus zum Loesen des Rubrik-Cube Problems
+
 
 #include <fcntl.h>
 #include <stdio.h>
@@ -28,7 +28,7 @@ int motor_file;
 int encoder_file;
 int arm_referenz=0;
 int arm_ist=0;
-const int arm_winkel[]={-4,-83,-231,-330};//-85   231
+const int arm_winkel[]={-4,-83,-132,-231,-330};//-85   231
 #endif
 
 
@@ -132,7 +132,7 @@ int arm_setpos(int arm_soll)
     motor_command[1]=MOTOR_PORT_A;
     motor_command[2]=1;
     write(motor_file,motor_command,3); //Motor stopppen
-    
+    usleep(10000);
     arm_ist=arm_soll;
 #endif
     return 0;

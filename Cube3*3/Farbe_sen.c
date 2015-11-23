@@ -75,18 +75,40 @@ int ColSen_getData()   //Center:zenteral Position
     Color_data_r=(unsigned char)pColorSensor->Raw[PORT][0][0]+(unsigned char)(pColorSensor->Raw[PORT][0][1]<<8);
     Color_data_g=(unsigned char)pColorSensor->Raw[PORT][0][2]+(unsigned char)(pColorSensor->Raw[PORT][0][3]<<8);
     Color_data_b=(unsigned char)pColorSensor->Raw[PORT][0][4]+(unsigned char)(pColorSensor->Raw[PORT][0][5]<<8);
-
+    
+    printf("COLOR_MAX is %d", MAX_Werte);
     printf("color_data is (%d, %d, %d) \n\r", Color_data_r,Color_data_g,Color_data_b);
     // usleep(10000);
     MAX_Werte=MAX_RGB(MAX_RGB(Color_data_r, Color_data_g),Color_data_b);
-    printf("color_max is %d ",MAX_Werte);
-    rot=Color_data_r/MAX_Werte;
-    gruen=Color_data_g/MAX_Werte;
-    blau=Color_data_b/MAX_Werte;
+    rot   =(Color_data_r*1.0)/MAX_Werte;
+    gruen =(Color_data_g*1.0)/MAX_Werte;
+    blau  =(Color_data_b*1.0)/MAX_Werte;
     Color_color=Color_col(rot,gruen,blau);
-    
-    printf("Color is %d",Color_color);
-
+    switch(Color_color){
+        case 0:
+            printf("\033[1;30m   %d\033[0m",Color_color);
+            break;
+            
+        case 1:
+            printf("\033[1;34m   %d\033[0m",Color_color);
+            break;
+            
+        case 2:
+            printf("\033[1;33m   %d\033[0m",Color_color);
+            break;
+            
+        case 3:
+            printf("\033[1;32m   %d\033[0m",Color_color);
+            break;
+            
+        case 4:
+            printf("\033[1;35m   %d\033[0m",Color_color);
+            break;
+            
+        case 5:
+            printf("\033[1;31m   %d\033[0m",Color_color);
+            break;
+    }
     return Color_color;
     // senden daten zu PC
 #endif
@@ -142,5 +164,8 @@ FARBE Color_col(float rot, float gruen,float blau)
     }
     return Color_col;
 }
+
+
+
 
 

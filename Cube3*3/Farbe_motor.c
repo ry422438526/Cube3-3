@@ -25,7 +25,7 @@ int motor_file;
 int encoder_file;
 int Farbe_referenz=0;
 int Farbe_ist=0;
-const int Farbe_winkel[]={4,-690,-580,-560,-400};
+const int Farbe_winkel[]={4,-690,-610,-580,-400};
 #endif
 
 int Farbe_init()
