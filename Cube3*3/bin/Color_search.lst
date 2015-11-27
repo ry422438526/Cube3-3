@@ -1,0 +1,899 @@
+   1              		.arch armv5te
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 2
+   9              		.eabi_attribute 30, 1
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.file	"Color_search.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.align	2
+  17              		.global	Kantenstein_suchen
+  19              	Kantenstein_suchen:
+  20              		.fnstart
+  21              	.LFB11:
+  22              		.file 1 "Color_search.c"
+   1:Color_search.c **** //
+   2:Color_search.c **** //  Color_search.c
+   3:Color_search.c **** //  Cube3*3
+   4:Color_search.c **** //
+   5:Color_search.c **** //  Created by 杨春霞 on 12.11.15.
+   6:Color_search.c **** //  Copyright © 2015 Chunxia Yang. All rights reserved.
+   7:Color_search.c **** //
+   8:Color_search.c **** 
+   9:Color_search.c **** #include "Color_search.h"
+  10:Color_search.c **** #include "main.h"
+  11:Color_search.c **** 
+  12:Color_search.c **** 
+  13:Color_search.c **** 
+  14:Color_search.c **** int Kantenstein_suchen(int Color1,int Color2)
+  15:Color_search.c **** {
+  23              		.loc 1 15 0
+  24              		.cfi_startproc
+  25              		@ args = 0, pretend = 0, frame = 0
+  26              		@ frame_needed = 0, uses_anonymous_args = 0
+  27              		@ link register save eliminated.
+  28              	.LVL0:
+  29 0000 30002DE9 		stmfd	sp!, {r4, r5}
+  30              		.save {r4, r5}
+  31              		.cfi_def_cfa_offset 8
+  32              		.cfi_offset 4, -8
+  33              		.cfi_offset 5, -4
+  34              	.LVL1:
+  16:Color_search.c ****     int kantPos=0; //kantPos=100*Schicht+10*ErsteCentrale+zweiteCentrale
+  17:Color_search.c ****     int c1=0,c2=0;
+  18:Color_search.c ****     
+  19:Color_search.c ****     //Erste_schicht
+  20:Color_search.c ****     c1= color_data[0][1]; c2= color_data[3][7];
+  35              		.loc 1 20 0
+  36 0004 E8329FE5 		ldr	r3, .L50
+  37 0008 0120D3E5 		ldrb	r2, [r3, #1]	@ zero_extendqisi2
+  38              	.LVL2:
+  39 000c 22C0D3E5 		ldrb	ip, [r3, #34]	@ zero_extendqisi2
+  40              	.LVL3:
+  21:Color_search.c ****     if (c1==Color1 && c2==Color2) {kantPos=103;}//weiss_Grün Kantenstein
+  41              		.loc 1 21 0
+  42 0010 000052E1 		cmp	r2, r0
+  43 0014 01005C01 		cmpeq	ip, r1
+  44 0018 0030A013 		movne	r3, #0
+  45 001c 0130A003 		moveq	r3, #1
+  16:Color_search.c ****     int kantPos=0; //kantPos=100*Schicht+10*ErsteCentrale+zweiteCentrale
+  46              		.loc 1 16 0
+  47 0020 000053E3 		cmp	r3, #0
+  48 0024 6730A013 		movne	r3, #103
+  49 0028 0030A003 		moveq	r3, #0
+  50              	.LVL4:
+  22:Color_search.c ****     if (c1==Color2 && c2==Color1) {kantPos=130;}
+  51              		.loc 1 22 0
+  52 002c 00005CE1 		cmp	ip, r0
+  53 0030 01005201 		cmpeq	r2, r1
+  54 0034 0020A013 		movne	r2, #0
+  55 0038 0120A003 		moveq	r2, #1
+  56              	.LVL5:
+  57 003c 000052E3 		cmp	r2, #0
+  58 0040 8230A013 		movne	r3, #130
+  59              	.LVL6:
+  23:Color_search.c ****     c1= color_data[0][3]; c2= color_data[4][7];
+  60              		.loc 1 23 0
+  61 0044 A8C29FE5 		ldr	ip, .L50
+  62              	.LVL7:
+  63 0048 0320DCE5 		ldrb	r2, [ip, #3]	@ zero_extendqisi2
+  64              	.LVL8:
+  65 004c 2BC0DCE5 		ldrb	ip, [ip, #43]	@ zero_extendqisi2
+  66              	.LVL9:
+  24:Color_search.c ****     if (c1==Color1 && c2==Color2) {kantPos=104;}//weiss_Rot Kantenstein
+  67              		.loc 1 24 0
+  68 0050 000052E1 		cmp	r2, r0
+  69 0054 01005C01 		cmpeq	ip, r1
+  70 0058 0040A013 		movne	r4, #0
+  71 005c 0140A003 		moveq	r4, #1
+  72 0060 000054E3 		cmp	r4, #0
+  73 0064 6830A013 		movne	r3, #104
+  74              	.LVL10:
+  25:Color_search.c ****     if (c1==Color2 && c2==Color1) {kantPos=140;}
+  75              		.loc 1 25 0
+  76 0068 00005CE1 		cmp	ip, r0
+  77 006c 01005201 		cmpeq	r2, r1
+  78 0070 0020A013 		movne	r2, #0
+  79 0074 0120A003 		moveq	r2, #1
+  80              	.LVL11:
+  81 0078 000052E3 		cmp	r2, #0
+  82 007c 8C30A013 		movne	r3, #140
+  83              	.LVL12:
+  26:Color_search.c ****     c1= color_data[0][5]; c2= color_data[5][7];
+  84              		.loc 1 26 0
+  85 0080 6CC29FE5 		ldr	ip, .L50
+  86              	.LVL13:
+  87 0084 0520DCE5 		ldrb	r2, [ip, #5]	@ zero_extendqisi2
+  88              	.LVL14:
+  89 0088 34C0DCE5 		ldrb	ip, [ip, #52]	@ zero_extendqisi2
+  90              	.LVL15:
+  27:Color_search.c ****     if (c1==Color1 && c2==Color2) {kantPos=105;}//weiss_Orange Kantenstein
+  91              		.loc 1 27 0
+  92 008c 000052E1 		cmp	r2, r0
+  93 0090 01005C01 		cmpeq	ip, r1
+  94 0094 0040A013 		movne	r4, #0
+  95 0098 0140A003 		moveq	r4, #1
+  96 009c 000054E3 		cmp	r4, #0
+  97 00a0 6930A013 		movne	r3, #105
+  98              	.LVL16:
+  28:Color_search.c ****     if (c1==Color2 && c2==Color1) {kantPos=150;}
+  99              		.loc 1 28 0
+ 100 00a4 00005CE1 		cmp	ip, r0
+ 101 00a8 01005201 		cmpeq	r2, r1
+ 102 00ac 0020A013 		movne	r2, #0
+ 103 00b0 0120A003 		moveq	r2, #1
+ 104              	.LVL17:
+ 105 00b4 000052E3 		cmp	r2, #0
+ 106 00b8 9630A013 		movne	r3, #150
+ 107              	.LVL18:
+  29:Color_search.c ****     c1= color_data[0][7]; c2= color_data[1][1];
+ 108              		.loc 1 29 0
+ 109 00bc 30C29FE5 		ldr	ip, .L50
+ 110              	.LVL19:
+ 111 00c0 0720DCE5 		ldrb	r2, [ip, #7]	@ zero_extendqisi2
+ 112              	.LVL20:
+ 113 00c4 0AC0DCE5 		ldrb	ip, [ip, #10]	@ zero_extendqisi2
+ 114              	.LVL21:
+  30:Color_search.c ****     if (c1==Color1 && c2==Color2) {kantPos=101;}//weiss_Blau Kantenstein
+ 115              		.loc 1 30 0
+ 116 00c8 000052E1 		cmp	r2, r0
+ 117 00cc 01005C01 		cmpeq	ip, r1
+ 118 00d0 0040A013 		movne	r4, #0
+ 119 00d4 0140A003 		moveq	r4, #1
+ 120 00d8 000054E3 		cmp	r4, #0
+ 121 00dc 6530A013 		movne	r3, #101
+ 122              	.LVL22:
+  31:Color_search.c ****     if (c1==Color2 && c2==Color1) {kantPos=110;}
+ 123              		.loc 1 31 0
+ 124 00e0 00005CE1 		cmp	ip, r0
+ 125 00e4 01005201 		cmpeq	r2, r1
+ 126 00e8 0020A013 		movne	r2, #0
+ 127 00ec 0120A003 		moveq	r2, #1
+ 128              	.LVL23:
+ 129 00f0 000052E3 		cmp	r2, #0
+ 130 00f4 6E30A013 		movne	r3, #110
+ 131              	.LVL24:
+  32:Color_search.c ****     
+  33:Color_search.c ****     
+  34:Color_search.c ****     //Zweite_schicht
+  35:Color_search.c ****     c1= color_data[4][3]; c2= color_data[1][3];
+ 132              		.loc 1 35 0
+ 133 00f8 F4C19FE5 		ldr	ip, .L50
+ 134              	.LVL25:
+ 135 00fc 2720DCE5 		ldrb	r2, [ip, #39]	@ zero_extendqisi2
+ 136              	.LVL26:
+ 137 0100 0CC0DCE5 		ldrb	ip, [ip, #12]	@ zero_extendqisi2
+ 138              	.LVL27:
+  36:Color_search.c ****     if (c1==Color1 && c2==Color2) {kantPos=241;}//Rot_Blau Kantenstein
+ 139              		.loc 1 36 0
+ 140 0104 000052E1 		cmp	r2, r0
+ 141 0108 01005C01 		cmpeq	ip, r1
+ 142 010c 0040A013 		movne	r4, #0
+ 143 0110 0140A003 		moveq	r4, #1
+ 144 0114 000054E3 		cmp	r4, #0
+ 145 0118 F130A013 		movne	r3, #241
+ 146              	.LVL28:
+  37:Color_search.c ****     if (c1==Color2 && c2==Color1) {kantPos=214;}
+ 147              		.loc 1 37 0
+ 148 011c 00005CE1 		cmp	ip, r0
+ 149 0120 01005201 		cmpeq	r2, r1
+ 150 0124 0020A013 		movne	r2, #0
+ 151 0128 0120A003 		moveq	r2, #1
+ 152              	.LVL29:
+ 153 012c 000052E3 		cmp	r2, #0
+ 154 0130 D630A013 		movne	r3, #214
+ 155              	.LVL30:
+  38:Color_search.c ****     c1= color_data[1][5]; c2= color_data[5][5];
+ 156              		.loc 1 38 0
+ 157 0134 B8C19FE5 		ldr	ip, .L50
+ 158              	.LVL31:
+ 159 0138 0E20DCE5 		ldrb	r2, [ip, #14]	@ zero_extendqisi2
+ 160              	.LVL32:
+ 161 013c 32C0DCE5 		ldrb	ip, [ip, #50]	@ zero_extendqisi2
+ 162              	.LVL33:
+  39:Color_search.c ****     if (c1==Color1 && c2==Color2) {kantPos=215;}//Blau_Orange Kantenstein
+ 163              		.loc 1 39 0
+ 164 0140 000052E1 		cmp	r2, r0
+ 165 0144 01005C01 		cmpeq	ip, r1
+ 166 0148 0040A013 		movne	r4, #0
+ 167 014c 0140A003 		moveq	r4, #1
+ 168 0150 000054E3 		cmp	r4, #0
+ 169 0154 D730A013 		movne	r3, #215
+ 170              	.LVL34:
+  40:Color_search.c ****     if (c1==Color2 && c2==Color1) {kantPos=251;}
+ 171              		.loc 1 40 0
+ 172 0158 00005CE1 		cmp	ip, r0
+ 173 015c 01005201 		cmpeq	r2, r1
+ 174 0160 0020A013 		movne	r2, #0
+ 175 0164 0120A003 		moveq	r2, #1
+ 176              	.LVL35:
+ 177 0168 000052E3 		cmp	r2, #0
+ 178 016c FB30A013 		movne	r3, #251
+ 179              	.LVL36:
+  41:Color_search.c ****     c1= color_data[5][3]; c2= color_data[3][5];
+ 180              		.loc 1 41 0
+ 181 0170 7CC19FE5 		ldr	ip, .L50
+ 182              	.LVL37:
+ 183 0174 3020DCE5 		ldrb	r2, [ip, #48]	@ zero_extendqisi2
+ 184              	.LVL38:
+ 185 0178 20C0DCE5 		ldrb	ip, [ip, #32]	@ zero_extendqisi2
+ 186              	.LVL39:
+  42:Color_search.c ****     if (c1==Color1 && c2==Color2) {kantPos=253;}//Orange_Grün Kantenstein
+ 187              		.loc 1 42 0
+ 188 017c 000052E1 		cmp	r2, r0
+ 189 0180 01005C01 		cmpeq	ip, r1
+ 190 0184 0040A013 		movne	r4, #0
+ 191 0188 0140A003 		moveq	r4, #1
+ 192 018c 000054E3 		cmp	r4, #0
+ 193 0190 FD30A013 		movne	r3, #253
+ 194              	.LVL40:
+  43:Color_search.c ****     if (c1==Color2 && c2==Color1) {kantPos=235;}
+ 195              		.loc 1 43 0
+ 196 0194 00005CE1 		cmp	ip, r0
+ 197 0198 01005201 		cmpeq	r2, r1
+ 198 019c 0020A013 		movne	r2, #0
+ 199 01a0 0120A003 		moveq	r2, #1
+ 200              	.LVL41:
+ 201 01a4 000052E3 		cmp	r2, #0
+ 202 01a8 EB30A013 		movne	r3, #235
+ 203              	.LVL42:
+  44:Color_search.c ****     c1= color_data[3][3]; c2= color_data[4][5];
+ 204              		.loc 1 44 0
+ 205 01ac 40C19FE5 		ldr	ip, .L50
+ 206              	.LVL43:
+ 207 01b0 1E20DCE5 		ldrb	r2, [ip, #30]	@ zero_extendqisi2
+ 208              	.LVL44:
+ 209 01b4 29C0DCE5 		ldrb	ip, [ip, #41]	@ zero_extendqisi2
+ 210              	.LVL45:
+  45:Color_search.c ****     if (c1==Color1 && c2==Color2) {kantPos=234;}//Grün_Rot Kantenstein
+ 211              		.loc 1 45 0
+ 212 01b8 000052E1 		cmp	r2, r0
+ 213 01bc 01005C01 		cmpeq	ip, r1
+ 214 01c0 0040A013 		movne	r4, #0
+ 215 01c4 0140A003 		moveq	r4, #1
+ 216 01c8 000054E3 		cmp	r4, #0
+ 217 01cc EA30A013 		movne	r3, #234
+ 218              	.LVL46:
+  46:Color_search.c ****     if (c1==Color2 && c2==Color1) {kantPos=243;}
+ 219              		.loc 1 46 0
+ 220 01d0 00005CE1 		cmp	ip, r0
+ 221 01d4 01005201 		cmpeq	r2, r1
+ 222 01d8 0020A013 		movne	r2, #0
+ 223 01dc 0120A003 		moveq	r2, #1
+ 224              	.LVL47:
+ 225 01e0 000052E3 		cmp	r2, #0
+ 226 01e4 F330A013 		movne	r3, #243
+ 227              	.LVL48:
+  47:Color_search.c ****     
+  48:Color_search.c ****     
+  49:Color_search.c ****     //Dritte_schicht
+  50:Color_search.c ****     c1= color_data[1][7]; c2= color_data[2][1];
+ 228              		.loc 1 50 0
+ 229 01e8 04C19FE5 		ldr	ip, .L50
+ 230              	.LVL49:
+ 231 01ec 1020DCE5 		ldrb	r2, [ip, #16]	@ zero_extendqisi2
+ 232              	.LVL50:
+ 233 01f0 13C0DCE5 		ldrb	ip, [ip, #19]	@ zero_extendqisi2
+ 234              	.LVL51:
+  51:Color_search.c ****     if (c1==Color1 && c2==Color2) {kantPos=312;}//Blau_Gelb Kantenstein
+ 235              		.loc 1 51 0
+ 236 01f4 000052E1 		cmp	r2, r0
+ 237 01f8 01005C01 		cmpeq	ip, r1
+ 238 01fc 0040A013 		movne	r4, #0
+ 239 0200 0140A003 		moveq	r4, #1
+ 240 0204 000054E3 		cmp	r4, #0
+ 241 0208 4E3FA013 		movne	r3, #312
+ 242              	.LVL52:
+  52:Color_search.c ****     if (c1==Color2 && c2==Color1) {kantPos=321;}
+ 243              		.loc 1 52 0
+ 244 020c 00005CE1 		cmp	ip, r0
+ 245 0210 01005201 		cmpeq	r2, r1
+ 246 0214 0020A013 		movne	r2, #0
+ 247 0218 0120A003 		moveq	r2, #1
+ 248              	.LVL53:
+ 249 021c D4409FE5 		ldr	r4, .L50+4
+ 250 0220 000052E3 		cmp	r2, #0
+ 251 0224 0430A011 		movne	r3, r4
+ 252              	.LVL54:
+  53:Color_search.c ****     c1= color_data[5][1]; c2= color_data[2][5];
+ 253              		.loc 1 53 0
+ 254 0228 C4C09FE5 		ldr	ip, .L50
+ 255              	.LVL55:
+ 256 022c 2E20DCE5 		ldrb	r2, [ip, #46]	@ zero_extendqisi2
+ 257              	.LVL56:
+ 258 0230 17C0DCE5 		ldrb	ip, [ip, #23]	@ zero_extendqisi2
+ 259              	.LVL57:
+  54:Color_search.c ****     if (c1==Color1 && c2==Color2) {kantPos=352;}//Orange_Gelb Kantenstein
+ 260              		.loc 1 54 0
+ 261 0234 000052E1 		cmp	r2, r0
+ 262 0238 01005C01 		cmpeq	ip, r1
+ 263 023c 0040A013 		movne	r4, #0
+ 264 0240 0140A003 		moveq	r4, #1
+ 265 0244 000054E3 		cmp	r4, #0
+ 266 0248 163EA013 		movne	r3, #352
+ 267              	.LVL58:
+  55:Color_search.c ****     if (c1==Color2 && c2==Color1) {kantPos=325;}
+ 268              		.loc 1 55 0
+ 269 024c 00005CE1 		cmp	ip, r0
+ 270 0250 01005201 		cmpeq	r2, r1
+ 271 0254 0020A013 		movne	r2, #0
+ 272 0258 0120A003 		moveq	r2, #1
+ 273              	.LVL59:
+ 274 025c 98409FE5 		ldr	r4, .L50+8
+ 275 0260 000052E3 		cmp	r2, #0
+ 276 0264 0430A011 		movne	r3, r4
+ 277              	.LVL60:
+  56:Color_search.c ****     c1= color_data[3][1]; c2= color_data[2][7];
+ 278              		.loc 1 56 0
+ 279 0268 84C09FE5 		ldr	ip, .L50
+ 280              	.LVL61:
+ 281 026c 1C20DCE5 		ldrb	r2, [ip, #28]	@ zero_extendqisi2
+ 282              	.LVL62:
+ 283 0270 19C0DCE5 		ldrb	ip, [ip, #25]	@ zero_extendqisi2
+ 284              	.LVL63:
+  57:Color_search.c ****     if (c1==Color1 && c2==Color2) {kantPos=332;}//Grün_Gelb Kantenstein
+ 285              		.loc 1 57 0
+ 286 0274 000052E1 		cmp	r2, r0
+ 287 0278 01005C01 		cmpeq	ip, r1
+ 288 027c 0040A013 		movne	r4, #0
+ 289 0280 0140A003 		moveq	r4, #1
+ 290 0284 000054E3 		cmp	r4, #0
+ 291 0288 533FA013 		movne	r3, #332
+ 292              	.LVL64:
+  58:Color_search.c ****     if (c1==Color2 && c2==Color1) {kantPos=323;}
+ 293              		.loc 1 58 0
+ 294 028c 00005CE1 		cmp	ip, r0
+ 295 0290 01005201 		cmpeq	r2, r1
+ 296 0294 0020A013 		movne	r2, #0
+ 297 0298 0120A003 		moveq	r2, #1
+ 298              	.LVL65:
+ 299 029c 5C409FE5 		ldr	r4, .L50+12
+ 300 02a0 000052E3 		cmp	r2, #0
+ 301 02a4 0430A011 		movne	r3, r4
+ 302              	.LVL66:
+  59:Color_search.c ****     c1= color_data[4][1]; c2= color_data[2][3];
+ 303              		.loc 1 59 0
+ 304 02a8 44C09FE5 		ldr	ip, .L50
+ 305              	.LVL67:
+ 306 02ac 2520DCE5 		ldrb	r2, [ip, #37]	@ zero_extendqisi2
+ 307              	.LVL68:
+ 308 02b0 15C0DCE5 		ldrb	ip, [ip, #21]	@ zero_extendqisi2
+ 309              	.LVL69:
+  60:Color_search.c ****     if (c1==Color1 && c2==Color2) {kantPos=342;}//Rot_Gelb Kantenstein
+ 310              		.loc 1 60 0
+ 311 02b4 000052E1 		cmp	r2, r0
+ 312 02b8 01005C01 		cmpeq	ip, r1
+ 313 02bc 0050A013 		movne	r5, #0
+ 314 02c0 0150A003 		moveq	r5, #1
+ 315 02c4 134084E2 		add	r4, r4, #19
+ 316 02c8 000055E3 		cmp	r5, #0
+ 317 02cc 0430A011 		movne	r3, r4
+ 318              	.LVL70:
+  61:Color_search.c ****     if (c1==Color2 && c2==Color1) {kantPos=324;}
+ 319              		.loc 1 61 0
+ 320 02d0 00005CE1 		cmp	ip, r0
+ 321 02d4 01005201 		cmpeq	r2, r1
+ 322 02d8 0000A013 		movne	r0, #0
+ 323 02dc 0100A003 		moveq	r0, #1
+ 324              	.LVL71:
+  62:Color_search.c ****     
+  63:Color_search.c ****     return kantPos;
+  64:Color_search.c **** }
+ 325              		.loc 1 64 0
+ 326 02e0 000050E3 		cmp	r0, #0
+ 327 02e4 0300A001 		moveq	r0, r3
+ 328              	.LVL72:
+ 329 02e8 510FA013 		movne	r0, #324
+ 330 02ec 3000BDE8 		ldmfd	sp!, {r4, r5}
+ 331 02f0 1EFF2FE1 		bx	lr
+ 332              	.L51:
+ 333              		.align	2
+ 334              	.L50:
+ 335 02f4 00000000 		.word	color_data
+ 336 02f8 41010000 		.word	321
+ 337 02fc 45010000 		.word	325
+ 338 0300 43010000 		.word	323
+ 339              		.cfi_endproc
+ 340              	.LFE11:
+ 341              		.fnend
+ 343              		.align	2
+ 344              		.global	Mittelstein_suchen
+ 346              	Mittelstein_suchen:
+ 347              		.fnstart
+ 348              	.LFB12:
+  65:Color_search.c **** 
+  66:Color_search.c **** 
+  67:Color_search.c **** int Mittelstein_suchen(int Color)
+  68:Color_search.c **** {
+ 349              		.loc 1 68 0
+ 350              		.cfi_startproc
+ 351              		@ args = 0, pretend = 0, frame = 0
+ 352              		@ frame_needed = 0, uses_anonymous_args = 0
+ 353              		@ link register save eliminated.
+ 354              	.LVL73:
+ 355 0304 28209FE5 		ldr	r2, .L58
+  69:Color_search.c ****     int i;
+  70:Color_search.c ****     int c1=0,Centrale=6;
+ 356              		.loc 1 70 0
+ 357 0308 0610A0E3 		mov	r1, #6
+  71:Color_search.c ****     for (i=0; i<=5; i++) {
+ 358              		.loc 1 71 0
+ 359 030c 0030A0E3 		mov	r3, #0
+ 360              	.LVL74:
+ 361              	.L55:
+  72:Color_search.c ****         c1= color_data[i][4];
+ 362              		.loc 1 72 0
+ 363 0310 04C0D2E5 		ldrb	ip, [r2, #4]	@ zero_extendqisi2
+ 364              	.LVL75:
+ 365 0314 00005CE1 		cmp	ip, r0
+ 366 0318 0310A001 		moveq	r1, r3
+ 367              	.LVL76:
+  71:Color_search.c ****     for (i=0; i<=5; i++) {
+ 368              		.loc 1 71 0
+ 369 031c 013083E2 		add	r3, r3, #1
+ 370              	.LVL77:
+ 371 0320 092082E2 		add	r2, r2, #9
+ 372 0324 060053E3 		cmp	r3, #6
+ 373 0328 F8FFFF1A 		bne	.L55
+  73:Color_search.c ****         if(c1==Color) Centrale=i;
+  74:Color_search.c ****     }
+  75:Color_search.c ****     return Centrale;
+  76:Color_search.c **** }
+ 374              		.loc 1 76 0
+ 375 032c 0100A0E1 		mov	r0, r1
+ 376              	.LVL78:
+ 377 0330 1EFF2FE1 		bx	lr
+ 378              	.L59:
+ 379              		.align	2
+ 380              	.L58:
+ 381 0334 00000000 		.word	color_data
+ 382              		.cfi_endproc
+ 383              	.LFE12:
+ 384              		.fnend
+ 386              		.align	2
+ 387              		.global	Eckenstein_suchen
+ 389              	Eckenstein_suchen:
+ 390              		.fnstart
+ 391              	.LFB13:
+  77:Color_search.c **** 
+  78:Color_search.c **** 
+  79:Color_search.c **** int Eckenstein_suchen(int Color1, int Color2, int Color3 )
+  80:Color_search.c **** {
+ 392              		.loc 1 80 0
+ 393              		.cfi_startproc
+ 394              		@ args = 0, pretend = 0, frame = 0
+ 395              		@ frame_needed = 0, uses_anonymous_args = 0
+ 396              		@ link register save eliminated.
+ 397              	.LVL79:
+ 398 0338 30002DE9 		stmfd	sp!, {r4, r5}
+ 399              		.save {r4, r5}
+ 400              		.cfi_def_cfa_offset 8
+ 401              		.cfi_offset 4, -8
+ 402              		.cfi_offset 5, -4
+ 403              	.LVL80:
+  81:Color_search.c ****     int eckPos=0; //EckPos= 1000*Schicht+100*ErsteCenterale+10*zweiteCenterale+dritteCentrale
+  82:Color_search.c ****     int Color_eck=100*Color1+10*Color2+Color3;
+ 404              		.loc 1 82 0
+ 405 033c 6450A0E3 		mov	r5, #100
+ 406 0340 011181E0 		add	r1, r1, r1, asl #2
+ 407              	.LVL81:
+ 408 0344 8110A0E1 		mov	r1, r1, asl #1
+ 409 0348 951021E0 		mla	r1, r5, r0, r1
+  83:Color_search.c ****     
+  84:Color_search.c ****     //Erste Schichte
+  85:Color_search.c ****     if (Color_eck== 100*color_data[0][0]+10*color_data[4][8]+color_data[3][6])   //1043
+ 410              		.loc 1 85 0
+ 411 034c 74C39FE5 		ldr	ip, .L109
+ 412 0350 0040DCE5 		ldrb	r4, [ip]	@ zero_extendqisi2
+ 413 0354 2C00DCE5 		ldrb	r0, [ip, #44]	@ zero_extendqisi2
+ 414              	.LVL82:
+ 415 0358 21C0DCE5 		ldrb	ip, [ip, #33]	@ zero_extendqisi2
+ 416 035c 003180E0 		add	r3, r0, r0, asl #2
+ 417 0360 8330A0E1 		mov	r3, r3, asl #1
+ 418 0364 943525E0 		mla	r5, r4, r5, r3
+ 419 0368 0C5085E0 		add	r5, r5, ip
+ 420 036c 021081E0 		add	r1, r1, r2
+  81:Color_search.c ****     int eckPos=0; //EckPos= 1000*Schicht+100*ErsteCenterale+10*zweiteCenterale+dritteCentrale
+ 421              		.loc 1 81 0
+ 422 0370 54339FE5 		ldr	r3, .L109+4
+ 423 0374 010055E1 		cmp	r5, r1
+ 424 0378 0030A013 		movne	r3, #0
+ 425              	.LVL83:
+  86:Color_search.c ****         eckPos=1000*1+100*0+10*4+3;
+  87:Color_search.c ****     if (Color_eck== 100*color_data[4][8]+10*color_data[3][6]+color_data[0][0])   //1430
+ 426              		.loc 1 87 0
+ 427 037c 0C218CE0 		add	r2, ip, ip, asl #2
+ 428              	.LVL84:
+ 429 0380 8220A0E1 		mov	r2, r2, asl #1
+ 430 0384 6450A0E3 		mov	r5, #100
+ 431 0388 952022E0 		mla	r2, r5, r0, r2
+ 432 038c 042082E0 		add	r2, r2, r4
+  88:Color_search.c ****         eckPos=1000*1+100*4+10*3+0;
+ 433              		.loc 1 88 0
+ 434 0390 38539FE5 		ldr	r5, .L109+8
+ 435 0394 010052E1 		cmp	r2, r1
+ 436 0398 0530A001 		moveq	r3, r5
+ 437              	.LVL85:
+  89:Color_search.c ****     if (Color_eck== 100*color_data[3][6]+10*color_data[0][0]+color_data[4][8])   //1304
+ 438              		.loc 1 89 0
+ 439 039c 044184E0 		add	r4, r4, r4, asl #2
+ 440 03a0 8440A0E1 		mov	r4, r4, asl #1
+ 441 03a4 6420A0E3 		mov	r2, #100
+ 442 03a8 924C2CE0 		mla	ip, r2, ip, r4
+ 443 03ac 00C08CE0 		add	ip, ip, r0
+  90:Color_search.c ****         eckPos=1000*1+100*3+10*0+4;
+ 444              		.loc 1 90 0
+ 445 03b0 1C239FE5 		ldr	r2, .L109+12
+ 446 03b4 01005CE1 		cmp	ip, r1
+ 447 03b8 0230A001 		moveq	r3, r2
+ 448              	.LVL86:
+  91:Color_search.c ****     
+  92:Color_search.c ****     if (Color_eck== 100*color_data[0][2]+10*color_data[3][8]+color_data[5][6])   //1035
+ 449              		.loc 1 92 0
+ 450 03bc 04039FE5 		ldr	r0, .L109
+ 451 03c0 02C0D0E5 		ldrb	ip, [r0, #2]	@ zero_extendqisi2
+ 452 03c4 2320D0E5 		ldrb	r2, [r0, #35]	@ zero_extendqisi2
+ 453 03c8 3300D0E5 		ldrb	r0, [r0, #51]	@ zero_extendqisi2
+ 454 03cc 024182E0 		add	r4, r2, r2, asl #2
+ 455 03d0 8440A0E1 		mov	r4, r4, asl #1
+ 456 03d4 6450A0E3 		mov	r5, #100
+ 457 03d8 954C24E0 		mla	r4, r5, ip, r4
+ 458 03dc 004084E0 		add	r4, r4, r0
+  93:Color_search.c ****         eckPos=1000*1+100*0+10*3+5;
+ 459              		.loc 1 93 0
+ 460 03e0 F0529FE5 		ldr	r5, .L109+16
+ 461 03e4 010054E1 		cmp	r4, r1
+ 462 03e8 0530A001 		moveq	r3, r5
+ 463              	.LVL87:
+  94:Color_search.c ****     if (Color_eck== 100*color_data[3][8]+10*color_data[5][6]+color_data[0][2])   //1350
+ 464              		.loc 1 94 0
+ 465 03ec 004180E0 		add	r4, r0, r0, asl #2
+ 466 03f0 8440A0E1 		mov	r4, r4, asl #1
+ 467 03f4 6450A0E3 		mov	r5, #100
+ 468 03f8 954224E0 		mla	r4, r5, r2, r4
+ 469 03fc 0C4084E0 		add	r4, r4, ip
+  95:Color_search.c ****         eckPos=1000*1+100*3+10*5+0;
+ 470              		.loc 1 95 0
+ 471 0400 D4529FE5 		ldr	r5, .L109+20
+ 472 0404 010054E1 		cmp	r4, r1
+ 473 0408 0530A001 		moveq	r3, r5
+ 474              	.LVL88:
+  96:Color_search.c ****     if (Color_eck== 100*color_data[5][6]+10*color_data[0][2]+color_data[3][8])   //1503
+ 475              		.loc 1 96 0
+ 476 040c 0CC18CE0 		add	ip, ip, ip, asl #2
+ 477 0410 8CC0A0E1 		mov	ip, ip, asl #1
+ 478 0414 6440A0E3 		mov	r4, #100
+ 479 0418 94C020E0 		mla	r0, r4, r0, ip
+ 480 041c 020080E0 		add	r0, r0, r2
+  97:Color_search.c ****         eckPos=1000*1+100*5+10*0+3;
+ 481              		.loc 1 97 0
+ 482 0420 B8229FE5 		ldr	r2, .L109+24
+ 483 0424 010050E1 		cmp	r0, r1
+ 484 0428 0230A001 		moveq	r3, r2
+ 485              	.LVL89:
+  98:Color_search.c ****     
+  99:Color_search.c ****     if (Color_eck== 100*color_data[0][8]+10*color_data[5][8]+color_data[1][2])   //1051
+ 486              		.loc 1 99 0
+ 487 042c 94029FE5 		ldr	r0, .L109
+ 488 0430 08C0D0E5 		ldrb	ip, [r0, #8]	@ zero_extendqisi2
+ 489 0434 3520D0E5 		ldrb	r2, [r0, #53]	@ zero_extendqisi2
+ 490 0438 0B00D0E5 		ldrb	r0, [r0, #11]	@ zero_extendqisi2
+ 491 043c 024182E0 		add	r4, r2, r2, asl #2
+ 492 0440 8440A0E1 		mov	r4, r4, asl #1
+ 493 0444 6450A0E3 		mov	r5, #100
+ 494 0448 954C24E0 		mla	r4, r5, ip, r4
+ 495 044c 004084E0 		add	r4, r4, r0
+ 100:Color_search.c ****         eckPos=1000*1+100*0+10*5+1;
+ 496              		.loc 1 100 0
+ 497 0450 8C529FE5 		ldr	r5, .L109+28
+ 498 0454 010054E1 		cmp	r4, r1
+ 499 0458 0530A001 		moveq	r3, r5
+ 500              	.LVL90:
+ 101:Color_search.c ****     if (Color_eck== 100*color_data[5][8]+10*color_data[1][2]+color_data[0][8])   //1510
+ 501              		.loc 1 101 0
+ 502 045c 004180E0 		add	r4, r0, r0, asl #2
+ 503 0460 8440A0E1 		mov	r4, r4, asl #1
+ 504 0464 6450A0E3 		mov	r5, #100
+ 505 0468 954224E0 		mla	r4, r5, r2, r4
+ 506 046c 0C4084E0 		add	r4, r4, ip
+ 102:Color_search.c ****         eckPos=1000*1+100*5+10*1+0;
+ 507              		.loc 1 102 0
+ 508 0470 70529FE5 		ldr	r5, .L109+32
+ 509 0474 010054E1 		cmp	r4, r1
+ 510 0478 0530A001 		moveq	r3, r5
+ 511              	.LVL91:
+ 103:Color_search.c ****     if (Color_eck== 100*color_data[1][2]+10*color_data[0][8]+color_data[5][8])   //1105
+ 512              		.loc 1 103 0
+ 513 047c 0CC18CE0 		add	ip, ip, ip, asl #2
+ 514 0480 8CC0A0E1 		mov	ip, ip, asl #1
+ 515 0484 6440A0E3 		mov	r4, #100
+ 516 0488 94C020E0 		mla	r0, r4, r0, ip
+ 517 048c 020080E0 		add	r0, r0, r2
+ 104:Color_search.c ****         eckPos=1000*1+100*1+10*0+5;
+ 518              		.loc 1 104 0
+ 519 0490 54229FE5 		ldr	r2, .L109+36
+ 520 0494 010050E1 		cmp	r0, r1
+ 521 0498 0230A001 		moveq	r3, r2
+ 522              	.LVL92:
+ 105:Color_search.c ****     
+ 106:Color_search.c ****     if (Color_eck== 100*color_data[0][6]+10*color_data[1][0]+color_data[4][6])   //1014
+ 523              		.loc 1 106 0
+ 524 049c 24029FE5 		ldr	r0, .L109
+ 525 04a0 06C0D0E5 		ldrb	ip, [r0, #6]	@ zero_extendqisi2
+ 526 04a4 0920D0E5 		ldrb	r2, [r0, #9]	@ zero_extendqisi2
+ 527 04a8 2A00D0E5 		ldrb	r0, [r0, #42]	@ zero_extendqisi2
+ 528 04ac 024182E0 		add	r4, r2, r2, asl #2
+ 529 04b0 8440A0E1 		mov	r4, r4, asl #1
+ 530 04b4 6450A0E3 		mov	r5, #100
+ 531 04b8 954C24E0 		mla	r4, r5, ip, r4
+ 532 04bc 004084E0 		add	r4, r4, r0
+ 107:Color_search.c ****         eckPos=1000*1+100*0+10*1+4;
+ 533              		.loc 1 107 0
+ 534 04c0 28529FE5 		ldr	r5, .L109+40
+ 535 04c4 010054E1 		cmp	r4, r1
+ 536 04c8 0530A001 		moveq	r3, r5
+ 537              	.LVL93:
+ 108:Color_search.c ****     if (Color_eck== 100*color_data[1][0]+10*color_data[4][6]+color_data[0][6])   //1140
+ 538              		.loc 1 108 0
+ 539 04cc 004180E0 		add	r4, r0, r0, asl #2
+ 540 04d0 8440A0E1 		mov	r4, r4, asl #1
+ 541 04d4 6450A0E3 		mov	r5, #100
+ 542 04d8 954224E0 		mla	r4, r5, r2, r4
+ 543 04dc 0C4084E0 		add	r4, r4, ip
+ 109:Color_search.c ****         eckPos=1000*1+100*1+10*4+0;
+ 544              		.loc 1 109 0
+ 545 04e0 415E85E2 		add	r5, r5, #1040
+ 546 04e4 010054E1 		cmp	r4, r1
+ 547 04e8 0530A001 		moveq	r3, r5
+ 548              	.LVL94:
+ 110:Color_search.c ****     if (Color_eck== 100*color_data[4][6]+10*color_data[0][6]+color_data[1][0])   //1401
+ 549              		.loc 1 110 0
+ 550 04ec 0CC18CE0 		add	ip, ip, ip, asl #2
+ 551 04f0 8CC0A0E1 		mov	ip, ip, asl #1
+ 552 04f4 6440A0E3 		mov	r4, #100
+ 553 04f8 94C020E0 		mla	r0, r4, r0, ip
+ 554 04fc 020080E0 		add	r0, r0, r2
+ 111:Color_search.c ****         eckPos=1000*1+100*4+10*0+1;
+ 555              		.loc 1 111 0
+ 556 0500 EC219FE5 		ldr	r2, .L109+44
+ 557 0504 010050E1 		cmp	r0, r1
+ 558 0508 0230A001 		moveq	r3, r2
+ 559              	.LVL95:
+ 112:Color_search.c ****     
+ 113:Color_search.c ****     //Zweite Schichte
+ 114:Color_search.c ****     if (Color_eck== 100*color_data[2][0]+10*color_data[4][0]+color_data[1][6])   //3241
+ 560              		.loc 1 114 0
+ 561 050c B4019FE5 		ldr	r0, .L109
+ 562 0510 12C0D0E5 		ldrb	ip, [r0, #18]	@ zero_extendqisi2
+ 563 0514 2420D0E5 		ldrb	r2, [r0, #36]	@ zero_extendqisi2
+ 564 0518 0F00D0E5 		ldrb	r0, [r0, #15]	@ zero_extendqisi2
+ 565 051c 024182E0 		add	r4, r2, r2, asl #2
+ 566 0520 8440A0E1 		mov	r4, r4, asl #1
+ 567 0524 6450A0E3 		mov	r5, #100
+ 568 0528 954C24E0 		mla	r4, r5, ip, r4
+ 569 052c 004084E0 		add	r4, r4, r0
+ 115:Color_search.c ****         eckPos=1000*3+100*2+10*4+1;
+ 570              		.loc 1 115 0
+ 571 0530 C0519FE5 		ldr	r5, .L109+48
+ 572 0534 010054E1 		cmp	r4, r1
+ 573 0538 0530A001 		moveq	r3, r5
+ 574              	.LVL96:
+ 116:Color_search.c ****     if (Color_eck== 100*color_data[4][0]+10*color_data[1][6]+color_data[2][0])   //3412
+ 575              		.loc 1 116 0
+ 576 053c 004180E0 		add	r4, r0, r0, asl #2
+ 577 0540 8440A0E1 		mov	r4, r4, asl #1
+ 578 0544 6450A0E3 		mov	r5, #100
+ 579 0548 954224E0 		mla	r4, r5, r2, r4
+ 580 054c 0C4084E0 		add	r4, r4, ip
+ 117:Color_search.c ****         eckPos=1000*3+100*4+10*1+2;
+ 581              		.loc 1 117 0
+ 582 0550 CF5E85E2 		add	r5, r5, #3312
+ 583 0554 010054E1 		cmp	r4, r1
+ 584 0558 0530A001 		moveq	r3, r5
+ 585              	.LVL97:
+ 118:Color_search.c ****     if (Color_eck== 100*color_data[1][6]+10*color_data[2][0]+color_data[4][0])   //3124
+ 586              		.loc 1 118 0
+ 587 055c 0CC18CE0 		add	ip, ip, ip, asl #2
+ 588 0560 8CC0A0E1 		mov	ip, ip, asl #1
+ 589 0564 6440A0E3 		mov	r4, #100
+ 590 0568 94C020E0 		mla	r0, r4, r0, ip
+ 591 056c 020080E0 		add	r0, r0, r2
+ 119:Color_search.c ****         eckPos=1000*3+100*1+10*2+4;
+ 592              		.loc 1 119 0
+ 593 0570 84219FE5 		ldr	r2, .L109+52
+ 594 0574 010050E1 		cmp	r0, r1
+ 595 0578 0230A001 		moveq	r3, r2
+ 596              	.LVL98:
+ 120:Color_search.c ****     
+ 121:Color_search.c ****     if (Color_eck== 100*color_data[2][2]+10*color_data[1][8]+color_data[5][2])   //3215
+ 597              		.loc 1 121 0
+ 598 057c 44019FE5 		ldr	r0, .L109
+ 599 0580 14C0D0E5 		ldrb	ip, [r0, #20]	@ zero_extendqisi2
+ 600 0584 1120D0E5 		ldrb	r2, [r0, #17]	@ zero_extendqisi2
+ 601 0588 2F00D0E5 		ldrb	r0, [r0, #47]	@ zero_extendqisi2
+ 602 058c 024182E0 		add	r4, r2, r2, asl #2
+ 603 0590 8440A0E1 		mov	r4, r4, asl #1
+ 604 0594 6450A0E3 		mov	r5, #100
+ 605 0598 954C24E0 		mla	r4, r5, ip, r4
+ 606 059c 004084E0 		add	r4, r4, r0
+ 122:Color_search.c ****         eckPos=1000*3+100*2+10*1+5;
+ 607              		.loc 1 122 0
+ 608 05a0 58519FE5 		ldr	r5, .L109+56
+ 609 05a4 010054E1 		cmp	r4, r1
+ 610 05a8 0530A001 		moveq	r3, r5
+ 611              	.LVL99:
+ 123:Color_search.c ****     if (Color_eck== 100*color_data[1][8]+10*color_data[5][2]+color_data[2][2])   //3152
+ 612              		.loc 1 123 0
+ 613 05ac 004180E0 		add	r4, r0, r0, asl #2
+ 614 05b0 8440A0E1 		mov	r4, r4, asl #1
+ 615 05b4 6450A0E3 		mov	r5, #100
+ 616 05b8 954224E0 		mla	r4, r5, r2, r4
+ 617 05bc 0C4084E0 		add	r4, r4, ip
+ 124:Color_search.c ****         eckPos=1000*3+100*1+10*5+2;
+ 618              		.loc 1 124 0
+ 619 05c0 010054E1 		cmp	r4, r1
+ 620 05c4 C53EA003 		moveq	r3, #3152
+ 621              	.LVL100:
+ 125:Color_search.c ****     if (Color_eck== 100*color_data[5][2]+10*color_data[2][2]+color_data[1][8])   //3521
+ 622              		.loc 1 125 0
+ 623 05c8 0CC18CE0 		add	ip, ip, ip, asl #2
+ 624 05cc 8CC0A0E1 		mov	ip, ip, asl #1
+ 625 05d0 95C020E0 		mla	r0, r5, r0, ip
+ 626 05d4 020080E0 		add	r0, r0, r2
+ 126:Color_search.c ****         eckPos=1000*3+100*5+10*2+1;
+ 627              		.loc 1 126 0
+ 628 05d8 24219FE5 		ldr	r2, .L109+60
+ 629 05dc 010050E1 		cmp	r0, r1
+ 630 05e0 0230A001 		moveq	r3, r2
+ 631              	.LVL101:
+ 127:Color_search.c ****     
+ 128:Color_search.c ****     if (Color_eck== 100*color_data[2][8]+10*color_data[5][0]+color_data[3][2])   //3253
+ 632              		.loc 1 128 0
+ 633 05e4 DC009FE5 		ldr	r0, .L109
+ 634 05e8 1AC0D0E5 		ldrb	ip, [r0, #26]	@ zero_extendqisi2
+ 635 05ec 2D20D0E5 		ldrb	r2, [r0, #45]	@ zero_extendqisi2
+ 636 05f0 1D00D0E5 		ldrb	r0, [r0, #29]	@ zero_extendqisi2
+ 637 05f4 024182E0 		add	r4, r2, r2, asl #2
+ 638 05f8 8440A0E1 		mov	r4, r4, asl #1
+ 639 05fc 954C24E0 		mla	r4, r5, ip, r4
+ 640 0600 004084E0 		add	r4, r4, r0
+ 129:Color_search.c ****         eckPos=1000*3+100*2+10*5+3;
+ 641              		.loc 1 129 0
+ 642 0604 FC509FE5 		ldr	r5, .L109+64
+ 643 0608 010054E1 		cmp	r4, r1
+ 644 060c 0530A001 		moveq	r3, r5
+ 645              	.LVL102:
+ 130:Color_search.c ****     if (Color_eck== 100*color_data[5][0]+10*color_data[3][2]+color_data[2][8])   //3532
+ 646              		.loc 1 130 0
+ 647 0610 004180E0 		add	r4, r0, r0, asl #2
+ 648 0614 8440A0E1 		mov	r4, r4, asl #1
+ 649 0618 6450A0E3 		mov	r5, #100
+ 650 061c 954224E0 		mla	r4, r5, r2, r4
+ 651 0620 0C4084E0 		add	r4, r4, ip
+ 131:Color_search.c ****         eckPos=1000*3+100*5+10*3+2;
+ 652              		.loc 1 131 0
+ 653 0624 E0509FE5 		ldr	r5, .L109+68
+ 654 0628 010054E1 		cmp	r4, r1
+ 655 062c 0530A001 		moveq	r3, r5
+ 656              	.LVL103:
+ 132:Color_search.c ****     if (Color_eck== 100*color_data[3][2]+10*color_data[2][8]+color_data[5][0])   //3325
+ 657              		.loc 1 132 0
+ 658 0630 0CC18CE0 		add	ip, ip, ip, asl #2
+ 659 0634 8CC0A0E1 		mov	ip, ip, asl #1
+ 660 0638 6440A0E3 		mov	r4, #100
+ 661 063c 94C020E0 		mla	r0, r4, r0, ip
+ 662 0640 020080E0 		add	r0, r0, r2
+ 133:Color_search.c ****         eckPos=1000*3+100*3+10*2+5;
+ 663              		.loc 1 133 0
+ 664 0644 C4209FE5 		ldr	r2, .L109+72
+ 665 0648 010050E1 		cmp	r0, r1
+ 666 064c 0230A001 		moveq	r3, r2
+ 667              	.LVL104:
+ 134:Color_search.c ****     
+ 135:Color_search.c ****     if (Color_eck== 100*color_data[2][6]+10*color_data[3][0]+color_data[4][2])   //3234
+ 668              		.loc 1 135 0
+ 669 0650 70009FE5 		ldr	r0, .L109
+ 670 0654 1820D0E5 		ldrb	r2, [r0, #24]	@ zero_extendqisi2
+ 671 0658 1BC0D0E5 		ldrb	ip, [r0, #27]	@ zero_extendqisi2
+ 672 065c 2600D0E5 		ldrb	r0, [r0, #38]	@ zero_extendqisi2
+ 673 0660 0C418CE0 		add	r4, ip, ip, asl #2
+ 674 0664 8440A0E1 		mov	r4, r4, asl #1
+ 675 0668 6450A0E3 		mov	r5, #100
+ 676 066c 954224E0 		mla	r4, r5, r2, r4
+ 677 0670 004084E0 		add	r4, r4, r0
+ 136:Color_search.c ****         eckPos=1000*3+100*2+10*3+4;
+ 678              		.loc 1 136 0
+ 679 0674 98509FE5 		ldr	r5, .L109+76
+ 680 0678 010054E1 		cmp	r4, r1
+ 681 067c 0530A001 		moveq	r3, r5
+ 682              	.LVL105:
+ 137:Color_search.c ****     if (Color_eck== 100*color_data[4][2]+10*color_data[2][6]+color_data[3][0])   //3423
+ 683              		.loc 1 137 0
+ 684 0680 024182E0 		add	r4, r2, r2, asl #2
+ 685 0684 8440A0E1 		mov	r4, r4, asl #1
+ 686 0688 6450A0E3 		mov	r5, #100
+ 687 068c 954024E0 		mla	r4, r5, r0, r4
+ 688 0690 0C4084E0 		add	r4, r4, ip
+ 138:Color_search.c ****         eckPos=1000*3+100*4+10*2+3;
+ 689              		.loc 1 138 0
+ 690 0694 7C509FE5 		ldr	r5, .L109+80
+ 691 0698 010054E1 		cmp	r4, r1
+ 692 069c 0530A001 		moveq	r3, r5
+ 693              	.LVL106:
+ 139:Color_search.c ****     if (Color_eck== 100*color_data[3][0]+10*color_data[4][2]+color_data[2][6])   //3342
+ 694              		.loc 1 139 0
+ 695 06a0 000180E0 		add	r0, r0, r0, asl #2
+ 696 06a4 8000A0E1 		mov	r0, r0, asl #1
+ 697 06a8 6440A0E3 		mov	r4, #100
+ 698 06ac 940C2CE0 		mla	ip, r4, ip, r0
+ 699 06b0 02C08CE0 		add	ip, ip, r2
+ 700              	.LVL107:
+ 140:Color_search.c ****         eckPos=1000*3+100*3+10*4+2;
+ 141:Color_search.c ****     
+ 142:Color_search.c ****     return eckPos;
+ 143:Color_search.c ****     
+ 144:Color_search.c **** }
+ 701              		.loc 1 144 0
+ 702 06b4 60009FE5 		ldr	r0, .L109+84
+ 703 06b8 01005CE1 		cmp	ip, r1
+ 704 06bc 0300A011 		movne	r0, r3
+ 705 06c0 3000BDE8 		ldmfd	sp!, {r4, r5}
+ 706 06c4 1EFF2FE1 		bx	lr
+ 707              	.L110:
+ 708              		.align	2
+ 709              	.L109:
+ 710 06c8 00000000 		.word	color_data
+ 711 06cc 13040000 		.word	1043
+ 712 06d0 96050000 		.word	1430
+ 713 06d4 18050000 		.word	1304
+ 714 06d8 0B040000 		.word	1035
+ 715 06dc 46050000 		.word	1350
+ 716 06e0 DF050000 		.word	1503
+ 717 06e4 1B040000 		.word	1051
+ 718 06e8 E6050000 		.word	1510
+ 719 06ec 51040000 		.word	1105
+ 720 06f0 F6030000 		.word	1014
+ 721 06f4 79050000 		.word	1401
+ 722 06f8 A90C0000 		.word	3241
+ 723 06fc 340C0000 		.word	3124
+ 724 0700 8F0C0000 		.word	3215
+ 725 0704 C10D0000 		.word	3521
+ 726 0708 B50C0000 		.word	3253
+ 727 070c CC0D0000 		.word	3532
+ 728 0710 FD0C0000 		.word	3325
+ 729 0714 A20C0000 		.word	3234
+ 730 0718 5F0D0000 		.word	3423
+ 731 071c 0E0D0000 		.word	3342
+ 732              		.cfi_endproc
+ 733              	.LFE13:
+ 734              		.fnend
+ 736              	.Letext0:
+ 737              		.file 2 "/usr/local/carlson-minot/crosscompilers/lib/gcc/arm-none-linux-gnueabi/4.8.3/include/stdd
+ 738              		.file 3 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
+ 739              		.file 4 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
+ 740              		.file 5 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
+ 741              		.file 6 "main.h"
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 Color_search.c
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//cc0EBp37.s:16     .text:0000000000000000 $a
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//cc0EBp37.s:19     .text:0000000000000000 Kantenstein_suchen
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//cc0EBp37.s:335    .text:00000000000002f4 $d
+                       .ARM.exidx:0000000000000000 $d
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//cc0EBp37.s:343    .text:0000000000000304 $a
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//cc0EBp37.s:346    .text:0000000000000304 Mittelstein_suchen
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//cc0EBp37.s:381    .text:0000000000000334 $d
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//cc0EBp37.s:386    .text:0000000000000338 $a
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//cc0EBp37.s:389    .text:0000000000000338 Eckenstein_suchen
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//cc0EBp37.s:710    .text:00000000000006c8 $d
+                     .debug_frame:0000000000000010 $d
+
+UNDEFINED SYMBOLS
+color_data
+__aeabi_unwind_cpp_pr0

@@ -1,0 +1,2319 @@
+   1              		.arch armv5te
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 2
+   9              		.eabi_attribute 30, 1
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.file	"c_output.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.align	2
+  18              	OutputReset:
+  19              		.fnstart
+  20              	.LFB36:
+  21              		.file 1 "../lms2012/c_output.c"
+   1:../lms2012/c_output.c **** /*
+   2:../lms2012/c_output.c ****  * LEGO® MINDSTORMS EV3
+   3:../lms2012/c_output.c ****  *
+   4:../lms2012/c_output.c ****  * Copyright (C) 2010-2013 The LEGO Group
+   5:../lms2012/c_output.c ****  *
+   6:../lms2012/c_output.c ****  * This program is free software; you can redistribute it and/or modify
+   7:../lms2012/c_output.c ****  * it under the terms of the GNU General Public License as published by
+   8:../lms2012/c_output.c ****  * the Free Software Foundation; either version 2 of the License, or
+   9:../lms2012/c_output.c ****  * (at your option) any later version.
+  10:../lms2012/c_output.c ****  *
+  11:../lms2012/c_output.c ****  * This program is distributed in the hope that it will be useful,
+  12:../lms2012/c_output.c ****  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+  13:../lms2012/c_output.c ****  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  14:../lms2012/c_output.c ****  * GNU General Public License for more details.
+  15:../lms2012/c_output.c ****  *
+  16:../lms2012/c_output.c ****  * You should have received a copy of the GNU General Public License
+  17:../lms2012/c_output.c ****  * along with this program; if not, write to the Free Software
+  18:../lms2012/c_output.c ****  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+  19:../lms2012/c_output.c ****  */
+  20:../lms2012/c_output.c **** 
+  21:../lms2012/c_output.c **** 
+  22:../lms2012/c_output.c **** #include  "lms2012.h"
+  23:../lms2012/c_output.c **** #include  "c_output.h"
+  24:../lms2012/c_output.c **** 
+  25:../lms2012/c_output.c **** #include  <stdio.h>
+  26:../lms2012/c_output.c **** #include  <fcntl.h>
+  27:../lms2012/c_output.c **** #include  <stdlib.h>
+  28:../lms2012/c_output.c **** #include  <unistd.h>
+  29:../lms2012/c_output.c **** #include  <string.h>
+  30:../lms2012/c_output.c **** #include  <signal.h>
+  31:../lms2012/c_output.c **** #include  <sys/mman.h>
+  32:../lms2012/c_output.c **** 
+  33:../lms2012/c_output.c **** OUTPUT_GLOBALS OutputInstance;
+  34:../lms2012/c_output.c **** 
+  35:../lms2012/c_output.c **** static void      OutputReset(void)
+  36:../lms2012/c_output.c **** {
+  22              		.loc 1 36 0
+  23              		.cfi_startproc
+  24              		@ args = 0, pretend = 0, frame = 8
+  25              		@ frame_needed = 0, uses_anonymous_args = 0
+  26 0000 04E02DE5 		str	lr, [sp, #-4]!
+  27              		.save {lr}
+  28              		.cfi_def_cfa_offset 4
+  29              		.cfi_offset 14, -4
+  30              		.pad #12
+  31 0004 0CD04DE2 		sub	sp, sp, #12
+  32              		.cfi_def_cfa_offset 16
+  37:../lms2012/c_output.c ****   DATA8   StopArr[3];
+  38:../lms2012/c_output.c **** 
+  39:../lms2012/c_output.c ****   StopArr[0] = (DATA8)opOUTPUT_STOP;
+  33              		.loc 1 39 0
+  34 0008 5C30E0E3 		mvn	r3, #92
+  35 000c 0430CDE5 		strb	r3, [sp, #4]
+  40:../lms2012/c_output.c ****   StopArr[1] = 0x0F;
+  36              		.loc 1 40 0
+  37 0010 0F30A0E3 		mov	r3, #15
+  38 0014 0530CDE5 		strb	r3, [sp, #5]
+  41:../lms2012/c_output.c ****   StopArr[2] = 0x00;
+  39              		.loc 1 41 0
+  40 0018 0030A0E3 		mov	r3, #0
+  41 001c 0630CDE5 		strb	r3, [sp, #6]
+  42:../lms2012/c_output.c ****   if (OutputInstance.PwmFile >= 0)
+  42              		.loc 1 42 0
+  43 0020 1C309FE5 		ldr	r3, .L3
+  44 0024 040093E5 		ldr	r0, [r3, #4]
+  45 0028 000050E3 		cmp	r0, #0
+  46 002c 020000BA 		blt	.L1
+  43:../lms2012/c_output.c ****   {
+  44:../lms2012/c_output.c ****     write(OutputInstance.PwmFile,StopArr,3);
+  47              		.loc 1 44 0
+  48 0030 04108DE2 		add	r1, sp, #4
+  49 0034 0320A0E3 		mov	r2, #3
+  50 0038 FEFFFFEB 		bl	write
+  51              	.LVL0:
+  52              	.L1:
+  45:../lms2012/c_output.c ****   }
+  46:../lms2012/c_output.c **** }
+  53              		.loc 1 46 0
+  54 003c 0CD08DE2 		add	sp, sp, #12
+  55              		@ sp needed
+  56 0040 04F09DE4 		ldr	pc, [sp], #4
+  57              	.L4:
+  58              		.align	2
+  59              	.L3:
+  60 0044 00000000 		.word	OutputInstance
+  61              		.cfi_endproc
+  62              	.LFE36:
+  63              		.fnend
+  65              		.align	2
+  66              		.global	cOutputInit
+  68              	cOutputInit:
+  69              		.fnstart
+  70              	.LFB38:
+  47:../lms2012/c_output.c **** 
+  48:../lms2012/c_output.c **** static RESULT    cOutputOpen(void)
+  49:../lms2012/c_output.c **** {
+  50:../lms2012/c_output.c ****   RESULT  Result = FAIL;
+  51:../lms2012/c_output.c **** 
+  52:../lms2012/c_output.c ****   UBYTE   PrgStart =  opPROGRAM_START;
+  53:../lms2012/c_output.c **** 
+  54:../lms2012/c_output.c ****   OutputReset();
+  55:../lms2012/c_output.c **** 
+  56:../lms2012/c_output.c ****   if (OutputInstance.PwmFile >= 0)
+  57:../lms2012/c_output.c ****   {
+  58:../lms2012/c_output.c ****     write(OutputInstance.PwmFile,&PrgStart,1);
+  59:../lms2012/c_output.c ****   }
+  60:../lms2012/c_output.c **** 
+  61:../lms2012/c_output.c ****   Result  =  OK;
+  62:../lms2012/c_output.c **** 
+  63:../lms2012/c_output.c ****   return (Result);
+  64:../lms2012/c_output.c **** }
+  65:../lms2012/c_output.c **** 
+  66:../lms2012/c_output.c **** RESULT    cOutputInit(void)
+  67:../lms2012/c_output.c **** {
+  71              		.loc 1 67 0
+  72              		.cfi_startproc
+  73              		@ args = 0, pretend = 0, frame = 8
+  74              		@ frame_needed = 0, uses_anonymous_args = 0
+  75 0048 10402DE9 		stmfd	sp!, {r4, lr}
+  76              		.save {r4, lr}
+  77              		.cfi_def_cfa_offset 8
+  78              		.cfi_offset 4, -8
+  79              		.cfi_offset 14, -4
+  80              		.pad #16
+  81 004c 10D04DE2 		sub	sp, sp, #16
+  82              		.cfi_def_cfa_offset 24
+  83              	.LVL1:
+  68:../lms2012/c_output.c ****   RESULT      Result = FAIL;
+  69:../lms2012/c_output.c ****   MOTORDATA   *pTmp;
+  70:../lms2012/c_output.c **** 
+  71:../lms2012/c_output.c ****   // To ensure that pMotor is never uninitialised
+  72:../lms2012/c_output.c ****   OutputInstance.pMotor  =  OutputInstance.MotorData;
+  84              		.loc 1 72 0
+  85 0050 BC409FE5 		ldr	r4, .L11
+  86 0054 0C3084E2 		add	r3, r4, #12
+  87 0058 3C3084E5 		str	r3, [r4, #60]
+  73:../lms2012/c_output.c **** 
+  74:../lms2012/c_output.c ****   // Open the handle for writing commands
+  75:../lms2012/c_output.c ****   OutputInstance.PwmFile  =  open(PWM_DEVICE_NAME,O_RDWR);
+  88              		.loc 1 75 0
+  89 005c B4009FE5 		ldr	r0, .L11+4
+  90 0060 0210A0E3 		mov	r1, #2
+  91 0064 FEFFFFEB 		bl	open
+  92              	.LVL2:
+  93 0068 040084E5 		str	r0, [r4, #4]
+  76:../lms2012/c_output.c **** 
+  77:../lms2012/c_output.c ****   if (OutputInstance.PwmFile >= 0)
+  94              		.loc 1 77 0
+  95 006c 000050E3 		cmp	r0, #0
+  68:../lms2012/c_output.c ****   MOTORDATA   *pTmp;
+  96              		.loc 1 68 0
+  97 0070 0200A0B3 		movlt	r0, #2
+  98              		.loc 1 77 0
+  99 0074 240000BA 		blt	.L6
+  78:../lms2012/c_output.c ****   {
+  79:../lms2012/c_output.c **** 
+  80:../lms2012/c_output.c ****     // Open the handle for reading motor values - shared memory
+  81:../lms2012/c_output.c ****     OutputInstance.MotorFile  =  open(MOTOR_DEVICE_NAME,O_RDWR | O_SYNC);
+ 100              		.loc 1 81 0
+ 101 0078 9C009FE5 		ldr	r0, .L11+8
+ 102 007c 9C109FE5 		ldr	r1, .L11+12
+ 103 0080 FEFFFFEB 		bl	open
+ 104              	.LVL3:
+ 105 0084 080084E5 		str	r0, [r4, #8]
+  82:../lms2012/c_output.c ****     if (OutputInstance.MotorFile >= 0)
+ 106              		.loc 1 82 0
+ 107 0088 000050E3 		cmp	r0, #0
+  68:../lms2012/c_output.c ****   MOTORDATA   *pTmp;
+ 108              		.loc 1 68 0
+ 109 008c 0200A0B3 		movlt	r0, #2
+ 110              		.loc 1 82 0
+ 111 0090 1D0000BA 		blt	.L6
+  83:../lms2012/c_output.c ****     {
+  84:../lms2012/c_output.c ****       pTmp  =  (MOTORDATA*)mmap(0, sizeof(OutputInstance.MotorData), PROT_READ | PROT_WRITE, MAP_FI
+ 112              		.loc 1 84 0
+ 113 0094 00008DE5 		str	r0, [sp]
+ 114 0098 0000A0E3 		mov	r0, #0
+ 115 009c 04008DE5 		str	r0, [sp, #4]
+ 116 00a0 3010A0E3 		mov	r1, #48
+ 117 00a4 0320A0E3 		mov	r2, #3
+ 118 00a8 0130A0E3 		mov	r3, #1
+ 119 00ac FEFFFFEB 		bl	mmap
+ 120              	.LVL4:
+  85:../lms2012/c_output.c **** 
+  86:../lms2012/c_output.c ****       if (pTmp == MAP_FAILED)
+ 121              		.loc 1 86 0
+ 122 00b0 010070E3 		cmn	r0, #1
+ 123 00b4 0700001A 		bne	.L7
+  87:../lms2012/c_output.c ****       {
+  88:../lms2012/c_output.c ****         LogErrorNumber(OUTPUT_SHARED_MEMORY);
+ 124              		.loc 1 88 0
+ 125 00b8 0D00A0E3 		mov	r0, #13
+ 126              	.LVL5:
+ 127 00bc FEFFFFEB 		bl	LogErrorNumber
+ 128              	.LVL6:
+  89:../lms2012/c_output.c ****         close(OutputInstance.MotorFile);
+ 129              		.loc 1 89 0
+ 130 00c0 080094E5 		ldr	r0, [r4, #8]
+ 131 00c4 FEFFFFEB 		bl	close
+ 132              	.LVL7:
+  90:../lms2012/c_output.c ****         close(OutputInstance.PwmFile);
+ 133              		.loc 1 90 0
+ 134 00c8 040094E5 		ldr	r0, [r4, #4]
+ 135 00cc FEFFFFEB 		bl	close
+ 136              	.LVL8:
+  68:../lms2012/c_output.c ****   MOTORDATA   *pTmp;
+ 137              		.loc 1 68 0
+ 138 00d0 0200A0E3 		mov	r0, #2
+ 139 00d4 0C0000EA 		b	.L6
+ 140              	.LVL9:
+ 141              	.L7:
+  91:../lms2012/c_output.c ****       }
+  92:../lms2012/c_output.c ****       else
+  93:../lms2012/c_output.c ****       {
+  94:../lms2012/c_output.c ****         OutputInstance.pMotor  =  (MOTORDATA*)pTmp;
+ 142              		.loc 1 94 0
+ 143 00d8 34409FE5 		ldr	r4, .L11
+ 144 00dc 3C0084E5 		str	r0, [r4, #60]
+ 145              	.LVL10:
+ 146              	.LBB4:
+ 147              	.LBB5:
+  52:../lms2012/c_output.c **** 
+ 148              		.loc 1 52 0
+ 149 00e0 0330A0E3 		mov	r3, #3
+ 150 00e4 0F30CDE5 		strb	r3, [sp, #15]
+  54:../lms2012/c_output.c **** 
+ 151              		.loc 1 54 0
+ 152 00e8 C4FFFFEB 		bl	OutputReset
+ 153              	.LVL11:
+  56:../lms2012/c_output.c ****   {
+ 154              		.loc 1 56 0
+ 155 00ec 040094E5 		ldr	r0, [r4, #4]
+ 156 00f0 000050E3 		cmp	r0, #0
+ 157 00f4 020000BA 		blt	.L8
+  58:../lms2012/c_output.c ****   }
+ 158              		.loc 1 58 0
+ 159 00f8 0F108DE2 		add	r1, sp, #15
+ 160 00fc 0120A0E3 		mov	r2, #1
+ 161 0100 FEFFFFEB 		bl	write
+ 162              	.LVL12:
+ 163              	.L8:
+ 164              	.LBE5:
+ 165              	.LBE4:
+  95:../lms2012/c_output.c ****         Result  =  cOutputOpen();
+ 166              		.loc 1 95 0
+ 167 0104 0000A0E3 		mov	r0, #0
+ 168 0108 FFFFFFEA 		b	.L6
+ 169              	.LVL13:
+ 170              	.L6:
+  96:../lms2012/c_output.c ****       }
+  97:../lms2012/c_output.c ****     }
+  98:../lms2012/c_output.c ****   }
+  99:../lms2012/c_output.c **** 
+ 100:../lms2012/c_output.c ****   return (Result);
+ 101:../lms2012/c_output.c **** }
+ 171              		.loc 1 101 0
+ 172 010c 10D08DE2 		add	sp, sp, #16
+ 173              		@ sp needed
+ 174 0110 1080BDE8 		ldmfd	sp!, {r4, pc}
+ 175              	.L12:
+ 176              		.align	2
+ 177              	.L11:
+ 178 0114 00000000 		.word	OutputInstance
+ 179 0118 00000000 		.word	.LC0
+ 180 011c 10000000 		.word	.LC1
+ 181 0120 02101000 		.word	1052674
+ 182              		.cfi_endproc
+ 183              	.LFE38:
+ 184              		.fnend
+ 186              		.align	2
+ 187              		.global	cOutputExit
+ 189              	cOutputExit:
+ 190              		.fnstart
+ 191              	.LFB39:
+ 102:../lms2012/c_output.c **** 
+ 103:../lms2012/c_output.c **** #if 0
+ 104:../lms2012/c_output.c **** RESULT    cOutputClose(void)
+ 105:../lms2012/c_output.c **** {
+ 106:../lms2012/c_output.c ****   return (OK);
+ 107:../lms2012/c_output.c **** }
+ 108:../lms2012/c_output.c **** #endif
+ 109:../lms2012/c_output.c **** 
+ 110:../lms2012/c_output.c **** RESULT    cOutputExit(void)
+ 111:../lms2012/c_output.c **** {
+ 192              		.loc 1 111 0
+ 193              		.cfi_startproc
+ 194              		@ args = 0, pretend = 0, frame = 0
+ 195              		@ frame_needed = 0, uses_anonymous_args = 0
+ 196 0124 10402DE9 		stmfd	sp!, {r4, lr}
+ 197              		.save {r4, lr}
+ 198              		.cfi_def_cfa_offset 8
+ 199              		.cfi_offset 4, -8
+ 200              		.cfi_offset 14, -4
+ 201              	.LVL14:
+ 112:../lms2012/c_output.c ****   RESULT  Result = FAIL;
+ 113:../lms2012/c_output.c **** 
+ 114:../lms2012/c_output.c ****   OutputReset();
+ 202              		.loc 1 114 0
+ 203 0128 B4FFFFEB 		bl	OutputReset
+ 204              	.LVL15:
+ 115:../lms2012/c_output.c **** 
+ 116:../lms2012/c_output.c ****   if (OutputInstance.MotorFile >= 0)
+ 205              		.loc 1 116 0
+ 206 012c 3C309FE5 		ldr	r3, .L16
+ 207 0130 083093E5 		ldr	r3, [r3, #8]
+ 208 0134 000053E3 		cmp	r3, #0
+ 209 0138 050000BA 		blt	.L14
+ 117:../lms2012/c_output.c ****   {
+ 118:../lms2012/c_output.c ****     munmap(OutputInstance.pMotor,sizeof(OutputInstance.MotorData));
+ 210              		.loc 1 118 0
+ 211 013c 2C409FE5 		ldr	r4, .L16
+ 212 0140 3C0094E5 		ldr	r0, [r4, #60]
+ 213 0144 3010A0E3 		mov	r1, #48
+ 214 0148 FEFFFFEB 		bl	munmap
+ 215              	.LVL16:
+ 119:../lms2012/c_output.c ****     close(OutputInstance.MotorFile);
+ 216              		.loc 1 119 0
+ 217 014c 080094E5 		ldr	r0, [r4, #8]
+ 218 0150 FEFFFFEB 		bl	close
+ 219              	.LVL17:
+ 220              	.L14:
+ 120:../lms2012/c_output.c ****   }
+ 121:../lms2012/c_output.c **** 
+ 122:../lms2012/c_output.c ****   if (OutputInstance.PwmFile >= 0)
+ 221              		.loc 1 122 0
+ 222 0154 14309FE5 		ldr	r3, .L16
+ 223 0158 040093E5 		ldr	r0, [r3, #4]
+ 224 015c 000050E3 		cmp	r0, #0
+ 225 0160 000000BA 		blt	.L15
+ 123:../lms2012/c_output.c ****   {
+ 124:../lms2012/c_output.c ****     close(OutputInstance.PwmFile);
+ 226              		.loc 1 124 0
+ 227 0164 FEFFFFEB 		bl	close
+ 228              	.LVL18:
+ 229              	.L15:
+ 125:../lms2012/c_output.c ****   }
+ 126:../lms2012/c_output.c **** 
+ 127:../lms2012/c_output.c ****   Result  =  OK;
+ 128:../lms2012/c_output.c **** 
+ 129:../lms2012/c_output.c ****   return (Result);
+ 130:../lms2012/c_output.c **** }
+ 230              		.loc 1 130 0
+ 231 0168 0000A0E3 		mov	r0, #0
+ 232 016c 1080BDE8 		ldmfd	sp!, {r4, pc}
+ 233              	.L17:
+ 234              		.align	2
+ 235              	.L16:
+ 236 0170 00000000 		.word	OutputInstance
+ 237              		.cfi_endproc
+ 238              	.LFE39:
+ 239              		.fnend
+ 241              		.align	2
+ 242              		.global	cOutputSetTypes
+ 244              	cOutputSetTypes:
+ 245              		.fnstart
+ 246              	.LFB40:
+ 131:../lms2012/c_output.c **** 
+ 132:../lms2012/c_output.c **** 
+ 133:../lms2012/c_output.c **** void    cOutputSetTypes(char *pTypes)
+ 134:../lms2012/c_output.c **** {
+ 247              		.loc 1 134 0
+ 248              		.cfi_startproc
+ 249              		@ args = 0, pretend = 0, frame = 8
+ 250              		@ frame_needed = 0, uses_anonymous_args = 0
+ 251              	.LVL19:
+ 252 0174 04E02DE5 		str	lr, [sp, #-4]!
+ 253              		.save {lr}
+ 254              		.cfi_def_cfa_offset 4
+ 255              		.cfi_offset 14, -4
+ 256              		.pad #12
+ 257 0178 0CD04DE2 		sub	sp, sp, #12
+ 258              		.cfi_def_cfa_offset 16
+ 259 017c 0010A0E1 		mov	r1, r0
+ 135:../lms2012/c_output.c ****   DATA8   TypeArr[5];
+ 136:../lms2012/c_output.c **** 
+ 137:../lms2012/c_output.c ****   TypeArr[0] = opOUTPUT_SET_TYPE;
+ 260              		.loc 1 137 0
+ 261 0180 5E30E0E3 		mvn	r3, #94
+ 262 0184 0030CDE5 		strb	r3, [sp]
+ 138:../lms2012/c_output.c ****   memcpy(&TypeArr[1], pTypes, 4);
+ 263              		.loc 1 138 0
+ 264 0188 01008DE2 		add	r0, sp, #1
+ 265              	.LVL20:
+ 266 018c 0420A0E3 		mov	r2, #4
+ 267 0190 FEFFFFEB 		bl	memcpy
+ 268              	.LVL21:
+ 139:../lms2012/c_output.c **** 
+ 140:../lms2012/c_output.c ****   if (OutputInstance.PwmFile >= 0)
+ 269              		.loc 1 140 0
+ 270 0194 1C309FE5 		ldr	r3, .L20
+ 271 0198 040093E5 		ldr	r0, [r3, #4]
+ 272 019c 000050E3 		cmp	r0, #0
+ 273 01a0 020000BA 		blt	.L18
+ 141:../lms2012/c_output.c ****   {
+ 142:../lms2012/c_output.c ****     write(OutputInstance.PwmFile,TypeArr,sizeof(TypeArr));
+ 274              		.loc 1 142 0
+ 275 01a4 0D10A0E1 		mov	r1, sp
+ 276 01a8 0520A0E3 		mov	r2, #5
+ 277 01ac FEFFFFEB 		bl	write
+ 278              	.LVL22:
+ 279              	.L18:
+ 143:../lms2012/c_output.c ****   }
+ 144:../lms2012/c_output.c **** 
+ 145:../lms2012/c_output.c **** }
+ 280              		.loc 1 145 0
+ 281 01b0 0CD08DE2 		add	sp, sp, #12
+ 282              		@ sp needed
+ 283 01b4 04F09DE4 		ldr	pc, [sp], #4
+ 284              	.L21:
+ 285              		.align	2
+ 286              	.L20:
+ 287 01b8 00000000 		.word	OutputInstance
+ 288              		.cfi_endproc
+ 289              	.LFE40:
+ 290              		.fnend
+ 292              		.align	2
+ 293              		.global	cMotorGetBusyFlags
+ 295              	cMotorGetBusyFlags:
+ 296              		.fnstart
+ 297              	.LFB41:
+ 146:../lms2012/c_output.c **** 
+ 147:../lms2012/c_output.c **** 
+ 148:../lms2012/c_output.c **** UBYTE     cMotorGetBusyFlags(void)
+ 149:../lms2012/c_output.c **** {
+ 298              		.loc 1 149 0
+ 299              		.cfi_startproc
+ 300              		@ args = 0, pretend = 0, frame = 24
+ 301              		@ frame_needed = 0, uses_anonymous_args = 0
+ 302 01bc 04E02DE5 		str	lr, [sp, #-4]!
+ 303              		.save {lr}
+ 304              		.cfi_def_cfa_offset 4
+ 305              		.cfi_offset 14, -4
+ 306              		.pad #28
+ 307 01c0 1CD04DE2 		sub	sp, sp, #28
+ 308              		.cfi_def_cfa_offset 32
+ 150:../lms2012/c_output.c ****   int     test, test2;
+ 151:../lms2012/c_output.c ****   char    BusyReturn[10]; // Busy mask
+ 152:../lms2012/c_output.c **** 
+ 153:../lms2012/c_output.c ****   if (OutputInstance.PwmFile >= 0)
+ 309              		.loc 1 153 0
+ 310 01c4 40309FE5 		ldr	r3, .L25
+ 311 01c8 040093E5 		ldr	r0, [r3, #4]
+ 312 01cc 000050E3 		cmp	r0, #0
+ 154:../lms2012/c_output.c ****   {
+ 155:../lms2012/c_output.c ****     read(OutputInstance.PwmFile,BusyReturn,4);
+ 156:../lms2012/c_output.c ****     sscanf(BusyReturn,"%u %u",&test,&test2);
+ 157:../lms2012/c_output.c ****   }
+ 158:../lms2012/c_output.c ****   else
+ 159:../lms2012/c_output.c ****   {
+ 160:../lms2012/c_output.c ****     test = 0;
+ 313              		.loc 1 160 0
+ 314 01d0 0030A0B3 		movlt	r3, #0
+ 315 01d4 14308DB5 		strlt	r3, [sp, #20]
+ 153:../lms2012/c_output.c ****   {
+ 316              		.loc 1 153 0
+ 317 01d8 080000BA 		blt	.L24
+ 155:../lms2012/c_output.c ****     sscanf(BusyReturn,"%u %u",&test,&test2);
+ 318              		.loc 1 155 0
+ 319 01dc 04108DE2 		add	r1, sp, #4
+ 320 01e0 0420A0E3 		mov	r2, #4
+ 321 01e4 FEFFFFEB 		bl	read
+ 322              	.LVL23:
+ 156:../lms2012/c_output.c ****   }
+ 323              		.loc 1 156 0
+ 324 01e8 04008DE2 		add	r0, sp, #4
+ 325 01ec 1C109FE5 		ldr	r1, .L25+4
+ 326 01f0 14208DE2 		add	r2, sp, #20
+ 327 01f4 10308DE2 		add	r3, sp, #16
+ 328 01f8 FEFFFFEB 		bl	__isoc99_sscanf
+ 329              	.LVL24:
+ 330 01fc FFFFFFEA 		b	.L24
+ 331              	.L24:
+ 161:../lms2012/c_output.c ****   }
+ 162:../lms2012/c_output.c **** 
+ 163:../lms2012/c_output.c ****   return(test);
+ 164:../lms2012/c_output.c **** }
+ 332              		.loc 1 164 0
+ 333 0200 1400DDE5 		ldrb	r0, [sp, #20]	@ zero_extendqisi2
+ 334 0204 1CD08DE2 		add	sp, sp, #28
+ 335              		@ sp needed
+ 336 0208 04F09DE4 		ldr	pc, [sp], #4
+ 337              	.L26:
+ 338              		.align	2
+ 339              	.L25:
+ 340 020c 00000000 		.word	OutputInstance
+ 341 0210 20000000 		.word	.LC2
+ 342              		.cfi_endproc
+ 343              	.LFE41:
+ 344              		.fnend
+ 346              		.align	2
+ 347              		.global	cMotorSetBusyFlags
+ 349              	cMotorSetBusyFlags:
+ 350              		.fnstart
+ 351              	.LFB42:
+ 165:../lms2012/c_output.c **** 
+ 166:../lms2012/c_output.c **** 
+ 167:../lms2012/c_output.c **** void      cMotorSetBusyFlags(UBYTE Flags)
+ 168:../lms2012/c_output.c **** {
+ 352              		.loc 1 168 0
+ 353              		.cfi_startproc
+ 354              		@ args = 0, pretend = 0, frame = 8
+ 355              		@ frame_needed = 0, uses_anonymous_args = 0
+ 356              	.LVL25:
+ 357 0214 04E02DE5 		str	lr, [sp, #-4]!
+ 358              		.save {lr}
+ 359              		.cfi_def_cfa_offset 4
+ 360              		.cfi_offset 14, -4
+ 361              		.pad #12
+ 362 0218 0CD04DE2 		sub	sp, sp, #12
+ 363              		.cfi_def_cfa_offset 16
+ 364 021c 0700CDE5 		strb	r0, [sp, #7]
+ 169:../lms2012/c_output.c ****   if (OutputInstance.MotorFile >= 0)
+ 365              		.loc 1 169 0
+ 366 0220 1C309FE5 		ldr	r3, .L29
+ 367 0224 080093E5 		ldr	r0, [r3, #8]
+ 368              	.LVL26:
+ 369 0228 000050E3 		cmp	r0, #0
+ 370 022c 020000BA 		blt	.L27
+ 170:../lms2012/c_output.c ****   {
+ 171:../lms2012/c_output.c ****     write(OutputInstance.MotorFile, &Flags, sizeof(Flags));
+ 371              		.loc 1 171 0
+ 372 0230 07108DE2 		add	r1, sp, #7
+ 373              	.LVL27:
+ 374 0234 0120A0E3 		mov	r2, #1
+ 375 0238 FEFFFFEB 		bl	write
+ 376              	.LVL28:
+ 377              	.L27:
+ 172:../lms2012/c_output.c ****   }
+ 173:../lms2012/c_output.c **** }
+ 378              		.loc 1 173 0
+ 379 023c 0CD08DE2 		add	sp, sp, #12
+ 380              		@ sp needed
+ 381 0240 04F09DE4 		ldr	pc, [sp], #4
+ 382              	.L30:
+ 383              		.align	2
+ 384              	.L29:
+ 385 0244 00000000 		.word	OutputInstance
+ 386              		.cfi_endproc
+ 387              	.LFE42:
+ 388              		.fnend
+ 390              		.align	2
+ 391              		.global	cOutputPrgStop
+ 393              	cOutputPrgStop:
+ 394              		.fnstart
+ 395              	.LFB43:
+ 174:../lms2012/c_output.c **** 
+ 175:../lms2012/c_output.c **** 
+ 176:../lms2012/c_output.c **** //******* BYTE CODE SNIPPETS **************************************************
+ 177:../lms2012/c_output.c **** 
+ 178:../lms2012/c_output.c **** 
+ 179:../lms2012/c_output.c **** /*! \page cOutput Output
+ 180:../lms2012/c_output.c ****  *  <hr size="1"/>
+ 181:../lms2012/c_output.c ****  *  <b>     opOUTPUT_PRG_STOP ()  </b>
+ 182:../lms2012/c_output.c ****  *
+ 183:../lms2012/c_output.c ****  *- Program stop\n
+ 184:../lms2012/c_output.c ****  *- Dispatch status unchanged
+ 185:../lms2012/c_output.c ****  *
+ 186:../lms2012/c_output.c ****  */
+ 187:../lms2012/c_output.c **** /*! \brief  opOUTPUT_PRG_STOP byte code
+ 188:../lms2012/c_output.c ****  *
+ 189:../lms2012/c_output.c ****  */
+ 190:../lms2012/c_output.c **** void      cOutputPrgStop(void)
+ 191:../lms2012/c_output.c **** {
+ 396              		.loc 1 191 0
+ 397              		.cfi_startproc
+ 398              		@ args = 0, pretend = 0, frame = 8
+ 399              		@ frame_needed = 0, uses_anonymous_args = 0
+ 400 0248 04E02DE5 		str	lr, [sp, #-4]!
+ 401              		.save {lr}
+ 402              		.cfi_def_cfa_offset 4
+ 403              		.cfi_offset 14, -4
+ 404              		.pad #12
+ 405 024c 0CD04DE2 		sub	sp, sp, #12
+ 406              		.cfi_def_cfa_offset 16
+ 192:../lms2012/c_output.c ****   DATA8   PrgStop;
+ 193:../lms2012/c_output.c **** 
+ 194:../lms2012/c_output.c ****   PrgStop = (DATA8)opPROGRAM_STOP;
+ 407              		.loc 1 194 0
+ 408 0250 0230A0E3 		mov	r3, #2
+ 409 0254 0730CDE5 		strb	r3, [sp, #7]
+ 195:../lms2012/c_output.c ****   if (OutputInstance.PwmFile >= 0)
+ 410              		.loc 1 195 0
+ 411 0258 1C309FE5 		ldr	r3, .L33
+ 412 025c 040093E5 		ldr	r0, [r3, #4]
+ 413 0260 000050E3 		cmp	r0, #0
+ 414 0264 020000BA 		blt	.L31
+ 196:../lms2012/c_output.c ****   {
+ 197:../lms2012/c_output.c ****     write(OutputInstance.PwmFile,&PrgStop,1);
+ 415              		.loc 1 197 0
+ 416 0268 07108DE2 		add	r1, sp, #7
+ 417 026c 0120A0E3 		mov	r2, #1
+ 418 0270 FEFFFFEB 		bl	write
+ 419              	.LVL29:
+ 420              	.L31:
+ 198:../lms2012/c_output.c ****   }
+ 199:../lms2012/c_output.c **** }
+ 421              		.loc 1 199 0
+ 422 0274 0CD08DE2 		add	sp, sp, #12
+ 423              		@ sp needed
+ 424 0278 04F09DE4 		ldr	pc, [sp], #4
+ 425              	.L34:
+ 426              		.align	2
+ 427              	.L33:
+ 428 027c 00000000 		.word	OutputInstance
+ 429              		.cfi_endproc
+ 430              	.LFE43:
+ 431              		.fnend
+ 433              		.align	2
+ 434              		.global	cOutputSetType
+ 436              	cOutputSetType:
+ 437              		.fnstart
+ 438              	.LFB44:
+ 200:../lms2012/c_output.c **** 
+ 201:../lms2012/c_output.c **** 
+ 202:../lms2012/c_output.c **** /*! \page cOutput Output
+ 203:../lms2012/c_output.c ****  *  <hr size="1"/>
+ 204:../lms2012/c_output.c ****  *  <b>     opOUTPUT_SET_TYPE (NO, TYPE)  </b>
+ 205:../lms2012/c_output.c ****  *
+ 206:../lms2012/c_output.c ****  *- Set output type\n
+ 207:../lms2012/c_output.c ****  *- Dispatch status unchanged
+ 208:../lms2012/c_output.c ****  *
+ 209:../lms2012/c_output.c ****  *  \param  (DATA8)   NO      - Output no [0..3]
+ 210:../lms2012/c_output.c ****  *  \param  (DATA8)   TYPE    - Output device type
+ 211:../lms2012/c_output.c ****  */
+ 212:../lms2012/c_output.c **** /*! \brief  opOUTPUT_SET_TYPE byte code
+ 213:../lms2012/c_output.c ****  *
+ 214:../lms2012/c_output.c ****  */
+ 215:../lms2012/c_output.c **** void      cOutputSetType(DATA8 No, DATA8 Type)
+ 216:../lms2012/c_output.c **** {
+ 439              		.loc 1 216 0
+ 440              		.cfi_startproc
+ 441              		@ args = 0, pretend = 0, frame = 0
+ 442              		@ frame_needed = 0, uses_anonymous_args = 0
+ 443              		@ link register save eliminated.
+ 444              	.LVL30:
+ 217:../lms2012/c_output.c ****     if ((No >= 0) && (No < OUTPUTS))
+ 445              		.loc 1 217 0
+ 446 0280 FF3000E2 		and	r3, r0, #255
+ 447 0284 030053E3 		cmp	r3, #3
+ 448 0288 1EFF2F81 		bxhi	lr
+ 218:../lms2012/c_output.c ****     {
+ 219:../lms2012/c_output.c ****       if (OutputInstance.OutputType[No] != Type)
+ 449              		.loc 1 219 0
+ 450 028c 10309FE5 		ldr	r3, .L37
+ 451 0290 D03093E1 		ldrsb	r3, [r3, r0]
+ 452 0294 010053E1 		cmp	r3, r1
+ 220:../lms2012/c_output.c ****       {
+ 221:../lms2012/c_output.c ****         OutputInstance.OutputType[No]  =  Type;
+ 453              		.loc 1 221 0
+ 454 0298 04309F15 		ldrne	r3, .L37
+ 455 029c 0010C317 		strneb	r1, [r3, r0]
+ 456 02a0 1EFF2FE1 		bx	lr
+ 457              	.L38:
+ 458              		.align	2
+ 459              	.L37:
+ 460 02a4 00000000 		.word	OutputInstance
+ 461              		.cfi_endproc
+ 462              	.LFE44:
+ 463              		.fnend
+ 465              		.align	2
+ 466              		.global	cOutputReset
+ 468              	cOutputReset:
+ 469              		.fnstart
+ 470              	.LFB45:
+ 222:../lms2012/c_output.c **** 
+ 223:../lms2012/c_output.c ****         if ((Type == TYPE_NONE) || (Type == TYPE_ERROR))
+ 224:../lms2012/c_output.c ****         {
+ 225:../lms2012/c_output.c ****           #ifdef DEBUG
+ 226:../lms2012/c_output.c ****             printf("                Output %c Disable\r\n",'A' + No);
+ 227:../lms2012/c_output.c ****           #endif
+ 228:../lms2012/c_output.c ****         }
+ 229:../lms2012/c_output.c ****         else
+ 230:../lms2012/c_output.c ****         {
+ 231:../lms2012/c_output.c ****           #ifdef DEBUG
+ 232:../lms2012/c_output.c ****             printf("                Output %c Enable\r\n",'A' + No);
+ 233:../lms2012/c_output.c ****           #endif
+ 234:../lms2012/c_output.c ****         }
+ 235:../lms2012/c_output.c ****       }
+ 236:../lms2012/c_output.c ****     }
+ 237:../lms2012/c_output.c **** }
+ 238:../lms2012/c_output.c **** 
+ 239:../lms2012/c_output.c **** 
+ 240:../lms2012/c_output.c **** /*! \page cOutput
+ 241:../lms2012/c_output.c ****  *  <hr size="1"/>
+ 242:../lms2012/c_output.c ****  *  <b>     opOUTPUT_RESET (NOS)  </b>
+ 243:../lms2012/c_output.c ****  *
+ 244:../lms2012/c_output.c ****  *- Resets the Tacho counts \n
+ 245:../lms2012/c_output.c ****  *- Dispatch status unchanged
+ 246:../lms2012/c_output.c ****  *
+ 247:../lms2012/c_output.c ****  *  \param  (DATA8)   NOS     - Output bit field [0x00..0x0F]
+ 248:../lms2012/c_output.c ****  */
+ 249:../lms2012/c_output.c **** /*! \brief  opOUTPUT_RESET byte code
+ 250:../lms2012/c_output.c ****  *
+ 251:../lms2012/c_output.c ****  */
+ 252:../lms2012/c_output.c **** void      cOutputReset(DATA8 Nos)
+ 253:../lms2012/c_output.c **** {
+ 471              		.loc 1 253 0
+ 472              		.cfi_startproc
+ 473              		@ args = 0, pretend = 0, frame = 8
+ 474              		@ frame_needed = 0, uses_anonymous_args = 0
+ 475              	.LVL31:
+ 476 02a8 04E02DE5 		str	lr, [sp, #-4]!
+ 477              		.save {lr}
+ 478              		.cfi_def_cfa_offset 4
+ 479              		.cfi_offset 14, -4
+ 480              		.pad #12
+ 481 02ac 0CD04DE2 		sub	sp, sp, #12
+ 482              		.cfi_def_cfa_offset 16
+ 254:../lms2012/c_output.c ****   DATA8   ResetArr[2];
+ 255:../lms2012/c_output.c **** 
+ 256:../lms2012/c_output.c ****     ResetArr[0] = opOUTPUT_RESET;
+ 483              		.loc 1 256 0
+ 484 02b0 5D30E0E3 		mvn	r3, #93
+ 485 02b4 0430CDE5 		strb	r3, [sp, #4]
+ 257:../lms2012/c_output.c ****     ResetArr[1] = Nos;
+ 486              		.loc 1 257 0
+ 487 02b8 0500CDE5 		strb	r0, [sp, #5]
+ 258:../lms2012/c_output.c **** 
+ 259:../lms2012/c_output.c ****     if (OutputInstance.PwmFile >= 0)
+ 488              		.loc 1 259 0
+ 489 02bc 1C309FE5 		ldr	r3, .L41
+ 490 02c0 040093E5 		ldr	r0, [r3, #4]
+ 491              	.LVL32:
+ 492 02c4 000050E3 		cmp	r0, #0
+ 493 02c8 020000BA 		blt	.L39
+ 260:../lms2012/c_output.c ****     {
+ 261:../lms2012/c_output.c ****       write(OutputInstance.PwmFile,ResetArr,sizeof(ResetArr));
+ 494              		.loc 1 261 0
+ 495 02cc 04108DE2 		add	r1, sp, #4
+ 496 02d0 0220A0E3 		mov	r2, #2
+ 497 02d4 FEFFFFEB 		bl	write
+ 498              	.LVL33:
+ 499              	.L39:
+ 262:../lms2012/c_output.c ****     }
+ 263:../lms2012/c_output.c **** }
+ 500              		.loc 1 263 0
+ 501 02d8 0CD08DE2 		add	sp, sp, #12
+ 502              		@ sp needed
+ 503 02dc 04F09DE4 		ldr	pc, [sp], #4
+ 504              	.L42:
+ 505              		.align	2
+ 506              	.L41:
+ 507 02e0 00000000 		.word	OutputInstance
+ 508              		.cfi_endproc
+ 509              	.LFE45:
+ 510              		.fnend
+ 512              		.align	2
+ 513              		.global	cOutputStop
+ 515              	cOutputStop:
+ 516              		.fnstart
+ 517              	.LFB46:
+ 264:../lms2012/c_output.c **** 
+ 265:../lms2012/c_output.c **** 
+ 266:../lms2012/c_output.c **** /*! \page cOutput
+ 267:../lms2012/c_output.c ****  *  <hr size="1"/>
+ 268:../lms2012/c_output.c ****  *  <b>     opOUTPUT_STOP (NOS)  </b>
+ 269:../lms2012/c_output.c ****  *
+ 270:../lms2012/c_output.c ****  *- Stops the outputs\n
+ 271:../lms2012/c_output.c ****  *- Dispatch status unchanged
+ 272:../lms2012/c_output.c ****  *
+ 273:../lms2012/c_output.c ****  *  \param  (DATA8)   NOS     - Output bit field [0x00..0x0F]
+ 274:../lms2012/c_output.c ****  *  \param  (DATA8)   BRAKE   - Brake [0,1]
+ 275:../lms2012/c_output.c ****  */
+ 276:../lms2012/c_output.c **** /*! \brief  opOUTPUT_STOP byte code
+ 277:../lms2012/c_output.c ****  *
+ 278:../lms2012/c_output.c ****  */
+ 279:../lms2012/c_output.c **** void      cOutputStop(DATA8 Nos, DATA8 Brake)
+ 280:../lms2012/c_output.c **** {
+ 518              		.loc 1 280 0
+ 519              		.cfi_startproc
+ 520              		@ args = 0, pretend = 0, frame = 8
+ 521              		@ frame_needed = 0, uses_anonymous_args = 0
+ 522              	.LVL34:
+ 523 02e4 04E02DE5 		str	lr, [sp, #-4]!
+ 524              		.save {lr}
+ 525              		.cfi_def_cfa_offset 4
+ 526              		.cfi_offset 14, -4
+ 527              		.pad #12
+ 528 02e8 0CD04DE2 		sub	sp, sp, #12
+ 529              		.cfi_def_cfa_offset 16
+ 281:../lms2012/c_output.c ****   DATA8   StopArr[3];
+ 282:../lms2012/c_output.c **** 
+ 283:../lms2012/c_output.c ****     StopArr[0] = (DATA8)opOUTPUT_STOP;
+ 530              		.loc 1 283 0
+ 531 02ec 5C30E0E3 		mvn	r3, #92
+ 532 02f0 0430CDE5 		strb	r3, [sp, #4]
+ 284:../lms2012/c_output.c ****     StopArr[1] = Nos;
+ 533              		.loc 1 284 0
+ 534 02f4 0500CDE5 		strb	r0, [sp, #5]
+ 285:../lms2012/c_output.c ****     StopArr[2] = Brake;
+ 535              		.loc 1 285 0
+ 536 02f8 0610CDE5 		strb	r1, [sp, #6]
+ 286:../lms2012/c_output.c **** 
+ 287:../lms2012/c_output.c ****     if (OutputInstance.PwmFile >= 0)
+ 537              		.loc 1 287 0
+ 538 02fc 1C309FE5 		ldr	r3, .L45
+ 539 0300 040093E5 		ldr	r0, [r3, #4]
+ 540              	.LVL35:
+ 541 0304 000050E3 		cmp	r0, #0
+ 542 0308 020000BA 		blt	.L43
+ 288:../lms2012/c_output.c ****     {
+ 289:../lms2012/c_output.c ****       write(OutputInstance.PwmFile,StopArr,sizeof(StopArr));
+ 543              		.loc 1 289 0
+ 544 030c 04108DE2 		add	r1, sp, #4
+ 545              	.LVL36:
+ 546 0310 0320A0E3 		mov	r2, #3
+ 547 0314 FEFFFFEB 		bl	write
+ 548              	.LVL37:
+ 549              	.L43:
+ 290:../lms2012/c_output.c ****     }
+ 291:../lms2012/c_output.c **** }
+ 550              		.loc 1 291 0
+ 551 0318 0CD08DE2 		add	sp, sp, #12
+ 552              		@ sp needed
+ 553 031c 04F09DE4 		ldr	pc, [sp], #4
+ 554              	.L46:
+ 555              		.align	2
+ 556              	.L45:
+ 557 0320 00000000 		.word	OutputInstance
+ 558              		.cfi_endproc
+ 559              	.LFE46:
+ 560              		.fnend
+ 562              		.align	2
+ 563              		.global	cOutputSpeed
+ 565              	cOutputSpeed:
+ 566              		.fnstart
+ 567              	.LFB47:
+ 292:../lms2012/c_output.c **** 
+ 293:../lms2012/c_output.c **** 
+ 294:../lms2012/c_output.c **** /*! \page cOutput
+ 295:../lms2012/c_output.c ****  *  <hr size="1"/>
+ 296:../lms2012/c_output.c ****  *  <b>     opOUTPUT_SPEED (NOS, SPEED)  </b>
+ 297:../lms2012/c_output.c ****  *
+ 298:../lms2012/c_output.c ****  *- Set speed of the outputs\n
+ 299:../lms2012/c_output.c ****  *- Dispatch status unchanged
+ 300:../lms2012/c_output.c ****  *
+ 301:../lms2012/c_output.c ****  *  \param  (DATA8)   NOS     - Output bit field [0x00..0x0F]
+ 302:../lms2012/c_output.c ****  *  \param  (DATA8)   SPEED   - Speed [-100..100%]
+ 303:../lms2012/c_output.c ****  */
+ 304:../lms2012/c_output.c **** /*! \brief  opOUTPUT_SPEED byte code
+ 305:../lms2012/c_output.c ****  *
+ 306:../lms2012/c_output.c ****  */
+ 307:../lms2012/c_output.c **** void      cOutputSpeed(DATA8 Nos, DATA8 Speed)
+ 308:../lms2012/c_output.c **** {
+ 568              		.loc 1 308 0
+ 569              		.cfi_startproc
+ 570              		@ args = 0, pretend = 0, frame = 8
+ 571              		@ frame_needed = 0, uses_anonymous_args = 0
+ 572              	.LVL38:
+ 573 0324 04E02DE5 		str	lr, [sp, #-4]!
+ 574              		.save {lr}
+ 575              		.cfi_def_cfa_offset 4
+ 576              		.cfi_offset 14, -4
+ 577              		.pad #12
+ 578 0328 0CD04DE2 		sub	sp, sp, #12
+ 579              		.cfi_def_cfa_offset 16
+ 309:../lms2012/c_output.c ****   DATA8   SetSpeed[3];
+ 310:../lms2012/c_output.c **** 
+ 311:../lms2012/c_output.c ****     SetSpeed[0] = (DATA8)opOUTPUT_SPEED;
+ 580              		.loc 1 311 0
+ 581 032c 5A30E0E3 		mvn	r3, #90
+ 582 0330 0430CDE5 		strb	r3, [sp, #4]
+ 312:../lms2012/c_output.c ****     SetSpeed[1] = Nos;
+ 583              		.loc 1 312 0
+ 584 0334 0500CDE5 		strb	r0, [sp, #5]
+ 313:../lms2012/c_output.c ****     SetSpeed[2] = Speed;
+ 585              		.loc 1 313 0
+ 586 0338 0610CDE5 		strb	r1, [sp, #6]
+ 314:../lms2012/c_output.c **** 
+ 315:../lms2012/c_output.c ****     if (OutputInstance.PwmFile >= 0)
+ 587              		.loc 1 315 0
+ 588 033c 1C309FE5 		ldr	r3, .L49
+ 589 0340 040093E5 		ldr	r0, [r3, #4]
+ 590              	.LVL39:
+ 591 0344 000050E3 		cmp	r0, #0
+ 592 0348 020000BA 		blt	.L47
+ 316:../lms2012/c_output.c ****     {
+ 317:../lms2012/c_output.c ****       write(OutputInstance.PwmFile,SetSpeed,sizeof(SetSpeed));
+ 593              		.loc 1 317 0
+ 594 034c 04108DE2 		add	r1, sp, #4
+ 595              	.LVL40:
+ 596 0350 0320A0E3 		mov	r2, #3
+ 597 0354 FEFFFFEB 		bl	write
+ 598              	.LVL41:
+ 599              	.L47:
+ 318:../lms2012/c_output.c ****     }
+ 319:../lms2012/c_output.c **** }
+ 600              		.loc 1 319 0
+ 601 0358 0CD08DE2 		add	sp, sp, #12
+ 602              		@ sp needed
+ 603 035c 04F09DE4 		ldr	pc, [sp], #4
+ 604              	.L50:
+ 605              		.align	2
+ 606              	.L49:
+ 607 0360 00000000 		.word	OutputInstance
+ 608              		.cfi_endproc
+ 609              	.LFE47:
+ 610              		.fnend
+ 612              		.align	2
+ 613              		.global	cOutputPower
+ 615              	cOutputPower:
+ 616              		.fnstart
+ 617              	.LFB48:
+ 320:../lms2012/c_output.c **** 
+ 321:../lms2012/c_output.c **** 
+ 322:../lms2012/c_output.c **** /*! \page cOutput
+ 323:../lms2012/c_output.c ****  *  <hr size="1"/>
+ 324:../lms2012/c_output.c ****  *  <b>     opOUTPUT_POWER (NOS, SPEED)  </b>
+ 325:../lms2012/c_output.c ****  *
+ 326:../lms2012/c_output.c ****  *- Set power of the outputs\n
+ 327:../lms2012/c_output.c ****  *- Dispatch status unchanged
+ 328:../lms2012/c_output.c ****  *
+ 329:../lms2012/c_output.c ****  *  \param  (DATA8)   NOS     - Output bit field [0x00..0x0F]
+ 330:../lms2012/c_output.c ****  *  \param  (DATA8)   POWER   - Power [-100..100%]
+ 331:../lms2012/c_output.c ****  */
+ 332:../lms2012/c_output.c **** /*! \brief  opOUTPUT_POWER byte code
+ 333:../lms2012/c_output.c ****  *
+ 334:../lms2012/c_output.c ****  */
+ 335:../lms2012/c_output.c **** void      cOutputPower(DATA8 Nos, DATA8 Power)
+ 336:../lms2012/c_output.c **** {
+ 618              		.loc 1 336 0
+ 619              		.cfi_startproc
+ 620              		@ args = 0, pretend = 0, frame = 8
+ 621              		@ frame_needed = 0, uses_anonymous_args = 0
+ 622              	.LVL42:
+ 623 0364 04E02DE5 		str	lr, [sp, #-4]!
+ 624              		.save {lr}
+ 625              		.cfi_def_cfa_offset 4
+ 626              		.cfi_offset 14, -4
+ 627              		.pad #12
+ 628 0368 0CD04DE2 		sub	sp, sp, #12
+ 629              		.cfi_def_cfa_offset 16
+ 337:../lms2012/c_output.c ****   DATA8   SetPower[3];
+ 338:../lms2012/c_output.c **** 
+ 339:../lms2012/c_output.c ****     SetPower[0] = (DATA8)opOUTPUT_POWER;
+ 630              		.loc 1 339 0
+ 631 036c 5B30E0E3 		mvn	r3, #91
+ 632 0370 0430CDE5 		strb	r3, [sp, #4]
+ 340:../lms2012/c_output.c ****     SetPower[1] = Nos;
+ 633              		.loc 1 340 0
+ 634 0374 0500CDE5 		strb	r0, [sp, #5]
+ 341:../lms2012/c_output.c ****     SetPower[2] = Power;
+ 635              		.loc 1 341 0
+ 636 0378 0610CDE5 		strb	r1, [sp, #6]
+ 342:../lms2012/c_output.c ****     if (OutputInstance.PwmFile >= 0)
+ 637              		.loc 1 342 0
+ 638 037c 1C309FE5 		ldr	r3, .L53
+ 639 0380 040093E5 		ldr	r0, [r3, #4]
+ 640              	.LVL43:
+ 641 0384 000050E3 		cmp	r0, #0
+ 642 0388 020000BA 		blt	.L51
+ 343:../lms2012/c_output.c ****     {
+ 344:../lms2012/c_output.c ****       write(OutputInstance.PwmFile,SetPower,sizeof(SetPower));
+ 643              		.loc 1 344 0
+ 644 038c 04108DE2 		add	r1, sp, #4
+ 645              	.LVL44:
+ 646 0390 0320A0E3 		mov	r2, #3
+ 647 0394 FEFFFFEB 		bl	write
+ 648              	.LVL45:
+ 649              	.L51:
+ 345:../lms2012/c_output.c ****     }
+ 346:../lms2012/c_output.c **** }
+ 650              		.loc 1 346 0
+ 651 0398 0CD08DE2 		add	sp, sp, #12
+ 652              		@ sp needed
+ 653 039c 04F09DE4 		ldr	pc, [sp], #4
+ 654              	.L54:
+ 655              		.align	2
+ 656              	.L53:
+ 657 03a0 00000000 		.word	OutputInstance
+ 658              		.cfi_endproc
+ 659              	.LFE48:
+ 660              		.fnend
+ 662              		.align	2
+ 663              		.global	cOutputStart
+ 665              	cOutputStart:
+ 666              		.fnstart
+ 667              	.LFB49:
+ 347:../lms2012/c_output.c **** 
+ 348:../lms2012/c_output.c **** 
+ 349:../lms2012/c_output.c **** /*! \page cOutput
+ 350:../lms2012/c_output.c ****  *  <hr size="1"/>
+ 351:../lms2012/c_output.c ****  *  <b>     opOUTPUT_START (NOS)  </b>
+ 352:../lms2012/c_output.c ****  *
+ 353:../lms2012/c_output.c ****  *- Starts the outputs\n
+ 354:../lms2012/c_output.c ****  *- Dispatch status unchanged
+ 355:../lms2012/c_output.c ****  *
+ 356:../lms2012/c_output.c ****  *  \param  (DATA8)   NOS     - Output bit field [0x00..0x0F]
+ 357:../lms2012/c_output.c ****  */
+ 358:../lms2012/c_output.c **** /*! \brief  opOUTPUT_START byte code
+ 359:../lms2012/c_output.c ****  *
+ 360:../lms2012/c_output.c ****  */
+ 361:../lms2012/c_output.c **** void      cOutputStart(DATA8 Nos)
+ 362:../lms2012/c_output.c **** {
+ 668              		.loc 1 362 0
+ 669              		.cfi_startproc
+ 670              		@ args = 0, pretend = 0, frame = 8
+ 671              		@ frame_needed = 0, uses_anonymous_args = 0
+ 672              	.LVL46:
+ 673 03a4 04E02DE5 		str	lr, [sp, #-4]!
+ 674              		.save {lr}
+ 675              		.cfi_def_cfa_offset 4
+ 676              		.cfi_offset 14, -4
+ 677              		.pad #12
+ 678 03a8 0CD04DE2 		sub	sp, sp, #12
+ 679              		.cfi_def_cfa_offset 16
+ 363:../lms2012/c_output.c ****   DATA8   StartMotor[2];
+ 364:../lms2012/c_output.c **** 
+ 365:../lms2012/c_output.c ****     StartMotor[0] = (DATA8)opOUTPUT_START;
+ 680              		.loc 1 365 0
+ 681 03ac 5930E0E3 		mvn	r3, #89
+ 682 03b0 0430CDE5 		strb	r3, [sp, #4]
+ 366:../lms2012/c_output.c ****     StartMotor[1] = Nos;
+ 683              		.loc 1 366 0
+ 684 03b4 0500CDE5 		strb	r0, [sp, #5]
+ 367:../lms2012/c_output.c ****     if (OutputInstance.PwmFile >= 0)
+ 685              		.loc 1 367 0
+ 686 03b8 1C309FE5 		ldr	r3, .L57
+ 687 03bc 040093E5 		ldr	r0, [r3, #4]
+ 688              	.LVL47:
+ 689 03c0 000050E3 		cmp	r0, #0
+ 690 03c4 020000BA 		blt	.L55
+ 368:../lms2012/c_output.c ****     {
+ 369:../lms2012/c_output.c ****       write(OutputInstance.PwmFile,StartMotor,sizeof(StartMotor));
+ 691              		.loc 1 369 0
+ 692 03c8 04108DE2 		add	r1, sp, #4
+ 693 03cc 0220A0E3 		mov	r2, #2
+ 694 03d0 FEFFFFEB 		bl	write
+ 695              	.LVL48:
+ 696              	.L55:
+ 370:../lms2012/c_output.c ****     }
+ 371:../lms2012/c_output.c **** }
+ 697              		.loc 1 371 0
+ 698 03d4 0CD08DE2 		add	sp, sp, #12
+ 699              		@ sp needed
+ 700 03d8 04F09DE4 		ldr	pc, [sp], #4
+ 701              	.L58:
+ 702              		.align	2
+ 703              	.L57:
+ 704 03dc 00000000 		.word	OutputInstance
+ 705              		.cfi_endproc
+ 706              	.LFE49:
+ 707              		.fnend
+ 709              		.align	2
+ 710              		.global	cOutputPolarity
+ 712              	cOutputPolarity:
+ 713              		.fnstart
+ 714              	.LFB50:
+ 372:../lms2012/c_output.c **** 
+ 373:../lms2012/c_output.c **** 
+ 374:../lms2012/c_output.c **** /*! \page cOutput Output
+ 375:../lms2012/c_output.c ****  *  <hr size="1"/>
+ 376:../lms2012/c_output.c ****  *  <b>     opOUTPUT_POLARITY (NOS, POL)  </b>
+ 377:../lms2012/c_output.c ****  *
+ 378:../lms2012/c_output.c ****  *- Set polarity of the outputs\n
+ 379:../lms2012/c_output.c ****  *- Dispatch status unchanged
+ 380:../lms2012/c_output.c ****  *
+ 381:../lms2012/c_output.c ****  *  \param  (DATA8)   NOS     - Output bit field [0x00..0x0F]
+ 382:../lms2012/c_output.c ****  *  \param  (DATA8)   POL     - Polarity [-1,0,1]
+ 383:../lms2012/c_output.c ****  *
+ 384:../lms2012/c_output.c ****  *-  Polarity:
+ 385:../lms2012/c_output.c ****  *   - -1 makes the motor run backward
+ 386:../lms2012/c_output.c ****  *   -  1 makes the motor run forward
+ 387:../lms2012/c_output.c ****  *   -  0 makes the motor run the opposite direction
+ 388:../lms2012/c_output.c ****  */
+ 389:../lms2012/c_output.c **** /*! \brief  opOUTPUT_POLARITY byte code
+ 390:../lms2012/c_output.c ****  *
+ 391:../lms2012/c_output.c ****  */
+ 392:../lms2012/c_output.c **** void      cOutputPolarity(DATA8 Nos, DATA8 Pol)
+ 393:../lms2012/c_output.c **** {
+ 715              		.loc 1 393 0
+ 716              		.cfi_startproc
+ 717              		@ args = 0, pretend = 0, frame = 8
+ 718              		@ frame_needed = 0, uses_anonymous_args = 0
+ 719              	.LVL49:
+ 720 03e0 04E02DE5 		str	lr, [sp, #-4]!
+ 721              		.save {lr}
+ 722              		.cfi_def_cfa_offset 4
+ 723              		.cfi_offset 14, -4
+ 724              		.pad #12
+ 725 03e4 0CD04DE2 		sub	sp, sp, #12
+ 726              		.cfi_def_cfa_offset 16
+ 394:../lms2012/c_output.c ****   DATA8   Polarity[3];
+ 395:../lms2012/c_output.c **** 
+ 396:../lms2012/c_output.c ****   Polarity[0] =   (DATA8)opOUTPUT_POLARITY;
+ 727              		.loc 1 396 0
+ 728 03e8 5830E0E3 		mvn	r3, #88
+ 729 03ec 0430CDE5 		strb	r3, [sp, #4]
+ 397:../lms2012/c_output.c ****   Polarity[1] =  Nos;
+ 730              		.loc 1 397 0
+ 731 03f0 0500CDE5 		strb	r0, [sp, #5]
+ 398:../lms2012/c_output.c ****   Polarity[2] =  Pol;
+ 732              		.loc 1 398 0
+ 733 03f4 0610CDE5 		strb	r1, [sp, #6]
+ 399:../lms2012/c_output.c **** 
+ 400:../lms2012/c_output.c ****     if (OutputInstance.PwmFile >= 0)
+ 734              		.loc 1 400 0
+ 735 03f8 1C309FE5 		ldr	r3, .L61
+ 736 03fc 040093E5 		ldr	r0, [r3, #4]
+ 737              	.LVL50:
+ 738 0400 000050E3 		cmp	r0, #0
+ 739 0404 020000BA 		blt	.L59
+ 401:../lms2012/c_output.c ****     {
+ 402:../lms2012/c_output.c ****       write(OutputInstance.PwmFile,Polarity,sizeof(Polarity));
+ 740              		.loc 1 402 0
+ 741 0408 04108DE2 		add	r1, sp, #4
+ 742              	.LVL51:
+ 743 040c 0320A0E3 		mov	r2, #3
+ 744 0410 FEFFFFEB 		bl	write
+ 745              	.LVL52:
+ 746              	.L59:
+ 403:../lms2012/c_output.c ****     }
+ 404:../lms2012/c_output.c **** }
+ 747              		.loc 1 404 0
+ 748 0414 0CD08DE2 		add	sp, sp, #12
+ 749              		@ sp needed
+ 750 0418 04F09DE4 		ldr	pc, [sp], #4
+ 751              	.L62:
+ 752              		.align	2
+ 753              	.L61:
+ 754 041c 00000000 		.word	OutputInstance
+ 755              		.cfi_endproc
+ 756              	.LFE50:
+ 757              		.fnend
+ 759              		.align	2
+ 760              		.global	cOutputStepPower
+ 762              	cOutputStepPower:
+ 763              		.fnstart
+ 764              	.LFB51:
+ 405:../lms2012/c_output.c **** 
+ 406:../lms2012/c_output.c **** 
+ 407:../lms2012/c_output.c **** /*! \page cOutput Output
+ 408:../lms2012/c_output.c ****  *  <hr size="1"/>
+ 409:../lms2012/c_output.c ****  *  <b>     opOUTPUT_STEP_POWER (NOS, POWER, STEP1, STEP2, STEP3, BRAKE)  </b>
+ 410:../lms2012/c_output.c ****  *
+ 411:../lms2012/c_output.c ****  *- Set Ramp up, constant and rampdown steps and power of the outputs\n
+ 412:../lms2012/c_output.c ****  *- Dispatch status unchanged
+ 413:../lms2012/c_output.c ****  *
+ 414:../lms2012/c_output.c ****  *  \param  (DATA8)   NOS     - Output bit field [0x00..0x0F]
+ 415:../lms2012/c_output.c ****  *  \param  (DATA8)   POWER   - Power [-100..100]
+ 416:../lms2012/c_output.c ****  *  \param  (DATA32)  STEP1   - Tacho pulses [0..MAX]
+ 417:../lms2012/c_output.c ****  *  \param  (DATA32)  STEP2   - Tacho pulses [0..MAX]
+ 418:../lms2012/c_output.c ****  *  \param  (DATA32)  STEP3   - Tacho pulses [0..MAX]
+ 419:../lms2012/c_output.c ****  *  \param  (DATA8)   BRAKE   - 0 = Coast, 1 = BRAKE
+ 420:../lms2012/c_output.c ****  */
+ 421:../lms2012/c_output.c **** /*! \brief  opOUTPUT_STEP_POWER byte code
+ 422:../lms2012/c_output.c ****  *
+ 423:../lms2012/c_output.c ****  */
+ 424:../lms2012/c_output.c **** void      cOutputStepPower(DATA8 Nos, DATA8 Power, DATA32 Step1, DATA32 Step2, DATA32 Step3, DATA8 
+ 425:../lms2012/c_output.c **** {
+ 765              		.loc 1 425 0
+ 766              		.cfi_startproc
+ 767              		@ args = 8, pretend = 0, frame = 24
+ 768              		@ frame_needed = 0, uses_anonymous_args = 0
+ 769              	.LVL53:
+ 770 0420 04E02DE5 		str	lr, [sp, #-4]!
+ 771              		.save {lr}
+ 772              		.cfi_def_cfa_offset 4
+ 773              		.cfi_offset 14, -4
+ 774              	.LVL54:
+ 775              		.pad #28
+ 776 0424 1CD04DE2 		sub	sp, sp, #28
+ 777              		.cfi_def_cfa_offset 32
+ 778              	.LVL55:
+ 426:../lms2012/c_output.c ****   STEPPOWER   StepPower;
+ 427:../lms2012/c_output.c **** 
+ 428:../lms2012/c_output.c ****   StepPower.Cmd    =   opOUTPUT_STEP_POWER;
+ 779              		.loc 1 428 0
+ 780 0428 53C0E0E3 		mvn	ip, #83
+ 781 042c 04C0CDE5 		strb	ip, [sp, #4]
+ 429:../lms2012/c_output.c ****   StepPower.Nos    =  Nos;
+ 782              		.loc 1 429 0
+ 783 0430 0500CDE5 		strb	r0, [sp, #5]
+ 430:../lms2012/c_output.c ****   StepPower.Power  =  Power;
+ 784              		.loc 1 430 0
+ 785 0434 0610CDE5 		strb	r1, [sp, #6]
+ 431:../lms2012/c_output.c ****   StepPower.Step1  =  Step1;
+ 786              		.loc 1 431 0
+ 787 0438 08208DE5 		str	r2, [sp, #8]
+ 432:../lms2012/c_output.c ****   StepPower.Step2  =  Step2;
+ 788              		.loc 1 432 0
+ 789 043c 0C308DE5 		str	r3, [sp, #12]
+ 433:../lms2012/c_output.c ****   StepPower.Step3  =  Step3;
+ 790              		.loc 1 433 0
+ 791 0440 20309DE5 		ldr	r3, [sp, #32]
+ 792              	.LVL56:
+ 793 0444 10308DE5 		str	r3, [sp, #16]
+ 434:../lms2012/c_output.c ****   StepPower.Brake  =  Brake;
+ 794              		.loc 1 434 0
+ 795 0448 D432DDE1 		ldrsb	r3, [sp, #36]
+ 796 044c 1430CDE5 		strb	r3, [sp, #20]
+ 435:../lms2012/c_output.c **** 
+ 436:../lms2012/c_output.c ****     if (OutputInstance.PwmFile >= 0)
+ 797              		.loc 1 436 0
+ 798 0450 1C309FE5 		ldr	r3, .L65
+ 799 0454 040093E5 		ldr	r0, [r3, #4]
+ 800              	.LVL57:
+ 801 0458 000050E3 		cmp	r0, #0
+ 802 045c 020000BA 		blt	.L63
+ 437:../lms2012/c_output.c ****     {
+ 438:../lms2012/c_output.c ****       write(OutputInstance.PwmFile,(DATA8*)&(StepPower.Cmd),sizeof(StepPower));
+ 803              		.loc 1 438 0
+ 804 0460 04108DE2 		add	r1, sp, #4
+ 805              	.LVL58:
+ 806 0464 1420A0E3 		mov	r2, #20
+ 807              	.LVL59:
+ 808 0468 FEFFFFEB 		bl	write
+ 809              	.LVL60:
+ 810              	.L63:
+ 439:../lms2012/c_output.c ****     }
+ 440:../lms2012/c_output.c **** }
+ 811              		.loc 1 440 0
+ 812 046c 1CD08DE2 		add	sp, sp, #28
+ 813              		@ sp needed
+ 814 0470 04F09DE4 		ldr	pc, [sp], #4
+ 815              	.L66:
+ 816              		.align	2
+ 817              	.L65:
+ 818 0474 00000000 		.word	OutputInstance
+ 819              		.cfi_endproc
+ 820              	.LFE51:
+ 821              		.fnend
+ 823              		.align	2
+ 824              		.global	cOutputTimePower
+ 826              	cOutputTimePower:
+ 827              		.fnstart
+ 828              	.LFB52:
+ 441:../lms2012/c_output.c **** 
+ 442:../lms2012/c_output.c **** 
+ 443:../lms2012/c_output.c **** /*! \page cOutput Output
+ 444:../lms2012/c_output.c ****  *  <hr size="1"/>
+ 445:../lms2012/c_output.c ****  *  <b>     opOUTPUT_TIME_POWER (NOS, POWER, TIME1, TIME2, TIME3, BRAKE)  </b>
+ 446:../lms2012/c_output.c ****  *
+ 447:../lms2012/c_output.c ****  *- Set Ramp up, constant and rampdown steps and power of the outputs\n
+ 448:../lms2012/c_output.c ****  *- Dispatch status unchanged
+ 449:../lms2012/c_output.c ****  *
+ 450:../lms2012/c_output.c ****  *  \param  (DATA8)   NOS     - Output bit field [0x00..0x0F]
+ 451:../lms2012/c_output.c ****  *  \param  (DATA8)   POWER   - Power [-100..100]
+ 452:../lms2012/c_output.c ****  *  \param  (DATA32)  TIME1   - Time in Ms [0..MAX]
+ 453:../lms2012/c_output.c ****  *  \param  (DATA32)  TIME2   - Time in Ms [0..MAX]
+ 454:../lms2012/c_output.c ****  *  \param  (DATA32)  TIME3   - Time in Ms [0..MAX]
+ 455:../lms2012/c_output.c ****  *  \param  (DATA8)   BRAKE   - 0 = Coast, 1 = BRAKE
+ 456:../lms2012/c_output.c ****  */
+ 457:../lms2012/c_output.c **** /*! \brief  opOUTPUT_TIME_POWER byte code
+ 458:../lms2012/c_output.c ****  *
+ 459:../lms2012/c_output.c ****  */
+ 460:../lms2012/c_output.c **** void      cOutputTimePower(DATA8 Nos, DATA8 Power, DATA32 Time1, DATA32 Time2, DATA32 Time3, DATA8 
+ 461:../lms2012/c_output.c **** {
+ 829              		.loc 1 461 0
+ 830              		.cfi_startproc
+ 831              		@ args = 8, pretend = 0, frame = 24
+ 832              		@ frame_needed = 0, uses_anonymous_args = 0
+ 833              	.LVL61:
+ 834 0478 04E02DE5 		str	lr, [sp, #-4]!
+ 835              		.save {lr}
+ 836              		.cfi_def_cfa_offset 4
+ 837              		.cfi_offset 14, -4
+ 838              	.LVL62:
+ 839              		.pad #28
+ 840 047c 1CD04DE2 		sub	sp, sp, #28
+ 841              		.cfi_def_cfa_offset 32
+ 842              	.LVL63:
+ 462:../lms2012/c_output.c ****   TIMEPOWER   TimePower;
+ 463:../lms2012/c_output.c **** 
+ 464:../lms2012/c_output.c ****   TimePower.Cmd    =  opOUTPUT_TIME_POWER;
+ 843              		.loc 1 464 0
+ 844 0480 52C0E0E3 		mvn	ip, #82
+ 845 0484 04C0CDE5 		strb	ip, [sp, #4]
+ 465:../lms2012/c_output.c ****   TimePower.Nos    =  Nos;
+ 846              		.loc 1 465 0
+ 847 0488 0500CDE5 		strb	r0, [sp, #5]
+ 466:../lms2012/c_output.c ****   TimePower.Power  =  Power;
+ 848              		.loc 1 466 0
+ 849 048c 0610CDE5 		strb	r1, [sp, #6]
+ 467:../lms2012/c_output.c ****   TimePower.Time1  =  Time1;
+ 850              		.loc 1 467 0
+ 851 0490 08208DE5 		str	r2, [sp, #8]
+ 468:../lms2012/c_output.c ****   TimePower.Time2  =  Time2;
+ 852              		.loc 1 468 0
+ 853 0494 0C308DE5 		str	r3, [sp, #12]
+ 469:../lms2012/c_output.c ****   TimePower.Time3  =  Time3;
+ 854              		.loc 1 469 0
+ 855 0498 20309DE5 		ldr	r3, [sp, #32]
+ 856              	.LVL64:
+ 857 049c 10308DE5 		str	r3, [sp, #16]
+ 470:../lms2012/c_output.c ****   TimePower.Brake  =  Brake;
+ 858              		.loc 1 470 0
+ 859 04a0 D432DDE1 		ldrsb	r3, [sp, #36]
+ 860 04a4 1430CDE5 		strb	r3, [sp, #20]
+ 471:../lms2012/c_output.c **** 
+ 472:../lms2012/c_output.c ****     if (OutputInstance.PwmFile >= 0)
+ 861              		.loc 1 472 0
+ 862 04a8 1C309FE5 		ldr	r3, .L69
+ 863 04ac 040093E5 		ldr	r0, [r3, #4]
+ 864              	.LVL65:
+ 865 04b0 000050E3 		cmp	r0, #0
+ 866 04b4 020000BA 		blt	.L67
+ 473:../lms2012/c_output.c ****     {
+ 474:../lms2012/c_output.c ****       write(OutputInstance.PwmFile,(DATA8*)&(TimePower.Cmd),sizeof(TimePower));
+ 867              		.loc 1 474 0
+ 868 04b8 04108DE2 		add	r1, sp, #4
+ 869              	.LVL66:
+ 870 04bc 1420A0E3 		mov	r2, #20
+ 871              	.LVL67:
+ 872 04c0 FEFFFFEB 		bl	write
+ 873              	.LVL68:
+ 874              	.L67:
+ 475:../lms2012/c_output.c ****     }
+ 476:../lms2012/c_output.c **** }
+ 875              		.loc 1 476 0
+ 876 04c4 1CD08DE2 		add	sp, sp, #28
+ 877              		@ sp needed
+ 878 04c8 04F09DE4 		ldr	pc, [sp], #4
+ 879              	.L70:
+ 880              		.align	2
+ 881              	.L69:
+ 882 04cc 00000000 		.word	OutputInstance
+ 883              		.cfi_endproc
+ 884              	.LFE52:
+ 885              		.fnend
+ 887              		.align	2
+ 888              		.global	cOutputStepSpeed
+ 890              	cOutputStepSpeed:
+ 891              		.fnstart
+ 892              	.LFB53:
+ 477:../lms2012/c_output.c **** 
+ 478:../lms2012/c_output.c **** /*! \page cOutput Output
+ 479:../lms2012/c_output.c ****  *  <hr size="1"/>
+ 480:../lms2012/c_output.c ****  *  <b>     opOUTPUT_STEP_SPEED (NOS, SPEED, STEP1, STEP2, STEP3, BRAKE)  </b>
+ 481:../lms2012/c_output.c ****  *
+ 482:../lms2012/c_output.c ****  *- Set Ramp up, constant and rampdown steps and speed of the outputs\n
+ 483:../lms2012/c_output.c ****  *- Dispatch status unchanged
+ 484:../lms2012/c_output.c ****  *
+ 485:../lms2012/c_output.c ****  *  \param  (DATA8)   NOS     - Output bit field [0x00..0x0F]
+ 486:../lms2012/c_output.c ****  *  \param  (DATA8)   SPEED   - Power [-100..100]
+ 487:../lms2012/c_output.c ****  *  \param  (DATA32)  STEP1   - Tacho pulses [0..MAX]
+ 488:../lms2012/c_output.c ****  *  \param  (DATA32)  STEP2   - Tacho pulses [0..MAX]
+ 489:../lms2012/c_output.c ****  *  \param  (DATA32)  STEP3   - Tacho pulses [0..MAX]
+ 490:../lms2012/c_output.c ****  *  \param  (DATA8)   BRAKE   - 0 = Coast, 1 = BRAKE
+ 491:../lms2012/c_output.c ****  */
+ 492:../lms2012/c_output.c **** /*! \brief  opOUTPUT_STEP_SPEED byte code
+ 493:../lms2012/c_output.c ****  *
+ 494:../lms2012/c_output.c ****  */
+ 495:../lms2012/c_output.c **** void      cOutputStepSpeed(DATA8 Nos, DATA8 Speed, DATA32 Step1, DATA32 Step2, DATA32 Step3, DATA8 
+ 496:../lms2012/c_output.c **** {
+ 893              		.loc 1 496 0
+ 894              		.cfi_startproc
+ 895              		@ args = 8, pretend = 0, frame = 24
+ 896              		@ frame_needed = 0, uses_anonymous_args = 0
+ 897              	.LVL69:
+ 898 04d0 04E02DE5 		str	lr, [sp, #-4]!
+ 899              		.save {lr}
+ 900              		.cfi_def_cfa_offset 4
+ 901              		.cfi_offset 14, -4
+ 902              	.LVL70:
+ 903              		.pad #28
+ 904 04d4 1CD04DE2 		sub	sp, sp, #28
+ 905              		.cfi_def_cfa_offset 32
+ 906              	.LVL71:
+ 497:../lms2012/c_output.c ****   STEPSPEED   StepSpeed;
+ 498:../lms2012/c_output.c **** 
+ 499:../lms2012/c_output.c ****   StepSpeed.Cmd    =   opOUTPUT_STEP_SPEED;
+ 907              		.loc 1 499 0
+ 908 04d8 51C0E0E3 		mvn	ip, #81
+ 909 04dc 04C0CDE5 		strb	ip, [sp, #4]
+ 500:../lms2012/c_output.c ****   StepSpeed.Nos    =  Nos;
+ 910              		.loc 1 500 0
+ 911 04e0 0500CDE5 		strb	r0, [sp, #5]
+ 501:../lms2012/c_output.c ****   StepSpeed.Speed  =  Speed;
+ 912              		.loc 1 501 0
+ 913 04e4 0610CDE5 		strb	r1, [sp, #6]
+ 502:../lms2012/c_output.c ****   StepSpeed.Step1  =  Step1;
+ 914              		.loc 1 502 0
+ 915 04e8 08208DE5 		str	r2, [sp, #8]
+ 503:../lms2012/c_output.c ****   StepSpeed.Step2  =  Step2;
+ 916              		.loc 1 503 0
+ 917 04ec 0C308DE5 		str	r3, [sp, #12]
+ 504:../lms2012/c_output.c ****   StepSpeed.Step3  =  Step3;
+ 918              		.loc 1 504 0
+ 919 04f0 20309DE5 		ldr	r3, [sp, #32]
+ 920              	.LVL72:
+ 921 04f4 10308DE5 		str	r3, [sp, #16]
+ 505:../lms2012/c_output.c ****   StepSpeed.Brake  =  Brake;
+ 922              		.loc 1 505 0
+ 923 04f8 D432DDE1 		ldrsb	r3, [sp, #36]
+ 924 04fc 1430CDE5 		strb	r3, [sp, #20]
+ 506:../lms2012/c_output.c **** 
+ 507:../lms2012/c_output.c ****     if (OutputInstance.PwmFile >= 0)
+ 925              		.loc 1 507 0
+ 926 0500 1C309FE5 		ldr	r3, .L73
+ 927 0504 040093E5 		ldr	r0, [r3, #4]
+ 928              	.LVL73:
+ 929 0508 000050E3 		cmp	r0, #0
+ 930 050c 020000BA 		blt	.L71
+ 508:../lms2012/c_output.c ****     {
+ 509:../lms2012/c_output.c ****       write(OutputInstance.PwmFile,(DATA8*)&(StepSpeed.Cmd),sizeof(StepSpeed));
+ 931              		.loc 1 509 0
+ 932 0510 04108DE2 		add	r1, sp, #4
+ 933              	.LVL74:
+ 934 0514 1420A0E3 		mov	r2, #20
+ 935              	.LVL75:
+ 936 0518 FEFFFFEB 		bl	write
+ 937              	.LVL76:
+ 938              	.L71:
+ 510:../lms2012/c_output.c ****     }
+ 511:../lms2012/c_output.c **** }
+ 939              		.loc 1 511 0
+ 940 051c 1CD08DE2 		add	sp, sp, #28
+ 941              		@ sp needed
+ 942 0520 04F09DE4 		ldr	pc, [sp], #4
+ 943              	.L74:
+ 944              		.align	2
+ 945              	.L73:
+ 946 0524 00000000 		.word	OutputInstance
+ 947              		.cfi_endproc
+ 948              	.LFE53:
+ 949              		.fnend
+ 951              		.align	2
+ 952              		.global	cOutputTimeSpeed
+ 954              	cOutputTimeSpeed:
+ 955              		.fnstart
+ 956              	.LFB54:
+ 512:../lms2012/c_output.c **** 
+ 513:../lms2012/c_output.c **** 
+ 514:../lms2012/c_output.c **** /*! \page cOutput Output
+ 515:../lms2012/c_output.c ****  *  <hr size="1"/>
+ 516:../lms2012/c_output.c ****  *  <b>     opOUTPUT_TIME_SPEED (NOS, SPEED, STEP1, STEP2, STEP3, BRAKE)  </b>
+ 517:../lms2012/c_output.c ****  *
+ 518:../lms2012/c_output.c ****  *- Set Ramp up, constant and rampdown steps and speed of the outputs\n
+ 519:../lms2012/c_output.c ****  *- Dispatch status unchanged
+ 520:../lms2012/c_output.c ****  *
+ 521:../lms2012/c_output.c ****  *  \param  (DATA8)   NOS     - Output bit field [0x00..0x0F]
+ 522:../lms2012/c_output.c ****  *  \param  (DATA8)   SPEED   - Power [-100..100]
+ 523:../lms2012/c_output.c ****  *  \param  (DATA32)  STEP1   - Time in mS [0..MAX]
+ 524:../lms2012/c_output.c ****  *  \param  (DATA32)  STEP2   - Time in mS [0..MAX]
+ 525:../lms2012/c_output.c ****  *  \param  (DATA32)  STEP3   - Time in mS [0..MAX]
+ 526:../lms2012/c_output.c ****  *  \param  (DATA8)   BRAKE   - 0 = Coast, 1 = BRAKE
+ 527:../lms2012/c_output.c ****  */
+ 528:../lms2012/c_output.c **** /*! \brief  opOUTPUT_TIME_SPEED byte code
+ 529:../lms2012/c_output.c ****  *
+ 530:../lms2012/c_output.c ****  */
+ 531:../lms2012/c_output.c **** void      cOutputTimeSpeed(DATA8 Nos, DATA8 Speed, DATA32 Time1, DATA32 Time2, DATA32 Time3, DATA8 
+ 532:../lms2012/c_output.c **** {
+ 957              		.loc 1 532 0
+ 958              		.cfi_startproc
+ 959              		@ args = 8, pretend = 0, frame = 24
+ 960              		@ frame_needed = 0, uses_anonymous_args = 0
+ 961              	.LVL77:
+ 962 0528 04E02DE5 		str	lr, [sp, #-4]!
+ 963              		.save {lr}
+ 964              		.cfi_def_cfa_offset 4
+ 965              		.cfi_offset 14, -4
+ 966              	.LVL78:
+ 967              		.pad #28
+ 968 052c 1CD04DE2 		sub	sp, sp, #28
+ 969              		.cfi_def_cfa_offset 32
+ 970              	.LVL79:
+ 533:../lms2012/c_output.c ****   TIMESPEED   TimeSpeed;
+ 534:../lms2012/c_output.c **** 
+ 535:../lms2012/c_output.c ****   TimeSpeed.Cmd    =   (DATA8)opOUTPUT_TIME_SPEED;
+ 971              		.loc 1 535 0
+ 972 0530 50C0E0E3 		mvn	ip, #80
+ 973 0534 04C0CDE5 		strb	ip, [sp, #4]
+ 536:../lms2012/c_output.c ****   TimeSpeed.Nos    =   Nos;
+ 974              		.loc 1 536 0
+ 975 0538 0500CDE5 		strb	r0, [sp, #5]
+ 537:../lms2012/c_output.c ****   TimeSpeed.Speed  =   Speed;
+ 976              		.loc 1 537 0
+ 977 053c 0610CDE5 		strb	r1, [sp, #6]
+ 538:../lms2012/c_output.c ****   TimeSpeed.Time1  =   Time1;
+ 978              		.loc 1 538 0
+ 979 0540 08208DE5 		str	r2, [sp, #8]
+ 539:../lms2012/c_output.c ****   TimeSpeed.Time2  =   Time2;
+ 980              		.loc 1 539 0
+ 981 0544 0C308DE5 		str	r3, [sp, #12]
+ 540:../lms2012/c_output.c ****   TimeSpeed.Time3  =   Time3;
+ 982              		.loc 1 540 0
+ 983 0548 20309DE5 		ldr	r3, [sp, #32]
+ 984              	.LVL80:
+ 985 054c 10308DE5 		str	r3, [sp, #16]
+ 541:../lms2012/c_output.c ****   TimeSpeed.Brake  =   Brake;
+ 986              		.loc 1 541 0
+ 987 0550 D432DDE1 		ldrsb	r3, [sp, #36]
+ 988 0554 1430CDE5 		strb	r3, [sp, #20]
+ 542:../lms2012/c_output.c **** 
+ 543:../lms2012/c_output.c ****     if (OutputInstance.PwmFile >= 0)
+ 989              		.loc 1 543 0
+ 990 0558 1C309FE5 		ldr	r3, .L77
+ 991 055c 040093E5 		ldr	r0, [r3, #4]
+ 992              	.LVL81:
+ 993 0560 000050E3 		cmp	r0, #0
+ 994 0564 020000BA 		blt	.L75
+ 544:../lms2012/c_output.c ****     {
+ 545:../lms2012/c_output.c ****       write(OutputInstance.PwmFile,(DATA8*)&(TimeSpeed.Cmd),sizeof(TimeSpeed));
+ 995              		.loc 1 545 0
+ 996 0568 04108DE2 		add	r1, sp, #4
+ 997              	.LVL82:
+ 998 056c 1420A0E3 		mov	r2, #20
+ 999              	.LVL83:
+ 1000 0570 FEFFFFEB 		bl	write
+ 1001              	.LVL84:
+ 1002              	.L75:
+ 546:../lms2012/c_output.c ****     }
+ 547:../lms2012/c_output.c **** }
+ 1003              		.loc 1 547 0
+ 1004 0574 1CD08DE2 		add	sp, sp, #28
+ 1005              		@ sp needed
+ 1006 0578 04F09DE4 		ldr	pc, [sp], #4
+ 1007              	.L78:
+ 1008              		.align	2
+ 1009              	.L77:
+ 1010 057c 00000000 		.word	OutputInstance
+ 1011              		.cfi_endproc
+ 1012              	.LFE54:
+ 1013              		.fnend
+ 1015              		.align	2
+ 1016              		.global	cOutputStepSync
+ 1018              	cOutputStepSync:
+ 1019              		.fnstart
+ 1020              	.LFB55:
+ 548:../lms2012/c_output.c **** 
+ 549:../lms2012/c_output.c **** 
+ 550:../lms2012/c_output.c **** /*! \page cOutput Output
+ 551:../lms2012/c_output.c ****  *  <hr size="1"/>
+ 552:../lms2012/c_output.c ****  *  <b>     opOUTPUT_STEP_SYNC (NOS, SPEED, TURN, STEP, BRAKE)  </b>
+ 553:../lms2012/c_output.c ****  *
+ 554:../lms2012/c_output.c ****  *- Syncronizes 2 motors (and 2 motors only) in steps \n
+ 555:../lms2012/c_output.c ****  *- Dispatch status unchanged
+ 556:../lms2012/c_output.c ****  *
+ 557:../lms2012/c_output.c ****  *  \param  (DATA8)   NOS     - Output bit field   [0x00..0x0F]
+ 558:../lms2012/c_output.c ****  *  \param  (DATA8)   SPEED   - Power              [-100..100]
+ 559:../lms2012/c_output.c ****  *  \param  (DATA16)  TURN    - Turn Ratio         [-200..200]
+ 560:../lms2012/c_output.c ****  *  \param  (DATA32)  STEP    - Tacho Pulses       [0..MAX]
+ 561:../lms2012/c_output.c ****  *  \param  (DATA8)   BRAKE   - 0 = Coast, 1 = BRAKE
+ 562:../lms2012/c_output.c ****  */
+ 563:../lms2012/c_output.c **** /*! \brief  opOUTPUT_STEP_SYNC byte code
+ 564:../lms2012/c_output.c ****  *
+ 565:../lms2012/c_output.c ****  */
+ 566:../lms2012/c_output.c **** void      cOutputStepSync(DATA8 Nos, DATA8 Speed, DATA16 Turn, DATA32 Step, DATA8 Brake)
+ 567:../lms2012/c_output.c **** {
+ 1021              		.loc 1 567 0
+ 1022              		.cfi_startproc
+ 1023              		@ args = 4, pretend = 0, frame = 16
+ 1024              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1025              	.LVL85:
+ 1026 0580 04E02DE5 		str	lr, [sp, #-4]!
+ 1027              		.save {lr}
+ 1028              		.cfi_def_cfa_offset 4
+ 1029              		.cfi_offset 14, -4
+ 1030              	.LVL86:
+ 1031              		.pad #20
+ 1032 0584 14D04DE2 		sub	sp, sp, #20
+ 1033              		.cfi_def_cfa_offset 24
+ 1034              	.LVL87:
+ 568:../lms2012/c_output.c ****   DATA8       Tmp;
+ 569:../lms2012/c_output.c ****   DATA8       No;
+ 570:../lms2012/c_output.c ****   STEPSYNC    StepSync;
+ 571:../lms2012/c_output.c **** 
+ 572:../lms2012/c_output.c ****   StepSync.Cmd   =   opOUTPUT_STEP_SYNC;
+ 1035              		.loc 1 572 0
+ 1036 0588 4FC0E0E3 		mvn	ip, #79
+ 1037 058c 00C0CDE5 		strb	ip, [sp]
+ 573:../lms2012/c_output.c ****   StepSync.Nos   =   Nos;
+ 1038              		.loc 1 573 0
+ 1039 0590 0100CDE5 		strb	r0, [sp, #1]
+ 574:../lms2012/c_output.c ****   StepSync.Speed =   Speed;
+ 1040              		.loc 1 574 0
+ 1041 0594 0210CDE5 		strb	r1, [sp, #2]
+ 575:../lms2012/c_output.c ****   StepSync.Turn  =   Turn;
+ 1042              		.loc 1 575 0
+ 1043 0598 B420CDE1 		strh	r2, [sp, #4]	@ movhi
+ 576:../lms2012/c_output.c ****   StepSync.Step  =   Step;
+ 1044              		.loc 1 576 0
+ 1045 059c 08308DE5 		str	r3, [sp, #8]
+ 577:../lms2012/c_output.c ****   StepSync.Brake =   Brake;
+ 1046              		.loc 1 577 0
+ 1047 05a0 D831DDE1 		ldrsb	r3, [sp, #24]
+ 1048              	.LVL88:
+ 1049 05a4 0C30CDE5 		strb	r3, [sp, #12]
+ 1050              	.LVL89:
+ 1051 05a8 0030A0E3 		mov	r3, #0
+ 578:../lms2012/c_output.c **** 
+ 579:../lms2012/c_output.c ****   // Sync motor cmd is illegal if no of motors are different from 2
+ 580:../lms2012/c_output.c ****   for (Tmp = 0, No = 0; Tmp < OUTPUTS; Tmp++)
+ 1052              		.loc 1 580 0
+ 1053 05ac 0310A0E1 		mov	r1, r3
+ 1054              	.LVL90:
+ 1055              	.L82:
+ 581:../lms2012/c_output.c ****   {
+ 582:../lms2012/c_output.c ****     if (StepSync.Nos & (0x01 << Tmp))
+ 1056              		.loc 1 582 0
+ 1057 05b0 5023A0E1 		mov	r2, r0, asr r3
+ 1058 05b4 010012E3 		tst	r2, #1
+ 583:../lms2012/c_output.c ****     {
+ 584:../lms2012/c_output.c ****       No++;
+ 1059              		.loc 1 584 0
+ 1060 05b8 01108112 		addne	r1, r1, #1
+ 1061              	.LVL91:
+ 1062 05bc FF100112 		andne	r1, r1, #255
+ 1063              	.LVL92:
+ 1064 05c0 013083E2 		add	r3, r3, #1
+ 1065              	.LVL93:
+ 580:../lms2012/c_output.c ****   {
+ 1066              		.loc 1 580 0
+ 1067 05c4 040053E3 		cmp	r3, #4
+ 1068 05c8 F8FFFF1A 		bne	.L82
+ 585:../lms2012/c_output.c ****     }
+ 586:../lms2012/c_output.c ****   }
+ 587:../lms2012/c_output.c **** 
+ 588:../lms2012/c_output.c ****   if (2 == No)
+ 1069              		.loc 1 588 0
+ 1070 05cc 020051E3 		cmp	r1, #2
+ 1071 05d0 0600001A 		bne	.L79
+ 589:../lms2012/c_output.c ****   {
+ 590:../lms2012/c_output.c ****       if (OutputInstance.PwmFile >= 0)
+ 1072              		.loc 1 590 0
+ 1073 05d4 1C309FE5 		ldr	r3, .L85
+ 1074              	.LVL94:
+ 1075 05d8 040093E5 		ldr	r0, [r3, #4]
+ 1076              	.LVL95:
+ 1077 05dc 000050E3 		cmp	r0, #0
+ 1078 05e0 020000BA 		blt	.L79
+ 591:../lms2012/c_output.c ****       {
+ 592:../lms2012/c_output.c ****         write(OutputInstance.PwmFile,(DATA8*)&(StepSync.Cmd),sizeof(StepSync));
+ 1079              		.loc 1 592 0
+ 1080 05e4 0D10A0E1 		mov	r1, sp
+ 1081              	.LVL96:
+ 1082 05e8 1020A0E3 		mov	r2, #16
+ 1083 05ec FEFFFFEB 		bl	write
+ 1084              	.LVL97:
+ 1085              	.L79:
+ 593:../lms2012/c_output.c ****       }
+ 594:../lms2012/c_output.c ****   }
+ 595:../lms2012/c_output.c **** }
+ 1086              		.loc 1 595 0
+ 1087 05f0 14D08DE2 		add	sp, sp, #20
+ 1088              		@ sp needed
+ 1089 05f4 04F09DE4 		ldr	pc, [sp], #4
+ 1090              	.L86:
+ 1091              		.align	2
+ 1092              	.L85:
+ 1093 05f8 00000000 		.word	OutputInstance
+ 1094              		.cfi_endproc
+ 1095              	.LFE55:
+ 1096              		.fnend
+ 1098              		.align	2
+ 1099              		.global	cOutputTimeSync
+ 1101              	cOutputTimeSync:
+ 1102              		.fnstart
+ 1103              	.LFB56:
+ 596:../lms2012/c_output.c **** 
+ 597:../lms2012/c_output.c **** 
+ 598:../lms2012/c_output.c **** /*! \page cOutput Output
+ 599:../lms2012/c_output.c ****  *  <hr size="1"/>
+ 600:../lms2012/c_output.c ****  *  <b>     opOUTPUT_TIME_SYNC (NOS, SPEED, TURN, STEP, BRAKE)  </b>
+ 601:../lms2012/c_output.c ****  *
+ 602:../lms2012/c_output.c ****  *- Syncronizes 2 motors (and 2 motors only) for time\n
+ 603:../lms2012/c_output.c ****  *- Dispatch status unchanged
+ 604:../lms2012/c_output.c ****  *
+ 605:../lms2012/c_output.c ****  *  \param  (DATA8)   NOS     - Output bit field   [0x00..0x0F]
+ 606:../lms2012/c_output.c ****  *  \param  (DATA8)   SPEED   - Power              [-100..100]
+ 607:../lms2012/c_output.c ****  *  \param  (DATA16)  TURN    - Turn Ratio         [-200..200]
+ 608:../lms2012/c_output.c ****  *  \param  (DATA32)  TIME    - Time in ms         [0..MAX]
+ 609:../lms2012/c_output.c ****  *  \param  (DATA8)   BRAKE   - 0 = Coast, 1 = BRAKE
+ 610:../lms2012/c_output.c ****  */
+ 611:../lms2012/c_output.c **** /*! \brief  opOUTPUT_STEP_SYNC byte code
+ 612:../lms2012/c_output.c ****  *
+ 613:../lms2012/c_output.c ****  */
+ 614:../lms2012/c_output.c **** void      cOutputTimeSync(DATA8 Nos, DATA8 Speed, DATA16 Turn, DATA32 Time, DATA8 Brake)
+ 615:../lms2012/c_output.c **** {
+ 1104              		.loc 1 615 0
+ 1105              		.cfi_startproc
+ 1106              		@ args = 4, pretend = 0, frame = 16
+ 1107              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1108              	.LVL98:
+ 1109 05fc 04E02DE5 		str	lr, [sp, #-4]!
+ 1110              		.save {lr}
+ 1111              		.cfi_def_cfa_offset 4
+ 1112              		.cfi_offset 14, -4
+ 1113              	.LVL99:
+ 1114              		.pad #20
+ 1115 0600 14D04DE2 		sub	sp, sp, #20
+ 1116              		.cfi_def_cfa_offset 24
+ 1117              	.LVL100:
+ 616:../lms2012/c_output.c ****   TIMESYNC  TimeSync;
+ 617:../lms2012/c_output.c ****   DATA8     Tmp;
+ 618:../lms2012/c_output.c ****   DATA8     No;
+ 619:../lms2012/c_output.c **** 
+ 620:../lms2012/c_output.c ****   TimeSync.Cmd   =  opOUTPUT_TIME_SYNC;
+ 1118              		.loc 1 620 0
+ 1119 0604 4EC0E0E3 		mvn	ip, #78
+ 1120 0608 00C0CDE5 		strb	ip, [sp]
+ 621:../lms2012/c_output.c ****   TimeSync.Nos   =  Nos;
+ 1121              		.loc 1 621 0
+ 1122 060c 0100CDE5 		strb	r0, [sp, #1]
+ 622:../lms2012/c_output.c ****   TimeSync.Speed =  Speed;
+ 1123              		.loc 1 622 0
+ 1124 0610 0210CDE5 		strb	r1, [sp, #2]
+ 623:../lms2012/c_output.c ****   TimeSync.Turn  =  Turn;
+ 1125              		.loc 1 623 0
+ 1126 0614 B420CDE1 		strh	r2, [sp, #4]	@ movhi
+ 624:../lms2012/c_output.c ****   TimeSync.Time  =  Time;
+ 1127              		.loc 1 624 0
+ 1128 0618 08308DE5 		str	r3, [sp, #8]
+ 625:../lms2012/c_output.c ****   TimeSync.Brake =  Brake;
+ 1129              		.loc 1 625 0
+ 1130 061c D831DDE1 		ldrsb	r3, [sp, #24]
+ 1131              	.LVL101:
+ 1132 0620 0C30CDE5 		strb	r3, [sp, #12]
+ 1133              	.LVL102:
+ 1134 0624 0030A0E3 		mov	r3, #0
+ 626:../lms2012/c_output.c **** 
+ 627:../lms2012/c_output.c ****   // Sync motor cmd is illegal if no of motors are different from 2
+ 628:../lms2012/c_output.c ****   for (Tmp = 0, No = 0; Tmp < OUTPUTS; Tmp++)
+ 1135              		.loc 1 628 0
+ 1136 0628 0310A0E1 		mov	r1, r3
+ 1137              	.LVL103:
+ 1138              	.L90:
+ 629:../lms2012/c_output.c ****   {
+ 630:../lms2012/c_output.c ****     if (TimeSync.Nos & (0x01 << Tmp))
+ 1139              		.loc 1 630 0
+ 1140 062c 5023A0E1 		mov	r2, r0, asr r3
+ 1141 0630 010012E3 		tst	r2, #1
+ 631:../lms2012/c_output.c ****     {
+ 632:../lms2012/c_output.c ****       No++;
+ 1142              		.loc 1 632 0
+ 1143 0634 01108112 		addne	r1, r1, #1
+ 1144              	.LVL104:
+ 1145 0638 FF100112 		andne	r1, r1, #255
+ 1146              	.LVL105:
+ 1147 063c 013083E2 		add	r3, r3, #1
+ 1148              	.LVL106:
+ 628:../lms2012/c_output.c ****   {
+ 1149              		.loc 1 628 0
+ 1150 0640 040053E3 		cmp	r3, #4
+ 1151 0644 F8FFFF1A 		bne	.L90
+ 633:../lms2012/c_output.c ****     }
+ 634:../lms2012/c_output.c ****   }
+ 635:../lms2012/c_output.c **** 
+ 636:../lms2012/c_output.c ****   if (2 == No)
+ 1152              		.loc 1 636 0
+ 1153 0648 020051E3 		cmp	r1, #2
+ 1154 064c 0600001A 		bne	.L87
+ 637:../lms2012/c_output.c ****   {
+ 638:../lms2012/c_output.c ****       if (OutputInstance.PwmFile >= 0)
+ 1155              		.loc 1 638 0
+ 1156 0650 1C309FE5 		ldr	r3, .L93
+ 1157              	.LVL107:
+ 1158 0654 040093E5 		ldr	r0, [r3, #4]
+ 1159              	.LVL108:
+ 1160 0658 000050E3 		cmp	r0, #0
+ 1161 065c 020000BA 		blt	.L87
+ 639:../lms2012/c_output.c ****       {
+ 640:../lms2012/c_output.c ****         write(OutputInstance.PwmFile,(DATA8*)&(TimeSync.Cmd),sizeof(TimeSync));
+ 1162              		.loc 1 640 0
+ 1163 0660 0D10A0E1 		mov	r1, sp
+ 1164              	.LVL109:
+ 1165 0664 1020A0E3 		mov	r2, #16
+ 1166 0668 FEFFFFEB 		bl	write
+ 1167              	.LVL110:
+ 1168              	.L87:
+ 641:../lms2012/c_output.c ****       }
+ 642:../lms2012/c_output.c ****   }
+ 643:../lms2012/c_output.c **** }
+ 1169              		.loc 1 643 0
+ 1170 066c 14D08DE2 		add	sp, sp, #20
+ 1171              		@ sp needed
+ 1172 0670 04F09DE4 		ldr	pc, [sp], #4
+ 1173              	.L94:
+ 1174              		.align	2
+ 1175              	.L93:
+ 1176 0674 00000000 		.word	OutputInstance
+ 1177              		.cfi_endproc
+ 1178              	.LFE56:
+ 1179              		.fnend
+ 1181              		.align	2
+ 1182              		.global	cOutputReady
+ 1184              	cOutputReady:
+ 1185              		.fnstart
+ 1186              	.LFB57:
+ 644:../lms2012/c_output.c **** 
+ 645:../lms2012/c_output.c **** /*! \page   cOutput
+ 646:../lms2012/c_output.c ****  *  <hr size="1"/>
+ 647:../lms2012/c_output.c ****  *  <b>     opOUTPUT_READY (NOS) </b>
+ 648:../lms2012/c_output.c ****  *
+ 649:../lms2012/c_output.c ****  *- Wait for output ready (wait for completion)\n
+ 650:../lms2012/c_output.c ****  *- Dispatch status can change to BUSYBREAK
+ 651:../lms2012/c_output.c ****  *- cOUTPUT_START command has no effect on this command
+ 652:../lms2012/c_output.c ****  *
+ 653:../lms2012/c_output.c ****  *  \param  (DATA8)   NOS     - Output bit field [0x00..0x0F]
+ 654:../lms2012/c_output.c ****  */
+ 655:../lms2012/c_output.c **** /*! \brief  opOUTPUT_READY byte code
+ 656:../lms2012/c_output.c ****  *
+ 657:../lms2012/c_output.c ****  */
+ 658:../lms2012/c_output.c **** DSPSTAT      cOutputReady(DATA8 Nos)
+ 659:../lms2012/c_output.c **** {
+ 1187              		.loc 1 659 0
+ 1188              		.cfi_startproc
+ 1189              		@ args = 0, pretend = 0, frame = 24
+ 1190              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1191              	.LVL111:
+ 1192 0678 10402DE9 		stmfd	sp!, {r4, lr}
+ 1193              		.save {r4, lr}
+ 1194              		.cfi_def_cfa_offset 8
+ 1195              		.cfi_offset 4, -8
+ 1196              		.cfi_offset 14, -4
+ 1197              		.pad #24
+ 1198 067c 18D04DE2 		sub	sp, sp, #24
+ 1199              		.cfi_def_cfa_offset 32
+ 1200 0680 0040A0E1 		mov	r4, r0
+ 660:../lms2012/c_output.c ****   DATA8   Tmp;
+ 661:../lms2012/c_output.c ****   int     test;
+ 662:../lms2012/c_output.c ****   int     test2;
+ 663:../lms2012/c_output.c ****   char    BusyReturn[10]; // Busy mask
+ 664:../lms2012/c_output.c **** 
+ 665:../lms2012/c_output.c ****     if (OutputInstance.PwmFile >= 0)
+ 1201              		.loc 1 665 0
+ 1202 0684 70309FE5 		ldr	r3, .L103
+ 1203 0688 040093E5 		ldr	r0, [r3, #4]
+ 1204              	.LVL112:
+ 1205 068c 000050E3 		cmp	r0, #0
+ 666:../lms2012/c_output.c ****     {
+ 667:../lms2012/c_output.c ****       read(OutputInstance.PwmFile,BusyReturn,4);
+ 668:../lms2012/c_output.c **** 
+ 669:../lms2012/c_output.c ****       sscanf(BusyReturn,"%u %u",&test,&test2);
+ 670:../lms2012/c_output.c **** 
+ 671:../lms2012/c_output.c ****       for (Tmp = 0;Tmp < OUTPUTS;Tmp++)
+ 672:../lms2012/c_output.c ****       {
+ 673:../lms2012/c_output.c ****         // Check resources for NOTREADY
+ 674:../lms2012/c_output.c ****         if (Nos & (1 << Tmp))
+ 675:../lms2012/c_output.c ****         {
+ 676:../lms2012/c_output.c ****           // Only relevant ones
+ 677:../lms2012/c_output.c ****           if (test & (1 << Tmp))
+ 678:../lms2012/c_output.c ****           {
+ 679:../lms2012/c_output.c **** 			return BUSYBREAK;
+ 680:../lms2012/c_output.c ****           }
+ 681:../lms2012/c_output.c ****         }
+ 682:../lms2012/c_output.c ****       }
+ 683:../lms2012/c_output.c ****     }
+ 684:../lms2012/c_output.c ****   return NOBREAK;
+ 1206              		.loc 1 684 0
+ 1207 0690 010CA0B3 		movlt	r0, #256
+ 665:../lms2012/c_output.c ****     {
+ 1208              		.loc 1 665 0
+ 1209 0694 160000BA 		blt	.L96
+ 667:../lms2012/c_output.c **** 
+ 1210              		.loc 1 667 0
+ 1211 0698 04108DE2 		add	r1, sp, #4
+ 1212 069c 0420A0E3 		mov	r2, #4
+ 1213 06a0 FEFFFFEB 		bl	read
+ 1214              	.LVL113:
+ 669:../lms2012/c_output.c **** 
+ 1215              		.loc 1 669 0
+ 1216 06a4 04008DE2 		add	r0, sp, #4
+ 1217 06a8 50109FE5 		ldr	r1, .L103+4
+ 1218 06ac 14208DE2 		add	r2, sp, #20
+ 1219 06b0 10308DE2 		add	r3, sp, #16
+ 1220 06b4 FEFFFFEB 		bl	__isoc99_sscanf
+ 1221              	.LVL114:
+ 677:../lms2012/c_output.c ****           {
+ 1222              		.loc 1 677 0
+ 1223 06b8 14109DE5 		ldr	r1, [sp, #20]
+ 1224 06bc 0030A0E3 		mov	r3, #0
+ 1225              	.LVL115:
+ 1226              	.L98:
+ 674:../lms2012/c_output.c ****         {
+ 1227              		.loc 1 674 0
+ 1228 06c0 5423A0E1 		mov	r2, r4, asr r3
+ 1229 06c4 010012E3 		tst	r2, #1
+ 1230 06c8 0200000A 		beq	.L97
+ 677:../lms2012/c_output.c ****           {
+ 1231              		.loc 1 677 0
+ 1232 06cc 5123A0E1 		mov	r2, r1, asr r3
+ 1233 06d0 010012E3 		tst	r2, #1
+ 1234 06d4 0300001A 		bne	.L100
+ 1235              	.L97:
+ 1236              	.LVL116:
+ 1237 06d8 013083E2 		add	r3, r3, #1
+ 1238              	.LVL117:
+ 671:../lms2012/c_output.c ****       {
+ 1239              		.loc 1 671 0
+ 1240 06dc 040053E3 		cmp	r3, #4
+ 1241 06e0 F6FFFF1A 		bne	.L98
+ 1242 06e4 010000EA 		b	.L101
+ 1243              	.LVL118:
+ 1244              	.L100:
+ 679:../lms2012/c_output.c ****           }
+ 1245              		.loc 1 679 0
+ 1246 06e8 010AA0E3 		mov	r0, #4096
+ 1247 06ec 000000EA 		b	.L96
+ 1248              	.LVL119:
+ 1249              	.L101:
+ 1250              		.loc 1 684 0
+ 1251 06f0 010CA0E3 		mov	r0, #256
+ 1252              	.LVL120:
+ 1253              	.L96:
+ 685:../lms2012/c_output.c **** }
+ 1254              		.loc 1 685 0
+ 1255 06f4 18D08DE2 		add	sp, sp, #24
+ 1256              		@ sp needed
+ 1257 06f8 1080BDE8 		ldmfd	sp!, {r4, pc}
+ 1258              	.L104:
+ 1259              		.align	2
+ 1260              	.L103:
+ 1261 06fc 00000000 		.word	OutputInstance
+ 1262 0700 20000000 		.word	.LC2
+ 1263              		.cfi_endproc
+ 1264              	.LFE57:
+ 1265              		.fnend
+ 1267              		.align	2
+ 1268              		.global	cOutputTest
+ 1270              	cOutputTest:
+ 1271              		.fnstart
+ 1272              	.LFB58:
+ 686:../lms2012/c_output.c **** 
+ 687:../lms2012/c_output.c **** 
+ 688:../lms2012/c_output.c **** /*! \page   cOutput
+ 689:../lms2012/c_output.c ****  *  \anchor opOUTPUT_TEST \n
+ 690:../lms2012/c_output.c ****  *  <hr size="1"/>
+ 691:../lms2012/c_output.c ****  *  <b>     opOUTPUT_TEST (NOS, BUSY) </b>
+ 692:../lms2012/c_output.c ****  *
+ 693:../lms2012/c_output.c ****  *- Testing if output is not used \n
+ 694:../lms2012/c_output.c ****  *
+ 695:../lms2012/c_output.c ****  *  \param  (DATA8)   NOS     - Output bit field [0x00..0x0F]
+ 696:../lms2012/c_output.c ****  *  \return (DATA8)   BUSY    - Output busy flag (0 = ready, 1 = Busy)
+ 697:../lms2012/c_output.c ****  */
+ 698:../lms2012/c_output.c **** /*! \brief  opOUTPUT_TEST byte code
+ 699:../lms2012/c_output.c ****  *
+ 700:../lms2012/c_output.c ****  */
+ 701:../lms2012/c_output.c **** DATA8      cOutputTest(DATA8 Nos)
+ 702:../lms2012/c_output.c **** {
+ 1273              		.loc 1 702 0
+ 1274              		.cfi_startproc
+ 1275              		@ args = 0, pretend = 0, frame = 32
+ 1276              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1277              	.LVL121:
+ 1278 0704 10402DE9 		stmfd	sp!, {r4, lr}
+ 1279              		.save {r4, lr}
+ 1280              		.cfi_def_cfa_offset 8
+ 1281              		.cfi_offset 4, -8
+ 1282              		.cfi_offset 14, -4
+ 1283              		.pad #32
+ 1284 0708 20D04DE2 		sub	sp, sp, #32
+ 1285              		.cfi_def_cfa_offset 40
+ 1286 070c 0040A0E1 		mov	r4, r0
+ 1287              	.LVL122:
+ 703:../lms2012/c_output.c **** 
+ 704:../lms2012/c_output.c ****   int     test;
+ 705:../lms2012/c_output.c ****   int     test2;
+ 706:../lms2012/c_output.c ****   char    BusyReturn[20]; // Busy mask
+ 707:../lms2012/c_output.c ****   DATA8   Busy = 0;
+ 708:../lms2012/c_output.c **** 
+ 709:../lms2012/c_output.c ****     if (OutputInstance.PwmFile >= 0)
+ 1288              		.loc 1 709 0
+ 1289 0710 4C309FE5 		ldr	r3, .L108
+ 1290 0714 040093E5 		ldr	r0, [r3, #4]
+ 1291              	.LVL123:
+ 1292 0718 000050E3 		cmp	r0, #0
+ 707:../lms2012/c_output.c **** 
+ 1293              		.loc 1 707 0
+ 1294 071c 0000A0B3 		movlt	r0, #0
+ 1295              		.loc 1 709 0
+ 1296 0720 0D0000BA 		blt	.L106
+ 710:../lms2012/c_output.c ****     {
+ 711:../lms2012/c_output.c ****       read(OutputInstance.PwmFile,BusyReturn,10);
+ 1297              		.loc 1 711 0
+ 1298 0724 04108DE2 		add	r1, sp, #4
+ 1299 0728 0A20A0E3 		mov	r2, #10
+ 1300 072c FEFFFFEB 		bl	read
+ 1301              	.LVL124:
+ 712:../lms2012/c_output.c ****       sscanf(BusyReturn,"%u %u",&test,&test2);
+ 1302              		.loc 1 712 0
+ 1303 0730 04008DE2 		add	r0, sp, #4
+ 1304 0734 2C109FE5 		ldr	r1, .L108+4
+ 1305 0738 1C208DE2 		add	r2, sp, #28
+ 1306 073c 18308DE2 		add	r3, sp, #24
+ 1307 0740 FEFFFFEB 		bl	__isoc99_sscanf
+ 1308              	.LVL125:
+ 713:../lms2012/c_output.c **** 
+ 714:../lms2012/c_output.c ****       if (Nos & (DATA8)test2)
+ 1309              		.loc 1 714 0
+ 1310 0744 18309DE5 		ldr	r3, [sp, #24]
+ 1311 0748 034004E0 		and	r4, r4, r3
+ 1312 074c 044CB0E1 		movs	r4, r4, asl #24
+ 707:../lms2012/c_output.c **** 
+ 1313              		.loc 1 707 0
+ 1314 0750 0000A003 		moveq	r0, #0
+ 1315 0754 0100A013 		movne	r0, #1
+ 1316 0758 FFFFFFEA 		b	.L106
+ 1317              	.L106:
+ 1318              	.LVL126:
+ 715:../lms2012/c_output.c ****       {
+ 716:../lms2012/c_output.c ****         Busy = 1;
+ 717:../lms2012/c_output.c ****       }
+ 718:../lms2012/c_output.c ****     }
+ 719:../lms2012/c_output.c ****   return Busy;
+ 720:../lms2012/c_output.c **** }
+ 1319              		.loc 1 720 0
+ 1320 075c 20D08DE2 		add	sp, sp, #32
+ 1321              		@ sp needed
+ 1322 0760 1080BDE8 		ldmfd	sp!, {r4, pc}
+ 1323              	.L109:
+ 1324              		.align	2
+ 1325              	.L108:
+ 1326 0764 00000000 		.word	OutputInstance
+ 1327 0768 20000000 		.word	.LC2
+ 1328              		.cfi_endproc
+ 1329              	.LFE58:
+ 1330              		.fnend
+ 1332              		.align	2
+ 1333              		.global	cOutputClrCount
+ 1335              	cOutputClrCount:
+ 1336              		.fnstart
+ 1337              	.LFB59:
+ 721:../lms2012/c_output.c **** 
+ 722:../lms2012/c_output.c **** 
+ 723:../lms2012/c_output.c **** /*! \page   cOutput
+ 724:../lms2012/c_output.c ****  *  \anchor opOUTPUT_TEST \n
+ 725:../lms2012/c_output.c ****  *  <hr size="1"/>
+ 726:../lms2012/c_output.c ****  *  <b>     opOUTPUT_CLR_COUNT (NOS) </b>
+ 727:../lms2012/c_output.c ****  *
+ 728:../lms2012/c_output.c ****  *- Clearing tacho count when used as sensor \n
+ 729:../lms2012/c_output.c ****  *
+ 730:../lms2012/c_output.c ****  *  \param  (DATA8)   NOS     - Output bit field [0x00..0x0F]
+ 731:../lms2012/c_output.c ****  */
+ 732:../lms2012/c_output.c **** /*! \brief  opOUTPUT_CLR_COUNT byte code
+ 733:../lms2012/c_output.c ****  *
+ 734:../lms2012/c_output.c ****  */
+ 735:../lms2012/c_output.c **** void      cOutputClrCount(DATA8 Nos)
+ 736:../lms2012/c_output.c **** {
+ 1338              		.loc 1 736 0
+ 1339              		.cfi_startproc
+ 1340              		@ args = 0, pretend = 0, frame = 8
+ 1341              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1342              	.LVL127:
+ 1343 076c 10402DE9 		stmfd	sp!, {r4, lr}
+ 1344              		.save {r4, lr}
+ 1345              		.cfi_def_cfa_offset 8
+ 1346              		.cfi_offset 4, -8
+ 1347              		.cfi_offset 14, -4
+ 1348              		.pad #8
+ 1349 0770 08D04DE2 		sub	sp, sp, #8
+ 1350              		.cfi_def_cfa_offset 16
+ 737:../lms2012/c_output.c ****   DATA8   ClrCnt[2];
+ 738:../lms2012/c_output.c ****   UBYTE   Tmp;
+ 739:../lms2012/c_output.c **** 
+ 740:../lms2012/c_output.c ****   ClrCnt[0]   =  opOUTPUT_CLR_COUNT;
+ 1351              		.loc 1 740 0
+ 1352 0774 4D30E0E3 		mvn	r3, #77
+ 1353 0778 0430CDE5 		strb	r3, [sp, #4]
+ 741:../lms2012/c_output.c ****   ClrCnt[1]   =  Nos;
+ 1354              		.loc 1 741 0
+ 1355 077c 0500CDE5 		strb	r0, [sp, #5]
+ 742:../lms2012/c_output.c **** 
+ 743:../lms2012/c_output.c ****     if (OutputInstance.PwmFile >= 0)
+ 1356              		.loc 1 743 0
+ 1357 0780 60309FE5 		ldr	r3, .L116
+ 1358 0784 040093E5 		ldr	r0, [r3, #4]
+ 1359              	.LVL128:
+ 1360 0788 000050E3 		cmp	r0, #0
+ 1361 078c 0D0000BA 		blt	.L111
+ 744:../lms2012/c_output.c ****     {
+ 745:../lms2012/c_output.c ****       write(OutputInstance.PwmFile, ClrCnt, sizeof(ClrCnt));
+ 1362              		.loc 1 745 0
+ 1363 0790 04108DE2 		add	r1, sp, #4
+ 1364 0794 0220A0E3 		mov	r2, #2
+ 1365 0798 FEFFFFEB 		bl	write
+ 1366              	.LVL129:
+ 1367 079c 090000EA 		b	.L111
+ 1368              	.L114:
+ 1369              	.LVL130:
+ 746:../lms2012/c_output.c ****     }
+ 747:../lms2012/c_output.c **** 
+ 748:../lms2012/c_output.c ****     // Also the user layer entry to get immediate clear
+ 749:../lms2012/c_output.c ****     for(Tmp = 0; Tmp < OUTPUTS; Tmp++)
+ 750:../lms2012/c_output.c ****     {
+ 751:../lms2012/c_output.c ****       if (ClrCnt[1] & (1 << Tmp))
+ 1370              		.loc 1 751 0
+ 1371 07a0 5013A0E1 		mov	r1, r0, asr r3
+ 1372 07a4 010011E3 		tst	r1, #1
+ 752:../lms2012/c_output.c ****       {
+ 753:../lms2012/c_output.c ****         OutputInstance.pMotor[Tmp].TachoSensor = 0;
+ 1373              		.loc 1 753 0
+ 1374 07a8 3C109415 		ldrne	r1, [r4, #60]
+ 1375 07ac 02108110 		addne	r1, r1, r2
+ 1376 07b0 08C08115 		strne	ip, [r1, #8]
+ 1377              	.LVL131:
+ 1378 07b4 013083E2 		add	r3, r3, #1
+ 1379              	.LVL132:
+ 1380 07b8 0C2082E2 		add	r2, r2, #12
+ 749:../lms2012/c_output.c ****     {
+ 1381              		.loc 1 749 0
+ 1382 07bc 040053E3 		cmp	r3, #4
+ 1383 07c0 F6FFFF1A 		bne	.L114
+ 1384 07c4 050000EA 		b	.L115
+ 1385              	.LVL133:
+ 1386              	.L111:
+ 751:../lms2012/c_output.c ****       {
+ 1387              		.loc 1 751 0
+ 1388 07c8 D500DDE1 		ldrsb	r0, [sp, #5]
+ 1389 07cc 0020A0E3 		mov	r2, #0
+ 1390 07d0 0230A0E1 		mov	r3, r2
+ 1391              		.loc 1 753 0
+ 1392 07d4 0C409FE5 		ldr	r4, .L116
+ 1393 07d8 02C0A0E1 		mov	ip, r2
+ 1394 07dc EFFFFFEA 		b	.L114
+ 1395              	.LVL134:
+ 1396              	.L115:
+ 754:../lms2012/c_output.c ****       }
+ 755:../lms2012/c_output.c ****     }
+ 756:../lms2012/c_output.c **** }
+ 1397              		.loc 1 756 0
+ 1398 07e0 08D08DE2 		add	sp, sp, #8
+ 1399              		@ sp needed
+ 1400 07e4 1080BDE8 		ldmfd	sp!, {r4, pc}
+ 1401              	.L117:
+ 1402              		.align	2
+ 1403              	.L116:
+ 1404 07e8 00000000 		.word	OutputInstance
+ 1405              		.cfi_endproc
+ 1406              	.LFE59:
+ 1407              		.fnend
+ 1409              		.align	2
+ 1410              		.global	cOutputGetCount
+ 1412              	cOutputGetCount:
+ 1413              		.fnstart
+ 1414              	.LFB60:
+ 757:../lms2012/c_output.c **** 
+ 758:../lms2012/c_output.c **** 
+ 759:../lms2012/c_output.c **** /*! \page   cOutput
+ 760:../lms2012/c_output.c ****  *  \anchor opOUTPUT_TEST \n
+ 761:../lms2012/c_output.c ****  *  <hr size="1"/>
+ 762:../lms2012/c_output.c ****  *  <b>     opOUTPUT_GET_COUNT (NOS, *TACHO) </b>
+ 763:../lms2012/c_output.c ****  *
+ 764:../lms2012/c_output.c ****  *- Getting tacho count when used as sensor - values are in shared memory \n
+ 765:../lms2012/c_output.c ****  *
+ 766:../lms2012/c_output.c ****  *
+ 767:../lms2012/c_output.c ****  *  \param  (DATA8)   NOS     - Output number [0x00..0x0F]
+ 768:../lms2012/c_output.c ****  *  \return (DATA32)  *TACHO  - Tacho pulses [-MAX .. +MAX]
+ 769:../lms2012/c_output.c ****  */
+ 770:../lms2012/c_output.c **** /*! \brief  opOUTPUT_GET_COUNT byte code
+ 771:../lms2012/c_output.c ****  *
+ 772:../lms2012/c_output.c ****  */
+ 773:../lms2012/c_output.c **** DATA32      cOutputGetCount(DATA8 No)
+ 774:../lms2012/c_output.c **** {
+ 1415              		.loc 1 774 0
+ 1416              		.cfi_startproc
+ 1417              		@ args = 0, pretend = 0, frame = 0
+ 1418              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1419              		@ link register save eliminated.
+ 1420              	.LVL135:
+ 775:../lms2012/c_output.c ****     if (No < OUTPUTS)
+ 1421              		.loc 1 775 0
+ 1422 07ec 030050E3 		cmp	r0, #3
+ 776:../lms2012/c_output.c ****     {
+ 777:../lms2012/c_output.c ****       return(OutputInstance.pMotor[No].TachoSensor);
+ 1423              		.loc 1 777 0
+ 1424 07f0 14309FD5 		ldrle	r3, .L121
+ 1425 07f4 3C3093D5 		ldrle	r3, [r3, #60]
+ 1426 07f8 800080D0 		addle	r0, r0, r0, asl #1
+ 1427              	.LVL136:
+ 1428 07fc 000183D0 		addle	r0, r3, r0, asl #2
+ 1429 0800 080090D5 		ldrle	r0, [r0, #8]
+ 778:../lms2012/c_output.c ****     }
+ 779:../lms2012/c_output.c ****   return(0);
+ 1430              		.loc 1 779 0
+ 1431 0804 0000A0C3 		movgt	r0, #0
+ 780:../lms2012/c_output.c **** }
+ 1432              		.loc 1 780 0
+ 1433 0808 1EFF2FE1 		bx	lr
+ 1434              	.L122:
+ 1435              		.align	2
+ 1436              	.L121:
+ 1437 080c 00000000 		.word	OutputInstance
+ 1438              		.cfi_endproc
+ 1439              	.LFE60:
+ 1440              		.fnend
+ 1442              		.comm	OutputInstance,64,4
+ 1443              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 1444              		.align	2
+ 1445              	.LC0:
+ 1446 0000 2F646576 		.ascii	"/dev/lms_pwm\000"
+ 1446      2F6C6D73 
+ 1446      5F70776D 
+ 1446      00
+ 1447 000d 000000   		.space	3
+ 1448              	.LC1:
+ 1449 0010 2F646576 		.ascii	"/dev/lms_motor\000"
+ 1449      2F6C6D73 
+ 1449      5F6D6F74 
+ 1449      6F7200
+ 1450 001f 00       		.space	1
+ 1451              	.LC2:
+ 1452 0020 25752025 		.ascii	"%u %u\000"
+ 1452      7500
+ 1453 0026 0000     		.text
+ 1454              	.Letext0:
+ 1455              		.file 2 "../lms2012/lmstypes.h"
+ 1456              		.file 3 "../lms2012/bytecodes.h"
+ 1457              		.file 4 "../lms2012/lms2012.h"
+ 1458              		.file 5 "../lms2012/c_output.h"
+ 1459              		.file 6 "/usr/local/carlson-minot/crosscompilers/lib/gcc/arm-none-linux-gnueabi/4.8.3/include/stdd
+ 1460              		.file 7 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
+ 1461              		.file 8 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
+ 1462              		.file 9 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
+ 1463              		.file 10 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/u
+ 1464              		.file 11 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/u
+ 1465              		.file 12 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/u
+ 1466              		.file 13 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/u
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 c_output.c
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:16     .text:0000000000000000 $a
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:18     .text:0000000000000000 OutputReset
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:60     .text:0000000000000044 $d
+                            *COM*:0000000000000040 OutputInstance
+                       .ARM.exidx:0000000000000000 $d
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:65     .text:0000000000000048 $a
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:68     .text:0000000000000048 cOutputInit
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:178    .text:0000000000000114 $d
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:186    .text:0000000000000124 $a
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:189    .text:0000000000000124 cOutputExit
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:236    .text:0000000000000170 $d
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:241    .text:0000000000000174 $a
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:244    .text:0000000000000174 cOutputSetTypes
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:287    .text:00000000000001b8 $d
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:292    .text:00000000000001bc $a
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:295    .text:00000000000001bc cMotorGetBusyFlags
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:340    .text:000000000000020c $d
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:346    .text:0000000000000214 $a
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:349    .text:0000000000000214 cMotorSetBusyFlags
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:385    .text:0000000000000244 $d
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:390    .text:0000000000000248 $a
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:393    .text:0000000000000248 cOutputPrgStop
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:428    .text:000000000000027c $d
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:433    .text:0000000000000280 $a
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:436    .text:0000000000000280 cOutputSetType
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:460    .text:00000000000002a4 $d
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:465    .text:00000000000002a8 $a
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:468    .text:00000000000002a8 cOutputReset
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:507    .text:00000000000002e0 $d
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:512    .text:00000000000002e4 $a
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:515    .text:00000000000002e4 cOutputStop
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:557    .text:0000000000000320 $d
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:562    .text:0000000000000324 $a
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:565    .text:0000000000000324 cOutputSpeed
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:607    .text:0000000000000360 $d
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:612    .text:0000000000000364 $a
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:615    .text:0000000000000364 cOutputPower
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:657    .text:00000000000003a0 $d
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:662    .text:00000000000003a4 $a
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:665    .text:00000000000003a4 cOutputStart
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:704    .text:00000000000003dc $d
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:709    .text:00000000000003e0 $a
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:712    .text:00000000000003e0 cOutputPolarity
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:754    .text:000000000000041c $d
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:759    .text:0000000000000420 $a
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:762    .text:0000000000000420 cOutputStepPower
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:818    .text:0000000000000474 $d
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:823    .text:0000000000000478 $a
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:826    .text:0000000000000478 cOutputTimePower
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:882    .text:00000000000004cc $d
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:887    .text:00000000000004d0 $a
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:890    .text:00000000000004d0 cOutputStepSpeed
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:946    .text:0000000000000524 $d
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:951    .text:0000000000000528 $a
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:954    .text:0000000000000528 cOutputTimeSpeed
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:1010   .text:000000000000057c $d
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:1015   .text:0000000000000580 $a
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:1018   .text:0000000000000580 cOutputStepSync
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:1093   .text:00000000000005f8 $d
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:1098   .text:00000000000005fc $a
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:1101   .text:00000000000005fc cOutputTimeSync
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:1176   .text:0000000000000674 $d
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:1181   .text:0000000000000678 $a
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:1184   .text:0000000000000678 cOutputReady
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:1261   .text:00000000000006fc $d
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:1267   .text:0000000000000704 $a
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:1270   .text:0000000000000704 cOutputTest
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:1326   .text:0000000000000764 $d
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:1332   .text:000000000000076c $a
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:1335   .text:000000000000076c cOutputClrCount
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:1404   .text:00000000000007e8 $d
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:1409   .text:00000000000007ec $a
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:1412   .text:00000000000007ec cOutputGetCount
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:1437   .text:000000000000080c $d
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDen8Jc.s:1444   .rodata.str1.4:0000000000000000 $d
+                     .debug_frame:0000000000000010 $d
+
+UNDEFINED SYMBOLS
+write
+__aeabi_unwind_cpp_pr0
+open
+mmap
+LogErrorNumber
+close
+munmap
+memcpy
+read
+__isoc99_sscanf

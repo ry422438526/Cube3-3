@@ -13,6 +13,7 @@
 #include <sys/mman.h>
 #ifdef __linux__
 #include "lms2012.h"
+#include <unistd.h>
 #endif
 #include "main.h"
 typedef enum
@@ -26,9 +27,9 @@ typedef enum
 }FABER;
 
 #ifdef __linux__
-const char PORT=0x0;
-const char RGB_RAW=4;     //color mode
-const char COLOR_SENSOR_TYPE=29;
+ int  PORT=0x0;
+const DATA8 RGB_RAW=4;     //color mode
+const DATA8 COLOR_SENSOR_TYPE=29;
 const int MAX_SAMPLES =10;
 int file;
 UART *pColorSensor;
@@ -52,7 +53,6 @@ int ColSen_init()
         printf("Failed to map Color Sensor device\n");
         return -1;
     }
-    
     DevCon.Mode[PORT]=RGB_RAW;      //DeviceConnection
     DevCon.Connection[PORT]=CONN_INPUT_UART;   //Universal Asynchronous Receiver/Transmitter
     DevCon.Type[PORT]=COLOR_SENSOR_TYPE;
@@ -68,7 +68,6 @@ int ColSen_getData()   //Center:zenteral Position
     int MAX_Werte=0;
     float rot,gruen,blau;
     int Color_color;
-    int i;
     int Color_data_r=0;
     int Color_data_g=0;
     int Color_data_b=0;
@@ -77,7 +76,7 @@ int ColSen_getData()   //Center:zenteral Position
     Color_data_b=(unsigned char)pColorSensor->Raw[PORT][0][4]+(unsigned char)(pColorSensor->Raw[PORT][0][5]<<8);
     
     printf("COLOR_MAX is %d", MAX_Werte);
-    printf("color_data is (%d, %d, %d) \n\r", Color_data_r,Color_data_g,Color_data_b);
+    printf("color_data is (%d, %d, %d)", Color_data_r,Color_data_g,Color_data_b);
     // usleep(10000);
     MAX_Werte=MAX_RGB(MAX_RGB(Color_data_r, Color_data_g),Color_data_b);
     rot   =(Color_data_r*1.0)/MAX_Werte;
@@ -109,6 +108,7 @@ int ColSen_getData()   //Center:zenteral Position
             printf("\033[1;31m   %d\033[0m",Color_color);
             break;
     }
+    printf("\n\r");
     return Color_color;
     // senden daten zu PC
 #endif

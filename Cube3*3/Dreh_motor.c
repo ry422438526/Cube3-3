@@ -11,6 +11,8 @@
 #include <sys/mman.h>
 #ifdef __linux__
 #include "lms2012.h"
+#include "../lms2012/c_output.h"
+#include <unistd.h>
 #endif
 #include "Dreh_motor.h"
 
@@ -28,8 +30,9 @@ const int dreh_Korr_Winkel=10;  //Korrigieren Winkel
 
 
 int DrehTel_init()
-{
+{/Users/yangchunxia/Documents/Cube3*3/lms2012/c_output.h
 #ifdef __linux__
+#if 0
     if ((motor_file = open(PWM_DEVICE_NAME, O_WRONLY))== -1)
     {
         printf("Failed to open device\n");
@@ -43,6 +46,9 @@ int DrehTel_init()
         printf("Map failed\n");
         return -1;
     }
+#else
+    cOutputInit();
+#endif
     Tel_referenz=pMotorData[1].TachoSensor;
     printf("DrehTeller_referenz Position angefahren: %d\n\r",Tel_referenz);
     Tel_ist=0;
@@ -55,6 +61,7 @@ int DrehTel_init()
 int DrehTel_setpos(int Tel_soll)
 {
 #ifdef __linux__
+#if 0
     char motor_command[4];
     
     motor_command[0]=opOUTPUT_SPEED;
@@ -143,7 +150,10 @@ int DrehTel_setpos(int Tel_soll)
     motor_command[2]=1;
     write(motor_file,motor_command,3);  //Motor stoppen
     
-    
+#else
+    //if()
+      cOutputStepSpeed(MOTOR_PORT_B, MOTOR_SPEED_B, 10*3, 80*3, 90*3, 1);
+#endif
     Tel_ist=Tel_soll;
     Tel_referenz=pMotorData[1].TachoSensor;
     
@@ -167,7 +177,7 @@ int DrehTel_dreh(){
     write(motor_file,motor_command,2);
     
     int oldTachosensor=pMotorData[1].TachoSensor;
-    while (pMotorData[1].TachoSensor-oldTachosensor<135+30) {
+    while (pMotorData[1].TachoSensor-oldTachosensor<135) {
         usleep(100);
     }
     motor_command[0]=opOUTPUT_STOP;
@@ -175,9 +185,7 @@ int DrehTel_dreh(){
     motor_command[2]=1;  //break
     write(motor_file,motor_command,3);
     
-    
-    
-    Tel_referenz=pMotorData[1].TachoSensor;
+    /*Tel_referenz=pMotorData[1].TachoSensor;
     
     motor_command[0]=opOUTPUT_SPEED;
     motor_command[1]=MOTOR_PORT_B;
@@ -190,13 +198,13 @@ int DrehTel_dreh(){
     
     while(pMotorData[1].TachoSensor-Tel_referenz>-30)
     {
-        /*printf("Spd/Cnt/Snr: A=%d/%d/%d\n", pMotorData[1].Speed, pMotorData[1].TachoCounts, pMotorData[1].TachoSensor-dreh_winkel[Tel_ist]-Tel_referenz);*/
         usleep(100);
     }
     motor_command[0]=opOUTPUT_STOP;
     motor_command[1]=MOTOR_PORT_B;
     motor_command[2]=1;  //break
-    write(motor_file,motor_command,3);
+    write(motor_file,motor_command,3);*/
+    return 0;
 }
 
 

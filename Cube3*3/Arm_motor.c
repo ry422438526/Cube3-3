@@ -21,14 +21,14 @@
 
 
 #ifdef __linux__
-const int MOTOR_SPEED=20;//power:0~100
+const int MOTOR_SPEED=15;//power:0~100
 const char MOTOR_PORT_A = 0x01; //Ausfahrbarer Greifarm Motor;
 MOTORDATA *pMotorData;
 int motor_file;
 int encoder_file;
 int arm_referenz=0;
 int arm_ist=0;
-const int arm_winkel[]={-4,-83,-132,-231,-330};//-85   231
+const int arm_winkel[]={-4,-83,-140,-231,-330};//-85   231
 #endif
 
 
@@ -132,8 +132,8 @@ int arm_setpos(int arm_soll)
     motor_command[1]=MOTOR_PORT_A;
     motor_command[2]=1;
     write(motor_file,motor_command,3); //Motor stopppen
-    usleep(10000);
     arm_ist=arm_soll;
+    usleep(100000);
 #endif
     return 0;
 }

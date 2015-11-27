@@ -7,7 +7,7 @@
 //
 
 // Thema: Entwurf und Implementierung eines Algorithmus zum Loesen des Rubrik-Cube Problems
-
+#include <unistd.h>
 
 #include "Top_Cross.h"
 #include "F2L.h"
@@ -268,10 +268,53 @@ int main(int argc, const char * argv[]) {
     DrehTel_init();
     Farbe_init();
     ColSen_init();
-    color_data[6][9]=farbe_scan();
-    wuerfel_print(1);
-    arm_close();
-    Farbe_close();
+    Farbe_setpos(2);
+    sleep(1);
+    ColSen_getData();
+    sleep(1);
+    ColSen_getData();
+    sleep(1);
+    ColSen_getData();
+    sleep(1);
+    ColSen_getData();
+    sleep(1);
+    ColSen_getData();
+    sleep(1);
+    ColSen_getData();
+    sleep(1);
+    ColSen_getData();
+    sleep(1);
+    ColSen_getData();
+    sleep(1);
+    ColSen_getData();
+    sleep(1);
+    Farbe_setpos(1);
+    ColSen_getData();
+    sleep(1);
+    ColSen_getData();
+    sleep(1);
+    ColSen_getData();
+    sleep(1);
+    ColSen_getData();
+    sleep(1);
+    ColSen_getData();
+    sleep(1);
+    ColSen_getData();
+    sleep(1);
+    ColSen_getData();
+    sleep(1);
+    ColSen_getData();
+    sleep(1);
+    ColSen_getData();
+    sleep(1);
+    ColSen_getData();
+    sleep(1);
+    ColSen_getData();
+    sleep(1);
+    //color_data[6][9]=farbe_scan();
+    //wuerfel_print(1);
+    //arm_close();
+    //Farbe_close();
     
 #endif
     //change_topface(0);

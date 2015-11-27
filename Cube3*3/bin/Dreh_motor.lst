@@ -1,0 +1,984 @@
+   1              		.arch armv5te
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 2
+   9              		.eabi_attribute 30, 1
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.file	"Dreh_motor.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.align	2
+  17              		.global	DrehTel_setpos
+  19              	DrehTel_setpos:
+  20              		.fnstart
+  21              	.LFB12:
+  22              		.file 1 "Dreh_motor.c"
+   1:Dreh_motor.c  **** //
+   2:Dreh_motor.c  **** //  Dreh_motor.c
+   3:Dreh_motor.c  **** //  Cube3*3
+   4:Dreh_motor.c  **** //
+   5:Dreh_motor.c  **** //  Created by 杨春霞 on 12.11.15.
+   6:Dreh_motor.c  **** //  Copyright © 2015 Chunxia Yang. All rights reserved.
+   7:Dreh_motor.c  **** //
+   8:Dreh_motor.c  **** 
+   9:Dreh_motor.c  **** #include <fcntl.h>
+  10:Dreh_motor.c  **** #include <stdio.h>
+  11:Dreh_motor.c  **** #include <sys/mman.h>
+  12:Dreh_motor.c  **** #ifdef __linux__
+  13:Dreh_motor.c  **** #include "lms2012.h"
+  14:Dreh_motor.c  **** #include <unistd.h>
+  15:Dreh_motor.c  **** #endif
+  16:Dreh_motor.c  **** #include "Dreh_motor.h"
+  17:Dreh_motor.c  **** 
+  18:Dreh_motor.c  **** #ifdef __linux__
+  19:Dreh_motor.c  **** const int MOTOR_SPEED_B=30;
+  20:Dreh_motor.c  **** const char MOTOR_PORT_B=0x02; //Drehteller Motor;
+  21:Dreh_motor.c  **** MOTORDATA *pMotorData;
+  22:Dreh_motor.c  **** int motor_file;
+  23:Dreh_motor.c  **** int encoder_file;
+  24:Dreh_motor.c  **** int Tel_ist=0;
+  25:Dreh_motor.c  **** int Tel_referenz=0;
+  26:Dreh_motor.c  **** const int dreh_winkel[]={0*90*3,1*90*3,-1*90*3,2*90*3,-2*90*3};//274
+  27:Dreh_motor.c  **** const int dreh_Korr_Winkel=10;  //Korrigieren Winkel
+  28:Dreh_motor.c  **** #endif
+  29:Dreh_motor.c  **** 
+  30:Dreh_motor.c  **** 
+  31:Dreh_motor.c  **** int DrehTel_init()
+  32:Dreh_motor.c  **** {
+  33:Dreh_motor.c  **** #ifdef __linux__
+  34:Dreh_motor.c  ****     if ((motor_file = open(PWM_DEVICE_NAME, O_WRONLY))== -1)
+  35:Dreh_motor.c  ****     {
+  36:Dreh_motor.c  ****         printf("Failed to open device\n");
+  37:Dreh_motor.c  ****         return -1;
+  38:Dreh_motor.c  ****     }
+  39:Dreh_motor.c  ****     if((encoder_file = open(MOTOR_DEVICE_NAME, O_RDWR | O_SYNC)) == -1)
+  40:Dreh_motor.c  ****         return -1;
+  41:Dreh_motor.c  ****     pMotorData = (MOTORDATA*)mmap (0, sizeof(MOTORDATA)*vmOUTPUTS, PROT_READ|PROT_WRITE,MAP_FILE|MA
+  42:Dreh_motor.c  ****     if (pMotorData == MAP_FAILED)
+  43:Dreh_motor.c  ****     {
+  44:Dreh_motor.c  ****         printf("Map failed\n");
+  45:Dreh_motor.c  ****         return -1;
+  46:Dreh_motor.c  ****     }
+  47:Dreh_motor.c  ****     Tel_referenz=pMotorData[1].TachoSensor;
+  48:Dreh_motor.c  ****     printf("DrehTeller_referenz Position angefahren: %d\n\r",Tel_referenz);
+  49:Dreh_motor.c  ****     Tel_ist=0;
+  50:Dreh_motor.c  ****     DrehTel_setpos(0);
+  51:Dreh_motor.c  **** #endif
+  52:Dreh_motor.c  ****     return 0;
+  53:Dreh_motor.c  **** }
+  54:Dreh_motor.c  **** 
+  55:Dreh_motor.c  **** 
+  56:Dreh_motor.c  **** int DrehTel_setpos(int Tel_soll)
+  57:Dreh_motor.c  **** {
+  23              		.loc 1 57 0
+  24              		.cfi_startproc
+  25              		@ args = 0, pretend = 0, frame = 8
+  26              		@ frame_needed = 0, uses_anonymous_args = 0
+  27              	.LVL0:
+  28 0000 F0412DE9 		stmfd	sp!, {r4, r5, r6, r7, r8, lr}
+  29              		.save {r4, r5, r6, r7, r8, lr}
+  30              		.cfi_def_cfa_offset 24
+  31              		.cfi_offset 4, -24
+  32              		.cfi_offset 5, -20
+  33              		.cfi_offset 6, -16
+  34              		.cfi_offset 7, -12
+  35              		.cfi_offset 8, -8
+  36              		.cfi_offset 14, -4
+  37              		.pad #8
+  38 0004 08D04DE2 		sub	sp, sp, #8
+  39              		.cfi_def_cfa_offset 32
+  40 0008 0040A0E1 		mov	r4, r0
+  58:Dreh_motor.c  **** #ifdef __linux__
+  59:Dreh_motor.c  ****     char motor_command[4];
+  60:Dreh_motor.c  ****     
+  61:Dreh_motor.c  ****     motor_command[0]=opOUTPUT_SPEED;
+  41              		.loc 1 61 0
+  42 000c 5A30E0E3 		mvn	r3, #90
+  43 0010 0430CDE5 		strb	r3, [sp, #4]
+  62:Dreh_motor.c  ****     motor_command[1]=MOTOR_PORT_B;
+  44              		.loc 1 62 0
+  45 0014 0230A0E3 		mov	r3, #2
+  46 0018 0530CDE5 		strb	r3, [sp, #5]
+  63:Dreh_motor.c  ****     if (dreh_winkel[Tel_soll]<=0)
+  47              		.loc 1 63 0
+  48 001c 18339FE5 		ldr	r3, .L10
+  49 0020 005193E7 		ldr	r5, [r3, r0, asl #2]
+  50 0024 000055E3 		cmp	r5, #0
+  51 0028 530000CA 		bgt	.L2
+  64:Dreh_motor.c  ****     {
+  65:Dreh_motor.c  ****         motor_command[2]=-MOTOR_SPEED_B;
+  52              		.loc 1 65 0
+  53 002c 1D30E0E3 		mvn	r3, #29
+  54 0030 0630CDE5 		strb	r3, [sp, #6]
+  66:Dreh_motor.c  ****         write(motor_file,motor_command,3);    //Motor_speed Wert geben
+  55              		.loc 1 66 0
+  56 0034 04639FE5 		ldr	r6, .L10+4
+  57 0038 000096E5 		ldr	r0, [r6]
+  58              	.LVL1:
+  59 003c 04108DE2 		add	r1, sp, #4
+  60 0040 0320A0E3 		mov	r2, #3
+  61 0044 FEFFFFEB 		bl	write
+  62              	.LVL2:
+  67:Dreh_motor.c  ****         
+  68:Dreh_motor.c  ****         motor_command[0]=opOUTPUT_START;
+  63              		.loc 1 68 0
+  64 0048 5930E0E3 		mvn	r3, #89
+  65 004c 0430CDE5 		strb	r3, [sp, #4]
+  69:Dreh_motor.c  ****         motor_command[1]=MOTOR_PORT_B;
+  66              		.loc 1 69 0
+  67 0050 0220A0E3 		mov	r2, #2
+  68 0054 0520CDE5 		strb	r2, [sp, #5]
+  70:Dreh_motor.c  ****         write(motor_file,motor_command,2);    //Motor  srarten
+  69              		.loc 1 70 0
+  70 0058 000096E5 		ldr	r0, [r6]
+  71 005c 04108DE2 		add	r1, sp, #4
+  72 0060 FEFFFFEB 		bl	write
+  73              	.LVL3:
+  71:Dreh_motor.c  ****         while((pMotorData[1].TachoSensor-Tel_referenz) >= (dreh_winkel[Tel_soll]-40))
+  74              		.loc 1 71 0
+  75 0064 285045E2 		sub	r5, r5, #40
+  76 0068 D4329FE5 		ldr	r3, .L10+8
+  77 006c 003093E5 		ldr	r3, [r3]
+  78 0070 142093E5 		ldr	r2, [r3, #20]
+  79 0074 CC329FE5 		ldr	r3, .L10+12
+  80 0078 003093E5 		ldr	r3, [r3]
+  81 007c 023063E0 		rsb	r3, r3, r2
+  82 0080 050053E1 		cmp	r3, r5
+  83 0084 0A0000BA 		blt	.L3
+  72:Dreh_motor.c  ****         {
+  73:Dreh_motor.c  ****             // printf("Spd/Cnt/Snr: A=%d/%d/%d\n", pMotorData[1].Speed, pMotorData[1].TachoCounts, 
+  74:Dreh_motor.c  ****             usleep(1000);
+  84              		.loc 1 74 0
+  85 0088 FA8FA0E3 		mov	r8, #1000
+  71:Dreh_motor.c  ****         while((pMotorData[1].TachoSensor-Tel_referenz) >= (dreh_winkel[Tel_soll]-40))
+  86              		.loc 1 71 0
+  87 008c B0729FE5 		ldr	r7, .L10+8
+  88 0090 B0629FE5 		ldr	r6, .L10+12
+  89              	.L4:
+  90              		.loc 1 74 0
+  91 0094 0800A0E1 		mov	r0, r8
+  92 0098 FEFFFFEB 		bl	usleep
+  93              	.LVL4:
+  71:Dreh_motor.c  ****         while((pMotorData[1].TachoSensor-Tel_referenz) >= (dreh_winkel[Tel_soll]-40))
+  94              		.loc 1 71 0
+  95 009c 003097E5 		ldr	r3, [r7]
+  96 00a0 142093E5 		ldr	r2, [r3, #20]
+  97 00a4 003096E5 		ldr	r3, [r6]
+  98 00a8 023063E0 		rsb	r3, r3, r2
+  99 00ac 050053E1 		cmp	r3, r5
+ 100 00b0 F7FFFFAA 		bge	.L4
+ 101              	.L3:
+  75:Dreh_motor.c  ****         }
+  76:Dreh_motor.c  ****         
+  77:Dreh_motor.c  ****         
+  78:Dreh_motor.c  ****         motor_command[0]=opOUTPUT_STOP;
+ 102              		.loc 1 78 0
+ 103 00b4 5C30E0E3 		mvn	r3, #92
+ 104 00b8 0430CDE5 		strb	r3, [sp, #4]
+  79:Dreh_motor.c  ****         motor_command[1]=MOTOR_PORT_B;
+ 105              		.loc 1 79 0
+ 106 00bc 0250A0E3 		mov	r5, #2
+ 107 00c0 0550CDE5 		strb	r5, [sp, #5]
+  80:Dreh_motor.c  ****         motor_command[2]=1;
+ 108              		.loc 1 80 0
+ 109 00c4 0130A0E3 		mov	r3, #1
+ 110 00c8 0630CDE5 		strb	r3, [sp, #6]
+  81:Dreh_motor.c  ****         write(motor_file,motor_command,3);
+ 111              		.loc 1 81 0
+ 112 00cc 6C629FE5 		ldr	r6, .L10+4
+ 113 00d0 000096E5 		ldr	r0, [r6]
+ 114 00d4 04108DE2 		add	r1, sp, #4
+ 115 00d8 0320A0E3 		mov	r2, #3
+ 116 00dc FEFFFFEB 		bl	write
+ 117              	.LVL5:
+  82:Dreh_motor.c  ****         
+  83:Dreh_motor.c  ****         Tel_referenz=pMotorData[1].TachoSensor;
+ 118              		.loc 1 83 0
+ 119 00e0 60729FE5 		ldr	r7, .L10+12
+ 120 00e4 58829FE5 		ldr	r8, .L10+8
+ 121 00e8 003098E5 		ldr	r3, [r8]
+ 122 00ec 143093E5 		ldr	r3, [r3, #20]
+ 123 00f0 003087E5 		str	r3, [r7]
+  84:Dreh_motor.c  ****         
+  85:Dreh_motor.c  ****         motor_command[0]=opOUTPUT_SPEED;
+ 124              		.loc 1 85 0
+ 125 00f4 5A30E0E3 		mvn	r3, #90
+ 126 00f8 0430CDE5 		strb	r3, [sp, #4]
+  86:Dreh_motor.c  ****         motor_command[1]=MOTOR_PORT_B;
+ 127              		.loc 1 86 0
+ 128 00fc 0550CDE5 		strb	r5, [sp, #5]
+  87:Dreh_motor.c  ****         motor_command[2]=MOTOR_SPEED_B;
+ 129              		.loc 1 87 0
+ 130 0100 1E30A0E3 		mov	r3, #30
+ 131 0104 0630CDE5 		strb	r3, [sp, #6]
+  88:Dreh_motor.c  ****         write(motor_file,motor_command,3);
+ 132              		.loc 1 88 0
+ 133 0108 000096E5 		ldr	r0, [r6]
+ 134 010c 04108DE2 		add	r1, sp, #4
+ 135 0110 0320A0E3 		mov	r2, #3
+ 136 0114 FEFFFFEB 		bl	write
+ 137              	.LVL6:
+  89:Dreh_motor.c  ****         
+  90:Dreh_motor.c  ****         motor_command[0]=opOUTPUT_START;
+ 138              		.loc 1 90 0
+ 139 0118 5930E0E3 		mvn	r3, #89
+ 140 011c 0430CDE5 		strb	r3, [sp, #4]
+  91:Dreh_motor.c  ****         motor_command[1]=MOTOR_PORT_B;
+ 141              		.loc 1 91 0
+ 142 0120 0550CDE5 		strb	r5, [sp, #5]
+  92:Dreh_motor.c  ****         write(motor_file,motor_command,2);
+ 143              		.loc 1 92 0
+ 144 0124 000096E5 		ldr	r0, [r6]
+ 145 0128 04108DE2 		add	r1, sp, #4
+ 146 012c 0520A0E1 		mov	r2, r5
+ 147 0130 FEFFFFEB 		bl	write
+ 148              	.LVL7:
+  93:Dreh_motor.c  ****         
+  94:Dreh_motor.c  ****         while(pMotorData[1].TachoSensor-Tel_referenz<40)
+ 149              		.loc 1 94 0
+ 150 0134 003098E5 		ldr	r3, [r8]
+ 151 0138 142093E5 		ldr	r2, [r3, #20]
+ 152 013c 003097E5 		ldr	r3, [r7]
+ 153 0140 023063E0 		rsb	r3, r3, r2
+ 154 0144 270053E3 		cmp	r3, #39
+ 155 0148 5E0000CA 		bgt	.L5
+  95:Dreh_motor.c  ****         {
+  96:Dreh_motor.c  ****             // printf("Spd/Cnt/Snr: A=%d/%d/%d\n", pMotorData[1].Speed, pMotorData[1].TachoCounts, 
+  97:Dreh_motor.c  ****             usleep(100);
+ 156              		.loc 1 97 0
+ 157 014c 6470A0E3 		mov	r7, #100
+  94:Dreh_motor.c  ****         {
+ 158              		.loc 1 94 0
+ 159 0150 0860A0E1 		mov	r6, r8
+ 160 0154 EC519FE5 		ldr	r5, .L10+12
+ 161              	.L6:
+ 162              		.loc 1 97 0
+ 163 0158 0700A0E1 		mov	r0, r7
+ 164 015c FEFFFFEB 		bl	usleep
+ 165              	.LVL8:
+  94:Dreh_motor.c  ****         {
+ 166              		.loc 1 94 0
+ 167 0160 003096E5 		ldr	r3, [r6]
+ 168 0164 142093E5 		ldr	r2, [r3, #20]
+ 169 0168 003095E5 		ldr	r3, [r5]
+ 170 016c 023063E0 		rsb	r3, r3, r2
+ 171 0170 270053E3 		cmp	r3, #39
+ 172 0174 F7FFFFDA 		ble	.L6
+ 173 0178 520000EA 		b	.L5
+ 174              	.LVL9:
+ 175              	.L2:
+  98:Dreh_motor.c  ****         }
+  99:Dreh_motor.c  ****         
+ 100:Dreh_motor.c  ****     }
+ 101:Dreh_motor.c  ****     else
+ 102:Dreh_motor.c  ****         
+ 103:Dreh_motor.c  ****     {
+ 104:Dreh_motor.c  ****         motor_command[2]=MOTOR_SPEED_B;
+ 176              		.loc 1 104 0
+ 177 017c 1E30A0E3 		mov	r3, #30
+ 178 0180 0630CDE5 		strb	r3, [sp, #6]
+ 105:Dreh_motor.c  ****         write(motor_file,motor_command,3);    //Motor_speed Wert geben
+ 179              		.loc 1 105 0
+ 180 0184 B4619FE5 		ldr	r6, .L10+4
+ 181 0188 000096E5 		ldr	r0, [r6]
+ 182              	.LVL10:
+ 183 018c 04108DE2 		add	r1, sp, #4
+ 184 0190 0320A0E3 		mov	r2, #3
+ 185 0194 FEFFFFEB 		bl	write
+ 186              	.LVL11:
+ 106:Dreh_motor.c  ****         
+ 107:Dreh_motor.c  ****         motor_command[0]=opOUTPUT_START;
+ 187              		.loc 1 107 0
+ 188 0198 5930E0E3 		mvn	r3, #89
+ 189 019c 0430CDE5 		strb	r3, [sp, #4]
+ 108:Dreh_motor.c  ****         motor_command[1]=MOTOR_PORT_B;
+ 190              		.loc 1 108 0
+ 191 01a0 0220A0E3 		mov	r2, #2
+ 192 01a4 0520CDE5 		strb	r2, [sp, #5]
+ 109:Dreh_motor.c  ****         write(motor_file,motor_command,2);    //Motor  srarten
+ 193              		.loc 1 109 0
+ 194 01a8 000096E5 		ldr	r0, [r6]
+ 195 01ac 04108DE2 		add	r1, sp, #4
+ 196 01b0 FEFFFFEB 		bl	write
+ 197              	.LVL12:
+ 110:Dreh_motor.c  ****         
+ 111:Dreh_motor.c  ****         while((pMotorData[1].TachoSensor-Tel_referenz) < (dreh_winkel[Tel_soll]+40))
+ 198              		.loc 1 111 0
+ 199 01b4 285085E2 		add	r5, r5, #40
+ 200 01b8 84319FE5 		ldr	r3, .L10+8
+ 201 01bc 003093E5 		ldr	r3, [r3]
+ 202 01c0 142093E5 		ldr	r2, [r3, #20]
+ 203 01c4 7C319FE5 		ldr	r3, .L10+12
+ 204 01c8 003093E5 		ldr	r3, [r3]
+ 205 01cc 023063E0 		rsb	r3, r3, r2
+ 206 01d0 050053E1 		cmp	r3, r5
+ 207 01d4 0A0000AA 		bge	.L7
+ 112:Dreh_motor.c  ****         {
+ 113:Dreh_motor.c  ****             //printf("Spd/Cnt/Snr: A=%d/%d/%d\n", pMotorData[1].Speed, pMotorData[1].TachoCounts, p
+ 114:Dreh_motor.c  ****             usleep(1000);
+ 208              		.loc 1 114 0
+ 209 01d8 FA8FA0E3 		mov	r8, #1000
+ 111:Dreh_motor.c  ****         {
+ 210              		.loc 1 111 0
+ 211 01dc 60719FE5 		ldr	r7, .L10+8
+ 212 01e0 60619FE5 		ldr	r6, .L10+12
+ 213              	.L8:
+ 214              		.loc 1 114 0
+ 215 01e4 0800A0E1 		mov	r0, r8
+ 216 01e8 FEFFFFEB 		bl	usleep
+ 217              	.LVL13:
+ 111:Dreh_motor.c  ****         {
+ 218              		.loc 1 111 0
+ 219 01ec 003097E5 		ldr	r3, [r7]
+ 220 01f0 142093E5 		ldr	r2, [r3, #20]
+ 221 01f4 003096E5 		ldr	r3, [r6]
+ 222 01f8 023063E0 		rsb	r3, r3, r2
+ 223 01fc 050053E1 		cmp	r3, r5
+ 224 0200 F7FFFFBA 		blt	.L8
+ 225              	.L7:
+ 115:Dreh_motor.c  ****         }
+ 116:Dreh_motor.c  ****         
+ 117:Dreh_motor.c  ****         motor_command[0]=opOUTPUT_STOP;
+ 226              		.loc 1 117 0
+ 227 0204 5C30E0E3 		mvn	r3, #92
+ 228 0208 0430CDE5 		strb	r3, [sp, #4]
+ 118:Dreh_motor.c  ****         motor_command[1]=MOTOR_PORT_B;
+ 229              		.loc 1 118 0
+ 230 020c 0250A0E3 		mov	r5, #2
+ 231 0210 0550CDE5 		strb	r5, [sp, #5]
+ 119:Dreh_motor.c  ****         motor_command[2]=1;
+ 232              		.loc 1 119 0
+ 233 0214 0130A0E3 		mov	r3, #1
+ 234 0218 0630CDE5 		strb	r3, [sp, #6]
+ 120:Dreh_motor.c  ****         write(motor_file,motor_command,3);
+ 235              		.loc 1 120 0
+ 236 021c 1C619FE5 		ldr	r6, .L10+4
+ 237 0220 000096E5 		ldr	r0, [r6]
+ 238 0224 04108DE2 		add	r1, sp, #4
+ 239 0228 0320A0E3 		mov	r2, #3
+ 240 022c FEFFFFEB 		bl	write
+ 241              	.LVL14:
+ 121:Dreh_motor.c  ****         
+ 122:Dreh_motor.c  ****         Tel_referenz=pMotorData[1].TachoSensor;
+ 242              		.loc 1 122 0
+ 243 0230 10719FE5 		ldr	r7, .L10+12
+ 244 0234 08819FE5 		ldr	r8, .L10+8
+ 245 0238 003098E5 		ldr	r3, [r8]
+ 246 023c 143093E5 		ldr	r3, [r3, #20]
+ 247 0240 003087E5 		str	r3, [r7]
+ 123:Dreh_motor.c  ****         
+ 124:Dreh_motor.c  ****         motor_command[0]=opOUTPUT_SPEED;
+ 248              		.loc 1 124 0
+ 249 0244 5A30E0E3 		mvn	r3, #90
+ 250 0248 0430CDE5 		strb	r3, [sp, #4]
+ 125:Dreh_motor.c  ****         motor_command[1]=MOTOR_PORT_B;
+ 251              		.loc 1 125 0
+ 252 024c 0550CDE5 		strb	r5, [sp, #5]
+ 126:Dreh_motor.c  ****         motor_command[2]=-MOTOR_SPEED_B;
+ 253              		.loc 1 126 0
+ 254 0250 1D30E0E3 		mvn	r3, #29
+ 255 0254 0630CDE5 		strb	r3, [sp, #6]
+ 127:Dreh_motor.c  ****         write(motor_file,motor_command,3);
+ 256              		.loc 1 127 0
+ 257 0258 000096E5 		ldr	r0, [r6]
+ 258 025c 04108DE2 		add	r1, sp, #4
+ 259 0260 0320A0E3 		mov	r2, #3
+ 260 0264 FEFFFFEB 		bl	write
+ 261              	.LVL15:
+ 128:Dreh_motor.c  ****         
+ 129:Dreh_motor.c  ****         motor_command[0]=opOUTPUT_START;
+ 262              		.loc 1 129 0
+ 263 0268 5930E0E3 		mvn	r3, #89
+ 264 026c 0430CDE5 		strb	r3, [sp, #4]
+ 130:Dreh_motor.c  ****         motor_command[1]=MOTOR_PORT_B;
+ 265              		.loc 1 130 0
+ 266 0270 0550CDE5 		strb	r5, [sp, #5]
+ 131:Dreh_motor.c  ****         write(motor_file,motor_command,2);
+ 267              		.loc 1 131 0
+ 268 0274 000096E5 		ldr	r0, [r6]
+ 269 0278 04108DE2 		add	r1, sp, #4
+ 270 027c 0520A0E1 		mov	r2, r5
+ 271 0280 FEFFFFEB 		bl	write
+ 272              	.LVL16:
+ 132:Dreh_motor.c  ****         
+ 133:Dreh_motor.c  ****         while(pMotorData[1].TachoSensor-Tel_referenz>-40)
+ 273              		.loc 1 133 0
+ 274 0284 003098E5 		ldr	r3, [r8]
+ 275 0288 142093E5 		ldr	r2, [r3, #20]
+ 276 028c 003097E5 		ldr	r3, [r7]
+ 277 0290 023063E0 		rsb	r3, r3, r2
+ 278 0294 270073E3 		cmn	r3, #39
+ 279 0298 0A0000BA 		blt	.L5
+ 134:Dreh_motor.c  ****         {
+ 135:Dreh_motor.c  ****             /*printf("Spd/Cnt/Snr: A=%d/%d/%d\n", pMotorData[1].Speed, pMotorData[1].TachoCounts, p
+ 136:Dreh_motor.c  ****             usleep(100);
+ 280              		.loc 1 136 0
+ 281 029c 6470A0E3 		mov	r7, #100
+ 133:Dreh_motor.c  ****         {
+ 282              		.loc 1 133 0
+ 283 02a0 0860A0E1 		mov	r6, r8
+ 284 02a4 9C509FE5 		ldr	r5, .L10+12
+ 285              	.L9:
+ 286              		.loc 1 136 0
+ 287 02a8 0700A0E1 		mov	r0, r7
+ 288 02ac FEFFFFEB 		bl	usleep
+ 289              	.LVL17:
+ 133:Dreh_motor.c  ****         {
+ 290              		.loc 1 133 0
+ 291 02b0 003096E5 		ldr	r3, [r6]
+ 292 02b4 142093E5 		ldr	r2, [r3, #20]
+ 293 02b8 003095E5 		ldr	r3, [r5]
+ 294 02bc 023063E0 		rsb	r3, r3, r2
+ 295 02c0 270073E3 		cmn	r3, #39
+ 296 02c4 F7FFFFAA 		bge	.L9
+ 297              	.L5:
+ 137:Dreh_motor.c  ****         }
+ 138:Dreh_motor.c  ****         
+ 139:Dreh_motor.c  ****         
+ 140:Dreh_motor.c  ****     }
+ 141:Dreh_motor.c  ****     
+ 142:Dreh_motor.c  ****     motor_command[0]=opOUTPUT_STOP;
+ 298              		.loc 1 142 0
+ 299 02c8 5C30E0E3 		mvn	r3, #92
+ 300 02cc 0430CDE5 		strb	r3, [sp, #4]
+ 143:Dreh_motor.c  ****     motor_command[1]=MOTOR_PORT_B;
+ 301              		.loc 1 143 0
+ 302 02d0 0230A0E3 		mov	r3, #2
+ 303 02d4 0530CDE5 		strb	r3, [sp, #5]
+ 144:Dreh_motor.c  ****     motor_command[2]=1;
+ 304              		.loc 1 144 0
+ 305 02d8 0130A0E3 		mov	r3, #1
+ 306 02dc 0630CDE5 		strb	r3, [sp, #6]
+ 145:Dreh_motor.c  ****     write(motor_file,motor_command,3);  //Motor stoppen
+ 307              		.loc 1 145 0
+ 308 02e0 58309FE5 		ldr	r3, .L10+4
+ 309 02e4 000093E5 		ldr	r0, [r3]
+ 310 02e8 04108DE2 		add	r1, sp, #4
+ 311 02ec 0320A0E3 		mov	r2, #3
+ 312 02f0 FEFFFFEB 		bl	write
+ 313              	.LVL18:
+ 146:Dreh_motor.c  ****     
+ 147:Dreh_motor.c  ****     
+ 148:Dreh_motor.c  ****     Tel_ist=Tel_soll;
+ 314              		.loc 1 148 0
+ 315 02f4 4C509FE5 		ldr	r5, .L10+12
+ 316 02f8 044085E5 		str	r4, [r5, #4]
+ 149:Dreh_motor.c  ****     Tel_referenz=pMotorData[1].TachoSensor;
+ 317              		.loc 1 149 0
+ 318 02fc 40409FE5 		ldr	r4, .L10+8
+ 319              	.LVL19:
+ 320 0300 003094E5 		ldr	r3, [r4]
+ 321 0304 141093E5 		ldr	r1, [r3, #20]
+ 322 0308 001085E5 		str	r1, [r5]
+ 150:Dreh_motor.c  ****     
+ 151:Dreh_motor.c  ****     printf("Tel_referenz:%d \n\r",Tel_referenz);
+ 323              		.loc 1 151 0
+ 324 030c 38009FE5 		ldr	r0, .L10+16
+ 325 0310 FEFFFFEB 		bl	printf
+ 326              	.LVL20:
+ 152:Dreh_motor.c  ****     printf("pMotorData[1].TachoSensor: %d\n\r",pMotorData[1].TachoSensor);
+ 327              		.loc 1 152 0
+ 328 0314 003094E5 		ldr	r3, [r4]
+ 329 0318 30009FE5 		ldr	r0, .L10+20
+ 330 031c 141093E5 		ldr	r1, [r3, #20]
+ 331 0320 FEFFFFEB 		bl	printf
+ 332              	.LVL21:
+ 153:Dreh_motor.c  ****     printf("Tel_ist: %d\n\r",Tel_ist);
+ 333              		.loc 1 153 0
+ 334 0324 28009FE5 		ldr	r0, .L10+24
+ 335 0328 041095E5 		ldr	r1, [r5, #4]
+ 336 032c FEFFFFEB 		bl	printf
+ 337              	.LVL22:
+ 154:Dreh_motor.c  **** #endif
+ 155:Dreh_motor.c  ****     return 0;
+ 156:Dreh_motor.c  **** }
+ 338              		.loc 1 156 0
+ 339 0330 0000A0E3 		mov	r0, #0
+ 340 0334 08D08DE2 		add	sp, sp, #8
+ 341              		@ sp needed
+ 342 0338 F081BDE8 		ldmfd	sp!, {r4, r5, r6, r7, r8, pc}
+ 343              	.L11:
+ 344              		.align	2
+ 345              	.L10:
+ 346 033c 00000000 		.word	.LANCHOR0
+ 347 0340 00000000 		.word	motor_file
+ 348 0344 00000000 		.word	pMotorData
+ 349 0348 00000000 		.word	.LANCHOR1
+ 350 034c 00000000 		.word	.LC0
+ 351 0350 14000000 		.word	.LC1
+ 352 0354 34000000 		.word	.LC2
+ 353              		.cfi_endproc
+ 354              	.LFE12:
+ 355              		.fnend
+ 357              		.align	2
+ 358              		.global	DrehTel_init
+ 360              	DrehTel_init:
+ 361              		.fnstart
+ 362              	.LFB11:
+  32:Dreh_motor.c  **** #ifdef __linux__
+ 363              		.loc 1 32 0
+ 364              		.cfi_startproc
+ 365              		@ args = 0, pretend = 0, frame = 0
+ 366              		@ frame_needed = 0, uses_anonymous_args = 0
+ 367 0358 30402DE9 		stmfd	sp!, {r4, r5, lr}
+ 368              		.save {r4, r5, lr}
+ 369              		.cfi_def_cfa_offset 12
+ 370              		.cfi_offset 4, -12
+ 371              		.cfi_offset 5, -8
+ 372              		.cfi_offset 14, -4
+ 373              		.pad #12
+ 374 035c 0CD04DE2 		sub	sp, sp, #12
+ 375              		.cfi_def_cfa_offset 24
+  34:Dreh_motor.c  ****     {
+ 376              		.loc 1 34 0
+ 377 0360 B4009FE5 		ldr	r0, .L17
+ 378 0364 0110A0E3 		mov	r1, #1
+ 379 0368 FEFFFFEB 		bl	open
+ 380              	.LVL23:
+ 381 036c AC309FE5 		ldr	r3, .L17+4
+ 382 0370 000083E5 		str	r0, [r3]
+ 383 0374 010070E3 		cmn	r0, #1
+ 384 0378 0300001A 		bne	.L13
+  36:Dreh_motor.c  ****         return -1;
+ 385              		.loc 1 36 0
+ 386 037c A0009FE5 		ldr	r0, .L17+8
+ 387 0380 FEFFFFEB 		bl	printf
+ 388              	.LVL24:
+  37:Dreh_motor.c  ****     }
+ 389              		.loc 1 37 0
+ 390 0384 0000E0E3 		mvn	r0, #0
+ 391 0388 210000EA 		b	.L14
+ 392              	.L13:
+  39:Dreh_motor.c  ****         return -1;
+ 393              		.loc 1 39 0
+ 394 038c 94009FE5 		ldr	r0, .L17+12
+ 395 0390 94109FE5 		ldr	r1, .L17+16
+ 396 0394 FEFFFFEB 		bl	open
+ 397              	.LVL25:
+ 398 0398 90309FE5 		ldr	r3, .L17+20
+ 399 039c 000083E5 		str	r0, [r3]
+ 400 03a0 010070E3 		cmn	r0, #1
+ 401 03a4 1900000A 		beq	.L16
+  41:Dreh_motor.c  ****     if (pMotorData == MAP_FAILED)
+ 402              		.loc 1 41 0
+ 403 03a8 00008DE5 		str	r0, [sp]
+ 404 03ac 0000A0E3 		mov	r0, #0
+ 405 03b0 04008DE5 		str	r0, [sp, #4]
+ 406 03b4 3010A0E3 		mov	r1, #48
+ 407 03b8 0320A0E3 		mov	r2, #3
+ 408 03bc 0130A0E3 		mov	r3, #1
+ 409 03c0 FEFFFFEB 		bl	mmap
+ 410              	.LVL26:
+ 411 03c4 68309FE5 		ldr	r3, .L17+24
+ 412 03c8 000083E5 		str	r0, [r3]
+  42:Dreh_motor.c  ****     {
+ 413              		.loc 1 42 0
+ 414 03cc 010070E3 		cmn	r0, #1
+ 415 03d0 0300001A 		bne	.L15
+  44:Dreh_motor.c  ****         return -1;
+ 416              		.loc 1 44 0
+ 417 03d4 5C009FE5 		ldr	r0, .L17+28
+ 418 03d8 FEFFFFEB 		bl	printf
+ 419              	.LVL27:
+  45:Dreh_motor.c  ****     }
+ 420              		.loc 1 45 0
+ 421 03dc 0000E0E3 		mvn	r0, #0
+ 422 03e0 0B0000EA 		b	.L14
+ 423              	.L15:
+  47:Dreh_motor.c  ****     printf("DrehTeller_referenz Position angefahren: %d\n\r",Tel_referenz);
+ 424              		.loc 1 47 0
+ 425 03e4 141090E5 		ldr	r1, [r0, #20]
+ 426 03e8 4C509FE5 		ldr	r5, .L17+32
+ 427 03ec 001085E5 		str	r1, [r5]
+  48:Dreh_motor.c  ****     Tel_ist=0;
+ 428              		.loc 1 48 0
+ 429 03f0 48009FE5 		ldr	r0, .L17+36
+ 430 03f4 FEFFFFEB 		bl	printf
+ 431              	.LVL28:
+  49:Dreh_motor.c  ****     DrehTel_setpos(0);
+ 432              		.loc 1 49 0
+ 433 03f8 0040A0E3 		mov	r4, #0
+ 434 03fc 044085E5 		str	r4, [r5, #4]
+  50:Dreh_motor.c  **** #endif
+ 435              		.loc 1 50 0
+ 436 0400 0400A0E1 		mov	r0, r4
+ 437 0404 FEFFFFEB 		bl	DrehTel_setpos
+ 438              	.LVL29:
+  52:Dreh_motor.c  **** }
+ 439              		.loc 1 52 0
+ 440 0408 0400A0E1 		mov	r0, r4
+ 441 040c 000000EA 		b	.L14
+ 442              	.L16:
+  40:Dreh_motor.c  ****     pMotorData = (MOTORDATA*)mmap (0, sizeof(MOTORDATA)*vmOUTPUTS, PROT_READ|PROT_WRITE,MAP_FILE|MA
+ 443              		.loc 1 40 0
+ 444 0410 0000E0E3 		mvn	r0, #0
+ 445              	.L14:
+  53:Dreh_motor.c  **** 
+ 446              		.loc 1 53 0
+ 447 0414 0CD08DE2 		add	sp, sp, #12
+ 448              		@ sp needed
+ 449 0418 3080BDE8 		ldmfd	sp!, {r4, r5, pc}
+ 450              	.L18:
+ 451              		.align	2
+ 452              	.L17:
+ 453 041c 44000000 		.word	.LC3
+ 454 0420 00000000 		.word	motor_file
+ 455 0424 54000000 		.word	.LC4
+ 456 0428 6C000000 		.word	.LC5
+ 457 042c 02101000 		.word	1052674
+ 458 0430 00000000 		.word	encoder_file
+ 459 0434 00000000 		.word	pMotorData
+ 460 0438 7C000000 		.word	.LC6
+ 461 043c 00000000 		.word	.LANCHOR1
+ 462 0440 88000000 		.word	.LC7
+ 463              		.cfi_endproc
+ 464              	.LFE11:
+ 465              		.fnend
+ 467              		.align	2
+ 468              		.global	DrehTel_dreh
+ 470              	DrehTel_dreh:
+ 471              		.fnstart
+ 472              	.LFB13:
+ 157:Dreh_motor.c  **** #ifdef __linux__
+ 158:Dreh_motor.c  **** int DrehTel_dreh(){
+ 473              		.loc 1 158 0
+ 474              		.cfi_startproc
+ 475              		@ args = 0, pretend = 0, frame = 8
+ 476              		@ frame_needed = 0, uses_anonymous_args = 0
+ 477 0444 70402DE9 		stmfd	sp!, {r4, r5, r6, lr}
+ 478              		.save {r4, r5, r6, lr}
+ 479              		.cfi_def_cfa_offset 16
+ 480              		.cfi_offset 4, -16
+ 481              		.cfi_offset 5, -12
+ 482              		.cfi_offset 6, -8
+ 483              		.cfi_offset 14, -4
+ 484              		.pad #8
+ 485 0448 08D04DE2 		sub	sp, sp, #8
+ 486              		.cfi_def_cfa_offset 24
+ 159:Dreh_motor.c  ****     char motor_command[4];
+ 160:Dreh_motor.c  ****     
+ 161:Dreh_motor.c  ****     motor_command[0]=opOUTPUT_SPEED;
+ 487              		.loc 1 161 0
+ 488 044c 5A30E0E3 		mvn	r3, #90
+ 489 0450 0430CDE5 		strb	r3, [sp, #4]
+ 162:Dreh_motor.c  ****     motor_command[1]=MOTOR_PORT_B;
+ 490              		.loc 1 162 0
+ 491 0454 0240A0E3 		mov	r4, #2
+ 492 0458 0540CDE5 		strb	r4, [sp, #5]
+ 163:Dreh_motor.c  ****     motor_command[2]=MOTOR_SPEED_B;
+ 493              		.loc 1 163 0
+ 494 045c 1E30A0E3 		mov	r3, #30
+ 495 0460 0630CDE5 		strb	r3, [sp, #6]
+ 164:Dreh_motor.c  ****     write(motor_file,motor_command,3);
+ 496              		.loc 1 164 0
+ 497 0464 90509FE5 		ldr	r5, .L22
+ 498 0468 000095E5 		ldr	r0, [r5]
+ 499 046c 04108DE2 		add	r1, sp, #4
+ 500 0470 0320A0E3 		mov	r2, #3
+ 501 0474 FEFFFFEB 		bl	write
+ 502              	.LVL30:
+ 165:Dreh_motor.c  ****     
+ 166:Dreh_motor.c  ****     motor_command[0]=opOUTPUT_START;
+ 503              		.loc 1 166 0
+ 504 0478 5930E0E3 		mvn	r3, #89
+ 505 047c 0430CDE5 		strb	r3, [sp, #4]
+ 167:Dreh_motor.c  ****     motor_command[1]=MOTOR_PORT_B;
+ 506              		.loc 1 167 0
+ 507 0480 0540CDE5 		strb	r4, [sp, #5]
+ 168:Dreh_motor.c  ****     write(motor_file,motor_command,2);
+ 508              		.loc 1 168 0
+ 509 0484 000095E5 		ldr	r0, [r5]
+ 510 0488 04108DE2 		add	r1, sp, #4
+ 511 048c 0420A0E1 		mov	r2, r4
+ 512 0490 FEFFFFEB 		bl	write
+ 513              	.LVL31:
+ 169:Dreh_motor.c  ****     
+ 170:Dreh_motor.c  ****     int oldTachosensor=pMotorData[1].TachoSensor;
+ 514              		.loc 1 170 0
+ 515 0494 64309FE5 		ldr	r3, .L22+4
+ 516 0498 003093E5 		ldr	r3, [r3]
+ 517 049c 146093E5 		ldr	r6, [r3, #20]
+ 518              	.LVL32:
+ 171:Dreh_motor.c  ****     while (pMotorData[1].TachoSensor-oldTachosensor<135) {
+ 172:Dreh_motor.c  ****         usleep(100);
+ 519              		.loc 1 172 0
+ 520 04a0 6450A0E3 		mov	r5, #100
+ 171:Dreh_motor.c  ****     while (pMotorData[1].TachoSensor-oldTachosensor<135) {
+ 521              		.loc 1 171 0
+ 522 04a4 54409FE5 		ldr	r4, .L22+4
+ 523              	.L21:
+ 524              		.loc 1 172 0
+ 525 04a8 0500A0E1 		mov	r0, r5
+ 526 04ac FEFFFFEB 		bl	usleep
+ 527              	.LVL33:
+ 171:Dreh_motor.c  ****     while (pMotorData[1].TachoSensor-oldTachosensor<135) {
+ 528              		.loc 1 171 0
+ 529 04b0 003094E5 		ldr	r3, [r4]
+ 530 04b4 143093E5 		ldr	r3, [r3, #20]
+ 531 04b8 033066E0 		rsb	r3, r6, r3
+ 532 04bc 860053E3 		cmp	r3, #134
+ 533 04c0 F8FFFFDA 		ble	.L21
+ 173:Dreh_motor.c  ****     }
+ 174:Dreh_motor.c  ****     motor_command[0]=opOUTPUT_STOP;
+ 534              		.loc 1 174 0
+ 535 04c4 5C30E0E3 		mvn	r3, #92
+ 536 04c8 0430CDE5 		strb	r3, [sp, #4]
+ 175:Dreh_motor.c  ****     motor_command[1]=MOTOR_PORT_B;
+ 537              		.loc 1 175 0
+ 538 04cc 0230A0E3 		mov	r3, #2
+ 539 04d0 0530CDE5 		strb	r3, [sp, #5]
+ 176:Dreh_motor.c  ****     motor_command[2]=1;  //break
+ 540              		.loc 1 176 0
+ 541 04d4 0130A0E3 		mov	r3, #1
+ 542 04d8 0630CDE5 		strb	r3, [sp, #6]
+ 177:Dreh_motor.c  ****     write(motor_file,motor_command,3);
+ 543              		.loc 1 177 0
+ 544 04dc 18309FE5 		ldr	r3, .L22
+ 545 04e0 000093E5 		ldr	r0, [r3]
+ 546 04e4 04108DE2 		add	r1, sp, #4
+ 547 04e8 0320A0E3 		mov	r2, #3
+ 548 04ec FEFFFFEB 		bl	write
+ 549              	.LVL34:
+ 178:Dreh_motor.c  ****     
+ 179:Dreh_motor.c  ****     /*Tel_referenz=pMotorData[1].TachoSensor;
+ 180:Dreh_motor.c  ****     
+ 181:Dreh_motor.c  ****     motor_command[0]=opOUTPUT_SPEED;
+ 182:Dreh_motor.c  ****     motor_command[1]=MOTOR_PORT_B;
+ 183:Dreh_motor.c  ****     motor_command[2]=-MOTOR_SPEED_B;
+ 184:Dreh_motor.c  ****     write(motor_file,motor_command,3);
+ 185:Dreh_motor.c  ****     
+ 186:Dreh_motor.c  ****     motor_command[0]=opOUTPUT_START;
+ 187:Dreh_motor.c  ****     motor_command[1]=MOTOR_PORT_B;
+ 188:Dreh_motor.c  ****     write(motor_file,motor_command,2);
+ 189:Dreh_motor.c  ****     
+ 190:Dreh_motor.c  ****     while(pMotorData[1].TachoSensor-Tel_referenz>-30)
+ 191:Dreh_motor.c  ****     {
+ 192:Dreh_motor.c  ****         usleep(100);
+ 193:Dreh_motor.c  ****     }
+ 194:Dreh_motor.c  ****     motor_command[0]=opOUTPUT_STOP;
+ 195:Dreh_motor.c  ****     motor_command[1]=MOTOR_PORT_B;
+ 196:Dreh_motor.c  ****     motor_command[2]=1;  //break
+ 197:Dreh_motor.c  ****     write(motor_file,motor_command,3);*/
+ 198:Dreh_motor.c  ****     return 0;
+ 199:Dreh_motor.c  **** }
+ 550              		.loc 1 199 0
+ 551 04f0 0000A0E3 		mov	r0, #0
+ 552 04f4 08D08DE2 		add	sp, sp, #8
+ 553              		@ sp needed
+ 554 04f8 7080BDE8 		ldmfd	sp!, {r4, r5, r6, pc}
+ 555              	.LVL35:
+ 556              	.L23:
+ 557              		.align	2
+ 558              	.L22:
+ 559 04fc 00000000 		.word	motor_file
+ 560 0500 00000000 		.word	pMotorData
+ 561              		.cfi_endproc
+ 562              	.LFE13:
+ 563              		.fnend
+ 565              		.align	2
+ 566              		.global	DrehTel_close
+ 568              	DrehTel_close:
+ 569              		.fnstart
+ 570              	.LFB14:
+ 200:Dreh_motor.c  **** 
+ 201:Dreh_motor.c  **** 
+ 202:Dreh_motor.c  **** int DrehTel_close(){
+ 571              		.loc 1 202 0
+ 572              		.cfi_startproc
+ 573              		@ args = 0, pretend = 0, frame = 8
+ 574              		@ frame_needed = 0, uses_anonymous_args = 0
+ 575 0504 30402DE9 		stmfd	sp!, {r4, r5, lr}
+ 576              		.save {r4, r5, lr}
+ 577              		.cfi_def_cfa_offset 12
+ 578              		.cfi_offset 4, -12
+ 579              		.cfi_offset 5, -8
+ 580              		.cfi_offset 14, -4
+ 581              		.pad #12
+ 582 0508 0CD04DE2 		sub	sp, sp, #12
+ 583              		.cfi_def_cfa_offset 24
+ 203:Dreh_motor.c  ****     char motor_command[4];
+ 204:Dreh_motor.c  ****     motor_command[0] = opOUTPUT_STOP;
+ 584              		.loc 1 204 0
+ 585 050c 5C30E0E3 		mvn	r3, #92
+ 586 0510 0430CDE5 		strb	r3, [sp, #4]
+ 205:Dreh_motor.c  ****     motor_command[1] = MOTOR_PORT_B;
+ 587              		.loc 1 205 0
+ 588 0514 0230A0E3 		mov	r3, #2
+ 589 0518 0530CDE5 		strb	r3, [sp, #5]
+ 206:Dreh_motor.c  ****     motor_command[2] = 0;
+ 590              		.loc 1 206 0
+ 591 051c 0040A0E3 		mov	r4, #0
+ 592 0520 0640CDE5 		strb	r4, [sp, #6]
+ 207:Dreh_motor.c  ****     write(motor_file,motor_command,3);
+ 593              		.loc 1 207 0
+ 594 0524 2C509FE5 		ldr	r5, .L25
+ 595 0528 000095E5 		ldr	r0, [r5]
+ 596 052c 04108DE2 		add	r1, sp, #4
+ 597 0530 0320A0E3 		mov	r2, #3
+ 598 0534 FEFFFFEB 		bl	write
+ 599              	.LVL36:
+ 208:Dreh_motor.c  ****     close(encoder_file);
+ 600              		.loc 1 208 0
+ 601 0538 1C309FE5 		ldr	r3, .L25+4
+ 602 053c 000093E5 		ldr	r0, [r3]
+ 603 0540 FEFFFFEB 		bl	close
+ 604              	.LVL37:
+ 209:Dreh_motor.c  ****     close(motor_file);
+ 605              		.loc 1 209 0
+ 606 0544 000095E5 		ldr	r0, [r5]
+ 607 0548 FEFFFFEB 		bl	close
+ 608              	.LVL38:
+ 210:Dreh_motor.c  **** 
+ 211:Dreh_motor.c  ****     return 0;
+ 212:Dreh_motor.c  **** }
+ 609              		.loc 1 212 0
+ 610 054c 0400A0E1 		mov	r0, r4
+ 611 0550 0CD08DE2 		add	sp, sp, #12
+ 612              		@ sp needed
+ 613 0554 3080BDE8 		ldmfd	sp!, {r4, r5, pc}
+ 614              	.L26:
+ 615              		.align	2
+ 616              	.L25:
+ 617 0558 00000000 		.word	motor_file
+ 618 055c 00000000 		.word	encoder_file
+ 619              		.cfi_endproc
+ 620              	.LFE14:
+ 621              		.fnend
+ 623              		.global	dreh_Korr_Winkel
+ 624              		.global	dreh_winkel
+ 625              		.global	Tel_referenz
+ 626              		.global	Tel_ist
+ 627              		.comm	encoder_file,4,4
+ 628              		.comm	motor_file,4,4
+ 629              		.comm	pMotorData,4,4
+ 630              		.global	MOTOR_PORT_B
+ 631              		.global	MOTOR_SPEED_B
+ 632              		.section	.rodata
+ 633              		.align	2
+ 634              	.LANCHOR0 = . + 0
+ 637              	dreh_winkel:
+ 638 0000 00000000 		.word	0
+ 639 0004 0E010000 		.word	270
+ 640 0008 F2FEFFFF 		.word	-270
+ 641 000c 1C020000 		.word	540
+ 642 0010 E4FDFFFF 		.word	-540
+ 645              	dreh_Korr_Winkel:
+ 646 0014 0A000000 		.word	10
+ 649              	MOTOR_PORT_B:
+ 650 0018 02       		.byte	2
+ 651 0019 000000   		.space	3
+ 654              	MOTOR_SPEED_B:
+ 655 001c 1E000000 		.word	30
+ 656              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 657              		.align	2
+ 658              	.LC0:
+ 659 0000 54656C5F 		.ascii	"Tel_referenz:%d \012\015\000"
+ 659      72656665 
+ 659      72656E7A 
+ 659      3A256420 
+ 659      0A0D00
+ 660 0013 00       		.space	1
+ 661              	.LC1:
+ 662 0014 704D6F74 		.ascii	"pMotorData[1].TachoSensor: %d\012\015\000"
+ 662      6F724461 
+ 662      74615B31 
+ 662      5D2E5461 
+ 662      63686F53 
+ 663              	.LC2:
+ 664 0034 54656C5F 		.ascii	"Tel_ist: %d\012\015\000"
+ 664      6973743A 
+ 664      2025640A 
+ 664      0D00
+ 665 0042 0000     		.space	2
+ 666              	.LC3:
+ 667 0044 2F646576 		.ascii	"/dev/lms_pwm\000"
+ 667      2F6C6D73 
+ 667      5F70776D 
+ 667      00
+ 668 0051 000000   		.space	3
+ 669              	.LC4:
+ 670 0054 4661696C 		.ascii	"Failed to open device\012\000"
+ 670      65642074 
+ 670      6F206F70 
+ 670      656E2064 
+ 670      65766963 
+ 671 006b 00       		.space	1
+ 672              	.LC5:
+ 673 006c 2F646576 		.ascii	"/dev/lms_motor\000"
+ 673      2F6C6D73 
+ 673      5F6D6F74 
+ 673      6F7200
+ 674 007b 00       		.space	1
+ 675              	.LC6:
+ 676 007c 4D617020 		.ascii	"Map failed\012\000"
+ 676      6661696C 
+ 676      65640A00 
+ 677              	.LC7:
+ 678 0088 44726568 		.ascii	"DrehTeller_referenz Position angefahren: %d\012\015"
+ 678      54656C6C 
+ 678      65725F72 
+ 678      65666572 
+ 678      656E7A20 
+ 679 00b5 00       		.ascii	"\000"
+ 680 00b6 0000     		.bss
+ 681              		.align	2
+ 682              	.LANCHOR1 = . + 0
+ 685              	Tel_referenz:
+ 686 0000 00000000 		.space	4
+ 689              	Tel_ist:
+ 690 0004 00000000 		.space	4
+ 691              		.text
+ 692              	.Letext0:
+ 693              		.file 2 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
+ 694              		.file 3 "/usr/local/carlson-minot/crosscompilers/lib/gcc/arm-none-linux-gnueabi/4.8.3/include/stdd
+ 695              		.file 4 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
+ 696              		.file 5 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
+ 697              		.file 6 "lmstypes.h"
+ 698              		.file 7 "bytecodes.h"
+ 699              		.file 8 "lms2012.h"
+ 700              		.file 9 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
+ 701              		.file 10 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/u
+ 702              		.file 11 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/u
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 Dreh_motor.c
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDdXBi3.s:16     .text:0000000000000000 $a
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDdXBi3.s:19     .text:0000000000000000 DrehTel_setpos
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDdXBi3.s:346    .text:000000000000033c $d
+                            *COM*:0000000000000004 motor_file
+                            *COM*:0000000000000004 pMotorData
+                       .ARM.exidx:0000000000000000 $d
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDdXBi3.s:357    .text:0000000000000358 $a
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDdXBi3.s:360    .text:0000000000000358 DrehTel_init
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDdXBi3.s:453    .text:000000000000041c $d
+                            *COM*:0000000000000004 encoder_file
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDdXBi3.s:467    .text:0000000000000444 $a
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDdXBi3.s:470    .text:0000000000000444 DrehTel_dreh
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDdXBi3.s:559    .text:00000000000004fc $d
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDdXBi3.s:565    .text:0000000000000504 $a
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDdXBi3.s:568    .text:0000000000000504 DrehTel_close
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDdXBi3.s:617    .text:0000000000000558 $d
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDdXBi3.s:645    .rodata:0000000000000014 dreh_Korr_Winkel
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDdXBi3.s:637    .rodata:0000000000000000 dreh_winkel
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDdXBi3.s:685    .bss:0000000000000000 Tel_referenz
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDdXBi3.s:689    .bss:0000000000000004 Tel_ist
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDdXBi3.s:649    .rodata:0000000000000018 MOTOR_PORT_B
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDdXBi3.s:654    .rodata:000000000000001c MOTOR_SPEED_B
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDdXBi3.s:633    .rodata:0000000000000000 $d
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDdXBi3.s:657    .rodata.str1.4:0000000000000000 $d
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccDdXBi3.s:681    .bss:0000000000000000 $d
+                     .debug_frame:0000000000000010 $d
+
+UNDEFINED SYMBOLS
+write
+usleep
+printf
+__aeabi_unwind_cpp_pr0
+open
+mmap
+close

@@ -1,0 +1,1025 @@
+   1              		.arch armv5te
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 2
+   9              		.eabi_attribute 30, 1
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.file	"main.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.align	2
+  17              		.global	main
+  19              	main:
+  20              		.fnstart
+  21              	.LFB11:
+  22              		.file 1 "main.c"
+   1:main.c        **** //
+   2:main.c        **** //  main.c
+   3:main.c        **** //  Cube3*3
+   4:main.c        **** //
+   5:main.c        **** //  Created by 杨春霞 on 12.11.15.
+   6:main.c        **** //  Copyright © 2015 Chunxia Yang. All rights reserved.
+   7:main.c        **** //
+   8:main.c        **** 
+   9:main.c        **** // Thema: Entwurf und Implementierung eines Algorithmus zum Loesen des Rubrik-Cube Problems
+  10:main.c        **** #include <unistd.h>
+  11:main.c        **** 
+  12:main.c        **** #include "Top_Cross.h"
+  13:main.c        **** #include "F2L.h"
+  14:main.c        **** #include "print_mode.h"
+  15:main.c        **** #include "Color_search.h"
+  16:main.c        **** #include "stdio.h"
+  17:main.c        **** #include "main.h"
+  18:main.c        **** #ifdef  __linux__
+  19:main.c        **** #include "Arm_motor.h"
+  20:main.c        **** #include "Dreh_motor.h"
+  21:main.c        **** #include "Farbe_motor.h"
+  22:main.c        **** #include "Farbe_scan.h"
+  23:main.c        **** #include "Side_dreh.h"
+  24:main.c        **** #include "Farbe_sen.h"
+  25:main.c        **** #endif
+  26:main.c        **** 
+  27:main.c        **** const  char print_mode[][12][9]=
+  28:main.c        **** {
+  29:main.c        ****     {{36,37,38,27,28,29,45,46,47},
+  30:main.c        ****         {39,40,41,30,31,32,48,49,50},
+  31:main.c        ****         {42,43,44,33,34,35,51,52,53},
+  32:main.c        ****         {-1,-1,-1, 0, 1, 2,-1,-1,-1},
+  33:main.c        ****         {-1,-1,-1, 3, 4, 5,-1,-1,-1},
+  34:main.c        ****         {-1,-1,-1, 6, 7, 8,-1,-1,-1},
+  35:main.c        ****         {-1,-1,-1, 9,10,11,-1,-1,-1},
+  36:main.c        ****         {-1,-1,-1,12,13,14,-1,-1,-1},
+  37:main.c        ****         {-1,-1,-1,15,16,17,-1,-1,-1},
+  38:main.c        ****         {-1,-1,-1,18,19,20,-1,-1,-1},
+  39:main.c        ****         {-1,-1,-1,21,22,23,-1,-1,-1},
+  40:main.c        ****         {-1,-1,-1,24,25,26,-1,-1,-1} },
+  41:main.c        ****     
+  42:main.c        ****     {{-1,-1,-1,27,28,29,-1,-1,-1},
+  43:main.c        ****         {-1,-1,-1,30,31,32,-1,-1,-1},
+  44:main.c        ****         {-1,-1,-1,33,34,35,-1,-1,-1},
+  45:main.c        ****         {38,41,44, 0, 1, 2,51,48,45},
+  46:main.c        ****         {37,40,43, 3, 4, 5,52,49,46},
+  47:main.c        ****         {36,39,42, 6, 7, 8,53,50,47},
+  48:main.c        ****         {-1,-1,-1, 9,10,11,-1,-1,-1},
+  49:main.c        ****         {-1,-1,-1,12,13,14,-1,-1,-1},
+  50:main.c        ****         {-1,-1,-1,15,16,17,-1,-1,-1},
+  51:main.c        ****         {-1,-1,-1,18,19,20,-1,-1,-1},
+  52:main.c        ****         {-1,-1,-1,21,22,23,-1,-1,-1},
+  53:main.c        ****         {-1,-1,-1,24,25,26,-1,-1,-1} },
+  54:main.c        ****     
+  55:main.c        ****     {{-1,-1,-1,27,28,29,-1,-1,-1},
+  56:main.c        ****         {-1,-1,-1,30,31,32,-1,-1,-1},
+  57:main.c        ****         {-1,-1,-1,33,34,35,-1,-1,-1},
+  58:main.c        ****         {-1,-1,-1, 0, 1, 2,-1,-1,-1},
+  59:main.c        ****         {-1,-1,-1, 3, 4, 5,-1,-1,-1},
+  60:main.c        ****         {-1,-1,-1, 6, 7, 8,-1,-1,-1},
+  61:main.c        ****         {44,43,42, 9,10,11,53,52,51},
+  62:main.c        ****         {41,40,39,12,13,14,50,49,48},
+  63:main.c        ****         {38,37,36,15,16,17,47,46,45},
+  64:main.c        ****         {-1,-1,-1,18,19,20,-1,-1,-1},
+  65:main.c        ****         {-1,-1,-1,21,22,23,-1,-1,-1},
+  66:main.c        ****         {-1,-1,-1,24,25,26,-1,-1,-1} },
+  67:main.c        ****     
+  68:main.c        ****     {{-1,-1,-1,27,28,29,-1,-1,-1},
+  69:main.c        ****         {-1,-1,-1,30,31,32,-1,-1,-1},
+  70:main.c        ****         {-1,-1,-1,33,34,35,-1,-1,-1},
+  71:main.c        ****         {-1,-1,-1, 0, 1, 2,-1,-1,-1},
+  72:main.c        ****         {-1,-1,-1, 3, 4, 5,-1,-1,-1},
+  73:main.c        ****         {-1,-1,-1, 6, 7, 8,-1,-1,-1},
+  74:main.c        ****         {-1,-1,-1, 9,10,11,-1,-1,-1},
+  75:main.c        ****         {-1,-1,-1,12,13,14,-1,-1,-1},
+  76:main.c        ****         {-1,-1,-1,15,16,17,-1,-1,-1},
+  77:main.c        ****         {42,39,36,18,19,20,47,50,53},
+  78:main.c        ****         {43,40,37,21,22,23,46,49,52},
+  79:main.c        ****         {44,41,38,24,25,26,45,48,51} },            //print_mode
+  80:main.c        ****     
+  81:main.c        **** };
+  82:main.c        **** #ifdef __linux__
+  83:main.c        **** unsigned char color_data[6][9];
+  84:main.c        **** #endif
+  85:main.c        **** 
+  86:main.c        **** #ifndef __linux__
+  87:main.c        **** unsigned char color_data[6][9]={
+  88:main.c        ****     
+  89:main.c        ****     
+  90:main.c        ****     /*{0,0,0,0,0,0,0,0,0},
+  91:main.c        ****      {1,1,1,1,1,1,1,1,1},
+  92:main.c        ****      {2,2,2,2,2,2,2,2,2},
+  93:main.c        ****      {3,3,3,3,3,3,3,3,3},
+  94:main.c        ****      {4,4,4,4,4,4,4,4,4},
+  95:main.c        ****      {5,5,5,5,5,5,5,5,5}*/
+  96:main.c        ****     
+  97:main.c        ****     {0,0,0,4,0,3,1,4,4},
+  98:main.c        ****     {5,2,3,5,3,4,1,1,3},
+  99:main.c        ****     {2,2,0,1,2,5,1,5,5},
+ 100:main.c        ****     {0,0,2,0,1,2,3,1,1},
+ 101:main.c        ****     {4,4,5,1,5,3,2,0,4},
+ 102:main.c        ****     {3,2,5,3,4,3,4,5,2}  //105-140-101-150
+ 103:main.c        ****     
+ 104:main.c        ****      /*{2,1,4,2,0,5,5,3,0},
+ 105:main.c        ****      {0,0,3,5,4,4,2,5,0},
+ 106:main.c        ****      {4,3,1,4,2,3,5,1,2},
+ 107:main.c        ****      {2,4,4,5,5,2,3,0,0},
+ 108:main.c        ****      {1,3,1,0,3,1,3,4,5},
+ 109:main.c        ****      {3,2,5,1,1,0,1,2,4}*/  // 130-332-235-324
+ 110:main.c        ****     
+ 111:main.c        ****     /*{0,0,3,1,0,0,1,2,5},
+ 112:main.c        ****      {5,4,0,0,4,5,0,5,5},
+ 113:main.c        ****      {3,0,0,4,2,5,3,1,2},
+ 114:main.c        ****      {4,2,1,4,5,3,4,1,2},
+ 115:main.c        ****      {5,3,2,3,3,1,2,5,1},
+ 116:main.c        ****      {4,3,1,2,1,2,5,4,3}*/   //103-105-235-234    //die eckenstein ist falsch     (0,4,3)fehlen
+ 117:main.c        ****     
+ 118:main.c        ****     /*{5,2,4,0,0,0,0,2,4},
+ 119:main.c        ****      {1,4,0,0,4,5,0,5,5},
+ 120:main.c        ****      {3,0,0,4,2,5,3,1,2},
+ 121:main.c        ****      {4,2,3,4,5,5,1,3,1},
+ 122:main.c        ****      {5,3,2,3,3,1,4,1,2},
+ 123:main.c        ****      {5,3,1,1,1,2,2,4,3}*/  //104-323-215-321
+ 124:main.c        ****     
+ 125:main.c        ****     /*{4,0,2,1,0,1,0,2,5},
+ 126:main.c        ****      {4,3,0,4,4,3,3,2,3},
+ 127:main.c        ****      {4,4,0,4,2,5,5,3,2},
+ 128:main.c        ****      {3,0,1,1,5,5,1,5,1},
+ 129:main.c        ****      {2,0,2,1,3,5,3,0,0},
+ 130:main.c        ****      {4,2,5,3,1,4,5,2,1}*/ //140-214-150-105
+ 131:main.c        ****     
+ 132:main.c        ****     /*{3,2,5,3,0,1,4,4,4},
+ 133:main.c        ****      {2,0,1,2,4,5,3,3,2},
+ 134:main.c        ****      {5,4,3,2,2,0,5,5,1},
+ 135:main.c        ****      {1,1,4,4,5,0,4,1,2},
+ 136:main.c        ****      {0,3,0,4,3,1,3,5,0},
+ 137:main.c        ****      {2,3,5,5,1,2,1,0,0}*/ //150-251-214-325
+ 138:main.c        ****     
+ 139:main.c        ****     /*{3,2,4,3,0,0,1,0,0},
+ 140:main.c        ****      {5,1,4,0,4,3,2,2,3},
+ 141:main.c        ****      {3,4,0,2,2,5,5,5,2},
+ 142:main.c        ****      {1,1,3,4,5,0,4,1,1},
+ 143:main.c        ****      {4,3,0,4,3,1,2,5,0},
+ 144:main.c        ****      {5,2,5,3,1,4,2,5,1}*/  //101-251-214-325
+ 145:main.c        ****     
+ 146:main.c        ****     /*{3,3,1,1,0,1,4,1,5},
+ 147:main.c        ****      {0,0,2,3,4,5,2,4,5},
+ 148:main.c        ****      {4,0,3,0,2,2,0,4,3},
+ 149:main.c        ****      {5,2,2,0,5,1,4,4,5},
+ 150:main.c        ****      {1,5,1,5,3,3,1,5,0},
+ 151:main.c        ****      {4,3,0,4,1,2,2,2,3}*/ //110-215-215-253
+ 152:main.c        ****     
+ 153:main.c        ****     /*{3,2,5,5,0,3,4,1,1},
+ 154:main.c        ****      {1,4,0,1,4,4,3,3,0},
+ 155:main.c        ****      {2,2,5,5,2,1,1,3,3},
+ 156:main.c        ****      {5,4,2,1,5,2,4,5,1},
+ 157:main.c        ****      {5,0,2,0,3,2,2,3,0},
+ 158:main.c        ****      {4,5,3,4,1,0,0,0,4}*/ //241-325-110-235
+ 159:main.c        ****     
+ 160:main.c        ****     /*{2,4,2,4,0,5,2,4,5},
+ 161:main.c        ****      {3,3,0,0,4,2,0,2,2},
+ 162:main.c        ****      {3,1,1,5,2,3,4,3,1},
+ 163:main.c        ****      {3,5,0,5,5,0,3,1,1},
+ 164:main.c        ****      {5,0,0,1,3,2,4,0,5},
+ 165:main.c        ****      {4,2,4,3,1,4,5,1,1}*/  //214-110-324-234
+ 166:main.c        ****     
+ 167:main.c        ****     
+ 168:main.c        ****     /*{2,0,5,0,0,0,0,0,0},
+ 169:main.c        ****      {1,1,5,4,1,2,2,2,0},
+ 170:main.c        ****      {4,5,1,2,2,3,2,5,4},
+ 171:main.c        ****      {5,1,0,3,3,3,4,3,2},
+ 172:main.c        ****      {1,1,3,1,4,5,4,4,3},
+ 173:main.c        ****      {3,4,5,2,5,4,1,5,3}*/  //1510&104 -------1510&105----------3215&251
+ 174:main.c        ****     
+ 175:main.c        ****     /*{2,0,5,0,0,0,2,0,0},
+ 176:main.c        ****      {4,1,5,4,1,2,3,2,0},
+ 177:main.c        ****      {0,5,1,1,2,5,4,2,2},
+ 178:main.c        ****      {0,1,3,3,3,3,4,3,2},
+ 179:main.c        ****      {4,4,1,3,4,5,1,4,3},
+ 180:main.c        ****      {5,1,5,2,5,4,1,5,3}*/
+ 181:main.c        ****     
+ 182:main.c        ****     /*{2,0,0,0,0,0,2,0,0},
+ 183:main.c        ****      {4,1,3,4,1,5,0,2,2},
+ 184:main.c        ****      {5,5,5,3,2,4,4,1,3},
+ 185:main.c        ****      {2,5,0,1,3,1,3,3,1},
+ 186:main.c        ****      {1,2,3,3,4,2,1,4,5},
+ 187:main.c        ****      {5,2,1,4,5,3,4,5,4}*/
+ 188:main.c        ****     
+ 189:main.c        ****     /*{2,0,0,0,0,0,3,0,0},
+ 190:main.c        ****      {5,1,3,3,1,5,2,2,1},
+ 191:main.c        ****      {5,3,5,5,2,1,1,5,1},
+ 192:main.c        ****      {2,2,2,4,3,1,4,3,1},
+ 193:main.c        ****      {3,1,4,4,4,2,0,4,3},
+ 194:main.c        ****      {5,2,0,4,5,3,4,5,4}*/
+ 195:main.c        ****     
+ 196:main.c        ****     /*{1,0,0,0,0,0,3,0,0},
+ 197:main.c        ****      {5,1,1,3,1,4,2,1,5},
+ 198:main.c        ****      {3,5,2,1,2,3,3,5,2},
+ 199:main.c        ****      {0,2,5,2,3,1,4,3,1},
+ 200:main.c        ****      {4,2,4,4,4,3,0,4,2},
+ 201:main.c        ****      {1,5,3,4,5,2,4,5,5}*/
+ 202:main.c        ****     
+ 203:main.c        ****     /*{1,0,0,0,0,0,3,0,2},
+ 204:main.c        ****      {5,1,5,3,1,5,2,4,1},
+ 205:main.c        ****      {3,2,5,2,2,3,4,1,2},
+ 206:main.c        ****      {3,2,3,2,3,1,4,3,1},
+ 207:main.c        ****      {4,5,0,4,4,3,0,4,2},
+ 208:main.c        ****      {5,5,0,4,5,1,4,5,1}*/
+ 209:main.c        ****     
+ 210:main.c        ****     /*{1,0,0,0,0,0,1,0,2},
+ 211:main.c        ****      {5,1,4,3,1,1,5,5,0},
+ 212:main.c        ****      {0,2,1,4,2,1,2,3,4},
+ 213:main.c        ****      {5,4,0,2,3,1,4,3,1},
+ 214:main.c        ****      {3,2,3,5,4,3,2,4,2},
+ 215:main.c        ****      {3,2,5,4,5,5,4,5,3}*/
+ 216:main.c        ****     
+ 217:main.c        ****     /*{5,0,0,0,0,0,4,0,0},
+ 218:main.c        ****      {0,1,5,2,1,2,2,5,1},
+ 219:main.c        ****      {4,2,5,1,2,5,4,2,5},
+ 220:main.c        ****      {2,1,1,3,3,4,1,3,4},
+ 221:main.c        ****      {1,4,3,4,4,5,1,4,2},
+ 222:main.c        ****      {3,1,0,3,5,3,3,5,3}*/
+ 223:main.c        ****     
+ 224:main.c        ****     /*{3,0,0,0,0,0,4,0,2},
+ 225:main.c        ****      {0,1,1,2,1,5,4,3,5},
+ 226:main.c        ****      {2,2,0,2,2,5,2,2,2},
+ 227:main.c        ****      {5,1,5,4,3,4,0,3,4},
+ 228:main.c        ****      {3,5,3,4,4,1,1,4,5},
+ 229:main.c        ****      {1,3,1,3,5,1,3,5,4}*/
+ 230:main.c        ****     
+ 231:main.c        ****     /*{3,0,0,0,0,0,4,0,5},
+ 232:main.c        ****      {0,1,0,2,1,1,5,1,3},
+ 233:main.c        ****      {2,2,5,2,2,5,1,3,4},
+ 234:main.c        ****      {2,2,3,4,3,4,0,3,4},
+ 235:main.c        ****      {1,5,4,4,4,1,1,4,5},
+ 236:main.c        ****      {2,3,2,3,5,5,3,5,1}*/
+ 237:main.c        ****     
+ 238:main.c        ****     /*{3,0,0,0,0,0,0,0,5},
+ 239:main.c        ****      {1,1,0,5,1,5,5,3,4},
+ 240:main.c        ****      {3,2,3,1,2,2,2,5,1},
+ 241:main.c        ****      {4,3,2,4,3,4,0,3,4},
+ 242:main.c        ****      {2,2,1,2,4,1,4,4,5},
+ 243:main.c        ****      {5,4,2,3,5,1,3,5,1}*/
+ 244:main.c        ****     
+ 245:main.c        ****     /*{3,0,0,0,0,0,0,0,1},
+ 246:main.c        ****      {1,1,5,5,1,1,4,2,2},
+ 247:main.c        ****      {2,1,1,2,2,3,1,2,2},
+ 248:main.c        ****      {5,3,3,4,3,4,0,3,4},
+ 249:main.c        ****      {3,4,2,2,4,1,4,4,5},
+ 250:main.c        ****      {5,5,4,3,5,5,3,5,0}*/
+ 251:main.c        ****     
+ 252:main.c        ****     /*{4,0,2,0,0,0,0,0,1},
+ 253:main.c        ****      {1,1,5,5,1,5,5,3,5},
+ 254:main.c        ****      {0,2,1,2,2,5,4,2,2},
+ 255:main.c        ****      {2,1,1,1,3,4,0,3,5},
+ 256:main.c        ****      {3,4,3,2,4,4,4,4,3},
+ 257:main.c        ****      {4,3,2,3,5,1,3,5,0}*/
+ 258:main.c        **** };
+ 259:main.c        **** #endif
+ 260:main.c        **** 
+ 261:main.c        **** int main(int argc, const char * argv[]) {
+  23              		.loc 1 261 0
+  24              		.cfi_startproc
+  25              		@ args = 0, pretend = 0, frame = 0
+  26              		@ frame_needed = 0, uses_anonymous_args = 0
+  27              	.LVL0:
+  28 0000 08402DE9 		stmfd	sp!, {r3, lr}
+  29              		.save {r3, lr}
+  30              		.cfi_def_cfa_offset 8
+  31              		.cfi_offset 3, -8
+  32              		.cfi_offset 14, -4
+ 262:main.c        **** #ifndef __linux__
+ 263:main.c        ****     set_conio_terminal_mode();
+ 264:main.c        **** #endif
+ 265:main.c        ****     
+ 266:main.c        **** #ifdef __linux__
+ 267:main.c        ****     arm_init();
+  33              		.loc 1 267 0
+  34 0004 FEFFFFEB 		bl	arm_init
+  35              	.LVL1:
+ 268:main.c        ****     DrehTel_init();
+  36              		.loc 1 268 0
+  37 0008 FEFFFFEB 		bl	DrehTel_init
+  38              	.LVL2:
+ 269:main.c        ****     Farbe_init();
+  39              		.loc 1 269 0
+  40 000c FEFFFFEB 		bl	Farbe_init
+  41              	.LVL3:
+ 270:main.c        ****     ColSen_init();
+  42              		.loc 1 270 0
+  43 0010 FEFFFFEB 		bl	ColSen_init
+  44              	.LVL4:
+ 271:main.c        ****     Farbe_setpos(2);
+  45              		.loc 1 271 0
+  46 0014 0200A0E3 		mov	r0, #2
+  47 0018 FEFFFFEB 		bl	Farbe_setpos
+  48              	.LVL5:
+ 272:main.c        ****     sleep(1);
+  49              		.loc 1 272 0
+  50 001c 0100A0E3 		mov	r0, #1
+  51 0020 FEFFFFEB 		bl	sleep
+  52              	.LVL6:
+ 273:main.c        ****     ColSen_getData();
+  53              		.loc 1 273 0
+  54 0024 FEFFFFEB 		bl	ColSen_getData
+  55              	.LVL7:
+ 274:main.c        ****     sleep(1);
+  56              		.loc 1 274 0
+  57 0028 0100A0E3 		mov	r0, #1
+  58 002c FEFFFFEB 		bl	sleep
+  59              	.LVL8:
+ 275:main.c        ****     ColSen_getData();
+  60              		.loc 1 275 0
+  61 0030 FEFFFFEB 		bl	ColSen_getData
+  62              	.LVL9:
+ 276:main.c        ****     sleep(1);
+  63              		.loc 1 276 0
+  64 0034 0100A0E3 		mov	r0, #1
+  65 0038 FEFFFFEB 		bl	sleep
+  66              	.LVL10:
+ 277:main.c        ****     ColSen_getData();
+  67              		.loc 1 277 0
+  68 003c FEFFFFEB 		bl	ColSen_getData
+  69              	.LVL11:
+ 278:main.c        ****     sleep(1);
+  70              		.loc 1 278 0
+  71 0040 0100A0E3 		mov	r0, #1
+  72 0044 FEFFFFEB 		bl	sleep
+  73              	.LVL12:
+ 279:main.c        ****     ColSen_getData();
+  74              		.loc 1 279 0
+  75 0048 FEFFFFEB 		bl	ColSen_getData
+  76              	.LVL13:
+ 280:main.c        ****     sleep(1);
+  77              		.loc 1 280 0
+  78 004c 0100A0E3 		mov	r0, #1
+  79 0050 FEFFFFEB 		bl	sleep
+  80              	.LVL14:
+ 281:main.c        ****     ColSen_getData();
+  81              		.loc 1 281 0
+  82 0054 FEFFFFEB 		bl	ColSen_getData
+  83              	.LVL15:
+ 282:main.c        ****     sleep(1);
+  84              		.loc 1 282 0
+  85 0058 0100A0E3 		mov	r0, #1
+  86 005c FEFFFFEB 		bl	sleep
+  87              	.LVL16:
+ 283:main.c        ****     ColSen_getData();
+  88              		.loc 1 283 0
+  89 0060 FEFFFFEB 		bl	ColSen_getData
+  90              	.LVL17:
+ 284:main.c        ****     sleep(1);
+  91              		.loc 1 284 0
+  92 0064 0100A0E3 		mov	r0, #1
+  93 0068 FEFFFFEB 		bl	sleep
+  94              	.LVL18:
+ 285:main.c        ****     ColSen_getData();
+  95              		.loc 1 285 0
+  96 006c FEFFFFEB 		bl	ColSen_getData
+  97              	.LVL19:
+ 286:main.c        ****     sleep(1);
+  98              		.loc 1 286 0
+  99 0070 0100A0E3 		mov	r0, #1
+ 100 0074 FEFFFFEB 		bl	sleep
+ 101              	.LVL20:
+ 287:main.c        ****     ColSen_getData();
+ 102              		.loc 1 287 0
+ 103 0078 FEFFFFEB 		bl	ColSen_getData
+ 104              	.LVL21:
+ 288:main.c        ****     sleep(1);
+ 105              		.loc 1 288 0
+ 106 007c 0100A0E3 		mov	r0, #1
+ 107 0080 FEFFFFEB 		bl	sleep
+ 108              	.LVL22:
+ 289:main.c        ****     ColSen_getData();
+ 109              		.loc 1 289 0
+ 110 0084 FEFFFFEB 		bl	ColSen_getData
+ 111              	.LVL23:
+ 290:main.c        ****     sleep(1);
+ 112              		.loc 1 290 0
+ 113 0088 0100A0E3 		mov	r0, #1
+ 114 008c FEFFFFEB 		bl	sleep
+ 115              	.LVL24:
+ 291:main.c        ****     Farbe_setpos(1);
+ 116              		.loc 1 291 0
+ 117 0090 0100A0E3 		mov	r0, #1
+ 118 0094 FEFFFFEB 		bl	Farbe_setpos
+ 119              	.LVL25:
+ 292:main.c        ****     ColSen_getData();
+ 120              		.loc 1 292 0
+ 121 0098 FEFFFFEB 		bl	ColSen_getData
+ 122              	.LVL26:
+ 293:main.c        ****     sleep(1);
+ 123              		.loc 1 293 0
+ 124 009c 0100A0E3 		mov	r0, #1
+ 125 00a0 FEFFFFEB 		bl	sleep
+ 126              	.LVL27:
+ 294:main.c        ****     ColSen_getData();
+ 127              		.loc 1 294 0
+ 128 00a4 FEFFFFEB 		bl	ColSen_getData
+ 129              	.LVL28:
+ 295:main.c        ****     sleep(1);
+ 130              		.loc 1 295 0
+ 131 00a8 0100A0E3 		mov	r0, #1
+ 132 00ac FEFFFFEB 		bl	sleep
+ 133              	.LVL29:
+ 296:main.c        ****     ColSen_getData();
+ 134              		.loc 1 296 0
+ 135 00b0 FEFFFFEB 		bl	ColSen_getData
+ 136              	.LVL30:
+ 297:main.c        ****     sleep(1);
+ 137              		.loc 1 297 0
+ 138 00b4 0100A0E3 		mov	r0, #1
+ 139 00b8 FEFFFFEB 		bl	sleep
+ 140              	.LVL31:
+ 298:main.c        ****     ColSen_getData();
+ 141              		.loc 1 298 0
+ 142 00bc FEFFFFEB 		bl	ColSen_getData
+ 143              	.LVL32:
+ 299:main.c        ****     sleep(1);
+ 144              		.loc 1 299 0
+ 145 00c0 0100A0E3 		mov	r0, #1
+ 146 00c4 FEFFFFEB 		bl	sleep
+ 147              	.LVL33:
+ 300:main.c        ****     ColSen_getData();
+ 148              		.loc 1 300 0
+ 149 00c8 FEFFFFEB 		bl	ColSen_getData
+ 150              	.LVL34:
+ 301:main.c        ****     sleep(1);
+ 151              		.loc 1 301 0
+ 152 00cc 0100A0E3 		mov	r0, #1
+ 153 00d0 FEFFFFEB 		bl	sleep
+ 154              	.LVL35:
+ 302:main.c        ****     ColSen_getData();
+ 155              		.loc 1 302 0
+ 156 00d4 FEFFFFEB 		bl	ColSen_getData
+ 157              	.LVL36:
+ 303:main.c        ****     sleep(1);
+ 158              		.loc 1 303 0
+ 159 00d8 0100A0E3 		mov	r0, #1
+ 160 00dc FEFFFFEB 		bl	sleep
+ 161              	.LVL37:
+ 304:main.c        ****     ColSen_getData();
+ 162              		.loc 1 304 0
+ 163 00e0 FEFFFFEB 		bl	ColSen_getData
+ 164              	.LVL38:
+ 305:main.c        ****     sleep(1);
+ 165              		.loc 1 305 0
+ 166 00e4 0100A0E3 		mov	r0, #1
+ 167 00e8 FEFFFFEB 		bl	sleep
+ 168              	.LVL39:
+ 306:main.c        ****     ColSen_getData();
+ 169              		.loc 1 306 0
+ 170 00ec FEFFFFEB 		bl	ColSen_getData
+ 171              	.LVL40:
+ 307:main.c        ****     sleep(1);
+ 172              		.loc 1 307 0
+ 173 00f0 0100A0E3 		mov	r0, #1
+ 174 00f4 FEFFFFEB 		bl	sleep
+ 175              	.LVL41:
+ 308:main.c        ****     ColSen_getData();
+ 176              		.loc 1 308 0
+ 177 00f8 FEFFFFEB 		bl	ColSen_getData
+ 178              	.LVL42:
+ 309:main.c        ****     sleep(1);
+ 179              		.loc 1 309 0
+ 180 00fc 0100A0E3 		mov	r0, #1
+ 181 0100 FEFFFFEB 		bl	sleep
+ 182              	.LVL43:
+ 310:main.c        ****     ColSen_getData();
+ 183              		.loc 1 310 0
+ 184 0104 FEFFFFEB 		bl	ColSen_getData
+ 185              	.LVL44:
+ 311:main.c        ****     sleep(1);
+ 186              		.loc 1 311 0
+ 187 0108 0100A0E3 		mov	r0, #1
+ 188 010c FEFFFFEB 		bl	sleep
+ 189              	.LVL45:
+ 312:main.c        ****     ColSen_getData();
+ 190              		.loc 1 312 0
+ 191 0110 FEFFFFEB 		bl	ColSen_getData
+ 192              	.LVL46:
+ 313:main.c        ****     sleep(1);
+ 193              		.loc 1 313 0
+ 194 0114 0100A0E3 		mov	r0, #1
+ 195 0118 FEFFFFEB 		bl	sleep
+ 196              	.LVL47:
+ 314:main.c        ****     //color_data[6][9]=farbe_scan();
+ 315:main.c        ****     //wuerfel_print(1);
+ 316:main.c        ****     //arm_close();
+ 317:main.c        ****     //Farbe_close();
+ 318:main.c        ****     
+ 319:main.c        **** #endif
+ 320:main.c        ****     //change_topface(0);
+ 321:main.c        ****     //change_rightface(5);
+ 322:main.c        ****     //wuerfel_print(1);
+ 323:main.c        ****     //Top_Cross();
+ 324:main.c        ****     //F2L();
+ 325:main.c        ****     //wuerfel_print(1);
+ 326:main.c        **** #ifndef __linux__
+ 327:main.c        ****     while(1)
+ 328:main.c        ****     {
+ 329:main.c        ****         if(kbhit())
+ 330:main.c        ****         {
+ 331:main.c        ****             switch(getch())
+ 332:main.c        ****             {
+ 333:main.c        ****                 case 'q':
+ 334:main.c        ****                 case 'Q':
+ 335:main.c        ****                     return 0;
+ 336:main.c        ****                     
+ 337:main.c        ****                 case '0':
+ 338:main.c        ****                     wuerfel_print(0);
+ 339:main.c        ****                     break;
+ 340:main.c        ****                 case '1':
+ 341:main.c        ****                     wuerfel_print(1);
+ 342:main.c        ****                     break;
+ 343:main.c        ****                 case '2':
+ 344:main.c        ****                     wuerfel_print(2);
+ 345:main.c        ****                     break;
+ 346:main.c        ****                 case '3':
+ 347:main.c        ****                     wuerfel_print(3);
+ 348:main.c        ****                     break;
+ 349:main.c        ****                     
+ 350:main.c        ****             }
+ 351:main.c        ****         }
+ 352:main.c        ****         
+ 353:main.c        ****     }
+ 354:main.c        **** #endif
+ 355:main.c        ****     return 0;
+ 356:main.c        **** }
+ 197              		.loc 1 356 0
+ 198 011c 0000A0E3 		mov	r0, #0
+ 199 0120 0880BDE8 		ldmfd	sp!, {r3, pc}
+ 200              		.cfi_endproc
+ 201              	.LFE11:
+ 202              		.fnend
+ 204              		.comm	color_data,54,4
+ 205              		.global	print_mode
+ 206              		.section	.rodata
+ 207              		.align	2
+ 210              	print_mode:
+ 211 0000 24       		.byte	36
+ 212 0001 25       		.byte	37
+ 213 0002 26       		.byte	38
+ 214 0003 1B       		.byte	27
+ 215 0004 1C       		.byte	28
+ 216 0005 1D       		.byte	29
+ 217 0006 2D       		.byte	45
+ 218 0007 2E       		.byte	46
+ 219 0008 2F       		.byte	47
+ 220 0009 27       		.byte	39
+ 221 000a 28       		.byte	40
+ 222 000b 29       		.byte	41
+ 223 000c 1E       		.byte	30
+ 224 000d 1F       		.byte	31
+ 225 000e 20       		.byte	32
+ 226 000f 30       		.byte	48
+ 227 0010 31       		.byte	49
+ 228 0011 32       		.byte	50
+ 229 0012 2A       		.byte	42
+ 230 0013 2B       		.byte	43
+ 231 0014 2C       		.byte	44
+ 232 0015 21       		.byte	33
+ 233 0016 22       		.byte	34
+ 234 0017 23       		.byte	35
+ 235 0018 33       		.byte	51
+ 236 0019 34       		.byte	52
+ 237 001a 35       		.byte	53
+ 238 001b FF       		.byte	-1
+ 239 001c FF       		.byte	-1
+ 240 001d FF       		.byte	-1
+ 241 001e 00       		.byte	0
+ 242 001f 01       		.byte	1
+ 243 0020 02       		.byte	2
+ 244 0021 FF       		.byte	-1
+ 245 0022 FF       		.byte	-1
+ 246 0023 FF       		.byte	-1
+ 247 0024 FF       		.byte	-1
+ 248 0025 FF       		.byte	-1
+ 249 0026 FF       		.byte	-1
+ 250 0027 03       		.byte	3
+ 251 0028 04       		.byte	4
+ 252 0029 05       		.byte	5
+ 253 002a FF       		.byte	-1
+ 254 002b FF       		.byte	-1
+ 255 002c FF       		.byte	-1
+ 256 002d FF       		.byte	-1
+ 257 002e FF       		.byte	-1
+ 258 002f FF       		.byte	-1
+ 259 0030 06       		.byte	6
+ 260 0031 07       		.byte	7
+ 261 0032 08       		.byte	8
+ 262 0033 FF       		.byte	-1
+ 263 0034 FF       		.byte	-1
+ 264 0035 FF       		.byte	-1
+ 265 0036 FF       		.byte	-1
+ 266 0037 FF       		.byte	-1
+ 267 0038 FF       		.byte	-1
+ 268 0039 09       		.byte	9
+ 269 003a 0A       		.byte	10
+ 270 003b 0B       		.byte	11
+ 271 003c FF       		.byte	-1
+ 272 003d FF       		.byte	-1
+ 273 003e FF       		.byte	-1
+ 274 003f FF       		.byte	-1
+ 275 0040 FF       		.byte	-1
+ 276 0041 FF       		.byte	-1
+ 277 0042 0C       		.byte	12
+ 278 0043 0D       		.byte	13
+ 279 0044 0E       		.byte	14
+ 280 0045 FF       		.byte	-1
+ 281 0046 FF       		.byte	-1
+ 282 0047 FF       		.byte	-1
+ 283 0048 FF       		.byte	-1
+ 284 0049 FF       		.byte	-1
+ 285 004a FF       		.byte	-1
+ 286 004b 0F       		.byte	15
+ 287 004c 10       		.byte	16
+ 288 004d 11       		.byte	17
+ 289 004e FF       		.byte	-1
+ 290 004f FF       		.byte	-1
+ 291 0050 FF       		.byte	-1
+ 292 0051 FF       		.byte	-1
+ 293 0052 FF       		.byte	-1
+ 294 0053 FF       		.byte	-1
+ 295 0054 12       		.byte	18
+ 296 0055 13       		.byte	19
+ 297 0056 14       		.byte	20
+ 298 0057 FF       		.byte	-1
+ 299 0058 FF       		.byte	-1
+ 300 0059 FF       		.byte	-1
+ 301 005a FF       		.byte	-1
+ 302 005b FF       		.byte	-1
+ 303 005c FF       		.byte	-1
+ 304 005d 15       		.byte	21
+ 305 005e 16       		.byte	22
+ 306 005f 17       		.byte	23
+ 307 0060 FF       		.byte	-1
+ 308 0061 FF       		.byte	-1
+ 309 0062 FF       		.byte	-1
+ 310 0063 FF       		.byte	-1
+ 311 0064 FF       		.byte	-1
+ 312 0065 FF       		.byte	-1
+ 313 0066 18       		.byte	24
+ 314 0067 19       		.byte	25
+ 315 0068 1A       		.byte	26
+ 316 0069 FF       		.byte	-1
+ 317 006a FF       		.byte	-1
+ 318 006b FF       		.byte	-1
+ 319 006c FF       		.byte	-1
+ 320 006d FF       		.byte	-1
+ 321 006e FF       		.byte	-1
+ 322 006f 1B       		.byte	27
+ 323 0070 1C       		.byte	28
+ 324 0071 1D       		.byte	29
+ 325 0072 FF       		.byte	-1
+ 326 0073 FF       		.byte	-1
+ 327 0074 FF       		.byte	-1
+ 328 0075 FF       		.byte	-1
+ 329 0076 FF       		.byte	-1
+ 330 0077 FF       		.byte	-1
+ 331 0078 1E       		.byte	30
+ 332 0079 1F       		.byte	31
+ 333 007a 20       		.byte	32
+ 334 007b FF       		.byte	-1
+ 335 007c FF       		.byte	-1
+ 336 007d FF       		.byte	-1
+ 337 007e FF       		.byte	-1
+ 338 007f FF       		.byte	-1
+ 339 0080 FF       		.byte	-1
+ 340 0081 21       		.byte	33
+ 341 0082 22       		.byte	34
+ 342 0083 23       		.byte	35
+ 343 0084 FF       		.byte	-1
+ 344 0085 FF       		.byte	-1
+ 345 0086 FF       		.byte	-1
+ 346 0087 26       		.byte	38
+ 347 0088 29       		.byte	41
+ 348 0089 2C       		.byte	44
+ 349 008a 00       		.byte	0
+ 350 008b 01       		.byte	1
+ 351 008c 02       		.byte	2
+ 352 008d 33       		.byte	51
+ 353 008e 30       		.byte	48
+ 354 008f 2D       		.byte	45
+ 355 0090 25       		.byte	37
+ 356 0091 28       		.byte	40
+ 357 0092 2B       		.byte	43
+ 358 0093 03       		.byte	3
+ 359 0094 04       		.byte	4
+ 360 0095 05       		.byte	5
+ 361 0096 34       		.byte	52
+ 362 0097 31       		.byte	49
+ 363 0098 2E       		.byte	46
+ 364 0099 24       		.byte	36
+ 365 009a 27       		.byte	39
+ 366 009b 2A       		.byte	42
+ 367 009c 06       		.byte	6
+ 368 009d 07       		.byte	7
+ 369 009e 08       		.byte	8
+ 370 009f 35       		.byte	53
+ 371 00a0 32       		.byte	50
+ 372 00a1 2F       		.byte	47
+ 373 00a2 FF       		.byte	-1
+ 374 00a3 FF       		.byte	-1
+ 375 00a4 FF       		.byte	-1
+ 376 00a5 09       		.byte	9
+ 377 00a6 0A       		.byte	10
+ 378 00a7 0B       		.byte	11
+ 379 00a8 FF       		.byte	-1
+ 380 00a9 FF       		.byte	-1
+ 381 00aa FF       		.byte	-1
+ 382 00ab FF       		.byte	-1
+ 383 00ac FF       		.byte	-1
+ 384 00ad FF       		.byte	-1
+ 385 00ae 0C       		.byte	12
+ 386 00af 0D       		.byte	13
+ 387 00b0 0E       		.byte	14
+ 388 00b1 FF       		.byte	-1
+ 389 00b2 FF       		.byte	-1
+ 390 00b3 FF       		.byte	-1
+ 391 00b4 FF       		.byte	-1
+ 392 00b5 FF       		.byte	-1
+ 393 00b6 FF       		.byte	-1
+ 394 00b7 0F       		.byte	15
+ 395 00b8 10       		.byte	16
+ 396 00b9 11       		.byte	17
+ 397 00ba FF       		.byte	-1
+ 398 00bb FF       		.byte	-1
+ 399 00bc FF       		.byte	-1
+ 400 00bd FF       		.byte	-1
+ 401 00be FF       		.byte	-1
+ 402 00bf FF       		.byte	-1
+ 403 00c0 12       		.byte	18
+ 404 00c1 13       		.byte	19
+ 405 00c2 14       		.byte	20
+ 406 00c3 FF       		.byte	-1
+ 407 00c4 FF       		.byte	-1
+ 408 00c5 FF       		.byte	-1
+ 409 00c6 FF       		.byte	-1
+ 410 00c7 FF       		.byte	-1
+ 411 00c8 FF       		.byte	-1
+ 412 00c9 15       		.byte	21
+ 413 00ca 16       		.byte	22
+ 414 00cb 17       		.byte	23
+ 415 00cc FF       		.byte	-1
+ 416 00cd FF       		.byte	-1
+ 417 00ce FF       		.byte	-1
+ 418 00cf FF       		.byte	-1
+ 419 00d0 FF       		.byte	-1
+ 420 00d1 FF       		.byte	-1
+ 421 00d2 18       		.byte	24
+ 422 00d3 19       		.byte	25
+ 423 00d4 1A       		.byte	26
+ 424 00d5 FF       		.byte	-1
+ 425 00d6 FF       		.byte	-1
+ 426 00d7 FF       		.byte	-1
+ 427 00d8 FF       		.byte	-1
+ 428 00d9 FF       		.byte	-1
+ 429 00da FF       		.byte	-1
+ 430 00db 1B       		.byte	27
+ 431 00dc 1C       		.byte	28
+ 432 00dd 1D       		.byte	29
+ 433 00de FF       		.byte	-1
+ 434 00df FF       		.byte	-1
+ 435 00e0 FF       		.byte	-1
+ 436 00e1 FF       		.byte	-1
+ 437 00e2 FF       		.byte	-1
+ 438 00e3 FF       		.byte	-1
+ 439 00e4 1E       		.byte	30
+ 440 00e5 1F       		.byte	31
+ 441 00e6 20       		.byte	32
+ 442 00e7 FF       		.byte	-1
+ 443 00e8 FF       		.byte	-1
+ 444 00e9 FF       		.byte	-1
+ 445 00ea FF       		.byte	-1
+ 446 00eb FF       		.byte	-1
+ 447 00ec FF       		.byte	-1
+ 448 00ed 21       		.byte	33
+ 449 00ee 22       		.byte	34
+ 450 00ef 23       		.byte	35
+ 451 00f0 FF       		.byte	-1
+ 452 00f1 FF       		.byte	-1
+ 453 00f2 FF       		.byte	-1
+ 454 00f3 FF       		.byte	-1
+ 455 00f4 FF       		.byte	-1
+ 456 00f5 FF       		.byte	-1
+ 457 00f6 00       		.byte	0
+ 458 00f7 01       		.byte	1
+ 459 00f8 02       		.byte	2
+ 460 00f9 FF       		.byte	-1
+ 461 00fa FF       		.byte	-1
+ 462 00fb FF       		.byte	-1
+ 463 00fc FF       		.byte	-1
+ 464 00fd FF       		.byte	-1
+ 465 00fe FF       		.byte	-1
+ 466 00ff 03       		.byte	3
+ 467 0100 04       		.byte	4
+ 468 0101 05       		.byte	5
+ 469 0102 FF       		.byte	-1
+ 470 0103 FF       		.byte	-1
+ 471 0104 FF       		.byte	-1
+ 472 0105 FF       		.byte	-1
+ 473 0106 FF       		.byte	-1
+ 474 0107 FF       		.byte	-1
+ 475 0108 06       		.byte	6
+ 476 0109 07       		.byte	7
+ 477 010a 08       		.byte	8
+ 478 010b FF       		.byte	-1
+ 479 010c FF       		.byte	-1
+ 480 010d FF       		.byte	-1
+ 481 010e 2C       		.byte	44
+ 482 010f 2B       		.byte	43
+ 483 0110 2A       		.byte	42
+ 484 0111 09       		.byte	9
+ 485 0112 0A       		.byte	10
+ 486 0113 0B       		.byte	11
+ 487 0114 35       		.byte	53
+ 488 0115 34       		.byte	52
+ 489 0116 33       		.byte	51
+ 490 0117 29       		.byte	41
+ 491 0118 28       		.byte	40
+ 492 0119 27       		.byte	39
+ 493 011a 0C       		.byte	12
+ 494 011b 0D       		.byte	13
+ 495 011c 0E       		.byte	14
+ 496 011d 32       		.byte	50
+ 497 011e 31       		.byte	49
+ 498 011f 30       		.byte	48
+ 499 0120 26       		.byte	38
+ 500 0121 25       		.byte	37
+ 501 0122 24       		.byte	36
+ 502 0123 0F       		.byte	15
+ 503 0124 10       		.byte	16
+ 504 0125 11       		.byte	17
+ 505 0126 2F       		.byte	47
+ 506 0127 2E       		.byte	46
+ 507 0128 2D       		.byte	45
+ 508 0129 FF       		.byte	-1
+ 509 012a FF       		.byte	-1
+ 510 012b FF       		.byte	-1
+ 511 012c 12       		.byte	18
+ 512 012d 13       		.byte	19
+ 513 012e 14       		.byte	20
+ 514 012f FF       		.byte	-1
+ 515 0130 FF       		.byte	-1
+ 516 0131 FF       		.byte	-1
+ 517 0132 FF       		.byte	-1
+ 518 0133 FF       		.byte	-1
+ 519 0134 FF       		.byte	-1
+ 520 0135 15       		.byte	21
+ 521 0136 16       		.byte	22
+ 522 0137 17       		.byte	23
+ 523 0138 FF       		.byte	-1
+ 524 0139 FF       		.byte	-1
+ 525 013a FF       		.byte	-1
+ 526 013b FF       		.byte	-1
+ 527 013c FF       		.byte	-1
+ 528 013d FF       		.byte	-1
+ 529 013e 18       		.byte	24
+ 530 013f 19       		.byte	25
+ 531 0140 1A       		.byte	26
+ 532 0141 FF       		.byte	-1
+ 533 0142 FF       		.byte	-1
+ 534 0143 FF       		.byte	-1
+ 535 0144 FF       		.byte	-1
+ 536 0145 FF       		.byte	-1
+ 537 0146 FF       		.byte	-1
+ 538 0147 1B       		.byte	27
+ 539 0148 1C       		.byte	28
+ 540 0149 1D       		.byte	29
+ 541 014a FF       		.byte	-1
+ 542 014b FF       		.byte	-1
+ 543 014c FF       		.byte	-1
+ 544 014d FF       		.byte	-1
+ 545 014e FF       		.byte	-1
+ 546 014f FF       		.byte	-1
+ 547 0150 1E       		.byte	30
+ 548 0151 1F       		.byte	31
+ 549 0152 20       		.byte	32
+ 550 0153 FF       		.byte	-1
+ 551 0154 FF       		.byte	-1
+ 552 0155 FF       		.byte	-1
+ 553 0156 FF       		.byte	-1
+ 554 0157 FF       		.byte	-1
+ 555 0158 FF       		.byte	-1
+ 556 0159 21       		.byte	33
+ 557 015a 22       		.byte	34
+ 558 015b 23       		.byte	35
+ 559 015c FF       		.byte	-1
+ 560 015d FF       		.byte	-1
+ 561 015e FF       		.byte	-1
+ 562 015f FF       		.byte	-1
+ 563 0160 FF       		.byte	-1
+ 564 0161 FF       		.byte	-1
+ 565 0162 00       		.byte	0
+ 566 0163 01       		.byte	1
+ 567 0164 02       		.byte	2
+ 568 0165 FF       		.byte	-1
+ 569 0166 FF       		.byte	-1
+ 570 0167 FF       		.byte	-1
+ 571 0168 FF       		.byte	-1
+ 572 0169 FF       		.byte	-1
+ 573 016a FF       		.byte	-1
+ 574 016b 03       		.byte	3
+ 575 016c 04       		.byte	4
+ 576 016d 05       		.byte	5
+ 577 016e FF       		.byte	-1
+ 578 016f FF       		.byte	-1
+ 579 0170 FF       		.byte	-1
+ 580 0171 FF       		.byte	-1
+ 581 0172 FF       		.byte	-1
+ 582 0173 FF       		.byte	-1
+ 583 0174 06       		.byte	6
+ 584 0175 07       		.byte	7
+ 585 0176 08       		.byte	8
+ 586 0177 FF       		.byte	-1
+ 587 0178 FF       		.byte	-1
+ 588 0179 FF       		.byte	-1
+ 589 017a FF       		.byte	-1
+ 590 017b FF       		.byte	-1
+ 591 017c FF       		.byte	-1
+ 592 017d 09       		.byte	9
+ 593 017e 0A       		.byte	10
+ 594 017f 0B       		.byte	11
+ 595 0180 FF       		.byte	-1
+ 596 0181 FF       		.byte	-1
+ 597 0182 FF       		.byte	-1
+ 598 0183 FF       		.byte	-1
+ 599 0184 FF       		.byte	-1
+ 600 0185 FF       		.byte	-1
+ 601 0186 0C       		.byte	12
+ 602 0187 0D       		.byte	13
+ 603 0188 0E       		.byte	14
+ 604 0189 FF       		.byte	-1
+ 605 018a FF       		.byte	-1
+ 606 018b FF       		.byte	-1
+ 607 018c FF       		.byte	-1
+ 608 018d FF       		.byte	-1
+ 609 018e FF       		.byte	-1
+ 610 018f 0F       		.byte	15
+ 611 0190 10       		.byte	16
+ 612 0191 11       		.byte	17
+ 613 0192 FF       		.byte	-1
+ 614 0193 FF       		.byte	-1
+ 615 0194 FF       		.byte	-1
+ 616 0195 2A       		.byte	42
+ 617 0196 27       		.byte	39
+ 618 0197 24       		.byte	36
+ 619 0198 12       		.byte	18
+ 620 0199 13       		.byte	19
+ 621 019a 14       		.byte	20
+ 622 019b 2F       		.byte	47
+ 623 019c 32       		.byte	50
+ 624 019d 35       		.byte	53
+ 625 019e 2B       		.byte	43
+ 626 019f 28       		.byte	40
+ 627 01a0 25       		.byte	37
+ 628 01a1 15       		.byte	21
+ 629 01a2 16       		.byte	22
+ 630 01a3 17       		.byte	23
+ 631 01a4 2E       		.byte	46
+ 632 01a5 31       		.byte	49
+ 633 01a6 34       		.byte	52
+ 634 01a7 2C       		.byte	44
+ 635 01a8 29       		.byte	41
+ 636 01a9 26       		.byte	38
+ 637 01aa 18       		.byte	24
+ 638 01ab 19       		.byte	25
+ 639 01ac 1A       		.byte	26
+ 640 01ad 2D       		.byte	45
+ 641 01ae 30       		.byte	48
+ 642 01af 33       		.byte	51
+ 643              		.text
+ 644              	.Letext0:
+ 645              		.file 2 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
+ 646              		.file 3 "/usr/local/carlson-minot/crosscompilers/lib/gcc/arm-none-linux-gnueabi/4.8.3/include/stdd
+ 647              		.file 4 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
+ 648              		.file 5 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
+ 649              		.file 6 "Arm_motor.h"
+ 650              		.file 7 "Dreh_motor.h"
+ 651              		.file 8 "Farbe_motor.h"
+ 652              		.file 9 "Farbe_sen.h"
+ 653              		.file 10 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/u
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 main.c
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccMVVVkL.s:16     .text:0000000000000000 $a
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccMVVVkL.s:19     .text:0000000000000000 main
+                       .ARM.extab:0000000000000000 $d
+                       .ARM.exidx:0000000000000000 $d
+                            *COM*:0000000000000036 color_data
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccMVVVkL.s:210    .rodata:0000000000000000 print_mode
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccMVVVkL.s:207    .rodata:0000000000000000 $d
+                     .debug_frame:0000000000000010 $d
+
+UNDEFINED SYMBOLS
+arm_init
+DrehTel_init
+Farbe_init
+ColSen_init
+Farbe_setpos
+sleep
+ColSen_getData
+__aeabi_unwind_cpp_pr1

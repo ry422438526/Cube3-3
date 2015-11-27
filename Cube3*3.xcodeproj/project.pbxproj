@@ -106,8 +106,8 @@
 				7AD9AB331BF4D7800079E82F /* Farbe_scan.c */,
 				7AD9AB341BF4D7800079E82F /* Farbe_scan.h */,
 				7AD9AB361BF4D7A90079E82F /* Farbe_sen.c */,
-				7AD9AB371BF4D7A90079E82F /* Farbe_sen.h */,
 				7AD9AB391BF4D7D20079E82F /* Side_dreh.c */,
+				7AD9AB371BF4D7A90079E82F /* Farbe_sen.h */,
 				7AD9AB3A1BF4D7D20079E82F /* Side_dreh.h */,
 				7AD9AB3F1BF4D9830079E82F /* print_mode.c */,
 				7AD9AB401BF4D9830079E82F /* print_mode.h */,
@@ -305,6 +305,7 @@
 				7AD9AB291BF4D6260079E82F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

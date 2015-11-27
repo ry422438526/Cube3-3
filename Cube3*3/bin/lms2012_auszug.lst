@@ -1,0 +1,445 @@
+   1              		.arch armv5te
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 2
+   9              		.eabi_attribute 30, 1
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.file	"lms2012_auszug.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.align	2
+  17              		.global	LogErrorNumber
+  19              	LogErrorNumber:
+  20              		.fnstart
+  21              	.LFB11:
+  22              		.file 1 "../lms2012/lms2012_auszug.c"
+   1:../lms2012/lms2012_auszug.c **** /*
+   2:../lms2012/lms2012_auszug.c ****  * LEGO® MINDSTORMS EV3
+   3:../lms2012/lms2012_auszug.c ****  *
+   4:../lms2012/lms2012_auszug.c ****  * Copyright (C) 2010-2013 The LEGO Group
+   5:../lms2012/lms2012_auszug.c ****  *
+   6:../lms2012/lms2012_auszug.c ****  * This program is free software; you can redistribute it and/or modify
+   7:../lms2012/lms2012_auszug.c ****  * it under the terms of the GNU General Public License as published by
+   8:../lms2012/lms2012_auszug.c ****  * the Free Software Foundation; either version 2 of the License, or
+   9:../lms2012/lms2012_auszug.c ****  * (at your option) any later version.
+  10:../lms2012/lms2012_auszug.c ****  *
+  11:../lms2012/lms2012_auszug.c ****  * This program is distributed in the hope that it will be useful,
+  12:../lms2012/lms2012_auszug.c ****  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+  13:../lms2012/lms2012_auszug.c ****  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  14:../lms2012/lms2012_auszug.c ****  * GNU General Public License for more details.
+  15:../lms2012/lms2012_auszug.c ****  *
+  16:../lms2012/lms2012_auszug.c ****  * You should have received a copy of the GNU General Public License
+  17:../lms2012/lms2012_auszug.c ****  * along with this program; if not, write to the Free Software
+  18:../lms2012/lms2012_auszug.c ****  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+  19:../lms2012/lms2012_auszug.c ****  */
+  20:../lms2012/lms2012_auszug.c **** 
+  21:../lms2012/lms2012_auszug.c **** 
+  22:../lms2012/lms2012_auszug.c **** 
+  23:../lms2012/lms2012_auszug.c **** #include  "lms2012.h"
+  24:../lms2012/lms2012_auszug.c **** #include  <stdio.h>
+  25:../lms2012/lms2012_auszug.c **** 
+  26:../lms2012/lms2012_auszug.c **** 
+  27:../lms2012/lms2012_auszug.c **** #define   ERROR(ErrorCode)    [ErrorCode]  =  #ErrorCode
+  28:../lms2012/lms2012_auszug.c **** 
+  29:../lms2012/lms2012_auszug.c **** char      ErrString[ERRORS][ERR_STRING_SIZE] =
+  30:../lms2012/lms2012_auszug.c **** {
+  31:../lms2012/lms2012_auszug.c **** 
+  32:../lms2012/lms2012_auszug.c ****   ERROR(TOO_MANY_ERRORS_TO_BUFFER),
+  33:../lms2012/lms2012_auszug.c ****   ERROR(TYPEDATA_TABEL_FULL),
+  34:../lms2012/lms2012_auszug.c ****   ERROR(TYPEDATA_FILE_NOT_FOUND),
+  35:../lms2012/lms2012_auszug.c ****   ERROR(ANALOG_DEVICE_FILE_NOT_FOUND),
+  36:../lms2012/lms2012_auszug.c ****   ERROR(ANALOG_SHARED_MEMORY),
+  37:../lms2012/lms2012_auszug.c ****   ERROR(UART_DEVICE_FILE_NOT_FOUND),
+  38:../lms2012/lms2012_auszug.c ****   ERROR(UART_SHARED_MEMORY),
+  39:../lms2012/lms2012_auszug.c ****   ERROR(IIC_DEVICE_FILE_NOT_FOUND),
+  40:../lms2012/lms2012_auszug.c ****   ERROR(IIC_SHARED_MEMORY),
+  41:../lms2012/lms2012_auszug.c ****   ERROR(DISPLAY_SHARED_MEMORY),
+  42:../lms2012/lms2012_auszug.c ****   ERROR(UI_SHARED_MEMORY),
+  43:../lms2012/lms2012_auszug.c ****   ERROR(UI_DEVICE_FILE_NOT_FOUND),
+  44:../lms2012/lms2012_auszug.c ****   ERROR(LCD_DEVICE_FILE_NOT_FOUND),
+  45:../lms2012/lms2012_auszug.c ****   ERROR(OUTPUT_SHARED_MEMORY),
+  46:../lms2012/lms2012_auszug.c ****   ERROR(COM_COULD_NOT_OPEN_FILE),
+  47:../lms2012/lms2012_auszug.c ****   ERROR(COM_NAME_TOO_SHORT),
+  48:../lms2012/lms2012_auszug.c ****   ERROR(COM_NAME_TOO_LONG),
+  49:../lms2012/lms2012_auszug.c ****   ERROR(COM_INTERNAL),
+  50:../lms2012/lms2012_auszug.c ****   ERROR(VM_INTERNAL),
+  51:../lms2012/lms2012_auszug.c ****   ERROR(VM_PROGRAM_VALIDATION),
+  52:../lms2012/lms2012_auszug.c ****   ERROR(VM_PROGRAM_NOT_STARTED),
+  53:../lms2012/lms2012_auszug.c ****   ERROR(VM_PROGRAM_FAIL_BREAK),
+  54:../lms2012/lms2012_auszug.c ****   ERROR(VM_PROGRAM_INSTRUCTION_BREAK),
+  55:../lms2012/lms2012_auszug.c ****   ERROR(VM_PROGRAM_NOT_FOUND),
+  56:../lms2012/lms2012_auszug.c ****   ERROR(SOUND_DEVICE_FILE_NOT_FOUND),
+  57:../lms2012/lms2012_auszug.c ****   ERROR(SOUND_SHARED_MEMORY),
+  58:../lms2012/lms2012_auszug.c ****   ERROR(FILE_OPEN_ERROR),
+  59:../lms2012/lms2012_auszug.c ****   ERROR(FILE_READ_ERROR),
+  60:../lms2012/lms2012_auszug.c ****   ERROR(FILE_WRITE_ERROR),
+  61:../lms2012/lms2012_auszug.c ****   ERROR(FILE_CLOSE_ERROR),
+  62:../lms2012/lms2012_auszug.c ****   ERROR(FILE_GET_HANDLE_ERROR),
+  63:../lms2012/lms2012_auszug.c ****   ERROR(FILE_NAME_ERROR),
+  64:../lms2012/lms2012_auszug.c ****   ERROR(USB_SHARED_MEMORY),
+  65:../lms2012/lms2012_auszug.c ****   ERROR(OUT_OF_MEMORY),
+  66:../lms2012/lms2012_auszug.c **** 
+  67:../lms2012/lms2012_auszug.c **** };
+  68:../lms2012/lms2012_auszug.c **** 
+  69:../lms2012/lms2012_auszug.c **** 
+  70:../lms2012/lms2012_auszug.c **** void      LogErrorNumber(ERR Err)
+  71:../lms2012/lms2012_auszug.c **** {
+  23              		.loc 1 71 0
+  24              		.cfi_startproc
+  25              		@ args = 0, pretend = 0, frame = 0
+  26              		@ frame_needed = 0, uses_anonymous_args = 0
+  27              	.LVL0:
+  28 0000 08402DE9 		stmfd	sp!, {r3, lr}
+  29              		.save {r3, lr}
+  30              		.cfi_def_cfa_offset 8
+  31              		.cfi_offset 3, -8
+  32              		.cfi_offset 14, -4
+  72:../lms2012/lms2012_auszug.c **** #if 0  
+  73:../lms2012/lms2012_auszug.c ****   UBYTE   Tmp;
+  74:../lms2012/lms2012_auszug.c **** 
+  75:../lms2012/lms2012_auszug.c ****   if (Err > TOO_MANY_ERRORS_TO_BUFFER)
+  76:../lms2012/lms2012_auszug.c ****   {
+  77:../lms2012/lms2012_auszug.c ****     Tmp  =  VMInstance.ErrorIn;
+  78:../lms2012/lms2012_auszug.c ****     if (++Tmp >= ERROR_BUFFER_SIZE)
+  79:../lms2012/lms2012_auszug.c ****     {
+  80:../lms2012/lms2012_auszug.c ****       Tmp  =  0;
+  81:../lms2012/lms2012_auszug.c ****     }
+  82:../lms2012/lms2012_auszug.c ****     if (Tmp != VMInstance.ErrorOut)
+  83:../lms2012/lms2012_auszug.c ****     {
+  84:../lms2012/lms2012_auszug.c ****       VMInstance.Errors[VMInstance.ErrorIn]   =  Err;
+  85:../lms2012/lms2012_auszug.c ****       VMInstance.ErrorIn                      =  Tmp;
+  86:../lms2012/lms2012_auszug.c ****     }
+  87:../lms2012/lms2012_auszug.c ****     else
+  88:../lms2012/lms2012_auszug.c ****     {
+  89:../lms2012/lms2012_auszug.c ****       snprintf(VMInstance.PrintBuffer,PRINTBUFFERSIZE,"\r\n#### %s ####\r\n\n",ErrString[TOO_MANY_E
+  90:../lms2012/lms2012_auszug.c ****       VmPrint(VMInstance.PrintBuffer);
+  91:../lms2012/lms2012_auszug.c ****     }
+  92:../lms2012/lms2012_auszug.c ****   }
+  93:../lms2012/lms2012_auszug.c **** #else
+  94:../lms2012/lms2012_auszug.c ****   printf("\r\n#### %s ####\r\n\n",ErrString[TOO_MANY_ERRORS_TO_BUFFER]);
+  33              		.loc 1 94 0
+  34 0004 08009FE5 		ldr	r0, .L2
+  35              	.LVL1:
+  36 0008 08109FE5 		ldr	r1, .L2+4
+  37 000c FEFFFFEB 		bl	printf
+  38              	.LVL2:
+  39 0010 0880BDE8 		ldmfd	sp!, {r3, pc}
+  40              	.L3:
+  41              		.align	2
+  42              	.L2:
+  43 0014 00000000 		.word	.LC0
+  44 0018 00000000 		.word	.LANCHOR0
+  45              		.cfi_endproc
+  46              	.LFE11:
+  47              		.fnend
+  49              		.global	ErrString
+  50              		.data
+  51              		.align	2
+  52              	.LANCHOR0 = . + 0
+  55              	ErrString:
+  56 0000 544F4F5F 		.ascii	"TOO_MANY_ERRORS_TO_BUFFER\000"
+  56      4D414E59 
+  56      5F455252 
+  56      4F52535F 
+  56      544F5F42 
+  57 001a 00000000 		.space	6
+  57      0000
+  58 0020 54595045 		.ascii	"TYPEDATA_TABEL_FULL\000"
+  58      44415441 
+  58      5F544142 
+  58      454C5F46 
+  58      554C4C00 
+  59 0034 00000000 		.space	12
+  59      00000000 
+  59      00000000 
+  60 0040 54595045 		.ascii	"TYPEDATA_FILE_NOT_FOUND\000"
+  60      44415441 
+  60      5F46494C 
+  60      455F4E4F 
+  60      545F464F 
+  61 0058 00000000 		.space	8
+  61      00000000 
+  62 0060 414E414C 		.ascii	"ANALOG_DEVICE_FILE_NOT_FOUND\000"
+  62      4F475F44 
+  62      45564943 
+  62      455F4649 
+  62      4C455F4E 
+  63 007d 000000   		.space	3
+  64 0080 414E414C 		.ascii	"ANALOG_SHARED_MEMORY\000"
+  64      4F475F53 
+  64      48415245 
+  64      445F4D45 
+  64      4D4F5259 
+  65 0095 00000000 		.space	11
+  65      00000000 
+  65      000000
+  66 00a0 55415254 		.ascii	"UART_DEVICE_FILE_NOT_FOUND\000"
+  66      5F444556 
+  66      4943455F 
+  66      46494C45 
+  66      5F4E4F54 
+  67 00bb 00000000 		.space	5
+  67      00
+  68 00c0 55415254 		.ascii	"UART_SHARED_MEMORY\000"
+  68      5F534841 
+  68      5245445F 
+  68      4D454D4F 
+  68      525900
+  69 00d3 00000000 		.space	13
+  69      00000000 
+  69      00000000 
+  69      00
+  70 00e0 4949435F 		.ascii	"IIC_DEVICE_FILE_NOT_FOUND\000"
+  70      44455649 
+  70      43455F46 
+  70      494C455F 
+  70      4E4F545F 
+  71 00fa 00000000 		.space	6
+  71      0000
+  72 0100 4949435F 		.ascii	"IIC_SHARED_MEMORY\000"
+  72      53484152 
+  72      45445F4D 
+  72      454D4F52 
+  72      5900
+  73 0112 00000000 		.space	14
+  73      00000000 
+  73      00000000 
+  73      0000
+  74 0120 44495350 		.ascii	"DISPLAY_SHARED_MEMORY\000"
+  74      4C41595F 
+  74      53484152 
+  74      45445F4D 
+  74      454D4F52 
+  75 0136 00000000 		.space	10
+  75      00000000 
+  75      0000
+  76 0140 55495F53 		.ascii	"UI_SHARED_MEMORY\000"
+  76      48415245 
+  76      445F4D45 
+  76      4D4F5259 
+  76      00
+  77 0151 00000000 		.space	15
+  77      00000000 
+  77      00000000 
+  77      000000
+  78 0160 55495F44 		.ascii	"UI_DEVICE_FILE_NOT_FOUND\000"
+  78      45564943 
+  78      455F4649 
+  78      4C455F4E 
+  78      4F545F46 
+  79 0179 00000000 		.space	7
+  79      000000
+  80 0180 4C43445F 		.ascii	"LCD_DEVICE_FILE_NOT_FOUND\000"
+  80      44455649 
+  80      43455F46 
+  80      494C455F 
+  80      4E4F545F 
+  81 019a 00000000 		.space	6
+  81      0000
+  82 01a0 4F555450 		.ascii	"OUTPUT_SHARED_MEMORY\000"
+  82      55545F53 
+  82      48415245 
+  82      445F4D45 
+  82      4D4F5259 
+  83 01b5 00000000 		.space	11
+  83      00000000 
+  83      000000
+  84 01c0 434F4D5F 		.ascii	"COM_COULD_NOT_OPEN_FILE\000"
+  84      434F554C 
+  84      445F4E4F 
+  84      545F4F50 
+  84      454E5F46 
+  85 01d8 00000000 		.space	8
+  85      00000000 
+  86 01e0 434F4D5F 		.ascii	"COM_NAME_TOO_SHORT\000"
+  86      4E414D45 
+  86      5F544F4F 
+  86      5F53484F 
+  86      525400
+  87 01f3 00000000 		.space	13
+  87      00000000 
+  87      00000000 
+  87      00
+  88 0200 434F4D5F 		.ascii	"COM_NAME_TOO_LONG\000"
+  88      4E414D45 
+  88      5F544F4F 
+  88      5F4C4F4E 
+  88      4700
+  89 0212 00000000 		.space	14
+  89      00000000 
+  89      00000000 
+  89      0000
+  90 0220 434F4D5F 		.ascii	"COM_INTERNAL\000"
+  90      494E5445 
+  90      524E414C 
+  90      00
+  91 022d 00000000 		.space	19
+  91      00000000 
+  91      00000000 
+  91      00000000 
+  91      000000
+  92 0240 564D5F49 		.ascii	"VM_INTERNAL\000"
+  92      4E544552 
+  92      4E414C00 
+  93 024c 00000000 		.space	20
+  93      00000000 
+  93      00000000 
+  93      00000000 
+  93      00000000 
+  94 0260 564D5F50 		.ascii	"VM_PROGRAM_VALIDATION\000"
+  94      524F4752 
+  94      414D5F56 
+  94      414C4944 
+  94      4154494F 
+  95 0276 00000000 		.space	10
+  95      00000000 
+  95      0000
+  96 0280 564D5F50 		.ascii	"VM_PROGRAM_NOT_STARTED\000"
+  96      524F4752 
+  96      414D5F4E 
+  96      4F545F53 
+  96      54415254 
+  97 0297 00000000 		.space	9
+  97      00000000 
+  97      00
+  98 02a0 564D5F50 		.ascii	"VM_PROGRAM_FAIL_BREAK\000"
+  98      524F4752 
+  98      414D5F46 
+  98      41494C5F 
+  98      42524541 
+  99 02b6 00000000 		.space	10
+  99      00000000 
+  99      0000
+ 100 02c0 564D5F50 		.ascii	"VM_PROGRAM_INSTRUCTION_BREAK\000"
+ 100      524F4752 
+ 100      414D5F49 
+ 100      4E535452 
+ 100      55435449 
+ 101 02dd 000000   		.space	3
+ 102 02e0 564D5F50 		.ascii	"VM_PROGRAM_NOT_FOUND\000"
+ 102      524F4752 
+ 102      414D5F4E 
+ 102      4F545F46 
+ 102      4F554E44 
+ 103 02f5 00000000 		.space	11
+ 103      00000000 
+ 103      000000
+ 104 0300 534F554E 		.ascii	"SOUND_DEVICE_FILE_NOT_FOUND\000"
+ 104      445F4445 
+ 104      56494345 
+ 104      5F46494C 
+ 104      455F4E4F 
+ 105 031c 00000000 		.space	4
+ 106 0320 534F554E 		.ascii	"SOUND_SHARED_MEMORY\000"
+ 106      445F5348 
+ 106      41524544 
+ 106      5F4D454D 
+ 106      4F525900 
+ 107 0334 00000000 		.space	12
+ 107      00000000 
+ 107      00000000 
+ 108 0340 46494C45 		.ascii	"FILE_OPEN_ERROR\000"
+ 108      5F4F5045 
+ 108      4E5F4552 
+ 108      524F5200 
+ 109 0350 00000000 		.space	16
+ 109      00000000 
+ 109      00000000 
+ 109      00000000 
+ 110 0360 46494C45 		.ascii	"FILE_READ_ERROR\000"
+ 110      5F524541 
+ 110      445F4552 
+ 110      524F5200 
+ 111 0370 00000000 		.space	16
+ 111      00000000 
+ 111      00000000 
+ 111      00000000 
+ 112 0380 46494C45 		.ascii	"FILE_WRITE_ERROR\000"
+ 112      5F575249 
+ 112      54455F45 
+ 112      52524F52 
+ 112      00
+ 113 0391 00000000 		.space	15
+ 113      00000000 
+ 113      00000000 
+ 113      000000
+ 114 03a0 46494C45 		.ascii	"FILE_CLOSE_ERROR\000"
+ 114      5F434C4F 
+ 114      53455F45 
+ 114      52524F52 
+ 114      00
+ 115 03b1 00000000 		.space	15
+ 115      00000000 
+ 115      00000000 
+ 115      000000
+ 116 03c0 46494C45 		.ascii	"FILE_GET_HANDLE_ERROR\000"
+ 116      5F474554 
+ 116      5F48414E 
+ 116      444C455F 
+ 116      4552524F 
+ 117 03d6 00000000 		.space	10
+ 117      00000000 
+ 117      0000
+ 118 03e0 46494C45 		.ascii	"FILE_NAME_ERROR\000"
+ 118      5F4E414D 
+ 118      455F4552 
+ 118      524F5200 
+ 119 03f0 00000000 		.space	16
+ 119      00000000 
+ 119      00000000 
+ 119      00000000 
+ 120 0400 5553425F 		.ascii	"USB_SHARED_MEMORY\000"
+ 120      53484152 
+ 120      45445F4D 
+ 120      454D4F52 
+ 120      5900
+ 121 0412 00000000 		.space	14
+ 121      00000000 
+ 121      00000000 
+ 121      0000
+ 122 0420 4F55545F 		.ascii	"OUT_OF_MEMORY\000"
+ 122      4F465F4D 
+ 122      454D4F52 
+ 122      5900
+ 123 042e 00000000 		.space	18
+ 123      00000000 
+ 123      00000000 
+ 123      00000000 
+ 123      0000
+ 124              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 125              		.align	2
+ 126              	.LC0:
+ 127 0000 0D0A2323 		.ascii	"\015\012#### %s ####\015\012\012\000"
+ 127      23232025 
+ 127      73202323 
+ 127      23230D0A 
+ 127      0A00
+ 128 0012 0000     		.text
+ 129              	.Letext0:
+ 130              		.file 2 "../lms2012/bytecodes.h"
+ 131              		.file 3 "../lms2012/lms2012.h"
+ 132              		.file 4 "/usr/local/carlson-minot/crosscompilers/lib/gcc/arm-none-linux-gnueabi/4.8.3/include/stdd
+ 133              		.file 5 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
+ 134              		.file 6 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
+ 135              		.file 7 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 lms2012_auszug.c
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//cc8g7Ysl.s:16     .text:0000000000000000 $a
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//cc8g7Ysl.s:19     .text:0000000000000000 LogErrorNumber
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//cc8g7Ysl.s:43     .text:0000000000000014 $d
+                       .ARM.extab:0000000000000000 $d
+                       .ARM.exidx:0000000000000000 $d
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//cc8g7Ysl.s:55     .data:0000000000000000 ErrString
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//cc8g7Ysl.s:51     .data:0000000000000000 $d
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//cc8g7Ysl.s:125    .rodata.str1.4:0000000000000000 $d
+                     .debug_frame:0000000000000010 $d
+
+UNDEFINED SYMBOLS
+printf
+__aeabi_unwind_cpp_pr1
