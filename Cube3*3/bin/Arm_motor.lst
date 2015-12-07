@@ -34,86 +34,103 @@
   13:Arm_motor.c   **** 
   14:Arm_motor.c   **** #ifdef __linux__
   15:Arm_motor.c   **** #include "lms2012.h"
-  16:Arm_motor.c   **** #endif
-  17:Arm_motor.c   **** 
-  18:Arm_motor.c   **** #include <unistd.h>
-  19:Arm_motor.c   **** #include <stdlib.h>
-  20:Arm_motor.c   **** #include "Arm_motor.h"
-  21:Arm_motor.c   **** 
+  16:Arm_motor.c   **** #include "../lms2012/c_output.h"
+  17:Arm_motor.c   **** #endif
+  18:Arm_motor.c   **** 
+  19:Arm_motor.c   **** #include <unistd.h>
+  20:Arm_motor.c   **** #include <stdlib.h>
+  21:Arm_motor.c   **** #include "Arm_motor.h"
   22:Arm_motor.c   **** 
-  23:Arm_motor.c   **** #ifdef __linux__
-  24:Arm_motor.c   **** const int MOTOR_SPEED=15;//power:0~100
-  25:Arm_motor.c   **** const char MOTOR_PORT_A = 0x01; //Ausfahrbarer Greifarm Motor;
-  26:Arm_motor.c   **** MOTORDATA *pMotorData;
-  27:Arm_motor.c   **** int motor_file;
-  28:Arm_motor.c   **** int encoder_file;
-  29:Arm_motor.c   **** int arm_referenz=0;
-  30:Arm_motor.c   **** int arm_ist=0;
-  31:Arm_motor.c   **** const int arm_winkel[]={-4,-83,-140,-231,-330};//-85   231
-  32:Arm_motor.c   **** #endif
-  33:Arm_motor.c   **** 
-  34:Arm_motor.c   **** 
-  35:Arm_motor.c   **** int arm_init()
-  36:Arm_motor.c   **** {
-  37:Arm_motor.c   **** #ifdef __linux__
-  38:Arm_motor.c   ****     if ((motor_file = open(PWM_DEVICE_NAME, O_WRONLY))== -1)
-  39:Arm_motor.c   ****     {
-  40:Arm_motor.c   ****         printf("Failed to open device\n");
-  41:Arm_motor.c   ****         return -1;
-  42:Arm_motor.c   ****     }
-  43:Arm_motor.c   ****     
-  44:Arm_motor.c   ****     if((encoder_file = open(MOTOR_DEVICE_NAME, O_RDWR | O_SYNC)) == -1)
-  45:Arm_motor.c   ****         return -1;
-  46:Arm_motor.c   ****     pMotorData = (MOTORDATA*)mmap (0, sizeof(MOTORDATA)*vmOUTPUTS, PROT_READ|PROT_WRITE,MAP_FILE|MA
-  47:Arm_motor.c   ****     
-  48:Arm_motor.c   ****     if (pMotorData == MAP_FAILED)
-  49:Arm_motor.c   ****     {
-  50:Arm_motor.c   ****         printf("Map failed\n");
-  51:Arm_motor.c   ****         return -1;
-  52:Arm_motor.c   ****     }
-  53:Arm_motor.c   ****     
-  54:Arm_motor.c   ****     char motor_command[4];
-  55:Arm_motor.c   ****     motor_command[0]=opOUTPUT_SPEED;
-  56:Arm_motor.c   ****     motor_command[1]=MOTOR_PORT_A;
-  57:Arm_motor.c   ****     motor_command[2]=MOTOR_SPEED;
-  58:Arm_motor.c   ****     write(motor_file,motor_command,3);// motor_speed Wert geben
-  59:Arm_motor.c   ****     
-  60:Arm_motor.c   ****     motor_command[0]=opOUTPUT_START;
-  61:Arm_motor.c   ****     motor_command[1]=MOTOR_PORT_A;
-  62:Arm_motor.c   ****     write(motor_file,motor_command,2);// Motor starten
-  63:Arm_motor.c   ****     
-  64:Arm_motor.c   ****     int old_TachoSensor;
-  65:Arm_motor.c   ****     old_TachoSensor=pMotorData[0].TachoSensor;
+  23:Arm_motor.c   **** 
+  24:Arm_motor.c   **** #ifdef __linux__
+  25:Arm_motor.c   **** const int MOTOR_SPEED=25;//power:0~100
+  26:Arm_motor.c   **** const char MOTOR_PORT_A = 0x01; //Ausfahrbarer Greifarm Motor;
+  27:Arm_motor.c   **** 
+  28:Arm_motor.c   **** #if 0
+  29:Arm_motor.c   **** MOTORDATA *pMotorData;
+  30:Arm_motor.c   **** int motor_file;
+  31:Arm_motor.c   **** int encoder_file;
+  32:Arm_motor.c   **** #else
+  33:Arm_motor.c   **** OUTPUT_GLOBALS OutputInstance;
+  34:Arm_motor.c   **** #endif
+  35:Arm_motor.c   **** 
+  36:Arm_motor.c   **** int arm_referenz=0;
+  37:Arm_motor.c   **** int arm_ist=0;
+  38:Arm_motor.c   **** const int arm_winkel[]={4,-83,-150,-240,-330};//-85   231
+  39:Arm_motor.c   **** #endif
+  40:Arm_motor.c   **** 
+  41:Arm_motor.c   **** 
+  42:Arm_motor.c   **** int arm_init()
+  43:Arm_motor.c   **** {
+  44:Arm_motor.c   **** #ifdef __linux__
+  45:Arm_motor.c   **** /*
+  46:Arm_motor.c   ****     if ((motor_file = open(PWM_DEVICE_NAME, O_WRONLY))== -1)
+  47:Arm_motor.c   ****     {
+  48:Arm_motor.c   ****         printf("Failed to open device\n");
+  49:Arm_motor.c   ****         return -1;
+  50:Arm_motor.c   ****     }
+  51:Arm_motor.c   ****     
+  52:Arm_motor.c   ****     if((encoder_file = open(MOTOR_DEVICE_NAME, O_RDWR | O_SYNC)) == -1)
+  53:Arm_motor.c   ****         return -1;
+  54:Arm_motor.c   ****     pMotorData = (MOTORDATA*)mmap (0, sizeof(MOTORDATA)*vmOUTPUTS, PROT_READ|PROT_WRITE,MAP_FILE|MA
+  55:Arm_motor.c   ****     
+  56:Arm_motor.c   ****     if (pMotorData == MAP_FAILED)
+  57:Arm_motor.c   ****     {
+  58:Arm_motor.c   ****         printf("Map failed\n");
+  59:Arm_motor.c   ****         return -1;
+  60:Arm_motor.c   ****     }
+  61:Arm_motor.c   ****     char motor_command[4];
+  62:Arm_motor.c   ****     motor_command[0]=opOUTPUT_SPEED;
+  63:Arm_motor.c   ****     motor_command[1]=MOTOR_PORT_A;
+  64:Arm_motor.c   ****     motor_command[2]=MOTOR_SPEED;
+  65:Arm_motor.c   ****     write(motor_file,motor_command,3);// motor_speed Wert geben
   66:Arm_motor.c   ****     
-  67:Arm_motor.c   ****     usleep(1000000);
-  68:Arm_motor.c   ****     while(old_TachoSensor!=pMotorData[0].TachoSensor){
-  69:Arm_motor.c   ****         /* printf("Spd/Cnt/Snr: A=%d/%d/%d\n", pMotorData[0].Speed, pMotorData[0].TachoCounts, pMot
-  70:Arm_motor.c   ****         old_TachoSensor=pMotorData[0].TachoSensor;
-  71:Arm_motor.c   ****         usleep(10000);
-  72:Arm_motor.c   ****     }
+  67:Arm_motor.c   ****     motor_command[0]=opOUTPUT_START;
+  68:Arm_motor.c   ****     motor_command[1]=MOTOR_PORT_A;
+  69:Arm_motor.c   ****     write(motor_file,motor_command,2);// Motor starten
+  70:Arm_motor.c   ****     
+  71:Arm_motor.c   ****     int old_TachoSensor;
+  72:Arm_motor.c   ****     old_TachoSensor=pMotorData[0].TachoSensor;
   73:Arm_motor.c   ****     
-  74:Arm_motor.c   ****     motor_command[0]=opOUTPUT_STOP;
-  75:Arm_motor.c   ****     motor_command[1]=MOTOR_PORT_A;
-  76:Arm_motor.c   ****     motor_command[2]=1;
-  77:Arm_motor.c   ****     write(motor_file,motor_command,3);  // Motor stoppen
-  78:Arm_motor.c   ****     
-  79:Arm_motor.c   ****     arm_referenz=pMotorData[0].TachoSensor;
-  80:Arm_motor.c   ****     arm_ist = 0;
-  81:Arm_motor.c   ****     printf("Arm_referenzPosition angefahren %d\n\r",arm_referenz);
-  82:Arm_motor.c   ****     
-  83:Arm_motor.c   ****     arm_setpos(0);
-  84:Arm_motor.c   **** #endif
-  85:Arm_motor.c   ****     return 0;
-  86:Arm_motor.c   **** }
-  87:Arm_motor.c   **** 
-  88:Arm_motor.c   **** 
-  89:Arm_motor.c   **** 
-  90:Arm_motor.c   **** 
-  91:Arm_motor.c   **** int arm_setpos(int arm_soll)
-  92:Arm_motor.c   **** {
-  23              		.loc 1 92 0
+  74:Arm_motor.c   ****     usleep(1000000);
+  75:Arm_motor.c   ****     while(old_TachoSensor!=pMotorData[0].TachoSensor){
+  76:Arm_motor.c   ****         old_TachoSensor=pMotorData[0].TachoSensor;
+  77:Arm_motor.c   ****         usleep(10000);
+  78:Arm_motor.c   ****     }
+  79:Arm_motor.c   ****     
+  80:Arm_motor.c   ****     motor_command[0]=opOUTPUT_STOP;
+  81:Arm_motor.c   ****     motor_command[1]=MOTOR_PORT_A;
+  82:Arm_motor.c   ****     motor_command[2]=1;
+  83:Arm_motor.c   ****     write(motor_file,motor_command,3);  // Motor stoppen
+  84:Arm_motor.c   **** */
+  85:Arm_motor.c   ****     
+  86:Arm_motor.c   ****     cOutputInit();
+  87:Arm_motor.c   ****     cOutputSpeed(MOTOR_PORT_A,MOTOR_SPEED);
+  88:Arm_motor.c   ****     cOutputStart(MOTOR_PORT_A);
+  89:Arm_motor.c   ****     int old_TachoSensor;
+  90:Arm_motor.c   ****     old_TachoSensor=cOutputGetCount(0);
+  91:Arm_motor.c   ****     usleep(1000000);
+  92:Arm_motor.c   ****     while(old_TachoSensor!=cOutputGetCount(0)){
+  93:Arm_motor.c   ****         old_TachoSensor=cOutputGetCount(0);
+  94:Arm_motor.c   ****         usleep(10000);
+  95:Arm_motor.c   ****     }
+  96:Arm_motor.c   ****     cOutputStop(MOTOR_PORT_A,1);
+  97:Arm_motor.c   ****     arm_referenz=cOutputGetCount(0);
+  98:Arm_motor.c   ****     arm_ist = 0;
+  99:Arm_motor.c   ****     arm_setpos(4);
+ 100:Arm_motor.c   ****     printf("Arm_referenzPosition angefahren %d\n\r",arm_referenz);
+ 101:Arm_motor.c   **** #endif
+ 102:Arm_motor.c   ****     return 0;
+ 103:Arm_motor.c   **** }
+ 104:Arm_motor.c   **** 
+ 105:Arm_motor.c   **** 
+ 106:Arm_motor.c   **** 
+ 107:Arm_motor.c   **** 
+ 108:Arm_motor.c   **** int arm_setpos(int arm_soll)
+ 109:Arm_motor.c   **** {
+  23              		.loc 1 109 0
   24              		.cfi_startproc
-  25              		@ args = 0, pretend = 0, frame = 8
+  25              		@ args = 0, pretend = 0, frame = 0
   26              		@ frame_needed = 0, uses_anonymous_args = 0
   27              	.LVL0:
   28 0000 F0412DE9 		stmfd	sp!, {r4, r5, r6, r7, r8, lr}
@@ -125,613 +142,417 @@
   34              		.cfi_offset 7, -12
   35              		.cfi_offset 8, -8
   36              		.cfi_offset 14, -4
-  37              		.pad #8
-  38 0004 08D04DE2 		sub	sp, sp, #8
-  39              		.cfi_def_cfa_offset 32
-  40 0008 0080A0E1 		mov	r8, r0
-  93:Arm_motor.c   **** #ifdef __linux__
-  94:Arm_motor.c   ****     char motor_command[4];
-  95:Arm_motor.c   ****     
-  96:Arm_motor.c   ****     motor_command[0]=opOUTPUT_SPEED;
-  41              		.loc 1 96 0
-  42 000c 5A30E0E3 		mvn	r3, #90
-  43 0010 0430CDE5 		strb	r3, [sp, #4]
-  97:Arm_motor.c   ****     motor_command[1]=MOTOR_PORT_A;
-  44              		.loc 1 97 0
-  45 0014 0130A0E3 		mov	r3, #1
-  46 0018 0530CDE5 		strb	r3, [sp, #5]
-  98:Arm_motor.c   ****     if(arm_winkel[arm_ist]<arm_winkel[arm_soll])
-  47              		.loc 1 98 0
-  48 001c 6C319FE5 		ldr	r3, .L6
-  49 0020 004193E7 		ldr	r4, [r3, r0, asl #2]
-  50 0024 68219FE5 		ldr	r2, .L6+4
-  51 0028 002092E5 		ldr	r2, [r2]
-  52 002c 023193E7 		ldr	r3, [r3, r2, asl #2]
-  53 0030 040053E1 		cmp	r3, r4
-  54 0034 220000AA 		bge	.L2
-  99:Arm_motor.c   ****     {
- 100:Arm_motor.c   ****         motor_command[2]=MOTOR_SPEED;
-  55              		.loc 1 100 0
-  56 0038 0F30A0E3 		mov	r3, #15
-  57 003c 0630CDE5 		strb	r3, [sp, #6]
- 101:Arm_motor.c   ****         write(motor_file,motor_command,3);  //motor_speed Wert geben
-  58              		.loc 1 101 0
-  59 0040 50519FE5 		ldr	r5, .L6+8
-  60 0044 000095E5 		ldr	r0, [r5]
-  61              	.LVL1:
-  62 0048 04108DE2 		add	r1, sp, #4
-  63 004c 0320A0E3 		mov	r2, #3
-  64 0050 FEFFFFEB 		bl	write
-  65              	.LVL2:
- 102:Arm_motor.c   ****         
- 103:Arm_motor.c   ****         motor_command[0]=opOUTPUT_START;
-  66              		.loc 1 103 0
-  67 0054 5930E0E3 		mvn	r3, #89
-  68 0058 0430CDE5 		strb	r3, [sp, #4]
- 104:Arm_motor.c   ****         motor_command[1]=MOTOR_PORT_A;
-  69              		.loc 1 104 0
-  70 005c 0130A0E3 		mov	r3, #1
-  71 0060 0530CDE5 		strb	r3, [sp, #5]
- 105:Arm_motor.c   ****         write(motor_file,motor_command,2);  //Motor starten
-  72              		.loc 1 105 0
-  73 0064 000095E5 		ldr	r0, [r5]
-  74 0068 04108DE2 		add	r1, sp, #4
-  75 006c 0220A0E3 		mov	r2, #2
-  76 0070 FEFFFFEB 		bl	write
-  77              	.LVL3:
- 106:Arm_motor.c   ****         
- 107:Arm_motor.c   ****         
- 108:Arm_motor.c   ****         while ((pMotorData[0].TachoSensor-arm_referenz) < arm_winkel[arm_soll])
-  78              		.loc 1 108 0
-  79 0074 20319FE5 		ldr	r3, .L6+12
-  80 0078 003093E5 		ldr	r3, [r3]
-  81 007c 082093E5 		ldr	r2, [r3, #8]
-  82 0080 0C319FE5 		ldr	r3, .L6+4
-  83 0084 043093E5 		ldr	r3, [r3, #4]
-  84 0088 023063E0 		rsb	r3, r3, r2
-  85 008c 030054E1 		cmp	r4, r3
-  86 0090 2D0000DA 		ble	.L3
- 109:Arm_motor.c   ****         {
- 110:Arm_motor.c   ****             /* printf("Spd/Cnt/Snr: A=%d/%d/%d\n", pMotorData[0].Speed, pMotorData[0].TachoCounts, 
- 111:Arm_motor.c   ****             usleep(10000);
-  87              		.loc 1 111 0
-  88 0094 04719FE5 		ldr	r7, .L6+16
- 108:Arm_motor.c   ****         {
-  89              		.loc 1 108 0
-  90 0098 FC609FE5 		ldr	r6, .L6+12
-  91 009c F0509FE5 		ldr	r5, .L6+4
-  92              	.L4:
-  93              		.loc 1 111 0
-  94 00a0 0700A0E1 		mov	r0, r7
-  95 00a4 FEFFFFEB 		bl	usleep
-  96              	.LVL4:
- 108:Arm_motor.c   ****         {
-  97              		.loc 1 108 0
-  98 00a8 003096E5 		ldr	r3, [r6]
-  99 00ac 082093E5 		ldr	r2, [r3, #8]
- 100 00b0 043095E5 		ldr	r3, [r5, #4]
- 101 00b4 023063E0 		rsb	r3, r3, r2
- 102 00b8 030054E1 		cmp	r4, r3
- 103 00bc F7FFFFCA 		bgt	.L4
- 104 00c0 210000EA 		b	.L3
- 105              	.LVL5:
- 106              	.L2:
- 112:Arm_motor.c   ****         }
- 113:Arm_motor.c   ****     }
- 114:Arm_motor.c   ****     else
- 115:Arm_motor.c   ****     {
- 116:Arm_motor.c   ****         motor_command[2]=-MOTOR_SPEED;
- 107              		.loc 1 116 0
- 108 00c4 0E30E0E3 		mvn	r3, #14
- 109 00c8 0630CDE5 		strb	r3, [sp, #6]
- 117:Arm_motor.c   ****         write(motor_file,motor_command,3);  //motor_speed Wert geben
- 110              		.loc 1 117 0
- 111 00cc C4509FE5 		ldr	r5, .L6+8
- 112 00d0 000095E5 		ldr	r0, [r5]
- 113              	.LVL6:
- 114 00d4 04108DE2 		add	r1, sp, #4
- 115 00d8 0320A0E3 		mov	r2, #3
- 116 00dc FEFFFFEB 		bl	write
- 117              	.LVL7:
- 118:Arm_motor.c   ****         
- 119:Arm_motor.c   ****         motor_command[0]=opOUTPUT_START;
- 118              		.loc 1 119 0
- 119 00e0 5930E0E3 		mvn	r3, #89
- 120 00e4 0430CDE5 		strb	r3, [sp, #4]
- 120:Arm_motor.c   ****         motor_command[1]=MOTOR_PORT_A;
- 121              		.loc 1 120 0
- 122 00e8 0130A0E3 		mov	r3, #1
- 123 00ec 0530CDE5 		strb	r3, [sp, #5]
- 121:Arm_motor.c   ****         write(motor_file,motor_command,2);  //Motor starten
- 124              		.loc 1 121 0
- 125 00f0 000095E5 		ldr	r0, [r5]
- 126 00f4 04108DE2 		add	r1, sp, #4
- 127 00f8 0220A0E3 		mov	r2, #2
- 128 00fc FEFFFFEB 		bl	write
- 129              	.LVL8:
- 122:Arm_motor.c   ****         
- 123:Arm_motor.c   ****         
- 124:Arm_motor.c   ****         while ((pMotorData[0].TachoSensor-arm_referenz) > arm_winkel[arm_soll])
- 130              		.loc 1 124 0
- 131 0100 94309FE5 		ldr	r3, .L6+12
- 132 0104 003093E5 		ldr	r3, [r3]
- 133 0108 082093E5 		ldr	r2, [r3, #8]
- 134 010c 80309FE5 		ldr	r3, .L6+4
- 135 0110 043093E5 		ldr	r3, [r3, #4]
- 136 0114 023063E0 		rsb	r3, r3, r2
- 137 0118 030054E1 		cmp	r4, r3
- 138 011c 0A0000AA 		bge	.L3
- 125:Arm_motor.c   ****         {
- 126:Arm_motor.c   ****             /*printf("Spd/Cnt/Snr: A=%d/%d/%d\n", pMotorData[0].Speed, pMotorData[0].TachoCounts, p
- 127:Arm_motor.c   ****             usleep(10000);
- 139              		.loc 1 127 0
- 140 0120 78709FE5 		ldr	r7, .L6+16
- 124:Arm_motor.c   ****         {
- 141              		.loc 1 124 0
- 142 0124 70609FE5 		ldr	r6, .L6+12
- 143 0128 64509FE5 		ldr	r5, .L6+4
- 144              	.L5:
- 145              		.loc 1 127 0
- 146 012c 0700A0E1 		mov	r0, r7
- 147 0130 FEFFFFEB 		bl	usleep
- 148              	.LVL9:
- 124:Arm_motor.c   ****         {
- 149              		.loc 1 124 0
- 150 0134 003096E5 		ldr	r3, [r6]
- 151 0138 082093E5 		ldr	r2, [r3, #8]
- 152 013c 043095E5 		ldr	r3, [r5, #4]
- 153 0140 023063E0 		rsb	r3, r3, r2
- 154 0144 030054E1 		cmp	r4, r3
- 155 0148 F7FFFFBA 		blt	.L5
- 156              	.L3:
- 128:Arm_motor.c   ****         }
- 129:Arm_motor.c   ****     }
- 130:Arm_motor.c   ****     
- 131:Arm_motor.c   ****     motor_command[0]=opOUTPUT_STOP;
- 157              		.loc 1 131 0
- 158 014c 5C30E0E3 		mvn	r3, #92
- 159 0150 0430CDE5 		strb	r3, [sp, #4]
- 132:Arm_motor.c   ****     motor_command[1]=MOTOR_PORT_A;
- 160              		.loc 1 132 0
- 161 0154 0130A0E3 		mov	r3, #1
- 162 0158 0530CDE5 		strb	r3, [sp, #5]
- 133:Arm_motor.c   ****     motor_command[2]=1;
- 163              		.loc 1 133 0
- 164 015c 0630CDE5 		strb	r3, [sp, #6]
- 134:Arm_motor.c   ****     write(motor_file,motor_command,3); //Motor stopppen
- 165              		.loc 1 134 0
- 166 0160 30309FE5 		ldr	r3, .L6+8
- 167 0164 000093E5 		ldr	r0, [r3]
- 168 0168 04108DE2 		add	r1, sp, #4
- 169 016c 0320A0E3 		mov	r2, #3
- 170 0170 FEFFFFEB 		bl	write
- 171              	.LVL10:
- 135:Arm_motor.c   ****     arm_ist=arm_soll;
- 172              		.loc 1 135 0
- 173 0174 18309FE5 		ldr	r3, .L6+4
- 174 0178 008083E5 		str	r8, [r3]
- 136:Arm_motor.c   ****     usleep(100000);
- 175              		.loc 1 136 0
- 176 017c 20009FE5 		ldr	r0, .L6+20
- 177 0180 FEFFFFEB 		bl	usleep
- 178              	.LVL11:
- 137:Arm_motor.c   **** #endif
- 138:Arm_motor.c   ****     return 0;
- 139:Arm_motor.c   **** }
- 179              		.loc 1 139 0
- 180 0184 0000A0E3 		mov	r0, #0
- 181 0188 08D08DE2 		add	sp, sp, #8
- 182              		@ sp needed
- 183 018c F081BDE8 		ldmfd	sp!, {r4, r5, r6, r7, r8, pc}
- 184              	.LVL12:
- 185              	.L7:
- 186              		.align	2
- 187              	.L6:
- 188 0190 00000000 		.word	.LANCHOR0
- 189 0194 00000000 		.word	.LANCHOR1
- 190 0198 00000000 		.word	motor_file
- 191 019c 00000000 		.word	pMotorData
- 192 01a0 10270000 		.word	10000
- 193 01a4 A0860100 		.word	100000
- 194              		.cfi_endproc
- 195              	.LFE22:
- 196              		.fnend
- 198              		.align	2
- 199              		.global	arm_init
- 201              	arm_init:
- 202              		.fnstart
- 203              	.LFB21:
-  36:Arm_motor.c   **** #ifdef __linux__
- 204              		.loc 1 36 0
- 205              		.cfi_startproc
- 206              		@ args = 0, pretend = 0, frame = 8
- 207              		@ frame_needed = 0, uses_anonymous_args = 0
- 208 01a8 70402DE9 		stmfd	sp!, {r4, r5, r6, lr}
- 209              		.save {r4, r5, r6, lr}
- 210              		.cfi_def_cfa_offset 16
- 211              		.cfi_offset 4, -16
- 212              		.cfi_offset 5, -12
- 213              		.cfi_offset 6, -8
- 214              		.cfi_offset 14, -4
- 215              		.pad #16
- 216 01ac 10D04DE2 		sub	sp, sp, #16
- 217              		.cfi_def_cfa_offset 32
-  38:Arm_motor.c   ****     {
- 218              		.loc 1 38 0
- 219 01b0 74019FE5 		ldr	r0, .L15
- 220 01b4 0110A0E3 		mov	r1, #1
- 221 01b8 FEFFFFEB 		bl	open
- 222              	.LVL13:
- 223 01bc 6C319FE5 		ldr	r3, .L15+4
- 224 01c0 000083E5 		str	r0, [r3]
- 225 01c4 010070E3 		cmn	r0, #1
- 226 01c8 0300001A 		bne	.L9
-  40:Arm_motor.c   ****         return -1;
- 227              		.loc 1 40 0
- 228 01cc 60019FE5 		ldr	r0, .L15+8
- 229 01d0 FEFFFFEB 		bl	printf
- 230              	.LVL14:
-  41:Arm_motor.c   ****     }
- 231              		.loc 1 41 0
- 232 01d4 0000E0E3 		mvn	r0, #0
- 233 01d8 510000EA 		b	.L10
- 234              	.L9:
-  44:Arm_motor.c   ****         return -1;
- 235              		.loc 1 44 0
- 236 01dc 54019FE5 		ldr	r0, .L15+12
- 237 01e0 54119FE5 		ldr	r1, .L15+16
- 238 01e4 FEFFFFEB 		bl	open
- 239              	.LVL15:
- 240 01e8 50319FE5 		ldr	r3, .L15+20
- 241 01ec 000083E5 		str	r0, [r3]
- 242 01f0 010070E3 		cmn	r0, #1
- 243 01f4 4900000A 		beq	.L14
-  46:Arm_motor.c   ****     
- 244              		.loc 1 46 0
- 245 01f8 00008DE5 		str	r0, [sp]
- 246 01fc 0000A0E3 		mov	r0, #0
- 247 0200 04008DE5 		str	r0, [sp, #4]
- 248 0204 3010A0E3 		mov	r1, #48
- 249 0208 0320A0E3 		mov	r2, #3
- 250 020c 0130A0E3 		mov	r3, #1
- 251 0210 FEFFFFEB 		bl	mmap
- 252              	.LVL16:
- 253 0214 28319FE5 		ldr	r3, .L15+24
- 254 0218 000083E5 		str	r0, [r3]
-  48:Arm_motor.c   ****     {
- 255              		.loc 1 48 0
- 256 021c 010070E3 		cmn	r0, #1
- 257 0220 0300001A 		bne	.L11
-  50:Arm_motor.c   ****         return -1;
- 258              		.loc 1 50 0
- 259 0224 1C019FE5 		ldr	r0, .L15+28
- 260 0228 FEFFFFEB 		bl	printf
- 261              	.LVL17:
-  51:Arm_motor.c   ****     }
- 262              		.loc 1 51 0
- 263 022c 0000E0E3 		mvn	r0, #0
- 264 0230 3B0000EA 		b	.L10
- 265              	.L11:
-  55:Arm_motor.c   ****     motor_command[1]=MOTOR_PORT_A;
- 266              		.loc 1 55 0
- 267 0234 5A30E0E3 		mvn	r3, #90
- 268 0238 0C30CDE5 		strb	r3, [sp, #12]
-  56:Arm_motor.c   ****     motor_command[2]=MOTOR_SPEED;
- 269              		.loc 1 56 0
- 270 023c 0150A0E3 		mov	r5, #1
- 271 0240 0D50CDE5 		strb	r5, [sp, #13]
-  57:Arm_motor.c   ****     write(motor_file,motor_command,3);// motor_speed Wert geben
- 272              		.loc 1 57 0
- 273 0244 0F30A0E3 		mov	r3, #15
- 274 0248 0E30CDE5 		strb	r3, [sp, #14]
-  58:Arm_motor.c   ****     
- 275              		.loc 1 58 0
- 276 024c DC409FE5 		ldr	r4, .L15+4
- 277 0250 000094E5 		ldr	r0, [r4]
- 278 0254 0C108DE2 		add	r1, sp, #12
- 279 0258 0320A0E3 		mov	r2, #3
- 280 025c FEFFFFEB 		bl	write
- 281              	.LVL18:
-  60:Arm_motor.c   ****     motor_command[1]=MOTOR_PORT_A;
- 282              		.loc 1 60 0
- 283 0260 5930E0E3 		mvn	r3, #89
- 284 0264 0C30CDE5 		strb	r3, [sp, #12]
-  61:Arm_motor.c   ****     write(motor_file,motor_command,2);// Motor starten
- 285              		.loc 1 61 0
- 286 0268 0D50CDE5 		strb	r5, [sp, #13]
-  62:Arm_motor.c   ****     
- 287              		.loc 1 62 0
- 288 026c 000094E5 		ldr	r0, [r4]
- 289 0270 0C108DE2 		add	r1, sp, #12
- 290 0274 0220A0E3 		mov	r2, #2
- 291 0278 FEFFFFEB 		bl	write
- 292              	.LVL19:
-  65:Arm_motor.c   ****     
- 293              		.loc 1 65 0
- 294 027c C0409FE5 		ldr	r4, .L15+24
- 295 0280 003094E5 		ldr	r3, [r4]
- 296 0284 085093E5 		ldr	r5, [r3, #8]
- 297              	.LVL20:
-  67:Arm_motor.c   ****     while(old_TachoSensor!=pMotorData[0].TachoSensor){
- 298              		.loc 1 67 0
- 299 0288 BC009FE5 		ldr	r0, .L15+32
- 300 028c FEFFFFEB 		bl	usleep
- 301              	.LVL21:
-  68:Arm_motor.c   ****         /* printf("Spd/Cnt/Snr: A=%d/%d/%d\n", pMotorData[0].Speed, pMotorData[0].TachoCounts, pMot
- 302              		.loc 1 68 0
- 303 0290 003094E5 		ldr	r3, [r4]
- 304 0294 084093E5 		ldr	r4, [r3, #8]
- 305 0298 040055E1 		cmp	r5, r4
- 306 029c 0800000A 		beq	.L12
-  71:Arm_motor.c   ****     }
- 307              		.loc 1 71 0
- 308 02a0 A8609FE5 		ldr	r6, .L15+36
-  68:Arm_motor.c   ****         /* printf("Spd/Cnt/Snr: A=%d/%d/%d\n", pMotorData[0].Speed, pMotorData[0].TachoCounts, pMot
- 309              		.loc 1 68 0
- 310 02a4 98509FE5 		ldr	r5, .L15+24
- 311              	.LVL22:
- 312              	.L13:
-  71:Arm_motor.c   ****     }
- 313              		.loc 1 71 0
- 314 02a8 0600A0E1 		mov	r0, r6
- 315 02ac FEFFFFEB 		bl	usleep
- 316              	.LVL23:
-  68:Arm_motor.c   ****         /* printf("Spd/Cnt/Snr: A=%d/%d/%d\n", pMotorData[0].Speed, pMotorData[0].TachoCounts, pMot
- 317              		.loc 1 68 0
- 318 02b0 003095E5 		ldr	r3, [r5]
- 319 02b4 083093E5 		ldr	r3, [r3, #8]
- 320 02b8 040053E1 		cmp	r3, r4
- 321 02bc 0340A011 		movne	r4, r3
- 322              	.LVL24:
- 323 02c0 F8FFFF1A 		bne	.L13
- 324              	.L12:
-  74:Arm_motor.c   ****     motor_command[1]=MOTOR_PORT_A;
- 325              		.loc 1 74 0
- 326 02c4 5C30E0E3 		mvn	r3, #92
- 327 02c8 0C30CDE5 		strb	r3, [sp, #12]
-  75:Arm_motor.c   ****     motor_command[2]=1;
- 328              		.loc 1 75 0
- 329 02cc 0130A0E3 		mov	r3, #1
- 330 02d0 0D30CDE5 		strb	r3, [sp, #13]
-  76:Arm_motor.c   ****     write(motor_file,motor_command,3);  // Motor stoppen
- 331              		.loc 1 76 0
- 332 02d4 0E30CDE5 		strb	r3, [sp, #14]
-  77:Arm_motor.c   ****     
- 333              		.loc 1 77 0
- 334 02d8 50309FE5 		ldr	r3, .L15+4
- 335 02dc 000093E5 		ldr	r0, [r3]
- 336 02e0 0C108DE2 		add	r1, sp, #12
- 337 02e4 0320A0E3 		mov	r2, #3
- 338 02e8 FEFFFFEB 		bl	write
- 339              	.LVL25:
-  79:Arm_motor.c   ****     arm_ist = 0;
- 340              		.loc 1 79 0
- 341 02ec 50309FE5 		ldr	r3, .L15+24
- 342 02f0 003093E5 		ldr	r3, [r3]
- 343 02f4 081093E5 		ldr	r1, [r3, #8]
- 344 02f8 54309FE5 		ldr	r3, .L15+40
- 345 02fc 041083E5 		str	r1, [r3, #4]
-  80:Arm_motor.c   ****     printf("Arm_referenzPosition angefahren %d\n\r",arm_referenz);
- 346              		.loc 1 80 0
- 347 0300 0040A0E3 		mov	r4, #0
- 348 0304 004083E5 		str	r4, [r3]
-  81:Arm_motor.c   ****     
- 349              		.loc 1 81 0
- 350 0308 48009FE5 		ldr	r0, .L15+44
- 351 030c FEFFFFEB 		bl	printf
- 352              	.LVL26:
-  83:Arm_motor.c   **** #endif
- 353              		.loc 1 83 0
- 354 0310 0400A0E1 		mov	r0, r4
- 355 0314 FEFFFFEB 		bl	arm_setpos
- 356              	.LVL27:
-  85:Arm_motor.c   **** }
- 357              		.loc 1 85 0
- 358 0318 0400A0E1 		mov	r0, r4
- 359 031c 000000EA 		b	.L10
- 360              	.L14:
-  45:Arm_motor.c   ****     pMotorData = (MOTORDATA*)mmap (0, sizeof(MOTORDATA)*vmOUTPUTS, PROT_READ|PROT_WRITE,MAP_FILE|MA
- 361              		.loc 1 45 0
- 362 0320 0000E0E3 		mvn	r0, #0
- 363              	.L10:
-  86:Arm_motor.c   **** 
- 364              		.loc 1 86 0
- 365 0324 10D08DE2 		add	sp, sp, #16
- 366              		@ sp needed
- 367 0328 7080BDE8 		ldmfd	sp!, {r4, r5, r6, pc}
- 368              	.L16:
- 369              		.align	2
- 370              	.L15:
- 371 032c 00000000 		.word	.LC0
- 372 0330 00000000 		.word	motor_file
- 373 0334 10000000 		.word	.LC1
- 374 0338 28000000 		.word	.LC2
- 375 033c 02101000 		.word	1052674
- 376 0340 00000000 		.word	encoder_file
- 377 0344 00000000 		.word	pMotorData
- 378 0348 38000000 		.word	.LC3
- 379 034c 40420F00 		.word	1000000
- 380 0350 10270000 		.word	10000
- 381 0354 00000000 		.word	.LANCHOR1
- 382 0358 44000000 		.word	.LC4
- 383              		.cfi_endproc
- 384              	.LFE21:
- 385              		.fnend
- 387              		.align	2
- 388              		.global	arm_close
- 390              	arm_close:
- 391              		.fnstart
- 392              	.LFB23:
- 140:Arm_motor.c   **** 
- 141:Arm_motor.c   **** 
- 142:Arm_motor.c   **** int arm_close()
- 143:Arm_motor.c   **** {
- 393              		.loc 1 143 0
- 394              		.cfi_startproc
- 395              		@ args = 0, pretend = 0, frame = 8
- 396              		@ frame_needed = 0, uses_anonymous_args = 0
- 397 035c 30402DE9 		stmfd	sp!, {r4, r5, lr}
- 398              		.save {r4, r5, lr}
- 399              		.cfi_def_cfa_offset 12
- 400              		.cfi_offset 4, -12
- 401              		.cfi_offset 5, -8
- 402              		.cfi_offset 14, -4
- 403              		.pad #12
- 404 0360 0CD04DE2 		sub	sp, sp, #12
- 405              		.cfi_def_cfa_offset 24
- 144:Arm_motor.c   **** #ifdef __linux__
- 145:Arm_motor.c   ****     char motor_command[4];
- 146:Arm_motor.c   ****     
- 147:Arm_motor.c   ****     motor_command[0] = opOUTPUT_STOP;
- 406              		.loc 1 147 0
- 407 0364 5C30E0E3 		mvn	r3, #92
- 408 0368 0430CDE5 		strb	r3, [sp, #4]
- 148:Arm_motor.c   ****     motor_command[1] = MOTOR_PORT_A;
- 409              		.loc 1 148 0
- 410 036c 0130A0E3 		mov	r3, #1
- 411 0370 0530CDE5 		strb	r3, [sp, #5]
- 149:Arm_motor.c   ****     motor_command[2]=0;
- 412              		.loc 1 149 0
- 413 0374 0040A0E3 		mov	r4, #0
- 414 0378 0640CDE5 		strb	r4, [sp, #6]
- 150:Arm_motor.c   ****     write(motor_file,motor_command,3);
- 415              		.loc 1 150 0
- 416 037c 2C509FE5 		ldr	r5, .L18
- 417 0380 000095E5 		ldr	r0, [r5]
- 418 0384 04108DE2 		add	r1, sp, #4
- 419 0388 0320A0E3 		mov	r2, #3
- 420 038c FEFFFFEB 		bl	write
- 421              	.LVL28:
- 151:Arm_motor.c   ****     
- 152:Arm_motor.c   ****     close(encoder_file);
- 422              		.loc 1 152 0
- 423 0390 1C309FE5 		ldr	r3, .L18+4
- 424 0394 000093E5 		ldr	r0, [r3]
- 425 0398 FEFFFFEB 		bl	close
- 426              	.LVL29:
- 153:Arm_motor.c   ****     close(motor_file);
- 427              		.loc 1 153 0
- 428 039c 000095E5 		ldr	r0, [r5]
- 429 03a0 FEFFFFEB 		bl	close
- 430              	.LVL30:
- 154:Arm_motor.c   **** #endif
- 155:Arm_motor.c   ****     return 0;
- 156:Arm_motor.c   **** }...
- 431              		.loc 1 156 0
- 432 03a4 0400A0E1 		mov	r0, r4
- 433 03a8 0CD08DE2 		add	sp, sp, #12
- 434              		@ sp needed
- 435 03ac 3080BDE8 		ldmfd	sp!, {r4, r5, pc}
- 436              	.L19:
- 437              		.align	2
- 438              	.L18:
- 439 03b0 00000000 		.word	motor_file
- 440 03b4 00000000 		.word	encoder_file
- 441              		.cfi_endproc
- 442              	.LFE23:
- 443              		.fnend
- 445              		.global	arm_winkel
- 446              		.global	arm_ist
- 447              		.global	arm_referenz
- 448              		.comm	encoder_file,4,4
- 449              		.comm	motor_file,4,4
- 450              		.comm	pMotorData,4,4
- 451              		.global	MOTOR_PORT_A
- 452              		.global	MOTOR_SPEED
- 453              		.section	.rodata
- 454              		.align	2
- 455              	.LANCHOR0 = . + 0
- 458              	arm_winkel:
- 459 0000 FCFFFFFF 		.word	-4
- 460 0004 ADFFFFFF 		.word	-83
- 461 0008 74FFFFFF 		.word	-140
- 462 000c 19FFFFFF 		.word	-231
- 463 0010 B6FEFFFF 		.word	-330
- 466              	MOTOR_PORT_A:
- 467 0014 01       		.byte	1
- 468 0015 000000   		.space	3
- 471              	MOTOR_SPEED:
- 472 0018 0F000000 		.word	15
- 473              		.section	.rodata.str1.4,"aMS",%progbits,1
- 474              		.align	2
- 475              	.LC0:
- 476 0000 2F646576 		.ascii	"/dev/lms_pwm\000"
- 476      2F6C6D73 
- 476      5F70776D 
- 476      00
- 477 000d 000000   		.space	3
- 478              	.LC1:
- 479 0010 4661696C 		.ascii	"Failed to open device\012\000"
- 479      65642074 
- 479      6F206F70 
- 479      656E2064 
- 479      65766963 
- 480 0027 00       		.space	1
- 481              	.LC2:
- 482 0028 2F646576 		.ascii	"/dev/lms_motor\000"
- 482      2F6C6D73 
- 482      5F6D6F74 
- 482      6F7200
- 483 0037 00       		.space	1
- 484              	.LC3:
- 485 0038 4D617020 		.ascii	"Map failed\012\000"
- 485      6661696C 
- 485      65640A00 
- 486              	.LC4:
- 487 0044 41726D5F 		.ascii	"Arm_referenzPosition angefahren %d\012\015\000"
- 487      72656665 
- 487      72656E7A 
- 487      506F7369 
- 487      74696F6E 
- 488 0069 000000   		.bss
- 489              		.align	2
- 490              	.LANCHOR1 = . + 0
- 493              	arm_ist:
- 494 0000 00000000 		.space	4
- 497              	arm_referenz:
- 498 0004 00000000 		.space	4
- 499              		.text
- 500              	.Letext0:
- 501              		.file 2 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
- 502              		.file 3 "/usr/local/carlson-minot/crosscompilers/lib/gcc/arm-none-linux-gnueabi/4.8.3/include/stdd
- 503              		.file 4 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
- 504              		.file 5 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
- 505              		.file 6 "lmstypes.h"
- 506              		.file 7 "bytecodes.h"
- 507              		.file 8 "lms2012.h"
- 508              		.file 9 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
- 509              		.file 10 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/u
- 510              		.file 11 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/u
+  37 0004 0070A0E1 		mov	r7, r0
+ 110:Arm_motor.c   **** #ifdef __linux__
+ 111:Arm_motor.c   **** #if 0
+ 112:Arm_motor.c   ****     char motor_command[4];
+ 113:Arm_motor.c   ****     
+ 114:Arm_motor.c   ****     motor_command[0]=opOUTPUT_SPEED;
+ 115:Arm_motor.c   ****     motor_command[1]=MOTOR_PORT_A;
+ 116:Arm_motor.c   ****     if(arm_winkel[arm_ist]<arm_winkel[arm_soll])
+ 117:Arm_motor.c   ****     {
+ 118:Arm_motor.c   ****         motor_command[2]=MOTOR_SPEED;
+ 119:Arm_motor.c   ****         write(motor_file,motor_command,3);  //motor_speed Wert geben
+ 120:Arm_motor.c   ****         
+ 121:Arm_motor.c   ****         motor_command[0]=opOUTPUT_START;
+ 122:Arm_motor.c   ****         motor_command[1]=MOTOR_PORT_A;
+ 123:Arm_motor.c   ****         write(motor_file,motor_command,2);  //Motor starten
+ 124:Arm_motor.c   ****         
+ 125:Arm_motor.c   ****         while ((pMotorData[0].TachoSensor-arm_referenz) < arm_winkel[arm_soll])
+ 126:Arm_motor.c   ****         {
+ 127:Arm_motor.c   ****             /* printf("Spd/Cnt/Snr: A=%d/%d/%d\n", pMotorData[0].Speed, pMotorData[0].TachoCounts, 
+ 128:Arm_motor.c   ****             usleep(10000);
+ 129:Arm_motor.c   ****         }
+ 130:Arm_motor.c   ****     }
+ 131:Arm_motor.c   ****     else
+ 132:Arm_motor.c   ****     {
+ 133:Arm_motor.c   ****         motor_command[2]=-MOTOR_SPEED;
+ 134:Arm_motor.c   ****         write(motor_file,motor_command,3);  //motor_speed Wert geben
+ 135:Arm_motor.c   ****         
+ 136:Arm_motor.c   ****         motor_command[0]=opOUTPUT_START;
+ 137:Arm_motor.c   ****         motor_command[1]=MOTOR_PORT_A;
+ 138:Arm_motor.c   ****         write(motor_file,motor_command,2);  //Motor starten
+ 139:Arm_motor.c   ****         
+ 140:Arm_motor.c   ****         
+ 141:Arm_motor.c   ****         while ((pMotorData[0].TachoSensor-arm_referenz) > arm_winkel[arm_soll])
+ 142:Arm_motor.c   ****         {
+ 143:Arm_motor.c   ****             /*printf("Spd/Cnt/Snr: A=%d/%d/%d\n", pMotorData[0].Speed, pMotorData[0].TachoCounts, p
+ 144:Arm_motor.c   ****             usleep(10000);
+ 145:Arm_motor.c   ****         }
+ 146:Arm_motor.c   ****     }
+ 147:Arm_motor.c   ****     
+ 148:Arm_motor.c   ****     motor_command[0]=opOUTPUT_STOP;
+ 149:Arm_motor.c   ****     motor_command[1]=MOTOR_PORT_A;
+ 150:Arm_motor.c   ****     motor_command[2]=1;
+ 151:Arm_motor.c   ****     write(motor_file,motor_command,3); //Motor stopppen
+ 152:Arm_motor.c   **** #else
+ 153:Arm_motor.c   ****     if(arm_winkel[arm_ist]<arm_winkel[arm_soll]){
+  38              		.loc 1 153 0
+  39 0008 C4309FE5 		ldr	r3, .L8
+  40 000c 004193E7 		ldr	r4, [r3, r0, asl #2]
+  41 0010 C0209FE5 		ldr	r2, .L8+4
+  42 0014 002092E5 		ldr	r2, [r2]
+  43 0018 023193E7 		ldr	r3, [r3, r2, asl #2]
+  44 001c 040053E1 		cmp	r3, r4
+  45 0020 110000AA 		bge	.L2
+ 154:Arm_motor.c   ****         cOutputSpeed(MOTOR_PORT_A,MOTOR_SPEED);
+  46              		.loc 1 154 0
+  47 0024 0100A0E3 		mov	r0, #1
+  48              	.LVL1:
+  49 0028 1910A0E3 		mov	r1, #25
+  50 002c FEFFFFEB 		bl	cOutputSpeed
+  51              	.LVL2:
+ 155:Arm_motor.c   ****         cOutputStart(MOTOR_PORT_A);
+  52              		.loc 1 155 0
+  53 0030 0100A0E3 		mov	r0, #1
+  54 0034 FEFFFFEB 		bl	cOutputStart
+  55              	.LVL3:
+ 156:Arm_motor.c   ****         while ((cOutputGetCount(0)-arm_referenz) < arm_winkel[arm_soll])
+  56              		.loc 1 156 0
+  57 0038 0060A0E3 		mov	r6, #0
+  58 003c 94509FE5 		ldr	r5, .L8+4
+ 157:Arm_motor.c   ****         {
+ 158:Arm_motor.c   ****             usleep(10000);
+  59              		.loc 1 158 0
+  60 0040 94809FE5 		ldr	r8, .L8+8
+ 156:Arm_motor.c   ****         while ((cOutputGetCount(0)-arm_referenz) < arm_winkel[arm_soll])
+  61              		.loc 1 156 0
+  62 0044 010000EA 		b	.L3
+  63              	.L4:
+  64              		.loc 1 158 0
+  65 0048 0800A0E1 		mov	r0, r8
+  66 004c FEFFFFEB 		bl	usleep
+  67              	.LVL4:
+  68              	.L3:
+ 156:Arm_motor.c   ****         while ((cOutputGetCount(0)-arm_referenz) < arm_winkel[arm_soll])
+  69              		.loc 1 156 0 discriminator 1
+  70 0050 0600A0E1 		mov	r0, r6
+  71 0054 FEFFFFEB 		bl	cOutputGetCount
+  72              	.LVL5:
+  73 0058 043095E5 		ldr	r3, [r5, #4]
+  74 005c 000063E0 		rsb	r0, r3, r0
+  75 0060 000054E1 		cmp	r4, r0
+  76 0064 F7FFFFCA 		bgt	.L4
+  77 0068 100000EA 		b	.L5
+  78              	.LVL6:
+  79              	.L2:
+ 159:Arm_motor.c   ****         }
+ 160:Arm_motor.c   ****     }else{
+ 161:Arm_motor.c   ****         cOutputSpeed(MOTOR_PORT_A,-MOTOR_SPEED);
+  80              		.loc 1 161 0
+  81 006c 0100A0E3 		mov	r0, #1
+  82              	.LVL7:
+  83 0070 1810E0E3 		mvn	r1, #24
+  84 0074 FEFFFFEB 		bl	cOutputSpeed
+  85              	.LVL8:
+ 162:Arm_motor.c   ****         cOutputStart(MOTOR_PORT_A);
+  86              		.loc 1 162 0
+  87 0078 0100A0E3 		mov	r0, #1
+  88 007c FEFFFFEB 		bl	cOutputStart
+  89              	.LVL9:
+ 163:Arm_motor.c   ****         while ((cOutputGetCount(0)-arm_referenz) > arm_winkel[arm_soll])
+  90              		.loc 1 163 0
+  91 0080 0060A0E3 		mov	r6, #0
+  92 0084 4C509FE5 		ldr	r5, .L8+4
+ 164:Arm_motor.c   ****         {
+ 165:Arm_motor.c   ****             usleep(10000);
+  93              		.loc 1 165 0
+  94 0088 4C809FE5 		ldr	r8, .L8+8
+ 163:Arm_motor.c   ****         while ((cOutputGetCount(0)-arm_referenz) > arm_winkel[arm_soll])
+  95              		.loc 1 163 0
+  96 008c 010000EA 		b	.L6
+  97              	.L7:
+  98              		.loc 1 165 0
+  99 0090 0800A0E1 		mov	r0, r8
+ 100 0094 FEFFFFEB 		bl	usleep
+ 101              	.LVL10:
+ 102              	.L6:
+ 163:Arm_motor.c   ****         while ((cOutputGetCount(0)-arm_referenz) > arm_winkel[arm_soll])
+ 103              		.loc 1 163 0 discriminator 1
+ 104 0098 0600A0E1 		mov	r0, r6
+ 105 009c FEFFFFEB 		bl	cOutputGetCount
+ 106              	.LVL11:
+ 107 00a0 043095E5 		ldr	r3, [r5, #4]
+ 108 00a4 000063E0 		rsb	r0, r3, r0
+ 109 00a8 000054E1 		cmp	r4, r0
+ 110 00ac F7FFFFBA 		blt	.L7
+ 111              	.L5:
+ 166:Arm_motor.c   ****         }
+ 167:Arm_motor.c   ****         
+ 168:Arm_motor.c   ****     }
+ 169:Arm_motor.c   ****     cOutputStop(MOTOR_PORT_A,1);
+ 112              		.loc 1 169 0
+ 113 00b0 0100A0E3 		mov	r0, #1
+ 114 00b4 0010A0E1 		mov	r1, r0
+ 115 00b8 FEFFFFEB 		bl	cOutputStop
+ 116              	.LVL12:
+ 170:Arm_motor.c   **** #endif
+ 171:Arm_motor.c   ****     arm_ist=arm_soll;
+ 117              		.loc 1 171 0
+ 118 00bc 14309FE5 		ldr	r3, .L8+4
+ 119 00c0 007083E5 		str	r7, [r3]
+ 172:Arm_motor.c   ****     usleep(100000);
+ 120              		.loc 1 172 0
+ 121 00c4 14009FE5 		ldr	r0, .L8+12
+ 122 00c8 FEFFFFEB 		bl	usleep
+ 123              	.LVL13:
+ 173:Arm_motor.c   **** #endif
+ 174:Arm_motor.c   ****     return 0;
+ 175:Arm_motor.c   **** }
+ 124              		.loc 1 175 0
+ 125 00cc 0000A0E3 		mov	r0, #0
+ 126 00d0 F081BDE8 		ldmfd	sp!, {r4, r5, r6, r7, r8, pc}
+ 127              	.L9:
+ 128              		.align	2
+ 129              	.L8:
+ 130 00d4 00000000 		.word	.LANCHOR0
+ 131 00d8 00000000 		.word	.LANCHOR1
+ 132 00dc 10270000 		.word	10000
+ 133 00e0 A0860100 		.word	100000
+ 134              		.cfi_endproc
+ 135              	.LFE22:
+ 136              		.fnend
+ 138              		.align	2
+ 139              		.global	arm_init
+ 141              	arm_init:
+ 142              		.fnstart
+ 143              	.LFB21:
+  43:Arm_motor.c   **** #ifdef __linux__
+ 144              		.loc 1 43 0
+ 145              		.cfi_startproc
+ 146              		@ args = 0, pretend = 0, frame = 0
+ 147              		@ frame_needed = 0, uses_anonymous_args = 0
+ 148 00e4 70402DE9 		stmfd	sp!, {r4, r5, r6, lr}
+ 149              		.save {r4, r5, r6, lr}
+ 150              		.cfi_def_cfa_offset 16
+ 151              		.cfi_offset 4, -16
+ 152              		.cfi_offset 5, -12
+ 153              		.cfi_offset 6, -8
+ 154              		.cfi_offset 14, -4
+  86:Arm_motor.c   ****     cOutputSpeed(MOTOR_PORT_A,MOTOR_SPEED);
+ 155              		.loc 1 86 0
+ 156 00e8 FEFFFFEB 		bl	cOutputInit
+ 157              	.LVL14:
+  87:Arm_motor.c   ****     cOutputStart(MOTOR_PORT_A);
+ 158              		.loc 1 87 0
+ 159 00ec 0100A0E3 		mov	r0, #1
+ 160 00f0 1910A0E3 		mov	r1, #25
+ 161 00f4 FEFFFFEB 		bl	cOutputSpeed
+ 162              	.LVL15:
+  88:Arm_motor.c   ****     int old_TachoSensor;
+ 163              		.loc 1 88 0
+ 164 00f8 0100A0E3 		mov	r0, #1
+ 165 00fc FEFFFFEB 		bl	cOutputStart
+ 166              	.LVL16:
+  90:Arm_motor.c   ****     usleep(1000000);
+ 167              		.loc 1 90 0
+ 168 0100 0000A0E3 		mov	r0, #0
+ 169 0104 FEFFFFEB 		bl	cOutputGetCount
+ 170              	.LVL17:
+ 171 0108 0050A0E1 		mov	r5, r0
+ 172              	.LVL18:
+  91:Arm_motor.c   ****     while(old_TachoSensor!=cOutputGetCount(0)){
+ 173              		.loc 1 91 0
+ 174 010c 70009FE5 		ldr	r0, .L13
+ 175              	.LVL19:
+ 176 0110 FEFFFFEB 		bl	usleep
+ 177              	.LVL20:
+  92:Arm_motor.c   ****         old_TachoSensor=cOutputGetCount(0);
+ 178              		.loc 1 92 0
+ 179 0114 0040A0E3 		mov	r4, #0
+  94:Arm_motor.c   ****     }
+ 180              		.loc 1 94 0
+ 181 0118 68609FE5 		ldr	r6, .L13+4
+  92:Arm_motor.c   ****         old_TachoSensor=cOutputGetCount(0);
+ 182              		.loc 1 92 0
+ 183 011c 040000EA 		b	.L11
+ 184              	.L12:
+  93:Arm_motor.c   ****         usleep(10000);
+ 185              		.loc 1 93 0
+ 186 0120 0400A0E1 		mov	r0, r4
+ 187 0124 FEFFFFEB 		bl	cOutputGetCount
+ 188              	.LVL21:
+ 189 0128 0050A0E1 		mov	r5, r0
+ 190              	.LVL22:
+  94:Arm_motor.c   ****     }
+ 191              		.loc 1 94 0
+ 192 012c 0600A0E1 		mov	r0, r6
+ 193              	.LVL23:
+ 194 0130 FEFFFFEB 		bl	usleep
+ 195              	.LVL24:
+ 196              	.L11:
+  92:Arm_motor.c   ****         old_TachoSensor=cOutputGetCount(0);
+ 197              		.loc 1 92 0 discriminator 1
+ 198 0134 0400A0E1 		mov	r0, r4
+ 199 0138 FEFFFFEB 		bl	cOutputGetCount
+ 200              	.LVL25:
+ 201 013c 050050E1 		cmp	r0, r5
+ 202 0140 F6FFFF1A 		bne	.L12
+  96:Arm_motor.c   ****     arm_referenz=cOutputGetCount(0);
+ 203              		.loc 1 96 0
+ 204 0144 0100A0E3 		mov	r0, #1
+ 205 0148 0010A0E1 		mov	r1, r0
+ 206 014c FEFFFFEB 		bl	cOutputStop
+ 207              	.LVL26:
+  97:Arm_motor.c   ****     arm_ist = 0;
+ 208              		.loc 1 97 0
+ 209 0150 0000A0E3 		mov	r0, #0
+ 210 0154 FEFFFFEB 		bl	cOutputGetCount
+ 211              	.LVL27:
+ 212 0158 2C409FE5 		ldr	r4, .L13+8
+ 213 015c 040084E5 		str	r0, [r4, #4]
+  98:Arm_motor.c   ****     arm_setpos(4);
+ 214              		.loc 1 98 0
+ 215 0160 0050A0E3 		mov	r5, #0
+ 216              	.LVL28:
+ 217 0164 005084E5 		str	r5, [r4]
+  99:Arm_motor.c   ****     printf("Arm_referenzPosition angefahren %d\n\r",arm_referenz);
+ 218              		.loc 1 99 0
+ 219 0168 0400A0E3 		mov	r0, #4
+ 220 016c FEFFFFEB 		bl	arm_setpos
+ 221              	.LVL29:
+ 100:Arm_motor.c   **** #endif
+ 222              		.loc 1 100 0
+ 223 0170 18009FE5 		ldr	r0, .L13+12
+ 224 0174 041094E5 		ldr	r1, [r4, #4]
+ 225 0178 FEFFFFEB 		bl	printf
+ 226              	.LVL30:
+ 103:Arm_motor.c   **** 
+ 227              		.loc 1 103 0
+ 228 017c 0500A0E1 		mov	r0, r5
+ 229 0180 7080BDE8 		ldmfd	sp!, {r4, r5, r6, pc}
+ 230              	.L14:
+ 231              		.align	2
+ 232              	.L13:
+ 233 0184 40420F00 		.word	1000000
+ 234 0188 10270000 		.word	10000
+ 235 018c 00000000 		.word	.LANCHOR1
+ 236 0190 00000000 		.word	.LC0
+ 237              		.cfi_endproc
+ 238              	.LFE21:
+ 239              		.fnend
+ 241              		.align	2
+ 242              		.global	arm_close
+ 244              	arm_close:
+ 245              		.fnstart
+ 246              	.LFB23:
+ 176:Arm_motor.c   **** 
+ 177:Arm_motor.c   **** 
+ 178:Arm_motor.c   **** int arm_close()
+ 179:Arm_motor.c   **** {
+ 247              		.loc 1 179 0
+ 248              		.cfi_startproc
+ 249              		@ args = 0, pretend = 0, frame = 0
+ 250              		@ frame_needed = 0, uses_anonymous_args = 0
+ 251 0194 08402DE9 		stmfd	sp!, {r3, lr}
+ 252              		.save {r3, lr}
+ 253              		.cfi_def_cfa_offset 8
+ 254              		.cfi_offset 3, -8
+ 255              		.cfi_offset 14, -4
+ 180:Arm_motor.c   **** #ifdef __linux__
+ 181:Arm_motor.c   **** #if 0
+ 182:Arm_motor.c   ****     char motor_command[4];
+ 183:Arm_motor.c   ****     
+ 184:Arm_motor.c   ****     motor_command[0] = opOUTPUT_STOP;
+ 185:Arm_motor.c   ****     motor_command[1] = MOTOR_PORT_A;
+ 186:Arm_motor.c   ****     motor_command[2]=0;
+ 187:Arm_motor.c   ****     write(motor_file,motor_command,3);
+ 188:Arm_motor.c   ****     
+ 189:Arm_motor.c   ****     close(encoder_file);
+ 190:Arm_motor.c   ****     close(motor_file);
+ 191:Arm_motor.c   **** #else
+ 192:Arm_motor.c   ****     cOutputExit();
+ 256              		.loc 1 192 0
+ 257 0198 FEFFFFEB 		bl	cOutputExit
+ 258              	.LVL31:
+ 193:Arm_motor.c   **** #endif
+ 194:Arm_motor.c   ****     
+ 195:Arm_motor.c   **** #endif
+ 196:Arm_motor.c   ****     return 0;
+ 197:Arm_motor.c   **** }...
+ 259              		.loc 1 197 0
+ 260 019c 0000A0E3 		mov	r0, #0
+ 261 01a0 0880BDE8 		ldmfd	sp!, {r3, pc}
+ 262              		.cfi_endproc
+ 263              	.LFE23:
+ 264              		.fnend
+ 266              		.global	arm_winkel
+ 267              		.global	arm_ist
+ 268              		.global	arm_referenz
+ 269              		.comm	OutputInstance,64,4
+ 270              		.global	MOTOR_PORT_A
+ 271              		.global	MOTOR_SPEED
+ 272              		.section	.rodata
+ 273              		.align	2
+ 274              	.LANCHOR0 = . + 0
+ 277              	arm_winkel:
+ 278 0000 04000000 		.word	4
+ 279 0004 ADFFFFFF 		.word	-83
+ 280 0008 6AFFFFFF 		.word	-150
+ 281 000c 10FFFFFF 		.word	-240
+ 282 0010 B6FEFFFF 		.word	-330
+ 285              	MOTOR_PORT_A:
+ 286 0014 01       		.byte	1
+ 287 0015 000000   		.space	3
+ 290              	MOTOR_SPEED:
+ 291 0018 19000000 		.word	25
+ 292              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 293              		.align	2
+ 294              	.LC0:
+ 295 0000 41726D5F 		.ascii	"Arm_referenzPosition angefahren %d\012\015\000"
+ 295      72656665 
+ 295      72656E7A 
+ 295      506F7369 
+ 295      74696F6E 
+ 296 0025 000000   		.bss
+ 297              		.align	2
+ 298              	.LANCHOR1 = . + 0
+ 301              	arm_ist:
+ 302 0000 00000000 		.space	4
+ 305              	arm_referenz:
+ 306 0004 00000000 		.space	4
+ 307              		.text
+ 308              	.Letext0:
+ 309              		.file 2 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
+ 310              		.file 3 "/usr/local/carlson-minot/crosscompilers/lib/gcc/arm-none-linux-gnueabi/4.8.3/include/stdd
+ 311              		.file 4 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
+ 312              		.file 5 "lmstypes.h"
+ 313              		.file 6 "bytecodes.h"
+ 314              		.file 7 "lms2012.h"
+ 315              		.file 8 "../lms2012/c_output.h"
+ 316              		.file 9 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
+ 317              		.file 10 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/u
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 Arm_motor.c
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccsMp70y.s:16     .text:0000000000000000 $a
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccsMp70y.s:19     .text:0000000000000000 arm_setpos
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccsMp70y.s:188    .text:0000000000000190 $d
-                            *COM*:0000000000000004 motor_file
-                            *COM*:0000000000000004 pMotorData
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//cciPorEZ.s:16     .text:0000000000000000 $a
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//cciPorEZ.s:19     .text:0000000000000000 arm_setpos
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//cciPorEZ.s:130    .text:00000000000000d4 $d
                        .ARM.exidx:0000000000000000 $d
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccsMp70y.s:198    .text:00000000000001a8 $a
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccsMp70y.s:201    .text:00000000000001a8 arm_init
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccsMp70y.s:371    .text:000000000000032c $d
-                            *COM*:0000000000000004 encoder_file
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccsMp70y.s:387    .text:000000000000035c $a
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccsMp70y.s:390    .text:000000000000035c arm_close
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccsMp70y.s:439    .text:00000000000003b0 $d
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccsMp70y.s:458    .rodata:0000000000000000 arm_winkel
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccsMp70y.s:493    .bss:0000000000000000 arm_ist
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccsMp70y.s:497    .bss:0000000000000004 arm_referenz
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccsMp70y.s:466    .rodata:0000000000000014 MOTOR_PORT_A
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccsMp70y.s:471    .rodata:0000000000000018 MOTOR_SPEED
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccsMp70y.s:454    .rodata:0000000000000000 $d
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccsMp70y.s:474    .rodata.str1.4:0000000000000000 $d
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccsMp70y.s:489    .bss:0000000000000000 $d
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//cciPorEZ.s:138    .text:00000000000000e4 $a
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//cciPorEZ.s:141    .text:00000000000000e4 arm_init
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//cciPorEZ.s:233    .text:0000000000000184 $d
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//cciPorEZ.s:241    .text:0000000000000194 $a
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//cciPorEZ.s:244    .text:0000000000000194 arm_close
+                       .ARM.extab:0000000000000000 $d
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//cciPorEZ.s:277    .rodata:0000000000000000 arm_winkel
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//cciPorEZ.s:301    .bss:0000000000000000 arm_ist
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//cciPorEZ.s:305    .bss:0000000000000004 arm_referenz
+                            *COM*:0000000000000040 OutputInstance
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//cciPorEZ.s:285    .rodata:0000000000000014 MOTOR_PORT_A
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//cciPorEZ.s:290    .rodata:0000000000000018 MOTOR_SPEED
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//cciPorEZ.s:273    .rodata:0000000000000000 $d
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//cciPorEZ.s:293    .rodata.str1.4:0000000000000000 $d
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//cciPorEZ.s:297    .bss:0000000000000000 $d
                      .debug_frame:0000000000000010 $d
 
 UNDEFINED SYMBOLS
-write
+cOutputSpeed
+cOutputStart
 usleep
+cOutputGetCount
+cOutputStop
 __aeabi_unwind_cpp_pr0
-open
+cOutputInit
 printf
-mmap
-close
+cOutputExit
+__aeabi_unwind_cpp_pr1

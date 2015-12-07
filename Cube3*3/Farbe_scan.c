@@ -35,7 +35,8 @@ int Center[]={0,5,2,3,4,1};
 int farbe_scan()
 {
 #ifdef __linux__
-    int i,j;
+    int i;
+    //int i,j;
     arm_setpos(4);
     for (i=0; i<=2; i++)
     {
@@ -44,9 +45,53 @@ int farbe_scan()
         color_data[Center[i]][(int)Color_position[Center[i]][0]]=ColSen_getData();
         usleep(100000);
         DrehTel_dreh();
-        Farbe_setpos(3);
+        Farbe_setpos(5);
+        usleep(100000);
+        color_data[Center[i]][(int)Color_position[Center[i]][1]]=ColSen_getData();
         sleep(1);
-        for(j=1;j<=7;j++)
+        usleep(100000);
+        DrehTel_dreh();
+        Farbe_setpos(2);
+        usleep(100000);
+        color_data[Center[i]][(int)Color_position[Center[i]][2]]=ColSen_getData();
+        sleep(1);
+        usleep(100000);
+        DrehTel_dreh();
+        Farbe_setpos(4);
+        usleep(100000);
+        color_data[Center[i]][(int)Color_position[Center[i]][3]]=ColSen_getData();
+        sleep(1);
+        usleep(100000);
+        DrehTel_dreh();
+        Farbe_setpos(2);
+        usleep(100000);
+        color_data[Center[i]][(int)Color_position[Center[i]][4]]=ColSen_getData();
+        sleep(1);
+        usleep(100000);
+        DrehTel_dreh();
+        Farbe_setpos(5);
+        usleep(100000);
+        color_data[Center[i]][(int)Color_position[Center[i]][5]]=ColSen_getData();
+        sleep(1);
+        usleep(100000);
+        DrehTel_dreh();
+        Farbe_setpos(3);
+        usleep(100000);
+        color_data[Center[i]][(int)Color_position[Center[i]][6]]=ColSen_getData();
+        sleep(1);
+        usleep(100000);
+        DrehTel_dreh();
+        Farbe_setpos(5);
+        usleep(100000);
+        color_data[Center[i]][(int)Color_position[Center[i]][7]]=ColSen_getData();
+        sleep(1);
+        usleep(100000);
+        DrehTel_dreh();
+        Farbe_setpos(3);
+        usleep(100000);
+        color_data[Center[i]][(int)Color_position[Center[i]][8]]=ColSen_getData();
+        sleep(1);
+        /*for(j=1;j<=7;j++)
         {
             if (j%2 != 0){
                 usleep(1000);
@@ -67,32 +112,76 @@ int farbe_scan()
                 DrehTel_dreh();
                 sleep(1);
             }
-        }
-        Farbe_setpos(4);
+        }*/
+        Farbe_setpos(6);
         usleep(10000);
         arm_setpos(3);
         arm_setpos(2);
         arm_setpos(4);
     }
     
-    usleep(10000);
+    usleep(100000);
     DrehTel_setpos(1);
-    usleep(10000);
+    usleep(100000);
     arm_setpos(3);
     arm_setpos(2);
     arm_setpos(4);
+    usleep(100000);
     DrehTel_setpos(3);
-
     
     for (i=3; i<=5; i++) {
         Farbe_setpos(1);
         usleep(100000);
         color_data[Center[i]][(int)Color_position[Center[i]][0]]=ColSen_getData();
         usleep(100000);
-        Farbe_setpos(3);
         DrehTel_dreh();
+        Farbe_setpos(5);
+        usleep(100000);
+        color_data[Center[i]][(int)Color_position[Center[i]][1]]=ColSen_getData();
         sleep(1);
-        for(j=1;j<=7;j++)
+        usleep(100000);
+        DrehTel_dreh();
+        Farbe_setpos(2);
+        usleep(100000);
+        color_data[Center[i]][(int)Color_position[Center[i]][2]]=ColSen_getData();
+        sleep(1);
+        usleep(100000);
+        DrehTel_dreh();
+        Farbe_setpos(4);
+        usleep(100000);
+        color_data[Center[i]][(int)Color_position[Center[i]][3]]=ColSen_getData();
+        sleep(1);
+        usleep(100000);
+        DrehTel_dreh();
+        Farbe_setpos(2);
+        usleep(100000);
+        color_data[Center[i]][(int)Color_position[Center[i]][4]]=ColSen_getData();
+        sleep(1);
+        usleep(100000);
+        DrehTel_dreh();
+        Farbe_setpos(5);
+        usleep(100000);
+        color_data[Center[i]][(int)Color_position[Center[i]][5]]=ColSen_getData();
+        sleep(1);
+        usleep(100000);
+        DrehTel_dreh();
+        Farbe_setpos(3);
+        usleep(100000);
+        color_data[Center[i]][(int)Color_position[Center[i]][6]]=ColSen_getData();
+        sleep(1);
+        usleep(100000);
+        DrehTel_dreh();
+        Farbe_setpos(5);
+        usleep(100000);
+        color_data[Center[i]][(int)Color_position[Center[i]][7]]=ColSen_getData();
+        sleep(1);
+        usleep(100000);
+        DrehTel_dreh();
+        Farbe_setpos(3);
+        usleep(100000);
+        color_data[Center[i]][(int)Color_position[Center[i]][8]]=ColSen_getData();
+        sleep(1);
+        /*for(j=1;j<=7;j++)
         {
             if (j%2 != 0){
                 usleep(1000);
@@ -113,8 +202,9 @@ int farbe_scan()
                 DrehTel_dreh();
                 sleep(1);
             }
-        }
-        Farbe_setpos(4);
+        }*/
+        Farbe_setpos(6);
+        usleep(10000);
         arm_setpos(3);
         arm_setpos(2);
         arm_setpos(4);

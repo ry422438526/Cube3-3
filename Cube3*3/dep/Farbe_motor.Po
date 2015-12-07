@@ -30,7 +30,7 @@ bin/Farbe_motor.o: Farbe_motor.c \
  /usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/usr/include/asm-generic/int-ll64.h \
  /usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/usr/include/asm/bitsperlong.h \
  /usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/usr/include/asm-generic/bitsperlong.h \
- lmstypes.h bytecodes.h \
+ lmstypes.h bytecodes.h ../lms2012/c_output.h \
  /usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/usr/include/unistd.h \
  /usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/usr/include/bits/posix_opt.h \
  /usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/usr/include/bits/environments.h \
@@ -120,6 +120,8 @@ lms2012.h:
 lmstypes.h:
 
 bytecodes.h:
+
+../lms2012/c_output.h:
 
 /usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/usr/include/unistd.h:
 

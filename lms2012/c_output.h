@@ -143,7 +143,8 @@ void      cOutputSpeed    (DATA8 Nos, DATA8 Speed);
 void      cOutputStart    (DATA8 Nos);
 void      cOutputPolarity (DATA8 Nos, DATA8 Pol);
 
-DATA8     cOutputTest     (DATA8 Nos);
+DATA8     cOutputTest  
+(DATA8 Nos);
 DSPSTAT   cOutputReady    (DATA8 Nos);
 void      cOutputStepPower(DATA8 Nos, DATA8 Power, DATA32 Step1, DATA32 Step2, DATA32 Step3, DATA8 Brake);
 void      cOutputTimePower(DATA8 Nos, DATA8 Power, DATA32 Time1, DATA32 Time2, DATA32 Time3, DATA8 Brake);

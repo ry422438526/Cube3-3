@@ -11,6 +11,7 @@
 
 #include <stdio.h>
 
+
 int arm_init();
 int arm_setpos(int arm_soll);
 int arm_close();

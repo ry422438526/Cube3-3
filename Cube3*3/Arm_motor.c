@@ -13,6 +13,7 @@
 
 #ifdef __linux__
 #include "lms2012.h"
+#include "../lms2012/c_output.h"
 #endif
 
 #include <unistd.h>
@@ -21,20 +22,27 @@
 
 
 #ifdef __linux__
-const int MOTOR_SPEED=15;//power:0~100
+const int MOTOR_SPEED=25;//power:0~100
 const char MOTOR_PORT_A = 0x01; //Ausfahrbarer Greifarm Motor;
+
+#if 0
 MOTORDATA *pMotorData;
 int motor_file;
 int encoder_file;
+#else
+OUTPUT_GLOBALS OutputInstance;
+#endif
+
 int arm_referenz=0;
 int arm_ist=0;
-const int arm_winkel[]={-4,-83,-140,-231,-330};//-85   231
+const int arm_winkel[]={4,-83,-150,-240,-330};//-85   231
 #endif
 
 
 int arm_init()
 {
 #ifdef __linux__
+/*
     if ((motor_file = open(PWM_DEVICE_NAME, O_WRONLY))== -1)
     {
         printf("Failed to open device\n");
@@ -50,7 +58,6 @@ int arm_init()
         printf("Map failed\n");
         return -1;
     }
-    
     char motor_command[4];
     motor_command[0]=opOUTPUT_SPEED;
     motor_command[1]=MOTOR_PORT_A;
@@ -66,7 +73,6 @@ int arm_init()
     
     usleep(1000000);
     while(old_TachoSensor!=pMotorData[0].TachoSensor){
-        /* printf("Spd/Cnt/Snr: A=%d/%d/%d\n", pMotorData[0].Speed, pMotorData[0].TachoCounts, pMotorData[0].TachoSensor);*/
         old_TachoSensor=pMotorData[0].TachoSensor;
         usleep(10000);
     }
@@ -75,12 +81,23 @@ int arm_init()
     motor_command[1]=MOTOR_PORT_A;
     motor_command[2]=1;
     write(motor_file,motor_command,3);  // Motor stoppen
+*/
     
-    arm_referenz=pMotorData[0].TachoSensor;
+    cOutputInit();
+    cOutputSpeed(MOTOR_PORT_A,MOTOR_SPEED);
+    cOutputStart(MOTOR_PORT_A);
+    int old_TachoSensor;
+    old_TachoSensor=cOutputGetCount(0);
+    usleep(1000000);
+    while(old_TachoSensor!=cOutputGetCount(0)){
+        old_TachoSensor=cOutputGetCount(0);
+        usleep(10000);
+    }
+    cOutputStop(MOTOR_PORT_A,1);
+    arm_referenz=cOutputGetCount(0);
     arm_ist = 0;
+    arm_setpos(4);
     printf("Arm_referenzPosition angefahren %d\n\r",arm_referenz);
-    
-    arm_setpos(0);
 #endif
     return 0;
 }
@@ -91,6 +108,7 @@ int arm_init()
 int arm_setpos(int arm_soll)
 {
 #ifdef __linux__
+#if 0
     char motor_command[4];
     
     motor_command[0]=opOUTPUT_SPEED;
@@ -103,7 +121,6 @@ int arm_setpos(int arm_soll)
         motor_command[0]=opOUTPUT_START;
         motor_command[1]=MOTOR_PORT_A;
         write(motor_file,motor_command,2);  //Motor starten
-        
         
         while ((pMotorData[0].TachoSensor-arm_referenz) < arm_winkel[arm_soll])
         {
@@ -132,6 +149,25 @@ int arm_setpos(int arm_soll)
     motor_command[1]=MOTOR_PORT_A;
     motor_command[2]=1;
     write(motor_file,motor_command,3); //Motor stopppen
+#else
+    if(arm_winkel[arm_ist]<arm_winkel[arm_soll]){
+        cOutputSpeed(MOTOR_PORT_A,MOTOR_SPEED);
+        cOutputStart(MOTOR_PORT_A);
+        while ((cOutputGetCount(0)-arm_referenz) < arm_winkel[arm_soll])
+        {
+            usleep(10000);
+        }
+    }else{
+        cOutputSpeed(MOTOR_PORT_A,-MOTOR_SPEED);
+        cOutputStart(MOTOR_PORT_A);
+        while ((cOutputGetCount(0)-arm_referenz) > arm_winkel[arm_soll])
+        {
+            usleep(10000);
+        }
+        
+    }
+    cOutputStop(MOTOR_PORT_A,1);
+#endif
     arm_ist=arm_soll;
     usleep(100000);
 #endif
@@ -142,6 +178,7 @@ int arm_setpos(int arm_soll)
 int arm_close()
 {
 #ifdef __linux__
+#if 0
     char motor_command[4];
     
     motor_command[0] = opOUTPUT_STOP;
@@ -151,6 +188,10 @@ int arm_close()
     
     close(encoder_file);
     close(motor_file);
+#else
+    cOutputExit();
+#endif
+    
 #endif
     return 0;
 }

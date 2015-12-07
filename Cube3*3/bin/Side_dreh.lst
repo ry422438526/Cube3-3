@@ -1532,32 +1532,32 @@
  1168              		.file 10 "print_mode.h"
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 Side_dreh.c
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccehpvTt.s:16     .text:0000000000000000 $a
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccehpvTt.s:19     .text:0000000000000000 klappen
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccehpvTt.s:158    .text:0000000000000130 $d
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccRyz2zU.s:16     .text:0000000000000000 $a
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccRyz2zU.s:19     .text:0000000000000000 klappen
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccRyz2zU.s:158    .text:0000000000000130 $d
                        .ARM.exidx:0000000000000000 $d
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccehpvTt.s:164    .text:0000000000000138 $a
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccehpvTt.s:167    .text:0000000000000138 drehen_unter
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccehpvTt.s:438    .text:00000000000003a8 $d
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccehpvTt.s:446    .text:00000000000003b8 $a
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccehpvTt.s:449    .text:00000000000003b8 drehen
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccehpvTt.s:643    .text:0000000000000574 $d
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccehpvTt.s:648    .text:0000000000000578 $a
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccehpvTt.s:651    .text:0000000000000578 us_dreh
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccehpvTt.s:699    .text:00000000000005b4 ds_dreh
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccehpvTt.s:742    .text:00000000000005e8 fs_dreh
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccehpvTt.s:800    .text:0000000000000638 bs_dreh
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccehpvTt.s:858    .text:0000000000000688 ls_dreh
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccehpvTt.s:899    .text:00000000000006b8 rs_dreh
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccehpvTt.s:954    .text:0000000000000700 change_topface
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccehpvTt.s:997    .text:0000000000000740 $d
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccehpvTt.s:1004   .text:0000000000000754 $a
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccehpvTt.s:1057   .text:00000000000007a4 $d
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccehpvTt.s:1062   .text:00000000000007a8 $a
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccehpvTt.s:1065   .text:00000000000007a8 change_rightface
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccehpvTt.s:1146   .text:000000000000082c $d
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccehpvTt.s:1156   .data:0000000000000000 Surface
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccehpvTt.s:1153   .data:0000000000000000 $d
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccRyz2zU.s:164    .text:0000000000000138 $a
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccRyz2zU.s:167    .text:0000000000000138 drehen_unter
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccRyz2zU.s:438    .text:00000000000003a8 $d
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccRyz2zU.s:446    .text:00000000000003b8 $a
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccRyz2zU.s:449    .text:00000000000003b8 drehen
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccRyz2zU.s:643    .text:0000000000000574 $d
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccRyz2zU.s:648    .text:0000000000000578 $a
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccRyz2zU.s:651    .text:0000000000000578 us_dreh
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccRyz2zU.s:699    .text:00000000000005b4 ds_dreh
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccRyz2zU.s:742    .text:00000000000005e8 fs_dreh
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccRyz2zU.s:800    .text:0000000000000638 bs_dreh
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccRyz2zU.s:858    .text:0000000000000688 ls_dreh
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccRyz2zU.s:899    .text:00000000000006b8 rs_dreh
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccRyz2zU.s:954    .text:0000000000000700 change_topface
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccRyz2zU.s:997    .text:0000000000000740 $d
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccRyz2zU.s:1004   .text:0000000000000754 $a
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccRyz2zU.s:1057   .text:00000000000007a4 $d
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccRyz2zU.s:1062   .text:00000000000007a8 $a
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccRyz2zU.s:1065   .text:00000000000007a8 change_rightface
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccRyz2zU.s:1146   .text:000000000000082c $d
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccRyz2zU.s:1156   .data:0000000000000000 Surface
+/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccRyz2zU.s:1153   .data:0000000000000000 $d
                      .debug_frame:0000000000000010 $d
 
 UNDEFINED SYMBOLS

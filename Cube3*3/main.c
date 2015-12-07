@@ -264,58 +264,14 @@ int main(int argc, const char * argv[]) {
 #endif
     
 #ifdef __linux__
+    Farbe_init();
     arm_init();
     DrehTel_init();
-    Farbe_init();
     ColSen_init();
-    Farbe_setpos(2);
-    sleep(1);
-    ColSen_getData();
-    sleep(1);
-    ColSen_getData();
-    sleep(1);
-    ColSen_getData();
-    sleep(1);
-    ColSen_getData();
-    sleep(1);
-    ColSen_getData();
-    sleep(1);
-    ColSen_getData();
-    sleep(1);
-    ColSen_getData();
-    sleep(1);
-    ColSen_getData();
-    sleep(1);
-    ColSen_getData();
-    sleep(1);
-    Farbe_setpos(1);
-    ColSen_getData();
-    sleep(1);
-    ColSen_getData();
-    sleep(1);
-    ColSen_getData();
-    sleep(1);
-    ColSen_getData();
-    sleep(1);
-    ColSen_getData();
-    sleep(1);
-    ColSen_getData();
-    sleep(1);
-    ColSen_getData();
-    sleep(1);
-    ColSen_getData();
-    sleep(1);
-    ColSen_getData();
-    sleep(1);
-    ColSen_getData();
-    sleep(1);
-    ColSen_getData();
-    sleep(1);
-    //color_data[6][9]=farbe_scan();
-    //wuerfel_print(1);
-    //arm_close();
-    //Farbe_close();
-    
+    color_data[6][9]=farbe_scan();
+    wuerfel_print(1);
+    arm_close();
+    Farbe_close();
 #endif
     //change_topface(0);
     //change_rightface(5);
