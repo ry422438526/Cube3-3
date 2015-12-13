@@ -36,7 +36,7 @@ void klappen()
 #ifdef __linux__
     arm_setpos(3);
     arm_setpos(2);
-    arm_setpos(3);
+    arm_setpos(4);
     //Code zur Ansteuerung der Hardware
 #endif
     int i,j;
@@ -148,8 +148,8 @@ void drehen_unter(int dir,int dreh_Angel)
 
 void drehen(int dir)                       //drehen 90 Grad
 {
-    arm_setpos(4);
 #ifdef __linux__
+    arm_setpos(4);
     if(dir==1)
     {
         DrehTel_setpos(2);

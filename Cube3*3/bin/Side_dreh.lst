@@ -84,9 +84,9 @@
   47 0010 0200A0E3 		mov	r0, #2
   48 0014 FEFFFFEB 		bl	arm_setpos
   49              	.LVL1:
-  39:Side_dreh.c   ****     arm_setpos(3);
+  39:Side_dreh.c   ****     arm_setpos(4);
   50              		.loc 1 39 0
-  51 0018 0300A0E3 		mov	r0, #3
+  51 0018 0400A0E3 		mov	r0, #4
   52 001c FEFFFFEB 		bl	arm_setpos
   53              	.LVL2:
   54 0020 0080A0E3 		mov	r8, #0
@@ -631,13 +631,13 @@
  470 03bc 44D04DE2 		sub	sp, sp, #68
  471              		.cfi_def_cfa_offset 104
  472 03c0 0040A0E1 		mov	r4, r0
- 151:Side_dreh.c   ****     arm_setpos(4);
- 473              		.loc 1 151 0
+ 151:Side_dreh.c   **** #ifdef __linux__
+ 152:Side_dreh.c   ****     arm_setpos(4);
+ 473              		.loc 1 152 0
  474 03c4 0400A0E3 		mov	r0, #4
  475              	.LVL46:
  476 03c8 FEFFFFEB 		bl	arm_setpos
  477              	.LVL47:
- 152:Side_dreh.c   **** #ifdef __linux__
  153:Side_dreh.c   ****     if(dir==1)
  478              		.loc 1 153 0
  479 03cc 010054E3 		cmp	r4, #1
@@ -727,7 +727,7 @@
  543              	.L36:
  544 0480 04309DE5 		ldr	r3, [sp, #4]
  545 0484 035066E0 		rsb	r5, r6, r3
- 150:Side_dreh.c   ****     arm_setpos(4);
+ 150:Side_dreh.c   **** #ifdef __linux__
  546              		.loc 1 150 0 discriminator 1
  547 0488 062089E0 		add	r2, r9, r6
  548 048c 0A4066E0 		rsb	r4, r6, r10
@@ -1532,32 +1532,32 @@
  1168              		.file 10 "print_mode.h"
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 Side_dreh.c
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccRyz2zU.s:16     .text:0000000000000000 $a
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccRyz2zU.s:19     .text:0000000000000000 klappen
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccRyz2zU.s:158    .text:0000000000000130 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccx6WXTE.s:16     .text:0000000000000000 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccx6WXTE.s:19     .text:0000000000000000 klappen
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccx6WXTE.s:158    .text:0000000000000130 $d
                        .ARM.exidx:0000000000000000 $d
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccRyz2zU.s:164    .text:0000000000000138 $a
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccRyz2zU.s:167    .text:0000000000000138 drehen_unter
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccRyz2zU.s:438    .text:00000000000003a8 $d
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccRyz2zU.s:446    .text:00000000000003b8 $a
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccRyz2zU.s:449    .text:00000000000003b8 drehen
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccRyz2zU.s:643    .text:0000000000000574 $d
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccRyz2zU.s:648    .text:0000000000000578 $a
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccRyz2zU.s:651    .text:0000000000000578 us_dreh
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccRyz2zU.s:699    .text:00000000000005b4 ds_dreh
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccRyz2zU.s:742    .text:00000000000005e8 fs_dreh
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccRyz2zU.s:800    .text:0000000000000638 bs_dreh
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccRyz2zU.s:858    .text:0000000000000688 ls_dreh
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccRyz2zU.s:899    .text:00000000000006b8 rs_dreh
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccRyz2zU.s:954    .text:0000000000000700 change_topface
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccRyz2zU.s:997    .text:0000000000000740 $d
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccRyz2zU.s:1004   .text:0000000000000754 $a
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccRyz2zU.s:1057   .text:00000000000007a4 $d
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccRyz2zU.s:1062   .text:00000000000007a8 $a
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccRyz2zU.s:1065   .text:00000000000007a8 change_rightface
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccRyz2zU.s:1146   .text:000000000000082c $d
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccRyz2zU.s:1156   .data:0000000000000000 Surface
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccRyz2zU.s:1153   .data:0000000000000000 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccx6WXTE.s:164    .text:0000000000000138 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccx6WXTE.s:167    .text:0000000000000138 drehen_unter
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccx6WXTE.s:438    .text:00000000000003a8 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccx6WXTE.s:446    .text:00000000000003b8 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccx6WXTE.s:449    .text:00000000000003b8 drehen
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccx6WXTE.s:643    .text:0000000000000574 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccx6WXTE.s:648    .text:0000000000000578 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccx6WXTE.s:651    .text:0000000000000578 us_dreh
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccx6WXTE.s:699    .text:00000000000005b4 ds_dreh
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccx6WXTE.s:742    .text:00000000000005e8 fs_dreh
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccx6WXTE.s:800    .text:0000000000000638 bs_dreh
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccx6WXTE.s:858    .text:0000000000000688 ls_dreh
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccx6WXTE.s:899    .text:00000000000006b8 rs_dreh
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccx6WXTE.s:954    .text:0000000000000700 change_topface
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccx6WXTE.s:997    .text:0000000000000740 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccx6WXTE.s:1004   .text:0000000000000754 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccx6WXTE.s:1057   .text:00000000000007a4 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccx6WXTE.s:1062   .text:00000000000007a8 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccx6WXTE.s:1065   .text:00000000000007a8 change_rightface
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccx6WXTE.s:1146   .text:000000000000082c $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccx6WXTE.s:1156   .data:0000000000000000 Surface
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccx6WXTE.s:1153   .data:0000000000000000 $d
                      .debug_frame:0000000000000010 $d
 
 UNDEFINED SYMBOLS

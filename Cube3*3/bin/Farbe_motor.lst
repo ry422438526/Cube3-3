@@ -506,25 +506,25 @@
  312              		.file 10 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/u
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 Farbe_motor.c
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccZn8sJY.s:16     .text:0000000000000000 $a
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccZn8sJY.s:19     .text:0000000000000000 Farbe_init
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccZn8sJY.s:112    .text:00000000000000a4 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccSMRDXd.s:16     .text:0000000000000000 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccSMRDXd.s:19     .text:0000000000000000 Farbe_init
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccSMRDXd.s:112    .text:00000000000000a4 $d
                        .ARM.exidx:0000000000000000 $d
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccZn8sJY.s:119    .text:00000000000000b0 $a
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccZn8sJY.s:122    .text:00000000000000b0 Farbe_setpos
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccZn8sJY.s:228    .text:000000000000017c $d
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccZn8sJY.s:234    .text:0000000000000184 $a
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccZn8sJY.s:237    .text:0000000000000184 Farbe_close
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccSMRDXd.s:119    .text:00000000000000b0 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccSMRDXd.s:122    .text:00000000000000b0 Farbe_setpos
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccSMRDXd.s:228    .text:000000000000017c $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccSMRDXd.s:234    .text:0000000000000184 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccSMRDXd.s:237    .text:0000000000000184 Farbe_close
                        .ARM.extab:0000000000000000 $d
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccZn8sJY.s:270    .rodata:0000000000000000 Farbe_winkel
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccZn8sJY.s:300    .bss:0000000000000004 Farbe_ist
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccZn8sJY.s:296    .bss:0000000000000000 Farbe_referenz
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccSMRDXd.s:270    .rodata:0000000000000000 Farbe_winkel
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccSMRDXd.s:300    .bss:0000000000000004 Farbe_ist
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccSMRDXd.s:296    .bss:0000000000000000 Farbe_referenz
                             *COM*:0000000000000040 OutputInstance
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccZn8sJY.s:280    .rodata:000000000000001c MOTOR_PORT_D
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccZn8sJY.s:285    .rodata:0000000000000020 MOTOR_SPEED_D
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccZn8sJY.s:266    .rodata:0000000000000000 $d
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccZn8sJY.s:288    .rodata.str1.4:0000000000000000 $d
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccZn8sJY.s:292    .bss:0000000000000000 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccSMRDXd.s:280    .rodata:000000000000001c MOTOR_PORT_D
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccSMRDXd.s:285    .rodata:0000000000000020 MOTOR_SPEED_D
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccSMRDXd.s:266    .rodata:0000000000000000 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccSMRDXd.s:288    .rodata.str1.4:0000000000000000 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccSMRDXd.s:292    .bss:0000000000000000 $d
                      .debug_frame:0000000000000010 $d
 
 UNDEFINED SYMBOLS

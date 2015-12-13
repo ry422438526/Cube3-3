@@ -273,12 +273,12 @@ int main(int argc, const char * argv[]) {
     arm_close();
     Farbe_close();
 #endif
-    //change_topface(0);
-    //change_rightface(5);
-    //wuerfel_print(1);
-    //Top_Cross();
-    //F2L();
-    //wuerfel_print(1);
+    change_topface(0);
+    change_rightface(5);
+    wuerfel_print(1);
+    Top_Cross();
+    F2L();
+    wuerfel_print(1);
 #ifndef __linux__
     while(1)
     {

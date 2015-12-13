@@ -16,10 +16,11 @@
 #include <unistd.h>
 #include <sys/select.h>
 #include <termios.h>
-
-//#define RUN_MACOS  1
+#ifdef __linux__
 #define RUN_EV3    1
-
+#else
+#define RUN_MACOS  1
+#endif
 
 //0 =Weisse 1 =Balu 2 =Gelb 3 =Gruen 4 =Rot 5 =Orangen
 

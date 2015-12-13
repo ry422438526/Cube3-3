@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C3513CF1C185A6000B7D2BA /* OLL.c in Sources */ = {isa = PBXBuildFile; fileRef = 2C3513CD1C185A6000B7D2BA /* OLL.c */; };
 		7AD9AB241BF4D6260079E82F /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 7AD9AB231BF4D6260079E82F /* main.c */; };
 		7AD9AB2C1BF4D6510079E82F /* Arm_motor.c in Sources */ = {isa = PBXBuildFile; fileRef = 7AD9AB2A1BF4D6510079E82F /* Arm_motor.c */; };
 		7AD9AB2F1BF4D7120079E82F /* Dreh_motor.c in Sources */ = {isa = PBXBuildFile; fileRef = 7AD9AB2D1BF4D7120079E82F /* Dreh_motor.c */; };
@@ -33,6 +34,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2C3513CD1C185A6000B7D2BA /* OLL.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = OLL.c; sourceTree = "<group>"; };
+		2C3513CE1C185A6000B7D2BA /* OLL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OLL.h; sourceTree = "<group>"; };
 		7AD9AB201BF4D6260079E82F /* Cube3*3 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Cube3*3"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AD9AB231BF4D6260079E82F /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		7AD9AB2A1BF4D6510079E82F /* Arm_motor.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Arm_motor.c; sourceTree = "<group>"; };
@@ -97,6 +100,8 @@
 				7AD9AB4A1BF4DACC0079E82F /* F2L.h */,
 				7AD9AB461BF4DA9B0079E82F /* Top_Cross.c */,
 				7AD9AB471BF4DA9B0079E82F /* Top_Cross.h */,
+				2C3513CD1C185A6000B7D2BA /* OLL.c */,
+				2C3513CE1C185A6000B7D2BA /* OLL.h */,
 				7AD9AB2A1BF4D6510079E82F /* Arm_motor.c */,
 				7AD9AB2B1BF4D6510079E82F /* Arm_motor.h */,
 				7AD9AB2D1BF4D7120079E82F /* Dreh_motor.c */,
@@ -185,6 +190,7 @@
 				7AD9AB351BF4D7800079E82F /* Farbe_scan.c in Sources */,
 				7AD9AB241BF4D6260079E82F /* main.c in Sources */,
 				7AD9AB411BF4D9830079E82F /* print_mode.c in Sources */,
+				2C3513CF1C185A6000B7D2BA /* OLL.c in Sources */,
 				7AD9AB441BF4DA410079E82F /* Color_search.c in Sources */,
 				7AD9AB381BF4D7A90079E82F /* Farbe_sen.c in Sources */,
 			);

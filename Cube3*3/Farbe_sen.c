@@ -71,6 +71,7 @@ int ColSen_getData()   //Center:zenteral Position
     int Color_data_r=0;
     int Color_data_g=0;
     int Color_data_b=0;
+    sleep(1);
     Color_data_r=(unsigned char)pColorSensor->Raw[PORT][0][0]+(unsigned char)(pColorSensor->Raw[PORT][0][1]<<8);
     Color_data_g=(unsigned char)pColorSensor->Raw[PORT][0][2]+(unsigned char)(pColorSensor->Raw[PORT][0][3]<<8);
     Color_data_b=(unsigned char)pColorSensor->Raw[PORT][0][4]+(unsigned char)(pColorSensor->Raw[PORT][0][5]<<8);
@@ -109,6 +110,7 @@ int ColSen_getData()   //Center:zenteral Position
             break;
     }
     printf("\n\r");
+    sleep(1);
     return Color_color;
     // senden daten zu PC
 #endif

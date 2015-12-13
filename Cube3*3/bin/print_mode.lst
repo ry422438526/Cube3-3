@@ -37,60 +37,61 @@
   16:print_mode.c  **** #include <unistd.h>
   17:print_mode.c  **** #include <sys/select.h>
   18:print_mode.c  **** #include <termios.h>
-  19:print_mode.c  **** 
-  20:print_mode.c  **** //#define RUN_MACOS  1
-  21:print_mode.c  **** #define RUN_EV3    1
-  22:print_mode.c  **** 
-  23:print_mode.c  **** 
-  24:print_mode.c  **** //0 =Weisse 1 =Balu 2 =Gelb 3 =Gruen 4 =Rot 5 =Orangen
-  25:print_mode.c  **** 
-  26:print_mode.c  **** #ifndef __linux__
-  27:print_mode.c  **** struct termios orig_termios;
-  28:print_mode.c  **** 
-  29:print_mode.c  **** void reset_terminal_mode()
-  30:print_mode.c  **** {
-  31:print_mode.c  ****     tcsetattr(0, TCSANOW, &orig_termios);
-  32:print_mode.c  **** }
-  33:print_mode.c  **** 
-  34:print_mode.c  **** void set_conio_terminal_mode()
-  35:print_mode.c  **** {
-  36:print_mode.c  ****     struct termios new_termios;
-  37:print_mode.c  ****     
-  38:print_mode.c  ****     /* take two copies - one for now, one for later */
-  39:print_mode.c  ****     tcgetattr(0, &orig_termios);
-  40:print_mode.c  ****     memcpy(&new_termios, &orig_termios, sizeof(new_termios));
-  41:print_mode.c  ****     
-  42:print_mode.c  ****     /* register cleanup handler, and set the new terminal mode */
-  43:print_mode.c  ****     atexit(reset_terminal_mode);
-  44:print_mode.c  ****     cfmakeraw(&new_termios);
-  45:print_mode.c  ****     tcsetattr(0, TCSANOW, &new_termios);
-  46:print_mode.c  **** }
-  47:print_mode.c  **** 
+  19:print_mode.c  **** #ifdef __linux__
+  20:print_mode.c  **** #define RUN_EV3    1
+  21:print_mode.c  **** #else
+  22:print_mode.c  **** #define RUN_MACOS  1
+  23:print_mode.c  **** #endif
+  24:print_mode.c  **** 
+  25:print_mode.c  **** //0 =Weisse 1 =Balu 2 =Gelb 3 =Gruen 4 =Rot 5 =Orangen
+  26:print_mode.c  **** 
+  27:print_mode.c  **** #ifndef __linux__
+  28:print_mode.c  **** struct termios orig_termios;
+  29:print_mode.c  **** 
+  30:print_mode.c  **** void reset_terminal_mode()
+  31:print_mode.c  **** {
+  32:print_mode.c  ****     tcsetattr(0, TCSANOW, &orig_termios);
+  33:print_mode.c  **** }
+  34:print_mode.c  **** 
+  35:print_mode.c  **** void set_conio_terminal_mode()
+  36:print_mode.c  **** {
+  37:print_mode.c  ****     struct termios new_termios;
+  38:print_mode.c  ****     
+  39:print_mode.c  ****     /* take two copies - one for now, one for later */
+  40:print_mode.c  ****     tcgetattr(0, &orig_termios);
+  41:print_mode.c  ****     memcpy(&new_termios, &orig_termios, sizeof(new_termios));
+  42:print_mode.c  ****     
+  43:print_mode.c  ****     /* register cleanup handler, and set the new terminal mode */
+  44:print_mode.c  ****     atexit(reset_terminal_mode);
+  45:print_mode.c  ****     cfmakeraw(&new_termios);
+  46:print_mode.c  ****     tcsetattr(0, TCSANOW, &new_termios);
+  47:print_mode.c  **** }
   48:print_mode.c  **** 
   49:print_mode.c  **** 
-  50:print_mode.c  **** int kbhit()
-  51:print_mode.c  **** {
-  52:print_mode.c  ****     struct timeval tv = { 0L, 0L };
-  53:print_mode.c  ****     fd_set fds;
-  54:print_mode.c  ****     FD_ZERO(&fds);
-  55:print_mode.c  ****     FD_SET(0, &fds);
-  56:print_mode.c  ****     return select(1, &fds, NULL, NULL, &tv);
-  57:print_mode.c  **** }
-  58:print_mode.c  **** 
-  59:print_mode.c  **** int getch()
-  60:print_mode.c  **** {
-  61:print_mode.c  ****     int r;
-  62:print_mode.c  ****     unsigned char c;
-  63:print_mode.c  ****     if ((r = read(0, &c, sizeof(c))) < 0) {
-  64:print_mode.c  ****         return r;
-  65:print_mode.c  ****     } else {
-  66:print_mode.c  ****         return c;
-  67:print_mode.c  ****     }
-  68:print_mode.c  **** }
-  69:print_mode.c  **** #endif
-  70:print_mode.c  **** void wuerfel_print(int mode)
-  71:print_mode.c  **** {
-  23              		.loc 1 71 0
+  50:print_mode.c  **** 
+  51:print_mode.c  **** int kbhit()
+  52:print_mode.c  **** {
+  53:print_mode.c  ****     struct timeval tv = { 0L, 0L };
+  54:print_mode.c  ****     fd_set fds;
+  55:print_mode.c  ****     FD_ZERO(&fds);
+  56:print_mode.c  ****     FD_SET(0, &fds);
+  57:print_mode.c  ****     return select(1, &fds, NULL, NULL, &tv);
+  58:print_mode.c  **** }
+  59:print_mode.c  **** 
+  60:print_mode.c  **** int getch()
+  61:print_mode.c  **** {
+  62:print_mode.c  ****     int r;
+  63:print_mode.c  ****     unsigned char c;
+  64:print_mode.c  ****     if ((r = read(0, &c, sizeof(c))) < 0) {
+  65:print_mode.c  ****         return r;
+  66:print_mode.c  ****     } else {
+  67:print_mode.c  ****         return c;
+  68:print_mode.c  ****     }
+  69:print_mode.c  **** }
+  70:print_mode.c  **** #endif
+  71:print_mode.c  **** void wuerfel_print(int mode)
+  72:print_mode.c  **** {
+  23              		.loc 1 72 0
   24              		.cfi_startproc
   25              		@ args = 0, pretend = 0, frame = 8
   26              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -111,37 +112,37 @@
   41 0004 0CD04DE2 		sub	sp, sp, #12
   42              		.cfi_def_cfa_offset 48
   43 0008 0050A0E1 		mov	r5, r0
-  72:print_mode.c  ****     
-  73:print_mode.c  ****     int zeile;
-  74:print_mode.c  ****     int spalte;
-  75:print_mode.c  ****     
-  76:print_mode.c  ****     setenv("XcodeColor", "YES", 0);
-  44              		.loc 1 76 0
+  73:print_mode.c  ****     
+  74:print_mode.c  ****     int zeile;
+  75:print_mode.c  ****     int spalte;
+  76:print_mode.c  ****     
+  77:print_mode.c  ****     setenv("XcodeColor", "YES", 0);
+  44              		.loc 1 77 0
   45 000c 38019FE5 		ldr	r0, .L14
   46              	.LVL1:
   47 0010 38119FE5 		ldr	r1, .L14+4
   48 0014 0020A0E3 		mov	r2, #0
   49 0018 FEFFFFEB 		bl	setenv
   50              	.LVL2:
-  77:print_mode.c  ****     
-  78:print_mode.c  ****     printf("\n");
-  51              		.loc 1 78 0
+  78:print_mode.c  ****     
+  79:print_mode.c  ****     printf("\n");
+  51              		.loc 1 79 0
   52 001c 30419FE5 		ldr	r4, .L14+8
   53 0020 0400A0E1 		mov	r0, r4
   54 0024 FEFFFFEB 		bl	printf
   55              	.LVL3:
-  79:print_mode.c  ****     printf(".........................................");
-  56              		.loc 1 79 0
+  80:print_mode.c  ****     printf(".........................................");
+  56              		.loc 1 80 0
   57 0028 28019FE5 		ldr	r0, .L14+12
   58 002c FEFFFFEB 		bl	printf
   59              	.LVL4:
-  80:print_mode.c  ****     printf("\n");
-  60              		.loc 1 80 0
+  81:print_mode.c  ****     printf("\n");
+  60              		.loc 1 81 0
   61 0030 0400A0E1 		mov	r0, r4
   62 0034 FEFFFFEB 		bl	printf
   63              	.LVL5:
-  81:print_mode.c  ****     printf("\n");
-  64              		.loc 1 81 0
+  82:print_mode.c  ****     printf("\n");
+  64              		.loc 1 82 0
   65 0038 0400A0E1 		mov	r0, r4
   66 003c FEFFFFEB 		bl	printf
   67              	.LVL6:
@@ -154,87 +155,87 @@
   74 0054 022083E0 		add	r2, r3, r2
   75 0058 04208DE5 		str	r2, [sp, #4]
   76              	.LBB2:
-  82:print_mode.c  ****     for(zeile=0;zeile<12;zeile++)
-  83:print_mode.c  ****     {
-  84:print_mode.c  ****         for(spalte=0;spalte<9;spalte++)
-  85:print_mode.c  ****         {
-  86:print_mode.c  ****             char tmp=print_mode[mode][zeile][spalte];
-  87:print_mode.c  ****             if(tmp==-1)
-  88:print_mode.c  ****                 printf("    ");
-  89:print_mode.c  ****             else
-  90:print_mode.c  ****                 switch(color_data[tmp/9][tmp%9])
-  77              		.loc 1 90 0
+  83:print_mode.c  ****     for(zeile=0;zeile<12;zeile++)
+  84:print_mode.c  ****     {
+  85:print_mode.c  ****         for(spalte=0;spalte<9;spalte++)
+  86:print_mode.c  ****         {
+  87:print_mode.c  ****             char tmp=print_mode[mode][zeile][spalte];
+  88:print_mode.c  ****             if(tmp==-1)
+  89:print_mode.c  ****                 printf("    ");
+  90:print_mode.c  ****             else
+  91:print_mode.c  ****                 switch(color_data[tmp/9][tmp%9])
+  77              		.loc 1 91 0
   78 005c FC709FE5 		ldr	r7, .L14+20
   79 0060 FC609FE5 		ldr	r6, .L14+24
-  91:print_mode.c  ****             {
-  92:print_mode.c  **** #ifdef RUN_MACOS
-  93:print_mode.c  ****                 case 0:
-  94:print_mode.c  ****                     printf("\033[fg0,0,0;   %d\033[;",color_data[tmp/9][tmp%9]);
-  95:print_mode.c  ****                     break;
-  96:print_mode.c  ****                     
-  97:print_mode.c  ****                 case 1:
-  98:print_mode.c  ****                     printf("\033[fg0,0,255;   %d\033[;",color_data[tmp/9][tmp%9]);
-  99:print_mode.c  ****                     break;
- 100:print_mode.c  ****                     
- 101:print_mode.c  ****                 case 2:
- 102:print_mode.c  ****                     printf("\033[fg255,255,0;   %d\033[;",color_data[tmp/9][tmp%9]);
- 103:print_mode.c  ****                     break;
- 104:print_mode.c  ****                     
- 105:print_mode.c  ****                 case 3:
- 106:print_mode.c  ****                     printf("\033[fg0,255,0;   %d\033[;",color_data[tmp/9][tmp%9]);
- 107:print_mode.c  ****                     break;
- 108:print_mode.c  ****                     
- 109:print_mode.c  ****                 case 4:
- 110:print_mode.c  ****                     printf("\033[fg255,0,0;   %d\033[;",color_data[tmp/9][tmp%9]);
- 111:print_mode.c  ****                     break;
- 112:print_mode.c  ****                     
- 113:print_mode.c  ****                 case 5:
- 114:print_mode.c  ****                     printf("\033[fg255,97,0;   %d\033[;",color_data[tmp/9][tmp%9]);
- 115:print_mode.c  ****                     break;
- 116:print_mode.c  **** #endif
- 117:print_mode.c  **** #ifdef RUN_EV3
- 118:print_mode.c  ****                 case 0:
- 119:print_mode.c  ****                     printf("\033[1;30m   %d\033[0m",color_data[tmp/9][tmp%9]);
- 120:print_mode.c  ****                     break;
- 121:print_mode.c  ****                     
- 122:print_mode.c  ****                 case 1:
- 123:print_mode.c  ****                     printf("\033[1;34m   %d\033[0m",color_data[tmp/9][tmp%9]);
- 124:print_mode.c  ****                     break;
- 125:print_mode.c  ****                     
- 126:print_mode.c  ****                 case 2:
- 127:print_mode.c  ****                     printf("\033[1;33m   %d\033[0m",color_data[tmp/9][tmp%9]);
- 128:print_mode.c  ****                     break;
- 129:print_mode.c  ****                     
- 130:print_mode.c  ****                 case 3:
- 131:print_mode.c  ****                     printf("\033[1;32m   %d\033[0m",color_data[tmp/9][tmp%9]);
- 132:print_mode.c  ****                     break;
- 133:print_mode.c  ****                     
- 134:print_mode.c  ****                 case 4:
- 135:print_mode.c  ****                     printf("\033[1;35m   %d\033[0m",color_data[tmp/9][tmp%9]);
- 136:print_mode.c  ****                     break;
- 137:print_mode.c  ****                     
- 138:print_mode.c  ****                 case 5:
- 139:print_mode.c  ****                     printf("\033[1;31m   %d\033[0m",color_data[tmp/9][tmp%9]);
-  80              		.loc 1 139 0
+  92:print_mode.c  ****             {
+  93:print_mode.c  **** #ifdef RUN_MACOS
+  94:print_mode.c  ****                 case 0:
+  95:print_mode.c  ****                     printf("\033[fg0,0,0;   %d\033[;",color_data[tmp/9][tmp%9]);
+  96:print_mode.c  ****                     break;
+  97:print_mode.c  ****                     
+  98:print_mode.c  ****                 case 1:
+  99:print_mode.c  ****                     printf("\033[fg0,0,255;   %d\033[;",color_data[tmp/9][tmp%9]);
+ 100:print_mode.c  ****                     break;
+ 101:print_mode.c  ****                     
+ 102:print_mode.c  ****                 case 2:
+ 103:print_mode.c  ****                     printf("\033[fg255,255,0;   %d\033[;",color_data[tmp/9][tmp%9]);
+ 104:print_mode.c  ****                     break;
+ 105:print_mode.c  ****                     
+ 106:print_mode.c  ****                 case 3:
+ 107:print_mode.c  ****                     printf("\033[fg0,255,0;   %d\033[;",color_data[tmp/9][tmp%9]);
+ 108:print_mode.c  ****                     break;
+ 109:print_mode.c  ****                     
+ 110:print_mode.c  ****                 case 4:
+ 111:print_mode.c  ****                     printf("\033[fg255,0,0;   %d\033[;",color_data[tmp/9][tmp%9]);
+ 112:print_mode.c  ****                     break;
+ 113:print_mode.c  ****                     
+ 114:print_mode.c  ****                 case 5:
+ 115:print_mode.c  ****                     printf("\033[fg255,97,0;   %d\033[;",color_data[tmp/9][tmp%9]);
+ 116:print_mode.c  ****                     break;
+ 117:print_mode.c  **** #endif
+ 118:print_mode.c  **** #ifdef RUN_EV3
+ 119:print_mode.c  ****                 case 0:
+ 120:print_mode.c  ****                     printf("\033[1;30m   %d\033[0m",color_data[tmp/9][tmp%9]);
+ 121:print_mode.c  ****                     break;
+ 122:print_mode.c  ****                     
+ 123:print_mode.c  ****                 case 1:
+ 124:print_mode.c  ****                     printf("\033[1;34m   %d\033[0m",color_data[tmp/9][tmp%9]);
+ 125:print_mode.c  ****                     break;
+ 126:print_mode.c  ****                     
+ 127:print_mode.c  ****                 case 2:
+ 128:print_mode.c  ****                     printf("\033[1;33m   %d\033[0m",color_data[tmp/9][tmp%9]);
+ 129:print_mode.c  ****                     break;
+ 130:print_mode.c  ****                     
+ 131:print_mode.c  ****                 case 3:
+ 132:print_mode.c  ****                     printf("\033[1;32m   %d\033[0m",color_data[tmp/9][tmp%9]);
+ 133:print_mode.c  ****                     break;
+ 134:print_mode.c  ****                     
+ 135:print_mode.c  ****                 case 4:
+ 136:print_mode.c  ****                     printf("\033[1;35m   %d\033[0m",color_data[tmp/9][tmp%9]);
+ 137:print_mode.c  ****                     break;
+ 138:print_mode.c  ****                     
+ 139:print_mode.c  ****                 case 5:
+ 140:print_mode.c  ****                     printf("\033[1;31m   %d\033[0m",color_data[tmp/9][tmp%9]);
+  80              		.loc 1 140 0
   81 0064 FCB09FE5 		ldr	fp, .L14+28
- 135:print_mode.c  ****                     break;
-  82              		.loc 1 135 0
+ 136:print_mode.c  ****                     break;
+  82              		.loc 1 136 0
   83 0068 FCA09FE5 		ldr	r10, .L14+32
- 131:print_mode.c  ****                     break;
-  84              		.loc 1 131 0
+ 132:print_mode.c  ****                     break;
+  84              		.loc 1 132 0
   85 006c FC909FE5 		ldr	r9, .L14+36
- 127:print_mode.c  ****                     break;
-  86              		.loc 1 127 0
+ 128:print_mode.c  ****                     break;
+  86              		.loc 1 128 0
   87 0070 FC809FE5 		ldr	r8, .L14+40
   88 0074 300000EA 		b	.L2
   89              	.LVL8:
   90              	.L13:
-  86:print_mode.c  ****             if(tmp==-1)
-  91              		.loc 1 86 0
+  87:print_mode.c  ****             if(tmp==-1)
+  91              		.loc 1 87 0
   92 0078 0420D5E7 		ldrb	r2, [r5, r4]	@ zero_extendqisi2
   93              	.LVL9:
-  90:print_mode.c  ****             {
-  94              		.loc 1 90 0
+  91:print_mode.c  ****             {
+  94              		.loc 1 91 0
   95 007c 961283E0 		umull	r1, r3, r6, r2
   96 0080 A330A0E1 		mov	r3, r3, lsr #1
   97 0084 831183E0 		add	r1, r3, r3, asl #3
@@ -253,100 +254,100 @@
  110 00b4 FC000000 		.word	.L9
  111 00b8 0C010000 		.word	.L10
  112              	.L4:
- 119:print_mode.c  ****                     break;
- 113              		.loc 1 119 0
+ 120:print_mode.c  ****                     break;
+ 113              		.loc 1 120 0
  114 00bc B4009FE5 		ldr	r0, .L14+44
  115 00c0 0010A0E3 		mov	r1, #0
  116 00c4 FEFFFFEB 		bl	printf
  117              	.LVL10:
- 120:print_mode.c  ****                     
- 118              		.loc 1 120 0
+ 121:print_mode.c  ****                     
+ 118              		.loc 1 121 0
  119 00c8 120000EA 		b	.L3
  120              	.LVL11:
  121              	.L6:
- 123:print_mode.c  ****                     break;
- 122              		.loc 1 123 0
+ 124:print_mode.c  ****                     break;
+ 122              		.loc 1 124 0
  123 00cc A8009FE5 		ldr	r0, .L14+48
  124 00d0 0110A0E3 		mov	r1, #1
  125 00d4 FEFFFFEB 		bl	printf
  126              	.LVL12:
- 124:print_mode.c  ****                     
- 127              		.loc 1 124 0
+ 125:print_mode.c  ****                     
+ 127              		.loc 1 125 0
  128 00d8 0E0000EA 		b	.L3
  129              	.LVL13:
  130              	.L7:
- 127:print_mode.c  ****                     break;
- 131              		.loc 1 127 0
+ 128:print_mode.c  ****                     break;
+ 131              		.loc 1 128 0
  132 00dc 0800A0E1 		mov	r0, r8
  133 00e0 0210A0E3 		mov	r1, #2
  134 00e4 FEFFFFEB 		bl	printf
  135              	.LVL14:
- 128:print_mode.c  ****                     
- 136              		.loc 1 128 0
+ 129:print_mode.c  ****                     
+ 136              		.loc 1 129 0
  137 00e8 0A0000EA 		b	.L3
  138              	.LVL15:
  139              	.L8:
- 131:print_mode.c  ****                     break;
- 140              		.loc 1 131 0
+ 132:print_mode.c  ****                     break;
+ 140              		.loc 1 132 0
  141 00ec 0900A0E1 		mov	r0, r9
  142 00f0 0310A0E3 		mov	r1, #3
  143 00f4 FEFFFFEB 		bl	printf
  144              	.LVL16:
- 132:print_mode.c  ****                     
- 145              		.loc 1 132 0
+ 133:print_mode.c  ****                     
+ 145              		.loc 1 133 0
  146 00f8 060000EA 		b	.L3
  147              	.LVL17:
  148              	.L9:
- 135:print_mode.c  ****                     break;
- 149              		.loc 1 135 0
+ 136:print_mode.c  ****                     break;
+ 149              		.loc 1 136 0
  150 00fc 0A00A0E1 		mov	r0, r10
  151 0100 0410A0E3 		mov	r1, #4
  152 0104 FEFFFFEB 		bl	printf
  153              	.LVL18:
- 136:print_mode.c  ****                     
- 154              		.loc 1 136 0
+ 137:print_mode.c  ****                     
+ 154              		.loc 1 137 0
  155 0108 020000EA 		b	.L3
  156              	.LVL19:
  157              	.L10:
- 158              		.loc 1 139 0
+ 158              		.loc 1 140 0
  159 010c 0B00A0E1 		mov	r0, fp
  160 0110 0510A0E3 		mov	r1, #5
  161 0114 FEFFFFEB 		bl	printf
  162              	.LVL20:
  163              	.L3:
  164              	.LBE2:
-  84:print_mode.c  ****         {
- 165              		.loc 1 84 0
+  85:print_mode.c  ****         {
+ 165              		.loc 1 85 0
  166 0118 014084E2 		add	r4, r4, #1
  167              	.LVL21:
  168 011c 090054E3 		cmp	r4, #9
  169 0120 D4FFFF1A 		bne	.L13
- 140:print_mode.c  ****                     break;
- 141:print_mode.c  **** #endif
- 142:print_mode.c  ****             }
- 143:print_mode.c  ****         }
- 144:print_mode.c  ****         printf("\n\r");
- 170              		.loc 1 144 0
+ 141:print_mode.c  ****                     break;
+ 142:print_mode.c  **** #endif
+ 143:print_mode.c  ****             }
+ 144:print_mode.c  ****         }
+ 145:print_mode.c  ****         printf("\n\r");
+ 170              		.loc 1 145 0
  171 0124 54009FE5 		ldr	r0, .L14+52
  172 0128 FEFFFFEB 		bl	printf
  173              	.LVL22:
  174 012c 095085E2 		add	r5, r5, #9
-  82:print_mode.c  ****     {
- 175              		.loc 1 82 0
+  83:print_mode.c  ****     {
+ 175              		.loc 1 83 0
  176 0130 04309DE5 		ldr	r3, [sp, #4]
  177 0134 030055E1 		cmp	r5, r3
  178 0138 0100000A 		beq	.L1
  179              	.LVL23:
  180              	.L2:
-  71:print_mode.c  ****     
- 181              		.loc 1 71 0 discriminator 1
+  72:print_mode.c  ****     
+ 181              		.loc 1 72 0 discriminator 1
  182 013c 0040A0E3 		mov	r4, #0
  183 0140 CCFFFFEA 		b	.L13
  184              	.LVL24:
  185              	.L1:
- 145:print_mode.c  ****     }
- 146:print_mode.c  **** }
- 186              		.loc 1 146 0
+ 146:print_mode.c  ****     }
+ 147:print_mode.c  **** }
+ 186              		.loc 1 147 0
  187 0144 0CD08DE2 		add	sp, sp, #12
  188              		@ sp needed
  189 0148 F08FBDE8 		ldmfd	sp!, {r4, r5, r6, r7, r8, r9, r10, fp, pc}
@@ -444,13 +445,13 @@
  252              		.file 7 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 print_mode.c
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccV6S0Qj.s:16     .text:0000000000000000 $a
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccV6S0Qj.s:19     .text:0000000000000000 wuerfel_print
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccV6S0Qj.s:106    .text:00000000000000a4 $d
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccV6S0Qj.s:114    .text:00000000000000bc $a
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccV6S0Qj.s:194    .text:000000000000014c $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccGqFEpS.s:16     .text:0000000000000000 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccGqFEpS.s:19     .text:0000000000000000 wuerfel_print
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccGqFEpS.s:106    .text:00000000000000a4 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccGqFEpS.s:114    .text:00000000000000bc $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccGqFEpS.s:194    .text:000000000000014c $d
                        .ARM.exidx:0000000000000000 $d
-/var/folders/23/5yg9vnhn5dd7xxkqmvdyw4ww0000gn/T//ccV6S0Qj.s:213    .rodata.str1.4:0000000000000000 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccGqFEpS.s:213    .rodata.str1.4:0000000000000000 $d
                      .debug_frame:0000000000000010 $d
 
 UNDEFINED SYMBOLS
