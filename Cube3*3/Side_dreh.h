@@ -11,8 +11,8 @@
 
 #include <stdio.h>
 
-void change_topface(int center_color);
-void change_rightface(int rightface);
+int change_topface(int center_color);
+int change_rightface(int rightface);
 void klappen();
 void drehen_unter(int dir,int dreh_Angel);
 void drehen(int dir);

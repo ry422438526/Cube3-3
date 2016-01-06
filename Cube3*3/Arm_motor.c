@@ -22,7 +22,7 @@
 
 
 #ifdef __linux__
-const int MOTOR_SPEED=25;//power:0~100
+const int MOTOR_SPEED=20;//power:0~100
 const char MOTOR_PORT_A = 0x01; //Ausfahrbarer Greifarm Motor;
 
 #if 0

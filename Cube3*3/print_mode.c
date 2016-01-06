@@ -16,15 +16,15 @@
 #include <unistd.h>
 #include <sys/select.h>
 #include <termios.h>
+
 #ifdef __linux__
 #define RUN_EV3    1
-#else
+#else if
 #define RUN_MACOS  1
 #endif
 
 //0 =Weisse 1 =Balu 2 =Gelb 3 =Gruen 4 =Rot 5 =Orangen
 
-#ifndef __linux__
 struct termios orig_termios;
 
 void reset_terminal_mode()
@@ -67,7 +67,6 @@ int getch()
         return c;
     }
 }
-#endif
 void wuerfel_print(int mode)
 {
     
@@ -79,7 +78,7 @@ void wuerfel_print(int mode)
     printf("\n");
     printf(".........................................");
     printf("\n");
-    printf("\n");
+    printf("\n\r");
     for(zeile=0;zeile<12;zeile++)
     {
         for(spalte=0;spalte<9;spalte++)

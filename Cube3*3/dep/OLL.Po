@@ -1,21 +1,16 @@
-bin/main.o: main.c \
+bin/OLL.o: OLL.c \
  /usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/usr/include/stdc-predef.h \
  /usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/usr/include/bits/predefs.h \
- /usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/usr/include/unistd.h \
+ OLL.h \
+ /usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/usr/include/stdio.h \
  /usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/usr/include/features.h \
  /usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/usr/include/sys/cdefs.h \
  /usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/usr/include/bits/wordsize.h \
  /usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/usr/include/gnu/stubs.h \
  /usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/usr/include/gnu/stubs-soft.h \
- /usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/usr/include/bits/posix_opt.h \
- /usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/usr/include/bits/environments.h \
+ /usr/local/carlson-minot/crosscompilers/lib/gcc/arm-none-linux-gnueabi/4.8.3/include/stddef.h \
  /usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/usr/include/bits/types.h \
  /usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/usr/include/bits/typesizes.h \
- /usr/local/carlson-minot/crosscompilers/lib/gcc/arm-none-linux-gnueabi/4.8.3/include/stddef.h \
- /usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/usr/include/bits/confname.h \
- /usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/usr/include/getopt.h \
- Top_Cross.h \
- /usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/usr/include/stdio.h \
  /usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/usr/include/libio.h \
  /usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/usr/include/_G_config.h \
  /usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/usr/include/wchar.h \
@@ -23,14 +18,15 @@ bin/main.o: main.c \
  /usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/usr/include/bits/stdio_lim.h \
  /usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/usr/include/bits/sys_errlist.h \
  /usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/usr/include/bits/stdio.h \
- F2L.h OLL.h PLL.h print_mode.h main.h Color_search.h Arm_motor.h \
- Dreh_motor.h Farbe_motor.h Farbe_scan.h Side_dreh.h Farbe_sen.h
+ Color_search.h Side_dreh.h print_mode.h main.h
 
 /usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/usr/include/stdc-predef.h:
 
 /usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/usr/include/bits/predefs.h:
 
-/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/usr/include/unistd.h:
+OLL.h:
+
+/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/usr/include/stdio.h:
 
 /usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/usr/include/features.h:
 
@@ -42,23 +38,11 @@ bin/main.o: main.c \
 
 /usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/usr/include/gnu/stubs-soft.h:
 
-/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/usr/include/bits/posix_opt.h:
-
-/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/usr/include/bits/environments.h:
+/usr/local/carlson-minot/crosscompilers/lib/gcc/arm-none-linux-gnueabi/4.8.3/include/stddef.h:
 
 /usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/usr/include/bits/types.h:
 
 /usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/usr/include/bits/typesizes.h:
-
-/usr/local/carlson-minot/crosscompilers/lib/gcc/arm-none-linux-gnueabi/4.8.3/include/stddef.h:
-
-/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/usr/include/bits/confname.h:
-
-/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/usr/include/getopt.h:
-
-Top_Cross.h:
-
-/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/usr/include/stdio.h:
 
 /usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/usr/include/libio.h:
 
@@ -74,26 +58,10 @@ Top_Cross.h:
 
 /usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/usr/include/bits/stdio.h:
 
-F2L.h:
+Color_search.h:
 
-OLL.h:
-
-PLL.h:
+Side_dreh.h:
 
 print_mode.h:
 
 main.h:
-
-Color_search.h:
-
-Arm_motor.h:
-
-Dreh_motor.h:
-
-Farbe_motor.h:
-
-Farbe_scan.h:
-
-Side_dreh.h:
-
-Farbe_sen.h:

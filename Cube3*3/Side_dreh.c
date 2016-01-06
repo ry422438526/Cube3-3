@@ -286,7 +286,7 @@ void rs_dreh(int dir,int dreh_Angel_r)                          //rechten_Schich
     wuerfel_print(1);
 }
 
-void change_topface(int center_color)
+int change_topface(int center_color)
 {   int i;
     for (i=0; i<=5; i++) {
         if (color_data[i][4]==center_color)
@@ -320,9 +320,10 @@ void change_topface(int center_color)
             }
         }
     }
+    return 0;
 }
 
-void change_rightface(int rightface)
+int change_rightface(int rightface)
 {
     int i;
     for (i=0; i<=5; i++) {
@@ -343,5 +344,6 @@ void change_rightface(int rightface)
             }
         }
     }
+    return 0;
 }
 

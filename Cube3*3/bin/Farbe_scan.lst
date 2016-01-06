@@ -746,14 +746,14 @@
  570              		.file 12 "bytecodes.h"
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 Farbe_scan.c
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc9TU1BH.s:16     .text:0000000000000000 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc9TU1BH.s:19     .text:0000000000000000 farbe_scan
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc9TU1BH.s:475    .text:0000000000000438 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc2iUm1T.s:16     .text:0000000000000000 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc2iUm1T.s:19     .text:0000000000000000 farbe_scan
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc2iUm1T.s:475    .text:0000000000000438 $d
                        .ARM.exidx:0000000000000000 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc9TU1BH.s:551    .data:0000000000000000 Center
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc9TU1BH.s:491    .rodata:0000000000000000 Color_position
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc9TU1BH.s:487    .rodata:0000000000000000 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc9TU1BH.s:547    .data:0000000000000000 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc2iUm1T.s:551    .data:0000000000000000 Center
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc2iUm1T.s:491    .rodata:0000000000000000 Color_position
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc2iUm1T.s:487    .rodata:0000000000000000 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc2iUm1T.s:547    .data:0000000000000000 $d
                      .debug_frame:0000000000000010 $d
 
 UNDEFINED SYMBOLS

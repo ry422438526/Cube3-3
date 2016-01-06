@@ -30,7 +30,7 @@ OUTPUT_GLOBALS OutputInstance;
 #endif
 int Farbe_referenz=0;
 int Farbe_ist=0;
-const int Farbe_winkel[]={4,-720,-640,-625,-610,-580,-400};//690------695 veraenderung
+const int Farbe_winkel[]={4,-750,-640,-625,-610,-580,-400};//690------695 veraenderung
 //const int Farbe_winkel[]={4,-720,-625,-580,-400};//690------695 veraenderung
 #endif
 

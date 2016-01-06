@@ -17,7 +17,7 @@ int color_ecken[4]={1,5,3,4};
 int F2L(){
     int Getpos_e=0;
     int Getpos_k=0;
-    for (i=0; i<=3; i++) {                                                          //nach 41 Formula
+    for (i=0; i<=3; i++) {                                                          //nach 41 Formular
         change_topface(0);
         change_rightface(1);
         wuerfel_print(1);

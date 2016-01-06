@@ -1,0 +1,1343 @@
+   1              		.arch armv5te
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 2
+   9              		.eabi_attribute 30, 1
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.file	"OLL.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.align	2
+  17              		.global	OLL
+  19              	OLL:
+  20              		.fnstart
+  21              	.LFB11:
+  22              		.file 1 "OLL.c"
+   1:OLL.c         **** //
+   2:OLL.c         **** //  OLL.c
+   3:OLL.c         **** //  Cube3*3
+   4:OLL.c         **** //
+   5:OLL.c         **** //  Created by Ryoma on 09.12.15.
+   6:OLL.c         **** //  Copyright © 2015 Chunxia Yang. All rights reserved.
+   7:OLL.c         **** //
+   8:OLL.c         **** 
+   9:OLL.c         **** #include "OLL.h"
+  10:OLL.c         **** #include "Color_search.h"
+  11:OLL.c         **** #include "Side_dreh.h"
+  12:OLL.c         **** #include "print_mode.h"
+  13:OLL.c         **** 
+  14:OLL.c         **** int OLL(){
+  23              		.loc 1 14 0
+  24              		.cfi_startproc
+  25              		@ args = 0, pretend = 0, frame = 16
+  26              		@ frame_needed = 0, uses_anonymous_args = 0
+  27 0000 F04F2DE9 		stmfd	sp!, {r4, r5, r6, r7, r8, r9, r10, fp, lr}
+  28              		.save {r4, r5, r6, r7, r8, r9, r10, fp, lr}
+  29              		.cfi_def_cfa_offset 36
+  30              		.cfi_offset 4, -36
+  31              		.cfi_offset 5, -32
+  32              		.cfi_offset 6, -28
+  33              		.cfi_offset 7, -24
+  34              		.cfi_offset 8, -20
+  35              		.cfi_offset 9, -16
+  36              		.cfi_offset 10, -12
+  37              		.cfi_offset 11, -8
+  38              		.cfi_offset 14, -4
+  39              		.pad #20
+  40 0004 14D04DE2 		sub	sp, sp, #20
+  41              		.cfi_def_cfa_offset 56
+  15:OLL.c         ****     change_topface(2);
+  42              		.loc 1 15 0
+  43 0008 0200A0E3 		mov	r0, #2
+  44 000c FEFFFFEB 		bl	change_topface
+  45              	.LVL0:
+  16:OLL.c         ****     change_rightface(4);
+  46              		.loc 1 16 0
+  47 0010 0400A0E3 		mov	r0, #4
+  48 0014 FEFFFFEB 		bl	change_rightface
+  49              	.LVL1:
+  17:OLL.c         ****     wuerfel_print(1);
+  50              		.loc 1 17 0
+  51 0018 0100A0E3 		mov	r0, #1
+  52 001c FEFFFFEB 		bl	wuerfel_print
+  53              	.LVL2:
+  18:OLL.c         ****     if ((color_data[0][1]!=2)&&(color_data[0][3]!=2)&&(color_data[0][5]!=2)&&(color_data[0][7]!=2))
+  54              		.loc 1 18 0
+  55 0020 243A9FE5 		ldr	r3, .L33
+  56 0024 0130D3E5 		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+  57 0028 020053E3 		cmp	r3, #2
+  58 002c 2300000A 		beq	.L2
+  59              		.loc 1 18 0 is_stmt 0 discriminator 1
+  60 0030 143A9FE5 		ldr	r3, .L33
+  61 0034 0330D3E5 		ldrb	r3, [r3, #3]	@ zero_extendqisi2
+  62 0038 020053E3 		cmp	r3, #2
+  63 003c 4500000A 		beq	.L28
+  64 0040 043A9FE5 		ldr	r3, .L33
+  65 0044 0530D3E5 		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+  66 0048 020053E3 		cmp	r3, #2
+  67 004c 4100000A 		beq	.L28
+  68 0050 F4399FE5 		ldr	r3, .L33
+  69 0054 0730D3E5 		ldrb	r3, [r3, #7]	@ zero_extendqisi2
+  70 0058 020053E3 		cmp	r3, #2
+  71 005c 3D00000A 		beq	.L28
+  19:OLL.c         ****     {
+  20:OLL.c         ****         /*fs_dreh(1, 90);
+  21:OLL.c         ****         fs_dreh(1, 90);
+  22:OLL.c         ****         bs_dreh(1, 90);
+  23:OLL.c         ****         rs_dreh(-1, 90);
+  24:OLL.c         ****         ls_dreh(-1, 90);
+  25:OLL.c         ****         bs_dreh(-1, 90);
+  26:OLL.c         ****         us_dreh(1, 90);
+  27:OLL.c         ****         fs_dreh(1, 90);
+  28:OLL.c         ****         bs_dreh(1, 90);
+  29:OLL.c         ****         rs_dreh(-1, 90);
+  30:OLL.c         ****         ls_dreh(-1, 90);
+  31:OLL.c         ****         bs_dreh(-1, 90);
+  32:OLL.c         ****         us_dreh(1, 90);
+  33:OLL.c         ****         fs_dreh(1, 90);
+  34:OLL.c         ****         bs_dreh(1, 90);
+  35:OLL.c         ****         rs_dreh(-1, 90);
+  36:OLL.c         ****         ls_dreh(-1, 90);
+  37:OLL.c         ****         bs_dreh(-1, 90);*/
+  38:OLL.c         ****         rs_dreh(-1, 90);
+  72              		.loc 1 38 0 is_stmt 1
+  73 0060 0000E0E3 		mvn	r0, #0
+  74 0064 5A10A0E3 		mov	r1, #90
+  75 0068 FEFFFFEB 		bl	rs_dreh
+  76              	.LVL3:
+  39:OLL.c         ****         fs_dreh(-1, 90);
+  77              		.loc 1 39 0
+  78 006c 0000E0E3 		mvn	r0, #0
+  79 0070 5A10A0E3 		mov	r1, #90
+  80 0074 FEFFFFEB 		bl	fs_dreh
+  81              	.LVL4:
+  40:OLL.c         ****         fs_dreh(-1, 90);
+  82              		.loc 1 40 0
+  83 0078 0000E0E3 		mvn	r0, #0
+  84 007c 5A10A0E3 		mov	r1, #90
+  85 0080 FEFFFFEB 		bl	fs_dreh
+  86              	.LVL5:
+  41:OLL.c         ****         rs_dreh(1, 90);
+  87              		.loc 1 41 0
+  88 0084 0100A0E3 		mov	r0, #1
+  89 0088 5A10A0E3 		mov	r1, #90
+  90 008c FEFFFFEB 		bl	rs_dreh
+  91              	.LVL6:
+  42:OLL.c         ****         ls_dreh(1, 90);
+  92              		.loc 1 42 0
+  93 0090 0100A0E3 		mov	r0, #1
+  94 0094 5A10A0E3 		mov	r1, #90
+  95 0098 FEFFFFEB 		bl	ls_dreh
+  96              	.LVL7:
+  43:OLL.c         ****         fs_dreh(1, 90);
+  97              		.loc 1 43 0
+  98 009c 0100A0E3 		mov	r0, #1
+  99 00a0 5A10A0E3 		mov	r1, #90
+ 100 00a4 FEFFFFEB 		bl	fs_dreh
+ 101              	.LVL8:
+  44:OLL.c         ****         change_topface(2);
+ 102              		.loc 1 44 0
+ 103 00a8 0200A0E3 		mov	r0, #2
+ 104 00ac FEFFFFEB 		bl	change_topface
+ 105              	.LVL9:
+  45:OLL.c         ****     }
+  46:OLL.c         ****         if((color_data[0][1]==2)&&(color_data[0][3]!=2)&&(color_data[0][5]!=2)&&(color_data[0][7]==
+ 106              		.loc 1 46 0
+ 107 00b0 94399FE5 		ldr	r3, .L33
+ 108 00b4 0130D3E5 		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 109 00b8 020053E3 		cmp	r3, #2
+ 110 00bc 2500001A 		bne	.L28
+ 111              	.L2:
+ 112              		.loc 1 46 0 is_stmt 0 discriminator 1
+ 113 00c0 84399FE5 		ldr	r3, .L33
+ 114 00c4 0330D3E5 		ldrb	r3, [r3, #3]	@ zero_extendqisi2
+ 115 00c8 020053E3 		cmp	r3, #2
+ 116 00cc 4700000A 		beq	.L29
+ 117 00d0 74399FE5 		ldr	r3, .L33
+ 118 00d4 0530D3E5 		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+ 119 00d8 020053E3 		cmp	r3, #2
+ 120 00dc 4300000A 		beq	.L29
+ 121 00e0 64399FE5 		ldr	r3, .L33
+ 122 00e4 0730D3E5 		ldrb	r3, [r3, #7]	@ zero_extendqisi2
+ 123 00e8 020053E3 		cmp	r3, #2
+ 124 00ec 3F00001A 		bne	.L29
+  47:OLL.c         ****         {
+  48:OLL.c         ****             wuerfel_print(1);
+ 125              		.loc 1 48 0 is_stmt 1
+ 126 00f0 0100A0E3 		mov	r0, #1
+ 127 00f4 FEFFFFEB 		bl	wuerfel_print
+ 128              	.LVL10:
+  49:OLL.c         ****             rs_dreh(-1, 90);
+ 129              		.loc 1 49 0
+ 130 00f8 0000E0E3 		mvn	r0, #0
+ 131 00fc 5A10A0E3 		mov	r1, #90
+ 132 0100 FEFFFFEB 		bl	rs_dreh
+ 133              	.LVL11:
+  50:OLL.c         ****             fs_dreh(-1, 90);
+ 134              		.loc 1 50 0
+ 135 0104 0000E0E3 		mvn	r0, #0
+ 136 0108 5A10A0E3 		mov	r1, #90
+ 137 010c FEFFFFEB 		bl	fs_dreh
+ 138              	.LVL12:
+  51:OLL.c         ****             fs_dreh(-1, 90);
+ 139              		.loc 1 51 0
+ 140 0110 0000E0E3 		mvn	r0, #0
+ 141 0114 5A10A0E3 		mov	r1, #90
+ 142 0118 FEFFFFEB 		bl	fs_dreh
+ 143              	.LVL13:
+  52:OLL.c         ****             rs_dreh(1, 90);
+ 144              		.loc 1 52 0
+ 145 011c 0100A0E3 		mov	r0, #1
+ 146 0120 5A10A0E3 		mov	r1, #90
+ 147 0124 FEFFFFEB 		bl	rs_dreh
+ 148              	.LVL14:
+  53:OLL.c         ****             ls_dreh(1, 90);
+ 149              		.loc 1 53 0
+ 150 0128 0100A0E3 		mov	r0, #1
+ 151 012c 5A10A0E3 		mov	r1, #90
+ 152 0130 FEFFFFEB 		bl	ls_dreh
+ 153              	.LVL15:
+  54:OLL.c         ****             fs_dreh(1, 90);
+ 154              		.loc 1 54 0
+ 155 0134 0100A0E3 		mov	r0, #1
+ 156 0138 5A10A0E3 		mov	r1, #90
+ 157 013c FEFFFFEB 		bl	fs_dreh
+ 158              	.LVL16:
+  55:OLL.c         ****             change_topface(2);
+ 159              		.loc 1 55 0
+ 160 0140 0200A0E3 		mov	r0, #2
+ 161 0144 FEFFFFEB 		bl	change_topface
+ 162              	.LVL17:
+  56:OLL.c         ****         }
+  57:OLL.c         ****         if ((color_data[0][1]!=2)&&(color_data[0][3]==2)&&(color_data[0][5]==2)&&(color_data[0][7]!
+ 163              		.loc 1 57 0
+ 164 0148 FC389FE5 		ldr	r3, .L33
+ 165 014c 0130D3E5 		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 166 0150 020053E3 		cmp	r3, #2
+ 167 0154 2500000A 		beq	.L29
+ 168              	.L28:
+ 169              		.loc 1 57 0 is_stmt 0 discriminator 1
+ 170 0158 EC389FE5 		ldr	r3, .L33
+ 171 015c 0330D3E5 		ldrb	r3, [r3, #3]	@ zero_extendqisi2
+ 172 0160 020053E3 		cmp	r3, #2
+ 173 0164 4500001A 		bne	.L30
+ 174 0168 DC389FE5 		ldr	r3, .L33
+ 175 016c 0530D3E5 		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+ 176 0170 020053E3 		cmp	r3, #2
+ 177 0174 4100001A 		bne	.L30
+ 178 0178 CC389FE5 		ldr	r3, .L33
+ 179 017c 0730D3E5 		ldrb	r3, [r3, #7]	@ zero_extendqisi2
+ 180 0180 020053E3 		cmp	r3, #2
+ 181 0184 3D00000A 		beq	.L30
+  58:OLL.c         ****         {
+  59:OLL.c         ****             drehen(-1);
+ 182              		.loc 1 59 0 is_stmt 1
+ 183 0188 0000E0E3 		mvn	r0, #0
+ 184 018c FEFFFFEB 		bl	drehen
+ 185              	.LVL18:
+  60:OLL.c         ****             rs_dreh(-1, 90);
+ 186              		.loc 1 60 0
+ 187 0190 0000E0E3 		mvn	r0, #0
+ 188 0194 5A10A0E3 		mov	r1, #90
+ 189 0198 FEFFFFEB 		bl	rs_dreh
+ 190              	.LVL19:
+  61:OLL.c         ****             fs_dreh(-1, 90);
+ 191              		.loc 1 61 0
+ 192 019c 0000E0E3 		mvn	r0, #0
+ 193 01a0 5A10A0E3 		mov	r1, #90
+ 194 01a4 FEFFFFEB 		bl	fs_dreh
+ 195              	.LVL20:
+  62:OLL.c         ****             fs_dreh(-1, 90);
+ 196              		.loc 1 62 0
+ 197 01a8 0000E0E3 		mvn	r0, #0
+ 198 01ac 5A10A0E3 		mov	r1, #90
+ 199 01b0 FEFFFFEB 		bl	fs_dreh
+ 200              	.LVL21:
+  63:OLL.c         ****             rs_dreh(1, 90);
+ 201              		.loc 1 63 0
+ 202 01b4 0100A0E3 		mov	r0, #1
+ 203 01b8 5A10A0E3 		mov	r1, #90
+ 204 01bc FEFFFFEB 		bl	rs_dreh
+ 205              	.LVL22:
+  64:OLL.c         ****             ls_dreh(1, 90);
+ 206              		.loc 1 64 0
+ 207 01c0 0100A0E3 		mov	r0, #1
+ 208 01c4 5A10A0E3 		mov	r1, #90
+ 209 01c8 FEFFFFEB 		bl	ls_dreh
+ 210              	.LVL23:
+  65:OLL.c         ****             fs_dreh(1, 90);
+ 211              		.loc 1 65 0
+ 212 01cc 0100A0E3 		mov	r0, #1
+ 213 01d0 5A10A0E3 		mov	r1, #90
+ 214 01d4 FEFFFFEB 		bl	fs_dreh
+ 215              	.LVL24:
+  66:OLL.c         ****             change_topface(2);
+ 216              		.loc 1 66 0
+ 217 01d8 0200A0E3 		mov	r0, #2
+ 218 01dc FEFFFFEB 		bl	change_topface
+ 219              	.LVL25:
+  67:OLL.c         ****         }
+  68:OLL.c         ****         if ((color_data[0][1]==2)&&(color_data[0][3]==2)&&(color_data[0][5]!=2)&&(color_data[0][7]!
+ 220              		.loc 1 68 0
+ 221 01e0 64389FE5 		ldr	r3, .L33
+ 222 01e4 0130D3E5 		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 223 01e8 020053E3 		cmp	r3, #2
+ 224 01ec 2300001A 		bne	.L30
+ 225              	.L29:
+ 226              		.loc 1 68 0 is_stmt 0 discriminator 1
+ 227 01f0 54389FE5 		ldr	r3, .L33
+ 228 01f4 0330D3E5 		ldrb	r3, [r3, #3]	@ zero_extendqisi2
+ 229 01f8 020053E3 		cmp	r3, #2
+ 230 01fc 4500001A 		bne	.L31
+ 231 0200 44389FE5 		ldr	r3, .L33
+ 232 0204 0530D3E5 		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+ 233 0208 020053E3 		cmp	r3, #2
+ 234 020c 4100000A 		beq	.L31
+ 235 0210 34389FE5 		ldr	r3, .L33
+ 236 0214 0730D3E5 		ldrb	r3, [r3, #7]	@ zero_extendqisi2
+ 237 0218 020053E3 		cmp	r3, #2
+ 238 021c 3D00000A 		beq	.L31
+  69:OLL.c         ****         {
+  70:OLL.c         ****             rs_dreh(-1, 90);
+ 239              		.loc 1 70 0 is_stmt 1
+ 240 0220 0000E0E3 		mvn	r0, #0
+ 241 0224 5A10A0E3 		mov	r1, #90
+ 242 0228 FEFFFFEB 		bl	rs_dreh
+ 243              	.LVL26:
+  71:OLL.c         ****             rs_dreh(-1, 90);
+ 244              		.loc 1 71 0
+ 245 022c 0000E0E3 		mvn	r0, #0
+ 246 0230 5A10A0E3 		mov	r1, #90
+ 247 0234 FEFFFFEB 		bl	rs_dreh
+ 248              	.LVL27:
+  72:OLL.c         ****             fs_dreh(-1, 90);
+ 249              		.loc 1 72 0
+ 250 0238 0000E0E3 		mvn	r0, #0
+ 251 023c 5A10A0E3 		mov	r1, #90
+ 252 0240 FEFFFFEB 		bl	fs_dreh
+ 253              	.LVL28:
+  73:OLL.c         ****             rs_dreh(1, 90);
+ 254              		.loc 1 73 0
+ 255 0244 0100A0E3 		mov	r0, #1
+ 256 0248 5A10A0E3 		mov	r1, #90
+ 257 024c FEFFFFEB 		bl	rs_dreh
+ 258              	.LVL29:
+  74:OLL.c         ****             ls_dreh(1, 90);
+ 259              		.loc 1 74 0
+ 260 0250 0100A0E3 		mov	r0, #1
+ 261 0254 5A10A0E3 		mov	r1, #90
+ 262 0258 FEFFFFEB 		bl	ls_dreh
+ 263              	.LVL30:
+  75:OLL.c         ****             bs_dreh(1, 90);
+ 264              		.loc 1 75 0
+ 265 025c 0100A0E3 		mov	r0, #1
+ 266 0260 5A10A0E3 		mov	r1, #90
+ 267 0264 FEFFFFEB 		bl	bs_dreh
+ 268              	.LVL31:
+  76:OLL.c         ****             change_topface(2);
+ 269              		.loc 1 76 0
+ 270 0268 0200A0E3 		mov	r0, #2
+ 271 026c FEFFFFEB 		bl	change_topface
+ 272              	.LVL32:
+  77:OLL.c         ****         }
+  78:OLL.c         ****         if((color_data[0][1]!=2)&&(color_data[0][3]==2)&&(color_data[0][5]!=2)&&(color_data[0][7]==
+ 273              		.loc 1 78 0
+ 274 0270 D4379FE5 		ldr	r3, .L33
+ 275 0274 0130D3E5 		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 276 0278 020053E3 		cmp	r3, #2
+ 277 027c 2500000A 		beq	.L31
+ 278              	.L30:
+ 279              		.loc 1 78 0 is_stmt 0 discriminator 1
+ 280 0280 C4379FE5 		ldr	r3, .L33
+ 281 0284 0330D3E5 		ldrb	r3, [r3, #3]	@ zero_extendqisi2
+ 282 0288 020053E3 		cmp	r3, #2
+ 283 028c 4700001A 		bne	.L32
+ 284 0290 B4379FE5 		ldr	r3, .L33
+ 285 0294 0530D3E5 		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+ 286 0298 020053E3 		cmp	r3, #2
+ 287 029c 4300000A 		beq	.L32
+ 288 02a0 A4379FE5 		ldr	r3, .L33
+ 289 02a4 0730D3E5 		ldrb	r3, [r3, #7]	@ zero_extendqisi2
+ 290 02a8 020053E3 		cmp	r3, #2
+ 291 02ac 3F00001A 		bne	.L32
+  79:OLL.c         ****         {
+  80:OLL.c         ****             drehen(1);              //??????????????????????1 or -1
+ 292              		.loc 1 80 0 is_stmt 1
+ 293 02b0 0100A0E3 		mov	r0, #1
+ 294 02b4 FEFFFFEB 		bl	drehen
+ 295              	.LVL33:
+  81:OLL.c         ****             rs_dreh(-1, 90);
+ 296              		.loc 1 81 0
+ 297 02b8 0000E0E3 		mvn	r0, #0
+ 298 02bc 5A10A0E3 		mov	r1, #90
+ 299 02c0 FEFFFFEB 		bl	rs_dreh
+ 300              	.LVL34:
+  82:OLL.c         ****             rs_dreh(-1, 90);
+ 301              		.loc 1 82 0
+ 302 02c4 0000E0E3 		mvn	r0, #0
+ 303 02c8 5A10A0E3 		mov	r1, #90
+ 304 02cc FEFFFFEB 		bl	rs_dreh
+ 305              	.LVL35:
+  83:OLL.c         ****             fs_dreh(-1, 90);
+ 306              		.loc 1 83 0
+ 307 02d0 0000E0E3 		mvn	r0, #0
+ 308 02d4 5A10A0E3 		mov	r1, #90
+ 309 02d8 FEFFFFEB 		bl	fs_dreh
+ 310              	.LVL36:
+  84:OLL.c         ****             rs_dreh(1, 90);
+ 311              		.loc 1 84 0
+ 312 02dc 0100A0E3 		mov	r0, #1
+ 313 02e0 5A10A0E3 		mov	r1, #90
+ 314 02e4 FEFFFFEB 		bl	rs_dreh
+ 315              	.LVL37:
+  85:OLL.c         ****             ls_dreh(1, 90);
+ 316              		.loc 1 85 0
+ 317 02e8 0100A0E3 		mov	r0, #1
+ 318 02ec 5A10A0E3 		mov	r1, #90
+ 319 02f0 FEFFFFEB 		bl	ls_dreh
+ 320              	.LVL38:
+  86:OLL.c         ****             bs_dreh(1, 90);
+ 321              		.loc 1 86 0
+ 322 02f4 0100A0E3 		mov	r0, #1
+ 323 02f8 5A10A0E3 		mov	r1, #90
+ 324 02fc FEFFFFEB 		bl	bs_dreh
+ 325              	.LVL39:
+  87:OLL.c         ****             change_topface(2);
+ 326              		.loc 1 87 0
+ 327 0300 0200A0E3 		mov	r0, #2
+ 328 0304 FEFFFFEB 		bl	change_topface
+ 329              	.LVL40:
+  88:OLL.c         ****         }
+  89:OLL.c         ****         if((color_data[0][1]==2)&&(color_data[0][3]!=2)&&(color_data[0][5]==2)&&(color_data[0][7]!=
+ 330              		.loc 1 89 0
+ 331 0308 3C379FE5 		ldr	r3, .L33
+ 332 030c 0130D3E5 		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 333 0310 020053E3 		cmp	r3, #2
+ 334 0314 2500001A 		bne	.L32
+ 335              	.L31:
+ 336              		.loc 1 89 0 is_stmt 0 discriminator 1
+ 337 0318 2C379FE5 		ldr	r3, .L33
+ 338 031c 0330D3E5 		ldrb	r3, [r3, #3]	@ zero_extendqisi2
+ 339 0320 020053E3 		cmp	r3, #2
+ 340 0324 4500000A 		beq	.L8
+ 341 0328 1C379FE5 		ldr	r3, .L33
+ 342 032c 0530D3E5 		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+ 343 0330 020053E3 		cmp	r3, #2
+ 344 0334 4100001A 		bne	.L8
+ 345 0338 0C379FE5 		ldr	r3, .L33
+ 346 033c 0730D3E5 		ldrb	r3, [r3, #7]	@ zero_extendqisi2
+ 347 0340 020053E3 		cmp	r3, #2
+ 348 0344 3D00000A 		beq	.L8
+  90:OLL.c         ****         {
+  91:OLL.c         ****             drehen(-1);              //??????????????????????1 or -1
+ 349              		.loc 1 91 0 is_stmt 1
+ 350 0348 0000E0E3 		mvn	r0, #0
+ 351 034c FEFFFFEB 		bl	drehen
+ 352              	.LVL41:
+  92:OLL.c         ****             rs_dreh(-1, 90);
+ 353              		.loc 1 92 0
+ 354 0350 0000E0E3 		mvn	r0, #0
+ 355 0354 5A10A0E3 		mov	r1, #90
+ 356 0358 FEFFFFEB 		bl	rs_dreh
+ 357              	.LVL42:
+  93:OLL.c         ****             rs_dreh(-1, 90);
+ 358              		.loc 1 93 0
+ 359 035c 0000E0E3 		mvn	r0, #0
+ 360 0360 5A10A0E3 		mov	r1, #90
+ 361 0364 FEFFFFEB 		bl	rs_dreh
+ 362              	.LVL43:
+  94:OLL.c         ****             fs_dreh(-1, 90);
+ 363              		.loc 1 94 0
+ 364 0368 0000E0E3 		mvn	r0, #0
+ 365 036c 5A10A0E3 		mov	r1, #90
+ 366 0370 FEFFFFEB 		bl	fs_dreh
+ 367              	.LVL44:
+  95:OLL.c         ****             rs_dreh(1, 90);
+ 368              		.loc 1 95 0
+ 369 0374 0100A0E3 		mov	r0, #1
+ 370 0378 5A10A0E3 		mov	r1, #90
+ 371 037c FEFFFFEB 		bl	rs_dreh
+ 372              	.LVL45:
+  96:OLL.c         ****             ls_dreh(1, 90);
+ 373              		.loc 1 96 0
+ 374 0380 0100A0E3 		mov	r0, #1
+ 375 0384 5A10A0E3 		mov	r1, #90
+ 376 0388 FEFFFFEB 		bl	ls_dreh
+ 377              	.LVL46:
+  97:OLL.c         ****             bs_dreh(1, 90);
+ 378              		.loc 1 97 0
+ 379 038c 0100A0E3 		mov	r0, #1
+ 380 0390 5A10A0E3 		mov	r1, #90
+ 381 0394 FEFFFFEB 		bl	bs_dreh
+ 382              	.LVL47:
+  98:OLL.c         ****             change_topface(2);
+ 383              		.loc 1 98 0
+ 384 0398 0200A0E3 		mov	r0, #2
+ 385 039c FEFFFFEB 		bl	change_topface
+ 386              	.LVL48:
+  99:OLL.c         ****         }
+ 100:OLL.c         ****         if((color_data[0][1]!=2)&&(color_data[0][3]!=2)&&(color_data[0][5]==2)&&(color_data[0][7]==
+ 387              		.loc 1 100 0
+ 388 03a0 A4369FE5 		ldr	r3, .L33
+ 389 03a4 0130D3E5 		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 390 03a8 020053E3 		cmp	r3, #2
+ 391 03ac 2300000A 		beq	.L8
+ 392              	.L32:
+ 393              		.loc 1 100 0 is_stmt 0 discriminator 1
+ 394 03b0 94369FE5 		ldr	r3, .L33
+ 395 03b4 0330D3E5 		ldrb	r3, [r3, #3]	@ zero_extendqisi2
+ 396 03b8 020053E3 		cmp	r3, #2
+ 397 03bc 1F00000A 		beq	.L8
+ 398 03c0 84369FE5 		ldr	r3, .L33
+ 399 03c4 0530D3E5 		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+ 400 03c8 020053E3 		cmp	r3, #2
+ 401 03cc 1B00001A 		bne	.L8
+ 402 03d0 74369FE5 		ldr	r3, .L33
+ 403 03d4 0730D3E5 		ldrb	r3, [r3, #7]	@ zero_extendqisi2
+ 404 03d8 020053E3 		cmp	r3, #2
+ 405 03dc 1700001A 		bne	.L8
+ 101:OLL.c         ****         {
+ 102:OLL.c         ****             drehen(1);
+ 406              		.loc 1 102 0 is_stmt 1
+ 407 03e0 0100A0E3 		mov	r0, #1
+ 408 03e4 FEFFFFEB 		bl	drehen
+ 409              	.LVL49:
+ 103:OLL.c         ****             drehen(1);
+ 410              		.loc 1 103 0
+ 411 03e8 0100A0E3 		mov	r0, #1
+ 412 03ec FEFFFFEB 		bl	drehen
+ 413              	.LVL50:
+ 104:OLL.c         ****             rs_dreh(-1, 90);
+ 414              		.loc 1 104 0
+ 415 03f0 0000E0E3 		mvn	r0, #0
+ 416 03f4 5A10A0E3 		mov	r1, #90
+ 417 03f8 FEFFFFEB 		bl	rs_dreh
+ 418              	.LVL51:
+ 105:OLL.c         ****             rs_dreh(-1, 90);
+ 419              		.loc 1 105 0
+ 420 03fc 0000E0E3 		mvn	r0, #0
+ 421 0400 5A10A0E3 		mov	r1, #90
+ 422 0404 FEFFFFEB 		bl	rs_dreh
+ 423              	.LVL52:
+ 106:OLL.c         ****             fs_dreh(-1, 90);
+ 424              		.loc 1 106 0
+ 425 0408 0000E0E3 		mvn	r0, #0
+ 426 040c 5A10A0E3 		mov	r1, #90
+ 427 0410 FEFFFFEB 		bl	fs_dreh
+ 428              	.LVL53:
+ 107:OLL.c         ****             rs_dreh(1, 90);
+ 429              		.loc 1 107 0
+ 430 0414 0100A0E3 		mov	r0, #1
+ 431 0418 5A10A0E3 		mov	r1, #90
+ 432 041c FEFFFFEB 		bl	rs_dreh
+ 433              	.LVL54:
+ 108:OLL.c         ****             ls_dreh(1, 90);
+ 434              		.loc 1 108 0
+ 435 0420 0100A0E3 		mov	r0, #1
+ 436 0424 5A10A0E3 		mov	r1, #90
+ 437 0428 FEFFFFEB 		bl	ls_dreh
+ 438              	.LVL55:
+ 109:OLL.c         ****             bs_dreh(1, 90);
+ 439              		.loc 1 109 0
+ 440 042c 0100A0E3 		mov	r0, #1
+ 441 0430 5A10A0E3 		mov	r1, #90
+ 442 0434 FEFFFFEB 		bl	bs_dreh
+ 443              	.LVL56:
+ 110:OLL.c         ****             change_topface(2);
+ 444              		.loc 1 110 0
+ 445 0438 0200A0E3 		mov	r0, #2
+ 446 043c FEFFFFEB 		bl	change_topface
+ 447              	.LVL57:
+ 448              	.L8:
+ 111:OLL.c         ****         }
+ 112:OLL.c         ****     
+ 113:OLL.c         ****     wuerfel_print(1);
+ 449              		.loc 1 113 0
+ 450 0440 0100A0E3 		mov	r0, #1
+ 451 0444 FEFFFFEB 		bl	wuerfel_print
+ 452              	.LVL58:
+ 114:OLL.c         ****     
+ 115:OLL.c         ****     int color_kanten[]={1,5,3,4};
+ 453              		.loc 1 115 0
+ 454 0448 00369FE5 		ldr	r3, .L33+4
+ 455 044c 0F0093E8 		ldmia	r3, {r0, r1, r2, r3}
+ 456 0450 10C08DE2 		add	ip, sp, #16
+ 457 0454 0F000CE9 		stmdb	ip, {r0, r1, r2, r3}
+ 458              	.LVL59:
+ 459 0458 04404DE2 		sub	r4, sp, #4
+ 460 045c 0C808DE2 		add	r8, sp, #12
+ 116:OLL.c         ****     // durch Formular
+ 117:OLL.c         ****     int i;
+ 118:OLL.c         ****     for(i=0;i<=3;i++){
+ 119:OLL.c         ****         
+ 120:OLL.c         ****         change_topface(2);
+ 461              		.loc 1 120 0
+ 462 0460 0270A0E3 		mov	r7, #2
+ 121:OLL.c         ****         change_rightface(color_kanten[i]);
+ 122:OLL.c         ****         wuerfel_print(1);
+ 463              		.loc 1 122 0
+ 464 0464 0160A0E3 		mov	r6, #1
+ 123:OLL.c         ****         
+ 124:OLL.c         ****         if((color_data[0][1]==2)&&(color_data[0][3]==2)&&(color_data[0][5]==2)&&(color_data[0][7]==
+ 465              		.loc 1 124 0
+ 466 0468 DC559FE5 		ldr	r5, .L33
+ 125:OLL.c         ****         {
+ 126:OLL.c         ****             rs_dreh(1, 90);
+ 127:OLL.c         ****             rs_dreh(1, 90);
+ 128:OLL.c         ****             ds_dreh(1, 90);
+ 129:OLL.c         ****             ls_dreh(-1, 90);
+ 130:OLL.c         ****             rs_dreh(-1, 90);
+ 131:OLL.c         ****             ls_dreh(1, 90);
+ 132:OLL.c         ****             rs_dreh(1, 90);
+ 133:OLL.c         ****             ls_dreh(-1, 90);
+ 134:OLL.c         ****             rs_dreh(-1, 90);
+ 135:OLL.c         ****             ls_dreh(1, 90);
+ 136:OLL.c         ****             rs_dreh(-1, 90);
+ 137:OLL.c         ****             ls_dreh(-1, 90);
+ 138:OLL.c         ****         }
+ 139:OLL.c         ****         if ((color_data[0][1]==2)&&(color_data[0][3]==2)&&(color_data[0][5]==2)&&(color_data[0][7]=
+ 140:OLL.c         ****         {
+ 141:OLL.c         ****             rs_dreh(1, 90);
+ 142:OLL.c         ****             rs_dreh(-1, 90);
+ 143:OLL.c         ****             ds_dreh(-1, 90);
+ 144:OLL.c         ****             ls_dreh(-1, 180);
+ 145:OLL.c         ****             rs_dreh(-1, 90);
+ 146:OLL.c         ****             ls_dreh(1, 180);
+ 147:OLL.c         ****             rs_dreh(-1, 90);
+ 148:OLL.c         ****             ls_dreh(-1, 180);
+ 149:OLL.c         ****             rs_dreh(1, 180);
+ 150:OLL.c         ****             ls_dreh(1, 90);
+ 151:OLL.c         ****         }
+ 152:OLL.c         ****         if ((color_data[0][1]==2)&&(color_data[0][3]==2)&&(color_data[0][5]==2)&&(color_data[0][7]=
+ 153:OLL.c         ****         {
+ 154:OLL.c         ****             rs_dreh(1, 180);
+ 155:OLL.c         ****             ls_dreh(-1, 90);
+ 156:OLL.c         ****             rs_dreh(1, 90);
+ 157:OLL.c         ****             rs_dreh(-1, 90);
+ 158:OLL.c         ****             ds_dreh(-1, 90);
+ 159:OLL.c         ****             ls_dreh(-1, 90);
+ 160:OLL.c         ****             ls_dreh(1, 90);
+ 161:OLL.c         ****             rs_dreh(1, 90);
+ 162:OLL.c         ****             rs_dreh(-1, 90);
+ 163:OLL.c         ****             ds_dreh(-1, 90);
+ 164:OLL.c         ****             ls_dreh(1, 90);
+ 165:OLL.c         ****         }
+ 166:OLL.c         ****         if ((color_data[0][1]==2)&&(color_data[0][3]==2)&&(color_data[0][5]==2)&&(color_data[0][7]=
+ 167:OLL.c         ****         {
+ 168:OLL.c         ****             ls_dreh(1, 90);
+ 169:OLL.c         ****             fs_dreh(1, 90);
+ 170:OLL.c         ****             ls_dreh(-1, 90);
+ 171:OLL.c         ****             rs_dreh(-1, 90);
+ 172:OLL.c         ****             rs_dreh(-1, 90);
+ 173:OLL.c         ****             ls_dreh(1, 90); ///////////////////////
+ 174:OLL.c         ****             ls_dreh(1, 90);
+ 175:OLL.c         ****             rs_dreh(-1, 90);
+ 176:OLL.c         ****         }
+ 177:OLL.c         ****         if((color_data[0][1]==2)&&(color_data[0][3]==2)&&(color_data[0][5]==2)&&(color_data[0][7]==
+ 178:OLL.c         ****             //formular 25
+ 179:OLL.c         ****         {
+ 180:OLL.c         ****             fs_dreh(-1, 90);
+ 181:OLL.c         ****             bs_dreh(1, 90);
+ 182:OLL.c         ****             rs_dreh(1, 90);
+ 183:OLL.c         ****             rs_dreh(-1, 90);
+ 184:OLL.c         ****             ls_dreh(-1, 90);
+ 185:OLL.c         ****             ls_dreh(-1, 90);
+ 186:OLL.c         ****             rs_dreh(1, 90);
+ 187:OLL.c         ****             rs_dreh(1, 90);
+ 188:OLL.c         ****         }
+ 189:OLL.c         ****         if((color_data[0][1]==2)&&(color_data[0][3]==2)&&(color_data[0][5]==2)&&(color_data[0][7]==
+ 190:OLL.c         ****         {
+ 191:OLL.c         ****             
+ 192:OLL.c         ****             rs_dreh(1, 90);
+ 193:OLL.c         ****             rs_dreh(-1, 90);
+ 194:OLL.c         ****             ds_dreh(-1, 90);
+ 195:OLL.c         ****             ls_dreh(-1, 90);
+ 196:OLL.c         ****             rs_dreh(-1, 90);
+ 197:OLL.c         ****             ls_dreh(1, 90);
+ 198:OLL.c         ****             rs_dreh(-1, 90);
+ 199:OLL.c         ****             ls_dreh(-1, 90);
+ 200:OLL.c         ****         }
+ 201:OLL.c         ****         if((color_data[0][1]==2)&&(color_data[0][3]==2)&&(color_data[0][5]==2)&&(color_data[0][7]==
+ 202:OLL.c         ****             //formular 27
+ 203:OLL.c         ****         {
+ 204:OLL.c         ****             
+ 205:OLL.c         ****             rs_dreh(-1, 90);
+ 467              		.loc 1 205 0
+ 468 046c 00A0E0E3 		mvn	r10, #0
+ 469 0470 5A90A0E3 		mov	r9, #90
+ 206:OLL.c         ****             rs_dreh(1, 180);
+ 470              		.loc 1 206 0
+ 471 0474 B4B0A0E3 		mov	fp, #180
+ 472              	.LVL60:
+ 473              	.L27:
+ 120:OLL.c         ****         change_rightface(color_kanten[i]);
+ 474              		.loc 1 120 0
+ 475 0478 0700A0E1 		mov	r0, r7
+ 476 047c FEFFFFEB 		bl	change_topface
+ 477              	.LVL61:
+ 121:OLL.c         ****         wuerfel_print(1);
+ 478              		.loc 1 121 0
+ 479 0480 0400B4E5 		ldr	r0, [r4, #4]!
+ 480 0484 FEFFFFEB 		bl	change_rightface
+ 481              	.LVL62:
+ 122:OLL.c         ****         
+ 482              		.loc 1 122 0
+ 483 0488 0600A0E1 		mov	r0, r6
+ 484 048c FEFFFFEB 		bl	wuerfel_print
+ 485              	.LVL63:
+ 124:OLL.c         ****         {
+ 486              		.loc 1 124 0
+ 487 0490 0130D5E5 		ldrb	r3, [r5, #1]	@ zero_extendqisi2
+ 488 0494 020053E3 		cmp	r3, #2
+ 489 0498 6401001A 		bne	.L25
+ 124:OLL.c         ****         {
+ 490              		.loc 1 124 0 is_stmt 0 discriminator 1
+ 491 049c 0330D5E5 		ldrb	r3, [r5, #3]	@ zero_extendqisi2
+ 492 04a0 020053E3 		cmp	r3, #2
+ 493 04a4 6101001A 		bne	.L25
+ 494 04a8 0530D5E5 		ldrb	r3, [r5, #5]	@ zero_extendqisi2
+ 495 04ac 020053E3 		cmp	r3, #2
+ 496 04b0 3800001A 		bne	.L11
+ 497 04b4 0730D5E5 		ldrb	r3, [r5, #7]	@ zero_extendqisi2
+ 498 04b8 020053E3 		cmp	r3, #2
+ 499 04bc 3500001A 		bne	.L11
+ 500 04c0 0930D5E5 		ldrb	r3, [r5, #9]	@ zero_extendqisi2
+ 501 04c4 020053E3 		cmp	r3, #2
+ 502 04c8 3200001A 		bne	.L11
+ 503 04cc 0B30D5E5 		ldrb	r3, [r5, #11]	@ zero_extendqisi2
+ 504 04d0 020053E3 		cmp	r3, #2
+ 505 04d4 2F00001A 		bne	.L11
+ 506 04d8 2130D5E5 		ldrb	r3, [r5, #33]	@ zero_extendqisi2
+ 507 04dc 020053E3 		cmp	r3, #2
+ 508 04e0 2C00001A 		bne	.L11
+ 509 04e4 2330D5E5 		ldrb	r3, [r5, #35]	@ zero_extendqisi2
+ 510 04e8 020053E3 		cmp	r3, #2
+ 511 04ec 2900001A 		bne	.L11
+ 126:OLL.c         ****             rs_dreh(1, 90);
+ 512              		.loc 1 126 0 is_stmt 1
+ 513 04f0 0600A0E1 		mov	r0, r6
+ 514 04f4 0910A0E1 		mov	r1, r9
+ 515 04f8 FEFFFFEB 		bl	rs_dreh
+ 516              	.LVL64:
+ 127:OLL.c         ****             ds_dreh(1, 90);
+ 517              		.loc 1 127 0
+ 518 04fc 0600A0E1 		mov	r0, r6
+ 519 0500 0910A0E1 		mov	r1, r9
+ 520 0504 FEFFFFEB 		bl	rs_dreh
+ 521              	.LVL65:
+ 128:OLL.c         ****             ls_dreh(-1, 90);
+ 522              		.loc 1 128 0
+ 523 0508 0600A0E1 		mov	r0, r6
+ 524 050c 0910A0E1 		mov	r1, r9
+ 525 0510 FEFFFFEB 		bl	ds_dreh
+ 526              	.LVL66:
+ 129:OLL.c         ****             rs_dreh(-1, 90);
+ 527              		.loc 1 129 0
+ 528 0514 0A00A0E1 		mov	r0, r10
+ 529 0518 0910A0E1 		mov	r1, r9
+ 530 051c FEFFFFEB 		bl	ls_dreh
+ 531              	.LVL67:
+ 130:OLL.c         ****             ls_dreh(1, 90);
+ 532              		.loc 1 130 0
+ 533 0520 0A00A0E1 		mov	r0, r10
+ 534 0524 0910A0E1 		mov	r1, r9
+ 535 0528 FEFFFFEB 		bl	rs_dreh
+ 536              	.LVL68:
+ 131:OLL.c         ****             rs_dreh(1, 90);
+ 537              		.loc 1 131 0
+ 538 052c 0600A0E1 		mov	r0, r6
+ 539 0530 0910A0E1 		mov	r1, r9
+ 540 0534 FEFFFFEB 		bl	ls_dreh
+ 541              	.LVL69:
+ 132:OLL.c         ****             ls_dreh(-1, 90);
+ 542              		.loc 1 132 0
+ 543 0538 0600A0E1 		mov	r0, r6
+ 544 053c 0910A0E1 		mov	r1, r9
+ 545 0540 FEFFFFEB 		bl	rs_dreh
+ 546              	.LVL70:
+ 133:OLL.c         ****             rs_dreh(-1, 90);
+ 547              		.loc 1 133 0
+ 548 0544 0A00A0E1 		mov	r0, r10
+ 549 0548 0910A0E1 		mov	r1, r9
+ 550 054c FEFFFFEB 		bl	ls_dreh
+ 551              	.LVL71:
+ 134:OLL.c         ****             ls_dreh(1, 90);
+ 552              		.loc 1 134 0
+ 553 0550 0A00A0E1 		mov	r0, r10
+ 554 0554 0910A0E1 		mov	r1, r9
+ 555 0558 FEFFFFEB 		bl	rs_dreh
+ 556              	.LVL72:
+ 135:OLL.c         ****             rs_dreh(-1, 90);
+ 557              		.loc 1 135 0
+ 558 055c 0600A0E1 		mov	r0, r6
+ 559 0560 0910A0E1 		mov	r1, r9
+ 560 0564 FEFFFFEB 		bl	ls_dreh
+ 561              	.LVL73:
+ 136:OLL.c         ****             ls_dreh(-1, 90);
+ 562              		.loc 1 136 0
+ 563 0568 0A00A0E1 		mov	r0, r10
+ 564 056c 0910A0E1 		mov	r1, r9
+ 565 0570 FEFFFFEB 		bl	rs_dreh
+ 566              	.LVL74:
+ 137:OLL.c         ****         }
+ 567              		.loc 1 137 0
+ 568 0574 0A00A0E1 		mov	r0, r10
+ 569 0578 0910A0E1 		mov	r1, r9
+ 570 057c FEFFFFEB 		bl	ls_dreh
+ 571              	.LVL75:
+ 139:OLL.c         ****         {
+ 572              		.loc 1 139 0
+ 573 0580 0130D5E5 		ldrb	r3, [r5, #1]	@ zero_extendqisi2
+ 574 0584 020053E3 		cmp	r3, #2
+ 575 0588 2801001A 		bne	.L25
+ 139:OLL.c         ****         {
+ 576              		.loc 1 139 0 is_stmt 0 discriminator 1
+ 577 058c 0330D5E5 		ldrb	r3, [r5, #3]	@ zero_extendqisi2
+ 578 0590 020053E3 		cmp	r3, #2
+ 579 0594 2501001A 		bne	.L25
+ 580              	.L11:
+ 581 0598 0530D5E5 		ldrb	r3, [r5, #5]	@ zero_extendqisi2
+ 582 059c 020053E3 		cmp	r3, #2
+ 583 05a0 3200001A 		bne	.L12
+ 584 05a4 0730D5E5 		ldrb	r3, [r5, #7]	@ zero_extendqisi2
+ 585 05a8 020053E3 		cmp	r3, #2
+ 586 05ac 2F00001A 		bne	.L12
+ 587 05b0 2A30D5E5 		ldrb	r3, [r5, #42]	@ zero_extendqisi2
+ 588 05b4 020053E3 		cmp	r3, #2
+ 589 05b8 2C00001A 		bne	.L12
+ 590 05bc 2C30D5E5 		ldrb	r3, [r5, #44]	@ zero_extendqisi2
+ 591 05c0 020053E3 		cmp	r3, #2
+ 592 05c4 2900001A 		bne	.L12
+ 593 05c8 2330D5E5 		ldrb	r3, [r5, #35]	@ zero_extendqisi2
+ 594 05cc 020053E3 		cmp	r3, #2
+ 595 05d0 2600001A 		bne	.L12
+ 596 05d4 0B30D5E5 		ldrb	r3, [r5, #11]	@ zero_extendqisi2
+ 597 05d8 020053E3 		cmp	r3, #2
+ 598 05dc 2300001A 		bne	.L12
+ 141:OLL.c         ****             rs_dreh(-1, 90);
+ 599              		.loc 1 141 0 is_stmt 1
+ 600 05e0 0600A0E1 		mov	r0, r6
+ 601 05e4 0910A0E1 		mov	r1, r9
+ 602 05e8 FEFFFFEB 		bl	rs_dreh
+ 603              	.LVL76:
+ 142:OLL.c         ****             ds_dreh(-1, 90);
+ 604              		.loc 1 142 0
+ 605 05ec 0A00A0E1 		mov	r0, r10
+ 606 05f0 0910A0E1 		mov	r1, r9
+ 607 05f4 FEFFFFEB 		bl	rs_dreh
+ 608              	.LVL77:
+ 143:OLL.c         ****             ls_dreh(-1, 180);
+ 609              		.loc 1 143 0
+ 610 05f8 0A00A0E1 		mov	r0, r10
+ 611 05fc 0910A0E1 		mov	r1, r9
+ 612 0600 FEFFFFEB 		bl	ds_dreh
+ 613              	.LVL78:
+ 144:OLL.c         ****             rs_dreh(-1, 90);
+ 614              		.loc 1 144 0
+ 615 0604 0A00A0E1 		mov	r0, r10
+ 616 0608 0B10A0E1 		mov	r1, fp
+ 617 060c FEFFFFEB 		bl	ls_dreh
+ 618              	.LVL79:
+ 145:OLL.c         ****             ls_dreh(1, 180);
+ 619              		.loc 1 145 0
+ 620 0610 0A00A0E1 		mov	r0, r10
+ 621 0614 0910A0E1 		mov	r1, r9
+ 622 0618 FEFFFFEB 		bl	rs_dreh
+ 623              	.LVL80:
+ 146:OLL.c         ****             rs_dreh(-1, 90);
+ 624              		.loc 1 146 0
+ 625 061c 0600A0E1 		mov	r0, r6
+ 626 0620 0B10A0E1 		mov	r1, fp
+ 627 0624 FEFFFFEB 		bl	ls_dreh
+ 628              	.LVL81:
+ 147:OLL.c         ****             ls_dreh(-1, 180);
+ 629              		.loc 1 147 0
+ 630 0628 0A00A0E1 		mov	r0, r10
+ 631 062c 0910A0E1 		mov	r1, r9
+ 632 0630 FEFFFFEB 		bl	rs_dreh
+ 633              	.LVL82:
+ 148:OLL.c         ****             rs_dreh(1, 180);
+ 634              		.loc 1 148 0
+ 635 0634 0A00A0E1 		mov	r0, r10
+ 636 0638 0B10A0E1 		mov	r1, fp
+ 637 063c FEFFFFEB 		bl	ls_dreh
+ 638              	.LVL83:
+ 149:OLL.c         ****             ls_dreh(1, 90);
+ 639              		.loc 1 149 0
+ 640 0640 0600A0E1 		mov	r0, r6
+ 641 0644 0B10A0E1 		mov	r1, fp
+ 642 0648 FEFFFFEB 		bl	rs_dreh
+ 643              	.LVL84:
+ 150:OLL.c         ****         }
+ 644              		.loc 1 150 0
+ 645 064c 0600A0E1 		mov	r0, r6
+ 646 0650 0910A0E1 		mov	r1, r9
+ 647 0654 FEFFFFEB 		bl	ls_dreh
+ 648              	.LVL85:
+ 152:OLL.c         ****         {
+ 649              		.loc 1 152 0
+ 650 0658 0130D5E5 		ldrb	r3, [r5, #1]	@ zero_extendqisi2
+ 651 065c 020053E3 		cmp	r3, #2
+ 652 0660 F200001A 		bne	.L25
+ 152:OLL.c         ****         {
+ 653              		.loc 1 152 0 is_stmt 0 discriminator 1
+ 654 0664 0330D5E5 		ldrb	r3, [r5, #3]	@ zero_extendqisi2
+ 655 0668 020053E3 		cmp	r3, #2
+ 656 066c EF00001A 		bne	.L25
+ 657              	.L12:
+ 658 0670 0530D5E5 		ldrb	r3, [r5, #5]	@ zero_extendqisi2
+ 659 0674 020053E3 		cmp	r3, #2
+ 660 0678 3500001A 		bne	.L15
+ 661 067c 0730D5E5 		ldrb	r3, [r5, #7]	@ zero_extendqisi2
+ 662 0680 020053E3 		cmp	r3, #2
+ 663 0684 3200001A 		bne	.L15
+ 664 0688 0630D5E5 		ldrb	r3, [r5, #6]	@ zero_extendqisi2
+ 665 068c 020053E3 		cmp	r3, #2
+ 666 0690 2F00001A 		bne	.L15
+ 667 0694 0830D5E5 		ldrb	r3, [r5, #8]	@ zero_extendqisi2
+ 668 0698 020053E3 		cmp	r3, #2
+ 669 069c 2C00001A 		bne	.L15
+ 670 06a0 2130D5E5 		ldrb	r3, [r5, #33]	@ zero_extendqisi2
+ 671 06a4 020053E3 		cmp	r3, #2
+ 672 06a8 2900001A 		bne	.L15
+ 673 06ac 2330D5E5 		ldrb	r3, [r5, #35]	@ zero_extendqisi2
+ 674 06b0 020053E3 		cmp	r3, #2
+ 675 06b4 2600001A 		bne	.L15
+ 154:OLL.c         ****             ls_dreh(-1, 90);
+ 676              		.loc 1 154 0 is_stmt 1
+ 677 06b8 0600A0E1 		mov	r0, r6
+ 678 06bc 0B10A0E1 		mov	r1, fp
+ 679 06c0 FEFFFFEB 		bl	rs_dreh
+ 680              	.LVL86:
+ 155:OLL.c         ****             rs_dreh(1, 90);
+ 681              		.loc 1 155 0
+ 682 06c4 0A00A0E1 		mov	r0, r10
+ 683 06c8 0910A0E1 		mov	r1, r9
+ 684 06cc FEFFFFEB 		bl	ls_dreh
+ 685              	.LVL87:
+ 156:OLL.c         ****             rs_dreh(-1, 90);
+ 686              		.loc 1 156 0
+ 687 06d0 0600A0E1 		mov	r0, r6
+ 688 06d4 0910A0E1 		mov	r1, r9
+ 689 06d8 FEFFFFEB 		bl	rs_dreh
+ 690              	.LVL88:
+ 157:OLL.c         ****             ds_dreh(-1, 90);
+ 691              		.loc 1 157 0
+ 692 06dc 0A00A0E1 		mov	r0, r10
+ 693 06e0 0910A0E1 		mov	r1, r9
+ 694 06e4 FEFFFFEB 		bl	rs_dreh
+ 695              	.LVL89:
+ 158:OLL.c         ****             ls_dreh(-1, 90);
+ 696              		.loc 1 158 0
+ 697 06e8 0A00A0E1 		mov	r0, r10
+ 698 06ec 0910A0E1 		mov	r1, r9
+ 699 06f0 FEFFFFEB 		bl	ds_dreh
+ 700              	.LVL90:
+ 159:OLL.c         ****             ls_dreh(1, 90);
+ 701              		.loc 1 159 0
+ 702 06f4 0A00A0E1 		mov	r0, r10
+ 703 06f8 0910A0E1 		mov	r1, r9
+ 704 06fc FEFFFFEB 		bl	ls_dreh
+ 705              	.LVL91:
+ 160:OLL.c         ****             rs_dreh(1, 90);
+ 706              		.loc 1 160 0
+ 707 0700 0600A0E1 		mov	r0, r6
+ 708 0704 0910A0E1 		mov	r1, r9
+ 709 0708 FEFFFFEB 		bl	ls_dreh
+ 710              	.LVL92:
+ 161:OLL.c         ****             rs_dreh(-1, 90);
+ 711              		.loc 1 161 0
+ 712 070c 0600A0E1 		mov	r0, r6
+ 713 0710 0910A0E1 		mov	r1, r9
+ 714 0714 FEFFFFEB 		bl	rs_dreh
+ 715              	.LVL93:
+ 162:OLL.c         ****             ds_dreh(-1, 90);
+ 716              		.loc 1 162 0
+ 717 0718 0A00A0E1 		mov	r0, r10
+ 718 071c 0910A0E1 		mov	r1, r9
+ 719 0720 FEFFFFEB 		bl	rs_dreh
+ 720              	.LVL94:
+ 163:OLL.c         ****             ls_dreh(1, 90);
+ 721              		.loc 1 163 0
+ 722 0724 0A00A0E1 		mov	r0, r10
+ 723 0728 0910A0E1 		mov	r1, r9
+ 724 072c FEFFFFEB 		bl	ds_dreh
+ 725              	.LVL95:
+ 164:OLL.c         ****         }
+ 726              		.loc 1 164 0
+ 727 0730 0600A0E1 		mov	r0, r6
+ 728 0734 0910A0E1 		mov	r1, r9
+ 729 0738 FEFFFFEB 		bl	ls_dreh
+ 730              	.LVL96:
+ 166:OLL.c         ****         {
+ 731              		.loc 1 166 0
+ 732 073c 0130D5E5 		ldrb	r3, [r5, #1]	@ zero_extendqisi2
+ 733 0740 020053E3 		cmp	r3, #2
+ 734 0744 B900001A 		bne	.L25
+ 166:OLL.c         ****         {
+ 735              		.loc 1 166 0 is_stmt 0 discriminator 1
+ 736 0748 0330D5E5 		ldrb	r3, [r5, #3]	@ zero_extendqisi2
+ 737 074c 020053E3 		cmp	r3, #2
+ 738 0750 B600001A 		bne	.L25
+ 739              	.L15:
+ 740 0754 0530D5E5 		ldrb	r3, [r5, #5]	@ zero_extendqisi2
+ 741 0758 020053E3 		cmp	r3, #2
+ 742 075c 2C00001A 		bne	.L18
+ 743 0760 0730D5E5 		ldrb	r3, [r5, #7]	@ zero_extendqisi2
+ 744 0764 020053E3 		cmp	r3, #2
+ 745 0768 2900001A 		bne	.L18
+ 746 076c 0230D5E5 		ldrb	r3, [r5, #2]	@ zero_extendqisi2
+ 747 0770 020053E3 		cmp	r3, #2
+ 748 0774 2600001A 		bne	.L18
+ 749 0778 0830D5E5 		ldrb	r3, [r5, #8]	@ zero_extendqisi2
+ 750 077c 020053E3 		cmp	r3, #2
+ 751 0780 2300001A 		bne	.L18
+ 752 0784 2130D5E5 		ldrb	r3, [r5, #33]	@ zero_extendqisi2
+ 753 0788 020053E3 		cmp	r3, #2
+ 754 078c 2000001A 		bne	.L18
+ 755 0790 0930D5E5 		ldrb	r3, [r5, #9]	@ zero_extendqisi2
+ 756 0794 020053E3 		cmp	r3, #2
+ 757 0798 1D00001A 		bne	.L18
+ 168:OLL.c         ****             fs_dreh(1, 90);
+ 758              		.loc 1 168 0 is_stmt 1
+ 759 079c 0600A0E1 		mov	r0, r6
+ 760 07a0 0910A0E1 		mov	r1, r9
+ 761 07a4 FEFFFFEB 		bl	ls_dreh
+ 762              	.LVL97:
+ 169:OLL.c         ****             ls_dreh(-1, 90);
+ 763              		.loc 1 169 0
+ 764 07a8 0600A0E1 		mov	r0, r6
+ 765 07ac 0910A0E1 		mov	r1, r9
+ 766 07b0 FEFFFFEB 		bl	fs_dreh
+ 767              	.LVL98:
+ 170:OLL.c         ****             rs_dreh(-1, 90);
+ 768              		.loc 1 170 0
+ 769 07b4 0A00A0E1 		mov	r0, r10
+ 770 07b8 0910A0E1 		mov	r1, r9
+ 771 07bc FEFFFFEB 		bl	ls_dreh
+ 772              	.LVL99:
+ 171:OLL.c         ****             rs_dreh(-1, 90);
+ 773              		.loc 1 171 0
+ 774 07c0 0A00A0E1 		mov	r0, r10
+ 775 07c4 0910A0E1 		mov	r1, r9
+ 776 07c8 FEFFFFEB 		bl	rs_dreh
+ 777              	.LVL100:
+ 172:OLL.c         ****             ls_dreh(1, 90); ///////////////////////
+ 778              		.loc 1 172 0
+ 779 07cc 0A00A0E1 		mov	r0, r10
+ 780 07d0 0910A0E1 		mov	r1, r9
+ 781 07d4 FEFFFFEB 		bl	rs_dreh
+ 782              	.LVL101:
+ 173:OLL.c         ****             ls_dreh(1, 90);
+ 783              		.loc 1 173 0
+ 784 07d8 0600A0E1 		mov	r0, r6
+ 785 07dc 0910A0E1 		mov	r1, r9
+ 786 07e0 FEFFFFEB 		bl	ls_dreh
+ 787              	.LVL102:
+ 174:OLL.c         ****             rs_dreh(-1, 90);
+ 788              		.loc 1 174 0
+ 789 07e4 0600A0E1 		mov	r0, r6
+ 790 07e8 0910A0E1 		mov	r1, r9
+ 791 07ec FEFFFFEB 		bl	ls_dreh
+ 792              	.LVL103:
+ 175:OLL.c         ****         }
+ 793              		.loc 1 175 0
+ 794 07f0 0A00A0E1 		mov	r0, r10
+ 795 07f4 0910A0E1 		mov	r1, r9
+ 796 07f8 FEFFFFEB 		bl	rs_dreh
+ 797              	.LVL104:
+ 177:OLL.c         ****             //formular 25
+ 798              		.loc 1 177 0
+ 799 07fc 0130D5E5 		ldrb	r3, [r5, #1]	@ zero_extendqisi2
+ 800 0800 020053E3 		cmp	r3, #2
+ 801 0804 8900001A 		bne	.L25
+ 177:OLL.c         ****             //formular 25
+ 802              		.loc 1 177 0 is_stmt 0 discriminator 1
+ 803 0808 0330D5E5 		ldrb	r3, [r5, #3]	@ zero_extendqisi2
+ 804 080c 020053E3 		cmp	r3, #2
+ 805 0810 8600001A 		bne	.L25
+ 806              	.L18:
+ 807 0814 0530D5E5 		ldrb	r3, [r5, #5]	@ zero_extendqisi2
+ 808 0818 020053E3 		cmp	r3, #2
+ 809 081c 2C00001A 		bne	.L21
+ 810 0820 0730D5E5 		ldrb	r3, [r5, #7]	@ zero_extendqisi2
+ 811 0824 020053E3 		cmp	r3, #2
+ 812 0828 2900001A 		bne	.L21
+ 813 082c 0630D5E5 		ldrb	r3, [r5, #6]	@ zero_extendqisi2
+ 814 0830 020053E3 		cmp	r3, #2
+ 815 0834 2600001A 		bne	.L21
+ 816 0838 0230D5E5 		ldrb	r3, [r5, #2]	@ zero_extendqisi2
+ 817 083c 020053E3 		cmp	r3, #2
+ 818 0840 2300001A 		bne	.L21
+ 819 0844 2C30D5E5 		ldrb	r3, [r5, #44]	@ zero_extendqisi2
+ 820 0848 020053E3 		cmp	r3, #2
+ 821 084c 2000001A 		bne	.L21
+ 822 0850 0B30D5E5 		ldrb	r3, [r5, #11]	@ zero_extendqisi2
+ 823 0854 020053E3 		cmp	r3, #2
+ 824 0858 1D00001A 		bne	.L21
+ 180:OLL.c         ****             bs_dreh(1, 90);
+ 825              		.loc 1 180 0 is_stmt 1
+ 826 085c 0A00A0E1 		mov	r0, r10
+ 827 0860 0910A0E1 		mov	r1, r9
+ 828 0864 FEFFFFEB 		bl	fs_dreh
+ 829              	.LVL105:
+ 181:OLL.c         ****             rs_dreh(1, 90);
+ 830              		.loc 1 181 0
+ 831 0868 0600A0E1 		mov	r0, r6
+ 832 086c 0910A0E1 		mov	r1, r9
+ 833 0870 FEFFFFEB 		bl	bs_dreh
+ 834              	.LVL106:
+ 182:OLL.c         ****             rs_dreh(-1, 90);
+ 835              		.loc 1 182 0
+ 836 0874 0600A0E1 		mov	r0, r6
+ 837 0878 0910A0E1 		mov	r1, r9
+ 838 087c FEFFFFEB 		bl	rs_dreh
+ 839              	.LVL107:
+ 183:OLL.c         ****             ls_dreh(-1, 90);
+ 840              		.loc 1 183 0
+ 841 0880 0A00A0E1 		mov	r0, r10
+ 842 0884 0910A0E1 		mov	r1, r9
+ 843 0888 FEFFFFEB 		bl	rs_dreh
+ 844              	.LVL108:
+ 184:OLL.c         ****             ls_dreh(-1, 90);
+ 845              		.loc 1 184 0
+ 846 088c 0A00A0E1 		mov	r0, r10
+ 847 0890 0910A0E1 		mov	r1, r9
+ 848 0894 FEFFFFEB 		bl	ls_dreh
+ 849              	.LVL109:
+ 185:OLL.c         ****             rs_dreh(1, 90);
+ 850              		.loc 1 185 0
+ 851 0898 0A00A0E1 		mov	r0, r10
+ 852 089c 0910A0E1 		mov	r1, r9
+ 853 08a0 FEFFFFEB 		bl	ls_dreh
+ 854              	.LVL110:
+ 186:OLL.c         ****             rs_dreh(1, 90);
+ 855              		.loc 1 186 0
+ 856 08a4 0600A0E1 		mov	r0, r6
+ 857 08a8 0910A0E1 		mov	r1, r9
+ 858 08ac FEFFFFEB 		bl	rs_dreh
+ 859              	.LVL111:
+ 187:OLL.c         ****         }
+ 860              		.loc 1 187 0
+ 861 08b0 0600A0E1 		mov	r0, r6
+ 862 08b4 0910A0E1 		mov	r1, r9
+ 863 08b8 FEFFFFEB 		bl	rs_dreh
+ 864              	.LVL112:
+ 189:OLL.c         ****         {
+ 865              		.loc 1 189 0
+ 866 08bc 0130D5E5 		ldrb	r3, [r5, #1]	@ zero_extendqisi2
+ 867 08c0 020053E3 		cmp	r3, #2
+ 868 08c4 5900001A 		bne	.L25
+ 189:OLL.c         ****         {
+ 869              		.loc 1 189 0 is_stmt 0 discriminator 1
+ 870 08c8 0330D5E5 		ldrb	r3, [r5, #3]	@ zero_extendqisi2
+ 871 08cc 020053E3 		cmp	r3, #2
+ 872 08d0 5600001A 		bne	.L25
+ 873              	.L21:
+ 874 08d4 0530D5E5 		ldrb	r3, [r5, #5]	@ zero_extendqisi2
+ 875 08d8 020053E3 		cmp	r3, #2
+ 876 08dc 2C00001A 		bne	.L24
+ 877 08e0 0730D5E5 		ldrb	r3, [r5, #7]	@ zero_extendqisi2
+ 878 08e4 020053E3 		cmp	r3, #2
+ 879 08e8 2900001A 		bne	.L24
+ 880 08ec 0230D5E5 		ldrb	r3, [r5, #2]	@ zero_extendqisi2
+ 881 08f0 020053E3 		cmp	r3, #2
+ 882 08f4 2600001A 		bne	.L24
+ 883 08f8 2C30D5E5 		ldrb	r3, [r5, #44]	@ zero_extendqisi2
+ 884 08fc 020053E3 		cmp	r3, #2
+ 885 0900 2300001A 		bne	.L24
+ 886 0904 0930D5E5 		ldrb	r3, [r5, #9]	@ zero_extendqisi2
+ 887 0908 020053E3 		cmp	r3, #2
+ 888 090c 2000001A 		bne	.L24
+ 889 0910 3530D5E5 		ldrb	r3, [r5, #53]	@ zero_extendqisi2
+ 890 0914 020053E3 		cmp	r3, #2
+ 891 0918 1D00001A 		bne	.L24
+ 192:OLL.c         ****             rs_dreh(-1, 90);
+ 892              		.loc 1 192 0 is_stmt 1
+ 893 091c 0600A0E1 		mov	r0, r6
+ 894 0920 0910A0E1 		mov	r1, r9
+ 895 0924 FEFFFFEB 		bl	rs_dreh
+ 896              	.LVL113:
+ 193:OLL.c         ****             ds_dreh(-1, 90);
+ 897              		.loc 1 193 0
+ 898 0928 0A00A0E1 		mov	r0, r10
+ 899 092c 0910A0E1 		mov	r1, r9
+ 900 0930 FEFFFFEB 		bl	rs_dreh
+ 901              	.LVL114:
+ 194:OLL.c         ****             ls_dreh(-1, 90);
+ 902              		.loc 1 194 0
+ 903 0934 0A00A0E1 		mov	r0, r10
+ 904 0938 0910A0E1 		mov	r1, r9
+ 905 093c FEFFFFEB 		bl	ds_dreh
+ 906              	.LVL115:
+ 195:OLL.c         ****             rs_dreh(-1, 90);
+ 907              		.loc 1 195 0
+ 908 0940 0A00A0E1 		mov	r0, r10
+ 909 0944 0910A0E1 		mov	r1, r9
+ 910 0948 FEFFFFEB 		bl	ls_dreh
+ 911              	.LVL116:
+ 196:OLL.c         ****             ls_dreh(1, 90);
+ 912              		.loc 1 196 0
+ 913 094c 0A00A0E1 		mov	r0, r10
+ 914 0950 0910A0E1 		mov	r1, r9
+ 915 0954 FEFFFFEB 		bl	rs_dreh
+ 916              	.LVL117:
+ 197:OLL.c         ****             rs_dreh(-1, 90);
+ 917              		.loc 1 197 0
+ 918 0958 0600A0E1 		mov	r0, r6
+ 919 095c 0910A0E1 		mov	r1, r9
+ 920 0960 FEFFFFEB 		bl	ls_dreh
+ 921              	.LVL118:
+ 198:OLL.c         ****             ls_dreh(-1, 90);
+ 922              		.loc 1 198 0
+ 923 0964 0A00A0E1 		mov	r0, r10
+ 924 0968 0910A0E1 		mov	r1, r9
+ 925 096c FEFFFFEB 		bl	rs_dreh
+ 926              	.LVL119:
+ 199:OLL.c         ****         }
+ 927              		.loc 1 199 0
+ 928 0970 0A00A0E1 		mov	r0, r10
+ 929 0974 0910A0E1 		mov	r1, r9
+ 930 0978 FEFFFFEB 		bl	ls_dreh
+ 931              	.LVL120:
+ 201:OLL.c         ****             //formular 27
+ 932              		.loc 1 201 0
+ 933 097c 0130D5E5 		ldrb	r3, [r5, #1]	@ zero_extendqisi2
+ 934 0980 020053E3 		cmp	r3, #2
+ 935 0984 2900001A 		bne	.L25
+ 201:OLL.c         ****             //formular 27
+ 936              		.loc 1 201 0 is_stmt 0 discriminator 1
+ 937 0988 0330D5E5 		ldrb	r3, [r5, #3]	@ zero_extendqisi2
+ 938 098c 020053E3 		cmp	r3, #2
+ 939 0990 2600001A 		bne	.L25
+ 940              	.L24:
+ 941 0994 0530D5E5 		ldrb	r3, [r5, #5]	@ zero_extendqisi2
+ 942 0998 020053E3 		cmp	r3, #2
+ 943 099c 2300001A 		bne	.L25
+ 944 09a0 0730D5E5 		ldrb	r3, [r5, #7]	@ zero_extendqisi2
+ 945 09a4 020053E3 		cmp	r3, #2
+ 946 09a8 2000001A 		bne	.L25
+ 947 09ac 0830D5E5 		ldrb	r3, [r5, #8]	@ zero_extendqisi2
+ 948 09b0 020053E3 		cmp	r3, #2
+ 949 09b4 1D00001A 		bne	.L25
+ 950 09b8 2A30D5E5 		ldrb	r3, [r5, #42]	@ zero_extendqisi2
+ 951 09bc 020053E3 		cmp	r3, #2
+ 952 09c0 1A00001A 		bne	.L25
+ 953 09c4 2130D5E5 		ldrb	r3, [r5, #33]	@ zero_extendqisi2
+ 954 09c8 020053E3 		cmp	r3, #2
+ 955 09cc 1700001A 		bne	.L25
+ 956 09d0 3330D5E5 		ldrb	r3, [r5, #51]	@ zero_extendqisi2
+ 957 09d4 020053E3 		cmp	r3, #2
+ 958 09d8 1400001A 		bne	.L25
+ 205:OLL.c         ****             rs_dreh(1, 180);
+ 959              		.loc 1 205 0 is_stmt 1
+ 960 09dc 0A00A0E1 		mov	r0, r10
+ 961 09e0 0910A0E1 		mov	r1, r9
+ 962 09e4 FEFFFFEB 		bl	rs_dreh
+ 963              	.LVL121:
+ 964              		.loc 1 206 0
+ 965 09e8 0600A0E1 		mov	r0, r6
+ 966 09ec 0B10A0E1 		mov	r1, fp
+ 967 09f0 FEFFFFEB 		bl	rs_dreh
+ 968              	.LVL122:
+ 207:OLL.c         ****             ls_dreh(1, 90);
+ 969              		.loc 1 207 0
+ 970 09f4 0600A0E1 		mov	r0, r6
+ 971 09f8 0910A0E1 		mov	r1, r9
+ 972 09fc FEFFFFEB 		bl	ls_dreh
+ 973              	.LVL123:
+ 208:OLL.c         ****             rs_dreh(1, 90);
+ 974              		.loc 1 208 0
+ 975 0a00 0600A0E1 		mov	r0, r6
+ 976 0a04 0910A0E1 		mov	r1, r9
+ 977 0a08 FEFFFFEB 		bl	rs_dreh
+ 978              	.LVL124:
+ 209:OLL.c         ****             ls_dreh(-1, 90);
+ 979              		.loc 1 209 0
+ 980 0a0c 0A00A0E1 		mov	r0, r10
+ 981 0a10 0910A0E1 		mov	r1, r9
+ 982 0a14 FEFFFFEB 		bl	ls_dreh
+ 983              	.LVL125:
+ 210:OLL.c         ****             rs_dreh(1, 90);
+ 984              		.loc 1 210 0
+ 985 0a18 0600A0E1 		mov	r0, r6
+ 986 0a1c 0910A0E1 		mov	r1, r9
+ 987 0a20 FEFFFFEB 		bl	rs_dreh
+ 988              	.LVL126:
+ 211:OLL.c         ****             ls_dreh(1, 90);
+ 989              		.loc 1 211 0
+ 990 0a24 0600A0E1 		mov	r0, r6
+ 991 0a28 0910A0E1 		mov	r1, r9
+ 992 0a2c FEFFFFEB 		bl	ls_dreh
+ 993              	.LVL127:
+ 994              	.L25:
+ 212:OLL.c         ****         }
+ 213:OLL.c         ****         wuerfel_print(1);
+ 995              		.loc 1 213 0
+ 996 0a30 0600A0E1 		mov	r0, r6
+ 997 0a34 FEFFFFEB 		bl	wuerfel_print
+ 998              	.LVL128:
+ 118:OLL.c         ****         
+ 999              		.loc 1 118 0
+ 1000 0a38 080054E1 		cmp	r4, r8
+ 1001 0a3c 8DFEFF1A 		bne	.L27
+ 214:OLL.c         ****     }
+ 215:OLL.c         ****     return 0;
+ 216:OLL.c         **** }
+ 1002              		.loc 1 216 0
+ 1003 0a40 0000A0E3 		mov	r0, #0
+ 1004 0a44 14D08DE2 		add	sp, sp, #20
+ 1005              		@ sp needed
+ 1006 0a48 F08FBDE8 		ldmfd	sp!, {r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 1007              	.L34:
+ 1008              		.align	2
+ 1009              	.L33:
+ 1010 0a4c 00000000 		.word	color_data
+ 1011 0a50 00000000 		.word	.LANCHOR0
+ 1012              		.cfi_endproc
+ 1013              	.LFE11:
+ 1014              		.fnend
+ 1016              		.section	.rodata
+ 1017              		.align	2
+ 1018              	.LANCHOR0 = . + 0
+ 1019              	.LC0:
+ 1020 0000 01000000 		.word	1
+ 1021 0004 05000000 		.word	5
+ 1022 0008 03000000 		.word	3
+ 1023 000c 04000000 		.word	4
+ 1024              		.text
+ 1025              	.Letext0:
+ 1026              		.file 2 "/usr/local/carlson-minot/crosscompilers/lib/gcc/arm-none-linux-gnueabi/4.8.3/include/stdd
+ 1027              		.file 3 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
+ 1028              		.file 4 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
+ 1029              		.file 5 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
+ 1030              		.file 6 "main.h"
+ 1031              		.file 7 "Side_dreh.h"
+ 1032              		.file 8 "print_mode.h"
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 OLL.c
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccrWdF8k.s:16     .text:0000000000000000 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccrWdF8k.s:19     .text:0000000000000000 OLL
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccrWdF8k.s:1010   .text:0000000000000a4c $d
+                       .ARM.exidx:0000000000000000 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccrWdF8k.s:1017   .rodata:0000000000000000 $d
+                     .debug_frame:0000000000000010 $d
+
+UNDEFINED SYMBOLS
+change_topface
+change_rightface
+wuerfel_print
+rs_dreh
+fs_dreh
+ls_dreh
+drehen
+bs_dreh
+ds_dreh
+color_data
+__aeabi_unwind_cpp_pr0

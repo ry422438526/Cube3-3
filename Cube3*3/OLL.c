@@ -11,23 +11,13 @@
 #include "Side_dreh.h"
 #include "print_mode.h"
 
-
-int n=0,m=0;  //n=die Kantenstein des unteren Seites; m=die richtigen Menge der untersn Seites
-
-void OLL(){
+int OLL(){
     change_topface(2);
     change_rightface(4);
-    n=nSum();
-    m=mSum();
-    if (n==0)
+    wuerfel_print(1);
+    if ((color_data[0][1]!=2)&&(color_data[0][3]!=2)&&(color_data[0][5]!=2)&&(color_data[0][7]!=2))
     {
-        fs_dreh(1, 90);
-        fs_dreh(1, 90);
-        bs_dreh(1, 90);
-        rs_dreh(-1, 90);
-        ls_dreh(-1, 90);
-        bs_dreh(-1, 90);
-        us_dreh(1, 90);
+        /*fs_dreh(1, 90);
         fs_dreh(1, 90);
         bs_dreh(1, 90);
         rs_dreh(-1, 90);
@@ -39,39 +29,189 @@ void OLL(){
         rs_dreh(-1, 90);
         ls_dreh(-1, 90);
         bs_dreh(-1, 90);
+        us_dreh(1, 90);
+        fs_dreh(1, 90);
+        bs_dreh(1, 90);
+        rs_dreh(-1, 90);
+        ls_dreh(-1, 90);
+        bs_dreh(-1, 90);*/
+        rs_dreh(-1, 90);
+        fs_dreh(-1, 90);
+        fs_dreh(-1, 90);
+        rs_dreh(1, 90);
+        ls_dreh(1, 90);
+        fs_dreh(1, 90);
+        change_topface(2);
     }
-    if(n==2)
-    {
+        if((color_data[0][1]==2)&&(color_data[0][3]!=2)&&(color_data[0][5]!=2)&&(color_data[0][7]==2)) //richtig
+        {
+            wuerfel_print(1);
+            rs_dreh(-1, 90);
+            fs_dreh(-1, 90);
+            fs_dreh(-1, 90);
+            rs_dreh(1, 90);
+            ls_dreh(1, 90);
+            fs_dreh(1, 90);
+            change_topface(2);
+        }
+        if ((color_data[0][1]!=2)&&(color_data[0][3]==2)&&(color_data[0][5]==2)&&(color_data[0][7]!=2)) // richtig
+        {
+            drehen(-1);
+            rs_dreh(-1, 90);
+            fs_dreh(-1, 90);
+            fs_dreh(-1, 90);
+            rs_dreh(1, 90);
+            ls_dreh(1, 90);
+            fs_dreh(1, 90);
+            change_topface(2);
+        }
+        if ((color_data[0][1]==2)&&(color_data[0][3]==2)&&(color_data[0][5]!=2)&&(color_data[0][7]!=2)) // richtig
+        {
+            rs_dreh(-1, 90);
+            rs_dreh(-1, 90);
+            fs_dreh(-1, 90);
+            rs_dreh(1, 90);
+            ls_dreh(1, 90);
+            bs_dreh(1, 90);
+            change_topface(2);
+        }
+        if((color_data[0][1]!=2)&&(color_data[0][3]==2)&&(color_data[0][5]!=2)&&(color_data[0][7]==2)) //richtig
+        {
+            drehen(1);              //??????????????????????1 or -1
+            rs_dreh(-1, 90);
+            rs_dreh(-1, 90);
+            fs_dreh(-1, 90);
+            rs_dreh(1, 90);
+            ls_dreh(1, 90);
+            bs_dreh(1, 90);
+            change_topface(2);
+        }
+        if((color_data[0][1]==2)&&(color_data[0][3]!=2)&&(color_data[0][5]==2)&&(color_data[0][7]!=2)) //richtig
+        {
+            drehen(-1);              //??????????????????????1 or -1
+            rs_dreh(-1, 90);
+            rs_dreh(-1, 90);
+            fs_dreh(-1, 90);
+            rs_dreh(1, 90);
+            ls_dreh(1, 90);
+            bs_dreh(1, 90);
+            change_topface(2);
+        }
+        if((color_data[0][1]!=2)&&(color_data[0][3]!=2)&&(color_data[0][5]==2)&&(color_data[0][7]==2))//richtig
+        {
+            drehen(1);
+            drehen(1);
+            rs_dreh(-1, 90);
+            rs_dreh(-1, 90);
+            fs_dreh(-1, 90);
+            rs_dreh(1, 90);
+            ls_dreh(1, 90);
+            bs_dreh(1, 90);
+            change_topface(2);
+        }
+    
+    wuerfel_print(1);
+    
+    int color_kanten[]={1,5,3,4};
+    // durch Formular
+    int i;
+    for(i=0;i<=3;i++){
         
-    }
-    if(n==4)
-    {
-        break;
-    }
-}
-
-int  mSum(){
-    int i,j,p,sum_m=0;
-    for (i=0; i<=2; i++) {
-        for (j=0; j<=2; j++) {
-            p=Mittelstein_suchen(2);
-            if (color_data[p][(3*i+j)]) {
-                sum_m++;
-            }
+        change_topface(2);
+        change_rightface(color_kanten[i]);
+        wuerfel_print(1);
+        
+        if((color_data[0][1]==2)&&(color_data[0][3]==2)&&(color_data[0][5]==2)&&(color_data[0][7]==2)&&(color_data[1][0]==2)&&(color_data[1][2]==2)&&(color_data[3][6]==2)&&(color_data[3][8]==2))  // formular 21
+        {
+            rs_dreh(1, 90);
+            rs_dreh(1, 90);
+            ds_dreh(1, 90);
+            ls_dreh(-1, 90);
+            rs_dreh(-1, 90);
+            ls_dreh(1, 90);
+            rs_dreh(1, 90);
+            ls_dreh(-1, 90);
+            rs_dreh(-1, 90);
+            ls_dreh(1, 90);
+            rs_dreh(-1, 90);
+            ls_dreh(-1, 90);
         }
-    }
-    return sum_m;
-}
-
-int nSum(){
-    int i,p,sum_n=0; // Position der Gelbseit
-    int color_kanten[]={1,3,5,7};
-    p=Mittelstein_suchen(2);
-    for (i=0; i<=3; i++) {
-        if (color_data[p][color_kanten[i]]) {
-            sum_n++;
+        if ((color_data[0][1]==2)&&(color_data[0][3]==2)&&(color_data[0][5]==2)&&(color_data[0][7]==2)&&(color_data[4][6]==2)&&(color_data[4][8]==2)&&(color_data[3][8]==2)&&(color_data[1][2]==2)) //fomular 22
+        {
+            rs_dreh(1, 90);
+            rs_dreh(-1, 90);
+            ds_dreh(-1, 90);
+            ls_dreh(-1, 180);
+            rs_dreh(-1, 90);
+            ls_dreh(1, 180);
+            rs_dreh(-1, 90);
+            ls_dreh(-1, 180);
+            rs_dreh(1, 180);
+            ls_dreh(1, 90);
         }
+        if ((color_data[0][1]==2)&&(color_data[0][3]==2)&&(color_data[0][5]==2)&&(color_data[0][7]==2)&&(color_data[0][6]==2)&&(color_data[0][8]==2)&&(color_data[3][6]==2)&&(color_data[3][8]==2))//fomular 23
+        {
+            rs_dreh(1, 180);
+            ls_dreh(-1, 90);
+            rs_dreh(1, 90);
+            rs_dreh(-1, 90);
+            ds_dreh(-1, 90);
+            ls_dreh(-1, 90);
+            ls_dreh(1, 90);
+            rs_dreh(1, 90);
+            rs_dreh(-1, 90);
+            ds_dreh(-1, 90);
+            ls_dreh(1, 90);
+        }
+        if ((color_data[0][1]==2)&&(color_data[0][3]==2)&&(color_data[0][5]==2)&&(color_data[0][7]==2)&&(color_data[0][2]==2)&&(color_data[0][8]==2)&&(color_data[3][6]==2)&&(color_data[1][0]==2))//formular 24
+        {
+            ls_dreh(1, 90);
+            fs_dreh(1, 90);
+            ls_dreh(-1, 90);
+            rs_dreh(-1, 90);
+            rs_dreh(-1, 90);
+            ls_dreh(1, 90); ///////////////////////
+            ls_dreh(1, 90);
+            rs_dreh(-1, 90);
+        }
+        if((color_data[0][1]==2)&&(color_data[0][3]==2)&&(color_data[0][5]==2)&&(color_data[0][7]==2)&&(color_data[0][6]==2)&&(color_data[0][2]==2)&&(color_data[4][8]==2)&&(color_data[1][2]==2))
+            //formular 25
+        {
+            fs_dreh(-1, 90);
+            bs_dreh(1, 90);
+            rs_dreh(1, 90);
+            rs_dreh(-1, 90);
+            ls_dreh(-1, 90);
+            ls_dreh(-1, 90);
+            rs_dreh(1, 90);
+            rs_dreh(1, 90);
+        }
+        if((color_data[0][1]==2)&&(color_data[0][3]==2)&&(color_data[0][5]==2)&&(color_data[0][7]==2)&&(color_data[0][2]==2)&&(color_data[4][8]==2)&&(color_data[1][0]==2)&&(color_data[5][8]==2))//formular 26
+        {
+            
+            rs_dreh(1, 90);
+            rs_dreh(-1, 90);
+            ds_dreh(-1, 90);
+            ls_dreh(-1, 90);
+            rs_dreh(-1, 90);
+            ls_dreh(1, 90);
+            rs_dreh(-1, 90);
+            ls_dreh(-1, 90);
+        }
+        if((color_data[0][1]==2)&&(color_data[0][3]==2)&&(color_data[0][5]==2)&&(color_data[0][7]==2)&&(color_data[0][8]==2)&&(color_data[4][6]==2)&&(color_data[3][6]==2)&&(color_data[5][6]==2))
+            //formular 27
+        {
+            
+            rs_dreh(-1, 90);
+            rs_dreh(1, 180);
+            ls_dreh(1, 90);
+            rs_dreh(1, 90);
+            ls_dreh(-1, 90);
+            rs_dreh(1, 90);
+            ls_dreh(1, 90);
+        }
+        wuerfel_print(1);
     }
-    return sum_n;
+    return 0;
 }
 

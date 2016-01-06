@@ -57,7 +57,7 @@ int ColSen_init()
     DevCon.Connection[PORT]=CONN_INPUT_UART;   //Universal Asynchronous Receiver/Transmitter
     DevCon.Type[PORT]=COLOR_SENSOR_TYPE;
     ioctl(file,UART_SET_CONN,&DevCon);
-    printf("Device is ready \n");
+    printf("Device is ready \n\r");
     return 0;
 }
 #endif
@@ -66,24 +66,32 @@ int ColSen_getData()   //Center:zenteral Position
 {
 #ifdef __linux__
     int MAX_Werte=0;
-    float rot,gruen,blau;
-    int Color_color;
+    float rot,gruen,blau,blank;
+    int Color_color =0;
     int Color_data_r=0;
     int Color_data_g=0;
     int Color_data_b=0;
+    int Color_data_blank=0;
     sleep(1);
     Color_data_r=(unsigned char)pColorSensor->Raw[PORT][0][0]+(unsigned char)(pColorSensor->Raw[PORT][0][1]<<8);
     Color_data_g=(unsigned char)pColorSensor->Raw[PORT][0][2]+(unsigned char)(pColorSensor->Raw[PORT][0][3]<<8);
     Color_data_b=(unsigned char)pColorSensor->Raw[PORT][0][4]+(unsigned char)(pColorSensor->Raw[PORT][0][5]<<8);
-    //Color_data_blank=(unsigned int)pColorSensor->Raw[PORT][0][6]+(unsigned int)(pColorSensor->Raw[PORT][0][7]<<8);
-    // usleep(10000);
-    MAX_Werte=MAX_RGB(MAX_RGB(Color_data_r, Color_data_g),Color_data_b);
-    rot   =(Color_data_r*1.0)/MAX_Werte;
+    Color_data_blank=(unsigned int)pColorSensor->Raw[PORT][0][6]+(unsigned int)(pColorSensor->Raw[PORT][0][7]<<8);
+    //usleep(100000);
+    
+    
+    
+    
+    //MAX_Werte=MAX_RGB(MAX_RGB(Color_data_r, Color_data_g),Color_data_b);
+    /*rot   =(Color_data_r*1.0)/MAX_Werte;
     gruen =(Color_data_g*1.0)/MAX_Werte;
     blau  =(Color_data_b*1.0)/MAX_Werte;
     Color_color=Color_col(rot,gruen,blau);
-    printf("COLOR_MAX is %d", MAX_Werte);
-    printf("color_data is (%d, %d, %d)", Color_data_r,Color_data_g,Color_data_b);
+    printf("COLOR_MAX is %d ", MAX_Werte);*/
+    Color_color=Color_col(Color_data_r*1.0,Color_data_g*1.0,Color_data_b*1.0);
+    printf("color_data is (%5d, %5d, %5d, %5d)",Color_data_r,Color_data_g,Color_data_b,Color_data_blank);
+    //printf("%5d, %5d, %5d, %5d", Color_data_r,Color_data_g,Color_data_b,Color_data_blank);
+#if 1
     switch(Color_color){
         case 0:
             printf("\033[1;30m   %d\033[0m",Color_color);
@@ -109,8 +117,9 @@ int ColSen_getData()   //Center:zenteral Position
             printf("\033[1;31m   %d\033[0m",Color_color);
             break;
     }
+#endif
     printf("\n\r");
-    sleep(1);
+//    sleep(1);
     return Color_color;
     // senden daten zu PC
 #endif
@@ -139,7 +148,8 @@ int MAX_RGB(int a,int b)
     }
 }
 
-FARBE Color_col(float rot, float gruen,float blau)
+
+/*FARBE Color_col(float rot, float gruen,float blau)
 {
     
     int Color_col=0;
@@ -147,7 +157,7 @@ FARBE Color_col(float rot, float gruen,float blau)
         if(gruen>0.5)
         {
             Color_col=GELB;
-        }else if ((gruen<0.3)||(blau<0.1)){
+        }else if ((gruen<0.3)&&(blau<0.1)){
             Color_col=ROT;
         }else{
             Color_col=ORANGE;
@@ -155,7 +165,7 @@ FARBE Color_col(float rot, float gruen,float blau)
     }
     if(gruen==1)
     {
-        if(rot<0.3)
+        if((rot<0.4)||(blau<0.3))
         {
             Color_col=GRUEN;
         }else if (blau>0.8){
@@ -166,8 +176,31 @@ FARBE Color_col(float rot, float gruen,float blau)
     }
     return Color_col;
 }
-
-
+*/
+FARBE Color_col(float rot, float gruen,float blau)
+{
+    int Farbe=-1;
+    
+    if ((rot>=20)||(gruen>=20)||(blau>=20)){
+        if ((rot>blau*1.35)&&(gruen>blau*1.35))
+        {
+            if (((rot>gruen)&&(rot<gruen*1.1))||((gruen>rot)&&(gruen<rot*1.1))){
+                Farbe= WEISS;
+            }else if(((rot>gruen/0.75)&&(rot<gruen/0.55))||((rot>blau/0.25)&&(rot<blau/0.15))){
+                Farbe=  GELB;
+            }else if ((rot>=2.5*gruen)&&(rot>0.4*blau)&&(gruen>=2*blau)){
+                Farbe=  ORANGE;
+            }else if ((rot>2*gruen)&&(rot>3*blau)) {
+                Farbe=  ROT;
+            }else if ((gruen>2*rot)&&(gruen>2*blau)) {
+                Farbe=  GRUEN;
+            }else if ((blau>gruen)&&(blau<2*gruen)&&(blau>2*rot)) {
+                Farbe=  BLAU;
+            }
+        }
+    }
+    return Farbe;
+}
 
 
 /*

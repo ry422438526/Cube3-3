@@ -10,9 +10,7 @@
 #define OLL_h
 
 #include <stdio.h>
-void OLL();
-int nSum();
-int mSum();
 
+int OLL();
 
 #endif /* OLL_h */

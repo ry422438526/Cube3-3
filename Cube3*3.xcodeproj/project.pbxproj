@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2C3513CF1C185A6000B7D2BA /* OLL.c in Sources */ = {isa = PBXBuildFile; fileRef = 2C3513CD1C185A6000B7D2BA /* OLL.c */; };
+		2CF216731C2704BF008D8234 /* PLL.c in Sources */ = {isa = PBXBuildFile; fileRef = 2CF216711C2704BF008D8234 /* PLL.c */; };
 		7AD9AB241BF4D6260079E82F /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 7AD9AB231BF4D6260079E82F /* main.c */; };
 		7AD9AB2C1BF4D6510079E82F /* Arm_motor.c in Sources */ = {isa = PBXBuildFile; fileRef = 7AD9AB2A1BF4D6510079E82F /* Arm_motor.c */; };
 		7AD9AB2F1BF4D7120079E82F /* Dreh_motor.c in Sources */ = {isa = PBXBuildFile; fileRef = 7AD9AB2D1BF4D7120079E82F /* Dreh_motor.c */; };
@@ -36,6 +37,8 @@
 /* Begin PBXFileReference section */
 		2C3513CD1C185A6000B7D2BA /* OLL.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = OLL.c; sourceTree = "<group>"; };
 		2C3513CE1C185A6000B7D2BA /* OLL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OLL.h; sourceTree = "<group>"; };
+		2CF216711C2704BF008D8234 /* PLL.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PLL.c; sourceTree = "<group>"; };
+		2CF216721C2704BF008D8234 /* PLL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLL.h; sourceTree = "<group>"; };
 		7AD9AB201BF4D6260079E82F /* Cube3*3 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Cube3*3"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AD9AB231BF4D6260079E82F /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		7AD9AB2A1BF4D6510079E82F /* Arm_motor.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Arm_motor.c; sourceTree = "<group>"; };
@@ -96,12 +99,14 @@
 			children = (
 				7AD9AB231BF4D6260079E82F /* main.c */,
 				7AD9AB451BF4DA5D0079E82F /* main.h */,
-				7AD9AB491BF4DACC0079E82F /* F2L.c */,
-				7AD9AB4A1BF4DACC0079E82F /* F2L.h */,
 				7AD9AB461BF4DA9B0079E82F /* Top_Cross.c */,
 				7AD9AB471BF4DA9B0079E82F /* Top_Cross.h */,
+				7AD9AB491BF4DACC0079E82F /* F2L.c */,
+				7AD9AB4A1BF4DACC0079E82F /* F2L.h */,
 				2C3513CD1C185A6000B7D2BA /* OLL.c */,
 				2C3513CE1C185A6000B7D2BA /* OLL.h */,
+				2CF216711C2704BF008D8234 /* PLL.c */,
+				2CF216721C2704BF008D8234 /* PLL.h */,
 				7AD9AB2A1BF4D6510079E82F /* Arm_motor.c */,
 				7AD9AB2B1BF4D6510079E82F /* Arm_motor.h */,
 				7AD9AB2D1BF4D7120079E82F /* Dreh_motor.c */,
@@ -182,6 +187,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7AD9AB4B1BF4DACC0079E82F /* F2L.c in Sources */,
+				2CF216731C2704BF008D8234 /* PLL.c in Sources */,
 				7AD9AB481BF4DA9B0079E82F /* Top_Cross.c in Sources */,
 				7AD9AB2C1BF4D6510079E82F /* Arm_motor.c in Sources */,
 				7AD9AB2F1BF4D7120079E82F /* Dreh_motor.c in Sources */,

@@ -43,7 +43,7 @@
   22:Arm_motor.c   **** 
   23:Arm_motor.c   **** 
   24:Arm_motor.c   **** #ifdef __linux__
-  25:Arm_motor.c   **** const int MOTOR_SPEED=25;//power:0~100
+  25:Arm_motor.c   **** const int MOTOR_SPEED=20;//power:0~100
   26:Arm_motor.c   **** const char MOTOR_PORT_A = 0x01; //Ausfahrbarer Greifarm Motor;
   27:Arm_motor.c   **** 
   28:Arm_motor.c   **** #if 0
@@ -199,7 +199,7 @@
   46              		.loc 1 154 0
   47 0024 0100A0E3 		mov	r0, #1
   48              	.LVL1:
-  49 0028 1910A0E3 		mov	r1, #25
+  49 0028 1410A0E3 		mov	r1, #20
   50 002c FEFFFFEB 		bl	cOutputSpeed
   51              	.LVL2:
  155:Arm_motor.c   ****         cOutputStart(MOTOR_PORT_A);
@@ -242,7 +242,7 @@
   80              		.loc 1 161 0
   81 006c 0100A0E3 		mov	r0, #1
   82              	.LVL7:
-  83 0070 1810E0E3 		mvn	r1, #24
+  83 0070 1310E0E3 		mvn	r1, #19
   84 0074 FEFFFFEB 		bl	cOutputSpeed
   85              	.LVL8:
  162:Arm_motor.c   ****         cOutputStart(MOTOR_PORT_A);
@@ -336,7 +336,7 @@
   87:Arm_motor.c   ****     cOutputStart(MOTOR_PORT_A);
  158              		.loc 1 87 0
  159 00ec 0100A0E3 		mov	r0, #1
- 160 00f0 1910A0E3 		mov	r1, #25
+ 160 00f0 1410A0E3 		mov	r1, #20
  161 00f4 FEFFFFEB 		bl	cOutputSpeed
  162              	.LVL15:
   88:Arm_motor.c   ****     int old_TachoSensor;
@@ -495,7 +495,7 @@
  286 0014 01       		.byte	1
  287 0015 000000   		.space	3
  290              	MOTOR_SPEED:
- 291 0018 19000000 		.word	25
+ 291 0018 14000000 		.word	20
  292              		.section	.rodata.str1.4,"aMS",%progbits,1
  293              		.align	2
  294              	.LC0:
@@ -524,25 +524,25 @@
  317              		.file 10 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/u
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 Arm_motor.c
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccIis5UI.s:16     .text:0000000000000000 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccIis5UI.s:19     .text:0000000000000000 arm_setpos
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccIis5UI.s:130    .text:00000000000000d4 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccV8QMk2.s:16     .text:0000000000000000 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccV8QMk2.s:19     .text:0000000000000000 arm_setpos
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccV8QMk2.s:130    .text:00000000000000d4 $d
                        .ARM.exidx:0000000000000000 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccIis5UI.s:138    .text:00000000000000e4 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccIis5UI.s:141    .text:00000000000000e4 arm_init
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccIis5UI.s:233    .text:0000000000000184 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccIis5UI.s:241    .text:0000000000000194 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccIis5UI.s:244    .text:0000000000000194 arm_close
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccV8QMk2.s:138    .text:00000000000000e4 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccV8QMk2.s:141    .text:00000000000000e4 arm_init
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccV8QMk2.s:233    .text:0000000000000184 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccV8QMk2.s:241    .text:0000000000000194 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccV8QMk2.s:244    .text:0000000000000194 arm_close
                        .ARM.extab:0000000000000000 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccIis5UI.s:277    .rodata:0000000000000000 arm_winkel
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccIis5UI.s:301    .bss:0000000000000000 arm_ist
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccIis5UI.s:305    .bss:0000000000000004 arm_referenz
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccV8QMk2.s:277    .rodata:0000000000000000 arm_winkel
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccV8QMk2.s:301    .bss:0000000000000000 arm_ist
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccV8QMk2.s:305    .bss:0000000000000004 arm_referenz
                             *COM*:0000000000000040 OutputInstance
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccIis5UI.s:285    .rodata:0000000000000014 MOTOR_PORT_A
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccIis5UI.s:290    .rodata:0000000000000018 MOTOR_SPEED
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccIis5UI.s:273    .rodata:0000000000000000 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccIis5UI.s:293    .rodata.str1.4:0000000000000000 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccIis5UI.s:297    .bss:0000000000000000 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccV8QMk2.s:285    .rodata:0000000000000014 MOTOR_PORT_A
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccV8QMk2.s:290    .rodata:0000000000000018 MOTOR_SPEED
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccV8QMk2.s:273    .rodata:0000000000000000 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccV8QMk2.s:293    .rodata.str1.4:0000000000000000 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccV8QMk2.s:297    .bss:0000000000000000 $d
                      .debug_frame:0000000000000010 $d
 
 UNDEFINED SYMBOLS
