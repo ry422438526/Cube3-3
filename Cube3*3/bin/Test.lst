@@ -1,0 +1,262 @@
+   1              		.arch armv5te
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 2
+   9              		.eabi_attribute 30, 1
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.file	"Test.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.align	2
+  17              		.global	test
+  19              	test:
+  20              		.fnstart
+  21              	.LFB11:
+  22              		.file 1 "Test.c"
+   1:Test.c        **** //
+   2:Test.c        **** //  Test.c
+   3:Test.c        **** //  Cube3*3
+   4:Test.c        **** //
+   5:Test.c        **** //  Created by Ryoma on 16/1/6.
+   6:Test.c        **** //  Copyright © 2016年 Chunxia Yang. All rights reserved.
+   7:Test.c        **** //
+   8:Test.c        **** 
+   9:Test.c        **** #include "Test.h"
+  10:Test.c        **** #include "main.h"
+  11:Test.c        **** #include "print_mode.h"
+  12:Test.c        **** 
+  13:Test.c        **** 
+  14:Test.c        **** typedef enum
+  15:Test.c        **** {
+  16:Test.c        ****     WEISS=0,
+  17:Test.c        ****     BLAU=1,
+  18:Test.c        ****     GELB=2,
+  19:Test.c        ****     GRUEN=3,
+  20:Test.c        ****     ROT=4,
+  21:Test.c        ****     ORANGE=5
+  22:Test.c        **** }FARBE;
+  23:Test.c        **** 
+  24:Test.c        **** int test(){
+  23              		.loc 1 24 0
+  24              		.cfi_startproc
+  25              		@ args = 0, pretend = 0, frame = 0
+  26              		@ frame_needed = 0, uses_anonymous_args = 0
+  27 0000 F0412DE9 		stmfd	sp!, {r4, r5, r6, r7, r8, lr}
+  28              		.save {r4, r5, r6, r7, r8, lr}
+  29              		.cfi_def_cfa_offset 24
+  30              		.cfi_offset 4, -24
+  31              		.cfi_offset 5, -20
+  32              		.cfi_offset 6, -16
+  33              		.cfi_offset 7, -12
+  34              		.cfi_offset 8, -8
+  35              		.cfi_offset 14, -4
+  36              	.LVL0:
+  37 0004 E0109FE5 		ldr	r1, .L17
+  38 0008 367081E2 		add	r7, r1, #54
+  25:Test.c        ****     int test=-1;
+  26:Test.c        ****     int i,j;
+  27:Test.c        ****     int Farbe_r=0,Farbe_g=0,Farbe_b=0,Farbe_w=0,Farbe_o=0,Farbe_y=0;
+  39              		.loc 1 27 0
+  40 000c 0000A0E3 		mov	r0, #0
+  41 0010 0060A0E1 		mov	r6, r0
+  42 0014 0040A0E1 		mov	r4, r0
+  43 0018 0050A0E1 		mov	r5, r0
+  44 001c 00C0A0E1 		mov	ip, r0
+  45 0020 00E0A0E1 		mov	lr, r0
+  24:Test.c        ****     int test=-1;
+  46              		.loc 1 24 0
+  47 0024 0080A0E1 		mov	r8, r0
+  48 0028 1A0000EA 		b	.L2
+  49              	.LVL1:
+  50              	.L13:
+  28:Test.c        ****     for (i=0; i<=5; i++) {
+  29:Test.c        ****         for (j=0; j<=8; j++) {
+  30:Test.c        ****             switch (color_data[i][j]) {
+  51              		.loc 1 30 0
+  52 002c 0320D1E7 		ldrb	r2, [r1, r3]	@ zero_extendqisi2
+  53 0030 050052E3 		cmp	r2, #5
+  54 0034 02F19F97 		ldrls	pc, [pc, r2, asl #2]
+  55 0038 100000EA 		b	.L3
+  56              	.L5:
+  57 003c 6C000000 		.word	.L4
+  58 0040 5C000000 		.word	.L6
+  59 0044 64000000 		.word	.L7
+  60 0048 74000000 		.word	.L8
+  61 004c 54000000 		.word	.L9
+  62 0050 7C000000 		.word	.L10
+  63              	.L9:
+  31:Test.c        ****                 case ROT:
+  32:Test.c        ****                     Farbe_r++;
+  64              		.loc 1 32 0
+  65 0054 01E08EE2 		add	lr, lr, #1
+  66              	.LVL2:
+  33:Test.c        ****                     break;
+  67              		.loc 1 33 0
+  68 0058 080000EA 		b	.L3
+  69              	.L6:
+  34:Test.c        ****                 case BLAU:
+  35:Test.c        ****                     Farbe_b++;
+  70              		.loc 1 35 0
+  71 005c 015085E2 		add	r5, r5, #1
+  72              	.LVL3:
+  36:Test.c        ****                     break;
+  73              		.loc 1 36 0
+  74 0060 060000EA 		b	.L3
+  75              	.L7:
+  37:Test.c        ****                 case GELB:
+  38:Test.c        ****                     Farbe_y++;
+  76              		.loc 1 38 0
+  77 0064 010080E2 		add	r0, r0, #1
+  78              	.LVL4:
+  39:Test.c        ****                     break;
+  79              		.loc 1 39 0
+  80 0068 040000EA 		b	.L3
+  81              	.L4:
+  40:Test.c        ****                 case WEISS:
+  41:Test.c        ****                     Farbe_w++;
+  82              		.loc 1 41 0
+  83 006c 014084E2 		add	r4, r4, #1
+  84              	.LVL5:
+  42:Test.c        ****                     break;
+  85              		.loc 1 42 0
+  86 0070 020000EA 		b	.L3
+  87              	.L8:
+  43:Test.c        ****                 case GRUEN:
+  44:Test.c        ****                     Farbe_g++;
+  88              		.loc 1 44 0
+  89 0074 01C08CE2 		add	ip, ip, #1
+  90              	.LVL6:
+  45:Test.c        ****                     break;
+  91              		.loc 1 45 0
+  92 0078 000000EA 		b	.L3
+  93              	.L10:
+  46:Test.c        ****                 case ORANGE:
+  47:Test.c        ****                     Farbe_o++;
+  94              		.loc 1 47 0
+  95 007c 016086E2 		add	r6, r6, #1
+  96              	.LVL7:
+  97              	.L3:
+  29:Test.c        ****             switch (color_data[i][j]) {
+  98              		.loc 1 29 0
+  99 0080 013083E2 		add	r3, r3, #1
+ 100              	.LVL8:
+ 101 0084 090053E3 		cmp	r3, #9
+ 102 0088 E7FFFF1A 		bne	.L13
+ 103 008c 091081E2 		add	r1, r1, #9
+  28:Test.c        ****         for (j=0; j<=8; j++) {
+ 104              		.loc 1 28 0
+ 105 0090 070051E1 		cmp	r1, r7
+ 106 0094 0100000A 		beq	.L12
+ 107              	.LVL9:
+ 108              	.L2:
+  24:Test.c        ****     int test=-1;
+ 109              		.loc 1 24 0 discriminator 1
+ 110 0098 0830A0E1 		mov	r3, r8
+ 111 009c E2FFFFEA 		b	.L13
+ 112              	.LVL10:
+ 113              	.L12:
+  48:Test.c        ****                     break;
+  49:Test.c        ****                     
+  50:Test.c        ****                 default:
+  51:Test.c        ****                     break;
+  52:Test.c        ****             }
+  53:Test.c        ****         }
+  54:Test.c        ****     }
+  55:Test.c        ****     if ((Farbe_r==9)&&(Farbe_g==9)&&(Farbe_b==9)&&(Farbe_w==9)&&(Farbe_y==9)&&(Farbe_o==9)) {
+ 114              		.loc 1 55 0
+ 115 00a0 09005EE3 		cmp	lr, #9
+ 116 00a4 09005C03 		cmpeq	ip, #9
+ 117 00a8 0900001A 		bne	.L14
+ 118              		.loc 1 55 0 is_stmt 0 discriminator 1
+ 119 00ac 090055E3 		cmp	r5, #9
+ 120 00b0 09005403 		cmpeq	r4, #9
+ 121 00b4 0600001A 		bne	.L14
+ 122 00b8 090050E3 		cmp	r0, #9
+ 123 00bc 09005603 		cmpeq	r6, #9
+ 124 00c0 0300001A 		bne	.L14
+  56:Test.c        ****         wuerfel_print(1);
+ 125              		.loc 1 56 0 is_stmt 1
+ 126 00c4 0100A0E3 		mov	r0, #1
+ 127              	.LVL11:
+ 128 00c8 FEFFFFEB 		bl	wuerfel_print
+ 129              	.LVL12:
+  57:Test.c        ****         test=1;
+ 130              		.loc 1 57 0
+ 131 00cc 0100A0E3 		mov	r0, #1
+ 132 00d0 F081BDE8 		ldmfd	sp!, {r4, r5, r6, r7, r8, pc}
+ 133              	.LVL13:
+ 134              	.L14:
+  58:Test.c        **** 
+  59:Test.c        ****     }
+  60:Test.c        ****     else{
+  61:Test.c        **** #ifdef __linux__
+  62:Test.c        ****         wuerfel_print(1);
+ 135              		.loc 1 62 0
+ 136 00d4 0100A0E3 		mov	r0, #1
+ 137              	.LVL14:
+ 138 00d8 FEFFFFEB 		bl	wuerfel_print
+ 139              	.LVL15:
+  63:Test.c        ****         test=0;
+  64:Test.c        **** #endif
+  65:Test.c        ****         printf("Das Farbe_Array ist nicht richtig, bitte neu scannen!\n\r");
+ 140              		.loc 1 65 0
+ 141 00dc 0C009FE5 		ldr	r0, .L17+4
+ 142 00e0 FEFFFFEB 		bl	printf
+ 143              	.LVL16:
+  63:Test.c        ****         test=0;
+ 144              		.loc 1 63 0
+ 145 00e4 0000A0E3 		mov	r0, #0
+ 146              	.LVL17:
+  66:Test.c        ****     }
+  67:Test.c        ****     return test;
+  68:Test.c        **** }
+ 147              		.loc 1 68 0
+ 148 00e8 F081BDE8 		ldmfd	sp!, {r4, r5, r6, r7, r8, pc}
+ 149              	.L18:
+ 150              		.align	2
+ 151              	.L17:
+ 152 00ec 00000000 		.word	color_data
+ 153 00f0 00000000 		.word	.LC0
+ 154              		.cfi_endproc
+ 155              	.LFE11:
+ 156              		.fnend
+ 158              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 159              		.align	2
+ 160              	.LC0:
+ 161 0000 44617320 		.ascii	"Das Farbe_Array ist nicht richtig, bitte neu scanne"
+ 161      46617262 
+ 161      655F4172 
+ 161      72617920 
+ 161      69737420 
+ 162 0033 6E210A0D 		.ascii	"n!\012\015\000"
+ 162      00
+ 163              		.text
+ 164              	.Letext0:
+ 165              		.file 2 "/usr/local/carlson-minot/crosscompilers/lib/gcc/arm-none-linux-gnueabi/4.8.3/include/stdd
+ 166              		.file 3 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
+ 167              		.file 4 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
+ 168              		.file 5 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
+ 169              		.file 6 "main.h"
+ 170              		.file 7 "print_mode.h"
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 Test.c
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccN5fFJ8.s:16     .text:0000000000000000 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccN5fFJ8.s:19     .text:0000000000000000 test
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccN5fFJ8.s:57     .text:000000000000003c $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccN5fFJ8.s:65     .text:0000000000000054 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccN5fFJ8.s:152    .text:00000000000000ec $d
+                       .ARM.exidx:0000000000000000 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccN5fFJ8.s:159    .rodata.str1.4:0000000000000000 $d
+                     .debug_frame:0000000000000010 $d
+
+UNDEFINED SYMBOLS
+wuerfel_print
+printf
+color_data
+__aeabi_unwind_cpp_pr0

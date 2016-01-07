@@ -17,7 +17,7 @@
 #include "Dreh_motor.h"
 
 #ifdef __linux__
-const int MOTOR_SPEED_B=30;
+const int MOTOR_SPEED_B=35;
 const char MOTOR_PORT_B=0x02; //Drehteller Motor;
 #if 0
 MOTORDATA *pMotorData;
@@ -79,7 +79,7 @@ int DrehTel_setpos(int Tel_soll)
         motor_command[0]=opOUTPUT_START;
         motor_command[1]=MOTOR_PORT_B;
         write(motor_file,motor_command,2);    //Motor  srarten
-        while((pMotorData[1].TachoSensor-Tel_referenz) >= (dreh_winkel[Tel_soll]-40))
+        while((pMotorData[1].TachoSensor-Tel_referenz) >= (dreh_winkel[Tel_soll]-20))  //40
         {
             // printf("Spd/Cnt/Snr: A=%d/%d/%d\n", pMotorData[1].Speed, pMotorData[1].TachoCounts, pMotorData[1].TachoSensor-dreh_winkel[Tel_ist]-Tel_referenz);
             usleep(1000);
@@ -100,7 +100,7 @@ int DrehTel_setpos(int Tel_soll)
         motor_command[1]=MOTOR_PORT_B;
         write(motor_file,motor_command,2);
         
-        while(pMotorData[1].TachoSensor-Tel_referenz<40)
+        while(pMotorData[1].TachoSensor-Tel_referenz<20)
         {
             // printf("Spd/Cnt/Snr: A=%d/%d/%d\n", pMotorData[1].Speed, pMotorData[1].TachoCounts, pMotorData[1].TachoSensor-dreh_winkel[Tel_ist]-Tel_referenz);
             usleep(100);
@@ -117,7 +117,7 @@ int DrehTel_setpos(int Tel_soll)
         motor_command[1]=MOTOR_PORT_B;
         write(motor_file,motor_command,2);    //Motor  srarten
         
-        while((pMotorData[1].TachoSensor-Tel_referenz) < (dreh_winkel[Tel_soll]+40))
+        while((pMotorData[1].TachoSensor-Tel_referenz) < (dreh_winkel[Tel_soll]+20))
         {
             //printf("Spd/Cnt/Snr: A=%d/%d/%d\n", pMotorData[1].Speed, pMotorData[1].TachoCounts, pMotorData[1].TachoSensor-dreh_winkel[Tel_ist]-Tel_referenz);
             usleep(1000);
@@ -139,7 +139,7 @@ int DrehTel_setpos(int Tel_soll)
         motor_command[1]=MOTOR_PORT_B;
         write(motor_file,motor_command,2);
         
-        while(pMotorData[1].TachoSensor-Tel_referenz>-40)
+        while(pMotorData[1].TachoSensor-Tel_referenz>-20)
         {
             /*printf("Spd/Cnt/Snr: A=%d/%d/%d\n", pMotorData[1].Speed, pMotorData[1].TachoCounts, pMotorData[1].TachoSensor-dreh_winkel[Tel_ist]-Tel_referenz);*/
             usleep(100);
@@ -203,7 +203,7 @@ int DrehTel_setpos(int Tel_soll)
     {
         cOutputSpeed(MOTOR_PORT_B,-MOTOR_SPEED_B);
         cOutputStart(MOTOR_PORT_B);
-        while((cOutputGetCount(1)-Tel_referenz) >= (dreh_winkel[Tel_soll]-40))
+        while((cOutputGetCount(1)-Tel_referenz) >= (dreh_winkel[Tel_soll]-20))
         {
             // printf("Spd/Cnt/Snr: A=%d/%d/%d\n", pMotorData[1].Speed, pMotorData[1].TachoCounts, pMotorData[1].TachoSensor-dreh_winkel[Tel_ist]-Tel_referenz);
             usleep(1000);
@@ -215,7 +215,7 @@ int DrehTel_setpos(int Tel_soll)
         cOutputSpeed(MOTOR_PORT_B,MOTOR_SPEED_B);
         cOutputStart(MOTOR_PORT_B);
         usleep(10000);
-        while(cOutputGetCount(1)-Tel_referenz<40)
+        while(cOutputGetCount(1)-Tel_referenz<20)
         {
             // printf("Spd/Cnt/Snr: A=%d/%d/%d\n", pMotorData[1].Speed, pMotorData[1].TachoCounts, pMotorData[1].TachoSensor-dreh_winkel[Tel_ist]-Tel_referenz);
             usleep(100);
@@ -228,7 +228,7 @@ int DrehTel_setpos(int Tel_soll)
         cOutputSpeed(MOTOR_PORT_B,MOTOR_SPEED_B);
         cOutputStart(MOTOR_PORT_B);
         
-        while((cOutputGetCount(1)-Tel_referenz) < (dreh_winkel[Tel_soll]+40))
+        while((cOutputGetCount(1)-Tel_referenz) < (dreh_winkel[Tel_soll]+20))
         {
             //printf("Spd/Cnt/Snr: A=%d/%d/%d\n", pMotorData[1].Speed, pMotorData[1].TachoCounts, pMotorData[1].TachoSensor-dreh_winkel[Tel_ist]-Tel_referenz);
             usleep(1000);
@@ -241,7 +241,7 @@ int DrehTel_setpos(int Tel_soll)
         cOutputSpeed(MOTOR_PORT_B,-MOTOR_SPEED_B);
         cOutputStart(MOTOR_PORT_B);
         usleep(10000);
-        while(cOutputGetCount(1)-Tel_referenz>-40)
+        while(cOutputGetCount(1)-Tel_referenz>-20)
         {
             /*printf("Spd/Cnt/Snr: A=%d/%d/%d\n", pMotorData[1].Speed, pMotorData[1].TachoCounts, pMotorData[1].TachoSensor-dreh_winkel[Tel_ist]-Tel_referenz);*/
             usleep(100);

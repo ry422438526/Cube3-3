@@ -45,7 +45,8 @@ bin/Farbe_scan.o: Farbe_scan.c \
  /usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/usr/include/bits/environments.h \
  /usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/usr/include/bits/confname.h \
  /usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/usr/include/getopt.h \
- Farbe_scan.h Farbe_motor.h Farbe_sen.h Arm_motor.h Dreh_motor.h main.h
+ Farbe_scan.h Farbe_motor.h Farbe_sen.h Arm_motor.h Dreh_motor.h main.h \
+ print_mode.h Side_dreh.h
 
 /usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/usr/include/stdc-predef.h:
 
@@ -152,3 +153,7 @@ Arm_motor.h:
 Dreh_motor.h:
 
 main.h:
+
+print_mode.h:
+
+Side_dreh.h:

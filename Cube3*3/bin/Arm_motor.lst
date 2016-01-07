@@ -56,7 +56,7 @@
   35:Arm_motor.c   **** 
   36:Arm_motor.c   **** int arm_referenz=0;
   37:Arm_motor.c   **** int arm_ist=0;
-  38:Arm_motor.c   **** const int arm_winkel[]={4,-83,-150,-240,-330};//-85   231
+  38:Arm_motor.c   **** const int arm_winkel[]={4,-83,-150,-240,-330};//-85   231   330
   39:Arm_motor.c   **** #endif
   40:Arm_motor.c   **** 
   41:Arm_motor.c   **** 
@@ -524,25 +524,25 @@
  317              		.file 10 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/u
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 Arm_motor.c
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccV8QMk2.s:16     .text:0000000000000000 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccV8QMk2.s:19     .text:0000000000000000 arm_setpos
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccV8QMk2.s:130    .text:00000000000000d4 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccDEN9No.s:16     .text:0000000000000000 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccDEN9No.s:19     .text:0000000000000000 arm_setpos
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccDEN9No.s:130    .text:00000000000000d4 $d
                        .ARM.exidx:0000000000000000 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccV8QMk2.s:138    .text:00000000000000e4 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccV8QMk2.s:141    .text:00000000000000e4 arm_init
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccV8QMk2.s:233    .text:0000000000000184 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccV8QMk2.s:241    .text:0000000000000194 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccV8QMk2.s:244    .text:0000000000000194 arm_close
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccDEN9No.s:138    .text:00000000000000e4 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccDEN9No.s:141    .text:00000000000000e4 arm_init
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccDEN9No.s:233    .text:0000000000000184 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccDEN9No.s:241    .text:0000000000000194 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccDEN9No.s:244    .text:0000000000000194 arm_close
                        .ARM.extab:0000000000000000 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccV8QMk2.s:277    .rodata:0000000000000000 arm_winkel
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccV8QMk2.s:301    .bss:0000000000000000 arm_ist
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccV8QMk2.s:305    .bss:0000000000000004 arm_referenz
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccDEN9No.s:277    .rodata:0000000000000000 arm_winkel
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccDEN9No.s:301    .bss:0000000000000000 arm_ist
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccDEN9No.s:305    .bss:0000000000000004 arm_referenz
                             *COM*:0000000000000040 OutputInstance
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccV8QMk2.s:285    .rodata:0000000000000014 MOTOR_PORT_A
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccV8QMk2.s:290    .rodata:0000000000000018 MOTOR_SPEED
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccV8QMk2.s:273    .rodata:0000000000000000 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccV8QMk2.s:293    .rodata.str1.4:0000000000000000 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccV8QMk2.s:297    .bss:0000000000000000 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccDEN9No.s:285    .rodata:0000000000000014 MOTOR_PORT_A
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccDEN9No.s:290    .rodata:0000000000000018 MOTOR_SPEED
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccDEN9No.s:273    .rodata:0000000000000000 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccDEN9No.s:293    .rodata.str1.4:0000000000000000 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccDEN9No.s:297    .bss:0000000000000000 $d
                      .debug_frame:0000000000000010 $d
 
 UNDEFINED SYMBOLS

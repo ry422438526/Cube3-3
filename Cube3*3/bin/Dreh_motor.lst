@@ -38,7 +38,7 @@
   17:Dreh_motor.c  **** #include "Dreh_motor.h"
   18:Dreh_motor.c  **** 
   19:Dreh_motor.c  **** #ifdef __linux__
-  20:Dreh_motor.c  **** const int MOTOR_SPEED_B=30;
+  20:Dreh_motor.c  **** const int MOTOR_SPEED_B=35;
   21:Dreh_motor.c  **** const char MOTOR_PORT_B=0x02; //Drehteller Motor;
   22:Dreh_motor.c  **** #if 0
   23:Dreh_motor.c  **** MOTORDATA *pMotorData;
@@ -115,7 +115,7 @@
   79:Dreh_motor.c  ****         motor_command[0]=opOUTPUT_START;
   80:Dreh_motor.c  ****         motor_command[1]=MOTOR_PORT_B;
   81:Dreh_motor.c  ****         write(motor_file,motor_command,2);    //Motor  srarten
-  82:Dreh_motor.c  ****         while((pMotorData[1].TachoSensor-Tel_referenz) >= (dreh_winkel[Tel_soll]-40))
+  82:Dreh_motor.c  ****         while((pMotorData[1].TachoSensor-Tel_referenz) >= (dreh_winkel[Tel_soll]-20))  //40
   83:Dreh_motor.c  ****         {
   84:Dreh_motor.c  ****             // printf("Spd/Cnt/Snr: A=%d/%d/%d\n", pMotorData[1].Speed, pMotorData[1].TachoCounts, 
   85:Dreh_motor.c  ****             usleep(1000);
@@ -136,7 +136,7 @@
  100:Dreh_motor.c  ****         motor_command[1]=MOTOR_PORT_B;
  101:Dreh_motor.c  ****         write(motor_file,motor_command,2);
  102:Dreh_motor.c  ****         
- 103:Dreh_motor.c  ****         while(pMotorData[1].TachoSensor-Tel_referenz<40)
+ 103:Dreh_motor.c  ****         while(pMotorData[1].TachoSensor-Tel_referenz<20)
  104:Dreh_motor.c  ****         {
  105:Dreh_motor.c  ****             // printf("Spd/Cnt/Snr: A=%d/%d/%d\n", pMotorData[1].Speed, pMotorData[1].TachoCounts, 
  106:Dreh_motor.c  ****             usleep(100);
@@ -153,7 +153,7 @@
  117:Dreh_motor.c  ****         motor_command[1]=MOTOR_PORT_B;
  118:Dreh_motor.c  ****         write(motor_file,motor_command,2);    //Motor  srarten
  119:Dreh_motor.c  ****         
- 120:Dreh_motor.c  ****         while((pMotorData[1].TachoSensor-Tel_referenz) < (dreh_winkel[Tel_soll]+40))
+ 120:Dreh_motor.c  ****         while((pMotorData[1].TachoSensor-Tel_referenz) < (dreh_winkel[Tel_soll]+20))
  121:Dreh_motor.c  ****         {
  122:Dreh_motor.c  ****             //printf("Spd/Cnt/Snr: A=%d/%d/%d\n", pMotorData[1].Speed, pMotorData[1].TachoCounts, p
  123:Dreh_motor.c  ****             usleep(1000);
@@ -175,7 +175,7 @@
  139:Dreh_motor.c  ****         motor_command[1]=MOTOR_PORT_B;
  140:Dreh_motor.c  ****         write(motor_file,motor_command,2);
  141:Dreh_motor.c  ****         
- 142:Dreh_motor.c  ****         while(pMotorData[1].TachoSensor-Tel_referenz>-40)
+ 142:Dreh_motor.c  ****         while(pMotorData[1].TachoSensor-Tel_referenz>-20)
  143:Dreh_motor.c  ****         {
  144:Dreh_motor.c  ****             /*printf("Spd/Cnt/Snr: A=%d/%d/%d\n", pMotorData[1].Speed, pMotorData[1].TachoCounts, p
  145:Dreh_motor.c  ****             usleep(100);
@@ -252,7 +252,7 @@
  204:Dreh_motor.c  ****         cOutputSpeed(MOTOR_PORT_B,-MOTOR_SPEED_B);
   50              		.loc 1 204 0
   51 0028 0200A0E3 		mov	r0, #2
-  52 002c 1D10E0E3 		mvn	r1, #29
+  52 002c 2210E0E3 		mvn	r1, #34
   53 0030 FEFFFFEB 		bl	cOutputSpeed
   54              	.LVL3:
  205:Dreh_motor.c  ****         cOutputStart(MOTOR_PORT_B);
@@ -260,17 +260,17 @@
   56 0034 0200A0E3 		mov	r0, #2
   57 0038 FEFFFFEB 		bl	cOutputStart
   58              	.LVL4:
- 206:Dreh_motor.c  ****         while((cOutputGetCount(1)-Tel_referenz) >= (dreh_winkel[Tel_soll]-40))
+ 206:Dreh_motor.c  ****         while((cOutputGetCount(1)-Tel_referenz) >= (dreh_winkel[Tel_soll]-20))
   59              		.loc 1 206 0
   60 003c 0170A0E3 		mov	r7, #1
   61 0040 8C519FE5 		ldr	r5, .L12
-  62 0044 284044E2 		sub	r4, r4, #40
+  62 0044 144044E2 		sub	r4, r4, #20
  207:Dreh_motor.c  ****         {
  208:Dreh_motor.c  ****             // printf("Spd/Cnt/Snr: A=%d/%d/%d\n", pMotorData[1].Speed, pMotorData[1].TachoCounts, 
  209:Dreh_motor.c  ****             usleep(1000);
   63              		.loc 1 209 0
   64 0048 FA8FA0E3 		mov	r8, #1000
- 206:Dreh_motor.c  ****         while((cOutputGetCount(1)-Tel_referenz) >= (dreh_winkel[Tel_soll]-40))
+ 206:Dreh_motor.c  ****         while((cOutputGetCount(1)-Tel_referenz) >= (dreh_winkel[Tel_soll]-20))
   65              		.loc 1 206 0
   66 004c 010000EA 		b	.L3
   67              	.L4:
@@ -279,7 +279,7 @@
   70 0054 FEFFFFEB 		bl	usleep
   71              	.LVL5:
   72              	.L3:
- 206:Dreh_motor.c  ****         while((cOutputGetCount(1)-Tel_referenz) >= (dreh_winkel[Tel_soll]-40))
+ 206:Dreh_motor.c  ****         while((cOutputGetCount(1)-Tel_referenz) >= (dreh_winkel[Tel_soll]-20))
   73              		.loc 1 206 0 discriminator 1
   74 0058 0700A0E1 		mov	r0, r7
   75 005c FEFFFFEB 		bl	cOutputGetCount
@@ -307,7 +307,7 @@
  215:Dreh_motor.c  ****         cOutputSpeed(MOTOR_PORT_B,MOTOR_SPEED_B);
   92              		.loc 1 215 0
   93 008c 0200A0E3 		mov	r0, #2
-  94 0090 1E10A0E3 		mov	r1, #30
+  94 0090 2310A0E3 		mov	r1, #35
   95 0094 FEFFFFEB 		bl	cOutputSpeed
   96              	.LVL9:
  216:Dreh_motor.c  ****         cOutputStart(MOTOR_PORT_B);
@@ -320,7 +320,7 @@
  102 00a0 34019FE5 		ldr	r0, .L12+8
  103 00a4 FEFFFFEB 		bl	usleep
  104              	.LVL11:
- 218:Dreh_motor.c  ****         while(cOutputGetCount(1)-Tel_referenz<40)
+ 218:Dreh_motor.c  ****         while(cOutputGetCount(1)-Tel_referenz<20)
  105              		.loc 1 218 0
  106 00a8 0150A0E3 		mov	r5, #1
  107 00ac 20419FE5 		ldr	r4, .L12
@@ -329,7 +329,7 @@
  221:Dreh_motor.c  ****             usleep(100);
  108              		.loc 1 221 0
  109 00b0 6470A0E3 		mov	r7, #100
- 218:Dreh_motor.c  ****         while(cOutputGetCount(1)-Tel_referenz<40)
+ 218:Dreh_motor.c  ****         while(cOutputGetCount(1)-Tel_referenz<20)
  110              		.loc 1 218 0
  111 00b4 010000EA 		b	.L5
  112              	.L6:
@@ -338,14 +338,14 @@
  115 00bc FEFFFFEB 		bl	usleep
  116              	.LVL12:
  117              	.L5:
- 218:Dreh_motor.c  ****         while(cOutputGetCount(1)-Tel_referenz<40)
+ 218:Dreh_motor.c  ****         while(cOutputGetCount(1)-Tel_referenz<20)
  118              		.loc 1 218 0 discriminator 1
  119 00c0 0500A0E1 		mov	r0, r5
  120 00c4 FEFFFFEB 		bl	cOutputGetCount
  121              	.LVL13:
  122 00c8 003094E5 		ldr	r3, [r4]
  123 00cc 000063E0 		rsb	r0, r3, r0
- 124 00d0 270050E3 		cmp	r0, #39
+ 124 00d0 130050E3 		cmp	r0, #19
  125 00d4 F7FFFFDA 		ble	.L6
  126 00d8 2B0000EA 		b	.L7
  127              	.L2:
@@ -358,7 +358,7 @@
  228:Dreh_motor.c  ****         cOutputSpeed(MOTOR_PORT_B,MOTOR_SPEED_B);
  128              		.loc 1 228 0
  129 00dc 0200A0E3 		mov	r0, #2
- 130 00e0 1E10A0E3 		mov	r1, #30
+ 130 00e0 2310A0E3 		mov	r1, #35
  131 00e4 FEFFFFEB 		bl	cOutputSpeed
  132              	.LVL14:
  229:Dreh_motor.c  ****         cOutputStart(MOTOR_PORT_B);
@@ -367,11 +367,11 @@
  135 00ec FEFFFFEB 		bl	cOutputStart
  136              	.LVL15:
  230:Dreh_motor.c  ****         
- 231:Dreh_motor.c  ****         while((cOutputGetCount(1)-Tel_referenz) < (dreh_winkel[Tel_soll]+40))
+ 231:Dreh_motor.c  ****         while((cOutputGetCount(1)-Tel_referenz) < (dreh_winkel[Tel_soll]+20))
  137              		.loc 1 231 0
  138 00f0 0170A0E3 		mov	r7, #1
  139 00f4 D8509FE5 		ldr	r5, .L12
- 140 00f8 284084E2 		add	r4, r4, #40
+ 140 00f8 144084E2 		add	r4, r4, #20
  232:Dreh_motor.c  ****         {
  233:Dreh_motor.c  ****             //printf("Spd/Cnt/Snr: A=%d/%d/%d\n", pMotorData[1].Speed, pMotorData[1].TachoCounts, p
  234:Dreh_motor.c  ****             usleep(1000);
@@ -415,7 +415,7 @@
  241:Dreh_motor.c  ****         cOutputSpeed(MOTOR_PORT_B,-MOTOR_SPEED_B);
  170              		.loc 1 241 0
  171 0140 0200A0E3 		mov	r0, #2
- 172 0144 1D10E0E3 		mvn	r1, #29
+ 172 0144 2210E0E3 		mvn	r1, #34
  173 0148 FEFFFFEB 		bl	cOutputSpeed
  174              	.LVL20:
  242:Dreh_motor.c  ****         cOutputStart(MOTOR_PORT_B);
@@ -428,7 +428,7 @@
  180 0154 80009FE5 		ldr	r0, .L12+8
  181 0158 FEFFFFEB 		bl	usleep
  182              	.LVL22:
- 244:Dreh_motor.c  ****         while(cOutputGetCount(1)-Tel_referenz>-40)
+ 244:Dreh_motor.c  ****         while(cOutputGetCount(1)-Tel_referenz>-20)
  183              		.loc 1 244 0
  184 015c 0150A0E3 		mov	r5, #1
  185 0160 6C409FE5 		ldr	r4, .L12
@@ -437,7 +437,7 @@
  247:Dreh_motor.c  ****             usleep(100);
  186              		.loc 1 247 0
  187 0164 6470A0E3 		mov	r7, #100
- 244:Dreh_motor.c  ****         while(cOutputGetCount(1)-Tel_referenz>-40)
+ 244:Dreh_motor.c  ****         while(cOutputGetCount(1)-Tel_referenz>-20)
  188              		.loc 1 244 0
  189 0168 010000EA 		b	.L10
  190              	.L11:
@@ -446,14 +446,14 @@
  193 0170 FEFFFFEB 		bl	usleep
  194              	.LVL23:
  195              	.L10:
- 244:Dreh_motor.c  ****         while(cOutputGetCount(1)-Tel_referenz>-40)
+ 244:Dreh_motor.c  ****         while(cOutputGetCount(1)-Tel_referenz>-20)
  196              		.loc 1 244 0 discriminator 1
  197 0174 0500A0E1 		mov	r0, r5
  198 0178 FEFFFFEB 		bl	cOutputGetCount
  199              	.LVL24:
  200 017c 003094E5 		ldr	r3, [r4]
  201 0180 000063E0 		rsb	r0, r3, r0
- 202 0184 270070E3 		cmn	r0, #39
+ 202 0184 130070E3 		cmn	r0, #19
  203 0188 F7FFFFAA 		bge	.L11
  204              	.L7:
  248:Dreh_motor.c  ****         }
@@ -611,7 +611,7 @@
  317 023c 0130A0E3 		mov	r3, #1
  318 0240 04308DE5 		str	r3, [sp, #4]
  319 0244 0200A0E3 		mov	r0, #2
- 320 0248 1E10A0E3 		mov	r1, #30
+ 320 0248 2310A0E3 		mov	r1, #35
  321 024c 6930A0E3 		mov	r3, #105
  322 0250 FEFFFFEB 		bl	cOutputStepSpeed
  323              	.LVL34:
@@ -688,7 +688,7 @@
  383 0018 02       		.byte	2
  384 0019 000000   		.space	3
  387              	MOTOR_SPEED_B:
- 388 001c 1E000000 		.word	30
+ 388 001c 23000000 		.word	35
  389              		.section	.rodata.str1.4,"aMS",%progbits,1
  390              		.align	2
  391              	.LC0:
@@ -731,27 +731,27 @@
  421              		.file 10 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/u
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 Dreh_motor.c
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccOVcoH8.s:16     .text:0000000000000000 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccOVcoH8.s:19     .text:0000000000000000 DrehTel_setpos
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccOVcoH8.s:238    .text:00000000000001d4 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccxhG7Bi.s:16     .text:0000000000000000 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccxhG7Bi.s:19     .text:0000000000000000 DrehTel_setpos
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccxhG7Bi.s:238    .text:00000000000001d4 $d
                        .ARM.exidx:0000000000000000 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccOVcoH8.s:247    .text:00000000000001e8 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccOVcoH8.s:250    .text:00000000000001e8 DrehTel_init
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccOVcoH8.s:291    .text:0000000000000224 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccOVcoH8.s:297    .text:000000000000022c $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccOVcoH8.s:300    .text:000000000000022c DrehTel_dreh
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccOVcoH8.s:336    .text:0000000000000260 DrehTel_close
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccxhG7Bi.s:247    .text:00000000000001e8 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccxhG7Bi.s:250    .text:00000000000001e8 DrehTel_init
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccxhG7Bi.s:291    .text:0000000000000224 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccxhG7Bi.s:297    .text:000000000000022c $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccxhG7Bi.s:300    .text:000000000000022c DrehTel_dreh
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccxhG7Bi.s:336    .text:0000000000000260 DrehTel_close
                        .ARM.extab:0000000000000000 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccOVcoH8.s:378    .rodata:0000000000000014 dreh_Korr_Winkel
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccOVcoH8.s:370    .rodata:0000000000000000 dreh_winkel
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccOVcoH8.s:405    .bss:0000000000000000 Tel_referenz
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccOVcoH8.s:409    .bss:0000000000000004 Tel_ist
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccxhG7Bi.s:378    .rodata:0000000000000014 dreh_Korr_Winkel
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccxhG7Bi.s:370    .rodata:0000000000000000 dreh_winkel
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccxhG7Bi.s:405    .bss:0000000000000000 Tel_referenz
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccxhG7Bi.s:409    .bss:0000000000000004 Tel_ist
                             *COM*:0000000000000040 OutputInstance
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccOVcoH8.s:382    .rodata:0000000000000018 MOTOR_PORT_B
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccOVcoH8.s:387    .rodata:000000000000001c MOTOR_SPEED_B
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccOVcoH8.s:366    .rodata:0000000000000000 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccOVcoH8.s:390    .rodata.str1.4:0000000000000000 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccOVcoH8.s:401    .bss:0000000000000000 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccxhG7Bi.s:382    .rodata:0000000000000018 MOTOR_PORT_B
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccxhG7Bi.s:387    .rodata:000000000000001c MOTOR_SPEED_B
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccxhG7Bi.s:366    .rodata:0000000000000000 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccxhG7Bi.s:390    .rodata.str1.4:0000000000000000 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccxhG7Bi.s:401    .bss:0000000000000000 $d
                      .debug_frame:0000000000000010 $d
 
 UNDEFINED SYMBOLS

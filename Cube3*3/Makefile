@@ -5,7 +5,7 @@ APP_EXT   =
 #Ziel: .a        -> Ziel ist eine Static Library (Archiv) 
 #Ziel: $(SOEXT)  -> Ziel ist eine Shared Library (Don't forget CFLAG=-fpic)
 
-APP_SRC = main Arm_motor.c Dreh_motor.c Farbe_motor.c Farbe_sen.c Farbe_scan.c Side_dreh.c print_mode.c Top_Cross.c F2L.c OLL.c Color_search.c \
+APP_SRC = main Arm_motor.c Dreh_motor.c Farbe_motor.c Farbe_sen.c Farbe_scan.c Side_dreh.c print_mode.c Top_Cross.c F2L.c OLL.c PLL.c Test.c Color_search.c \
 	  ../lms2012/lms2012_auszug.c ../lms2012/d_lcd.c  ../lms2012/c_output.c
 		   
 #32-Bit ARM-Mode   --> Dateiendung *.c

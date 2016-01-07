@@ -10,7 +10,7 @@
 #include "Color_search.h"
 #include "Side_dreh.h"
 #include "print_mode.h"
-
+#include "main.h"
 
 void PLL()
 {

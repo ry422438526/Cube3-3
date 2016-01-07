@@ -51,7 +51,7 @@
   30:Farbe_motor.c **** #endif
   31:Farbe_motor.c **** int Farbe_referenz=0;
   32:Farbe_motor.c **** int Farbe_ist=0;
-  33:Farbe_motor.c **** const int Farbe_winkel[]={4,-750,-640,-625,-610,-580,-400};//690------695 veraenderung
+  33:Farbe_motor.c **** const int Farbe_winkel[]={4,-760,-640,-635,-610,-590,-400};//690------695 veraenderung(2,4 weg) 755
   34:Farbe_motor.c **** //const int Farbe_winkel[]={4,-720,-625,-580,-400};//690------695 veraenderung
   35:Farbe_motor.c **** #endif
   36:Farbe_motor.c **** 
@@ -467,11 +467,11 @@
  267              	.LANCHOR1 = . + 0
  270              	Farbe_winkel:
  271 0000 04000000 		.word	4
- 272 0004 12FDFFFF 		.word	-750
+ 272 0004 08FDFFFF 		.word	-760
  273 0008 80FDFFFF 		.word	-640
- 274 000c 8FFDFFFF 		.word	-625
+ 274 000c 85FDFFFF 		.word	-635
  275 0010 9EFDFFFF 		.word	-610
- 276 0014 BCFDFFFF 		.word	-580
+ 276 0014 B2FDFFFF 		.word	-590
  277 0018 70FEFFFF 		.word	-400
  280              	MOTOR_PORT_D:
  281 001c 08       		.byte	8
@@ -506,25 +506,25 @@
  312              		.file 10 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/u
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 Farbe_motor.c
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHE8wlt.s:16     .text:0000000000000000 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHE8wlt.s:19     .text:0000000000000000 Farbe_init
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHE8wlt.s:112    .text:00000000000000a4 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccfMnDby.s:16     .text:0000000000000000 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccfMnDby.s:19     .text:0000000000000000 Farbe_init
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccfMnDby.s:112    .text:00000000000000a4 $d
                        .ARM.exidx:0000000000000000 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHE8wlt.s:119    .text:00000000000000b0 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHE8wlt.s:122    .text:00000000000000b0 Farbe_setpos
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHE8wlt.s:228    .text:000000000000017c $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHE8wlt.s:234    .text:0000000000000184 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHE8wlt.s:237    .text:0000000000000184 Farbe_close
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccfMnDby.s:119    .text:00000000000000b0 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccfMnDby.s:122    .text:00000000000000b0 Farbe_setpos
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccfMnDby.s:228    .text:000000000000017c $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccfMnDby.s:234    .text:0000000000000184 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccfMnDby.s:237    .text:0000000000000184 Farbe_close
                        .ARM.extab:0000000000000000 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHE8wlt.s:270    .rodata:0000000000000000 Farbe_winkel
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHE8wlt.s:300    .bss:0000000000000004 Farbe_ist
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHE8wlt.s:296    .bss:0000000000000000 Farbe_referenz
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccfMnDby.s:270    .rodata:0000000000000000 Farbe_winkel
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccfMnDby.s:300    .bss:0000000000000004 Farbe_ist
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccfMnDby.s:296    .bss:0000000000000000 Farbe_referenz
                             *COM*:0000000000000040 OutputInstance
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHE8wlt.s:280    .rodata:000000000000001c MOTOR_PORT_D
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHE8wlt.s:285    .rodata:0000000000000020 MOTOR_SPEED_D
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHE8wlt.s:266    .rodata:0000000000000000 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHE8wlt.s:288    .rodata.str1.4:0000000000000000 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHE8wlt.s:292    .bss:0000000000000000 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccfMnDby.s:280    .rodata:000000000000001c MOTOR_PORT_D
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccfMnDby.s:285    .rodata:0000000000000020 MOTOR_SPEED_D
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccfMnDby.s:266    .rodata:0000000000000000 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccfMnDby.s:288    .rodata.str1.4:0000000000000000 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccfMnDby.s:292    .bss:0000000000000000 $d
                      .debug_frame:0000000000000010 $d
 
 UNDEFINED SYMBOLS

@@ -45,7 +45,7 @@
   24:Farbe_sen.c   ****     GRUEN=3,
   25:Farbe_sen.c   ****     ROT=4,
   26:Farbe_sen.c   ****     ORANGE=5
-  27:Farbe_sen.c   **** }FABER;
+  27:Farbe_sen.c   **** }Farbe;
   28:Farbe_sen.c   **** 
   29:Farbe_sen.c   **** #ifdef __linux__
   30:Farbe_sen.c   ****  int  PORT=0x0;
@@ -202,59 +202,60 @@
   79:Farbe_sen.c   ****     Color_data_blank=(unsigned int)pColorSensor->Raw[PORT][0][6]+(unsigned int)(pColorSensor->Raw[P
   80:Farbe_sen.c   ****     //usleep(100000);
   81:Farbe_sen.c   ****     
-  82:Farbe_sen.c   ****     
-  83:Farbe_sen.c   ****     
-  84:Farbe_sen.c   ****     
-  85:Farbe_sen.c   ****     //MAX_Werte=MAX_RGB(MAX_RGB(Color_data_r, Color_data_g),Color_data_b);
-  86:Farbe_sen.c   ****     /*rot   =(Color_data_r*1.0)/MAX_Werte;
-  87:Farbe_sen.c   ****     gruen =(Color_data_g*1.0)/MAX_Werte;
-  88:Farbe_sen.c   ****     blau  =(Color_data_b*1.0)/MAX_Werte;
-  89:Farbe_sen.c   ****     Color_color=Color_col(rot,gruen,blau);
-  90:Farbe_sen.c   ****     printf("COLOR_MAX is %d ", MAX_Werte);*/
-  91:Farbe_sen.c   ****     Color_color=Color_col(Color_data_r*1.0,Color_data_g*1.0,Color_data_b*1.0);
-  92:Farbe_sen.c   ****     printf("color_data is (%5d, %5d, %5d, %5d)",Color_data_r,Color_data_g,Color_data_b,Color_data_b
-  93:Farbe_sen.c   ****     //printf("%5d, %5d, %5d, %5d", Color_data_r,Color_data_g,Color_data_b,Color_data_blank);
-  94:Farbe_sen.c   **** #if 1
-  95:Farbe_sen.c   ****     switch(Color_color){
-  96:Farbe_sen.c   ****         case 0:
-  97:Farbe_sen.c   ****             printf("\033[1;30m   %d\033[0m",Color_color);
-  98:Farbe_sen.c   ****             break;
-  99:Farbe_sen.c   ****             
- 100:Farbe_sen.c   ****         case 1:
- 101:Farbe_sen.c   ****             printf("\033[1;34m   %d\033[0m",Color_color);
- 102:Farbe_sen.c   ****             break;
- 103:Farbe_sen.c   ****             
- 104:Farbe_sen.c   ****         case 2:
- 105:Farbe_sen.c   ****             printf("\033[1;33m   %d\033[0m",Color_color);
- 106:Farbe_sen.c   ****             break;
- 107:Farbe_sen.c   ****             
- 108:Farbe_sen.c   ****         case 3:
- 109:Farbe_sen.c   ****             printf("\033[1;32m   %d\033[0m",Color_color);
- 110:Farbe_sen.c   ****             break;
- 111:Farbe_sen.c   ****             
- 112:Farbe_sen.c   ****         case 4:
- 113:Farbe_sen.c   ****             printf("\033[1;35m   %d\033[0m",Color_color);
- 114:Farbe_sen.c   ****             break;
- 115:Farbe_sen.c   ****             
- 116:Farbe_sen.c   ****         case 5:
- 117:Farbe_sen.c   ****             printf("\033[1;31m   %d\033[0m",Color_color);
- 118:Farbe_sen.c   ****             break;
- 119:Farbe_sen.c   ****     }
- 120:Farbe_sen.c   **** #endif
- 121:Farbe_sen.c   ****     printf("\n\r");
- 122:Farbe_sen.c   **** //    sleep(1);
- 123:Farbe_sen.c   ****     return Color_color;
- 124:Farbe_sen.c   ****     // senden daten zu PC
- 125:Farbe_sen.c   **** #endif
- 126:Farbe_sen.c   ****     
- 127:Farbe_sen.c   **** #ifndef __linux__
- 128:Farbe_sen.c   ****     return 0;
- 129:Farbe_sen.c   **** #endif
- 130:Farbe_sen.c   **** }
- 131:Farbe_sen.c   **** 
- 132:Farbe_sen.c   **** int ColSen_close()
- 133:Farbe_sen.c   **** {
- 127              		.loc 1 133 0
+  82:Farbe_sen.c   ****     //MAX_Werte=MAX_RGB(MAX_RGB(Color_data_r, Color_data_g),Color_data_b);
+  83:Farbe_sen.c   ****     /*rot   =(Color_data_r*1.0)/MAX_Werte;
+  84:Farbe_sen.c   ****     gruen =(Color_data_g*1.0)/MAX_Werte;
+  85:Farbe_sen.c   ****     blau  =(Color_data_b*1.0)/MAX_Werte;
+  86:Farbe_sen.c   ****     Color_color=Color_col(rot,gruen,blau);
+  87:Farbe_sen.c   ****     printf("COLOR_MAX is %d ", MAX_Werte);*/
+  88:Farbe_sen.c   ****     Color_color=Color_col(Color_data_r*1.0,Color_data_g*1.0,Color_data_b*1.0);
+  89:Farbe_sen.c   ****     printf("color_data is (%5d, %5d, %5d, %5d)",Color_data_r,Color_data_g,Color_data_b,Color_data_b
+  90:Farbe_sen.c   ****     //printf("%5d, %5d, %5d, %5d", Color_data_r,Color_data_g,Color_data_b,Color_data_blank);
+  91:Farbe_sen.c   **** #if 1
+  92:Farbe_sen.c   ****     switch(Color_color){
+  93:Farbe_sen.c   ****         case 0:
+  94:Farbe_sen.c   ****             printf("\033[1;30m   %d\033[0m",Color_color);
+  95:Farbe_sen.c   ****             break;
+  96:Farbe_sen.c   ****             
+  97:Farbe_sen.c   ****         case 1:
+  98:Farbe_sen.c   ****             printf("\033[1;34m   %d\033[0m",Color_color);
+  99:Farbe_sen.c   ****             break;
+ 100:Farbe_sen.c   ****             
+ 101:Farbe_sen.c   ****         case 2:
+ 102:Farbe_sen.c   ****             printf("\033[1;33m   %d\033[0m",Color_color);
+ 103:Farbe_sen.c   ****             break;
+ 104:Farbe_sen.c   ****             
+ 105:Farbe_sen.c   ****         case 3:
+ 106:Farbe_sen.c   ****             printf("\033[1;32m   %d\033[0m",Color_color);
+ 107:Farbe_sen.c   ****             break;
+ 108:Farbe_sen.c   ****             
+ 109:Farbe_sen.c   ****         case 4:
+ 110:Farbe_sen.c   ****             printf("\033[1;35m   %d\033[0m",Color_color);
+ 111:Farbe_sen.c   ****             break;
+ 112:Farbe_sen.c   ****             
+ 113:Farbe_sen.c   ****         case 5:
+ 114:Farbe_sen.c   ****             printf("\033[1;31m   %d\033[0m",Color_color);
+ 115:Farbe_sen.c   ****             break;
+ 116:Farbe_sen.c   ****                     
+ 117:Farbe_sen.c   ****         default:
+ 118:Farbe_sen.c   ****             printf(" x ");
+ 119:Farbe_sen.c   ****             break;
+ 120:Farbe_sen.c   ****     }
+ 121:Farbe_sen.c   **** #endif
+ 122:Farbe_sen.c   ****     printf("\n\r");
+ 123:Farbe_sen.c   **** //    sleep(1);
+ 124:Farbe_sen.c   ****     return Color_color;
+ 125:Farbe_sen.c   ****     // senden daten zu PC
+ 126:Farbe_sen.c   **** #endif
+ 127:Farbe_sen.c   ****     
+ 128:Farbe_sen.c   **** #ifndef __linux__
+ 129:Farbe_sen.c   ****     return 0;
+ 130:Farbe_sen.c   **** #endif
+ 131:Farbe_sen.c   **** }
+ 132:Farbe_sen.c   **** 
+ 133:Farbe_sen.c   **** int ColSen_close()
+ 134:Farbe_sen.c   **** {
+ 127              		.loc 1 134 0
  128              		.cfi_startproc
  129              		@ args = 0, pretend = 0, frame = 0
  130              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -263,22 +264,22 @@
  133              		.cfi_def_cfa_offset 8
  134              		.cfi_offset 3, -8
  135              		.cfi_offset 14, -4
- 134:Farbe_sen.c   ****     printf("Close the Color Sensor");
- 136              		.loc 1 134 0
+ 135:Farbe_sen.c   ****     printf("Close the Color Sensor");
+ 136              		.loc 1 135 0
  137 00ec 14009FE5 		ldr	r0, .L8
  138 00f0 FEFFFFEB 		bl	printf
  139              	.LVL6:
- 135:Farbe_sen.c   **** #ifdef __linux__
- 136:Farbe_sen.c   ****     close(file);
- 140              		.loc 1 136 0
+ 136:Farbe_sen.c   **** #ifdef __linux__
+ 137:Farbe_sen.c   ****     close(file);
+ 140              		.loc 1 137 0
  141 00f4 10309FE5 		ldr	r3, .L8+4
  142 00f8 000093E5 		ldr	r0, [r3]
  143 00fc FEFFFFEB 		bl	close
  144              	.LVL7:
- 137:Farbe_sen.c   **** #endif
- 138:Farbe_sen.c   ****     return 0;
- 139:Farbe_sen.c   **** }
- 145              		.loc 1 139 0
+ 138:Farbe_sen.c   **** #endif
+ 139:Farbe_sen.c   ****     return 0;
+ 140:Farbe_sen.c   **** }
+ 145              		.loc 1 140 0
  146 0100 0000A0E3 		mov	r0, #0
  147 0104 0880BDE8 		ldmfd	sp!, {r3, pc}
  148              	.L9:
@@ -294,23 +295,23 @@
  160              	MAX_RGB:
  161              		.fnstart
  162              	.LFB14:
- 140:Farbe_sen.c   **** 
  141:Farbe_sen.c   **** 
- 142:Farbe_sen.c   **** int MAX_RGB(int a,int b)
- 143:Farbe_sen.c   **** {
- 163              		.loc 1 143 0
+ 142:Farbe_sen.c   **** 
+ 143:Farbe_sen.c   **** int MAX_RGB(int a,int b)
+ 144:Farbe_sen.c   **** {
+ 163              		.loc 1 144 0
  164              		.cfi_startproc
  165              		@ args = 0, pretend = 0, frame = 0
  166              		@ frame_needed = 0, uses_anonymous_args = 0
  167              		@ link register save eliminated.
  168              	.LVL8:
- 144:Farbe_sen.c   ****     if (a>=b) {
- 145:Farbe_sen.c   ****         return a;
- 146:Farbe_sen.c   ****     }else{
- 147:Farbe_sen.c   ****         return b;
- 148:Farbe_sen.c   ****     }
- 149:Farbe_sen.c   **** }
- 169              		.loc 1 149 0
+ 145:Farbe_sen.c   ****     if (a>=b) {
+ 146:Farbe_sen.c   ****         return a;
+ 147:Farbe_sen.c   ****     }else{
+ 148:Farbe_sen.c   ****         return b;
+ 149:Farbe_sen.c   ****     }
+ 150:Farbe_sen.c   **** }
+ 169              		.loc 1 150 0
  170 0110 010050E1 		cmp	r0, r1
  171 0114 0100A0B1 		movlt	r0, r1
  172              	.LVL9:
@@ -324,789 +325,845 @@
  181              		.global	__aeabi_dcmpgt
  182              		.global	__aeabi_dcmplt
  183              		.global	__aeabi_fcmpgt
- 184              		.global	__aeabi_fcmplt
- 185              		.global	__aeabi_ddiv
- 186              		.global	__aeabi_dcmpge
- 187              		.global	__aeabi_fadd
- 188              		.global	__aeabi_fmul
+ 184              		.global	__aeabi_fcmple
+ 185              		.global	__aeabi_fmul
+ 186              		.global	__aeabi_fadd
+ 187              		.global	__aeabi_fcmplt
+ 188              		.global	__aeabi_ddiv
  189              		.align	2
  190              		.global	Color_col
  192              	Color_col:
  193              		.fnstart
  194              	.LFB15:
- 150:Farbe_sen.c   **** 
  151:Farbe_sen.c   **** 
- 152:Farbe_sen.c   **** /*FARBE Color_col(float rot, float gruen,float blau)
+ 152:Farbe_sen.c   **** FARBE Color_col(float rot, float gruen,float blau)
  153:Farbe_sen.c   **** {
- 154:Farbe_sen.c   ****     
- 155:Farbe_sen.c   ****     int Color_col=0;
- 156:Farbe_sen.c   ****     if (rot==1) {
- 157:Farbe_sen.c   ****         if(gruen>0.5)
- 158:Farbe_sen.c   ****         {
- 159:Farbe_sen.c   ****             Color_col=GELB;
- 160:Farbe_sen.c   ****         }else if ((gruen<0.3)&&(blau<0.1)){
- 161:Farbe_sen.c   ****             Color_col=ROT;
- 162:Farbe_sen.c   ****         }else{
- 163:Farbe_sen.c   ****             Color_col=ORANGE;
- 164:Farbe_sen.c   ****         }
- 165:Farbe_sen.c   ****     }
- 166:Farbe_sen.c   ****     if(gruen==1)
- 167:Farbe_sen.c   ****     {
- 168:Farbe_sen.c   ****         if((rot<0.4)||(blau<0.3))
- 169:Farbe_sen.c   ****         {
- 170:Farbe_sen.c   ****             Color_col=GRUEN;
- 171:Farbe_sen.c   ****         }else if (blau>0.8){
- 172:Farbe_sen.c   ****             Color_col=BLAU;
- 173:Farbe_sen.c   ****         }else{
- 174:Farbe_sen.c   ****             Color_col=WEISS;
- 175:Farbe_sen.c   ****         }
- 176:Farbe_sen.c   ****     }
- 177:Farbe_sen.c   ****     return Color_col;
- 178:Farbe_sen.c   **** }
- 179:Farbe_sen.c   **** */
- 180:Farbe_sen.c   **** FARBE Color_col(float rot, float gruen,float blau)
- 181:Farbe_sen.c   **** {
- 195              		.loc 1 181 0
+ 195              		.loc 1 153 0
  196              		.cfi_startproc
  197              		@ args = 0, pretend = 0, frame = 16
  198              		@ frame_needed = 0, uses_anonymous_args = 0
  199              	.LVL10:
- 200 011c F04F2DE9 		stmfd	sp!, {r4, r5, r6, r7, r8, r9, r10, fp, lr}
- 201              		.save {r4, r5, r6, r7, r8, r9, r10, fp, lr}
- 202              		.cfi_def_cfa_offset 36
- 203              		.cfi_offset 4, -36
- 204              		.cfi_offset 5, -32
- 205              		.cfi_offset 6, -28
- 206              		.cfi_offset 7, -24
- 207              		.cfi_offset 8, -20
- 208              		.cfi_offset 9, -16
- 209              		.cfi_offset 10, -12
- 210              		.cfi_offset 11, -8
- 211              		.cfi_offset 14, -4
- 212              		.pad #20
- 213 0120 14D04DE2 		sub	sp, sp, #20
- 214              		.cfi_def_cfa_offset 56
- 215 0124 00B0A0E1 		mov	fp, r0
- 216 0128 01A0A0E1 		mov	r10, r1
- 217 012c 04208DE5 		str	r2, [sp, #4]	@ float
- 218              	.LVL11:
- 182:Farbe_sen.c   ****     int Farbe=-1;
- 183:Farbe_sen.c   ****     
- 184:Farbe_sen.c   ****     if ((rot>=20)||(gruen>=20)||(blau>=20)){
- 219              		.loc 1 184 0
- 220 0130 78139FE5 		ldr	r1, .L64
- 221              	.LVL12:
- 222 0134 FEFFFFEB 		bl	__aeabi_fcmpge
- 223              	.LVL13:
- 224 0138 000050E3 		cmp	r0, #0
- 225 013c 0900001A 		bne	.L12
- 226              		.loc 1 184 0 is_stmt 0 discriminator 1
- 227 0140 0A00A0E1 		mov	r0, r10
- 228 0144 64139FE5 		ldr	r1, .L64
- 229 0148 FEFFFFEB 		bl	__aeabi_fcmpge
- 230              	.LVL14:
- 231 014c 000050E3 		cmp	r0, #0
- 232 0150 0400001A 		bne	.L12
- 233 0154 04009DE5 		ldr	r0, [sp, #4]	@ float
- 234 0158 50139FE5 		ldr	r1, .L64
- 235 015c FEFFFFEB 		bl	__aeabi_fcmpge
- 236              	.LVL15:
- 237 0160 000050E3 		cmp	r0, #0
- 238 0164 C600000A 		beq	.L59
- 239              	.L12:
- 185:Farbe_sen.c   ****         if ((rot>blau*1.35)&&(gruen>blau*1.35))
- 240              		.loc 1 185 0 is_stmt 1
- 241 0168 0B00A0E1 		mov	r0, fp
- 242 016c FEFFFFEB 		bl	__aeabi_f2d
- 243              	.LVL16:
- 244 0170 0040A0E1 		mov	r4, r0
- 245 0174 0150A0E1 		mov	r5, r1
- 246 0178 04009DE5 		ldr	r0, [sp, #4]	@ float
- 247 017c FEFFFFEB 		bl	__aeabi_f2d
- 248              	.LVL17:
- 249 0180 F800CDE1 		strd	r0, [sp, #8]
- 250 0184 28239FE5 		ldr	r2, .L64+4
- 251 0188 28339FE5 		ldr	r3, .L64+8
- 252 018c FEFFFFEB 		bl	__aeabi_dmul
- 253              	.LVL18:
- 254 0190 0080A0E1 		mov	r8, r0
- 255 0194 0190A0E1 		mov	r9, r1
- 256 0198 0400A0E1 		mov	r0, r4
- 257 019c 0510A0E1 		mov	r1, r5
- 258 01a0 0820A0E1 		mov	r2, r8
- 259 01a4 0930A0E1 		mov	r3, r9
- 260 01a8 FEFFFFEB 		bl	__aeabi_dcmpgt
- 261              	.LVL19:
- 262 01ac 000050E3 		cmp	r0, #0
- 263 01b0 B500000A 		beq	.L60
- 264              		.loc 1 185 0 is_stmt 0 discriminator 1
- 265 01b4 0A00A0E1 		mov	r0, r10
- 266 01b8 FEFFFFEB 		bl	__aeabi_f2d
- 267              	.LVL20:
- 268 01bc 0060A0E1 		mov	r6, r0
- 269 01c0 0170A0E1 		mov	r7, r1
- 270 01c4 0800A0E1 		mov	r0, r8
- 271 01c8 0910A0E1 		mov	r1, r9
- 272 01cc 0620A0E1 		mov	r2, r6
- 273 01d0 0730A0E1 		mov	r3, r7
- 274 01d4 FEFFFFEB 		bl	__aeabi_dcmplt
- 275              	.LVL21:
- 276 01d8 000050E3 		cmp	r0, #0
- 277 01dc AC00000A 		beq	.L61
- 186:Farbe_sen.c   ****         {
- 187:Farbe_sen.c   ****             if (((rot>gruen)&&(rot<gruen*1.1))||((gruen>rot)&&(gruen<rot*1.1))){
- 278              		.loc 1 187 0 is_stmt 1
- 279 01e0 0B00A0E1 		mov	r0, fp
- 280 01e4 0A10A0E1 		mov	r1, r10
- 281 01e8 FEFFFFEB 		bl	__aeabi_fcmpgt
- 282              	.LVL22:
- 283 01ec 000050E3 		cmp	r0, #0
- 284 01f0 0C00000A 		beq	.L17
- 285              		.loc 1 187 0 is_stmt 0 discriminator 1
- 286 01f4 0600A0E1 		mov	r0, r6
- 287 01f8 0710A0E1 		mov	r1, r7
- 288 01fc B0229FE5 		ldr	r2, .L64+4
- 289 0200 B4329FE5 		ldr	r3, .L64+12
- 290 0204 FEFFFFEB 		bl	__aeabi_dmul
- 291              	.LVL23:
- 292 0208 0020A0E1 		mov	r2, r0
- 293 020c 0130A0E1 		mov	r3, r1
- 294 0210 0400A0E1 		mov	r0, r4
- 295 0214 0510A0E1 		mov	r1, r5
- 296 0218 FEFFFFEB 		bl	__aeabi_dcmplt
- 297              	.LVL24:
- 298 021c 000050E3 		cmp	r0, #0
- 188:Farbe_sen.c   ****                 Farbe= WEISS;
- 299              		.loc 1 188 0 is_stmt 1 discriminator 1
- 300 0220 0000A013 		movne	r0, #0
- 187:Farbe_sen.c   ****                 Farbe= WEISS;
- 301              		.loc 1 187 0 discriminator 1
- 302 0224 9F00001A 		bne	.L13
- 303              	.L17:
- 187:Farbe_sen.c   ****                 Farbe= WEISS;
- 304              		.loc 1 187 0 is_stmt 0 discriminator 2
- 305 0228 0B00A0E1 		mov	r0, fp
- 306 022c 0A10A0E1 		mov	r1, r10
- 307 0230 FEFFFFEB 		bl	__aeabi_fcmplt
- 308              	.LVL25:
- 309 0234 000050E3 		cmp	r0, #0
- 310 0238 0C00000A 		beq	.L19
- 187:Farbe_sen.c   ****                 Farbe= WEISS;
- 311              		.loc 1 187 0 discriminator 1
- 312 023c 0400A0E1 		mov	r0, r4
- 313 0240 0510A0E1 		mov	r1, r5
- 314 0244 68229FE5 		ldr	r2, .L64+4
- 315 0248 6C329FE5 		ldr	r3, .L64+12
- 316 024c FEFFFFEB 		bl	__aeabi_dmul
- 317              	.LVL26:
- 318 0250 0020A0E1 		mov	r2, r0
- 319 0254 0130A0E1 		mov	r3, r1
- 320 0258 0600A0E1 		mov	r0, r6
- 321 025c 0710A0E1 		mov	r1, r7
- 322 0260 FEFFFFEB 		bl	__aeabi_dcmplt
- 323              	.LVL27:
- 324 0264 000050E3 		cmp	r0, #0
- 325              		.loc 1 188 0 is_stmt 1 discriminator 1
- 326 0268 0000A013 		movne	r0, #0
- 187:Farbe_sen.c   ****                 Farbe= WEISS;
- 327              		.loc 1 187 0 discriminator 1
- 328 026c 8D00001A 		bne	.L13
- 329              	.L19:
- 189:Farbe_sen.c   ****             }else if(((rot>gruen/0.75)&&(rot<gruen/0.55))||((rot>blau/0.25)&&(rot<blau/0.15))){
- 330              		.loc 1 189 0
- 331 0270 0600A0E1 		mov	r0, r6
- 332 0274 0710A0E1 		mov	r1, r7
- 333 0278 0020A0E3 		mov	r2, #0
- 334 027c 3C329FE5 		ldr	r3, .L64+16
- 335 0280 FEFFFFEB 		bl	__aeabi_ddiv
- 336              	.LVL28:
- 337 0284 0020A0E1 		mov	r2, r0
- 338 0288 0130A0E1 		mov	r3, r1
- 339 028c 0400A0E1 		mov	r0, r4
- 340 0290 0510A0E1 		mov	r1, r5
- 341 0294 FEFFFFEB 		bl	__aeabi_dcmpgt
- 342              	.LVL29:
- 343 0298 000050E3 		cmp	r0, #0
- 344 029c 0C00000A 		beq	.L21
- 345              		.loc 1 189 0 is_stmt 0 discriminator 1
- 346 02a0 0600A0E1 		mov	r0, r6
- 347 02a4 0710A0E1 		mov	r1, r7
- 348 02a8 04229FE5 		ldr	r2, .L64+4
- 349 02ac 10329FE5 		ldr	r3, .L64+20
- 350 02b0 FEFFFFEB 		bl	__aeabi_ddiv
- 351              	.LVL30:
- 352 02b4 0020A0E1 		mov	r2, r0
- 353 02b8 0130A0E1 		mov	r3, r1
- 354 02bc 0400A0E1 		mov	r0, r4
- 355 02c0 0510A0E1 		mov	r1, r5
- 356 02c4 FEFFFFEB 		bl	__aeabi_dcmplt
- 357              	.LVL31:
- 358 02c8 000050E3 		cmp	r0, #0
- 190:Farbe_sen.c   ****                 Farbe=  GELB;
- 359              		.loc 1 190 0 is_stmt 1 discriminator 1
- 360 02cc 0200A013 		movne	r0, #2
- 189:Farbe_sen.c   ****             }else if(((rot>gruen/0.75)&&(rot<gruen/0.55))||((rot>blau/0.25)&&(rot<blau/0.15))){
- 361              		.loc 1 189 0 discriminator 1
- 362 02d0 7400001A 		bne	.L13
- 363              	.L21:
- 189:Farbe_sen.c   ****             }else if(((rot>gruen/0.75)&&(rot<gruen/0.55))||((rot>blau/0.25)&&(rot<blau/0.15))){
- 364              		.loc 1 189 0 is_stmt 0 discriminator 2
- 365 02d4 D800CDE1 		ldrd	r0, [sp, #8]
- 366 02d8 0020A0E3 		mov	r2, #0
- 367 02dc E4319FE5 		ldr	r3, .L64+24
- 368 02e0 FEFFFFEB 		bl	__aeabi_dmul
- 369              	.LVL32:
- 370 02e4 0020A0E1 		mov	r2, r0
- 371 02e8 0130A0E1 		mov	r3, r1
- 372 02ec 0400A0E1 		mov	r0, r4
- 373 02f0 0510A0E1 		mov	r1, r5
- 374 02f4 FEFFFFEB 		bl	__aeabi_dcmpgt
- 375              	.LVL33:
- 376 02f8 000050E3 		cmp	r0, #0
- 377 02fc 0B00000A 		beq	.L23
- 189:Farbe_sen.c   ****             }else if(((rot>gruen/0.75)&&(rot<gruen/0.55))||((rot>blau/0.25)&&(rot<blau/0.15))){
- 378              		.loc 1 189 0 discriminator 1
- 379 0300 D800CDE1 		ldrd	r0, [sp, #8]
- 380 0304 C0219FE5 		ldr	r2, .L64+28
- 381 0308 C0319FE5 		ldr	r3, .L64+32
- 382 030c FEFFFFEB 		bl	__aeabi_ddiv
- 383              	.LVL34:
- 384 0310 0020A0E1 		mov	r2, r0
- 385 0314 0130A0E1 		mov	r3, r1
- 386 0318 0400A0E1 		mov	r0, r4
- 387 031c 0510A0E1 		mov	r1, r5
- 388 0320 FEFFFFEB 		bl	__aeabi_dcmplt
- 389              	.LVL35:
- 390 0324 000050E3 		cmp	r0, #0
- 391              		.loc 1 190 0 is_stmt 1 discriminator 1
- 392 0328 0200A013 		movne	r0, #2
- 189:Farbe_sen.c   ****             }else if(((rot>gruen/0.75)&&(rot<gruen/0.55))||((rot>blau/0.25)&&(rot<blau/0.15))){
- 393              		.loc 1 189 0 discriminator 1
- 394 032c 5D00001A 		bne	.L13
- 395              	.L23:
- 191:Farbe_sen.c   ****             }else if ((rot>=2.5*gruen)&&(rot>0.4*blau)&&(gruen>=2*blau)){
- 396              		.loc 1 191 0
- 397 0330 0600A0E1 		mov	r0, r6
- 398 0334 0710A0E1 		mov	r1, r7
- 399 0338 0020A0E3 		mov	r2, #0
- 400 033c 90319FE5 		ldr	r3, .L64+36
- 401 0340 FEFFFFEB 		bl	__aeabi_dmul
- 402              	.LVL36:
- 403 0344 0020A0E1 		mov	r2, r0
- 404 0348 0130A0E1 		mov	r3, r1
- 405 034c 0400A0E1 		mov	r0, r4
- 406 0350 0510A0E1 		mov	r1, r5
- 407 0354 FEFFFFEB 		bl	__aeabi_dcmpge
- 408              	.LVL37:
- 409 0358 000050E3 		cmp	r0, #0
- 410 035c 1300000A 		beq	.L25
- 411              		.loc 1 191 0 is_stmt 0 discriminator 1
- 412 0360 D800CDE1 		ldrd	r0, [sp, #8]
- 413 0364 48219FE5 		ldr	r2, .L64+4
- 414 0368 68319FE5 		ldr	r3, .L64+40
- 415 036c FEFFFFEB 		bl	__aeabi_dmul
- 416              	.LVL38:
- 417 0370 0020A0E1 		mov	r2, r0
- 418 0374 0130A0E1 		mov	r3, r1
- 419 0378 0400A0E1 		mov	r0, r4
- 420 037c 0510A0E1 		mov	r1, r5
- 421 0380 FEFFFFEB 		bl	__aeabi_dcmpgt
- 422              	.LVL39:
- 423 0384 000050E3 		cmp	r0, #0
- 424 0388 0800000A 		beq	.L25
- 425 038c 04009DE5 		ldr	r0, [sp, #4]	@ float
- 426 0390 0010A0E1 		mov	r1, r0
- 427 0394 FEFFFFEB 		bl	__aeabi_fadd
- 428              	.LVL40:
- 429 0398 0010A0E1 		mov	r1, r0
- 430 039c 0A00A0E1 		mov	r0, r10
- 431 03a0 FEFFFFEB 		bl	__aeabi_fcmpge
- 432              	.LVL41:
- 433 03a4 000050E3 		cmp	r0, #0
- 192:Farbe_sen.c   ****                 Farbe=  ORANGE;
- 434              		.loc 1 192 0 is_stmt 1 discriminator 1
- 435 03a8 0500A013 		movne	r0, #5
- 191:Farbe_sen.c   ****             }else if ((rot>=2.5*gruen)&&(rot>0.4*blau)&&(gruen>=2*blau)){
- 436              		.loc 1 191 0 discriminator 1
- 437 03ac 3D00001A 		bne	.L13
- 438              	.L25:
- 193:Farbe_sen.c   ****             }else if ((rot>2*gruen)&&(rot>3*blau)) {
- 439              		.loc 1 193 0
- 440 03b0 0A00A0E1 		mov	r0, r10
- 441 03b4 0A10A0E1 		mov	r1, r10
- 442 03b8 FEFFFFEB 		bl	__aeabi_fadd
- 443              	.LVL42:
- 444 03bc 0040A0E1 		mov	r4, r0
- 445 03c0 0B00A0E1 		mov	r0, fp
- 446 03c4 0410A0E1 		mov	r1, r4
- 447 03c8 FEFFFFEB 		bl	__aeabi_fcmpgt
- 448              	.LVL43:
- 449 03cc 000050E3 		cmp	r0, #0
- 450 03d0 0800000A 		beq	.L28
- 451              		.loc 1 193 0 is_stmt 0 discriminator 1
- 452 03d4 04009DE5 		ldr	r0, [sp, #4]	@ float
- 453 03d8 FC109FE5 		ldr	r1, .L64+44
- 454 03dc FEFFFFEB 		bl	__aeabi_fmul
- 455              	.LVL44:
- 456 03e0 0010A0E1 		mov	r1, r0
- 457 03e4 0B00A0E1 		mov	r0, fp
- 458 03e8 FEFFFFEB 		bl	__aeabi_fcmpgt
- 459              	.LVL45:
- 460 03ec 000050E3 		cmp	r0, #0
- 194:Farbe_sen.c   ****                 Farbe=  ROT;
- 461              		.loc 1 194 0 is_stmt 1 discriminator 1
- 462 03f0 0400A013 		movne	r0, #4
- 193:Farbe_sen.c   ****             }else if ((rot>2*gruen)&&(rot>3*blau)) {
- 463              		.loc 1 193 0 discriminator 1
- 464 03f4 2B00001A 		bne	.L13
- 465              	.L28:
- 195:Farbe_sen.c   ****             }else if ((gruen>2*rot)&&(gruen>2*blau)) {
- 466              		.loc 1 195 0
- 467 03f8 0B00A0E1 		mov	r0, fp
- 468 03fc 0B10A0E1 		mov	r1, fp
- 469 0400 FEFFFFEB 		bl	__aeabi_fadd
- 470              	.LVL46:
- 471 0404 0050A0E1 		mov	r5, r0
- 472 0408 0A00A0E1 		mov	r0, r10
- 473 040c 0510A0E1 		mov	r1, r5
- 474 0410 FEFFFFEB 		bl	__aeabi_fcmpgt
- 475              	.LVL47:
- 476 0414 000050E3 		cmp	r0, #0
- 477 0418 0800000A 		beq	.L30
- 478              		.loc 1 195 0 is_stmt 0 discriminator 1
- 479 041c 04009DE5 		ldr	r0, [sp, #4]	@ float
- 480 0420 0010A0E1 		mov	r1, r0
- 481 0424 FEFFFFEB 		bl	__aeabi_fadd
- 482              	.LVL48:
- 483 0428 0010A0E1 		mov	r1, r0
- 484 042c 0A00A0E1 		mov	r0, r10
- 485 0430 FEFFFFEB 		bl	__aeabi_fcmpgt
- 486              	.LVL49:
- 487 0434 000050E3 		cmp	r0, #0
- 196:Farbe_sen.c   ****                 Farbe=  GRUEN;
- 488              		.loc 1 196 0 is_stmt 1 discriminator 1
- 489 0438 0300A013 		movne	r0, #3
- 195:Farbe_sen.c   ****             }else if ((gruen>2*rot)&&(gruen>2*blau)) {
- 490              		.loc 1 195 0 discriminator 1
- 491 043c 1900001A 		bne	.L13
- 492              	.L30:
- 197:Farbe_sen.c   ****             }else if ((blau>gruen)&&(blau<2*gruen)&&(blau>2*rot)) {
- 493              		.loc 1 197 0
- 494 0440 0A00A0E1 		mov	r0, r10
- 495 0444 04109DE5 		ldr	r1, [sp, #4]	@ float
- 496 0448 FEFFFFEB 		bl	__aeabi_fcmplt
- 497              	.LVL50:
- 498 044c 000050E3 		cmp	r0, #0
- 499 0450 1100000A 		beq	.L62
- 500              		.loc 1 197 0 is_stmt 0 discriminator 1
- 501 0454 04009DE5 		ldr	r0, [sp, #4]	@ float
- 502 0458 0410A0E1 		mov	r1, r4
- 503 045c FEFFFFEB 		bl	__aeabi_fcmplt
- 504              	.LVL51:
- 505 0460 000050E3 		cmp	r0, #0
- 506 0464 0E00000A 		beq	.L63
- 507 0468 04009DE5 		ldr	r0, [sp, #4]	@ float
- 508 046c 0510A0E1 		mov	r1, r5
- 509 0470 FEFFFFEB 		bl	__aeabi_fcmpgt
- 510              	.LVL52:
- 511 0474 000050E3 		cmp	r0, #0
- 182:Farbe_sen.c   ****     
- 512              		.loc 1 182 0 is_stmt 1 discriminator 1
- 513 0478 0100A013 		movne	r0, #1
- 514 047c 0000E003 		mvneq	r0, #0
- 515 0480 080000EA 		b	.L13
- 516              	.L59:
- 182:Farbe_sen.c   ****     
- 517              		.loc 1 182 0 is_stmt 0
- 518 0484 0000E0E3 		mvn	r0, #0
- 519 0488 060000EA 		b	.L13
- 520              	.L60:
- 521 048c 0000E0E3 		mvn	r0, #0
- 522 0490 040000EA 		b	.L13
- 523              	.L61:
- 524 0494 0000E0E3 		mvn	r0, #0
- 525 0498 020000EA 		b	.L13
- 526              	.L62:
- 527 049c 0000E0E3 		mvn	r0, #0
- 528 04a0 000000EA 		b	.L13
- 529              	.L63:
- 530 04a4 0000E0E3 		mvn	r0, #0
- 531              	.L13:
- 532              	.LVL53:
- 198:Farbe_sen.c   ****                 Farbe=  BLAU;
- 199:Farbe_sen.c   ****             }
- 200:Farbe_sen.c   ****         }
- 201:Farbe_sen.c   ****     }
- 202:Farbe_sen.c   ****     return Farbe;
- 203:Farbe_sen.c   **** }
- 533              		.loc 1 203 0 is_stmt 1
- 534 04a8 14D08DE2 		add	sp, sp, #20
- 535              		@ sp needed
- 536 04ac F08FBDE8 		ldmfd	sp!, {r4, r5, r6, r7, r8, r9, r10, fp, pc}
- 537              	.LVL54:
- 538              	.L65:
- 539              		.align	2
- 540              	.L64:
- 541 04b0 0000A041 		.word	1101004800
- 542 04b4 9A999999 		.word	-1717986918
- 543 04b8 9999F53F 		.word	1073060249
- 544 04bc 9999F13F 		.word	1072798105
- 545 04c0 0000E83F 		.word	1072168960
- 546 04c4 9999E13F 		.word	1071749529
- 547 04c8 00001040 		.word	1074790400
- 548 04cc 33333333 		.word	858993459
- 549 04d0 3333C33F 		.word	1069757235
- 550 04d4 00000440 		.word	1074003968
- 551 04d8 9999D93F 		.word	1071225241
- 552 04dc 00004040 		.word	1077936128
- 553              		.cfi_endproc
- 554              	.LFE15:
- 555              		.fnend
- 557              		.global	__aeabi_i2d
- 558              		.global	__aeabi_d2f
- 559              		.align	2
- 560              		.global	ColSen_getData
- 562              	ColSen_getData:
- 563              		.fnstart
- 564              	.LFB12:
+ 200 011c F0472DE9 		stmfd	sp!, {r4, r5, r6, r7, r8, r9, r10, lr}
+ 201              		.save {r4, r5, r6, r7, r8, r9, r10, lr}
+ 202              		.cfi_def_cfa_offset 32
+ 203              		.cfi_offset 4, -32
+ 204              		.cfi_offset 5, -28
+ 205              		.cfi_offset 6, -24
+ 206              		.cfi_offset 7, -20
+ 207              		.cfi_offset 8, -16
+ 208              		.cfi_offset 9, -12
+ 209              		.cfi_offset 10, -8
+ 210              		.cfi_offset 14, -4
+ 211              		.pad #16
+ 212 0120 10D04DE2 		sub	sp, sp, #16
+ 213              		.cfi_def_cfa_offset 48
+ 214 0124 00A0A0E1 		mov	r10, r0
+ 215 0128 0180A0E1 		mov	r8, r1
+ 216 012c 0290A0E1 		mov	r9, r2
+ 217              	.LVL11:
+ 154:Farbe_sen.c   ****     int Farbe=-1;
+ 155:Farbe_sen.c   ****     
+ 156:Farbe_sen.c   ****     if ((rot>=20)||(gruen>=20)||(blau>=20)){
+ 218              		.loc 1 156 0
+ 219 0130 24149FE5 		ldr	r1, .L70
+ 220              	.LVL12:
+ 221 0134 FEFFFFEB 		bl	__aeabi_fcmpge
+ 222              	.LVL13:
+ 223 0138 000050E3 		cmp	r0, #0
+ 224 013c 0900001A 		bne	.L12
+ 225              		.loc 1 156 0 is_stmt 0 discriminator 1
+ 226 0140 0800A0E1 		mov	r0, r8
+ 227 0144 10149FE5 		ldr	r1, .L70
+ 228 0148 FEFFFFEB 		bl	__aeabi_fcmpge
+ 229              	.LVL14:
+ 230 014c 000050E3 		cmp	r0, #0
+ 231 0150 0400001A 		bne	.L12
+ 232 0154 0900A0E1 		mov	r0, r9
+ 233 0158 FC139FE5 		ldr	r1, .L70
+ 234 015c FEFFFFEB 		bl	__aeabi_fcmpge
+ 235              	.LVL15:
+ 236 0160 000050E3 		cmp	r0, #0
+ 237 0164 F700000A 		beq	.L68
+ 238              	.L12:
+ 157:Farbe_sen.c   ****         if ((rot>blau*1.35)&&(gruen>blau*1.35))
+ 239              		.loc 1 157 0 is_stmt 1
+ 240 0168 0A00A0E1 		mov	r0, r10
+ 241 016c FEFFFFEB 		bl	__aeabi_f2d
+ 242              	.LVL16:
+ 243 0170 0040A0E1 		mov	r4, r0
+ 244 0174 0150A0E1 		mov	r5, r1
+ 245 0178 0900A0E1 		mov	r0, r9
+ 246 017c FEFFFFEB 		bl	__aeabi_f2d
+ 247              	.LVL17:
+ 248 0180 F800CDE1 		strd	r0, [sp, #8]
+ 249 0184 D4239FE5 		ldr	r2, .L70+4
+ 250 0188 D4339FE5 		ldr	r3, .L70+8
+ 251 018c FEFFFFEB 		bl	__aeabi_dmul
+ 252              	.LVL18:
+ 253 0190 0060A0E1 		mov	r6, r0
+ 254 0194 0170A0E1 		mov	r7, r1
+ 255 0198 0400A0E1 		mov	r0, r4
+ 256 019c 0510A0E1 		mov	r1, r5
+ 257 01a0 0620A0E1 		mov	r2, r6
+ 258 01a4 0730A0E1 		mov	r3, r7
+ 259 01a8 FEFFFFEB 		bl	__aeabi_dcmpgt
+ 260              	.LVL19:
+ 261 01ac 000050E3 		cmp	r0, #0
+ 262 01b0 2A00000A 		beq	.L15
+ 263              		.loc 1 157 0 is_stmt 0 discriminator 1
+ 264 01b4 0800A0E1 		mov	r0, r8
+ 265 01b8 FEFFFFEB 		bl	__aeabi_f2d
+ 266              	.LVL20:
+ 267 01bc F000CDE1 		strd	r0, [sp]
+ 268 01c0 0600A0E1 		mov	r0, r6
+ 269 01c4 0710A0E1 		mov	r1, r7
+ 270 01c8 D020CDE1 		ldrd	r2, [sp]
+ 271 01cc FEFFFFEB 		bl	__aeabi_dcmplt
+ 272              	.LVL21:
+ 273 01d0 000050E3 		cmp	r0, #0
+ 274 01d4 2100000A 		beq	.L15
+ 158:Farbe_sen.c   ****         {
+ 159:Farbe_sen.c   ****             if (((rot>gruen)&&(rot<gruen*1.1))||((gruen>=rot)&&(gruen<rot*1.1))){
+ 275              		.loc 1 159 0 is_stmt 1
+ 276 01d8 0A00A0E1 		mov	r0, r10
+ 277 01dc 0810A0E1 		mov	r1, r8
+ 278 01e0 FEFFFFEB 		bl	__aeabi_fcmpgt
+ 279              	.LVL22:
+ 280 01e4 000050E3 		cmp	r0, #0
+ 281 01e8 0B00000A 		beq	.L18
+ 282              		.loc 1 159 0 is_stmt 0 discriminator 1
+ 283 01ec D000CDE1 		ldrd	r0, [sp]
+ 284 01f0 68239FE5 		ldr	r2, .L70+4
+ 285 01f4 6C339FE5 		ldr	r3, .L70+12
+ 286 01f8 FEFFFFEB 		bl	__aeabi_dmul
+ 287              	.LVL23:
+ 288 01fc 0020A0E1 		mov	r2, r0
+ 289 0200 0130A0E1 		mov	r3, r1
+ 290 0204 0400A0E1 		mov	r0, r4
+ 291 0208 0510A0E1 		mov	r1, r5
+ 292 020c FEFFFFEB 		bl	__aeabi_dcmplt
+ 293              	.LVL24:
+ 294 0210 000050E3 		cmp	r0, #0
+ 160:Farbe_sen.c   ****             Farbe= WEISS;
+ 295              		.loc 1 160 0 is_stmt 1 discriminator 1
+ 296 0214 0000A013 		movne	r0, #0
+ 159:Farbe_sen.c   ****             Farbe= WEISS;
+ 297              		.loc 1 159 0 discriminator 1
+ 298 0218 CD00001A 		bne	.L13
+ 299              	.L18:
+ 159:Farbe_sen.c   ****             Farbe= WEISS;
+ 300              		.loc 1 159 0 is_stmt 0 discriminator 2
+ 301 021c 0A00A0E1 		mov	r0, r10
+ 302 0220 0810A0E1 		mov	r1, r8
+ 303 0224 FEFFFFEB 		bl	__aeabi_fcmple
+ 304              	.LVL25:
+ 305 0228 000050E3 		cmp	r0, #0
+ 306 022c 0B00000A 		beq	.L15
+ 159:Farbe_sen.c   ****             Farbe= WEISS;
+ 307              		.loc 1 159 0 discriminator 1
+ 308 0230 0400A0E1 		mov	r0, r4
+ 309 0234 0510A0E1 		mov	r1, r5
+ 310 0238 20239FE5 		ldr	r2, .L70+4
+ 311 023c 24339FE5 		ldr	r3, .L70+12
+ 312 0240 FEFFFFEB 		bl	__aeabi_dmul
+ 313              	.LVL26:
+ 314 0244 0020A0E1 		mov	r2, r0
+ 315 0248 0130A0E1 		mov	r3, r1
+ 316 024c D000CDE1 		ldrd	r0, [sp]
+ 317 0250 FEFFFFEB 		bl	__aeabi_dcmplt
+ 318              	.LVL27:
+ 319 0254 000050E3 		cmp	r0, #0
+ 320              		.loc 1 160 0 is_stmt 1 discriminator 1
+ 321 0258 0000A013 		movne	r0, #0
+ 159:Farbe_sen.c   ****             Farbe= WEISS;
+ 322              		.loc 1 159 0 discriminator 1
+ 323 025c BC00001A 		bne	.L13
+ 324              	.L15:
+ 161:Farbe_sen.c   ****             goto fertig;
+ 162:Farbe_sen.c   ****                 
+ 163:Farbe_sen.c   ****             }
+ 164:Farbe_sen.c   ****         }
+ 165:Farbe_sen.c   ****         if ((rot>2.5*gruen)&&(rot>4*blau)&&(gruen>2*blau)&&(blau>10)){
+ 325              		.loc 1 165 0
+ 326 0260 0800A0E1 		mov	r0, r8
+ 327 0264 FEFFFFEB 		bl	__aeabi_f2d
+ 328              	.LVL28:
+ 329 0268 F000CDE1 		strd	r0, [sp]
+ 330 026c 0020A0E3 		mov	r2, #0
+ 331 0270 F4329FE5 		ldr	r3, .L70+16
+ 332 0274 FEFFFFEB 		bl	__aeabi_dmul
+ 333              	.LVL29:
+ 334 0278 0020A0E1 		mov	r2, r0
+ 335 027c 0130A0E1 		mov	r3, r1
+ 336 0280 0400A0E1 		mov	r0, r4
+ 337 0284 0510A0E1 		mov	r1, r5
+ 338 0288 FEFFFFEB 		bl	__aeabi_dcmpgt
+ 339              	.LVL30:
+ 340 028c 000050E3 		cmp	r0, #0
+ 341 0290 1500000A 		beq	.L21
+ 342              		.loc 1 165 0 is_stmt 0 discriminator 1
+ 343 0294 0900A0E1 		mov	r0, r9
+ 344 0298 D0129FE5 		ldr	r1, .L70+20
+ 345 029c FEFFFFEB 		bl	__aeabi_fmul
+ 346              	.LVL31:
+ 347 02a0 0010A0E1 		mov	r1, r0
+ 348 02a4 0A00A0E1 		mov	r0, r10
+ 349 02a8 FEFFFFEB 		bl	__aeabi_fcmpgt
+ 350              	.LVL32:
+ 351 02ac 000050E3 		cmp	r0, #0
+ 352 02b0 0D00000A 		beq	.L21
+ 353 02b4 0900A0E1 		mov	r0, r9
+ 354 02b8 0910A0E1 		mov	r1, r9
+ 355 02bc FEFFFFEB 		bl	__aeabi_fadd
+ 356              	.LVL33:
+ 357 02c0 0010A0E1 		mov	r1, r0
+ 358 02c4 0800A0E1 		mov	r0, r8
+ 359 02c8 FEFFFFEB 		bl	__aeabi_fcmpgt
+ 360              	.LVL34:
+ 361 02cc 000050E3 		cmp	r0, #0
+ 362 02d0 0500000A 		beq	.L21
+ 363 02d4 0900A0E1 		mov	r0, r9
+ 364 02d8 94129FE5 		ldr	r1, .L70+24
+ 365 02dc FEFFFFEB 		bl	__aeabi_fcmpgt
+ 366              	.LVL35:
+ 367 02e0 000050E3 		cmp	r0, #0
+ 166:Farbe_sen.c   ****             Farbe=  ORANGE;
+ 368              		.loc 1 166 0 is_stmt 1 discriminator 1
+ 369 02e4 0500A013 		movne	r0, #5
+ 165:Farbe_sen.c   ****             Farbe=  ORANGE;
+ 370              		.loc 1 165 0 discriminator 1
+ 371 02e8 9900001A 		bne	.L13
+ 372              	.L21:
+ 167:Farbe_sen.c   ****             goto fertig;
+ 168:Farbe_sen.c   ****         }
+ 169:Farbe_sen.c   ****         if ((rot>2*gruen)&&(rot>3*blau)) {
+ 373              		.loc 1 169 0
+ 374 02ec 0800A0E1 		mov	r0, r8
+ 375 02f0 0810A0E1 		mov	r1, r8
+ 376 02f4 FEFFFFEB 		bl	__aeabi_fadd
+ 377              	.LVL36:
+ 378 02f8 0060A0E1 		mov	r6, r0
+ 379 02fc 0A00A0E1 		mov	r0, r10
+ 380 0300 0610A0E1 		mov	r1, r6
+ 381 0304 FEFFFFEB 		bl	__aeabi_fcmpgt
+ 382              	.LVL37:
+ 383 0308 000050E3 		cmp	r0, #0
+ 384 030c 0800000A 		beq	.L25
+ 385              		.loc 1 169 0 is_stmt 0 discriminator 1
+ 386 0310 0900A0E1 		mov	r0, r9
+ 387 0314 5C129FE5 		ldr	r1, .L70+28
+ 388 0318 FEFFFFEB 		bl	__aeabi_fmul
+ 389              	.LVL38:
+ 390 031c 0010A0E1 		mov	r1, r0
+ 391 0320 0A00A0E1 		mov	r0, r10
+ 392 0324 FEFFFFEB 		bl	__aeabi_fcmpgt
+ 393              	.LVL39:
+ 394 0328 000050E3 		cmp	r0, #0
+ 170:Farbe_sen.c   ****             Farbe=  ROT;
+ 395              		.loc 1 170 0 is_stmt 1 discriminator 1
+ 396 032c 0400A013 		movne	r0, #4
+ 169:Farbe_sen.c   ****             Farbe=  ROT;
+ 397              		.loc 1 169 0 discriminator 1
+ 398 0330 8700001A 		bne	.L13
+ 399              	.L25:
+ 171:Farbe_sen.c   ****             goto fertig;
+ 172:Farbe_sen.c   ****             }
+ 173:Farbe_sen.c   ****         if ((gruen>2*rot)&&(gruen>2*blau)) {
+ 400              		.loc 1 173 0
+ 401 0334 0A00A0E1 		mov	r0, r10
+ 402 0338 0A10A0E1 		mov	r1, r10
+ 403 033c FEFFFFEB 		bl	__aeabi_fadd
+ 404              	.LVL40:
+ 405 0340 0010A0E1 		mov	r1, r0
+ 406 0344 0800A0E1 		mov	r0, r8
+ 407 0348 FEFFFFEB 		bl	__aeabi_fcmpgt
+ 408              	.LVL41:
+ 409 034c 000050E3 		cmp	r0, #0
+ 410 0350 0800000A 		beq	.L27
+ 411              		.loc 1 173 0 is_stmt 0 discriminator 1
+ 412 0354 0900A0E1 		mov	r0, r9
+ 413 0358 0910A0E1 		mov	r1, r9
+ 414 035c FEFFFFEB 		bl	__aeabi_fadd
+ 415              	.LVL42:
+ 416 0360 0010A0E1 		mov	r1, r0
+ 417 0364 0800A0E1 		mov	r0, r8
+ 418 0368 FEFFFFEB 		bl	__aeabi_fcmpgt
+ 419              	.LVL43:
+ 420 036c 000050E3 		cmp	r0, #0
+ 174:Farbe_sen.c   ****             Farbe=  GRUEN;
+ 421              		.loc 1 174 0 is_stmt 1 discriminator 1
+ 422 0370 0300A013 		movne	r0, #3
+ 173:Farbe_sen.c   ****             Farbe=  GRUEN;
+ 423              		.loc 1 173 0 discriminator 1
+ 424 0374 7600001A 		bne	.L13
+ 425              	.L27:
+ 175:Farbe_sen.c   ****             goto fertig;
+ 176:Farbe_sen.c   ****             }
+ 177:Farbe_sen.c   ****         if (((blau>gruen)&&(blau<2*gruen)&&(blau>1.5*rot)&&(blau<2.5*rot))||((gruen>=blau)&&(gruen<
+ 426              		.loc 1 177 0
+ 427 0378 0800A0E1 		mov	r0, r8
+ 428 037c 0910A0E1 		mov	r1, r9
+ 429 0380 FEFFFFEB 		bl	__aeabi_fcmplt
+ 430              	.LVL44:
+ 431 0384 000050E3 		cmp	r0, #0
+ 432 0388 1B00000A 		beq	.L29
+ 433              		.loc 1 177 0 is_stmt 0 discriminator 1
+ 434 038c 0900A0E1 		mov	r0, r9
+ 435 0390 0610A0E1 		mov	r1, r6
+ 436 0394 FEFFFFEB 		bl	__aeabi_fcmplt
+ 437              	.LVL45:
+ 438 0398 000050E3 		cmp	r0, #0
+ 439 039c 1600000A 		beq	.L29
+ 440 03a0 0400A0E1 		mov	r0, r4
+ 441 03a4 0510A0E1 		mov	r1, r5
+ 442 03a8 0020A0E3 		mov	r2, #0
+ 443 03ac C8319FE5 		ldr	r3, .L70+32
+ 444 03b0 FEFFFFEB 		bl	__aeabi_dmul
+ 445              	.LVL46:
+ 446 03b4 0020A0E1 		mov	r2, r0
+ 447 03b8 0130A0E1 		mov	r3, r1
+ 448 03bc D800CDE1 		ldrd	r0, [sp, #8]
+ 449 03c0 FEFFFFEB 		bl	__aeabi_dcmpgt
+ 450              	.LVL47:
+ 451 03c4 000050E3 		cmp	r0, #0
+ 452 03c8 0B00000A 		beq	.L29
+ 453 03cc 0400A0E1 		mov	r0, r4
+ 454 03d0 0510A0E1 		mov	r1, r5
+ 455 03d4 0020A0E3 		mov	r2, #0
+ 456 03d8 8C319FE5 		ldr	r3, .L70+16
+ 457 03dc FEFFFFEB 		bl	__aeabi_dmul
+ 458              	.LVL48:
+ 459 03e0 0020A0E1 		mov	r2, r0
+ 460 03e4 0130A0E1 		mov	r3, r1
+ 461 03e8 D800CDE1 		ldrd	r0, [sp, #8]
+ 462 03ec FEFFFFEB 		bl	__aeabi_dcmplt
+ 463              	.LVL49:
+ 464 03f0 000050E3 		cmp	r0, #0
+ 178:Farbe_sen.c   ****             Farbe=  BLAU;
+ 465              		.loc 1 178 0 is_stmt 1 discriminator 1
+ 466 03f4 0100A013 		movne	r0, #1
+ 177:Farbe_sen.c   ****             Farbe=  BLAU;
+ 467              		.loc 1 177 0 discriminator 1
+ 468 03f8 5500001A 		bne	.L13
+ 469              	.L29:
+ 177:Farbe_sen.c   ****             Farbe=  BLAU;
+ 470              		.loc 1 177 0 is_stmt 0 discriminator 2
+ 471 03fc 0800A0E1 		mov	r0, r8
+ 472 0400 0910A0E1 		mov	r1, r9
+ 473 0404 FEFFFFEB 		bl	__aeabi_fcmpge
+ 474              	.LVL50:
+ 475 0408 000050E3 		cmp	r0, #0
+ 476 040c 1E00000A 		beq	.L33
+ 177:Farbe_sen.c   ****             Farbe=  BLAU;
+ 477              		.loc 1 177 0 discriminator 1
+ 478 0410 0900A0E1 		mov	r0, r9
+ 479 0414 0910A0E1 		mov	r1, r9
+ 480 0418 FEFFFFEB 		bl	__aeabi_fadd
+ 481              	.LVL51:
+ 482 041c 0010A0E1 		mov	r1, r0
+ 483 0420 0800A0E1 		mov	r0, r8
+ 484 0424 FEFFFFEB 		bl	__aeabi_fcmplt
+ 485              	.LVL52:
+ 486 0428 000050E3 		cmp	r0, #0
+ 487 042c 1600000A 		beq	.L33
+ 488 0430 0400A0E1 		mov	r0, r4
+ 489 0434 0510A0E1 		mov	r1, r5
+ 490 0438 0020A0E3 		mov	r2, #0
+ 491 043c 38319FE5 		ldr	r3, .L70+32
+ 492 0440 FEFFFFEB 		bl	__aeabi_dmul
+ 493              	.LVL53:
+ 494 0444 0020A0E1 		mov	r2, r0
+ 495 0448 0130A0E1 		mov	r3, r1
+ 496 044c D000CDE1 		ldrd	r0, [sp]
+ 497 0450 FEFFFFEB 		bl	__aeabi_dcmpgt
+ 498              	.LVL54:
+ 499 0454 000050E3 		cmp	r0, #0
+ 500 0458 0B00000A 		beq	.L33
+ 501 045c 0400A0E1 		mov	r0, r4
+ 502 0460 0510A0E1 		mov	r1, r5
+ 503 0464 0020A0E3 		mov	r2, #0
+ 504 0468 FC309FE5 		ldr	r3, .L70+16
+ 505 046c FEFFFFEB 		bl	__aeabi_dmul
+ 506              	.LVL55:
+ 507 0470 0020A0E1 		mov	r2, r0
+ 508 0474 0130A0E1 		mov	r3, r1
+ 509 0478 D000CDE1 		ldrd	r0, [sp]
+ 510 047c FEFFFFEB 		bl	__aeabi_dcmplt
+ 511              	.LVL56:
+ 512 0480 000050E3 		cmp	r0, #0
+ 513              		.loc 1 178 0 is_stmt 1 discriminator 1
+ 514 0484 0100A013 		movne	r0, #1
+ 177:Farbe_sen.c   ****             Farbe=  BLAU;
+ 515              		.loc 1 177 0 discriminator 1
+ 516 0488 3100001A 		bne	.L13
+ 517              	.L33:
+ 179:Farbe_sen.c   ****             goto fertig;
+ 180:Farbe_sen.c   ****         }
+ 181:Farbe_sen.c   ****         if(((rot>gruen/0.75)&&(rot<gruen/0.55))||((rot>blau/0.25)&&(rot<blau/0.15))){
+ 518              		.loc 1 181 0
+ 519 048c D000CDE1 		ldrd	r0, [sp]
+ 520 0490 0020A0E3 		mov	r2, #0
+ 521 0494 E4309FE5 		ldr	r3, .L70+36
+ 522 0498 FEFFFFEB 		bl	__aeabi_ddiv
+ 523              	.LVL57:
+ 524 049c 0020A0E1 		mov	r2, r0
+ 525 04a0 0130A0E1 		mov	r3, r1
+ 526 04a4 0400A0E1 		mov	r0, r4
+ 527 04a8 0510A0E1 		mov	r1, r5
+ 528 04ac FEFFFFEB 		bl	__aeabi_dcmpgt
+ 529              	.LVL58:
+ 530 04b0 000050E3 		cmp	r0, #0
+ 531 04b4 0B00000A 		beq	.L37
+ 532              		.loc 1 181 0 is_stmt 0 discriminator 1
+ 533 04b8 D000CDE1 		ldrd	r0, [sp]
+ 534 04bc 9C209FE5 		ldr	r2, .L70+4
+ 535 04c0 BC309FE5 		ldr	r3, .L70+40
+ 536 04c4 FEFFFFEB 		bl	__aeabi_ddiv
+ 537              	.LVL59:
+ 538 04c8 0020A0E1 		mov	r2, r0
+ 539 04cc 0130A0E1 		mov	r3, r1
+ 540 04d0 0400A0E1 		mov	r0, r4
+ 541 04d4 0510A0E1 		mov	r1, r5
+ 542 04d8 FEFFFFEB 		bl	__aeabi_dcmplt
+ 543              	.LVL60:
+ 544 04dc 000050E3 		cmp	r0, #0
+ 182:Farbe_sen.c   ****             Farbe=  GELB;
+ 545              		.loc 1 182 0 is_stmt 1 discriminator 1
+ 546 04e0 0200A013 		movne	r0, #2
+ 181:Farbe_sen.c   ****             Farbe=  GELB;
+ 547              		.loc 1 181 0 discriminator 1
+ 548 04e4 1A00001A 		bne	.L13
+ 549              	.L37:
+ 181:Farbe_sen.c   ****             Farbe=  GELB;
+ 550              		.loc 1 181 0 is_stmt 0 discriminator 2
+ 551 04e8 D800CDE1 		ldrd	r0, [sp, #8]
+ 552 04ec 0020A0E3 		mov	r2, #0
+ 553 04f0 90309FE5 		ldr	r3, .L70+44
+ 554 04f4 FEFFFFEB 		bl	__aeabi_dmul
+ 555              	.LVL61:
+ 556 04f8 0020A0E1 		mov	r2, r0
+ 557 04fc 0130A0E1 		mov	r3, r1
+ 558 0500 0400A0E1 		mov	r0, r4
+ 559 0504 0510A0E1 		mov	r1, r5
+ 560 0508 FEFFFFEB 		bl	__aeabi_dcmpgt
+ 561              	.LVL62:
+ 562 050c 000050E3 		cmp	r0, #0
+ 563 0510 0E00000A 		beq	.L69
+ 181:Farbe_sen.c   ****             Farbe=  GELB;
+ 564              		.loc 1 181 0 discriminator 1
+ 565 0514 D800CDE1 		ldrd	r0, [sp, #8]
+ 566 0518 6C209FE5 		ldr	r2, .L70+48
+ 567 051c 6C309FE5 		ldr	r3, .L70+52
+ 568 0520 FEFFFFEB 		bl	__aeabi_ddiv
+ 569              	.LVL63:
+ 570 0524 0020A0E1 		mov	r2, r0
+ 571 0528 0130A0E1 		mov	r3, r1
+ 572 052c 0400A0E1 		mov	r0, r4
+ 573 0530 0510A0E1 		mov	r1, r5
+ 574 0534 FEFFFFEB 		bl	__aeabi_dcmplt
+ 575              	.LVL64:
+ 576 0538 000050E3 		cmp	r0, #0
+ 154:Farbe_sen.c   ****     
+ 577              		.loc 1 154 0 is_stmt 1 discriminator 1
+ 578 053c 0200A013 		movne	r0, #2
+ 579 0540 0000E003 		mvneq	r0, #0
+ 580 0544 020000EA 		b	.L13
+ 581              	.L68:
+ 154:Farbe_sen.c   ****     
+ 582              		.loc 1 154 0 is_stmt 0
+ 583 0548 0000E0E3 		mvn	r0, #0
+ 584 054c 000000EA 		b	.L13
+ 585              	.L69:
+ 586 0550 0000E0E3 		mvn	r0, #0
+ 587              	.L13:
+ 588              	.LVL65:
+ 183:Farbe_sen.c   ****             goto fertig;
+ 184:Farbe_sen.c   ****         }
+ 185:Farbe_sen.c   ****     }
+ 186:Farbe_sen.c   ****     fertig:return Farbe;
+ 187:Farbe_sen.c   **** }
+ 589              		.loc 1 187 0 is_stmt 1
+ 590 0554 10D08DE2 		add	sp, sp, #16
+ 591              		@ sp needed
+ 592 0558 F087BDE8 		ldmfd	sp!, {r4, r5, r6, r7, r8, r9, r10, pc}
+ 593              	.LVL66:
+ 594              	.L71:
+ 595              		.align	2
+ 596              	.L70:
+ 597 055c 0000A041 		.word	1101004800
+ 598 0560 9A999999 		.word	-1717986918
+ 599 0564 9999F53F 		.word	1073060249
+ 600 0568 9999F13F 		.word	1072798105
+ 601 056c 00000440 		.word	1074003968
+ 602 0570 00008040 		.word	1082130432
+ 603 0574 00002041 		.word	1092616192
+ 604 0578 00004040 		.word	1077936128
+ 605 057c 0000F83F 		.word	1073217536
+ 606 0580 0000E83F 		.word	1072168960
+ 607 0584 9999E13F 		.word	1071749529
+ 608 0588 00001040 		.word	1074790400
+ 609 058c 33333333 		.word	858993459
+ 610 0590 3333C33F 		.word	1069757235
+ 611              		.cfi_endproc
+ 612              	.LFE15:
+ 613              		.fnend
+ 615              		.global	__aeabi_i2d
+ 616              		.global	__aeabi_d2f
+ 617              		.align	2
+ 618              		.global	ColSen_getData
+ 620              	ColSen_getData:
+ 621              		.fnstart
+ 622              	.LFB12:
   66:Farbe_sen.c   **** #ifdef __linux__
- 565              		.loc 1 66 0
- 566              		.cfi_startproc
- 567              		@ args = 0, pretend = 0, frame = 0
- 568              		@ frame_needed = 0, uses_anonymous_args = 0
- 569 04e0 F0432DE9 		stmfd	sp!, {r4, r5, r6, r7, r8, r9, lr}
- 570              		.save {r4, r5, r6, r7, r8, r9, lr}
- 571              		.cfi_def_cfa_offset 28
- 572              		.cfi_offset 4, -28
- 573              		.cfi_offset 5, -24
- 574              		.cfi_offset 6, -20
- 575              		.cfi_offset 7, -16
- 576              		.cfi_offset 8, -12
- 577              		.cfi_offset 9, -8
- 578              		.cfi_offset 14, -4
- 579              		.pad #12
- 580 04e4 0CD04DE2 		sub	sp, sp, #12
- 581              		.cfi_def_cfa_offset 40
- 582              	.LVL55:
+ 623              		.loc 1 66 0
+ 624              		.cfi_startproc
+ 625              		@ args = 0, pretend = 0, frame = 0
+ 626              		@ frame_needed = 0, uses_anonymous_args = 0
+ 627 0594 F0432DE9 		stmfd	sp!, {r4, r5, r6, r7, r8, r9, lr}
+ 628              		.save {r4, r5, r6, r7, r8, r9, lr}
+ 629              		.cfi_def_cfa_offset 28
+ 630              		.cfi_offset 4, -28
+ 631              		.cfi_offset 5, -24
+ 632              		.cfi_offset 6, -20
+ 633              		.cfi_offset 7, -16
+ 634              		.cfi_offset 8, -12
+ 635              		.cfi_offset 9, -8
+ 636              		.cfi_offset 14, -4
+ 637              		.pad #12
+ 638 0598 0CD04DE2 		sub	sp, sp, #12
+ 639              		.cfi_def_cfa_offset 40
+ 640              	.LVL67:
   75:Farbe_sen.c   ****     Color_data_r=(unsigned char)pColorSensor->Raw[PORT][0][0]+(unsigned char)(pColorSensor->Raw[POR
- 583              		.loc 1 75 0
- 584 04e8 0100A0E3 		mov	r0, #1
- 585 04ec FEFFFFEB 		bl	sleep
- 586              	.LVL56:
+ 641              		.loc 1 75 0
+ 642 059c 0100A0E3 		mov	r0, #1
+ 643 05a0 FEFFFFEB 		bl	sleep
+ 644              	.LVL68:
   76:Farbe_sen.c   ****     Color_data_g=(unsigned char)pColorSensor->Raw[PORT][0][2]+(unsigned char)(pColorSensor->Raw[POR
- 587              		.loc 1 76 0
- 588 04f0 28319FE5 		ldr	r3, .L75
- 589 04f4 003093E5 		ldr	r3, [r3]
- 590 04f8 24219FE5 		ldr	r2, .L75+4
- 591 04fc 002092E5 		ldr	r2, [r2]
- 592 0500 964DA0E3 		mov	r4, #9600
- 593 0504 923424E0 		mla	r4, r2, r4, r3
- 594 0508 18319FE5 		ldr	r3, .L75+8
- 595 050c 0380D4E7 		ldrb	r8, [r4, r3]	@ zero_extendqisi2
- 596              	.LVL57:
+ 645              		.loc 1 76 0
+ 646 05a4 34319FE5 		ldr	r3, .L82
+ 647 05a8 003093E5 		ldr	r3, [r3]
+ 648 05ac 30219FE5 		ldr	r2, .L82+4
+ 649 05b0 002092E5 		ldr	r2, [r2]
+ 650 05b4 964DA0E3 		mov	r4, #9600
+ 651 05b8 923424E0 		mla	r4, r2, r4, r3
+ 652 05bc 24319FE5 		ldr	r3, .L82+8
+ 653 05c0 0380D4E7 		ldrb	r8, [r4, r3]	@ zero_extendqisi2
+ 654              	.LVL69:
   77:Farbe_sen.c   ****     Color_data_b=(unsigned char)pColorSensor->Raw[PORT][0][4]+(unsigned char)(pColorSensor->Raw[POR
- 597              		.loc 1 77 0
- 598 0510 023083E2 		add	r3, r3, #2
- 599 0514 0370D4E7 		ldrb	r7, [r4, r3]	@ zero_extendqisi2
- 600              	.LVL58:
+ 655              		.loc 1 77 0
+ 656 05c4 023083E2 		add	r3, r3, #2
+ 657 05c8 0370D4E7 		ldrb	r7, [r4, r3]	@ zero_extendqisi2
+ 658              	.LVL70:
   78:Farbe_sen.c   ****     Color_data_blank=(unsigned int)pColorSensor->Raw[PORT][0][6]+(unsigned int)(pColorSensor->Raw[P
- 601              		.loc 1 78 0
- 602 0518 023083E2 		add	r3, r3, #2
- 603 051c 0360D4E7 		ldrb	r6, [r4, r3]	@ zero_extendqisi2
- 604              	.LVL59:
-  91:Farbe_sen.c   ****     printf("color_data is (%5d, %5d, %5d, %5d)",Color_data_r,Color_data_g,Color_data_b,Color_data_b
- 605              		.loc 1 91 0
- 606 0520 0800A0E1 		mov	r0, r8
- 607 0524 FEFFFFEB 		bl	__aeabi_i2d
- 608              	.LVL60:
- 609 0528 FEFFFFEB 		bl	__aeabi_d2f
- 610              	.LVL61:
- 611 052c 0090A0E1 		mov	r9, r0
- 612 0530 0700A0E1 		mov	r0, r7
- 613 0534 FEFFFFEB 		bl	__aeabi_i2d
- 614              	.LVL62:
- 615 0538 FEFFFFEB 		bl	__aeabi_d2f
- 616              	.LVL63:
- 617 053c 0050A0E1 		mov	r5, r0
- 618 0540 0600A0E1 		mov	r0, r6
- 619 0544 FEFFFFEB 		bl	__aeabi_i2d
- 620              	.LVL64:
- 621 0548 FEFFFFEB 		bl	__aeabi_d2f
- 622              	.LVL65:
- 623 054c 0020A0E1 		mov	r2, r0
- 624 0550 0900A0E1 		mov	r0, r9
- 625 0554 0510A0E1 		mov	r1, r5
- 626 0558 FEFFFFEB 		bl	Color_col
- 627              	.LVL66:
- 628 055c 0050A0E1 		mov	r5, r0
- 629              	.LVL67:
+ 659              		.loc 1 78 0
+ 660 05cc 023083E2 		add	r3, r3, #2
+ 661 05d0 0360D4E7 		ldrb	r6, [r4, r3]	@ zero_extendqisi2
+ 662              	.LVL71:
+  88:Farbe_sen.c   ****     printf("color_data is (%5d, %5d, %5d, %5d)",Color_data_r,Color_data_g,Color_data_b,Color_data_b
+ 663              		.loc 1 88 0
+ 664 05d4 0800A0E1 		mov	r0, r8
+ 665 05d8 FEFFFFEB 		bl	__aeabi_i2d
+ 666              	.LVL72:
+ 667 05dc FEFFFFEB 		bl	__aeabi_d2f
+ 668              	.LVL73:
+ 669 05e0 0090A0E1 		mov	r9, r0
+ 670 05e4 0700A0E1 		mov	r0, r7
+ 671 05e8 FEFFFFEB 		bl	__aeabi_i2d
+ 672              	.LVL74:
+ 673 05ec FEFFFFEB 		bl	__aeabi_d2f
+ 674              	.LVL75:
+ 675 05f0 0050A0E1 		mov	r5, r0
+ 676 05f4 0600A0E1 		mov	r0, r6
+ 677 05f8 FEFFFFEB 		bl	__aeabi_i2d
+ 678              	.LVL76:
+ 679 05fc FEFFFFEB 		bl	__aeabi_d2f
+ 680              	.LVL77:
+ 681 0600 0020A0E1 		mov	r2, r0
+ 682 0604 0900A0E1 		mov	r0, r9
+ 683 0608 0510A0E1 		mov	r1, r5
+ 684 060c FEFFFFEB 		bl	Color_col
+ 685              	.LVL78:
+ 686 0610 0050A0E1 		mov	r5, r0
+ 687              	.LVL79:
   79:Farbe_sen.c   ****     //usleep(100000);
- 630              		.loc 1 79 0
- 631 0560 C4309FE5 		ldr	r3, .L75+12
- 632 0564 D32094E1 		ldrsb	r2, [r4, r3]
- 633 0568 013043E2 		sub	r3, r3, #1
- 634 056c D33094E1 		ldrsb	r3, [r4, r3]
- 635 0570 023483E0 		add	r3, r3, r2, asl #8
-  92:Farbe_sen.c   ****     //printf("%5d, %5d, %5d, %5d", Color_data_r,Color_data_g,Color_data_b,Color_data_blank);
- 636              		.loc 1 92 0
- 637 0574 00308DE5 		str	r3, [sp]
- 638 0578 B0009FE5 		ldr	r0, .L75+16
- 639              	.LVL68:
- 640 057c 0810A0E1 		mov	r1, r8
- 641 0580 0720A0E1 		mov	r2, r7
- 642 0584 0630A0E1 		mov	r3, r6
- 643 0588 FEFFFFEB 		bl	printf
- 644              	.LVL69:
-  95:Farbe_sen.c   ****         case 0:
- 645              		.loc 1 95 0
- 646 058c 050055E3 		cmp	r5, #5
- 647 0590 05F19F97 		ldrls	pc, [pc, r5, asl #2]
- 648 0594 1C0000EA 		b	.L67
- 649              	.L69:
- 650 0598 B0050000 		.word	.L68
- 651 059c C0050000 		.word	.L70
- 652 05a0 D0050000 		.word	.L71
- 653 05a4 E0050000 		.word	.L72
- 654 05a8 F0050000 		.word	.L73
- 655 05ac 00060000 		.word	.L74
- 656              	.L68:
-  97:Farbe_sen.c   ****             break;
- 657              		.loc 1 97 0
- 658 05b0 7C009FE5 		ldr	r0, .L75+20
- 659 05b4 0010A0E3 		mov	r1, #0
- 660 05b8 FEFFFFEB 		bl	printf
- 661              	.LVL70:
-  98:Farbe_sen.c   ****             
- 662              		.loc 1 98 0
- 663 05bc 120000EA 		b	.L67
- 664              	.L70:
- 101:Farbe_sen.c   ****             break;
- 665              		.loc 1 101 0
- 666 05c0 70009FE5 		ldr	r0, .L75+24
- 667 05c4 0110A0E3 		mov	r1, #1
- 668 05c8 FEFFFFEB 		bl	printf
- 669              	.LVL71:
- 102:Farbe_sen.c   ****             
- 670              		.loc 1 102 0
- 671 05cc 0E0000EA 		b	.L67
- 672              	.L71:
- 105:Farbe_sen.c   ****             break;
- 673              		.loc 1 105 0
- 674 05d0 64009FE5 		ldr	r0, .L75+28
- 675 05d4 0210A0E3 		mov	r1, #2
- 676 05d8 FEFFFFEB 		bl	printf
- 677              	.LVL72:
- 106:Farbe_sen.c   ****             
- 678              		.loc 1 106 0
- 679 05dc 0A0000EA 		b	.L67
- 680              	.L72:
- 109:Farbe_sen.c   ****             break;
- 681              		.loc 1 109 0
- 682 05e0 58009FE5 		ldr	r0, .L75+32
- 683 05e4 0310A0E3 		mov	r1, #3
- 684 05e8 FEFFFFEB 		bl	printf
- 685              	.LVL73:
- 110:Farbe_sen.c   ****             
- 686              		.loc 1 110 0
- 687 05ec 060000EA 		b	.L67
- 688              	.L73:
- 113:Farbe_sen.c   ****             break;
- 689              		.loc 1 113 0
- 690 05f0 4C009FE5 		ldr	r0, .L75+36
- 691 05f4 0410A0E3 		mov	r1, #4
- 692 05f8 FEFFFFEB 		bl	printf
- 693              	.LVL74:
- 114:Farbe_sen.c   ****             
- 694              		.loc 1 114 0
- 695 05fc 020000EA 		b	.L67
- 696              	.L74:
- 117:Farbe_sen.c   ****             break;
- 697              		.loc 1 117 0
- 698 0600 40009FE5 		ldr	r0, .L75+40
- 699 0604 0510A0E3 		mov	r1, #5
- 700 0608 FEFFFFEB 		bl	printf
- 701              	.LVL75:
- 702              	.L67:
- 121:Farbe_sen.c   **** //    sleep(1);
- 703              		.loc 1 121 0
- 704 060c 38009FE5 		ldr	r0, .L75+44
- 705 0610 FEFFFFEB 		bl	printf
- 706              	.LVL76:
- 130:Farbe_sen.c   **** 
- 707              		.loc 1 130 0
- 708 0614 0500A0E1 		mov	r0, r5
- 709 0618 0CD08DE2 		add	sp, sp, #12
- 710              		@ sp needed
- 711 061c F083BDE8 		ldmfd	sp!, {r4, r5, r6, r7, r8, r9, pc}
- 712              	.LVL77:
- 713              	.L76:
- 714              		.align	2
- 715              	.L75:
- 716 0620 00000000 		.word	pColorSensor
- 717 0624 00000000 		.word	.LANCHOR0
- 718 0628 60100000 		.word	4192
- 719 062c 67100000 		.word	4199
- 720 0630 78000000 		.word	.LC5
- 721 0634 9C000000 		.word	.LC6
- 722 0638 B0000000 		.word	.LC7
- 723 063c C4000000 		.word	.LC8
- 724 0640 D8000000 		.word	.LC9
- 725 0644 EC000000 		.word	.LC10
- 726 0648 00010000 		.word	.LC11
- 727 064c 14010000 		.word	.LC12
- 728              		.cfi_endproc
- 729              	.LFE12:
- 730              		.fnend
- 732              		.comm	DevCon,12,4
- 733              		.comm	pColorSensor,4,4
- 734              		.comm	file,4,4
- 735              		.global	MAX_SAMPLES
- 736              		.global	COLOR_SENSOR_TYPE
- 737              		.global	RGB_RAW
- 738              		.global	PORT
- 739              		.section	.rodata
- 740              		.align	2
- 743              	MAX_SAMPLES:
- 744 0000 0A000000 		.word	10
- 747              	COLOR_SENSOR_TYPE:
- 748 0004 1D       		.byte	29
- 751              	RGB_RAW:
- 752 0005 04       		.byte	4
- 753 0006 0000     		.section	.rodata.str1.4,"aMS",%progbits,1
- 754              		.align	2
- 755              	.LC0:
- 756 0000 2F646576 		.ascii	"/dev/lms_uart\000"
- 756      2F6C6D73 
- 756      5F756172 
- 756      7400
- 757 000e 0000     		.space	2
- 758              	.LC1:
- 759 0010 4661696C 		.ascii	"Failed to open device\012\000"
- 759      65642074 
- 759      6F206F70 
- 759      656E2064 
- 759      65766963 
- 760 0027 00       		.space	1
- 761              	.LC2:
- 762 0028 4661696C 		.ascii	"Failed to map Color Sensor device\012\000"
- 762      65642074 
- 762      6F206D61 
- 762      7020436F 
- 762      6C6F7220 
- 763 004b 00       		.space	1
- 764              	.LC3:
- 765 004c 44657669 		.ascii	"Device is ready \012\015\000"
- 765      63652069 
- 765      73207265 
- 765      61647920 
- 765      0A0D00
- 766 005f 00       		.space	1
- 767              	.LC4:
- 768 0060 436C6F73 		.ascii	"Close the Color Sensor\000"
- 768      65207468 
- 768      6520436F 
- 768      6C6F7220 
- 768      53656E73 
- 769 0077 00       		.space	1
- 770              	.LC5:
- 771 0078 636F6C6F 		.ascii	"color_data is (%5d, %5d, %5d, %5d)\000"
- 771      725F6461 
- 771      74612069 
- 771      73202825 
- 771      35642C20 
- 772 009b 00       		.space	1
- 773              	.LC6:
- 774 009c 1B5B313B 		.ascii	"\033[1;30m   %d\033[0m\000"
- 774      33306D20 
- 774      20202564 
- 774      1B5B306D 
- 774      00
- 775 00ad 000000   		.space	3
- 776              	.LC7:
- 777 00b0 1B5B313B 		.ascii	"\033[1;34m   %d\033[0m\000"
- 777      33346D20 
- 777      20202564 
- 777      1B5B306D 
- 777      00
- 778 00c1 000000   		.space	3
- 779              	.LC8:
- 780 00c4 1B5B313B 		.ascii	"\033[1;33m   %d\033[0m\000"
- 780      33336D20 
- 780      20202564 
- 780      1B5B306D 
- 780      00
- 781 00d5 000000   		.space	3
- 782              	.LC9:
- 783 00d8 1B5B313B 		.ascii	"\033[1;32m   %d\033[0m\000"
- 783      33326D20 
- 783      20202564 
- 783      1B5B306D 
- 783      00
- 784 00e9 000000   		.space	3
- 785              	.LC10:
- 786 00ec 1B5B313B 		.ascii	"\033[1;35m   %d\033[0m\000"
- 786      33356D20 
- 786      20202564 
- 786      1B5B306D 
- 786      00
- 787 00fd 000000   		.space	3
- 788              	.LC11:
- 789 0100 1B5B313B 		.ascii	"\033[1;31m   %d\033[0m\000"
- 789      33316D20 
- 789      20202564 
- 789      1B5B306D 
- 789      00
- 790 0111 000000   		.space	3
- 791              	.LC12:
- 792 0114 0A0D00   		.ascii	"\012\015\000"
- 793 0117 00       		.bss
- 794              		.align	2
- 795              	.LANCHOR0 = . + 0
- 798              	PORT:
- 799 0000 00000000 		.space	4
- 800              		.text
- 801              	.Letext0:
- 802              		.file 2 "/usr/local/carlson-minot/crosscompilers/lib/gcc/arm-none-linux-gnueabi/4.8.3/include/stdd
- 803              		.file 3 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
- 804              		.file 4 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
- 805              		.file 5 "Farbe_sen.h"
- 806              		.file 6 "lmstypes.h"
- 807              		.file 7 "bytecodes.h"
- 808              		.file 8 "lms2012.h"
- 809              		.file 9 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
- 810              		.file 10 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/u
- 811              		.file 11 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/u
- 812              		.file 12 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/u
- 813              		.file 13 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/u
+ 688              		.loc 1 79 0
+ 689 0614 D0309FE5 		ldr	r3, .L82+12
+ 690 0618 D32094E1 		ldrsb	r2, [r4, r3]
+ 691 061c 013043E2 		sub	r3, r3, #1
+ 692 0620 D33094E1 		ldrsb	r3, [r4, r3]
+ 693 0624 023483E0 		add	r3, r3, r2, asl #8
+  89:Farbe_sen.c   ****     //printf("%5d, %5d, %5d, %5d", Color_data_r,Color_data_g,Color_data_b,Color_data_blank);
+ 694              		.loc 1 89 0
+ 695 0628 00308DE5 		str	r3, [sp]
+ 696 062c BC009FE5 		ldr	r0, .L82+16
+ 697              	.LVL80:
+ 698 0630 0810A0E1 		mov	r1, r8
+ 699 0634 0720A0E1 		mov	r2, r7
+ 700 0638 0630A0E1 		mov	r3, r6
+ 701 063c FEFFFFEB 		bl	printf
+ 702              	.LVL81:
+  92:Farbe_sen.c   ****         case 0:
+ 703              		.loc 1 92 0
+ 704 0640 050055E3 		cmp	r5, #5
+ 705 0644 05F19F97 		ldrls	pc, [pc, r5, asl #2]
+ 706 0648 1D0000EA 		b	.L73
+ 707              	.L75:
+ 708 064c 64060000 		.word	.L74
+ 709 0650 74060000 		.word	.L76
+ 710 0654 84060000 		.word	.L77
+ 711 0658 94060000 		.word	.L78
+ 712 065c A4060000 		.word	.L79
+ 713 0660 B4060000 		.word	.L80
+ 714              	.L74:
+  94:Farbe_sen.c   ****             break;
+ 715              		.loc 1 94 0
+ 716 0664 88009FE5 		ldr	r0, .L82+20
+ 717 0668 0010A0E3 		mov	r1, #0
+ 718 066c FEFFFFEB 		bl	printf
+ 719              	.LVL82:
+  95:Farbe_sen.c   ****             
+ 720              		.loc 1 95 0
+ 721 0670 150000EA 		b	.L81
+ 722              	.L76:
+  98:Farbe_sen.c   ****             break;
+ 723              		.loc 1 98 0
+ 724 0674 7C009FE5 		ldr	r0, .L82+24
+ 725 0678 0110A0E3 		mov	r1, #1
+ 726 067c FEFFFFEB 		bl	printf
+ 727              	.LVL83:
+  99:Farbe_sen.c   ****             
+ 728              		.loc 1 99 0
+ 729 0680 110000EA 		b	.L81
+ 730              	.L77:
+ 102:Farbe_sen.c   ****             break;
+ 731              		.loc 1 102 0
+ 732 0684 70009FE5 		ldr	r0, .L82+28
+ 733 0688 0210A0E3 		mov	r1, #2
+ 734 068c FEFFFFEB 		bl	printf
+ 735              	.LVL84:
+ 103:Farbe_sen.c   ****             
+ 736              		.loc 1 103 0
+ 737 0690 0D0000EA 		b	.L81
+ 738              	.L78:
+ 106:Farbe_sen.c   ****             break;
+ 739              		.loc 1 106 0
+ 740 0694 64009FE5 		ldr	r0, .L82+32
+ 741 0698 0310A0E3 		mov	r1, #3
+ 742 069c FEFFFFEB 		bl	printf
+ 743              	.LVL85:
+ 107:Farbe_sen.c   ****             
+ 744              		.loc 1 107 0
+ 745 06a0 090000EA 		b	.L81
+ 746              	.L79:
+ 110:Farbe_sen.c   ****             break;
+ 747              		.loc 1 110 0
+ 748 06a4 58009FE5 		ldr	r0, .L82+36
+ 749 06a8 0410A0E3 		mov	r1, #4
+ 750 06ac FEFFFFEB 		bl	printf
+ 751              	.LVL86:
+ 111:Farbe_sen.c   ****             
+ 752              		.loc 1 111 0
+ 753 06b0 050000EA 		b	.L81
+ 754              	.L80:
+ 114:Farbe_sen.c   ****             break;
+ 755              		.loc 1 114 0
+ 756 06b4 4C009FE5 		ldr	r0, .L82+40
+ 757 06b8 0510A0E3 		mov	r1, #5
+ 758 06bc FEFFFFEB 		bl	printf
+ 759              	.LVL87:
+ 115:Farbe_sen.c   ****                     
+ 760              		.loc 1 115 0
+ 761 06c0 010000EA 		b	.L81
+ 762              	.L73:
+ 118:Farbe_sen.c   ****             break;
+ 763              		.loc 1 118 0
+ 764 06c4 40009FE5 		ldr	r0, .L82+44
+ 765 06c8 FEFFFFEB 		bl	printf
+ 766              	.LVL88:
+ 767              	.L81:
+ 122:Farbe_sen.c   **** //    sleep(1);
+ 768              		.loc 1 122 0
+ 769 06cc 3C009FE5 		ldr	r0, .L82+48
+ 770 06d0 FEFFFFEB 		bl	printf
+ 771              	.LVL89:
+ 131:Farbe_sen.c   **** 
+ 772              		.loc 1 131 0
+ 773 06d4 0500A0E1 		mov	r0, r5
+ 774 06d8 0CD08DE2 		add	sp, sp, #12
+ 775              		@ sp needed
+ 776 06dc F083BDE8 		ldmfd	sp!, {r4, r5, r6, r7, r8, r9, pc}
+ 777              	.LVL90:
+ 778              	.L83:
+ 779              		.align	2
+ 780              	.L82:
+ 781 06e0 00000000 		.word	pColorSensor
+ 782 06e4 00000000 		.word	.LANCHOR0
+ 783 06e8 60100000 		.word	4192
+ 784 06ec 67100000 		.word	4199
+ 785 06f0 78000000 		.word	.LC5
+ 786 06f4 9C000000 		.word	.LC6
+ 787 06f8 B0000000 		.word	.LC7
+ 788 06fc C4000000 		.word	.LC8
+ 789 0700 D8000000 		.word	.LC9
+ 790 0704 EC000000 		.word	.LC10
+ 791 0708 00010000 		.word	.LC11
+ 792 070c 14010000 		.word	.LC12
+ 793 0710 18010000 		.word	.LC13
+ 794              		.cfi_endproc
+ 795              	.LFE12:
+ 796              		.fnend
+ 798              		.comm	DevCon,12,4
+ 799              		.comm	pColorSensor,4,4
+ 800              		.comm	file,4,4
+ 801              		.global	MAX_SAMPLES
+ 802              		.global	COLOR_SENSOR_TYPE
+ 803              		.global	RGB_RAW
+ 804              		.global	PORT
+ 805              		.section	.rodata
+ 806              		.align	2
+ 809              	MAX_SAMPLES:
+ 810 0000 0A000000 		.word	10
+ 813              	COLOR_SENSOR_TYPE:
+ 814 0004 1D       		.byte	29
+ 817              	RGB_RAW:
+ 818 0005 04       		.byte	4
+ 819 0006 0000     		.section	.rodata.str1.4,"aMS",%progbits,1
+ 820              		.align	2
+ 821              	.LC0:
+ 822 0000 2F646576 		.ascii	"/dev/lms_uart\000"
+ 822      2F6C6D73 
+ 822      5F756172 
+ 822      7400
+ 823 000e 0000     		.space	2
+ 824              	.LC1:
+ 825 0010 4661696C 		.ascii	"Failed to open device\012\000"
+ 825      65642074 
+ 825      6F206F70 
+ 825      656E2064 
+ 825      65766963 
+ 826 0027 00       		.space	1
+ 827              	.LC2:
+ 828 0028 4661696C 		.ascii	"Failed to map Color Sensor device\012\000"
+ 828      65642074 
+ 828      6F206D61 
+ 828      7020436F 
+ 828      6C6F7220 
+ 829 004b 00       		.space	1
+ 830              	.LC3:
+ 831 004c 44657669 		.ascii	"Device is ready \012\015\000"
+ 831      63652069 
+ 831      73207265 
+ 831      61647920 
+ 831      0A0D00
+ 832 005f 00       		.space	1
+ 833              	.LC4:
+ 834 0060 436C6F73 		.ascii	"Close the Color Sensor\000"
+ 834      65207468 
+ 834      6520436F 
+ 834      6C6F7220 
+ 834      53656E73 
+ 835 0077 00       		.space	1
+ 836              	.LC5:
+ 837 0078 636F6C6F 		.ascii	"color_data is (%5d, %5d, %5d, %5d)\000"
+ 837      725F6461 
+ 837      74612069 
+ 837      73202825 
+ 837      35642C20 
+ 838 009b 00       		.space	1
+ 839              	.LC6:
+ 840 009c 1B5B313B 		.ascii	"\033[1;30m   %d\033[0m\000"
+ 840      33306D20 
+ 840      20202564 
+ 840      1B5B306D 
+ 840      00
+ 841 00ad 000000   		.space	3
+ 842              	.LC7:
+ 843 00b0 1B5B313B 		.ascii	"\033[1;34m   %d\033[0m\000"
+ 843      33346D20 
+ 843      20202564 
+ 843      1B5B306D 
+ 843      00
+ 844 00c1 000000   		.space	3
+ 845              	.LC8:
+ 846 00c4 1B5B313B 		.ascii	"\033[1;33m   %d\033[0m\000"
+ 846      33336D20 
+ 846      20202564 
+ 846      1B5B306D 
+ 846      00
+ 847 00d5 000000   		.space	3
+ 848              	.LC9:
+ 849 00d8 1B5B313B 		.ascii	"\033[1;32m   %d\033[0m\000"
+ 849      33326D20 
+ 849      20202564 
+ 849      1B5B306D 
+ 849      00
+ 850 00e9 000000   		.space	3
+ 851              	.LC10:
+ 852 00ec 1B5B313B 		.ascii	"\033[1;35m   %d\033[0m\000"
+ 852      33356D20 
+ 852      20202564 
+ 852      1B5B306D 
+ 852      00
+ 853 00fd 000000   		.space	3
+ 854              	.LC11:
+ 855 0100 1B5B313B 		.ascii	"\033[1;31m   %d\033[0m\000"
+ 855      33316D20 
+ 855      20202564 
+ 855      1B5B306D 
+ 855      00
+ 856 0111 000000   		.space	3
+ 857              	.LC12:
+ 858 0114 20782000 		.ascii	" x \000"
+ 859              	.LC13:
+ 860 0118 0A0D00   		.ascii	"\012\015\000"
+ 861 011b 00       		.bss
+ 862              		.align	2
+ 863              	.LANCHOR0 = . + 0
+ 866              	PORT:
+ 867 0000 00000000 		.space	4
+ 868              		.text
+ 869              	.Letext0:
+ 870              		.file 2 "/usr/local/carlson-minot/crosscompilers/lib/gcc/arm-none-linux-gnueabi/4.8.3/include/stdd
+ 871              		.file 3 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
+ 872              		.file 4 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
+ 873              		.file 5 "Farbe_sen.h"
+ 874              		.file 6 "lmstypes.h"
+ 875              		.file 7 "bytecodes.h"
+ 876              		.file 8 "lms2012.h"
+ 877              		.file 9 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
+ 878              		.file 10 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/u
+ 879              		.file 11 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/u
+ 880              		.file 12 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/u
+ 881              		.file 13 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/u
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 Farbe_sen.c
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc4YG580.s:16     .text:0000000000000000 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc4YG580.s:19     .text:0000000000000000 ColSen_init
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc4YG580.s:106    .text:00000000000000bc $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc3Nz7JP.s:16     .text:0000000000000000 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc3Nz7JP.s:19     .text:0000000000000000 ColSen_init
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc3Nz7JP.s:106    .text:00000000000000bc $d
                             *COM*:0000000000000004 file
                             *COM*:0000000000000004 pColorSensor
                             *COM*:000000000000000c DevCon
                        .ARM.exidx:0000000000000000 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc4YG580.s:121    .text:00000000000000e8 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc4YG580.s:124    .text:00000000000000e8 ColSen_close
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc4YG580.s:151    .text:0000000000000108 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc3Nz7JP.s:121    .text:00000000000000e8 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc3Nz7JP.s:124    .text:00000000000000e8 ColSen_close
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc3Nz7JP.s:151    .text:0000000000000108 $d
                        .ARM.extab:0000000000000000 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc4YG580.s:157    .text:0000000000000110 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc4YG580.s:160    .text:0000000000000110 MAX_RGB
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc4YG580.s:192    .text:000000000000011c Color_col
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc4YG580.s:541    .text:00000000000004b0 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc4YG580.s:559    .text:00000000000004e0 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc4YG580.s:562    .text:00000000000004e0 ColSen_getData
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc4YG580.s:650    .text:0000000000000598 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc4YG580.s:658    .text:00000000000005b0 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc4YG580.s:716    .text:0000000000000620 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc4YG580.s:743    .rodata:0000000000000000 MAX_SAMPLES
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc4YG580.s:747    .rodata:0000000000000004 COLOR_SENSOR_TYPE
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc4YG580.s:751    .rodata:0000000000000005 RGB_RAW
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc4YG580.s:798    .bss:0000000000000000 PORT
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc4YG580.s:740    .rodata:0000000000000000 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc4YG580.s:754    .rodata.str1.4:0000000000000000 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc4YG580.s:794    .bss:0000000000000000 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc3Nz7JP.s:157    .text:0000000000000110 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc3Nz7JP.s:160    .text:0000000000000110 MAX_RGB
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc3Nz7JP.s:192    .text:000000000000011c Color_col
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc3Nz7JP.s:597    .text:000000000000055c $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc3Nz7JP.s:617    .text:0000000000000594 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc3Nz7JP.s:620    .text:0000000000000594 ColSen_getData
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc3Nz7JP.s:708    .text:000000000000064c $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc3Nz7JP.s:716    .text:0000000000000664 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc3Nz7JP.s:781    .text:00000000000006e0 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc3Nz7JP.s:809    .rodata:0000000000000000 MAX_SAMPLES
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc3Nz7JP.s:813    .rodata:0000000000000004 COLOR_SENSOR_TYPE
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc3Nz7JP.s:817    .rodata:0000000000000005 RGB_RAW
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc3Nz7JP.s:866    .bss:0000000000000000 PORT
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc3Nz7JP.s:806    .rodata:0000000000000000 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc3Nz7JP.s:820    .rodata.str1.4:0000000000000000 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc3Nz7JP.s:862    .bss:0000000000000000 $d
                      .debug_frame:0000000000000010 $d
 
 UNDEFINED SYMBOLS
@@ -1123,11 +1180,11 @@ __aeabi_dmul
 __aeabi_dcmpgt
 __aeabi_dcmplt
 __aeabi_fcmpgt
+__aeabi_fcmple
+__aeabi_fmul
+__aeabi_fadd
 __aeabi_fcmplt
 __aeabi_ddiv
-__aeabi_dcmpge
-__aeabi_fadd
-__aeabi_fmul
 __aeabi_i2d
 __aeabi_d2f
 sleep

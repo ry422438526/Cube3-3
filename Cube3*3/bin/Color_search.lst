@@ -882,16 +882,16 @@
  741              		.file 6 "main.h"
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 Color_search.c
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHNYBLC.s:16     .text:0000000000000000 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHNYBLC.s:19     .text:0000000000000000 Kantenstein_suchen
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHNYBLC.s:335    .text:00000000000002f4 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccNQHIpz.s:16     .text:0000000000000000 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccNQHIpz.s:19     .text:0000000000000000 Kantenstein_suchen
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccNQHIpz.s:335    .text:00000000000002f4 $d
                        .ARM.exidx:0000000000000000 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHNYBLC.s:343    .text:0000000000000304 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHNYBLC.s:346    .text:0000000000000304 Mittelstein_suchen
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHNYBLC.s:381    .text:0000000000000334 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHNYBLC.s:386    .text:0000000000000338 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHNYBLC.s:389    .text:0000000000000338 Eckenstein_suchen
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHNYBLC.s:710    .text:00000000000006c8 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccNQHIpz.s:343    .text:0000000000000304 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccNQHIpz.s:346    .text:0000000000000304 Mittelstein_suchen
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccNQHIpz.s:381    .text:0000000000000334 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccNQHIpz.s:386    .text:0000000000000338 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccNQHIpz.s:389    .text:0000000000000338 Eckenstein_suchen
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccNQHIpz.s:710    .text:00000000000006c8 $d
                      .debug_frame:0000000000000010 $d
 
 UNDEFINED SYMBOLS

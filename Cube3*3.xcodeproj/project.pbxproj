@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2C3513CF1C185A6000B7D2BA /* OLL.c in Sources */ = {isa = PBXBuildFile; fileRef = 2C3513CD1C185A6000B7D2BA /* OLL.c */; };
+		2CD3DD4A1C3D214700D40C9C /* Test.c in Sources */ = {isa = PBXBuildFile; fileRef = 2CD3DD481C3D214700D40C9C /* Test.c */; };
 		2CF216731C2704BF008D8234 /* PLL.c in Sources */ = {isa = PBXBuildFile; fileRef = 2CF216711C2704BF008D8234 /* PLL.c */; };
 		7AD9AB241BF4D6260079E82F /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 7AD9AB231BF4D6260079E82F /* main.c */; };
 		7AD9AB2C1BF4D6510079E82F /* Arm_motor.c in Sources */ = {isa = PBXBuildFile; fileRef = 7AD9AB2A1BF4D6510079E82F /* Arm_motor.c */; };
@@ -37,6 +38,8 @@
 /* Begin PBXFileReference section */
 		2C3513CD1C185A6000B7D2BA /* OLL.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = OLL.c; sourceTree = "<group>"; };
 		2C3513CE1C185A6000B7D2BA /* OLL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OLL.h; sourceTree = "<group>"; };
+		2CD3DD481C3D214700D40C9C /* Test.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Test.c; sourceTree = "<group>"; };
+		2CD3DD491C3D214700D40C9C /* Test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Test.h; sourceTree = "<group>"; };
 		2CF216711C2704BF008D8234 /* PLL.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PLL.c; sourceTree = "<group>"; };
 		2CF216721C2704BF008D8234 /* PLL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLL.h; sourceTree = "<group>"; };
 		7AD9AB201BF4D6260079E82F /* Cube3*3 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Cube3*3"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -126,6 +129,8 @@
 				7AD9AB3C1BF4D81D0079E82F /* bytecodes.h */,
 				7AD9AB3D1BF4D8FA0079E82F /* lms2012.h */,
 				7AD9AB3E1BF4D9540079E82F /* lmstypes.h */,
+				2CD3DD481C3D214700D40C9C /* Test.c */,
+				2CD3DD491C3D214700D40C9C /* Test.h */,
 			);
 			path = "Cube3*3";
 			sourceTree = "<group>";
@@ -191,6 +196,7 @@
 				7AD9AB481BF4DA9B0079E82F /* Top_Cross.c in Sources */,
 				7AD9AB2C1BF4D6510079E82F /* Arm_motor.c in Sources */,
 				7AD9AB2F1BF4D7120079E82F /* Dreh_motor.c in Sources */,
+				2CD3DD4A1C3D214700D40C9C /* Test.c in Sources */,
 				7AD9AB3B1BF4D7D20079E82F /* Side_dreh.c in Sources */,
 				7AD9AB321BF4D7430079E82F /* Farbe_motor.c in Sources */,
 				7AD9AB351BF4D7800079E82F /* Farbe_scan.c in Sources */,

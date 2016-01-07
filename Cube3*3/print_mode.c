@@ -19,7 +19,7 @@
 
 #ifdef __linux__
 #define RUN_EV3    1
-#else if
+#else
 #define RUN_MACOS  1
 #endif
 
@@ -85,7 +85,12 @@ void wuerfel_print(int mode)
         {
             char tmp=print_mode[mode][zeile][spalte];
             if(tmp==-1)
+#ifndef __linux__
                 printf("    ");
+#endif
+#ifdef __linux__
+            printf("\033[1;30m   %d\033[0m", 0);
+#endif
             else
                 switch(color_data[tmp/9][tmp%9])
             {

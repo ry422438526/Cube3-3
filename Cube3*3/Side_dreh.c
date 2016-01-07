@@ -69,6 +69,7 @@ void klappen()
 void drehen_unter(int dir,int dreh_Angel)
 {
 #ifdef __linux__
+    arm_setpos(3);
     if(dir==1)
     {
         DrehTel_setpos(2*dreh_Angel*3/270);

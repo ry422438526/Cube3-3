@@ -24,7 +24,7 @@ typedef enum
     GRUEN=3,
     ROT=4,
     ORANGE=5
-}FABER;
+}Farbe;
 
 #ifdef __linux__
  int  PORT=0x0;
@@ -79,9 +79,6 @@ int ColSen_getData()   //Center:zenteral Position
     Color_data_blank=(unsigned int)pColorSensor->Raw[PORT][0][6]+(unsigned int)(pColorSensor->Raw[PORT][0][7]<<8);
     //usleep(100000);
     
-    
-    
-    
     //MAX_Werte=MAX_RGB(MAX_RGB(Color_data_r, Color_data_g),Color_data_b);
     /*rot   =(Color_data_r*1.0)/MAX_Werte;
     gruen =(Color_data_g*1.0)/MAX_Werte;
@@ -116,6 +113,10 @@ int ColSen_getData()   //Center:zenteral Position
         case 5:
             printf("\033[1;31m   %d\033[0m",Color_color);
             break;
+                    
+        default:
+            printf(" x ");
+            break;
     }
 #endif
     printf("\n\r");
@@ -148,35 +149,6 @@ int MAX_RGB(int a,int b)
     }
 }
 
-
-/*FARBE Color_col(float rot, float gruen,float blau)
-{
-    
-    int Color_col=0;
-    if (rot==1) {
-        if(gruen>0.5)
-        {
-            Color_col=GELB;
-        }else if ((gruen<0.3)&&(blau<0.1)){
-            Color_col=ROT;
-        }else{
-            Color_col=ORANGE;
-        }
-    }
-    if(gruen==1)
-    {
-        if((rot<0.4)||(blau<0.3))
-        {
-            Color_col=GRUEN;
-        }else if (blau>0.8){
-            Color_col=BLAU;
-        }else{
-            Color_col=WEISS;
-        }
-    }
-    return Color_col;
-}
-*/
 FARBE Color_col(float rot, float gruen,float blau)
 {
     int Farbe=-1;
@@ -184,22 +156,34 @@ FARBE Color_col(float rot, float gruen,float blau)
     if ((rot>=20)||(gruen>=20)||(blau>=20)){
         if ((rot>blau*1.35)&&(gruen>blau*1.35))
         {
-            if (((rot>gruen)&&(rot<gruen*1.1))||((gruen>rot)&&(gruen<rot*1.1))){
-                Farbe= WEISS;
-            }else if(((rot>gruen/0.75)&&(rot<gruen/0.55))||((rot>blau/0.25)&&(rot<blau/0.15))){
-                Farbe=  GELB;
-            }else if ((rot>=2.5*gruen)&&(rot>0.4*blau)&&(gruen>=2*blau)){
-                Farbe=  ORANGE;
-            }else if ((rot>2*gruen)&&(rot>3*blau)) {
-                Farbe=  ROT;
-            }else if ((gruen>2*rot)&&(gruen>2*blau)) {
-                Farbe=  GRUEN;
-            }else if ((blau>gruen)&&(blau<2*gruen)&&(blau>2*rot)) {
-                Farbe=  BLAU;
+            if (((rot>gruen)&&(rot<gruen*1.1))||((gruen>=rot)&&(gruen<rot*1.1))){
+            Farbe= WEISS;
+            goto fertig;
+                
             }
         }
+        if ((rot>2.5*gruen)&&(rot>4*blau)&&(gruen>2*blau)&&(blau>10)){
+            Farbe=  ORANGE;
+            goto fertig;
+        }
+        if ((rot>2*gruen)&&(rot>3*blau)) {
+            Farbe=  ROT;
+            goto fertig;
+            }
+        if ((gruen>2*rot)&&(gruen>2*blau)) {
+            Farbe=  GRUEN;
+            goto fertig;
+            }
+        if (((blau>gruen)&&(blau<2*gruen)&&(blau>1.5*rot)&&(blau<2.5*rot))||((gruen>=blau)&&(gruen<2*blau)&&(gruen>1.5*rot)&&(gruen<2.5*rot))) {
+            Farbe=  BLAU;
+            goto fertig;
+        }
+        if(((rot>gruen/0.75)&&(rot<gruen/0.55))||((rot>blau/0.25)&&(rot<blau/0.15))){
+            Farbe=  GELB;
+            goto fertig;
+        }
     }
-    return Farbe;
+    fertig:return Farbe;
 }
 
 
@@ -351,4 +335,33 @@ DATAF     cInputCalculateColor(COLORSTRUCT *pC)
 }
 */
 
+
+/*FARBE Color_col(float rot, float gruen,float blau)
+ {
+ 
+ int Color_col=0;
+ if (rot==1) {
+ if(gruen>0.5)
+ {
+ Color_col=GELB;
+ }else if ((gruen<0.3)&&(blau<0.1)){
+ Color_col=ROT;
+ }else{
+ Color_col=ORANGE;
+ }
+ }
+ if(gruen==1)
+ {
+ if((rot<0.4)||(blau<0.3))
+ {
+ Color_col=GRUEN;
+ }else if (blau>0.8){
+ Color_col=BLAU;
+ }else{
+ Color_col=WEISS;
+ }
+ }
+ return Color_col;
+ }
+ */
 

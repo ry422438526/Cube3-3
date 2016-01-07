@@ -8,6 +8,7 @@
 
 // Thema: Entwurf und Implementierung eines Algorithmus zum Loesen des Rubrik-Cube Problems
 #include <unistd.h>
+#include <stdlib.h>
 
 #include "Top_Cross.h"
 #include "F2L.h"
@@ -17,6 +18,7 @@
 #include "Color_search.h"
 #include "stdio.h"
 #include "main.h"
+#include "Test.h"
 #ifdef  __linux__
 #include "Arm_motor.h"
 #include "Dreh_motor.h"
@@ -174,26 +176,26 @@ unsigned char color_data[6][9]={
      {4,4,1,3,4,5,1,4,3},
      {5,1,5,2,5,4,1,5,3}*/
     
-     /*{2,0,0,0,0,0,2,0,0},
+     {2,0,0,0,0,0,2,0,0},
      {4,1,3,4,1,5,0,2,2},
      {5,5,5,3,2,4,4,1,3},
      {2,5,0,1,3,1,3,3,1},
      {1,2,3,3,4,2,1,4,5},
-     {5,2,1,4,5,3,4,5,4}*/
+     {5,2,1,4,5,3,4,5,4}
     
-    /*{2,0,0,0,0,0,3,0,0},
+     /*{2,0,0,0,0,0,3,0,0},
      {5,1,3,3,1,5,2,2,1},
      {5,3,5,5,2,1,1,5,1},
      {2,2,2,4,3,1,4,3,1},
      {3,1,4,4,4,2,0,4,3},
      {5,2,0,4,5,3,4,5,4}*/
     
-    {2,2,2,2,2,2,2,2,2},
+    /*{2,2,2,2,2,2,2,2,2},
     {4,5,4,4,4,4,4,4,4},
     {0,0,0,0,0,0,0,0,0},
     {5,5,5,5,5,5,5,4,5},
     {1,1,1,1,1,1,1,3,1},
-    {3,3,3,3,3,3,3,1,3}
+    {3,3,3,3,3,3,3,1,3}*/
     
      /*{1,0,0,0,0,0,3,0,0},
      {5,1,1,3,1,4,2,1,5},
@@ -279,6 +281,8 @@ unsigned char color_data[6][9]={
     {5,4,4,4,4,4,4,4,4},
     {1,1,1,5,5,5,5,5,5}*/
 };
+
+int count;
 #endif
 
 int main(int argc, const char * argv[]) {
@@ -289,26 +293,39 @@ int main(int argc, const char * argv[]) {
     //extern void ColSen_test(void);
     //ColSen_test();
     //return;
-    
     Farbe_init();
     arm_init();
     DrehTel_init();
     ColSen_init();
     color_data[6][9]=farbe_scan();
-    wuerfel_print(1);
-    arm_close();
-    Farbe_close();
+    if (test()==0) {
+        arm_close();
+        Farbe_close();
+        DrehTel_close();
+        ColSen_close();
+        exit(0);
+    }else
+    {
+        change_topface(0);
+        change_rightface(5);
+        wuerfel_print(1);
+        //Top_Cross();
+        //F2L();
+        //OLL();
+        //PLL();
+    }
 #endif
-    change_topface(0);
-    change_rightface(5);
-    wuerfel_print(1);
-    Top_Cross();
-    F2L();
-    OLL();
-    PLL();
-    wuerfel_print(1);
 #ifndef __linux__
-    while(1)
+        change_topface(0);
+        change_rightface(5);
+        wuerfel_print(1);
+        Top_Cross();
+        F2L();
+        OLL();
+        PLL();
+#endif
+#ifndef __linux__
+   /* while(1)
     {
         if(kbhit())
         {
@@ -334,7 +351,11 @@ int main(int argc, const char * argv[]) {
             }
         }
         
-    }
+    }*/
 #endif
     return 0;
 }
+
+
+
+

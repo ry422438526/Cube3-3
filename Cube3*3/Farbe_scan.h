@@ -11,6 +11,8 @@
 
 #include <stdio.h>
 
+typedef int FARBE;
+
 int farbe_scan();
 
 #endif /* Farbe_scan_h */

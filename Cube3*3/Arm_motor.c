@@ -35,7 +35,7 @@ OUTPUT_GLOBALS OutputInstance;
 
 int arm_referenz=0;
 int arm_ist=0;
-const int arm_winkel[]={4,-83,-150,-240,-330};//-85   231
+const int arm_winkel[]={4,-83,-150,-240,-330};//-85   231   330
 #endif
 
 
