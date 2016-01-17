@@ -72,22 +72,21 @@ int ColSen_getData()   //Center:zenteral Position
     int Color_data_g=0;
     int Color_data_b=0;
     int Color_data_blank=0;
+    usleep(10000);
     sleep(1);
     Color_data_r=(unsigned char)pColorSensor->Raw[PORT][0][0]+(unsigned char)(pColorSensor->Raw[PORT][0][1]<<8);
     Color_data_g=(unsigned char)pColorSensor->Raw[PORT][0][2]+(unsigned char)(pColorSensor->Raw[PORT][0][3]<<8);
     Color_data_b=(unsigned char)pColorSensor->Raw[PORT][0][4]+(unsigned char)(pColorSensor->Raw[PORT][0][5]<<8);
     Color_data_blank=(unsigned int)pColorSensor->Raw[PORT][0][6]+(unsigned int)(pColorSensor->Raw[PORT][0][7]<<8);
-    //usleep(100000);
-    
+    usleep(100000);
+    Color_color=Color_col(Color_data_r*1.0,Color_data_g*1.0,Color_data_b*1.0);
+    printf("color_data is (%5d, %5d, %5d, %5d)",Color_data_r,Color_data_g,Color_data_b,Color_data_blank);
     //MAX_Werte=MAX_RGB(MAX_RGB(Color_data_r, Color_data_g),Color_data_b);
     /*rot   =(Color_data_r*1.0)/MAX_Werte;
     gruen =(Color_data_g*1.0)/MAX_Werte;
     blau  =(Color_data_b*1.0)/MAX_Werte;
-    Color_color=Color_col(rot,gruen,blau);
-    printf("COLOR_MAX is %d ", MAX_Werte);*/
-    Color_color=Color_col(Color_data_r*1.0,Color_data_g*1.0,Color_data_b*1.0);
-    printf("color_data is (%5d, %5d, %5d, %5d)",Color_data_r,Color_data_g,Color_data_b,Color_data_blank);
-    //printf("%5d, %5d, %5d, %5d", Color_data_r,Color_data_g,Color_data_b,Color_data_blank);
+    Color_color=Color_col(rot,gruen,blau);*/
+
 #if 1
     switch(Color_color){
         case 0:
@@ -107,11 +106,11 @@ int ColSen_getData()   //Center:zenteral Position
             break;
             
         case 4:
-            printf("\033[1;35m   %d\033[0m",Color_color);
+            printf("\033[1;31m   %d\033[0m",Color_color);
             break;
             
         case 5:
-            printf("\033[1;31m   %d\033[0m",Color_color);
+            printf("\033[1;35m   %d\033[0m",Color_color);
             break;
                     
         default:
@@ -130,6 +129,7 @@ int ColSen_getData()   //Center:zenteral Position
 #endif
 }
 
+
 int ColSen_close()
 {
     printf("Close the Color Sensor");
@@ -139,16 +139,6 @@ int ColSen_close()
     return 0;
 }
 
-
-int MAX_RGB(int a,int b)
-{
-    if (a>=b) {
-        return a;
-    }else{
-        return b;
-    }
-}
-
 FARBE Color_col(float rot, float gruen,float blau)
 {
     int Farbe=-1;
@@ -156,13 +146,13 @@ FARBE Color_col(float rot, float gruen,float blau)
     if ((rot>=20)||(gruen>=20)||(blau>=20)){
         if ((rot>blau*1.35)&&(gruen>blau*1.35))
         {
-            if (((rot>gruen)&&(rot<gruen*1.1))||((gruen>=rot)&&(gruen<rot*1.1))){
+            if (((rot>gruen)&&(rot<gruen*1.2))||((gruen>=rot)&&(gruen<rot*1.2))){     //original werte 1.1
             Farbe= WEISS;
             goto fertig;
                 
             }
         }
-        if ((rot>2.5*gruen)&&(rot>4*blau)&&(gruen>2*blau)&&(blau>10)){
+        if ((rot>2.5*gruen)&&(rot>4*blau)&&(gruen>2*blau)&&(blau>10)){  //original grune>2*blue   1.9
             Farbe=  ORANGE;
             goto fertig;
         }
@@ -170,7 +160,7 @@ FARBE Color_col(float rot, float gruen,float blau)
             Farbe=  ROT;
             goto fertig;
             }
-        if ((gruen>2*rot)&&(gruen>2*blau)) {
+        if ((gruen>=2*rot)&&(gruen>=2*blau)) {
             Farbe=  GRUEN;
             goto fertig;
             }

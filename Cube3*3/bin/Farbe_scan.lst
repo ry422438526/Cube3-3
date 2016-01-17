@@ -44,126 +44,9 @@
   23:Farbe_scan.c  **** #include "print_mode.h"
   24:Farbe_scan.c  **** #include "Side_dreh.h"
   25:Farbe_scan.c  **** 
-  26:Farbe_scan.c  **** /*const char Color_position[6][9]=
+  26:Farbe_scan.c  **** int farbe_scan()
   27:Farbe_scan.c  **** {
-  28:Farbe_scan.c  ****     {4,2,1,0,3,6,7,8,5},
-  29:Farbe_scan.c  ****     {4,2,1,0,3,6,7,8,5},
-  30:Farbe_scan.c  ****     {4,6,7,8,5,2,1,0,3},
-  31:Farbe_scan.c  ****     {4,6,7,8,5,2,1,0,3},
-  32:Farbe_scan.c  ****     {4,6,7,8,5,2,1,0,3},
-  33:Farbe_scan.c  ****     {4,0,3,6,7,8,5,2,1},
-  34:Farbe_scan.c  **** };
-  35:Farbe_scan.c  **** typedef enum
-  36:Farbe_scan.c  **** {
-  37:Farbe_scan.c  ****     WEISS=0,
-  38:Farbe_scan.c  ****     BLAU=1,
-  39:Farbe_scan.c  ****     GELB=2,
-  40:Farbe_scan.c  ****     GRUEN=3,
-  41:Farbe_scan.c  ****     ROT=4,
-  42:Farbe_scan.c  ****     ORANGE=5
-  43:Farbe_scan.c  **** }Farbe;
-  44:Farbe_scan.c  **** int Center[]={0,5,2,3,4,1};
-  45:Farbe_scan.c  **** 
-  46:Farbe_scan.c  **** int farbe_scan()
-  47:Farbe_scan.c  **** {
-  48:Farbe_scan.c  **** #ifdef __linux__
-  49:Farbe_scan.c  ****     int i;
-  50:Farbe_scan.c  ****     //int i,j;
-  51:Farbe_scan.c  ****     arm_setpos(4);
-  52:Farbe_scan.c  ****     for (i=0; i<=2; i++)
-  53:Farbe_scan.c  ****     {
-  54:Farbe_scan.c  ****         Farbe_setpos(1);
-  55:Farbe_scan.c  ****         color_data[Center[i]][Color_position[Center[i]][0]]=ColSen_getData();
-  56:Farbe_scan.c  ****         DrehTel_dreh();
-  57:Farbe_scan.c  ****         Farbe_setpos(5);
-  58:Farbe_scan.c  ****         color_data[Center[i]][Color_position[Center[i]][1]]=ColSen_getData();
-  59:Farbe_scan.c  ****         DrehTel_dreh();
-  60:Farbe_scan.c  ****         Farbe_setpos(3);
-  61:Farbe_scan.c  ****         color_data[Center[i]][Color_position[Center[i]][2]]=ColSen_getData();
-  62:Farbe_scan.c  ****         DrehTel_dreh();
-  63:Farbe_scan.c  ****         Farbe_setpos(5);
-  64:Farbe_scan.c  ****         color_data[Center[i]][Color_position[Center[i]][3]]=ColSen_getData();
-  65:Farbe_scan.c  ****         DrehTel_dreh();
-  66:Farbe_scan.c  ****         Farbe_setpos(3);
-  67:Farbe_scan.c  ****         color_data[Center[i]][Color_position[Center[i]][4]]=ColSen_getData();
-  68:Farbe_scan.c  ****         DrehTel_dreh();
-  69:Farbe_scan.c  ****         Farbe_setpos(5);
-  70:Farbe_scan.c  ****         color_data[Center[i]][Color_position[Center[i]][5]]=ColSen_getData();
-  71:Farbe_scan.c  ****         DrehTel_dreh();
-  72:Farbe_scan.c  ****         Farbe_setpos(3);
-  73:Farbe_scan.c  ****         color_data[Center[i]][Color_position[Center[i]][6]]=ColSen_getData();
-  74:Farbe_scan.c  ****         DrehTel_dreh();
-  75:Farbe_scan.c  ****         Farbe_setpos(5);
-  76:Farbe_scan.c  ****         color_data[Center[i]][Color_position[Center[i]][7]]=ColSen_getData();
-  77:Farbe_scan.c  ****         DrehTel_dreh();
-  78:Farbe_scan.c  ****         Farbe_setpos(3);
-  79:Farbe_scan.c  ****         color_data[Center[i]][Color_position[Center[i]][8]]=ColSen_getData();
-  80:Farbe_scan.c  ****         Farbe_setpos(6);
-  81:Farbe_scan.c  ****         usleep(10000);
-  82:Farbe_scan.c  ****         arm_setpos(3);
-  83:Farbe_scan.c  ****         arm_setpos(2);
-  84:Farbe_scan.c  ****         arm_setpos(4);
-  85:Farbe_scan.c  ****     }
-  86:Farbe_scan.c  ****     usleep(100000);
-  87:Farbe_scan.c  ****     DrehTel_setpos(1);
-  88:Farbe_scan.c  ****     usleep(100000);
-  89:Farbe_scan.c  ****     arm_setpos(3);
-  90:Farbe_scan.c  ****     arm_setpos(2);
-  91:Farbe_scan.c  ****     arm_setpos(4);
-  92:Farbe_scan.c  ****     usleep(100000);
-  93:Farbe_scan.c  ****     DrehTel_setpos(3);
-  94:Farbe_scan.c  ****     arm_setpos(3);
-  95:Farbe_scan.c  ****     arm_setpos(4);
-  96:Farbe_scan.c  ****     usleep(100000);
-  97:Farbe_scan.c  ****     
-  98:Farbe_scan.c  ****     for (i=3; i<=5; i++) {
-  99:Farbe_scan.c  ****         Farbe_setpos(1);
- 100:Farbe_scan.c  ****         color_data[Center[i]][Color_position[Center[i]][0]]=ColSen_getData();
- 101:Farbe_scan.c  ****         DrehTel_dreh();
- 102:Farbe_scan.c  ****         Farbe_setpos(5);
- 103:Farbe_scan.c  ****         color_data[Center[i]][Color_position[Center[i]][1]]=ColSen_getData();
- 104:Farbe_scan.c  ****         DrehTel_dreh();
- 105:Farbe_scan.c  ****         Farbe_setpos(3);
- 106:Farbe_scan.c  ****         color_data[Center[i]][Color_position[Center[i]][2]]=ColSen_getData();
- 107:Farbe_scan.c  ****         DrehTel_dreh();
- 108:Farbe_scan.c  ****         Farbe_setpos(5);
- 109:Farbe_scan.c  ****         color_data[Center[i]][Color_position[Center[i]][3]]=ColSen_getData();
- 110:Farbe_scan.c  ****         DrehTel_dreh();
- 111:Farbe_scan.c  ****         Farbe_setpos(3);
- 112:Farbe_scan.c  ****         color_data[Center[i]][Color_position[Center[i]][4]]=ColSen_getData();
- 113:Farbe_scan.c  ****         DrehTel_dreh();
- 114:Farbe_scan.c  ****         Farbe_setpos(5);
- 115:Farbe_scan.c  ****         color_data[Center[i]][Color_position[Center[i]][5]]=ColSen_getData();
- 116:Farbe_scan.c  ****         DrehTel_dreh();
- 117:Farbe_scan.c  ****         Farbe_setpos(3);
- 118:Farbe_scan.c  ****         color_data[Center[i]][Color_position[Center[i]][6]]=ColSen_getData();
- 119:Farbe_scan.c  ****         DrehTel_dreh();
- 120:Farbe_scan.c  ****         Farbe_setpos(5);
- 121:Farbe_scan.c  ****         color_data[Center[i]][Color_position[Center[i]][7]]=ColSen_getData();
- 122:Farbe_scan.c  ****         DrehTel_dreh();
- 123:Farbe_scan.c  ****         Farbe_setpos(3);
- 124:Farbe_scan.c  ****         color_data[Center[i]][Color_position[Center[i]][8]]=ColSen_getData();
- 125:Farbe_scan.c  ****         
- 126:Farbe_scan.c  ****         Farbe_setpos(6);
- 127:Farbe_scan.c  ****         usleep(10000);
- 128:Farbe_scan.c  ****         arm_setpos(3);
- 129:Farbe_scan.c  ****         arm_setpos(2);
- 130:Farbe_scan.c  ****         arm_setpos(4);
- 131:Farbe_scan.c  ****     }
- 132:Farbe_scan.c  ****     return color_data[6][9];
- 133:Farbe_scan.c  **** #endif
- 134:Farbe_scan.c  ****     
- 135:Farbe_scan.c  **** #ifndef __linux__
- 136:Farbe_scan.c  ****     return 0;
- 137:Farbe_scan.c  **** #endif
- 138:Farbe_scan.c  **** }*/
- 139:Farbe_scan.c  **** 
- 140:Farbe_scan.c  **** 
- 141:Farbe_scan.c  **** 
- 142:Farbe_scan.c  **** 
- 143:Farbe_scan.c  **** int farbe_scan()
- 144:Farbe_scan.c  **** {
-  23              		.loc 1 144 0
+  23              		.loc 1 27 0
   24              		.cfi_startproc
   25              		@ args = 0, pretend = 0, frame = 0
   26              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -178,482 +61,501 @@
   35              		.cfi_offset 9, -12
   36              		.cfi_offset 10, -8
   37              		.cfi_offset 14, -4
- 145:Farbe_scan.c  **** #ifdef __linux__
- 146:Farbe_scan.c  ****     int i;
- 147:Farbe_scan.c  ****     arm_setpos(4);
-  38              		.loc 1 147 0
+  28:Farbe_scan.c  **** #ifdef __linux__
+  29:Farbe_scan.c  ****     int i;
+  30:Farbe_scan.c  ****     arm_setpos(4);
+  38              		.loc 1 30 0
   39 0004 0400A0E3 		mov	r0, #4
   40 0008 FEFFFFEB 		bl	arm_setpos
   41              	.LVL0:
   42 000c 0370A0E3 		mov	r7, #3
- 148:Farbe_scan.c  ****     for (i=0; i<=2; i++) {
- 149:Farbe_scan.c  ****         Farbe_setpos(1);
-  43              		.loc 1 149 0
+  31:Farbe_scan.c  ****     for (i=0; i<=2; i++) {
+  32:Farbe_scan.c  ****         Farbe_setpos(1);
+  43              		.loc 1 32 0
   44 0010 0180A0E3 		mov	r8, #1
- 150:Farbe_scan.c  ****         color_data[0][4]=ColSen_getData();
-  45              		.loc 1 150 0
-  46 0014 2C429FE5 		ldr	r4, .L6
- 151:Farbe_scan.c  ****         DrehTel_dreh();
- 152:Farbe_scan.c  ****         Farbe_setpos(5);
-  47              		.loc 1 152 0
+  33:Farbe_scan.c  ****         color_data[0][4]=ColSen_getData();
+  45              		.loc 1 33 0
+  46 0014 4C429FE5 		ldr	r4, .L6
+  34:Farbe_scan.c  ****         DrehTel_dreh();
+  35:Farbe_scan.c  ****         Farbe_setpos(5);
+  47              		.loc 1 35 0
   48 0018 0560A0E3 		mov	r6, #5
- 153:Farbe_scan.c  ****         color_data[0][2]=ColSen_getData();
- 154:Farbe_scan.c  ****         DrehTel_dreh();
- 155:Farbe_scan.c  ****         Farbe_setpos(3);
-  49              		.loc 1 155 0
+  36:Farbe_scan.c  ****         color_data[0][2]=ColSen_getData();
+  37:Farbe_scan.c  ****         DrehTel_dreh();
+  38:Farbe_scan.c  ****         Farbe_setpos(3);
+  49              		.loc 1 38 0
   50 001c 0750A0E1 		mov	r5, r7
- 156:Farbe_scan.c  ****         color_data[0][1]=ColSen_getData();
- 157:Farbe_scan.c  ****         DrehTel_dreh();
- 158:Farbe_scan.c  ****         Farbe_setpos(5);
- 159:Farbe_scan.c  ****         color_data[0][0]=ColSen_getData();
- 160:Farbe_scan.c  ****         DrehTel_dreh();
- 161:Farbe_scan.c  ****         Farbe_setpos(3);
- 162:Farbe_scan.c  ****         color_data[0][3]=ColSen_getData();
- 163:Farbe_scan.c  ****         DrehTel_dreh();
- 164:Farbe_scan.c  ****         Farbe_setpos(5);
- 165:Farbe_scan.c  ****         color_data[0][6]=ColSen_getData();
- 166:Farbe_scan.c  ****         DrehTel_dreh();
- 167:Farbe_scan.c  ****         Farbe_setpos(3);
- 168:Farbe_scan.c  ****         color_data[0][7]=ColSen_getData();
- 169:Farbe_scan.c  ****         DrehTel_dreh();
- 170:Farbe_scan.c  ****         Farbe_setpos(5);
- 171:Farbe_scan.c  ****         color_data[0][8]=ColSen_getData();
- 172:Farbe_scan.c  ****         DrehTel_dreh();
- 173:Farbe_scan.c  ****         Farbe_setpos(3);
- 174:Farbe_scan.c  ****         color_data[0][5]=ColSen_getData();
- 175:Farbe_scan.c  ****         Farbe_setpos(6);
-  51              		.loc 1 175 0
+  39:Farbe_scan.c  ****         color_data[0][1]=ColSen_getData();
+  40:Farbe_scan.c  ****         DrehTel_dreh();
+  41:Farbe_scan.c  ****         Farbe_setpos(5);
+  42:Farbe_scan.c  ****         color_data[0][0]=ColSen_getData();
+  43:Farbe_scan.c  ****         DrehTel_dreh();
+  44:Farbe_scan.c  ****         Farbe_setpos(3);
+  45:Farbe_scan.c  ****         color_data[0][3]=ColSen_getData();
+  46:Farbe_scan.c  ****         DrehTel_dreh();
+  47:Farbe_scan.c  ****         Farbe_setpos(5);
+  48:Farbe_scan.c  ****         color_data[0][6]=ColSen_getData();
+  49:Farbe_scan.c  ****         DrehTel_dreh();
+  50:Farbe_scan.c  ****         Farbe_setpos(3);
+  51:Farbe_scan.c  ****         color_data[0][7]=ColSen_getData();
+  52:Farbe_scan.c  ****         DrehTel_dreh();
+  53:Farbe_scan.c  ****         Farbe_setpos(5);
+  54:Farbe_scan.c  ****         color_data[0][8]=ColSen_getData();
+  55:Farbe_scan.c  ****         DrehTel_dreh();
+  56:Farbe_scan.c  ****         Farbe_setpos(3);
+  57:Farbe_scan.c  ****         color_data[0][5]=ColSen_getData();
+  58:Farbe_scan.c  ****         Farbe_setpos(6);
+  51              		.loc 1 58 0
   52 0020 06A0A0E3 		mov	r10, #6
- 176:Farbe_scan.c  ****         usleep(10000);
-  53              		.loc 1 176 0
-  54 0024 20929FE5 		ldr	r9, .L6+4
+  59:Farbe_scan.c  ****         usleep(10000);
+  53              		.loc 1 59 0
+  54 0024 40929FE5 		ldr	r9, .L6+4
   55              	.LVL1:
   56              	.L3:
- 149:Farbe_scan.c  ****         color_data[0][4]=ColSen_getData();
-  57              		.loc 1 149 0 discriminator 2
+  32:Farbe_scan.c  ****         color_data[0][4]=ColSen_getData();
+  57              		.loc 1 32 0 discriminator 2
   58 0028 0800A0E1 		mov	r0, r8
   59 002c FEFFFFEB 		bl	Farbe_setpos
   60              	.LVL2:
- 150:Farbe_scan.c  ****         DrehTel_dreh();
-  61              		.loc 1 150 0 discriminator 2
+  33:Farbe_scan.c  ****         DrehTel_dreh();
+  61              		.loc 1 33 0 discriminator 2
   62 0030 FEFFFFEB 		bl	ColSen_getData
   63              	.LVL3:
   64 0034 0400C4E5 		strb	r0, [r4, #4]
- 151:Farbe_scan.c  ****         Farbe_setpos(5);
-  65              		.loc 1 151 0 discriminator 2
+  34:Farbe_scan.c  ****         Farbe_setpos(5);
+  65              		.loc 1 34 0 discriminator 2
   66 0038 FEFFFFEB 		bl	DrehTel_dreh
   67              	.LVL4:
- 152:Farbe_scan.c  ****         color_data[0][2]=ColSen_getData();
-  68              		.loc 1 152 0 discriminator 2
+  35:Farbe_scan.c  ****         color_data[0][2]=ColSen_getData();
+  68              		.loc 1 35 0 discriminator 2
   69 003c 0600A0E1 		mov	r0, r6
   70 0040 FEFFFFEB 		bl	Farbe_setpos
   71              	.LVL5:
- 153:Farbe_scan.c  ****         DrehTel_dreh();
-  72              		.loc 1 153 0 discriminator 2
+  36:Farbe_scan.c  ****         DrehTel_dreh();
+  72              		.loc 1 36 0 discriminator 2
   73 0044 FEFFFFEB 		bl	ColSen_getData
   74              	.LVL6:
   75 0048 0200C4E5 		strb	r0, [r4, #2]
- 154:Farbe_scan.c  ****         Farbe_setpos(3);
-  76              		.loc 1 154 0 discriminator 2
+  37:Farbe_scan.c  ****         Farbe_setpos(3);
+  76              		.loc 1 37 0 discriminator 2
   77 004c FEFFFFEB 		bl	DrehTel_dreh
   78              	.LVL7:
- 155:Farbe_scan.c  ****         color_data[0][1]=ColSen_getData();
-  79              		.loc 1 155 0 discriminator 2
+  38:Farbe_scan.c  ****         color_data[0][1]=ColSen_getData();
+  79              		.loc 1 38 0 discriminator 2
   80 0050 0500A0E1 		mov	r0, r5
   81 0054 FEFFFFEB 		bl	Farbe_setpos
   82              	.LVL8:
- 156:Farbe_scan.c  ****         DrehTel_dreh();
-  83              		.loc 1 156 0 discriminator 2
+  39:Farbe_scan.c  ****         DrehTel_dreh();
+  83              		.loc 1 39 0 discriminator 2
   84 0058 FEFFFFEB 		bl	ColSen_getData
   85              	.LVL9:
   86 005c 0100C4E5 		strb	r0, [r4, #1]
- 157:Farbe_scan.c  ****         Farbe_setpos(5);
-  87              		.loc 1 157 0 discriminator 2
+  40:Farbe_scan.c  ****         Farbe_setpos(5);
+  87              		.loc 1 40 0 discriminator 2
   88 0060 FEFFFFEB 		bl	DrehTel_dreh
   89              	.LVL10:
- 158:Farbe_scan.c  ****         color_data[0][0]=ColSen_getData();
-  90              		.loc 1 158 0 discriminator 2
+  41:Farbe_scan.c  ****         color_data[0][0]=ColSen_getData();
+  90              		.loc 1 41 0 discriminator 2
   91 0064 0600A0E1 		mov	r0, r6
   92 0068 FEFFFFEB 		bl	Farbe_setpos
   93              	.LVL11:
- 159:Farbe_scan.c  ****         DrehTel_dreh();
-  94              		.loc 1 159 0 discriminator 2
+  42:Farbe_scan.c  ****         DrehTel_dreh();
+  94              		.loc 1 42 0 discriminator 2
   95 006c FEFFFFEB 		bl	ColSen_getData
   96              	.LVL12:
   97 0070 0000C4E5 		strb	r0, [r4]
- 160:Farbe_scan.c  ****         Farbe_setpos(3);
-  98              		.loc 1 160 0 discriminator 2
+  43:Farbe_scan.c  ****         Farbe_setpos(3);
+  98              		.loc 1 43 0 discriminator 2
   99 0074 FEFFFFEB 		bl	DrehTel_dreh
  100              	.LVL13:
- 161:Farbe_scan.c  ****         color_data[0][3]=ColSen_getData();
- 101              		.loc 1 161 0 discriminator 2
+  44:Farbe_scan.c  ****         color_data[0][3]=ColSen_getData();
+ 101              		.loc 1 44 0 discriminator 2
  102 0078 0500A0E1 		mov	r0, r5
  103 007c FEFFFFEB 		bl	Farbe_setpos
  104              	.LVL14:
- 162:Farbe_scan.c  ****         DrehTel_dreh();
- 105              		.loc 1 162 0 discriminator 2
+  45:Farbe_scan.c  ****         DrehTel_dreh();
+ 105              		.loc 1 45 0 discriminator 2
  106 0080 FEFFFFEB 		bl	ColSen_getData
  107              	.LVL15:
  108 0084 0300C4E5 		strb	r0, [r4, #3]
- 163:Farbe_scan.c  ****         Farbe_setpos(5);
- 109              		.loc 1 163 0 discriminator 2
+  46:Farbe_scan.c  ****         Farbe_setpos(5);
+ 109              		.loc 1 46 0 discriminator 2
  110 0088 FEFFFFEB 		bl	DrehTel_dreh
  111              	.LVL16:
- 164:Farbe_scan.c  ****         color_data[0][6]=ColSen_getData();
- 112              		.loc 1 164 0 discriminator 2
+  47:Farbe_scan.c  ****         color_data[0][6]=ColSen_getData();
+ 112              		.loc 1 47 0 discriminator 2
  113 008c 0600A0E1 		mov	r0, r6
  114 0090 FEFFFFEB 		bl	Farbe_setpos
  115              	.LVL17:
- 165:Farbe_scan.c  ****         DrehTel_dreh();
- 116              		.loc 1 165 0 discriminator 2
+  48:Farbe_scan.c  ****         DrehTel_dreh();
+ 116              		.loc 1 48 0 discriminator 2
  117 0094 FEFFFFEB 		bl	ColSen_getData
  118              	.LVL18:
  119 0098 0600C4E5 		strb	r0, [r4, #6]
- 166:Farbe_scan.c  ****         Farbe_setpos(3);
- 120              		.loc 1 166 0 discriminator 2
+  49:Farbe_scan.c  ****         Farbe_setpos(3);
+ 120              		.loc 1 49 0 discriminator 2
  121 009c FEFFFFEB 		bl	DrehTel_dreh
  122              	.LVL19:
- 167:Farbe_scan.c  ****         color_data[0][7]=ColSen_getData();
- 123              		.loc 1 167 0 discriminator 2
+  50:Farbe_scan.c  ****         color_data[0][7]=ColSen_getData();
+ 123              		.loc 1 50 0 discriminator 2
  124 00a0 0500A0E1 		mov	r0, r5
  125 00a4 FEFFFFEB 		bl	Farbe_setpos
  126              	.LVL20:
- 168:Farbe_scan.c  ****         DrehTel_dreh();
- 127              		.loc 1 168 0 discriminator 2
+  51:Farbe_scan.c  ****         DrehTel_dreh();
+ 127              		.loc 1 51 0 discriminator 2
  128 00a8 FEFFFFEB 		bl	ColSen_getData
  129              	.LVL21:
  130 00ac 0700C4E5 		strb	r0, [r4, #7]
- 169:Farbe_scan.c  ****         Farbe_setpos(5);
- 131              		.loc 1 169 0 discriminator 2
+  52:Farbe_scan.c  ****         Farbe_setpos(5);
+ 131              		.loc 1 52 0 discriminator 2
  132 00b0 FEFFFFEB 		bl	DrehTel_dreh
  133              	.LVL22:
- 170:Farbe_scan.c  ****         color_data[0][8]=ColSen_getData();
- 134              		.loc 1 170 0 discriminator 2
+  53:Farbe_scan.c  ****         color_data[0][8]=ColSen_getData();
+ 134              		.loc 1 53 0 discriminator 2
  135 00b4 0600A0E1 		mov	r0, r6
  136 00b8 FEFFFFEB 		bl	Farbe_setpos
  137              	.LVL23:
- 171:Farbe_scan.c  ****         DrehTel_dreh();
- 138              		.loc 1 171 0 discriminator 2
+  54:Farbe_scan.c  ****         DrehTel_dreh();
+ 138              		.loc 1 54 0 discriminator 2
  139 00bc FEFFFFEB 		bl	ColSen_getData
  140              	.LVL24:
  141 00c0 0800C4E5 		strb	r0, [r4, #8]
- 172:Farbe_scan.c  ****         Farbe_setpos(3);
- 142              		.loc 1 172 0 discriminator 2
+  55:Farbe_scan.c  ****         Farbe_setpos(3);
+ 142              		.loc 1 55 0 discriminator 2
  143 00c4 FEFFFFEB 		bl	DrehTel_dreh
  144              	.LVL25:
- 173:Farbe_scan.c  ****         color_data[0][5]=ColSen_getData();
- 145              		.loc 1 173 0 discriminator 2
+  56:Farbe_scan.c  ****         color_data[0][5]=ColSen_getData();
+ 145              		.loc 1 56 0 discriminator 2
  146 00c8 0500A0E1 		mov	r0, r5
  147 00cc FEFFFFEB 		bl	Farbe_setpos
  148              	.LVL26:
- 174:Farbe_scan.c  ****         Farbe_setpos(6);
- 149              		.loc 1 174 0 discriminator 2
+  57:Farbe_scan.c  ****         Farbe_setpos(6);
+ 149              		.loc 1 57 0 discriminator 2
  150 00d0 FEFFFFEB 		bl	ColSen_getData
  151              	.LVL27:
  152 00d4 0500C4E5 		strb	r0, [r4, #5]
- 175:Farbe_scan.c  ****         usleep(10000);
- 153              		.loc 1 175 0 discriminator 2
+  58:Farbe_scan.c  ****         usleep(10000);
+ 153              		.loc 1 58 0 discriminator 2
  154 00d8 0A00A0E1 		mov	r0, r10
  155 00dc FEFFFFEB 		bl	Farbe_setpos
  156              	.LVL28:
- 157              		.loc 1 176 0 discriminator 2
+ 157              		.loc 1 59 0 discriminator 2
  158 00e0 0900A0E1 		mov	r0, r9
  159 00e4 FEFFFFEB 		bl	usleep
  160              	.LVL29:
- 177:Farbe_scan.c  ****         wuerfel_print(1);
- 161              		.loc 1 177 0 discriminator 2
+  60:Farbe_scan.c  ****         wuerfel_print(1);
+ 161              		.loc 1 60 0 discriminator 2
  162 00e8 0800A0E1 		mov	r0, r8
  163 00ec FEFFFFEB 		bl	wuerfel_print
  164              	.LVL30:
- 178:Farbe_scan.c  ****         klappen();
- 165              		.loc 1 178 0 discriminator 2
+  61:Farbe_scan.c  ****         klappen();
+ 165              		.loc 1 61 0 discriminator 2
  166 00f0 FEFFFFEB 		bl	klappen
  167              	.LVL31:
- 148:Farbe_scan.c  ****         Farbe_setpos(1);
- 168              		.loc 1 148 0 discriminator 2
- 169 00f4 017057E2 		subs	r7, r7, #1
- 170              	.LVL32:
- 171 00f8 CAFFFF1A 		bne	.L3
- 179:Farbe_scan.c  ****     }
- 180:Farbe_scan.c  ****     usleep(100000);
- 172              		.loc 1 180 0
- 173 00fc 4C419FE5 		ldr	r4, .L6+8
- 174 0100 0400A0E1 		mov	r0, r4
- 175 0104 FEFFFFEB 		bl	usleep
- 176              	.LVL33:
- 181:Farbe_scan.c  ****     drehen(-1);
- 177              		.loc 1 181 0
- 178 0108 0000E0E3 		mvn	r0, #0
- 179 010c FEFFFFEB 		bl	drehen
- 180              	.LVL34:
- 182:Farbe_scan.c  ****     usleep(100000);
- 181              		.loc 1 182 0
+  62:Farbe_scan.c  ****         arm_setpos(3);
+ 168              		.loc 1 62 0 discriminator 2
+ 169 00f4 0500A0E1 		mov	r0, r5
+ 170 00f8 FEFFFFEB 		bl	arm_setpos
+ 171              	.LVL32:
+  63:Farbe_scan.c  ****         arm_setpos(4);
+ 172              		.loc 1 63 0 discriminator 2
+ 173 00fc 0400A0E3 		mov	r0, #4
+ 174 0100 FEFFFFEB 		bl	arm_setpos
+ 175              	.LVL33:
+  31:Farbe_scan.c  ****         Farbe_setpos(1);
+ 176              		.loc 1 31 0 discriminator 2
+ 177 0104 017057E2 		subs	r7, r7, #1
+ 178              	.LVL34:
+ 179 0108 C6FFFF1A 		bne	.L3
+  64:Farbe_scan.c  ****     }
+  65:Farbe_scan.c  ****     usleep(100000);
+ 180              		.loc 1 65 0
+ 181 010c 5C419FE5 		ldr	r4, .L6+8
  182 0110 0400A0E1 		mov	r0, r4
  183 0114 FEFFFFEB 		bl	usleep
  184              	.LVL35:
- 183:Farbe_scan.c  ****     klappen();
- 185              		.loc 1 183 0
- 186 0118 FEFFFFEB 		bl	klappen
- 187              	.LVL36:
- 184:Farbe_scan.c  ****     usleep(100000);
- 188              		.loc 1 184 0
- 189 011c 0400A0E1 		mov	r0, r4
- 190 0120 FEFFFFEB 		bl	usleep
- 191              	.LVL37:
- 185:Farbe_scan.c  ****     drehen(-1);
- 192              		.loc 1 185 0
- 193 0124 0000E0E3 		mvn	r0, #0
- 194 0128 FEFFFFEB 		bl	drehen
+  66:Farbe_scan.c  ****     drehen(-1);
+ 185              		.loc 1 66 0
+ 186 0118 0000E0E3 		mvn	r0, #0
+ 187 011c FEFFFFEB 		bl	drehen
+ 188              	.LVL36:
+  67:Farbe_scan.c  ****     usleep(100000);
+ 189              		.loc 1 67 0
+ 190 0120 0400A0E1 		mov	r0, r4
+ 191 0124 FEFFFFEB 		bl	usleep
+ 192              	.LVL37:
+  68:Farbe_scan.c  ****     klappen();
+ 193              		.loc 1 68 0
+ 194 0128 FEFFFFEB 		bl	klappen
  195              	.LVL38:
- 186:Farbe_scan.c  ****     drehen(-1);
- 196              		.loc 1 186 0
- 197 012c 0000E0E3 		mvn	r0, #0
- 198 0130 FEFFFFEB 		bl	drehen
+  69:Farbe_scan.c  ****     usleep(100000);
+ 196              		.loc 1 69 0
+ 197 012c 0400A0E1 		mov	r0, r4
+ 198 0130 FEFFFFEB 		bl	usleep
  199              	.LVL39:
- 187:Farbe_scan.c  ****     arm_setpos(3);
- 200              		.loc 1 187 0
- 201 0134 0300A0E3 		mov	r0, #3
- 202 0138 FEFFFFEB 		bl	arm_setpos
+  70:Farbe_scan.c  ****     drehen(-1);
+ 200              		.loc 1 70 0
+ 201 0134 0000E0E3 		mvn	r0, #0
+ 202 0138 FEFFFFEB 		bl	drehen
  203              	.LVL40:
- 188:Farbe_scan.c  ****     arm_setpos(4);
- 204              		.loc 1 188 0
- 205 013c 0400A0E3 		mov	r0, #4
- 206 0140 FEFFFFEB 		bl	arm_setpos
+  71:Farbe_scan.c  ****     drehen(-1);
+ 204              		.loc 1 71 0
+ 205 013c 0000E0E3 		mvn	r0, #0
+ 206 0140 FEFFFFEB 		bl	drehen
  207              	.LVL41:
- 189:Farbe_scan.c  ****     usleep(100000);
- 208              		.loc 1 189 0
- 209 0144 0400A0E1 		mov	r0, r4
- 210 0148 FEFFFFEB 		bl	usleep
+  72:Farbe_scan.c  ****     arm_setpos(3);
+ 208              		.loc 1 72 0
+ 209 0144 0300A0E3 		mov	r0, #3
+ 210 0148 FEFFFFEB 		bl	arm_setpos
  211              	.LVL42:
- 212 014c 0370A0E3 		mov	r7, #3
- 190:Farbe_scan.c  ****     for (i=3; i<=5; i++) {
- 191:Farbe_scan.c  ****         Farbe_setpos(1);
- 213              		.loc 1 191 0
- 214 0150 0180A0E3 		mov	r8, #1
- 192:Farbe_scan.c  ****         color_data[0][4]=ColSen_getData();
- 215              		.loc 1 192 0
- 216 0154 EC409FE5 		ldr	r4, .L6
- 193:Farbe_scan.c  ****         DrehTel_dreh();
- 194:Farbe_scan.c  ****         Farbe_setpos(5);
- 217              		.loc 1 194 0
- 218 0158 0560A0E3 		mov	r6, #5
- 195:Farbe_scan.c  ****         color_data[0][2]=ColSen_getData();
- 196:Farbe_scan.c  ****         DrehTel_dreh();
- 197:Farbe_scan.c  ****         Farbe_setpos(3);
- 219              		.loc 1 197 0
- 220 015c 0750A0E1 		mov	r5, r7
- 198:Farbe_scan.c  ****         color_data[0][1]=ColSen_getData();
- 199:Farbe_scan.c  ****         DrehTel_dreh();
- 200:Farbe_scan.c  ****         Farbe_setpos(5);
- 201:Farbe_scan.c  ****         color_data[0][0]=ColSen_getData();
- 202:Farbe_scan.c  ****         DrehTel_dreh();
- 203:Farbe_scan.c  ****         Farbe_setpos(3);
- 204:Farbe_scan.c  ****         color_data[0][3]=ColSen_getData();
- 205:Farbe_scan.c  ****         DrehTel_dreh();
- 206:Farbe_scan.c  ****         Farbe_setpos(5);
- 207:Farbe_scan.c  ****         color_data[0][6]=ColSen_getData();
- 208:Farbe_scan.c  ****         DrehTel_dreh();
- 209:Farbe_scan.c  ****         Farbe_setpos(3);
- 210:Farbe_scan.c  ****         color_data[0][7]=ColSen_getData();
- 211:Farbe_scan.c  ****         DrehTel_dreh();
- 212:Farbe_scan.c  ****         Farbe_setpos(5);
- 213:Farbe_scan.c  ****         color_data[0][8]=ColSen_getData();
- 214:Farbe_scan.c  ****         DrehTel_dreh();
- 215:Farbe_scan.c  ****         Farbe_setpos(3);
- 216:Farbe_scan.c  ****         color_data[0][5]=ColSen_getData();
- 217:Farbe_scan.c  ****         Farbe_setpos(6);
- 221              		.loc 1 217 0
- 222 0160 06A0A0E3 		mov	r10, #6
- 218:Farbe_scan.c  ****         wuerfel_print(1);
- 219:Farbe_scan.c  ****         usleep(10000);
- 223              		.loc 1 219 0
- 224 0164 E0909FE5 		ldr	r9, .L6+4
- 225              	.LVL43:
- 226              	.L5:
- 191:Farbe_scan.c  ****         color_data[0][4]=ColSen_getData();
- 227              		.loc 1 191 0 discriminator 2
- 228 0168 0800A0E1 		mov	r0, r8
- 229 016c FEFFFFEB 		bl	Farbe_setpos
- 230              	.LVL44:
- 192:Farbe_scan.c  ****         DrehTel_dreh();
- 231              		.loc 1 192 0 discriminator 2
- 232 0170 FEFFFFEB 		bl	ColSen_getData
+  73:Farbe_scan.c  ****     arm_setpos(4);
+ 212              		.loc 1 73 0
+ 213 014c 0400A0E3 		mov	r0, #4
+ 214 0150 FEFFFFEB 		bl	arm_setpos
+ 215              	.LVL43:
+  74:Farbe_scan.c  ****     usleep(100000);
+ 216              		.loc 1 74 0
+ 217 0154 0400A0E1 		mov	r0, r4
+ 218 0158 FEFFFFEB 		bl	usleep
+ 219              	.LVL44:
+ 220 015c 0370A0E3 		mov	r7, #3
+  75:Farbe_scan.c  ****     for (i=3; i<=5; i++) {
+  76:Farbe_scan.c  ****         Farbe_setpos(1);
+ 221              		.loc 1 76 0
+ 222 0160 0180A0E3 		mov	r8, #1
+  77:Farbe_scan.c  ****         color_data[0][4]=ColSen_getData();
+ 223              		.loc 1 77 0
+ 224 0164 FC409FE5 		ldr	r4, .L6
+  78:Farbe_scan.c  ****         DrehTel_dreh();
+  79:Farbe_scan.c  ****         Farbe_setpos(5);
+ 225              		.loc 1 79 0
+ 226 0168 0560A0E3 		mov	r6, #5
+  80:Farbe_scan.c  ****         color_data[0][2]=ColSen_getData();
+  81:Farbe_scan.c  ****         DrehTel_dreh();
+  82:Farbe_scan.c  ****         Farbe_setpos(3);
+ 227              		.loc 1 82 0
+ 228 016c 0750A0E1 		mov	r5, r7
+  83:Farbe_scan.c  ****         color_data[0][1]=ColSen_getData();
+  84:Farbe_scan.c  ****         DrehTel_dreh();
+  85:Farbe_scan.c  ****         Farbe_setpos(5);
+  86:Farbe_scan.c  ****         color_data[0][0]=ColSen_getData();
+  87:Farbe_scan.c  ****         DrehTel_dreh();
+  88:Farbe_scan.c  ****         Farbe_setpos(3);
+  89:Farbe_scan.c  ****         color_data[0][3]=ColSen_getData();
+  90:Farbe_scan.c  ****         DrehTel_dreh();
+  91:Farbe_scan.c  ****         Farbe_setpos(5);
+  92:Farbe_scan.c  ****         color_data[0][6]=ColSen_getData();
+  93:Farbe_scan.c  ****         DrehTel_dreh();
+  94:Farbe_scan.c  ****         Farbe_setpos(3);
+  95:Farbe_scan.c  ****         color_data[0][7]=ColSen_getData();
+  96:Farbe_scan.c  ****         DrehTel_dreh();
+  97:Farbe_scan.c  ****         Farbe_setpos(5);
+  98:Farbe_scan.c  ****         color_data[0][8]=ColSen_getData();
+  99:Farbe_scan.c  ****         DrehTel_dreh();
+ 100:Farbe_scan.c  ****         Farbe_setpos(3);
+ 101:Farbe_scan.c  ****         color_data[0][5]=ColSen_getData();
+ 102:Farbe_scan.c  ****         Farbe_setpos(6);
+ 229              		.loc 1 102 0
+ 230 0170 06A0A0E3 		mov	r10, #6
+ 103:Farbe_scan.c  ****         wuerfel_print(1);
+ 104:Farbe_scan.c  ****         usleep(10000);
+ 231              		.loc 1 104 0
+ 232 0174 F0909FE5 		ldr	r9, .L6+4
  233              	.LVL45:
- 234 0174 0400C4E5 		strb	r0, [r4, #4]
- 193:Farbe_scan.c  ****         Farbe_setpos(5);
- 235              		.loc 1 193 0 discriminator 2
- 236 0178 FEFFFFEB 		bl	DrehTel_dreh
- 237              	.LVL46:
- 194:Farbe_scan.c  ****         color_data[0][2]=ColSen_getData();
- 238              		.loc 1 194 0 discriminator 2
- 239 017c 0600A0E1 		mov	r0, r6
- 240 0180 FEFFFFEB 		bl	Farbe_setpos
+ 234              	.L5:
+  76:Farbe_scan.c  ****         color_data[0][4]=ColSen_getData();
+ 235              		.loc 1 76 0 discriminator 2
+ 236 0178 0800A0E1 		mov	r0, r8
+ 237 017c FEFFFFEB 		bl	Farbe_setpos
+ 238              	.LVL46:
+  77:Farbe_scan.c  ****         DrehTel_dreh();
+ 239              		.loc 1 77 0 discriminator 2
+ 240 0180 FEFFFFEB 		bl	ColSen_getData
  241              	.LVL47:
- 195:Farbe_scan.c  ****         DrehTel_dreh();
- 242              		.loc 1 195 0 discriminator 2
- 243 0184 FEFFFFEB 		bl	ColSen_getData
- 244              	.LVL48:
- 245 0188 0200C4E5 		strb	r0, [r4, #2]
- 196:Farbe_scan.c  ****         Farbe_setpos(3);
- 246              		.loc 1 196 0 discriminator 2
- 247 018c FEFFFFEB 		bl	DrehTel_dreh
- 248              	.LVL49:
- 197:Farbe_scan.c  ****         color_data[0][1]=ColSen_getData();
- 249              		.loc 1 197 0 discriminator 2
- 250 0190 0500A0E1 		mov	r0, r5
- 251 0194 FEFFFFEB 		bl	Farbe_setpos
+ 242 0184 0400C4E5 		strb	r0, [r4, #4]
+  78:Farbe_scan.c  ****         Farbe_setpos(5);
+ 243              		.loc 1 78 0 discriminator 2
+ 244 0188 FEFFFFEB 		bl	DrehTel_dreh
+ 245              	.LVL48:
+  79:Farbe_scan.c  ****         color_data[0][2]=ColSen_getData();
+ 246              		.loc 1 79 0 discriminator 2
+ 247 018c 0600A0E1 		mov	r0, r6
+ 248 0190 FEFFFFEB 		bl	Farbe_setpos
+ 249              	.LVL49:
+  80:Farbe_scan.c  ****         DrehTel_dreh();
+ 250              		.loc 1 80 0 discriminator 2
+ 251 0194 FEFFFFEB 		bl	ColSen_getData
  252              	.LVL50:
- 198:Farbe_scan.c  ****         DrehTel_dreh();
- 253              		.loc 1 198 0 discriminator 2
- 254 0198 FEFFFFEB 		bl	ColSen_getData
- 255              	.LVL51:
- 256 019c 0100C4E5 		strb	r0, [r4, #1]
- 199:Farbe_scan.c  ****         Farbe_setpos(5);
- 257              		.loc 1 199 0 discriminator 2
- 258 01a0 FEFFFFEB 		bl	DrehTel_dreh
- 259              	.LVL52:
- 200:Farbe_scan.c  ****         color_data[0][0]=ColSen_getData();
- 260              		.loc 1 200 0 discriminator 2
- 261 01a4 0600A0E1 		mov	r0, r6
- 262 01a8 FEFFFFEB 		bl	Farbe_setpos
+ 253 0198 0200C4E5 		strb	r0, [r4, #2]
+  81:Farbe_scan.c  ****         Farbe_setpos(3);
+ 254              		.loc 1 81 0 discriminator 2
+ 255 019c FEFFFFEB 		bl	DrehTel_dreh
+ 256              	.LVL51:
+  82:Farbe_scan.c  ****         color_data[0][1]=ColSen_getData();
+ 257              		.loc 1 82 0 discriminator 2
+ 258 01a0 0500A0E1 		mov	r0, r5
+ 259 01a4 FEFFFFEB 		bl	Farbe_setpos
+ 260              	.LVL52:
+  83:Farbe_scan.c  ****         DrehTel_dreh();
+ 261              		.loc 1 83 0 discriminator 2
+ 262 01a8 FEFFFFEB 		bl	ColSen_getData
  263              	.LVL53:
- 201:Farbe_scan.c  ****         DrehTel_dreh();
- 264              		.loc 1 201 0 discriminator 2
- 265 01ac FEFFFFEB 		bl	ColSen_getData
- 266              	.LVL54:
- 267 01b0 0000C4E5 		strb	r0, [r4]
- 202:Farbe_scan.c  ****         Farbe_setpos(3);
- 268              		.loc 1 202 0 discriminator 2
- 269 01b4 FEFFFFEB 		bl	DrehTel_dreh
- 270              	.LVL55:
- 203:Farbe_scan.c  ****         color_data[0][3]=ColSen_getData();
- 271              		.loc 1 203 0 discriminator 2
- 272 01b8 0500A0E1 		mov	r0, r5
- 273 01bc FEFFFFEB 		bl	Farbe_setpos
+ 264 01ac 0100C4E5 		strb	r0, [r4, #1]
+  84:Farbe_scan.c  ****         Farbe_setpos(5);
+ 265              		.loc 1 84 0 discriminator 2
+ 266 01b0 FEFFFFEB 		bl	DrehTel_dreh
+ 267              	.LVL54:
+  85:Farbe_scan.c  ****         color_data[0][0]=ColSen_getData();
+ 268              		.loc 1 85 0 discriminator 2
+ 269 01b4 0600A0E1 		mov	r0, r6
+ 270 01b8 FEFFFFEB 		bl	Farbe_setpos
+ 271              	.LVL55:
+  86:Farbe_scan.c  ****         DrehTel_dreh();
+ 272              		.loc 1 86 0 discriminator 2
+ 273 01bc FEFFFFEB 		bl	ColSen_getData
  274              	.LVL56:
- 204:Farbe_scan.c  ****         DrehTel_dreh();
- 275              		.loc 1 204 0 discriminator 2
- 276 01c0 FEFFFFEB 		bl	ColSen_getData
- 277              	.LVL57:
- 278 01c4 0300C4E5 		strb	r0, [r4, #3]
- 205:Farbe_scan.c  ****         Farbe_setpos(5);
- 279              		.loc 1 205 0 discriminator 2
- 280 01c8 FEFFFFEB 		bl	DrehTel_dreh
- 281              	.LVL58:
- 206:Farbe_scan.c  ****         color_data[0][6]=ColSen_getData();
- 282              		.loc 1 206 0 discriminator 2
- 283 01cc 0600A0E1 		mov	r0, r6
- 284 01d0 FEFFFFEB 		bl	Farbe_setpos
+ 275 01c0 0000C4E5 		strb	r0, [r4]
+  87:Farbe_scan.c  ****         Farbe_setpos(3);
+ 276              		.loc 1 87 0 discriminator 2
+ 277 01c4 FEFFFFEB 		bl	DrehTel_dreh
+ 278              	.LVL57:
+  88:Farbe_scan.c  ****         color_data[0][3]=ColSen_getData();
+ 279              		.loc 1 88 0 discriminator 2
+ 280 01c8 0500A0E1 		mov	r0, r5
+ 281 01cc FEFFFFEB 		bl	Farbe_setpos
+ 282              	.LVL58:
+  89:Farbe_scan.c  ****         DrehTel_dreh();
+ 283              		.loc 1 89 0 discriminator 2
+ 284 01d0 FEFFFFEB 		bl	ColSen_getData
  285              	.LVL59:
- 207:Farbe_scan.c  ****         DrehTel_dreh();
- 286              		.loc 1 207 0 discriminator 2
- 287 01d4 FEFFFFEB 		bl	ColSen_getData
- 288              	.LVL60:
- 289 01d8 0600C4E5 		strb	r0, [r4, #6]
- 208:Farbe_scan.c  ****         Farbe_setpos(3);
- 290              		.loc 1 208 0 discriminator 2
- 291 01dc FEFFFFEB 		bl	DrehTel_dreh
- 292              	.LVL61:
- 209:Farbe_scan.c  ****         color_data[0][7]=ColSen_getData();
- 293              		.loc 1 209 0 discriminator 2
- 294 01e0 0500A0E1 		mov	r0, r5
- 295 01e4 FEFFFFEB 		bl	Farbe_setpos
+ 286 01d4 0300C4E5 		strb	r0, [r4, #3]
+  90:Farbe_scan.c  ****         Farbe_setpos(5);
+ 287              		.loc 1 90 0 discriminator 2
+ 288 01d8 FEFFFFEB 		bl	DrehTel_dreh
+ 289              	.LVL60:
+  91:Farbe_scan.c  ****         color_data[0][6]=ColSen_getData();
+ 290              		.loc 1 91 0 discriminator 2
+ 291 01dc 0600A0E1 		mov	r0, r6
+ 292 01e0 FEFFFFEB 		bl	Farbe_setpos
+ 293              	.LVL61:
+  92:Farbe_scan.c  ****         DrehTel_dreh();
+ 294              		.loc 1 92 0 discriminator 2
+ 295 01e4 FEFFFFEB 		bl	ColSen_getData
  296              	.LVL62:
- 210:Farbe_scan.c  ****         DrehTel_dreh();
- 297              		.loc 1 210 0 discriminator 2
- 298 01e8 FEFFFFEB 		bl	ColSen_getData
- 299              	.LVL63:
- 300 01ec 0700C4E5 		strb	r0, [r4, #7]
- 211:Farbe_scan.c  ****         Farbe_setpos(5);
- 301              		.loc 1 211 0 discriminator 2
- 302 01f0 FEFFFFEB 		bl	DrehTel_dreh
- 303              	.LVL64:
- 212:Farbe_scan.c  ****         color_data[0][8]=ColSen_getData();
- 304              		.loc 1 212 0 discriminator 2
- 305 01f4 0600A0E1 		mov	r0, r6
- 306 01f8 FEFFFFEB 		bl	Farbe_setpos
+ 297 01e8 0600C4E5 		strb	r0, [r4, #6]
+  93:Farbe_scan.c  ****         Farbe_setpos(3);
+ 298              		.loc 1 93 0 discriminator 2
+ 299 01ec FEFFFFEB 		bl	DrehTel_dreh
+ 300              	.LVL63:
+  94:Farbe_scan.c  ****         color_data[0][7]=ColSen_getData();
+ 301              		.loc 1 94 0 discriminator 2
+ 302 01f0 0500A0E1 		mov	r0, r5
+ 303 01f4 FEFFFFEB 		bl	Farbe_setpos
+ 304              	.LVL64:
+  95:Farbe_scan.c  ****         DrehTel_dreh();
+ 305              		.loc 1 95 0 discriminator 2
+ 306 01f8 FEFFFFEB 		bl	ColSen_getData
  307              	.LVL65:
- 213:Farbe_scan.c  ****         DrehTel_dreh();
- 308              		.loc 1 213 0 discriminator 2
- 309 01fc FEFFFFEB 		bl	ColSen_getData
- 310              	.LVL66:
- 311 0200 0800C4E5 		strb	r0, [r4, #8]
- 214:Farbe_scan.c  ****         Farbe_setpos(3);
- 312              		.loc 1 214 0 discriminator 2
- 313 0204 FEFFFFEB 		bl	DrehTel_dreh
- 314              	.LVL67:
- 215:Farbe_scan.c  ****         color_data[0][5]=ColSen_getData();
- 315              		.loc 1 215 0 discriminator 2
- 316 0208 0500A0E1 		mov	r0, r5
- 317 020c FEFFFFEB 		bl	Farbe_setpos
+ 308 01fc 0700C4E5 		strb	r0, [r4, #7]
+  96:Farbe_scan.c  ****         Farbe_setpos(5);
+ 309              		.loc 1 96 0 discriminator 2
+ 310 0200 FEFFFFEB 		bl	DrehTel_dreh
+ 311              	.LVL66:
+  97:Farbe_scan.c  ****         color_data[0][8]=ColSen_getData();
+ 312              		.loc 1 97 0 discriminator 2
+ 313 0204 0600A0E1 		mov	r0, r6
+ 314 0208 FEFFFFEB 		bl	Farbe_setpos
+ 315              	.LVL67:
+  98:Farbe_scan.c  ****         DrehTel_dreh();
+ 316              		.loc 1 98 0 discriminator 2
+ 317 020c FEFFFFEB 		bl	ColSen_getData
  318              	.LVL68:
- 216:Farbe_scan.c  ****         Farbe_setpos(6);
- 319              		.loc 1 216 0 discriminator 2
- 320 0210 FEFFFFEB 		bl	ColSen_getData
- 321              	.LVL69:
- 322 0214 0500C4E5 		strb	r0, [r4, #5]
- 217:Farbe_scan.c  ****         wuerfel_print(1);
- 323              		.loc 1 217 0 discriminator 2
- 324 0218 0A00A0E1 		mov	r0, r10
+ 319 0210 0800C4E5 		strb	r0, [r4, #8]
+  99:Farbe_scan.c  ****         Farbe_setpos(3);
+ 320              		.loc 1 99 0 discriminator 2
+ 321 0214 FEFFFFEB 		bl	DrehTel_dreh
+ 322              	.LVL69:
+ 100:Farbe_scan.c  ****         color_data[0][5]=ColSen_getData();
+ 323              		.loc 1 100 0 discriminator 2
+ 324 0218 0500A0E1 		mov	r0, r5
  325 021c FEFFFFEB 		bl	Farbe_setpos
  326              	.LVL70:
- 218:Farbe_scan.c  ****         usleep(10000);
- 327              		.loc 1 218 0 discriminator 2
- 328 0220 0800A0E1 		mov	r0, r8
- 329 0224 FEFFFFEB 		bl	wuerfel_print
- 330              	.LVL71:
- 331              		.loc 1 219 0 discriminator 2
- 332 0228 0900A0E1 		mov	r0, r9
- 333 022c FEFFFFEB 		bl	usleep
+ 101:Farbe_scan.c  ****         Farbe_setpos(6);
+ 327              		.loc 1 101 0 discriminator 2
+ 328 0220 FEFFFFEB 		bl	ColSen_getData
+ 329              	.LVL71:
+ 330 0224 0500C4E5 		strb	r0, [r4, #5]
+ 102:Farbe_scan.c  ****         wuerfel_print(1);
+ 331              		.loc 1 102 0 discriminator 2
+ 332 0228 0A00A0E1 		mov	r0, r10
+ 333 022c FEFFFFEB 		bl	Farbe_setpos
  334              	.LVL72:
- 220:Farbe_scan.c  ****         klappen();
- 335              		.loc 1 220 0 discriminator 2
- 336 0230 FEFFFFEB 		bl	klappen
- 337              	.LVL73:
- 190:Farbe_scan.c  ****         Farbe_setpos(1);
- 338              		.loc 1 190 0 discriminator 2
- 339 0234 017057E2 		subs	r7, r7, #1
- 340              	.LVL74:
- 341 0238 CAFFFF1A 		bne	.L5
- 221:Farbe_scan.c  ****     }
- 222:Farbe_scan.c  ****     return color_data[6][9];
- 223:Farbe_scan.c  **** #endif
- 224:Farbe_scan.c  ****     
- 225:Farbe_scan.c  **** #ifndef __linux__
- 226:Farbe_scan.c  ****     return 0;
- 227:Farbe_scan.c  **** #endif
- 228:Farbe_scan.c  **** }
- 342              		.loc 1 228 0
- 343 023c 04309FE5 		ldr	r3, .L6
- 344 0240 3F00D3E5 		ldrb	r0, [r3, #63]	@ zero_extendqisi2
- 345 0244 F087BDE8 		ldmfd	sp!, {r4, r5, r6, r7, r8, r9, r10, pc}
- 346              	.L7:
- 347              		.align	2
- 348              	.L6:
- 349 0248 00000000 		.word	color_data
- 350 024c 10270000 		.word	10000
- 351 0250 A0860100 		.word	100000
- 352              		.cfi_endproc
- 353              	.LFE11:
- 354              		.fnend
- 356              	.Letext0:
- 357              		.file 2 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
- 358              		.file 3 "/usr/local/carlson-minot/crosscompilers/lib/gcc/arm-none-linux-gnueabi/4.8.3/include/stdd
- 359              		.file 4 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
- 360              		.file 5 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
- 361              		.file 6 "main.h"
- 362              		.file 7 "Arm_motor.h"
- 363              		.file 8 "Farbe_motor.h"
- 364              		.file 9 "Farbe_sen.h"
- 365              		.file 10 "Dreh_motor.h"
- 366              		.file 11 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/u
- 367              		.file 12 "print_mode.h"
- 368              		.file 13 "Side_dreh.h"
+ 103:Farbe_scan.c  ****         usleep(10000);
+ 335              		.loc 1 103 0 discriminator 2
+ 336 0230 0800A0E1 		mov	r0, r8
+ 337 0234 FEFFFFEB 		bl	wuerfel_print
+ 338              	.LVL73:
+ 339              		.loc 1 104 0 discriminator 2
+ 340 0238 0900A0E1 		mov	r0, r9
+ 341 023c FEFFFFEB 		bl	usleep
+ 342              	.LVL74:
+ 105:Farbe_scan.c  ****         klappen();
+ 343              		.loc 1 105 0 discriminator 2
+ 344 0240 FEFFFFEB 		bl	klappen
+ 345              	.LVL75:
+ 106:Farbe_scan.c  ****         arm_setpos(3);
+ 346              		.loc 1 106 0 discriminator 2
+ 347 0244 0500A0E1 		mov	r0, r5
+ 348 0248 FEFFFFEB 		bl	arm_setpos
+ 349              	.LVL76:
+ 107:Farbe_scan.c  ****         arm_setpos(4);
+ 350              		.loc 1 107 0 discriminator 2
+ 351 024c 0400A0E3 		mov	r0, #4
+ 352 0250 FEFFFFEB 		bl	arm_setpos
+ 353              	.LVL77:
+  75:Farbe_scan.c  ****         Farbe_setpos(1);
+ 354              		.loc 1 75 0 discriminator 2
+ 355 0254 017057E2 		subs	r7, r7, #1
+ 356              	.LVL78:
+ 357 0258 C6FFFF1A 		bne	.L5
+ 108:Farbe_scan.c  ****     }
+ 109:Farbe_scan.c  ****     return color_data[6][9];
+ 110:Farbe_scan.c  **** #endif
+ 111:Farbe_scan.c  **** #ifndef __linux__
+ 112:Farbe_scan.c  ****     return 0;
+ 113:Farbe_scan.c  **** #endif
+ 114:Farbe_scan.c  **** }
+ 358              		.loc 1 114 0
+ 359 025c 04309FE5 		ldr	r3, .L6
+ 360 0260 3F00D3E5 		ldrb	r0, [r3, #63]	@ zero_extendqisi2
+ 361 0264 F087BDE8 		ldmfd	sp!, {r4, r5, r6, r7, r8, r9, r10, pc}
+ 362              	.L7:
+ 363              		.align	2
+ 364              	.L6:
+ 365 0268 00000000 		.word	color_data
+ 366 026c 10270000 		.word	10000
+ 367 0270 A0860100 		.word	100000
+ 368              		.cfi_endproc
+ 369              	.LFE11:
+ 370              		.fnend
+ 372              	.Letext0:
+ 373              		.file 2 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
+ 374              		.file 3 "/usr/local/carlson-minot/crosscompilers/lib/gcc/arm-none-linux-gnueabi/4.8.3/include/stdd
+ 375              		.file 4 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
+ 376              		.file 5 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
+ 377              		.file 6 "main.h"
+ 378              		.file 7 "Arm_motor.h"
+ 379              		.file 8 "Farbe_motor.h"
+ 380              		.file 9 "Farbe_sen.h"
+ 381              		.file 10 "Dreh_motor.h"
+ 382              		.file 11 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/u
+ 383              		.file 12 "print_mode.h"
+ 384              		.file 13 "Side_dreh.h"
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 Farbe_scan.c
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cchJh9Ja.s:16     .text:0000000000000000 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cchJh9Ja.s:19     .text:0000000000000000 farbe_scan
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cchJh9Ja.s:349    .text:0000000000000248 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cctZVsWW.s:16     .text:0000000000000000 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cctZVsWW.s:19     .text:0000000000000000 farbe_scan
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cctZVsWW.s:365    .text:0000000000000268 $d
                        .ARM.exidx:0000000000000000 $d
                      .debug_frame:0000000000000010 $d
 

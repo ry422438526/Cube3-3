@@ -137,11 +137,11 @@ void wuerfel_print(int mode)
                     break;
                     
                 case 4:
-                    printf("\033[1;35m   %d\033[0m",color_data[tmp/9][tmp%9]);
+                    printf("\033[1;31m   %d\033[0m",color_data[tmp/9][tmp%9]);
                     break;
                     
                 case 5:
-                    printf("\033[1;31m   %d\033[0m",color_data[tmp/9][tmp%9]);
+                    printf("\033[1;35m   %d\033[0m",color_data[tmp/9][tmp%9]);
                     break;
 #endif
             }

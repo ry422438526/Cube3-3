@@ -42,46 +42,6 @@ const int arm_winkel[]={4,-83,-150,-240,-330};//-85   231   330
 int arm_init()
 {
 #ifdef __linux__
-/*
-    if ((motor_file = open(PWM_DEVICE_NAME, O_WRONLY))== -1)
-    {
-        printf("Failed to open device\n");
-        return -1;
-    }
-    
-    if((encoder_file = open(MOTOR_DEVICE_NAME, O_RDWR | O_SYNC)) == -1)
-        return -1;
-    pMotorData = (MOTORDATA*)mmap (0, sizeof(MOTORDATA)*vmOUTPUTS, PROT_READ|PROT_WRITE,MAP_FILE|MAP_SHARED,    encoder_file, 0);
-    
-    if (pMotorData == MAP_FAILED)
-    {
-        printf("Map failed\n");
-        return -1;
-    }
-    char motor_command[4];
-    motor_command[0]=opOUTPUT_SPEED;
-    motor_command[1]=MOTOR_PORT_A;
-    motor_command[2]=MOTOR_SPEED;
-    write(motor_file,motor_command,3);// motor_speed Wert geben
-    
-    motor_command[0]=opOUTPUT_START;
-    motor_command[1]=MOTOR_PORT_A;
-    write(motor_file,motor_command,2);// Motor starten
-    
-    int old_TachoSensor;
-    old_TachoSensor=pMotorData[0].TachoSensor;
-    
-    usleep(1000000);
-    while(old_TachoSensor!=pMotorData[0].TachoSensor){
-        old_TachoSensor=pMotorData[0].TachoSensor;
-        usleep(10000);
-    }
-    
-    motor_command[0]=opOUTPUT_STOP;
-    motor_command[1]=MOTOR_PORT_A;
-    motor_command[2]=1;
-    write(motor_file,motor_command,3);  // Motor stoppen
-*/
     
     cOutputInit();
     cOutputSpeed(MOTOR_PORT_A,MOTOR_SPEED);
@@ -124,7 +84,6 @@ int arm_setpos(int arm_soll)
         
         while ((pMotorData[0].TachoSensor-arm_referenz) < arm_winkel[arm_soll])
         {
-            /* printf("Spd/Cnt/Snr: A=%d/%d/%d\n", pMotorData[0].Speed, pMotorData[0].TachoCounts, pMotorData[0].TachoSensor-arm_referenz);*/
             usleep(10000);
         }
     }
@@ -140,7 +99,6 @@ int arm_setpos(int arm_soll)
         
         while ((pMotorData[0].TachoSensor-arm_referenz) > arm_winkel[arm_soll])
         {
-            /*printf("Spd/Cnt/Snr: A=%d/%d/%d\n", pMotorData[0].Speed, pMotorData[0].TachoCounts, pMotorData[0].TachoSensor-arm_referenz);*/
             usleep(10000);
         }
     }

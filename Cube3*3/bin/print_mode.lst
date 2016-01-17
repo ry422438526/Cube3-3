@@ -384,11 +384,11 @@
  137:print_mode.c  ****                     break;
  138:print_mode.c  ****                     
  139:print_mode.c  ****                 case 4:
- 140:print_mode.c  ****                     printf("\033[1;35m   %d\033[0m",color_data[tmp/9][tmp%9]);
+ 140:print_mode.c  ****                     printf("\033[1;31m   %d\033[0m",color_data[tmp/9][tmp%9]);
  141:print_mode.c  ****                     break;
  142:print_mode.c  ****                     
  143:print_mode.c  ****                 case 5:
- 144:print_mode.c  ****                     printf("\033[1;31m   %d\033[0m",color_data[tmp/9][tmp%9]);
+ 144:print_mode.c  ****                     printf("\033[1;35m   %d\033[0m",color_data[tmp/9][tmp%9]);
  257              		.loc 1 144 0
  258 015c 00B19FE5 		ldr	fp, .L27+32
  140:print_mode.c  ****                     break;
@@ -597,15 +597,15 @@
  416      00
  417 0091 000000   		.space	3
  418              	.LC9:
- 419 0094 1B5B313B 		.ascii	"\033[1;35m   %d\033[0m\000"
- 419      33356D20 
+ 419 0094 1B5B313B 		.ascii	"\033[1;31m   %d\033[0m\000"
+ 419      33316D20 
  419      20202564 
  419      1B5B306D 
  419      00
  420 00a5 000000   		.space	3
  421              	.LC10:
- 422 00a8 1B5B313B 		.ascii	"\033[1;31m   %d\033[0m\000"
- 422      33316D20 
+ 422 00a8 1B5B313B 		.ascii	"\033[1;35m   %d\033[0m\000"
+ 422      33356D20 
  422      20202564 
  422      1B5B306D 
  422      00
@@ -625,23 +625,23 @@
  436              		.file 13 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/u
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 print_mode.c
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccNBpxjd.s:16     .text:0000000000000000 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccNBpxjd.s:19     .text:0000000000000000 reset_terminal_mode
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccNBpxjd.s:42     .text:0000000000000018 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cclGee1n.s:16     .text:0000000000000000 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cclGee1n.s:19     .text:0000000000000000 reset_terminal_mode
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cclGee1n.s:42     .text:0000000000000018 $d
                             *COM*:000000000000003c orig_termios
                        .ARM.extab:0000000000000000 $d
                        .ARM.exidx:0000000000000000 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccNBpxjd.s:47     .text:000000000000001c $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccNBpxjd.s:50     .text:000000000000001c set_conio_terminal_mode
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccNBpxjd.s:98     .text:000000000000006c $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccNBpxjd.s:104    .text:0000000000000074 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccNBpxjd.s:107    .text:0000000000000074 kbhit
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccNBpxjd.s:162    .text:00000000000000d0 getch
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccNBpxjd.s:197    .text:00000000000000f8 wuerfel_print
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccNBpxjd.s:283    .text:000000000000019c $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccNBpxjd.s:291    .text:00000000000001b4 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccNBpxjd.s:371    .text:0000000000000244 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccNBpxjd.s:391    .rodata.str1.4:0000000000000000 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cclGee1n.s:47     .text:000000000000001c $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cclGee1n.s:50     .text:000000000000001c set_conio_terminal_mode
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cclGee1n.s:98     .text:000000000000006c $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cclGee1n.s:104    .text:0000000000000074 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cclGee1n.s:107    .text:0000000000000074 kbhit
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cclGee1n.s:162    .text:00000000000000d0 getch
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cclGee1n.s:197    .text:00000000000000f8 wuerfel_print
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cclGee1n.s:283    .text:000000000000019c $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cclGee1n.s:291    .text:00000000000001b4 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cclGee1n.s:371    .text:0000000000000244 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cclGee1n.s:391    .rodata.str1.4:0000000000000000 $d
                      .debug_frame:0000000000000010 $d
 
 UNDEFINED SYMBOLS

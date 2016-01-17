@@ -62,7 +62,7 @@ void klappen()
             color_data[a][b]=temp_color_data[a][b];
         }
     }
-    
+    wuerfel_print(1);/////////////
 }
 
 
@@ -145,6 +145,7 @@ void drehen_unter(int dir,int dreh_Angel)
             }
         }
     }
+    wuerfel_print(1);/////////////
 }
 
 void drehen(int dir)                       //drehen 90 Grad
@@ -153,9 +154,9 @@ void drehen(int dir)                       //drehen 90 Grad
     arm_setpos(4);
     if(dir==1)
     {
-        DrehTel_setpos(2);
-    }else{
         DrehTel_setpos(1);
+    }else{
+        DrehTel_setpos(2);
     }
 #endif
     int i,j;
@@ -192,6 +193,7 @@ void drehen(int dir)                       //drehen 90 Grad
             color_data[a][b]=temp_color_data[a][b];
         }
     }
+    wuerfel_print(1);/////////////
 }
 
 void us_dreh(int dir,int dreh_Angel_u)                        //Oben_Schicht
@@ -210,10 +212,10 @@ void us_dreh(int dir,int dreh_Angel_u)                        //Oben_Schicht
 
 void ds_dreh(int dir,int dreh_Angel_d)                        //Untern_Schicht
 {
-#ifdef __linux__
+/*#ifdef __linux__
     arm_setpos(2);
     arm_setpos(3);
-#endif
+#endif*/
     drehen_unter(dir, dreh_Angel_d);
     wuerfel_print(1);
     

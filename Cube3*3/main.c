@@ -289,14 +289,22 @@ int main(int argc, const char * argv[]) {
     set_conio_terminal_mode();
     
 #ifdef __linux__
-    //ColSen_init();
-    //extern void ColSen_test(void);
-    //ColSen_test();
-    //return;
     Farbe_init();
     arm_init();
     DrehTel_init();
     ColSen_init();
+    /*Farbe_setpos(1);
+    ColSen_getData();
+    ColSen_getData();
+    ColSen_getData();
+    ColSen_getData();
+    ColSen_getData();
+    ColSen_getData();
+    ColSen_getData();
+    ColSen_getData();
+    ColSen_getData();
+    ColSen_getData();*/
+    
     color_data[6][9]=farbe_scan();
     if (test()==0) {
         arm_close();
@@ -309,11 +317,12 @@ int main(int argc, const char * argv[]) {
         change_topface(0);
         change_rightface(5);
         wuerfel_print(1);
-        //Top_Cross();
-        //F2L();
-        //OLL();
-        //PLL();
+        Top_Cross();
+        F2L();
+        OLL();
+        PLL();
     }
+    exit(0);
 #endif
 #ifndef __linux__
         change_topface(0);
@@ -323,6 +332,7 @@ int main(int argc, const char * argv[]) {
         F2L();
         OLL();
         PLL();
+        exit(0);
 #endif
 #ifndef __linux__
    /* while(1)

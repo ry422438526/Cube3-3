@@ -1342,12 +1342,12 @@
  957              		.file 8 "print_mode.h"
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 Top_Cross.c
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccLseLmb.s:16     .text:0000000000000000 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccLseLmb.s:19     .text:0000000000000000 Top_Cross
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccLseLmb.s:927    .text:00000000000007a4 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc4dPytg.s:16     .text:0000000000000000 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc4dPytg.s:19     .text:0000000000000000 Top_Cross
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc4dPytg.s:927    .text:00000000000007a4 $d
                        .ARM.exidx:0000000000000000 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccLseLmb.s:938    .rodata:0000000000000000 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccLseLmb.s:946    .rodata.str1.4:0000000000000000 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc4dPytg.s:938    .rodata:0000000000000000 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc4dPytg.s:946    .rodata.str1.4:0000000000000000 $d
                      .debug_frame:0000000000000010 $d
 
 UNDEFINED SYMBOLS

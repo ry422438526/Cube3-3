@@ -1322,11 +1322,11 @@
  1032              		.file 8 "print_mode.h"
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 OLL.c
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc61HIIG.s:16     .text:0000000000000000 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc61HIIG.s:19     .text:0000000000000000 OLL
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc61HIIG.s:1010   .text:0000000000000a4c $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cckCBGLA.s:16     .text:0000000000000000 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cckCBGLA.s:19     .text:0000000000000000 OLL
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cckCBGLA.s:1010   .text:0000000000000a4c $d
                        .ARM.exidx:0000000000000000 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc61HIIG.s:1017   .rodata:0000000000000000 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cckCBGLA.s:1017   .rodata:0000000000000000 $d
                      .debug_frame:0000000000000010 $d
 
 UNDEFINED SYMBOLS
