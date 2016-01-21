@@ -25,13 +25,7 @@
 const int MOTOR_SPEED=20;//power:0~100
 const char MOTOR_PORT_A = 0x01; //Ausfahrbarer Greifarm Motor;
 
-#if 0
-MOTORDATA *pMotorData;
-int motor_file;
-int encoder_file;
-#else
 OUTPUT_GLOBALS OutputInstance;
-#endif
 
 int arm_referenz=0;
 int arm_ist=0;
@@ -57,7 +51,6 @@ int arm_init()
     arm_referenz=cOutputGetCount(0);
     arm_ist = 0;
     arm_setpos(4);
-    printf("Arm_referenzPosition angefahren %d\n\r",arm_referenz);
 #endif
     return 0;
 }
@@ -68,46 +61,6 @@ int arm_init()
 int arm_setpos(int arm_soll)
 {
 #ifdef __linux__
-#if 0
-    char motor_command[4];
-    
-    motor_command[0]=opOUTPUT_SPEED;
-    motor_command[1]=MOTOR_PORT_A;
-    if(arm_winkel[arm_ist]<arm_winkel[arm_soll])
-    {
-        motor_command[2]=MOTOR_SPEED;
-        write(motor_file,motor_command,3);  //motor_speed Wert geben
-        
-        motor_command[0]=opOUTPUT_START;
-        motor_command[1]=MOTOR_PORT_A;
-        write(motor_file,motor_command,2);  //Motor starten
-        
-        while ((pMotorData[0].TachoSensor-arm_referenz) < arm_winkel[arm_soll])
-        {
-            usleep(10000);
-        }
-    }
-    else
-    {
-        motor_command[2]=-MOTOR_SPEED;
-        write(motor_file,motor_command,3);  //motor_speed Wert geben
-        
-        motor_command[0]=opOUTPUT_START;
-        motor_command[1]=MOTOR_PORT_A;
-        write(motor_file,motor_command,2);  //Motor starten
-        
-        
-        while ((pMotorData[0].TachoSensor-arm_referenz) > arm_winkel[arm_soll])
-        {
-            usleep(10000);
-        }
-    }
-    
-    motor_command[0]=opOUTPUT_STOP;
-    motor_command[1]=MOTOR_PORT_A;
-    motor_command[2]=1;
-    write(motor_file,motor_command,3); //Motor stopppen
-#else
     if(arm_winkel[arm_ist]<arm_winkel[arm_soll]){
         cOutputSpeed(MOTOR_PORT_A,MOTOR_SPEED);
         cOutputStart(MOTOR_PORT_A);
@@ -125,7 +78,6 @@ int arm_setpos(int arm_soll)
         
     }
     cOutputStop(MOTOR_PORT_A,1);
-#endif
     arm_ist=arm_soll;
     usleep(100000);
 #endif
@@ -136,20 +88,7 @@ int arm_setpos(int arm_soll)
 int arm_close()
 {
 #ifdef __linux__
-#if 0
-    char motor_command[4];
-    
-    motor_command[0] = opOUTPUT_STOP;
-    motor_command[1] = MOTOR_PORT_A;
-    motor_command[2]=0;
-    write(motor_file,motor_command,3);
-    
-    close(encoder_file);
-    close(motor_file);
-#else
     cOutputExit();
-#endif
-    
 #endif
     return 0;
 }

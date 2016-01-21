@@ -33,7 +33,7 @@
   12:PLL.c         **** #include "print_mode.h"
   13:PLL.c         **** #include "main.h"
   14:PLL.c         **** 
-  15:PLL.c         **** void PLL()
+  15:PLL.c         **** int PLL()
   16:PLL.c         **** {
   23              		.loc 1 16 0
   24              		.cfi_startproc
@@ -67,30 +67,30 @@
   19:PLL.c         ****     int i,j;
   20:PLL.c         ****     int Color_col[4]={1,4,3,5};
   50              		.loc 1 20 0
-  51 0018 E8379FE5 		ldr	r3, .L30
+  51 0018 AC379FE5 		ldr	r3, .L34
   52 001c 0F0093E8 		ldmia	r3, {r0, r1, r2, r3}
   53 0020 18C08DE2 		add	ip, sp, #24
   54 0024 0F000CE9 		stmdb	ip, {r0, r1, r2, r3}
   21:PLL.c         ****     
   22:PLL.c         ****     if ((color_data[1][0]!=color_data[1][2])&&(color_data[5][6]!=color_data[5][8])&&(color_data[3][
   55              		.loc 1 22 0
-  56 0028 DC379FE5 		ldr	r3, .L30+4
+  56 0028 A0379FE5 		ldr	r3, .L34+4
   57 002c 0920D3E5 		ldrb	r2, [r3, #9]	@ zero_extendqisi2
   58 0030 0B30D3E5 		ldrb	r3, [r3, #11]	@ zero_extendqisi2
   59 0034 020053E1 		cmp	r3, r2
   60 0038 2E00000A 		beq	.L2
   61              		.loc 1 22 0 is_stmt 0 discriminator 1
-  62 003c C8379FE5 		ldr	r3, .L30+4
+  62 003c 8C379FE5 		ldr	r3, .L34+4
   63 0040 3320D3E5 		ldrb	r2, [r3, #51]	@ zero_extendqisi2
   64 0044 3530D3E5 		ldrb	r3, [r3, #53]	@ zero_extendqisi2
   65 0048 030052E1 		cmp	r2, r3
   66 004c 4B00000A 		beq	.L3
-  67 0050 B4379FE5 		ldr	r3, .L30+4
+  67 0050 78379FE5 		ldr	r3, .L34+4
   68 0054 2120D3E5 		ldrb	r2, [r3, #33]	@ zero_extendqisi2
   69 0058 2330D3E5 		ldrb	r3, [r3, #35]	@ zero_extendqisi2
   70 005c 030052E1 		cmp	r2, r3
   71 0060 4600000A 		beq	.L3
-  72 0064 A0379FE5 		ldr	r3, .L30+4
+  72 0064 64379FE5 		ldr	r3, .L34+4
   73 0068 2A20D3E5 		ldrb	r2, [r3, #42]	@ zero_extendqisi2
   74 006c 2C30D3E5 		ldrb	r3, [r3, #44]	@ zero_extendqisi2
   75 0070 030052E1 		cmp	r2, r3
@@ -153,24 +153,24 @@
   33:PLL.c         ****     
   34:PLL.c         ****     if ((color_data[1][0]==color_data[1][2])&&(color_data[5][6]==color_data[5][8])&&(color_data[3][
  122              		.loc 1 34 0
- 123 00e4 20379FE5 		ldr	r3, .L30+4
+ 123 00e4 E4369FE5 		ldr	r3, .L34+4
  124 00e8 0920D3E5 		ldrb	r2, [r3, #9]	@ zero_extendqisi2
  125 00ec 0B30D3E5 		ldrb	r3, [r3, #11]	@ zero_extendqisi2
  126 00f0 020053E1 		cmp	r3, r2
  127 00f4 2100001A 		bne	.L3
  128              	.L2:
  129              		.loc 1 34 0 is_stmt 0 discriminator 1
- 130 00f8 0C379FE5 		ldr	r3, .L30+4
+ 130 00f8 D0369FE5 		ldr	r3, .L34+4
  131 00fc 3310D3E5 		ldrb	r1, [r3, #51]	@ zero_extendqisi2
  132 0100 3530D3E5 		ldrb	r3, [r3, #53]	@ zero_extendqisi2
  133 0104 030051E1 		cmp	r1, r3
  134 0108 1C00001A 		bne	.L3
- 135 010c F8369FE5 		ldr	r3, .L30+4
+ 135 010c BC369FE5 		ldr	r3, .L34+4
  136 0110 2110D3E5 		ldrb	r1, [r3, #33]	@ zero_extendqisi2
  137 0114 2330D3E5 		ldrb	r3, [r3, #35]	@ zero_extendqisi2
  138 0118 030051E1 		cmp	r1, r3
  139 011c 1700001A 		bne	.L3
- 140 0120 E4369FE5 		ldr	r3, .L30+4
+ 140 0120 A8369FE5 		ldr	r3, .L34+4
  141 0124 2A10D3E5 		ldrb	r1, [r3, #42]	@ zero_extendqisi2
  142 0128 2C30D3E5 		ldrb	r3, [r3, #44]	@ zero_extendqisi2
  143 012c 030051E1 		cmp	r1, r3
@@ -182,7 +182,7 @@
  148 013c 050052E3 		cmp	r2, #5
  149 0140 0A00000A 		beq	.L6
  150 0144 030052E3 		cmp	r2, #3
- 151 0148 9F00001A 		bne	.L4
+ 151 0148 9701001A 		bne	.L9
  152 014c 030000EA 		b	.L7
  153              	.L5:
   36:PLL.c         ****             case 1:
@@ -196,7 +196,7 @@
  158              	.LVL11:
   40:PLL.c         ****                 break;
  159              		.loc 1 40 0
- 160 015c 9A0000EA 		b	.L4
+ 160 015c 920100EA 		b	.L9
  161              	.L7:
   41:PLL.c         ****             case 3:
   42:PLL.c         ****                 us_dreh(-1, 180);
@@ -207,7 +207,7 @@
  166              	.LVL12:
   43:PLL.c         ****                 break;
  167              		.loc 1 43 0
- 168 016c 960000EA 		b	.L4
+ 168 016c 8E0100EA 		b	.L9
  169              	.L6:
   44:PLL.c         ****             case 5:
   45:PLL.c         ****                 us_dreh(1, 90);
@@ -218,7 +218,7 @@
  174              	.LVL13:
   46:PLL.c         ****                 break;
  175              		.loc 1 46 0
- 176 017c 920000EA 		b	.L4
+ 176 017c 8A0100EA 		b	.L9
  177              	.L3:
   47:PLL.c         ****             default:
   48:PLL.c         ****                 break;
@@ -243,9 +243,9 @@
  187 0190 0160A0E3 		mov	r6, #1
   58:PLL.c         ****         if(color_data[1][0]==color_data[1][2])
  188              		.loc 1 58 0
- 189 0194 70569FE5 		ldr	r5, .L30+4
+ 189 0194 34569FE5 		ldr	r5, .L34+4
  190              	.LVL15:
- 191              	.L22:
+ 191              	.L24:
   55:PLL.c         ****         change_rightface(Color_col[(i+1)%4]);
  192              		.loc 1 55 0
  193 0198 0700A0E1 		mov	r0, r7
@@ -274,7 +274,7 @@
  214 01d0 0920D5E5 		ldrb	r2, [r5, #9]	@ zero_extendqisi2
  215 01d4 0B30D5E5 		ldrb	r3, [r5, #11]	@ zero_extendqisi2
  216 01d8 030052E1 		cmp	r2, r3
- 217 01dc 7800001A 		bne	.L8
+ 217 01dc 7800001A 		bne	.L10
  218 01e0 04708DE2 		add	r7, sp, #4
  219 01e4 0140A0E3 		mov	r4, #1
  220              	.LVL20:
@@ -283,7 +283,7 @@
   61:PLL.c         ****             {
   62:PLL.c         ****                 if ((color_data[1][0]==color_data[Color_col[j]][4])&&(color_data[1][2]==color_data[
  221              		.loc 1 62 0
- 222 01e8 1C569FE5 		ldr	r5, .L30+4
+ 222 01e8 E0559FE5 		ldr	r5, .L34+4
  223              	.LBB2:
   63:PLL.c         ****                 {
   64:PLL.c         ****                     int color_c;
@@ -311,10 +311,10 @@
   73:PLL.c         ****                             change_topface(2);
  229              		.loc 1 73 0
  230 01f8 5AA0A0E3 		mov	r10, #90
- 231 01fc 000000EA 		b	.L9
- 232              	.L18:
+ 231 01fc 000000EA 		b	.L11
+ 232              	.L20:
  233 0200 014084E2 		add	r4, r4, #1
- 234              	.L9:
+ 234              	.L11:
  235 0204 012044E2 		sub	r2, r4, #1
  236              	.LVL21:
  237              	.LBE2:
@@ -326,12 +326,12 @@
  242 0214 033085E0 		add	r3, r5, r3
  243 0218 0430D3E5 		ldrb	r3, [r3, #4]	@ zero_extendqisi2
  244 021c 060053E1 		cmp	r3, r6
- 245 0220 2F00001A 		bne	.L10
+ 245 0220 2F00001A 		bne	.L12
   62:PLL.c         ****                 {
  246              		.loc 1 62 0 is_stmt 0 discriminator 1
  247 0224 0B30D5E5 		ldrb	r3, [r5, #11]	@ zero_extendqisi2
  248 0228 060053E1 		cmp	r3, r6
- 249 022c 2C00001A 		bne	.L10
+ 249 022c 2C00001A 		bne	.L12
  250              	.LBB3:
   65:PLL.c         ****                     switch (j)
  251              		.loc 1 65 0 is_stmt 1
@@ -341,13 +341,13 @@
  254              		.loc 1 66 0
  255 0234 030052E3 		cmp	r2, #3
  256 0238 02F19F97 		ldrls	pc, [pc, r2, asl #2]
- 257 023c 280000EA 		b	.L10
- 258              	.L12:
- 259 0240 50020000 		.word	.L11
- 260 0244 64020000 		.word	.L13
- 261 0248 8C020000 		.word	.L14
- 262 024c BC020000 		.word	.L15
- 263              	.L11:
+ 257 023c 280000EA 		b	.L12
+ 258              	.L14:
+ 259 0240 50020000 		.word	.L13
+ 260 0244 64020000 		.word	.L15
+ 261 0248 8C020000 		.word	.L16
+ 262 024c BC020000 		.word	.L17
+ 263              	.L13:
   69:PLL.c         ****                             wuerfel_print(1);/////////////////
  264              		.loc 1 69 0
  265 0250 0600A0E1 		mov	r0, r6
@@ -360,9 +360,9 @@
  271              	.LVL24:
   71:PLL.c         ****                         case 1:
  272              		.loc 1 71 0
- 273 0260 E6FFFFEA 		b	.L18
+ 273 0260 E6FFFFEA 		b	.L20
  274              	.LVL25:
- 275              	.L13:
+ 275              	.L15:
   73:PLL.c         ****                             change_topface(2);
  276              		.loc 1 73 0
  277 0264 0800A0E1 		mov	r0, r8
@@ -386,9 +386,9 @@
  292              	.LVL29:
   77:PLL.c         ****                         case 2:
  293              		.loc 1 77 0
- 294 0288 DCFFFFEA 		b	.L18
+ 294 0288 DCFFFFEA 		b	.L20
  295              	.LVL30:
- 296              	.L14:
+ 296              	.L16:
   79:PLL.c         ****                             change_topface(2);
  297              		.loc 1 79 0
  298 028c 0800A0E1 		mov	r0, r8
@@ -416,9 +416,9 @@
  317              	.LVL35:
   84:PLL.c         ****                             break;
  318              		.loc 1 84 0
- 319 02b8 D0FFFFEA 		b	.L18
+ 319 02b8 D0FFFFEA 		b	.L20
  320              	.LVL36:
- 321              	.L15:
+ 321              	.L17:
   85:PLL.c         ****                         case 3:
   86:PLL.c         ****                             us_dreh(-1, 90);
  322              		.loc 1 86 0
@@ -441,16 +441,16 @@
  336 02d8 0100A0E3 		mov	r0, #1
  337 02dc FEFFFFEB 		bl	wuerfel_print
  338              	.LVL40:
- 339 02e0 010000EA 		b	.L17
+ 339 02e0 010000EA 		b	.L19
  340              	.LVL41:
- 341              	.L10:
+ 341              	.L12:
  342              	.LBE3:
   60:PLL.c         ****             {
  343              		.loc 1 60 0
  344 02e4 030054E3 		cmp	r4, #3
- 345 02e8 C4FFFFDA 		ble	.L18
+ 345 02e8 C4FFFFDA 		ble	.L20
  346              	.LVL42:
- 347              	.L17:
+ 347              	.L19:
   90:PLL.c         ****                             break;
   91:PLL.c         ****                         default:
   92:PLL.c         ****                             break;
@@ -528,16 +528,16 @@
  404              	.LVL54:
  108:PLL.c         ****             switch (color_data[1][0]) {
  405              		.loc 1 108 0
- 406 0370 94349FE5 		ldr	r3, .L30+4
+ 406 0370 58349FE5 		ldr	r3, .L34+4
  407 0374 0930D3E5 		ldrb	r3, [r3, #9]	@ zero_extendqisi2
  408 0378 040053E3 		cmp	r3, #4
- 409 037c 0400000A 		beq	.L19
+ 409 037c 0400000A 		beq	.L21
  410 0380 050053E3 		cmp	r3, #5
- 411 0384 0A00000A 		beq	.L20
+ 411 0384 0A00000A 		beq	.L22
  412 0388 030053E3 		cmp	r3, #3
- 413 038c 0E00001A 		bne	.L4
- 414 0390 030000EA 		b	.L21
- 415              	.L19:
+ 413 038c 0601001A 		bne	.L9
+ 414 0390 030000EA 		b	.L23
+ 415              	.L21:
  109:PLL.c         ****                 case 1:
  110:PLL.c         ****                     break;
  111:PLL.c         ****                 case 4:
@@ -549,8 +549,8 @@
  420              	.LVL55:
  113:PLL.c         ****                     break;
  421              		.loc 1 113 0
- 422 03a0 090000EA 		b	.L4
- 423              	.L21:
+ 422 03a0 010100EA 		b	.L9
+ 423              	.L23:
  114:PLL.c         ****                 case 3:
  115:PLL.c         ****                     us_dreh(-1, 180);
  424              		.loc 1 115 0
@@ -560,8 +560,8 @@
  428              	.LVL56:
  116:PLL.c         ****                     break;
  429              		.loc 1 116 0
- 430 03b0 050000EA 		b	.L4
- 431              	.L20:
+ 430 03b0 FD0000EA 		b	.L9
+ 431              	.L22:
  117:PLL.c         ****                 case 5:
  118:PLL.c         ****                     us_dreh(1, 90);
  432              		.loc 1 118 0
@@ -571,15 +571,16 @@
  436              	.LVL57:
  119:PLL.c         ****                     break;
  437              		.loc 1 119 0
- 438 03c0 010000EA 		b	.L4
+ 438 03c0 F90000EA 		b	.L9
  439              	.LVL58:
- 440              	.L8:
+ 440              	.L10:
   53:PLL.c         ****     {
  441              		.loc 1 53 0 discriminator 1
  442 03c4 040054E3 		cmp	r4, #4
- 443 03c8 72FFFF1A 		bne	.L22
- 444              	.LVL59:
- 445              	.L4:
+ 443 03c8 72FFFF1A 		bne	.L24
+ 444 03cc F60000EA 		b	.L9
+ 445              	.LVL59:
+ 446              	.L32:
  120:PLL.c         ****                 default:
  121:PLL.c         ****                     break;
  122:PLL.c         ****             }
@@ -587,574 +588,520 @@
  124:PLL.c         ****         }
  125:PLL.c         ****     }
  126:PLL.c         **** }
- 127:PLL.c         ****     wuerfel_print(1);//////////////////////
- 446              		.loc 1 127 0
- 447 03cc 0100A0E3 		mov	r0, #1
- 448 03d0 FEFFFFEB 		bl	wuerfel_print
- 449              	.LVL60:
- 128:PLL.c         ****     for (i=0; i<=3; i++) {
- 450              		.loc 1 128 0
- 451 03d4 0050A0E3 		mov	r5, #0
- 129:PLL.c         ****         change_topface(2);
- 452              		.loc 1 129 0
- 453 03d8 0270A0E3 		mov	r7, #2
- 130:PLL.c         ****         change_rightface(Color_col[(i+1)%4]);
- 131:PLL.c         ****       /*if ((color_data[3][6]==color_data[3][7]) && (color_data[3][7]==color_data[3][8])&&(color_da
- 132:PLL.c         ****         }*/
- 133:PLL.c         ****         wuerfel_print(1);//////////////////////
- 454              		.loc 1 133 0
- 455 03dc 0160A0E3 		mov	r6, #1
- 134:PLL.c         ****         if ((color_data[1][0]==color_data[1][1]) && (color_data[1][1]==color_data[1][2])&&(color_da
- 456              		.loc 1 134 0
- 457 03e0 24449FE5 		ldr	r4, .L30+4
- 135:PLL.c         ****                 drehen(1);
- 136:PLL.c         ****                 drehen(1);
- 137:PLL.c         ****             wuerfel_print(1);//////////////////////
- 138:PLL.c         ****             if ((color_data[1][1]==color_data[5][4])&&(color_data[5][7]==color_data[4][4])&&(color_
- 139:PLL.c         ****                 rs_dreh(1, 90);
- 140:PLL.c         ****                 rs_dreh(-1, 90);
- 141:PLL.c         ****                 ls_dreh(1, 90);
- 142:PLL.c         ****                 rs_dreh(1, 90);
- 143:PLL.c         ****                 ls_dreh(1, 90);
- 144:PLL.c         ****                 rs_dreh(1, 90);
- 145:PLL.c         ****                 ls_dreh(1, 90);
- 146:PLL.c         ****                 rs_dreh(-1, 90);
- 147:PLL.c         ****                 ls_dreh(-1, 90);
- 148:PLL.c         ****                 rs_dreh(-1, 90);
- 149:PLL.c         ****                 ls_dreh(1, 180);
- 150:PLL.c         ****                 wuerfel_print(1);//////////////////////            richtig
- 151:PLL.c         ****             }
- 152:PLL.c         ****             
- 153:PLL.c         ****             
- 154:PLL.c         ****             if ((color_data[1][1]==color_data[4][4])&&(color_data[5][7]==color_data[1][4])&&(color_
- 155:PLL.c         ****                 rs_dreh(-1, 180);
- 458              		.loc 1 155 0
- 459 03e4 00A0E0E3 		mvn	r10, #0
- 460 03e8 B480A0E3 		mov	r8, #180
- 156:PLL.c         ****                 rs_dreh(1, 90);
- 461              		.loc 1 156 0
- 462 03ec 5A90A0E3 		mov	r9, #90
- 463              	.LVL61:
- 464              	.L29:
- 129:PLL.c         ****         change_rightface(Color_col[(i+1)%4]);
- 465              		.loc 1 129 0
- 466 03f0 0700A0E1 		mov	r0, r7
- 467 03f4 FEFFFFEB 		bl	change_topface
- 468              	.LVL62:
- 130:PLL.c         ****       /*if ((color_data[3][6]==color_data[3][7]) && (color_data[3][7]==color_data[3][8])&&(color_da
- 469              		.loc 1 130 0
- 470 03f8 015085E2 		add	r5, r5, #1
- 471              	.LVL63:
- 472 03fc C53FA0E1 		mov	r3, r5, asr #31
- 473 0400 233FA0E1 		mov	r3, r3, lsr #30
- 474 0404 032085E0 		add	r2, r5, r3
- 475 0408 032002E2 		and	r2, r2, #3
- 476 040c 023063E0 		rsb	r3, r3, r2
- 477 0410 18C08DE2 		add	ip, sp, #24
- 478 0414 03318CE0 		add	r3, ip, r3, asl #2
- 479 0418 100013E5 		ldr	r0, [r3, #-16]
- 480 041c FEFFFFEB 		bl	change_rightface
- 481              	.LVL64:
- 133:PLL.c         ****         if ((color_data[1][0]==color_data[1][1]) && (color_data[1][1]==color_data[1][2])&&(color_da
- 482              		.loc 1 133 0
- 483 0420 0600A0E1 		mov	r0, r6
- 484 0424 FEFFFFEB 		bl	wuerfel_print
- 485              	.LVL65:
- 134:PLL.c         ****                 drehen(1);
- 486              		.loc 1 134 0
- 487 0428 0930D4E5 		ldrb	r3, [r4, #9]	@ zero_extendqisi2
- 488 042c 0A20D4E5 		ldrb	r2, [r4, #10]	@ zero_extendqisi2
- 489 0430 030052E1 		cmp	r2, r3
- 490 0434 6900001A 		bne	.L23
- 134:PLL.c         ****                 drehen(1);
- 491              		.loc 1 134 0 is_stmt 0 discriminator 1
- 492 0438 0B20D4E5 		ldrb	r2, [r4, #11]	@ zero_extendqisi2
- 493 043c 030052E1 		cmp	r2, r3
- 494 0440 6600001A 		bne	.L23
- 495 0444 0D20D4E5 		ldrb	r2, [r4, #13]	@ zero_extendqisi2
- 496 0448 030052E1 		cmp	r2, r3
- 497 044c 6300001A 		bne	.L23
- 135:PLL.c         ****                 drehen(1);
- 498              		.loc 1 135 0 is_stmt 1
- 499 0450 0600A0E1 		mov	r0, r6
- 500 0454 FEFFFFEB 		bl	drehen
- 501              	.LVL66:
- 136:PLL.c         ****             wuerfel_print(1);//////////////////////
- 502              		.loc 1 136 0
- 503 0458 0600A0E1 		mov	r0, r6
- 504 045c FEFFFFEB 		bl	drehen
- 505              	.LVL67:
- 137:PLL.c         ****             if ((color_data[1][1]==color_data[5][4])&&(color_data[5][7]==color_data[4][4])&&(color_
- 506              		.loc 1 137 0
- 507 0460 0600A0E1 		mov	r0, r6
- 508 0464 FEFFFFEB 		bl	wuerfel_print
- 509              	.LVL68:
- 138:PLL.c         ****                 rs_dreh(1, 90);
- 510              		.loc 1 138 0
- 511 0468 0A20D4E5 		ldrb	r2, [r4, #10]	@ zero_extendqisi2
- 512 046c 3130D4E5 		ldrb	r3, [r4, #49]	@ zero_extendqisi2
- 513 0470 030052E1 		cmp	r2, r3
- 514 0474 2A00001A 		bne	.L24
- 138:PLL.c         ****                 rs_dreh(1, 90);
- 515              		.loc 1 138 0 is_stmt 0 discriminator 1
- 516 0478 3420D4E5 		ldrb	r2, [r4, #52]	@ zero_extendqisi2
- 517 047c 2830D4E5 		ldrb	r3, [r4, #40]	@ zero_extendqisi2
- 518 0480 030052E1 		cmp	r2, r3
- 519 0484 2600001A 		bne	.L24
- 520 0488 2B20D4E5 		ldrb	r2, [r4, #43]	@ zero_extendqisi2
- 521 048c 0D30D4E5 		ldrb	r3, [r4, #13]	@ zero_extendqisi2
- 522 0490 030052E1 		cmp	r2, r3
- 523 0494 2200001A 		bne	.L24
- 139:PLL.c         ****                 rs_dreh(-1, 90);
- 524              		.loc 1 139 0 is_stmt 1
- 525 0498 0600A0E1 		mov	r0, r6
- 526 049c 0910A0E1 		mov	r1, r9
- 527 04a0 FEFFFFEB 		bl	rs_dreh
- 528              	.LVL69:
- 140:PLL.c         ****                 ls_dreh(1, 90);
- 529              		.loc 1 140 0
- 530 04a4 0A00A0E1 		mov	r0, r10
- 531 04a8 0910A0E1 		mov	r1, r9
- 532 04ac FEFFFFEB 		bl	rs_dreh
- 533              	.LVL70:
- 141:PLL.c         ****                 rs_dreh(1, 90);
- 534              		.loc 1 141 0
- 535 04b0 0600A0E1 		mov	r0, r6
- 536 04b4 0910A0E1 		mov	r1, r9
- 537 04b8 FEFFFFEB 		bl	ls_dreh
- 538              	.LVL71:
- 142:PLL.c         ****                 ls_dreh(1, 90);
- 539              		.loc 1 142 0
- 540 04bc 0600A0E1 		mov	r0, r6
- 541 04c0 0910A0E1 		mov	r1, r9
- 542 04c4 FEFFFFEB 		bl	rs_dreh
- 543              	.LVL72:
- 143:PLL.c         ****                 rs_dreh(1, 90);
- 544              		.loc 1 143 0
- 545 04c8 0600A0E1 		mov	r0, r6
- 546 04cc 0910A0E1 		mov	r1, r9
- 547 04d0 FEFFFFEB 		bl	ls_dreh
- 548              	.LVL73:
- 144:PLL.c         ****                 ls_dreh(1, 90);
- 549              		.loc 1 144 0
- 550 04d4 0600A0E1 		mov	r0, r6
- 551 04d8 0910A0E1 		mov	r1, r9
- 552 04dc FEFFFFEB 		bl	rs_dreh
- 553              	.LVL74:
- 145:PLL.c         ****                 rs_dreh(-1, 90);
- 554              		.loc 1 145 0
- 555 04e0 0600A0E1 		mov	r0, r6
- 556 04e4 0910A0E1 		mov	r1, r9
- 557 04e8 FEFFFFEB 		bl	ls_dreh
- 558              	.LVL75:
- 146:PLL.c         ****                 ls_dreh(-1, 90);
- 559              		.loc 1 146 0
- 560 04ec 0A00A0E1 		mov	r0, r10
- 561 04f0 0910A0E1 		mov	r1, r9
- 562 04f4 FEFFFFEB 		bl	rs_dreh
- 563              	.LVL76:
- 147:PLL.c         ****                 rs_dreh(-1, 90);
- 564              		.loc 1 147 0
- 565 04f8 0A00A0E1 		mov	r0, r10
- 566 04fc 0910A0E1 		mov	r1, r9
- 567 0500 FEFFFFEB 		bl	ls_dreh
- 568              	.LVL77:
- 148:PLL.c         ****                 ls_dreh(1, 180);
- 569              		.loc 1 148 0
- 570 0504 0A00A0E1 		mov	r0, r10
- 571 0508 0910A0E1 		mov	r1, r9
- 572 050c FEFFFFEB 		bl	rs_dreh
- 573              	.LVL78:
- 149:PLL.c         ****                 wuerfel_print(1);//////////////////////            richtig
- 574              		.loc 1 149 0
- 575 0510 0600A0E1 		mov	r0, r6
- 576 0514 0810A0E1 		mov	r1, r8
- 577 0518 FEFFFFEB 		bl	ls_dreh
- 578              	.LVL79:
- 150:PLL.c         ****             }
- 579              		.loc 1 150 0
- 580 051c 0600A0E1 		mov	r0, r6
- 581 0520 FEFFFFEB 		bl	wuerfel_print
- 582              	.LVL80:
- 583              	.L24:
- 154:PLL.c         ****                 rs_dreh(-1, 180);
- 584              		.loc 1 154 0
- 585 0524 0A20D4E5 		ldrb	r2, [r4, #10]	@ zero_extendqisi2
- 586 0528 2830D4E5 		ldrb	r3, [r4, #40]	@ zero_extendqisi2
- 587 052c 030052E1 		cmp	r2, r3
- 588 0530 2A00001A 		bne	.L23
- 154:PLL.c         ****                 rs_dreh(-1, 180);
- 589              		.loc 1 154 0 is_stmt 0 discriminator 1
- 590 0534 3420D4E5 		ldrb	r2, [r4, #52]	@ zero_extendqisi2
- 591 0538 0D30D4E5 		ldrb	r3, [r4, #13]	@ zero_extendqisi2
- 592 053c 030052E1 		cmp	r2, r3
- 593 0540 2600001A 		bne	.L23
- 594 0544 2B20D4E5 		ldrb	r2, [r4, #43]	@ zero_extendqisi2
- 595 0548 3130D4E5 		ldrb	r3, [r4, #49]	@ zero_extendqisi2
- 596 054c 030052E1 		cmp	r2, r3
- 597 0550 2200001A 		bne	.L23
- 155:PLL.c         ****                 rs_dreh(1, 90);
- 598              		.loc 1 155 0 is_stmt 1
- 599 0554 0A00A0E1 		mov	r0, r10
- 600 0558 0810A0E1 		mov	r1, r8
- 601 055c FEFFFFEB 		bl	rs_dreh
- 602              	.LVL81:
- 603              		.loc 1 156 0
- 604 0560 0600A0E1 		mov	r0, r6
- 605 0564 0910A0E1 		mov	r1, r9
- 606 0568 FEFFFFEB 		bl	rs_dreh
- 607              	.LVL82:
- 157:PLL.c         ****                 ls_dreh(1, 90);
- 608              		.loc 1 157 0
- 609 056c 0600A0E1 		mov	r0, r6
- 610 0570 0910A0E1 		mov	r1, r9
- 611 0574 FEFFFFEB 		bl	ls_dreh
- 612              	.LVL83:
- 158:PLL.c         ****                 rs_dreh(1, 90);
- 613              		.loc 1 158 0
- 614 0578 0600A0E1 		mov	r0, r6
- 615 057c 0910A0E1 		mov	r1, r9
- 616 0580 FEFFFFEB 		bl	rs_dreh
- 617              	.LVL84:
- 159:PLL.c         ****                 ls_dreh(-1, 90);
- 618              		.loc 1 159 0
- 619 0584 0A00A0E1 		mov	r0, r10
- 620 0588 0910A0E1 		mov	r1, r9
- 621 058c FEFFFFEB 		bl	ls_dreh
- 622              	.LVL85:
- 160:PLL.c         ****                 rs_dreh(-1, 90);
- 623              		.loc 1 160 0
- 624 0590 0A00A0E1 		mov	r0, r10
- 625 0594 0910A0E1 		mov	r1, r9
- 626 0598 FEFFFFEB 		bl	rs_dreh
- 627              	.LVL86:
- 161:PLL.c         ****                 ls_dreh(-1, 90);
- 628              		.loc 1 161 0
- 629 059c 0A00A0E1 		mov	r0, r10
- 630 05a0 0910A0E1 		mov	r1, r9
- 631 05a4 FEFFFFEB 		bl	ls_dreh
- 632              	.LVL87:
- 162:PLL.c         ****                 rs_dreh(-1, 90);
- 633              		.loc 1 162 0
- 634 05a8 0A00A0E1 		mov	r0, r10
- 635 05ac 0910A0E1 		mov	r1, r9
- 636 05b0 FEFFFFEB 		bl	rs_dreh
- 637              	.LVL88:
- 163:PLL.c         ****                 ls_dreh(-1, 90);
- 638              		.loc 1 163 0
- 639 05b4 0A00A0E1 		mov	r0, r10
- 640 05b8 0910A0E1 		mov	r1, r9
- 641 05bc FEFFFFEB 		bl	ls_dreh
- 642              	.LVL89:
- 164:PLL.c         ****                 rs_dreh(1, 90);
- 643              		.loc 1 164 0
- 644 05c0 0600A0E1 		mov	r0, r6
- 645 05c4 0910A0E1 		mov	r1, r9
- 646 05c8 FEFFFFEB 		bl	rs_dreh
- 647              	.LVL90:
- 165:PLL.c         ****                 ls_dreh(-1, 90);
- 648              		.loc 1 165 0
- 649 05cc 0A00A0E1 		mov	r0, r10
- 650 05d0 0910A0E1 		mov	r1, r9
- 651 05d4 FEFFFFEB 		bl	ls_dreh
- 652              	.LVL91:
- 166:PLL.c         ****                 wuerfel_print(1);//////////////////////  richtig
- 653              		.loc 1 166 0
- 654 05d8 0600A0E1 		mov	r0, r6
- 655 05dc FEFFFFEB 		bl	wuerfel_print
- 656              	.LVL92:
- 657              	.L23:
- 167:PLL.c         ****             }
- 168:PLL.c         ****         
- 169:PLL.c         ****         }
- 170:PLL.c         ****         
- 171:PLL.c         ****         if ((color_data[1][1]==color_data[3][4])&&(color_data[4][7]==color_data[5][4])&&(color_data
- 658              		.loc 1 171 0
- 659 05e0 0A20D4E5 		ldrb	r2, [r4, #10]	@ zero_extendqisi2
- 660 05e4 1F30D4E5 		ldrb	r3, [r4, #31]	@ zero_extendqisi2
- 661 05e8 030052E1 		cmp	r2, r3
- 662 05ec 2E00001A 		bne	.L25
- 663              		.loc 1 171 0 is_stmt 0 discriminator 1
- 664 05f0 2B20D4E5 		ldrb	r2, [r4, #43]	@ zero_extendqisi2
- 665 05f4 3130D4E5 		ldrb	r3, [r4, #49]	@ zero_extendqisi2
- 666 05f8 030052E1 		cmp	r2, r3
- 667 05fc 2A00001A 		bne	.L25
- 668 0600 2220D4E5 		ldrb	r2, [r4, #34]	@ zero_extendqisi2
- 669 0604 0D30D4E5 		ldrb	r3, [r4, #13]	@ zero_extendqisi2
- 670 0608 030052E1 		cmp	r2, r3
- 671 060c 2600001A 		bne	.L25
- 672 0610 3420D4E5 		ldrb	r2, [r4, #52]	@ zero_extendqisi2
- 673 0614 2830D4E5 		ldrb	r3, [r4, #40]	@ zero_extendqisi2
- 674 0618 030052E1 		cmp	r2, r3
- 675 061c 2200001A 		bne	.L25
- 172:PLL.c         ****             ls_dreh(1, 180);
- 676              		.loc 1 172 0 is_stmt 1
- 677 0620 0600A0E1 		mov	r0, r6
- 678 0624 0810A0E1 		mov	r1, r8
- 679 0628 FEFFFFEB 		bl	ls_dreh
- 680              	.LVL93:
- 173:PLL.c         ****             us_dreh(1, 180);
- 681              		.loc 1 173 0
- 682 062c 0600A0E1 		mov	r0, r6
- 683 0630 0810A0E1 		mov	r1, r8
- 684 0634 FEFFFFEB 		bl	us_dreh
- 685              	.LVL94:
- 174:PLL.c         ****             ls_dreh(1, 90);
- 686              		.loc 1 174 0
- 687 0638 0600A0E1 		mov	r0, r6
- 688 063c 0910A0E1 		mov	r1, r9
- 689 0640 FEFFFFEB 		bl	ls_dreh
- 690              	.LVL95:
- 175:PLL.c         ****             ls_dreh(1, 180);
- 691              		.loc 1 175 0
- 692 0644 0600A0E1 		mov	r0, r6
- 693 0648 0810A0E1 		mov	r1, r8
- 694 064c FEFFFFEB 		bl	ls_dreh
- 695              	.LVL96:
- 176:PLL.c         ****             us_dreh(1, 180);
- 696              		.loc 1 176 0
- 697 0650 0600A0E1 		mov	r0, r6
- 698 0654 0810A0E1 		mov	r1, r8
- 699 0658 FEFFFFEB 		bl	us_dreh
- 700              	.LVL97:
- 177:PLL.c         ****             rs_dreh(1, 180);
- 701              		.loc 1 177 0
- 702 065c 0600A0E1 		mov	r0, r6
- 703 0660 0810A0E1 		mov	r1, r8
- 704 0664 FEFFFFEB 		bl	rs_dreh
- 705              	.LVL98:
- 178:PLL.c         ****             ls_dreh(1, 180);
- 706              		.loc 1 178 0
- 707 0668 0600A0E1 		mov	r0, r6
- 708 066c 0810A0E1 		mov	r1, r8
- 709 0670 FEFFFFEB 		bl	ls_dreh
- 710              	.LVL99:
- 179:PLL.c         ****             us_dreh(1, 180);
- 711              		.loc 1 179 0
- 712 0674 0600A0E1 		mov	r0, r6
- 713 0678 0810A0E1 		mov	r1, r8
- 714 067c FEFFFFEB 		bl	us_dreh
- 715              	.LVL100:
- 180:PLL.c         ****             rs_dreh(1, 90);
- 716              		.loc 1 180 0
- 717 0680 0600A0E1 		mov	r0, r6
- 718 0684 0910A0E1 		mov	r1, r9
- 719 0688 FEFFFFEB 		bl	rs_dreh
- 720              	.LVL101:
- 181:PLL.c         ****             ls_dreh(1, 180);
- 721              		.loc 1 181 0
- 722 068c 0600A0E1 		mov	r0, r6
- 723 0690 0810A0E1 		mov	r1, r8
- 724 0694 FEFFFFEB 		bl	ls_dreh
- 725              	.LVL102:
- 182:PLL.c         ****             us_dreh(1, 180);
- 726              		.loc 1 182 0
- 727 0698 0600A0E1 		mov	r0, r6
- 728 069c 0810A0E1 		mov	r1, r8
- 729 06a0 FEFFFFEB 		bl	us_dreh
- 730              	.LVL103:
- 183:PLL.c         ****             wuerfel_print(1);//////////////////////    richtig
- 731              		.loc 1 183 0
- 732 06a4 0600A0E1 		mov	r0, r6
- 733 06a8 FEFFFFEB 		bl	wuerfel_print
- 734              	.LVL104:
- 735              	.L25:
- 184:PLL.c         ****         }
- 185:PLL.c         ****         if ((color_data[1][1]==color_data[4][4])&&(color_data[4][7]==color_data[1][4])&&(color_data
- 736              		.loc 1 185 0
- 737 06ac 0A20D4E5 		ldrb	r2, [r4, #10]	@ zero_extendqisi2
- 738 06b0 2830D4E5 		ldrb	r3, [r4, #40]	@ zero_extendqisi2
- 739 06b4 030052E1 		cmp	r2, r3
- 740 06b8 0F00001A 		bne	.L26
- 741              		.loc 1 185 0 is_stmt 0 discriminator 1
- 742 06bc 2B20D4E5 		ldrb	r2, [r4, #43]	@ zero_extendqisi2
- 743 06c0 0D30D4E5 		ldrb	r3, [r4, #13]	@ zero_extendqisi2
- 744 06c4 030052E1 		cmp	r2, r3
- 745 06c8 0B00001A 		bne	.L26
- 746 06cc 2220D4E5 		ldrb	r2, [r4, #34]	@ zero_extendqisi2
- 747 06d0 3130D4E5 		ldrb	r3, [r4, #49]	@ zero_extendqisi2
- 748 06d4 030052E1 		cmp	r2, r3
- 749 06d8 0700001A 		bne	.L26
- 750 06dc 3420D4E5 		ldrb	r2, [r4, #52]	@ zero_extendqisi2
- 751 06e0 1F30D4E5 		ldrb	r3, [r4, #31]	@ zero_extendqisi2
- 752 06e4 030052E1 		cmp	r2, r3
- 753 06e8 0300001A 		bne	.L26
- 186:PLL.c         ****             drehen(1);
- 754              		.loc 1 186 0 is_stmt 1
- 755 06ec 0600A0E1 		mov	r0, r6
- 756 06f0 FEFFFFEB 		bl	drehen
- 757              	.LVL105:
- 187:PLL.c         ****             wuerfel_print(1);//////////////////////
- 758              		.loc 1 187 0
- 759 06f4 0600A0E1 		mov	r0, r6
- 760 06f8 FEFFFFEB 		bl	wuerfel_print
- 761              	.LVL106:
- 762              	.L26:
- 188:PLL.c         ****         }
- 189:PLL.c         ****         
- 190:PLL.c         ****         if ((color_data[1][1]==color_data[5][4])&&(color_data[4][7]==color_data[3][4])&&(color_data
- 763              		.loc 1 190 0
- 764 06fc 0A20D4E5 		ldrb	r2, [r4, #10]	@ zero_extendqisi2
- 765 0700 3130D4E5 		ldrb	r3, [r4, #49]	@ zero_extendqisi2
- 766 0704 030052E1 		cmp	r2, r3
- 767 0708 3A00001A 		bne	.L27
- 768              		.loc 1 190 0 is_stmt 0 discriminator 1
- 769 070c 2B20D4E5 		ldrb	r2, [r4, #43]	@ zero_extendqisi2
- 770 0710 1F30D4E5 		ldrb	r3, [r4, #31]	@ zero_extendqisi2
- 771 0714 030052E1 		cmp	r2, r3
- 772 0718 3600001A 		bne	.L27
- 773 071c 2220D4E5 		ldrb	r2, [r4, #34]	@ zero_extendqisi2
- 774 0720 2830D4E5 		ldrb	r3, [r4, #40]	@ zero_extendqisi2
- 775 0724 030052E1 		cmp	r2, r3
- 776 0728 3200001A 		bne	.L27
- 777 072c 3420D4E5 		ldrb	r2, [r4, #52]	@ zero_extendqisi2
- 778 0730 0D30D4E5 		ldrb	r3, [r4, #13]	@ zero_extendqisi2
- 779 0734 030052E1 		cmp	r2, r3
- 780 0738 2E00001A 		bne	.L27
- 191:PLL.c         ****             ls_dreh(1, 180);
- 781              		.loc 1 191 0 is_stmt 1
- 782 073c 0600A0E1 		mov	r0, r6
- 783 0740 0810A0E1 		mov	r1, r8
- 784 0744 FEFFFFEB 		bl	ls_dreh
- 785              	.LVL107:
- 192:PLL.c         ****             us_dreh(1, 180);
- 786              		.loc 1 192 0
- 787 0748 0600A0E1 		mov	r0, r6
- 788 074c 0810A0E1 		mov	r1, r8
- 789 0750 FEFFFFEB 		bl	us_dreh
- 790              	.LVL108:
- 193:PLL.c         ****             ls_dreh(1, 90);
- 791              		.loc 1 193 0
- 792 0754 0600A0E1 		mov	r0, r6
- 793 0758 0910A0E1 		mov	r1, r9
- 794 075c FEFFFFEB 		bl	ls_dreh
- 795              	.LVL109:
- 194:PLL.c         ****             ls_dreh(1, 180);
- 796              		.loc 1 194 0
- 797 0760 0600A0E1 		mov	r0, r6
- 798 0764 0810A0E1 		mov	r1, r8
- 799 0768 FEFFFFEB 		bl	ls_dreh
- 800              	.LVL110:
- 195:PLL.c         ****             us_dreh(1, 180);
- 801              		.loc 1 195 0
- 802 076c 0600A0E1 		mov	r0, r6
- 803 0770 0810A0E1 		mov	r1, r8
- 804 0774 FEFFFFEB 		bl	us_dreh
- 805              	.LVL111:
- 196:PLL.c         ****             rs_dreh(1, 90);
- 806              		.loc 1 196 0
- 807 0778 0600A0E1 		mov	r0, r6
- 808 077c 0910A0E1 		mov	r1, r9
- 809 0780 FEFFFFEB 		bl	rs_dreh
- 810              	.LVL112:
- 197:PLL.c         ****             ls_dreh(1, 90);
- 811              		.loc 1 197 0
- 812 0784 0600A0E1 		mov	r0, r6
- 813 0788 0910A0E1 		mov	r1, r9
- 814 078c FEFFFFEB 		bl	ls_dreh
- 815              	.LVL113:
- 198:PLL.c         ****             us_dreh(-1, 90);
- 816              		.loc 1 198 0
- 817 0790 0A00A0E1 		mov	r0, r10
- 818 0794 0910A0E1 		mov	r1, r9
- 819 0798 FEFFFFEB 		bl	us_dreh
- 820              	.LVL114:
- 199:PLL.c         ****             fs_dreh(1, 180);
- 821              		.loc 1 199 0
- 822 079c 0600A0E1 		mov	r0, r6
- 823 07a0 0810A0E1 		mov	r1, r8
- 824 07a4 FEFFFFEB 		bl	fs_dreh
- 825              	.LVL115:
- 200:PLL.c         ****             ls_dreh(1, 180);
- 826              		.loc 1 200 0
- 827 07a8 0600A0E1 		mov	r0, r6
- 828 07ac 0810A0E1 		mov	r1, r8
- 829 07b0 FEFFFFEB 		bl	ls_dreh
- 830              	.LVL116:
- 201:PLL.c         ****             us_dreh(1, 180);
- 831              		.loc 1 201 0
- 832 07b4 0600A0E1 		mov	r0, r6
- 833 07b8 0810A0E1 		mov	r1, r8
- 834 07bc FEFFFFEB 		bl	us_dreh
- 835              	.LVL117:
- 202:PLL.c         ****             rs_dreh(1, 180);
- 836              		.loc 1 202 0
- 837 07c0 0600A0E1 		mov	r0, r6
- 838 07c4 0810A0E1 		mov	r1, r8
- 839 07c8 FEFFFFEB 		bl	rs_dreh
- 840              	.LVL118:
- 203:PLL.c         ****             ls_dreh(-1, 90);
- 841              		.loc 1 203 0
- 842 07cc 0A00A0E1 		mov	r0, r10
- 843 07d0 0910A0E1 		mov	r1, r9
- 844 07d4 FEFFFFEB 		bl	ls_dreh
- 845              	.LVL119:
- 204:PLL.c         ****             us_dreh(1, 90);
- 846              		.loc 1 204 0
- 847 07d8 0600A0E1 		mov	r0, r6
- 848 07dc 0910A0E1 		mov	r1, r9
- 849 07e0 FEFFFFEB 		bl	us_dreh
- 850              	.LVL120:
- 205:PLL.c         ****             bs_dreh(1, 180);
- 851              		.loc 1 205 0
- 852 07e4 0600A0E1 		mov	r0, r6
- 853 07e8 0810A0E1 		mov	r1, r8
- 854 07ec FEFFFFEB 		bl	bs_dreh
- 855              	.LVL121:
- 206:PLL.c         ****             wuerfel_print(1);////////////////////// richtig
- 856              		.loc 1 206 0
- 857 07f0 0600A0E1 		mov	r0, r6
- 858 07f4 FEFFFFEB 		bl	wuerfel_print
- 859              	.LVL122:
- 860              	.L27:
+ 127:PLL.c         ****     for (i=0; i<=3; i++) {
  128:PLL.c         ****         change_topface(2);
- 861              		.loc 1 128 0 discriminator 1
- 862 07f8 040055E3 		cmp	r5, #4
- 863 07fc FBFEFF1A 		bne	.L29
- 207:PLL.c         ****         }
- 208:PLL.c         ****         
- 209:PLL.c         ****     }
- 210:PLL.c         ****     
- 211:PLL.c         **** }...
- 864              		.loc 1 211 0
- 865 0800 1CD08DE2 		add	sp, sp, #28
- 866              		@ sp needed
- 867 0804 F08FBDE8 		ldmfd	sp!, {r4, r5, r6, r7, r8, r9, r10, fp, pc}
- 868              	.LVL123:
- 869              	.L31:
- 870              		.align	2
- 871              	.L30:
- 872 0808 00000000 		.word	.LANCHOR0
- 873 080c 00000000 		.word	color_data
- 874              		.cfi_endproc
- 875              	.LFE11:
- 876              		.fnend
- 878              		.section	.rodata
- 879              		.align	2
- 880              	.LANCHOR0 = . + 0
- 881              	.LC0:
- 882 0000 01000000 		.word	1
- 883 0004 04000000 		.word	4
- 884 0008 03000000 		.word	3
- 885 000c 05000000 		.word	5
- 886              		.text
- 887              	.Letext0:
- 888              		.file 2 "/usr/local/carlson-minot/crosscompilers/lib/gcc/arm-none-linux-gnueabi/4.8.3/include/stdd
- 889              		.file 3 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
- 890              		.file 4 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
- 891              		.file 5 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
- 892              		.file 6 "main.h"
- 893              		.file 7 "print_mode.h"
- 894              		.file 8 "Side_dreh.h"
+ 447              		.loc 1 128 0
+ 448 03d0 0600A0E1 		mov	r0, r6
+ 449 03d4 FEFFFFEB 		bl	change_topface
+ 450              	.LVL60:
+ 129:PLL.c         ****         change_rightface(Color_col[(i+1)%4]);
+ 451              		.loc 1 129 0
+ 452 03d8 015085E2 		add	r5, r5, #1
+ 453              	.LVL61:
+ 454 03dc C53FA0E1 		mov	r3, r5, asr #31
+ 455 03e0 233FA0E1 		mov	r3, r3, lsr #30
+ 456 03e4 032085E0 		add	r2, r5, r3
+ 457 03e8 032002E2 		and	r2, r2, #3
+ 458 03ec 023063E0 		rsb	r3, r3, r2
+ 459 03f0 18C08DE2 		add	ip, sp, #24
+ 460 03f4 03318CE0 		add	r3, ip, r3, asl #2
+ 461 03f8 100013E5 		ldr	r0, [r3, #-16]
+ 462 03fc FEFFFFEB 		bl	change_rightface
+ 463              	.LVL62:
+ 130:PLL.c         ****         if ((color_data[1][0]==color_data[1][1]) && (color_data[1][1]==color_data[1][2])&&(color_da
+ 464              		.loc 1 130 0
+ 465 0400 0930D4E5 		ldrb	r3, [r4, #9]	@ zero_extendqisi2
+ 466 0404 0A20D4E5 		ldrb	r2, [r4, #10]	@ zero_extendqisi2
+ 467 0408 030052E1 		cmp	r2, r3
+ 468 040c 6300001A 		bne	.L25
+ 469              		.loc 1 130 0 is_stmt 0 discriminator 1
+ 470 0410 0B20D4E5 		ldrb	r2, [r4, #11]	@ zero_extendqisi2
+ 471 0414 030052E1 		cmp	r2, r3
+ 472 0418 6000001A 		bne	.L25
+ 473 041c 0D20D4E5 		ldrb	r2, [r4, #13]	@ zero_extendqisi2
+ 474 0420 030052E1 		cmp	r2, r3
+ 475 0424 5D00001A 		bne	.L25
+ 131:PLL.c         ****                 drehen(1);
+ 476              		.loc 1 131 0 is_stmt 1
+ 477 0428 0700A0E1 		mov	r0, r7
+ 478 042c FEFFFFEB 		bl	drehen
+ 479              	.LVL63:
+ 132:PLL.c         ****                 drehen(1);
+ 480              		.loc 1 132 0
+ 481 0430 0700A0E1 		mov	r0, r7
+ 482 0434 FEFFFFEB 		bl	drehen
+ 483              	.LVL64:
+ 133:PLL.c         ****             if ((color_data[1][1]==color_data[5][4])&&(color_data[5][7]==color_data[4][4])&&(color_
+ 484              		.loc 1 133 0
+ 485 0438 0A30D4E5 		ldrb	r3, [r4, #10]	@ zero_extendqisi2
+ 486 043c 3120D4E5 		ldrb	r2, [r4, #49]	@ zero_extendqisi2
+ 487 0440 020053E1 		cmp	r3, r2
+ 488 0444 2900001A 		bne	.L26
+ 489              		.loc 1 133 0 is_stmt 0 discriminator 1
+ 490 0448 3400D4E5 		ldrb	r0, [r4, #52]	@ zero_extendqisi2
+ 491 044c 2810D4E5 		ldrb	r1, [r4, #40]	@ zero_extendqisi2
+ 492 0450 010050E1 		cmp	r0, r1
+ 493 0454 2500001A 		bne	.L26
+ 494 0458 2B00D4E5 		ldrb	r0, [r4, #43]	@ zero_extendqisi2
+ 495 045c 0D10D4E5 		ldrb	r1, [r4, #13]	@ zero_extendqisi2
+ 496 0460 010050E1 		cmp	r0, r1
+ 497 0464 2100001A 		bne	.L26
+ 134:PLL.c         ****                 rs_dreh(1, 90);
+ 498              		.loc 1 134 0 is_stmt 1
+ 499 0468 0100A0E3 		mov	r0, #1
+ 500 046c 5A10A0E3 		mov	r1, #90
+ 501 0470 FEFFFFEB 		bl	rs_dreh
+ 502              	.LVL65:
+ 135:PLL.c         ****                 rs_dreh(-1, 90);
+ 503              		.loc 1 135 0
+ 504 0474 0000E0E3 		mvn	r0, #0
+ 505 0478 5A10A0E3 		mov	r1, #90
+ 506 047c FEFFFFEB 		bl	rs_dreh
+ 507              	.LVL66:
+ 136:PLL.c         ****                 ls_dreh(1, 90);
+ 508              		.loc 1 136 0
+ 509 0480 0100A0E3 		mov	r0, #1
+ 510 0484 5A10A0E3 		mov	r1, #90
+ 511 0488 FEFFFFEB 		bl	ls_dreh
+ 512              	.LVL67:
+ 137:PLL.c         ****                 rs_dreh(1, 90);
+ 513              		.loc 1 137 0
+ 514 048c 0100A0E3 		mov	r0, #1
+ 515 0490 5A10A0E3 		mov	r1, #90
+ 516 0494 FEFFFFEB 		bl	rs_dreh
+ 517              	.LVL68:
+ 138:PLL.c         ****                 ls_dreh(1, 90);
+ 518              		.loc 1 138 0
+ 519 0498 0100A0E3 		mov	r0, #1
+ 520 049c 5A10A0E3 		mov	r1, #90
+ 521 04a0 FEFFFFEB 		bl	ls_dreh
+ 522              	.LVL69:
+ 139:PLL.c         ****                 rs_dreh(1, 90);
+ 523              		.loc 1 139 0
+ 524 04a4 0100A0E3 		mov	r0, #1
+ 525 04a8 5A10A0E3 		mov	r1, #90
+ 526 04ac FEFFFFEB 		bl	rs_dreh
+ 527              	.LVL70:
+ 140:PLL.c         ****                 ls_dreh(1, 90);
+ 528              		.loc 1 140 0
+ 529 04b0 0100A0E3 		mov	r0, #1
+ 530 04b4 5A10A0E3 		mov	r1, #90
+ 531 04b8 FEFFFFEB 		bl	ls_dreh
+ 532              	.LVL71:
+ 141:PLL.c         ****                 rs_dreh(-1, 90);
+ 533              		.loc 1 141 0
+ 534 04bc 0000E0E3 		mvn	r0, #0
+ 535 04c0 5A10A0E3 		mov	r1, #90
+ 536 04c4 FEFFFFEB 		bl	rs_dreh
+ 537              	.LVL72:
+ 142:PLL.c         ****                 ls_dreh(-1, 90);
+ 538              		.loc 1 142 0
+ 539 04c8 0000E0E3 		mvn	r0, #0
+ 540 04cc 5A10A0E3 		mov	r1, #90
+ 541 04d0 FEFFFFEB 		bl	ls_dreh
+ 542              	.LVL73:
+ 143:PLL.c         ****                 rs_dreh(-1, 90);
+ 543              		.loc 1 143 0
+ 544 04d4 0000E0E3 		mvn	r0, #0
+ 545 04d8 5A10A0E3 		mov	r1, #90
+ 546 04dc FEFFFFEB 		bl	rs_dreh
+ 547              	.LVL74:
+ 144:PLL.c         ****                 ls_dreh(1, 180);
+ 548              		.loc 1 144 0
+ 549 04e0 0100A0E3 		mov	r0, #1
+ 550 04e4 B410A0E3 		mov	r1, #180
+ 551 04e8 FEFFFFEB 		bl	ls_dreh
+ 552              	.LVL75:
+ 145:PLL.c         ****                 goto fertig;
+ 553              		.loc 1 145 0
+ 554 04ec B30000EA 		b	.L33
+ 555              	.L26:
+ 146:PLL.c         ****             }
+ 147:PLL.c         ****             
+ 148:PLL.c         ****             
+ 149:PLL.c         ****             if ((color_data[1][1]==color_data[4][4])&&(color_data[5][7]==color_data[1][4])&&(color_
+ 556              		.loc 1 149 0
+ 557 04f0 2810D4E5 		ldrb	r1, [r4, #40]	@ zero_extendqisi2
+ 558 04f4 030051E1 		cmp	r1, r3
+ 559 04f8 2800001A 		bne	.L25
+ 560              		.loc 1 149 0 is_stmt 0 discriminator 1
+ 561 04fc 3410D4E5 		ldrb	r1, [r4, #52]	@ zero_extendqisi2
+ 562 0500 0D30D4E5 		ldrb	r3, [r4, #13]	@ zero_extendqisi2
+ 563 0504 030051E1 		cmp	r1, r3
+ 564 0508 2400001A 		bne	.L25
+ 565 050c 2B30D4E5 		ldrb	r3, [r4, #43]	@ zero_extendqisi2
+ 566 0510 020053E1 		cmp	r3, r2
+ 567 0514 2100001A 		bne	.L25
+ 150:PLL.c         ****                 rs_dreh(-1, 180);
+ 568              		.loc 1 150 0 is_stmt 1
+ 569 0518 0000E0E3 		mvn	r0, #0
+ 570 051c B410A0E3 		mov	r1, #180
+ 571 0520 FEFFFFEB 		bl	rs_dreh
+ 572              	.LVL76:
+ 151:PLL.c         ****                 rs_dreh(1, 90);
+ 573              		.loc 1 151 0
+ 574 0524 0100A0E3 		mov	r0, #1
+ 575 0528 5A10A0E3 		mov	r1, #90
+ 576 052c FEFFFFEB 		bl	rs_dreh
+ 577              	.LVL77:
+ 152:PLL.c         ****                 ls_dreh(1, 90);
+ 578              		.loc 1 152 0
+ 579 0530 0100A0E3 		mov	r0, #1
+ 580 0534 5A10A0E3 		mov	r1, #90
+ 581 0538 FEFFFFEB 		bl	ls_dreh
+ 582              	.LVL78:
+ 153:PLL.c         ****                 rs_dreh(1, 90);
+ 583              		.loc 1 153 0
+ 584 053c 0100A0E3 		mov	r0, #1
+ 585 0540 5A10A0E3 		mov	r1, #90
+ 586 0544 FEFFFFEB 		bl	rs_dreh
+ 587              	.LVL79:
+ 154:PLL.c         ****                 ls_dreh(-1, 90);
+ 588              		.loc 1 154 0
+ 589 0548 0000E0E3 		mvn	r0, #0
+ 590 054c 5A10A0E3 		mov	r1, #90
+ 591 0550 FEFFFFEB 		bl	ls_dreh
+ 592              	.LVL80:
+ 155:PLL.c         ****                 rs_dreh(-1, 90);
+ 593              		.loc 1 155 0
+ 594 0554 0000E0E3 		mvn	r0, #0
+ 595 0558 5A10A0E3 		mov	r1, #90
+ 596 055c FEFFFFEB 		bl	rs_dreh
+ 597              	.LVL81:
+ 156:PLL.c         ****                 ls_dreh(-1, 90);
+ 598              		.loc 1 156 0
+ 599 0560 0000E0E3 		mvn	r0, #0
+ 600 0564 5A10A0E3 		mov	r1, #90
+ 601 0568 FEFFFFEB 		bl	ls_dreh
+ 602              	.LVL82:
+ 157:PLL.c         ****                 rs_dreh(-1, 90);
+ 603              		.loc 1 157 0
+ 604 056c 0000E0E3 		mvn	r0, #0
+ 605 0570 5A10A0E3 		mov	r1, #90
+ 606 0574 FEFFFFEB 		bl	rs_dreh
+ 607              	.LVL83:
+ 158:PLL.c         ****                 ls_dreh(-1, 90);
+ 608              		.loc 1 158 0
+ 609 0578 0000E0E3 		mvn	r0, #0
+ 610 057c 5A10A0E3 		mov	r1, #90
+ 611 0580 FEFFFFEB 		bl	ls_dreh
+ 612              	.LVL84:
+ 159:PLL.c         ****                 rs_dreh(1, 90);
+ 613              		.loc 1 159 0
+ 614 0584 0100A0E3 		mov	r0, #1
+ 615 0588 5A10A0E3 		mov	r1, #90
+ 616 058c FEFFFFEB 		bl	rs_dreh
+ 617              	.LVL85:
+ 160:PLL.c         ****                 ls_dreh(-1, 90);
+ 618              		.loc 1 160 0
+ 619 0590 0000E0E3 		mvn	r0, #0
+ 620 0594 5A10A0E3 		mov	r1, #90
+ 621 0598 FEFFFFEB 		bl	ls_dreh
+ 622              	.LVL86:
+ 161:PLL.c         ****                 goto fertig;
+ 623              		.loc 1 161 0
+ 624 059c 870000EA 		b	.L33
+ 625              	.L25:
+ 162:PLL.c         ****             }
+ 163:PLL.c         ****         
+ 164:PLL.c         ****         }
+ 165:PLL.c         ****         
+ 166:PLL.c         ****         if ((color_data[1][1]==color_data[3][4])&&(color_data[4][7]==color_data[5][4])&&(color_data
+ 626              		.loc 1 166 0
+ 627 05a0 0A30D4E5 		ldrb	r3, [r4, #10]	@ zero_extendqisi2
+ 628 05a4 1F20D4E5 		ldrb	r2, [r4, #31]	@ zero_extendqisi2
+ 629 05a8 020053E1 		cmp	r3, r2
+ 630 05ac 2D00001A 		bne	.L28
+ 631              		.loc 1 166 0 is_stmt 0 discriminator 1
+ 632 05b0 2B00D4E5 		ldrb	r0, [r4, #43]	@ zero_extendqisi2
+ 633 05b4 3110D4E5 		ldrb	r1, [r4, #49]	@ zero_extendqisi2
+ 634 05b8 010050E1 		cmp	r0, r1
+ 635 05bc 2900001A 		bne	.L28
+ 636 05c0 2200D4E5 		ldrb	r0, [r4, #34]	@ zero_extendqisi2
+ 637 05c4 0D10D4E5 		ldrb	r1, [r4, #13]	@ zero_extendqisi2
+ 638 05c8 010050E1 		cmp	r0, r1
+ 639 05cc 2500001A 		bne	.L28
+ 640 05d0 3400D4E5 		ldrb	r0, [r4, #52]	@ zero_extendqisi2
+ 641 05d4 2810D4E5 		ldrb	r1, [r4, #40]	@ zero_extendqisi2
+ 642 05d8 010050E1 		cmp	r0, r1
+ 643 05dc 2100001A 		bne	.L28
+ 167:PLL.c         ****             ls_dreh(1, 180);
+ 644              		.loc 1 167 0 is_stmt 1
+ 645 05e0 0100A0E3 		mov	r0, #1
+ 646 05e4 B410A0E3 		mov	r1, #180
+ 647 05e8 FEFFFFEB 		bl	ls_dreh
+ 648              	.LVL87:
+ 168:PLL.c         ****             us_dreh(1, 180);
+ 649              		.loc 1 168 0
+ 650 05ec 0100A0E3 		mov	r0, #1
+ 651 05f0 B410A0E3 		mov	r1, #180
+ 652 05f4 FEFFFFEB 		bl	us_dreh
+ 653              	.LVL88:
+ 169:PLL.c         ****             ls_dreh(1, 90);
+ 654              		.loc 1 169 0
+ 655 05f8 0100A0E3 		mov	r0, #1
+ 656 05fc 5A10A0E3 		mov	r1, #90
+ 657 0600 FEFFFFEB 		bl	ls_dreh
+ 658              	.LVL89:
+ 170:PLL.c         ****             ls_dreh(1, 180);
+ 659              		.loc 1 170 0
+ 660 0604 0100A0E3 		mov	r0, #1
+ 661 0608 B410A0E3 		mov	r1, #180
+ 662 060c FEFFFFEB 		bl	ls_dreh
+ 663              	.LVL90:
+ 171:PLL.c         ****             us_dreh(1, 180);
+ 664              		.loc 1 171 0
+ 665 0610 0100A0E3 		mov	r0, #1
+ 666 0614 B410A0E3 		mov	r1, #180
+ 667 0618 FEFFFFEB 		bl	us_dreh
+ 668              	.LVL91:
+ 172:PLL.c         ****             rs_dreh(1, 180);
+ 669              		.loc 1 172 0
+ 670 061c 0100A0E3 		mov	r0, #1
+ 671 0620 B410A0E3 		mov	r1, #180
+ 672 0624 FEFFFFEB 		bl	rs_dreh
+ 673              	.LVL92:
+ 173:PLL.c         ****             ls_dreh(1, 180);
+ 674              		.loc 1 173 0
+ 675 0628 0100A0E3 		mov	r0, #1
+ 676 062c B410A0E3 		mov	r1, #180
+ 677 0630 FEFFFFEB 		bl	ls_dreh
+ 678              	.LVL93:
+ 174:PLL.c         ****             us_dreh(1, 180);
+ 679              		.loc 1 174 0
+ 680 0634 0100A0E3 		mov	r0, #1
+ 681 0638 B410A0E3 		mov	r1, #180
+ 682 063c FEFFFFEB 		bl	us_dreh
+ 683              	.LVL94:
+ 175:PLL.c         ****             rs_dreh(1, 90);
+ 684              		.loc 1 175 0
+ 685 0640 0100A0E3 		mov	r0, #1
+ 686 0644 5A10A0E3 		mov	r1, #90
+ 687 0648 FEFFFFEB 		bl	rs_dreh
+ 688              	.LVL95:
+ 176:PLL.c         ****             ls_dreh(1, 180);
+ 689              		.loc 1 176 0
+ 690 064c 0100A0E3 		mov	r0, #1
+ 691 0650 B410A0E3 		mov	r1, #180
+ 692 0654 FEFFFFEB 		bl	ls_dreh
+ 693              	.LVL96:
+ 177:PLL.c         ****             us_dreh(1, 180);
+ 694              		.loc 1 177 0
+ 695 0658 0100A0E3 		mov	r0, #1
+ 696 065c B410A0E3 		mov	r1, #180
+ 697 0660 FEFFFFEB 		bl	us_dreh
+ 698              	.LVL97:
+ 178:PLL.c         ****             goto fertig;
+ 699              		.loc 1 178 0
+ 700 0664 550000EA 		b	.L33
+ 701              	.L28:
+ 179:PLL.c         ****         }
+ 180:PLL.c         ****         if ((color_data[1][1]==color_data[4][4])&&(color_data[4][7]==color_data[1][4])&&(color_data
+ 702              		.loc 1 180 0
+ 703 0668 2810D4E5 		ldrb	r1, [r4, #40]	@ zero_extendqisi2
+ 704 066c 030051E1 		cmp	r1, r3
+ 705 0670 0C00001A 		bne	.L29
+ 706              		.loc 1 180 0 is_stmt 0 discriminator 1
+ 707 0674 2B10D4E5 		ldrb	r1, [r4, #43]	@ zero_extendqisi2
+ 708 0678 0D30D4E5 		ldrb	r3, [r4, #13]	@ zero_extendqisi2
+ 709 067c 030051E1 		cmp	r1, r3
+ 710 0680 0800001A 		bne	.L29
+ 711 0684 2210D4E5 		ldrb	r1, [r4, #34]	@ zero_extendqisi2
+ 712 0688 3130D4E5 		ldrb	r3, [r4, #49]	@ zero_extendqisi2
+ 713 068c 030051E1 		cmp	r1, r3
+ 714 0690 0400001A 		bne	.L29
+ 715 0694 3430D4E5 		ldrb	r3, [r4, #52]	@ zero_extendqisi2
+ 716 0698 020053E1 		cmp	r3, r2
+ 717 069c 0100001A 		bne	.L29
+ 181:PLL.c         ****             drehen(1);
+ 718              		.loc 1 181 0 is_stmt 1
+ 719 06a0 0700A0E1 		mov	r0, r7
+ 720 06a4 FEFFFFEB 		bl	drehen
+ 721              	.LVL98:
+ 722              	.L29:
+ 182:PLL.c         ****         }
+ 183:PLL.c         ****         
+ 184:PLL.c         ****         if ((color_data[1][1]==color_data[5][4])&&(color_data[4][7]==color_data[3][4])&&(color_data
+ 723              		.loc 1 184 0
+ 724 06a8 0A20D4E5 		ldrb	r2, [r4, #10]	@ zero_extendqisi2
+ 725 06ac 3130D4E5 		ldrb	r3, [r4, #49]	@ zero_extendqisi2
+ 726 06b0 030052E1 		cmp	r2, r3
+ 727 06b4 3900001A 		bne	.L30
+ 728              		.loc 1 184 0 is_stmt 0 discriminator 1
+ 729 06b8 2B20D4E5 		ldrb	r2, [r4, #43]	@ zero_extendqisi2
+ 730 06bc 1F30D4E5 		ldrb	r3, [r4, #31]	@ zero_extendqisi2
+ 731 06c0 030052E1 		cmp	r2, r3
+ 732 06c4 3500001A 		bne	.L30
+ 733 06c8 2220D4E5 		ldrb	r2, [r4, #34]	@ zero_extendqisi2
+ 734 06cc 2830D4E5 		ldrb	r3, [r4, #40]	@ zero_extendqisi2
+ 735 06d0 030052E1 		cmp	r2, r3
+ 736 06d4 3100001A 		bne	.L30
+ 737 06d8 3420D4E5 		ldrb	r2, [r4, #52]	@ zero_extendqisi2
+ 738 06dc 0D30D4E5 		ldrb	r3, [r4, #13]	@ zero_extendqisi2
+ 739 06e0 030052E1 		cmp	r2, r3
+ 740 06e4 2D00001A 		bne	.L30
+ 185:PLL.c         ****             ls_dreh(1, 180);
+ 741              		.loc 1 185 0 is_stmt 1
+ 742 06e8 0100A0E3 		mov	r0, #1
+ 743 06ec B410A0E3 		mov	r1, #180
+ 744 06f0 FEFFFFEB 		bl	ls_dreh
+ 745              	.LVL99:
+ 186:PLL.c         ****             us_dreh(1, 180);
+ 746              		.loc 1 186 0
+ 747 06f4 0100A0E3 		mov	r0, #1
+ 748 06f8 B410A0E3 		mov	r1, #180
+ 749 06fc FEFFFFEB 		bl	us_dreh
+ 750              	.LVL100:
+ 187:PLL.c         ****             ls_dreh(1, 90);
+ 751              		.loc 1 187 0
+ 752 0700 0100A0E3 		mov	r0, #1
+ 753 0704 5A10A0E3 		mov	r1, #90
+ 754 0708 FEFFFFEB 		bl	ls_dreh
+ 755              	.LVL101:
+ 188:PLL.c         ****             ls_dreh(1, 180);
+ 756              		.loc 1 188 0
+ 757 070c 0100A0E3 		mov	r0, #1
+ 758 0710 B410A0E3 		mov	r1, #180
+ 759 0714 FEFFFFEB 		bl	ls_dreh
+ 760              	.LVL102:
+ 189:PLL.c         ****             us_dreh(1, 180);
+ 761              		.loc 1 189 0
+ 762 0718 0100A0E3 		mov	r0, #1
+ 763 071c B410A0E3 		mov	r1, #180
+ 764 0720 FEFFFFEB 		bl	us_dreh
+ 765              	.LVL103:
+ 190:PLL.c         ****             rs_dreh(1, 90);
+ 766              		.loc 1 190 0
+ 767 0724 0100A0E3 		mov	r0, #1
+ 768 0728 5A10A0E3 		mov	r1, #90
+ 769 072c FEFFFFEB 		bl	rs_dreh
+ 770              	.LVL104:
+ 191:PLL.c         ****             ls_dreh(1, 90);
+ 771              		.loc 1 191 0
+ 772 0730 0100A0E3 		mov	r0, #1
+ 773 0734 5A10A0E3 		mov	r1, #90
+ 774 0738 FEFFFFEB 		bl	ls_dreh
+ 775              	.LVL105:
+ 192:PLL.c         ****             us_dreh(-1, 90);
+ 776              		.loc 1 192 0
+ 777 073c 0000E0E3 		mvn	r0, #0
+ 778 0740 5A10A0E3 		mov	r1, #90
+ 779 0744 FEFFFFEB 		bl	us_dreh
+ 780              	.LVL106:
+ 193:PLL.c         ****             fs_dreh(1, 180);
+ 781              		.loc 1 193 0
+ 782 0748 0100A0E3 		mov	r0, #1
+ 783 074c B410A0E3 		mov	r1, #180
+ 784 0750 FEFFFFEB 		bl	fs_dreh
+ 785              	.LVL107:
+ 194:PLL.c         ****             ls_dreh(1, 180);
+ 786              		.loc 1 194 0
+ 787 0754 0100A0E3 		mov	r0, #1
+ 788 0758 B410A0E3 		mov	r1, #180
+ 789 075c FEFFFFEB 		bl	ls_dreh
+ 790              	.LVL108:
+ 195:PLL.c         ****             us_dreh(1, 180);
+ 791              		.loc 1 195 0
+ 792 0760 0100A0E3 		mov	r0, #1
+ 793 0764 B410A0E3 		mov	r1, #180
+ 794 0768 FEFFFFEB 		bl	us_dreh
+ 795              	.LVL109:
+ 196:PLL.c         ****             rs_dreh(1, 180);
+ 796              		.loc 1 196 0
+ 797 076c 0100A0E3 		mov	r0, #1
+ 798 0770 B410A0E3 		mov	r1, #180
+ 799 0774 FEFFFFEB 		bl	rs_dreh
+ 800              	.LVL110:
+ 197:PLL.c         ****             ls_dreh(-1, 90);
+ 801              		.loc 1 197 0
+ 802 0778 0000E0E3 		mvn	r0, #0
+ 803 077c 5A10A0E3 		mov	r1, #90
+ 804 0780 FEFFFFEB 		bl	ls_dreh
+ 805              	.LVL111:
+ 198:PLL.c         ****             us_dreh(1, 90);
+ 806              		.loc 1 198 0
+ 807 0784 0100A0E3 		mov	r0, #1
+ 808 0788 5A10A0E3 		mov	r1, #90
+ 809 078c FEFFFFEB 		bl	us_dreh
+ 810              	.LVL112:
+ 199:PLL.c         ****             bs_dreh(1, 180);
+ 811              		.loc 1 199 0
+ 812 0790 0100A0E3 		mov	r0, #1
+ 813 0794 B410A0E3 		mov	r1, #180
+ 814 0798 FEFFFFEB 		bl	bs_dreh
+ 815              	.LVL113:
+ 200:PLL.c         ****             goto fertig;
+ 816              		.loc 1 200 0
+ 817 079c 070000EA 		b	.L33
+ 818              	.L30:
+ 819              	.LVL114:
+ 127:PLL.c         ****         change_topface(2);
+ 820              		.loc 1 127 0 discriminator 1
+ 821 07a0 040055E3 		cmp	r5, #4
+ 822 07a4 09FFFF1A 		bne	.L32
+ 823              	.L27:
+ 824 07a8 040000EA 		b	.L33
+ 825              	.LVL115:
+ 826              	.L9:
+  58:PLL.c         ****         {
+ 827              		.loc 1 58 0
+ 828 07ac 0050A0E3 		mov	r5, #0
+ 128:PLL.c         ****         change_rightface(Color_col[(i+1)%4]);
+ 829              		.loc 1 128 0
+ 830 07b0 0260A0E3 		mov	r6, #2
+ 130:PLL.c         ****                 drehen(1);
+ 831              		.loc 1 130 0
+ 832 07b4 14409FE5 		ldr	r4, .L34+4
+ 131:PLL.c         ****                 drehen(1);
+ 833              		.loc 1 131 0
+ 834 07b8 0170A0E3 		mov	r7, #1
+ 835 07bc 03FFFFEA 		b	.L32
+ 836              	.L33:
+ 201:PLL.c         ****         }
+ 202:PLL.c         ****         
+ 203:PLL.c         ****     }
+ 204:PLL.c         ****     
+ 205:PLL.c         **** fertig:return 0;
+ 206:PLL.c         **** }...
+ 837              		.loc 1 206 0
+ 838 07c0 0000A0E3 		mov	r0, #0
+ 839 07c4 1CD08DE2 		add	sp, sp, #28
+ 840              		@ sp needed
+ 841 07c8 F08FBDE8 		ldmfd	sp!, {r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 842              	.L35:
+ 843              		.align	2
+ 844              	.L34:
+ 845 07cc 00000000 		.word	.LANCHOR0
+ 846 07d0 00000000 		.word	color_data
+ 847              		.cfi_endproc
+ 848              	.LFE11:
+ 849              		.fnend
+ 851              		.section	.rodata
+ 852              		.align	2
+ 853              	.LANCHOR0 = . + 0
+ 854              	.LC0:
+ 855 0000 01000000 		.word	1
+ 856 0004 04000000 		.word	4
+ 857 0008 03000000 		.word	3
+ 858 000c 05000000 		.word	5
+ 859              		.text
+ 860              	.Letext0:
+ 861              		.file 2 "/usr/local/carlson-minot/crosscompilers/lib/gcc/arm-none-linux-gnueabi/4.8.3/include/stdd
+ 862              		.file 3 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
+ 863              		.file 4 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
+ 864              		.file 5 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
+ 865              		.file 6 "main.h"
+ 866              		.file 7 "print_mode.h"
+ 867              		.file 8 "Side_dreh.h"
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 PLL.c
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccKKkQMy.s:16     .text:0000000000000000 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccKKkQMy.s:19     .text:0000000000000000 PLL
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccKKkQMy.s:259    .text:0000000000000240 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccKKkQMy.s:265    .text:0000000000000250 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccKKkQMy.s:872    .text:0000000000000808 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccbwmeef.s:16     .text:0000000000000000 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccbwmeef.s:19     .text:0000000000000000 PLL
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccbwmeef.s:259    .text:0000000000000240 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccbwmeef.s:265    .text:0000000000000250 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccbwmeef.s:845    .text:00000000000007cc $d
                        .ARM.exidx:0000000000000000 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccKKkQMy.s:879    .rodata:0000000000000000 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccbwmeef.s:852    .rodata:0000000000000000 $d
                      .debug_frame:0000000000000010 $d
 
 UNDEFINED SYMBOLS

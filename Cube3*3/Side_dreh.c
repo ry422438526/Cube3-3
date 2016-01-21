@@ -14,30 +14,17 @@
 #include "Dreh_motor.h"
 #endif
 
-#include "unistd.h"
 #include "main.h"
+#include "unistd.h"
 #include "print_mode.h"
 
-typedef enum
-{
-    U=0,
-    F=1,
-    D=2,
-    B=3,
-    L=4,
-    R=5
-}SURFACE;
-
-int Surface=-1;
-
+int Count=0;
 void klappen()
 {
-//#ifdef __ARMEL__
 #ifdef __linux__
     arm_setpos(3);
     arm_setpos(2);
     arm_setpos(4);
-    //Code zur Ansteuerung der Hardware
 #endif
     int i,j;
     unsigned char temp_color_data[6][9];
@@ -207,17 +194,17 @@ void us_dreh(int dir,int dreh_Angel_u)                        //Oben_Schicht
     sleep(1);
 #endif
     drehen_unter(dir, dreh_Angel_u);
+    Count++;
+    printf("Count=%d",Count);
     wuerfel_print(1);
 }
 
 void ds_dreh(int dir,int dreh_Angel_d)                        //Untern_Schicht
 {
-/*#ifdef __linux__
-    arm_setpos(2);
-    arm_setpos(3);
-#endif*/
     drehen_unter(dir, dreh_Angel_d);
     wuerfel_print(1);
+    Count++;
+    printf("Count=%d",Count);
     
 }
 
@@ -236,6 +223,8 @@ void fs_dreh(int dir,int dreh_Angel_f)                         //Vornen_Schicht
     sleep(1);
 #endif
     drehen_unter(dir, dreh_Angel_f);
+    Count++;
+    printf("Count=%d",Count);
     wuerfel_print(1);
 }
 
@@ -254,6 +243,8 @@ void bs_dreh(int dir,int dreh_Angel_b)                         //Hintern_Schicht
     sleep(1);
 #endif
     drehen_unter(dir, dreh_Angel_b);
+    Count++;
+    printf("Count=%d",Count);
     wuerfel_print(1);
     
 }
@@ -265,14 +256,14 @@ void ls_dreh(int dir,int dreh_Angel_l)                         //linken_Schicht
     sleep(1);
 #endif
     drehen_unter(dir, dreh_Angel_l);
+    Count++;
+    printf("Count=%d",Count);
     wuerfel_print(1);
     
 }
 
 void rs_dreh(int dir,int dreh_Angel_r)                          //rechten_Schicht
 {
-    
-    
     klappen();
 #ifdef __linux__
     sleep(1);
@@ -286,6 +277,8 @@ void rs_dreh(int dir,int dreh_Angel_r)                          //rechten_Schich
     sleep(1);
 #endif
     drehen_unter(dir, dreh_Angel_r);
+    Count++;
+    printf("Count=%d",Count);
     wuerfel_print(1);
 }
 

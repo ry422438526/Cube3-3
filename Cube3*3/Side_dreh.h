@@ -10,7 +10,9 @@
 #define Side_dreh_h
 
 #include <stdio.h>
+#include "main.h"
 
+extern int Count;
 int change_topface(int center_color);
 int change_rightface(int rightface);
 void klappen();

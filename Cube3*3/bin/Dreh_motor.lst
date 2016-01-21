@@ -40,702 +40,638 @@
   19:Dreh_motor.c  **** #ifdef __linux__
   20:Dreh_motor.c  **** const int MOTOR_SPEED_B=35;
   21:Dreh_motor.c  **** const char MOTOR_PORT_B=0x02; //Drehteller Motor;
-  22:Dreh_motor.c  **** #if 0
-  23:Dreh_motor.c  **** MOTORDATA *pMotorData;
-  24:Dreh_motor.c  **** int motor_file;
-  25:Dreh_motor.c  **** int encoder_file;
-  26:Dreh_motor.c  **** #else
-  27:Dreh_motor.c  **** OUTPUT_GLOBALS OutputInstance;
+  22:Dreh_motor.c  **** OUTPUT_GLOBALS OutputInstance;
+  23:Dreh_motor.c  **** int Tel_ist=0;
+  24:Dreh_motor.c  **** int Tel_soll=0;
+  25:Dreh_motor.c  **** int Tel_referenz=0;
+  26:Dreh_motor.c  **** const int dreh_winkel[]={0*90*3,1*90*3,-1*90*3,2*90*3,-2*90*3};//274
+  27:Dreh_motor.c  **** const int dreh_Korr_Winkel=30;  //Korrigieren Winkel
   28:Dreh_motor.c  **** #endif
-  29:Dreh_motor.c  **** int Tel_ist=0;
-  30:Dreh_motor.c  **** int Tel_referenz=0;
-  31:Dreh_motor.c  **** const int dreh_winkel[]={0*90*3,1*90*3,-1*90*3,2*90*3,-2*90*3};//274
-  32:Dreh_motor.c  **** const int dreh_Korr_Winkel=10;  //Korrigieren Winkel
-  33:Dreh_motor.c  **** #endif
-  34:Dreh_motor.c  **** 
-  35:Dreh_motor.c  **** 
-  36:Dreh_motor.c  **** int DrehTel_init()
-  37:Dreh_motor.c  **** {
-  38:Dreh_motor.c  **** // /Users/yangchunxia/Documents/Cube3*3/lms2012/c_output.h
-  39:Dreh_motor.c  **** #ifdef __linux__
-  40:Dreh_motor.c  **** #if 0
-  41:Dreh_motor.c  ****     if ((motor_file = open(PWM_DEVICE_NAME, O_WRONLY))== -1)
-  42:Dreh_motor.c  ****     {
-  43:Dreh_motor.c  ****         printf("Failed to open device\n");
-  44:Dreh_motor.c  ****         return -1;
-  45:Dreh_motor.c  ****     }
-  46:Dreh_motor.c  ****     if((encoder_file = open(MOTOR_DEVICE_NAME, O_RDWR | O_SYNC)) == -1)
-  47:Dreh_motor.c  ****         return -1;
-  48:Dreh_motor.c  ****     pMotorData = (MOTORDATA*)mmap (0, sizeof(MOTORDATA)*vmOUTPUTS, PROT_READ|PROT_WRITE,MAP_FILE|MA
-  49:Dreh_motor.c  ****     if (pMotorData == MAP_FAILED)
-  50:Dreh_motor.c  ****     {
-  51:Dreh_motor.c  ****         printf("Map failed\n");
-  52:Dreh_motor.c  ****         return -1;
-  53:Dreh_motor.c  ****     }
-  54:Dreh_motor.c  **** #else
-  55:Dreh_motor.c  ****     cOutputInit();
-  56:Dreh_motor.c  **** #endif
-  57:Dreh_motor.c  ****     Tel_referenz=cOutputGetCount(1);
-  58:Dreh_motor.c  ****     printf("DrehTeller_referenz Position angefahren: %d\n\r",Tel_referenz);
-  59:Dreh_motor.c  ****     Tel_ist=0;
-  60:Dreh_motor.c  ****     DrehTel_setpos(0);
-  61:Dreh_motor.c  **** #endif
-  62:Dreh_motor.c  ****     return 0;
-  63:Dreh_motor.c  **** }
-  64:Dreh_motor.c  **** 
-  65:Dreh_motor.c  **** 
-  66:Dreh_motor.c  **** 
-  67:Dreh_motor.c  **** 
-  68:Dreh_motor.c  **** 
-  69:Dreh_motor.c  **** 
-  70:Dreh_motor.c  **** 
-  71:Dreh_motor.c  **** 
-  72:Dreh_motor.c  **** 
-  73:Dreh_motor.c  **** 
-  74:Dreh_motor.c  **** 
-  75:Dreh_motor.c  **** 
-  76:Dreh_motor.c  **** 
-  77:Dreh_motor.c  **** 
-  78:Dreh_motor.c  **** 
-  79:Dreh_motor.c  **** 
-  80:Dreh_motor.c  **** 
-  81:Dreh_motor.c  **** int DrehTel_setpos(int Tel_soll)
-  82:Dreh_motor.c  **** {
-  23              		.loc 1 82 0
+  29:Dreh_motor.c  **** 
+  30:Dreh_motor.c  **** 
+  31:Dreh_motor.c  **** int DrehTel_init()
+  32:Dreh_motor.c  **** {
+  33:Dreh_motor.c  **** #ifdef __linux__
+  34:Dreh_motor.c  ****     cOutputInit();
+  35:Dreh_motor.c  ****     Tel_referenz=cOutputGetCount(1);
+  36:Dreh_motor.c  ****     Tel_ist=0;
+  37:Dreh_motor.c  ****     DrehTel_setpos(0);
+  38:Dreh_motor.c  **** #endif
+  39:Dreh_motor.c  ****     return 0;
+  40:Dreh_motor.c  **** }
+  41:Dreh_motor.c  **** 
+  42:Dreh_motor.c  **** int DrehTel_setpos(int Tel_soll)
+  43:Dreh_motor.c  **** {
+  23              		.loc 1 43 0
   24              		.cfi_startproc
   25              		@ args = 0, pretend = 0, frame = 0
   26              		@ frame_needed = 0, uses_anonymous_args = 0
   27              	.LVL0:
-  28 0000 F0412DE9 		stmfd	sp!, {r4, r5, r6, r7, r8, lr}
-  29              		.save {r4, r5, r6, r7, r8, lr}
-  30              		.cfi_def_cfa_offset 24
-  31              		.cfi_offset 4, -24
-  32              		.cfi_offset 5, -20
-  33              		.cfi_offset 6, -16
-  34              		.cfi_offset 7, -12
-  35              		.cfi_offset 8, -8
-  36              		.cfi_offset 14, -4
-  37 0004 0060A0E1 		mov	r6, r0
-  83:Dreh_motor.c  **** #ifdef __linux__
-  84:Dreh_motor.c  **** #if 0
-  85:Dreh_motor.c  ****     char motor_command[4];
-  86:Dreh_motor.c  ****     
-  87:Dreh_motor.c  ****     motor_command[0]=opOUTPUT_SPEED;
-  88:Dreh_motor.c  ****     motor_command[1]=MOTOR_PORT_B;
-  89:Dreh_motor.c  ****     if (dreh_winkel[Tel_soll]<=0)
-  90:Dreh_motor.c  ****     {
-  91:Dreh_motor.c  ****         motor_command[2]=-MOTOR_SPEED_B;
-  92:Dreh_motor.c  ****         write(motor_file,motor_command,3);    //Motor_speed Wert geben
-  93:Dreh_motor.c  ****         
-  94:Dreh_motor.c  ****         motor_command[0]=opOUTPUT_START;
-  95:Dreh_motor.c  ****         motor_command[1]=MOTOR_PORT_B;
-  96:Dreh_motor.c  ****         write(motor_file,motor_command,2);    //Motor  srarten
-  97:Dreh_motor.c  ****         while((pMotorData[1].TachoSensor-Tel_referenz) >= (dreh_winkel[Tel_soll]-30))  //40
-  98:Dreh_motor.c  ****         {
-  99:Dreh_motor.c  ****             usleep(1000);
- 100:Dreh_motor.c  ****         }
- 101:Dreh_motor.c  ****         motor_command[0]=opOUTPUT_STOP;
- 102:Dreh_motor.c  ****         motor_command[1]=MOTOR_PORT_B;
- 103:Dreh_motor.c  ****         motor_command[2]=1;
- 104:Dreh_motor.c  ****         write(motor_file,motor_command,3);
- 105:Dreh_motor.c  ****         
- 106:Dreh_motor.c  ****         Tel_referenz=pMotorData[1].TachoSensor;
- 107:Dreh_motor.c  ****         
- 108:Dreh_motor.c  ****         motor_command[0]=opOUTPUT_SPEED;
- 109:Dreh_motor.c  ****         motor_command[1]=MOTOR_PORT_B;
- 110:Dreh_motor.c  ****         motor_command[2]=MOTOR_SPEED_B;
- 111:Dreh_motor.c  ****         write(motor_file,motor_command,3);
- 112:Dreh_motor.c  ****         
- 113:Dreh_motor.c  ****         motor_command[0]=opOUTPUT_START;
- 114:Dreh_motor.c  ****         motor_command[1]=MOTOR_PORT_B;
- 115:Dreh_motor.c  ****         write(motor_file,motor_command,2);
- 116:Dreh_motor.c  ****         
- 117:Dreh_motor.c  ****         while(pMotorData[1].TachoSensor-Tel_referenz<30)
- 118:Dreh_motor.c  ****         {
- 119:Dreh_motor.c  ****             usleep(100);
- 120:Dreh_motor.c  ****         }
- 121:Dreh_motor.c  ****         
- 122:Dreh_motor.c  ****     }
- 123:Dreh_motor.c  ****     else
- 124:Dreh_motor.c  ****         
- 125:Dreh_motor.c  ****     {
- 126:Dreh_motor.c  ****         motor_command[2]=MOTOR_SPEED_B;
- 127:Dreh_motor.c  ****         write(motor_file,motor_command,3);    //Motor_speed Wert geben
- 128:Dreh_motor.c  ****         
- 129:Dreh_motor.c  ****         motor_command[0]=opOUTPUT_START;
- 130:Dreh_motor.c  ****         motor_command[1]=MOTOR_PORT_B;
- 131:Dreh_motor.c  ****         write(motor_file,motor_command,2);    //Motor  srarten
- 132:Dreh_motor.c  ****         
- 133:Dreh_motor.c  ****         while((pMotorData[1].TachoSensor-Tel_referenz) < (dreh_winkel[Tel_soll]+30))
- 134:Dreh_motor.c  ****         {
- 135:Dreh_motor.c  ****             usleep(1000);
- 136:Dreh_motor.c  ****         }
- 137:Dreh_motor.c  ****         
- 138:Dreh_motor.c  ****         motor_command[0]=opOUTPUT_STOP;
- 139:Dreh_motor.c  ****         motor_command[1]=MOTOR_PORT_B;
- 140:Dreh_motor.c  ****         motor_command[2]=1;
- 141:Dreh_motor.c  ****         write(motor_file,motor_command,3);
- 142:Dreh_motor.c  ****         
- 143:Dreh_motor.c  ****         Tel_referenz=pMotorData[1].TachoSensor;
- 144:Dreh_motor.c  ****         
- 145:Dreh_motor.c  ****         motor_command[0]=opOUTPUT_SPEED;
- 146:Dreh_motor.c  ****         motor_command[1]=MOTOR_PORT_B;
- 147:Dreh_motor.c  ****         motor_command[2]=-MOTOR_SPEED_B;
- 148:Dreh_motor.c  ****         write(motor_file,motor_command,3);
- 149:Dreh_motor.c  ****         
- 150:Dreh_motor.c  ****         motor_command[0]=opOUTPUT_START;
- 151:Dreh_motor.c  ****         motor_command[1]=MOTOR_PORT_B;
- 152:Dreh_motor.c  ****         write(motor_file,motor_command,2);
- 153:Dreh_motor.c  ****         
- 154:Dreh_motor.c  ****         while(pMotorData[1].TachoSensor-Tel_referenz>-30)
- 155:Dreh_motor.c  ****         {
- 156:Dreh_motor.c  ****             usleep(100);
- 157:Dreh_motor.c  ****         }
- 158:Dreh_motor.c  ****         
- 159:Dreh_motor.c  ****         
- 160:Dreh_motor.c  ****     }
- 161:Dreh_motor.c  ****     motor_command[0]=opOUTPUT_STOP;
- 162:Dreh_motor.c  ****     motor_command[1]=MOTOR_PORT_B;
- 163:Dreh_motor.c  ****     motor_command[2]=1;
- 164:Dreh_motor.c  ****     write(motor_file,motor_command,3);  //Motor stoppen
- 165:Dreh_motor.c  **** #else
- 166:Dreh_motor.c  ****     Tel_referenz=cOutputGetCount(1);
-  38              		.loc 1 166 0
-  39 0008 0100A0E3 		mov	r0, #1
-  40              	.LVL1:
-  41 000c FEFFFFEB 		bl	cOutputGetCount
-  42              	.LVL2:
-  43 0010 BC319FE5 		ldr	r3, .L12
-  44 0014 000083E5 		str	r0, [r3]
- 167:Dreh_motor.c  ****     if (dreh_winkel[Tel_soll]<=0)
-  45              		.loc 1 167 0
-  46 0018 B8319FE5 		ldr	r3, .L12+4
-  47 001c 064193E7 		ldr	r4, [r3, r6, asl #2]
-  48 0020 000054E3 		cmp	r4, #0
-  49 0024 2C0000CA 		bgt	.L2
- 168:Dreh_motor.c  ****     {
- 169:Dreh_motor.c  ****         cOutputSpeed(MOTOR_PORT_B,-MOTOR_SPEED_B);
-  50              		.loc 1 169 0
-  51 0028 0200A0E3 		mov	r0, #2
-  52 002c 2210E0E3 		mvn	r1, #34
-  53 0030 FEFFFFEB 		bl	cOutputSpeed
-  54              	.LVL3:
- 170:Dreh_motor.c  ****         cOutputStart(MOTOR_PORT_B);
-  55              		.loc 1 170 0
-  56 0034 0200A0E3 		mov	r0, #2
-  57 0038 FEFFFFEB 		bl	cOutputStart
-  58              	.LVL4:
- 171:Dreh_motor.c  ****         while((cOutputGetCount(1)-Tel_referenz) >= (dreh_winkel[Tel_soll]-30))
-  59              		.loc 1 171 0
-  60 003c 0170A0E3 		mov	r7, #1
-  61 0040 8C519FE5 		ldr	r5, .L12
-  62 0044 1E4044E2 		sub	r4, r4, #30
- 172:Dreh_motor.c  ****         {
- 173:Dreh_motor.c  ****             usleep(1000);
-  63              		.loc 1 173 0
-  64 0048 FA8FA0E3 		mov	r8, #1000
- 171:Dreh_motor.c  ****         while((cOutputGetCount(1)-Tel_referenz) >= (dreh_winkel[Tel_soll]-30))
-  65              		.loc 1 171 0
-  66 004c 010000EA 		b	.L3
-  67              	.L4:
-  68              		.loc 1 173 0
-  69 0050 0800A0E1 		mov	r0, r8
-  70 0054 FEFFFFEB 		bl	usleep
-  71              	.LVL5:
-  72              	.L3:
- 171:Dreh_motor.c  ****         while((cOutputGetCount(1)-Tel_referenz) >= (dreh_winkel[Tel_soll]-30))
-  73              		.loc 1 171 0 discriminator 1
-  74 0058 0700A0E1 		mov	r0, r7
-  75 005c FEFFFFEB 		bl	cOutputGetCount
-  76              	.LVL6:
-  77 0060 003095E5 		ldr	r3, [r5]
-  78 0064 000063E0 		rsb	r0, r3, r0
-  79 0068 040050E1 		cmp	r0, r4
-  80 006c F7FFFFAA 		bge	.L4
- 174:Dreh_motor.c  ****         }
- 175:Dreh_motor.c  ****         cOutputStop(MOTOR_PORT_B,1);
-  81              		.loc 1 175 0
-  82 0070 0200A0E3 		mov	r0, #2
-  83 0074 0110A0E3 		mov	r1, #1
-  84 0078 FEFFFFEB 		bl	cOutputStop
-  85              	.LVL7:
- 176:Dreh_motor.c  ****         
- 177:Dreh_motor.c  ****         Tel_referenz=cOutputGetCount(1);
-  86              		.loc 1 177 0
-  87 007c 0100A0E3 		mov	r0, #1
-  88 0080 FEFFFFEB 		bl	cOutputGetCount
-  89              	.LVL8:
-  90 0084 48319FE5 		ldr	r3, .L12
-  91 0088 000083E5 		str	r0, [r3]
- 178:Dreh_motor.c  ****         
- 179:Dreh_motor.c  ****         cOutputSpeed(MOTOR_PORT_B,MOTOR_SPEED_B);
-  92              		.loc 1 179 0
-  93 008c 0200A0E3 		mov	r0, #2
-  94 0090 2310A0E3 		mov	r1, #35
-  95 0094 FEFFFFEB 		bl	cOutputSpeed
-  96              	.LVL9:
- 180:Dreh_motor.c  ****         cOutputStart(MOTOR_PORT_B);
-  97              		.loc 1 180 0
-  98 0098 0200A0E3 		mov	r0, #2
-  99 009c FEFFFFEB 		bl	cOutputStart
- 100              	.LVL10:
- 181:Dreh_motor.c  ****         usleep(10000);
- 101              		.loc 1 181 0
- 102 00a0 34019FE5 		ldr	r0, .L12+8
- 103 00a4 FEFFFFEB 		bl	usleep
- 104              	.LVL11:
- 182:Dreh_motor.c  ****         while(cOutputGetCount(1)-Tel_referenz<30)
- 105              		.loc 1 182 0
- 106 00a8 0150A0E3 		mov	r5, #1
- 107 00ac 20419FE5 		ldr	r4, .L12
- 183:Dreh_motor.c  ****         {
- 184:Dreh_motor.c  ****             usleep(100);
- 108              		.loc 1 184 0
- 109 00b0 6470A0E3 		mov	r7, #100
- 182:Dreh_motor.c  ****         while(cOutputGetCount(1)-Tel_referenz<30)
- 110              		.loc 1 182 0
- 111 00b4 010000EA 		b	.L5
- 112              	.L6:
- 113              		.loc 1 184 0
- 114 00b8 0700A0E1 		mov	r0, r7
- 115 00bc FEFFFFEB 		bl	usleep
- 116              	.LVL12:
- 117              	.L5:
- 182:Dreh_motor.c  ****         while(cOutputGetCount(1)-Tel_referenz<30)
- 118              		.loc 1 182 0 discriminator 1
- 119 00c0 0500A0E1 		mov	r0, r5
- 120 00c4 FEFFFFEB 		bl	cOutputGetCount
- 121              	.LVL13:
- 122 00c8 003094E5 		ldr	r3, [r4]
- 123 00cc 000063E0 		rsb	r0, r3, r0
- 124 00d0 1D0050E3 		cmp	r0, #29
- 125 00d4 F7FFFFDA 		ble	.L6
- 126 00d8 2B0000EA 		b	.L7
- 127              	.L2:
- 185:Dreh_motor.c  ****         }
- 186:Dreh_motor.c  ****         
- 187:Dreh_motor.c  ****     }
- 188:Dreh_motor.c  ****     else
- 189:Dreh_motor.c  ****         
- 190:Dreh_motor.c  ****     {
- 191:Dreh_motor.c  ****         cOutputSpeed(MOTOR_PORT_B,MOTOR_SPEED_B);
- 128              		.loc 1 191 0
- 129 00dc 0200A0E3 		mov	r0, #2
- 130 00e0 2310A0E3 		mov	r1, #35
- 131 00e4 FEFFFFEB 		bl	cOutputSpeed
- 132              	.LVL14:
- 192:Dreh_motor.c  ****         cOutputStart(MOTOR_PORT_B);
- 133              		.loc 1 192 0
- 134 00e8 0200A0E3 		mov	r0, #2
- 135 00ec FEFFFFEB 		bl	cOutputStart
- 136              	.LVL15:
- 193:Dreh_motor.c  ****         
- 194:Dreh_motor.c  ****         while((cOutputGetCount(1)-Tel_referenz) < (dreh_winkel[Tel_soll]+30))
- 137              		.loc 1 194 0
- 138 00f0 0170A0E3 		mov	r7, #1
- 139 00f4 D8509FE5 		ldr	r5, .L12
- 140 00f8 1E4084E2 		add	r4, r4, #30
- 195:Dreh_motor.c  ****         {
- 196:Dreh_motor.c  ****             usleep(1000);
- 141              		.loc 1 196 0
- 142 00fc FA8FA0E3 		mov	r8, #1000
- 194:Dreh_motor.c  ****         {
- 143              		.loc 1 194 0
- 144 0100 010000EA 		b	.L8
- 145              	.L9:
- 146              		.loc 1 196 0
- 147 0104 0800A0E1 		mov	r0, r8
- 148 0108 FEFFFFEB 		bl	usleep
- 149              	.LVL16:
- 150              	.L8:
- 194:Dreh_motor.c  ****         {
- 151              		.loc 1 194 0 discriminator 1
- 152 010c 0700A0E1 		mov	r0, r7
- 153 0110 FEFFFFEB 		bl	cOutputGetCount
- 154              	.LVL17:
- 155 0114 003095E5 		ldr	r3, [r5]
- 156 0118 000063E0 		rsb	r0, r3, r0
- 157 011c 040050E1 		cmp	r0, r4
- 158 0120 F7FFFFBA 		blt	.L9
- 197:Dreh_motor.c  ****         }
- 198:Dreh_motor.c  ****         
- 199:Dreh_motor.c  ****         cOutputStop(MOTOR_PORT_B,1);
- 159              		.loc 1 199 0
- 160 0124 0200A0E3 		mov	r0, #2
- 161 0128 0110A0E3 		mov	r1, #1
- 162 012c FEFFFFEB 		bl	cOutputStop
- 163              	.LVL18:
- 200:Dreh_motor.c  ****         
- 201:Dreh_motor.c  ****         Tel_referenz=cOutputGetCount(1);
- 164              		.loc 1 201 0
- 165 0130 0100A0E3 		mov	r0, #1
- 166 0134 FEFFFFEB 		bl	cOutputGetCount
- 167              	.LVL19:
- 168 0138 94309FE5 		ldr	r3, .L12
- 169 013c 000083E5 		str	r0, [r3]
- 202:Dreh_motor.c  ****         
- 203:Dreh_motor.c  ****         cOutputSpeed(MOTOR_PORT_B,-MOTOR_SPEED_B);
- 170              		.loc 1 203 0
- 171 0140 0200A0E3 		mov	r0, #2
- 172 0144 2210E0E3 		mvn	r1, #34
- 173 0148 FEFFFFEB 		bl	cOutputSpeed
- 174              	.LVL20:
- 204:Dreh_motor.c  ****         cOutputStart(MOTOR_PORT_B);
- 175              		.loc 1 204 0
- 176 014c 0200A0E3 		mov	r0, #2
- 177 0150 FEFFFFEB 		bl	cOutputStart
- 178              	.LVL21:
- 205:Dreh_motor.c  ****         usleep(10000);
- 179              		.loc 1 205 0
- 180 0154 80009FE5 		ldr	r0, .L12+8
- 181 0158 FEFFFFEB 		bl	usleep
- 182              	.LVL22:
- 206:Dreh_motor.c  ****         while(cOutputGetCount(1)-Tel_referenz>-30)
- 183              		.loc 1 206 0
- 184 015c 0150A0E3 		mov	r5, #1
- 185 0160 6C409FE5 		ldr	r4, .L12
- 207:Dreh_motor.c  ****         {
- 208:Dreh_motor.c  ****             usleep(100);
- 186              		.loc 1 208 0
- 187 0164 6470A0E3 		mov	r7, #100
- 206:Dreh_motor.c  ****         while(cOutputGetCount(1)-Tel_referenz>-30)
- 188              		.loc 1 206 0
- 189 0168 010000EA 		b	.L10
- 190              	.L11:
- 191              		.loc 1 208 0
- 192 016c 0700A0E1 		mov	r0, r7
- 193 0170 FEFFFFEB 		bl	usleep
- 194              	.LVL23:
- 195              	.L10:
- 206:Dreh_motor.c  ****         while(cOutputGetCount(1)-Tel_referenz>-30)
- 196              		.loc 1 206 0 discriminator 1
- 197 0174 0500A0E1 		mov	r0, r5
- 198 0178 FEFFFFEB 		bl	cOutputGetCount
- 199              	.LVL24:
- 200 017c 003094E5 		ldr	r3, [r4]
- 201 0180 000063E0 		rsb	r0, r3, r0
- 202 0184 1D0070E3 		cmn	r0, #29
- 203 0188 F7FFFFAA 		bge	.L11
- 204              	.L7:
- 209:Dreh_motor.c  ****         }
- 210:Dreh_motor.c  ****         
- 211:Dreh_motor.c  ****     }
- 212:Dreh_motor.c  ****     cOutputStop(MOTOR_PORT_B,1);/*
- 205              		.loc 1 212 0
- 206 018c 0200A0E3 		mov	r0, #2
- 207 0190 0110A0E3 		mov	r1, #1
- 208 0194 FEFFFFEB 		bl	cOutputStop
- 209              	.LVL25:
- 213:Dreh_motor.c  ****     Tel_referenz=cOutputGetCount(1);
- 214:Dreh_motor.c  ****     if (dreh_winkel[Tel_soll]<=0)
- 215:Dreh_motor.c  ****     {
- 216:Dreh_motor.c  ****         cOutputSpeed(MOTOR_PORT_B,-MOTOR_SPEED_B);
- 217:Dreh_motor.c  ****         cOutputStart(MOTOR_PORT_B);
- 218:Dreh_motor.c  ****         while((cOutputGetCount(1)-Tel_referenz) >= dreh_winkel[Tel_soll])
- 219:Dreh_motor.c  ****         {
- 220:Dreh_motor.c  ****             usleep(1000);
- 221:Dreh_motor.c  ****         }
- 222:Dreh_motor.c  ****         
- 223:Dreh_motor.c  ****     }
- 224:Dreh_motor.c  ****     else
- 225:Dreh_motor.c  ****         
- 226:Dreh_motor.c  ****     {
- 227:Dreh_motor.c  ****         cOutputSpeed(MOTOR_PORT_B,MOTOR_SPEED_B);
- 228:Dreh_motor.c  ****         cOutputStart(MOTOR_PORT_B);
- 229:Dreh_motor.c  ****         
- 230:Dreh_motor.c  ****         while((cOutputGetCount(1)-Tel_referenz) < dreh_winkel[Tel_soll])
- 231:Dreh_motor.c  ****         {
- 232:Dreh_motor.c  ****             usleep(1000);
- 233:Dreh_motor.c  ****         }
- 234:Dreh_motor.c  ****     }
- 235:Dreh_motor.c  ****     cOutputStop(MOTOR_PORT_B,1);*/
- 236:Dreh_motor.c  **** #endif
- 237:Dreh_motor.c  ****     Tel_ist=Tel_soll;
- 210              		.loc 1 237 0
- 211 0198 34409FE5 		ldr	r4, .L12
- 212 019c 046084E5 		str	r6, [r4, #4]
- 238:Dreh_motor.c  ****     Tel_referenz=cOutputGetCount(1);
- 213              		.loc 1 238 0
- 214 01a0 0100A0E3 		mov	r0, #1
- 215 01a4 FEFFFFEB 		bl	cOutputGetCount
- 216              	.LVL26:
- 217 01a8 0010A0E1 		mov	r1, r0
- 218 01ac 000084E5 		str	r0, [r4]
- 239:Dreh_motor.c  ****     
- 240:Dreh_motor.c  ****     printf("Tel_referenz:%d \n\r",Tel_referenz);
- 219              		.loc 1 240 0
- 220 01b0 28009FE5 		ldr	r0, .L12+12
- 221 01b4 FEFFFFEB 		bl	printf
- 222              	.LVL27:
- 241:Dreh_motor.c  ****     printf("Tel_ist: %d\n\r",Tel_ist);
- 223              		.loc 1 241 0
- 224 01b8 24009FE5 		ldr	r0, .L12+16
- 225 01bc 041094E5 		ldr	r1, [r4, #4]
- 226 01c0 FEFFFFEB 		bl	printf
- 227              	.LVL28:
- 242:Dreh_motor.c  ****     sleep(1);
- 228              		.loc 1 242 0
- 229 01c4 0100A0E3 		mov	r0, #1
- 230 01c8 FEFFFFEB 		bl	sleep
- 231              	.LVL29:
- 243:Dreh_motor.c  **** #endif
- 244:Dreh_motor.c  ****     return 0;
- 245:Dreh_motor.c  **** }
- 232              		.loc 1 245 0
- 233 01cc 0000A0E3 		mov	r0, #0
- 234 01d0 F081BDE8 		ldmfd	sp!, {r4, r5, r6, r7, r8, pc}
- 235              	.L13:
- 236              		.align	2
- 237              	.L12:
- 238 01d4 00000000 		.word	.LANCHOR0
- 239 01d8 00000000 		.word	.LANCHOR1
- 240 01dc 10270000 		.word	10000
- 241 01e0 00000000 		.word	.LC0
- 242 01e4 14000000 		.word	.LC1
- 243              		.cfi_endproc
- 244              	.LFE12:
- 245              		.fnend
- 247              		.align	2
- 248              		.global	DrehTel_init
- 250              	DrehTel_init:
- 251              		.fnstart
- 252              	.LFB11:
-  37:Dreh_motor.c  **** // /Users/yangchunxia/Documents/Cube3*3/lms2012/c_output.h
- 253              		.loc 1 37 0
- 254              		.cfi_startproc
- 255              		@ args = 0, pretend = 0, frame = 0
- 256              		@ frame_needed = 0, uses_anonymous_args = 0
- 257 01e8 38402DE9 		stmfd	sp!, {r3, r4, r5, lr}
- 258              		.save {r3, r4, r5, lr}
- 259              		.cfi_def_cfa_offset 16
- 260              		.cfi_offset 3, -16
- 261              		.cfi_offset 4, -12
- 262              		.cfi_offset 5, -8
- 263              		.cfi_offset 14, -4
-  55:Dreh_motor.c  **** #endif
- 264              		.loc 1 55 0
- 265 01ec FEFFFFEB 		bl	cOutputInit
- 266              	.LVL30:
-  57:Dreh_motor.c  ****     printf("DrehTeller_referenz Position angefahren: %d\n\r",Tel_referenz);
- 267              		.loc 1 57 0
- 268 01f0 0100A0E3 		mov	r0, #1
- 269 01f4 FEFFFFEB 		bl	cOutputGetCount
- 270              	.LVL31:
- 271 01f8 0010A0E1 		mov	r1, r0
- 272 01fc 20509FE5 		ldr	r5, .L15
- 273 0200 000085E5 		str	r0, [r5]
-  58:Dreh_motor.c  ****     Tel_ist=0;
- 274              		.loc 1 58 0
- 275 0204 1C009FE5 		ldr	r0, .L15+4
- 276 0208 FEFFFFEB 		bl	printf
- 277              	.LVL32:
-  59:Dreh_motor.c  ****     DrehTel_setpos(0);
- 278              		.loc 1 59 0
- 279 020c 0040A0E3 		mov	r4, #0
- 280 0210 044085E5 		str	r4, [r5, #4]
-  60:Dreh_motor.c  **** #endif
- 281              		.loc 1 60 0
- 282 0214 0400A0E1 		mov	r0, r4
- 283 0218 FEFFFFEB 		bl	DrehTel_setpos
- 284              	.LVL33:
-  63:Dreh_motor.c  **** 
- 285              		.loc 1 63 0
- 286 021c 0400A0E1 		mov	r0, r4
- 287 0220 3880BDE8 		ldmfd	sp!, {r3, r4, r5, pc}
- 288              	.L16:
- 289              		.align	2
- 290              	.L15:
- 291 0224 00000000 		.word	.LANCHOR0
- 292 0228 24000000 		.word	.LC2
- 293              		.cfi_endproc
- 294              	.LFE11:
- 295              		.fnend
- 297              		.align	2
- 298              		.global	DrehTel_dreh
- 300              	DrehTel_dreh:
- 301              		.fnstart
- 302              	.LFB13:
- 246:Dreh_motor.c  **** #ifdef __linux__
- 247:Dreh_motor.c  **** int DrehTel_dreh(){
- 303              		.loc 1 247 0
- 304              		.cfi_startproc
- 305              		@ args = 0, pretend = 0, frame = 0
- 306              		@ frame_needed = 0, uses_anonymous_args = 0
- 307 022c 04E02DE5 		str	lr, [sp, #-4]!
- 308              		.save {lr}
- 309              		.cfi_def_cfa_offset 4
- 310              		.cfi_offset 14, -4
- 311              		.pad #12
- 312 0230 0CD04DE2 		sub	sp, sp, #12
- 313              		.cfi_def_cfa_offset 16
- 248:Dreh_motor.c  **** #if 0
- 249:Dreh_motor.c  ****     char motor_command[4];
- 250:Dreh_motor.c  ****     motor_command[0]=opOUTPUT_SPEED;
- 251:Dreh_motor.c  ****     motor_command[1]=MOTOR_PORT_B;
- 252:Dreh_motor.c  ****     motor_command[2]=MOTOR_SPEED_B;
- 253:Dreh_motor.c  ****     write(motor_file,motor_command,3);
- 254:Dreh_motor.c  ****     
- 255:Dreh_motor.c  ****     motor_command[0]=opOUTPUT_START;
- 256:Dreh_motor.c  ****     motor_command[1]=MOTOR_PORT_B;
- 257:Dreh_motor.c  ****     write(motor_file,motor_command,2);
- 258:Dreh_motor.c  ****     
- 259:Dreh_motor.c  ****     int oldTachosensor=OutputInstance.MotorData[1].TachoSensor;
- 260:Dreh_motor.c  ****     while (cOutputGetCount(3).TachoSensor-oldTachosensor<135) {
- 261:Dreh_motor.c  ****         usleep(100);
- 262:Dreh_motor.c  ****     }
- 263:Dreh_motor.c  ****     motor_command[0]=opOUTPUT_STOP;
- 264:Dreh_motor.c  ****     motor_command[1]=MOTOR_PORT_B;
- 265:Dreh_motor.c  ****     motor_command[2]=1;  //break
- 266:Dreh_motor.c  ****     write(motor_file,motor_command,3);
- 267:Dreh_motor.c  **** #else
- 268:Dreh_motor.c  ****     cOutputStepSpeed(MOTOR_PORT_B,MOTOR_SPEED_B, 15,105,15,1);
- 314              		.loc 1 268 0
- 315 0234 0F20A0E3 		mov	r2, #15
- 316 0238 00208DE5 		str	r2, [sp]
- 317 023c 0130A0E3 		mov	r3, #1
- 318 0240 04308DE5 		str	r3, [sp, #4]
- 319 0244 0200A0E3 		mov	r0, #2
- 320 0248 2310A0E3 		mov	r1, #35
- 321 024c 6930A0E3 		mov	r3, #105
- 322 0250 FEFFFFEB 		bl	cOutputStepSpeed
- 323              	.LVL34:
- 269:Dreh_motor.c  **** #endif
- 270:Dreh_motor.c  ****     
- 271:Dreh_motor.c  ****     return 0;
- 272:Dreh_motor.c  **** }
- 324              		.loc 1 272 0
- 325 0254 0000A0E3 		mov	r0, #0
- 326 0258 0CD08DE2 		add	sp, sp, #12
- 327              		@ sp needed
- 328 025c 04F09DE4 		ldr	pc, [sp], #4
- 329              		.cfi_endproc
- 330              	.LFE13:
- 331              		.fnend
- 333              		.align	2
- 334              		.global	DrehTel_close
- 336              	DrehTel_close:
- 337              		.fnstart
- 338              	.LFB14:
- 273:Dreh_motor.c  **** 
- 274:Dreh_motor.c  **** 
- 275:Dreh_motor.c  **** int DrehTel_close(){
- 339              		.loc 1 275 0
- 340              		.cfi_startproc
- 341              		@ args = 0, pretend = 0, frame = 0
- 342              		@ frame_needed = 0, uses_anonymous_args = 0
- 343 0260 08402DE9 		stmfd	sp!, {r3, lr}
- 344              		.save {r3, lr}
- 345              		.cfi_def_cfa_offset 8
- 346              		.cfi_offset 3, -8
- 347              		.cfi_offset 14, -4
- 276:Dreh_motor.c  **** #if 0
- 277:Dreh_motor.c  ****     char motor_command[4];
- 278:Dreh_motor.c  ****     motor_command[0] = opOUTPUT_STOP;
- 279:Dreh_motor.c  ****     motor_command[1] = MOTOR_PORT_B;
- 280:Dreh_motor.c  ****     motor_command[2] = 0;
- 281:Dreh_motor.c  ****     write(motor_file,motor_command,3);
- 282:Dreh_motor.c  ****     close(encoder_file);
- 283:Dreh_motor.c  ****     close(motor_file);
- 284:Dreh_motor.c  **** #else
- 285:Dreh_motor.c  ****     cOutputExit();
- 348              		.loc 1 285 0
- 349 0264 FEFFFFEB 		bl	cOutputExit
- 350              	.LVL35:
- 286:Dreh_motor.c  **** #endif
- 287:Dreh_motor.c  ****     return 0;
- 288:Dreh_motor.c  **** }
- 351              		.loc 1 288 0
- 352 0268 0000A0E3 		mov	r0, #0
- 353 026c 0880BDE8 		ldmfd	sp!, {r3, pc}
- 354              		.cfi_endproc
- 355              	.LFE14:
- 356              		.fnend
- 358              		.global	dreh_Korr_Winkel
- 359              		.global	dreh_winkel
- 360              		.global	Tel_referenz
- 361              		.global	Tel_ist
- 362              		.comm	OutputInstance,64,4
- 363              		.global	MOTOR_PORT_B
- 364              		.global	MOTOR_SPEED_B
- 365              		.section	.rodata
- 366              		.align	2
- 367              	.LANCHOR1 = . + 0
- 370              	dreh_winkel:
- 371 0000 00000000 		.word	0
- 372 0004 0E010000 		.word	270
- 373 0008 F2FEFFFF 		.word	-270
- 374 000c 1C020000 		.word	540
- 375 0010 E4FDFFFF 		.word	-540
- 378              	dreh_Korr_Winkel:
- 379 0014 0A000000 		.word	10
- 382              	MOTOR_PORT_B:
- 383 0018 02       		.byte	2
- 384 0019 000000   		.space	3
- 387              	MOTOR_SPEED_B:
- 388 001c 23000000 		.word	35
- 389              		.section	.rodata.str1.4,"aMS",%progbits,1
- 390              		.align	2
- 391              	.LC0:
- 392 0000 54656C5F 		.ascii	"Tel_referenz:%d \012\015\000"
- 392      72656665 
- 392      72656E7A 
- 392      3A256420 
- 392      0A0D00
- 393 0013 00       		.space	1
- 394              	.LC1:
- 395 0014 54656C5F 		.ascii	"Tel_ist: %d\012\015\000"
- 395      6973743A 
- 395      2025640A 
- 395      0D00
- 396 0022 0000     		.space	2
- 397              	.LC2:
- 398 0024 44726568 		.ascii	"DrehTeller_referenz Position angefahren: %d\012\015"
- 398      54656C6C 
- 398      65725F72 
- 398      65666572 
- 398      656E7A20 
- 399 0051 00       		.ascii	"\000"
- 400 0052 0000     		.bss
- 401              		.align	2
- 402              	.LANCHOR0 = . + 0
- 405              	Tel_referenz:
- 406 0000 00000000 		.space	4
- 409              	Tel_ist:
- 410 0004 00000000 		.space	4
- 411              		.text
- 412              	.Letext0:
- 413              		.file 2 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
- 414              		.file 3 "/usr/local/carlson-minot/crosscompilers/lib/gcc/arm-none-linux-gnueabi/4.8.3/include/stdd
- 415              		.file 4 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
- 416              		.file 5 "lmstypes.h"
- 417              		.file 6 "bytecodes.h"
- 418              		.file 7 "lms2012.h"
- 419              		.file 8 "../lms2012/c_output.h"
- 420              		.file 9 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
- 421              		.file 10 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/u
+  28 0000 F84F2DE9 		stmfd	sp!, {r3, r4, r5, r6, r7, r8, r9, r10, fp, lr}
+  29              		.save {r3, r4, r5, r6, r7, r8, r9, r10, fp, lr}
+  30              		.cfi_def_cfa_offset 40
+  31              		.cfi_offset 3, -40
+  32              		.cfi_offset 4, -36
+  33              		.cfi_offset 5, -32
+  34              		.cfi_offset 6, -28
+  35              		.cfi_offset 7, -24
+  36              		.cfi_offset 8, -20
+  37              		.cfi_offset 9, -16
+  38              		.cfi_offset 10, -12
+  39              		.cfi_offset 11, -8
+  40              		.cfi_offset 14, -4
+  41 0004 0090A0E1 		mov	r9, r0
+  42              	.LVL1:
+  44:Dreh_motor.c  **** #ifdef __linux__
+  45:Dreh_motor.c  **** #if 1
+  46:Dreh_motor.c  ****     int Old_Tel_referenz=0;
+  47:Dreh_motor.c  ****     Old_Tel_referenz=cOutputGetCount(1);
+  43              		.loc 1 47 0
+  44 0008 0100A0E3 		mov	r0, #1
+  45              	.LVL2:
+  46 000c FEFFFFEB 		bl	cOutputGetCount
+  47              	.LVL3:
+  48 0010 0080A0E1 		mov	r8, r0
+  49              	.LVL4:
+  48:Dreh_motor.c  ****     if (dreh_winkel[Tel_soll]<=0)
+  50              		.loc 1 48 0
+  51 0014 50329FE5 		ldr	r3, .L20
+  52 0018 094193E7 		ldr	r4, [r3, r9, asl #2]
+  53 001c 000054E3 		cmp	r4, #0
+  54 0020 2A0000CA 		bgt	.L2
+  49:Dreh_motor.c  ****     {
+  50:Dreh_motor.c  ****         cOutputSpeed(MOTOR_PORT_B,-MOTOR_SPEED_B);
+  55              		.loc 1 50 0
+  56 0024 0200A0E3 		mov	r0, #2
+  57              	.LVL5:
+  58 0028 2210E0E3 		mvn	r1, #34
+  59 002c FEFFFFEB 		bl	cOutputSpeed
+  60              	.LVL6:
+  51:Dreh_motor.c  ****         cOutputStart(MOTOR_PORT_B);
+  61              		.loc 1 51 0
+  62 0030 0200A0E3 		mov	r0, #2
+  63 0034 FEFFFFEB 		bl	cOutputStart
+  64              	.LVL7:
+  52:Dreh_motor.c  ****         while((cOutputGetCount(1)-Old_Tel_referenz) >= (dreh_winkel[Tel_soll]-dreh_Korr_Winkel))
+  65              		.loc 1 52 0
+  66 0038 0150A0E3 		mov	r5, #1
+  67 003c 1E4044E2 		sub	r4, r4, #30
+  53:Dreh_motor.c  ****         {
+  54:Dreh_motor.c  ****             usleep(1000);
+  68              		.loc 1 54 0
+  69 0040 FA6FA0E3 		mov	r6, #1000
+  52:Dreh_motor.c  ****         while((cOutputGetCount(1)-Old_Tel_referenz) >= (dreh_winkel[Tel_soll]-dreh_Korr_Winkel))
+  70              		.loc 1 52 0
+  71 0044 010000EA 		b	.L3
+  72              	.L4:
+  73              		.loc 1 54 0
+  74 0048 0600A0E1 		mov	r0, r6
+  75 004c FEFFFFEB 		bl	usleep
+  76              	.LVL8:
+  77              	.L3:
+  52:Dreh_motor.c  ****         while((cOutputGetCount(1)-Old_Tel_referenz) >= (dreh_winkel[Tel_soll]-dreh_Korr_Winkel))
+  78              		.loc 1 52 0 discriminator 1
+  79 0050 0500A0E1 		mov	r0, r5
+  80 0054 FEFFFFEB 		bl	cOutputGetCount
+  81              	.LVL9:
+  82 0058 000068E0 		rsb	r0, r8, r0
+  83 005c 040050E1 		cmp	r0, r4
+  84 0060 F8FFFFAA 		bge	.L4
+  55:Dreh_motor.c  ****         }
+  56:Dreh_motor.c  ****         cOutputStop(MOTOR_PORT_B,1);
+  85              		.loc 1 56 0
+  86 0064 0200A0E3 		mov	r0, #2
+  87 0068 0110A0E3 		mov	r1, #1
+  88 006c FEFFFFEB 		bl	cOutputStop
+  89              	.LVL10:
+  57:Dreh_motor.c  ****         
+  58:Dreh_motor.c  ****         Tel_referenz=cOutputGetCount(1);
+  90              		.loc 1 58 0
+  91 0070 0100A0E3 		mov	r0, #1
+  92 0074 FEFFFFEB 		bl	cOutputGetCount
+  93              	.LVL11:
+  94 0078 F0319FE5 		ldr	r3, .L20+4
+  95 007c 000083E5 		str	r0, [r3]
+  59:Dreh_motor.c  ****         
+  60:Dreh_motor.c  ****         cOutputSpeed(MOTOR_PORT_B,MOTOR_SPEED_B);
+  96              		.loc 1 60 0
+  97 0080 0200A0E3 		mov	r0, #2
+  98 0084 2310A0E3 		mov	r1, #35
+  99 0088 FEFFFFEB 		bl	cOutputSpeed
+ 100              	.LVL12:
+  61:Dreh_motor.c  ****         cOutputStart(MOTOR_PORT_B);
+ 101              		.loc 1 61 0
+ 102 008c 0200A0E3 		mov	r0, #2
+ 103 0090 FEFFFFEB 		bl	cOutputStart
+ 104              	.LVL13:
+  62:Dreh_motor.c  ****         usleep(10000);
+ 105              		.loc 1 62 0
+ 106 0094 D8019FE5 		ldr	r0, .L20+8
+ 107 0098 FEFFFFEB 		bl	usleep
+ 108              	.LVL14:
+  63:Dreh_motor.c  ****         while(cOutputGetCount(1)-Tel_referenz<dreh_Korr_Winkel)
+ 109              		.loc 1 63 0
+ 110 009c 0150A0E3 		mov	r5, #1
+ 111 00a0 C8419FE5 		ldr	r4, .L20+4
+  64:Dreh_motor.c  ****         {
+  65:Dreh_motor.c  ****             usleep(100);
+ 112              		.loc 1 65 0
+ 113 00a4 6460A0E3 		mov	r6, #100
+  63:Dreh_motor.c  ****         while(cOutputGetCount(1)-Tel_referenz<dreh_Korr_Winkel)
+ 114              		.loc 1 63 0
+ 115 00a8 010000EA 		b	.L5
+ 116              	.L6:
+ 117              		.loc 1 65 0
+ 118 00ac 0600A0E1 		mov	r0, r6
+ 119 00b0 FEFFFFEB 		bl	usleep
+ 120              	.LVL15:
+ 121              	.L5:
+  63:Dreh_motor.c  ****         while(cOutputGetCount(1)-Tel_referenz<dreh_Korr_Winkel)
+ 122              		.loc 1 63 0 discriminator 1
+ 123 00b4 0500A0E1 		mov	r0, r5
+ 124 00b8 FEFFFFEB 		bl	cOutputGetCount
+ 125              	.LVL16:
+ 126 00bc 003094E5 		ldr	r3, [r4]
+ 127 00c0 000063E0 		rsb	r0, r3, r0
+ 128 00c4 1D0050E3 		cmp	r0, #29
+ 129 00c8 F7FFFFDA 		ble	.L6
+ 130 00cc 290000EA 		b	.L7
+ 131              	.LVL17:
+ 132              	.L2:
+  66:Dreh_motor.c  ****         }
+  67:Dreh_motor.c  ****         
+  68:Dreh_motor.c  ****     }
+  69:Dreh_motor.c  ****     else
+  70:Dreh_motor.c  ****         
+  71:Dreh_motor.c  ****     {
+  72:Dreh_motor.c  ****         cOutputSpeed(MOTOR_PORT_B,MOTOR_SPEED_B);
+ 133              		.loc 1 72 0
+ 134 00d0 0200A0E3 		mov	r0, #2
+ 135              	.LVL18:
+ 136 00d4 2310A0E3 		mov	r1, #35
+ 137 00d8 FEFFFFEB 		bl	cOutputSpeed
+ 138              	.LVL19:
+  73:Dreh_motor.c  ****         cOutputStart(MOTOR_PORT_B);
+ 139              		.loc 1 73 0
+ 140 00dc 0200A0E3 		mov	r0, #2
+ 141 00e0 FEFFFFEB 		bl	cOutputStart
+ 142              	.LVL20:
+  74:Dreh_motor.c  ****         
+  75:Dreh_motor.c  ****         while((cOutputGetCount(1)-Old_Tel_referenz) < (dreh_winkel[Tel_soll]+dreh_Korr_Winkel))
+ 143              		.loc 1 75 0
+ 144 00e4 0150A0E3 		mov	r5, #1
+ 145 00e8 1E4084E2 		add	r4, r4, #30
+  76:Dreh_motor.c  ****         {
+  77:Dreh_motor.c  ****             usleep(1000);
+ 146              		.loc 1 77 0
+ 147 00ec FA6FA0E3 		mov	r6, #1000
+  75:Dreh_motor.c  ****         {
+ 148              		.loc 1 75 0
+ 149 00f0 010000EA 		b	.L8
+ 150              	.L9:
+ 151              		.loc 1 77 0
+ 152 00f4 0600A0E1 		mov	r0, r6
+ 153 00f8 FEFFFFEB 		bl	usleep
+ 154              	.LVL21:
+ 155              	.L8:
+  75:Dreh_motor.c  ****         {
+ 156              		.loc 1 75 0 discriminator 1
+ 157 00fc 0500A0E1 		mov	r0, r5
+ 158 0100 FEFFFFEB 		bl	cOutputGetCount
+ 159              	.LVL22:
+ 160 0104 000068E0 		rsb	r0, r8, r0
+ 161 0108 040050E1 		cmp	r0, r4
+ 162 010c F8FFFFBA 		blt	.L9
+  78:Dreh_motor.c  ****         }
+  79:Dreh_motor.c  ****         
+  80:Dreh_motor.c  ****         cOutputStop(MOTOR_PORT_B,1);
+ 163              		.loc 1 80 0
+ 164 0110 0200A0E3 		mov	r0, #2
+ 165 0114 0110A0E3 		mov	r1, #1
+ 166 0118 FEFFFFEB 		bl	cOutputStop
+ 167              	.LVL23:
+  81:Dreh_motor.c  ****         
+  82:Dreh_motor.c  ****         Tel_referenz=cOutputGetCount(1);
+ 168              		.loc 1 82 0
+ 169 011c 0100A0E3 		mov	r0, #1
+ 170 0120 FEFFFFEB 		bl	cOutputGetCount
+ 171              	.LVL24:
+ 172 0124 44319FE5 		ldr	r3, .L20+4
+ 173 0128 000083E5 		str	r0, [r3]
+  83:Dreh_motor.c  ****         
+  84:Dreh_motor.c  ****         cOutputSpeed(MOTOR_PORT_B,-MOTOR_SPEED_B);
+ 174              		.loc 1 84 0
+ 175 012c 0200A0E3 		mov	r0, #2
+ 176 0130 2210E0E3 		mvn	r1, #34
+ 177 0134 FEFFFFEB 		bl	cOutputSpeed
+ 178              	.LVL25:
+  85:Dreh_motor.c  ****         cOutputStart(MOTOR_PORT_B);
+ 179              		.loc 1 85 0
+ 180 0138 0200A0E3 		mov	r0, #2
+ 181 013c FEFFFFEB 		bl	cOutputStart
+ 182              	.LVL26:
+  86:Dreh_motor.c  ****         usleep(10000);
+ 183              		.loc 1 86 0
+ 184 0140 2C019FE5 		ldr	r0, .L20+8
+ 185 0144 FEFFFFEB 		bl	usleep
+ 186              	.LVL27:
+  87:Dreh_motor.c  ****         while(cOutputGetCount(1)-Tel_referenz>-dreh_Korr_Winkel)
+ 187              		.loc 1 87 0
+ 188 0148 0150A0E3 		mov	r5, #1
+ 189 014c 1C419FE5 		ldr	r4, .L20+4
+  88:Dreh_motor.c  ****         {
+  89:Dreh_motor.c  ****             usleep(100);
+ 190              		.loc 1 89 0
+ 191 0150 6460A0E3 		mov	r6, #100
+  87:Dreh_motor.c  ****         while(cOutputGetCount(1)-Tel_referenz>-dreh_Korr_Winkel)
+ 192              		.loc 1 87 0
+ 193 0154 010000EA 		b	.L10
+ 194              	.L11:
+ 195              		.loc 1 89 0
+ 196 0158 0600A0E1 		mov	r0, r6
+ 197 015c FEFFFFEB 		bl	usleep
+ 198              	.LVL28:
+ 199              	.L10:
+  87:Dreh_motor.c  ****         while(cOutputGetCount(1)-Tel_referenz>-dreh_Korr_Winkel)
+ 200              		.loc 1 87 0 discriminator 1
+ 201 0160 0500A0E1 		mov	r0, r5
+ 202 0164 FEFFFFEB 		bl	cOutputGetCount
+ 203              	.LVL29:
+ 204 0168 003094E5 		ldr	r3, [r4]
+ 205 016c 000063E0 		rsb	r0, r3, r0
+ 206 0170 1D0070E3 		cmn	r0, #29
+ 207 0174 F7FFFFAA 		bge	.L11
+ 208              	.L7:
+  90:Dreh_motor.c  ****         }
+  91:Dreh_motor.c  ****         
+  92:Dreh_motor.c  ****     }
+  93:Dreh_motor.c  ****     cOutputStop(MOTOR_PORT_B,1);
+ 209              		.loc 1 93 0
+ 210 0178 0200A0E3 		mov	r0, #2
+ 211 017c 0110A0E3 		mov	r1, #1
+ 212 0180 FEFFFFEB 		bl	cOutputStop
+ 213              	.LVL30:
+  94:Dreh_motor.c  ****     while(cOutputGetCount(1)!=dreh_winkel[Tel_soll]+Old_Tel_referenz){
+ 214              		.loc 1 94 0
+ 215 0184 0140A0E3 		mov	r4, #1
+ 216 0188 DCA09FE5 		ldr	r10, .L20
+  95:Dreh_motor.c  ****         if((cOutputGetCount(1)-(dreh_winkel[Tel_soll]+Old_Tel_referenz))<0){
+  96:Dreh_motor.c  ****             cOutputSpeed(MOTOR_PORT_B,MOTOR_SPEED_B);
+  97:Dreh_motor.c  ****             cOutputStart(MOTOR_PORT_B);
+  98:Dreh_motor.c  ****             while((cOutputGetCount(1)-(dreh_winkel[Tel_soll]+Old_Tel_referenz))<0)
+  99:Dreh_motor.c  ****             {
+ 100:Dreh_motor.c  ****                 usleep(10);
+ 101:Dreh_motor.c  ****             }
+ 102:Dreh_motor.c  ****             cOutputStop(MOTOR_PORT_B,1);
+ 103:Dreh_motor.c  ****         }else{
+ 104:Dreh_motor.c  ****             cOutputSpeed(MOTOR_PORT_B,-MOTOR_SPEED_B);
+ 217              		.loc 1 104 0
+ 218 018c 0270A0E3 		mov	r7, #2
+ 219 0190 22B0E0E3 		mvn	fp, #34
+ 105:Dreh_motor.c  ****             cOutputStart(MOTOR_PORT_B);
+ 106:Dreh_motor.c  ****             while((cOutputGetCount(1)-(dreh_winkel[Tel_soll]+Old_Tel_referenz))>0)
+ 107:Dreh_motor.c  ****             {
+ 108:Dreh_motor.c  ****                 usleep(10);
+ 220              		.loc 1 108 0
+ 221 0194 0A60A0E3 		mov	r6, #10
+  94:Dreh_motor.c  ****         if((cOutputGetCount(1)-(dreh_winkel[Tel_soll]+Old_Tel_referenz))<0){
+ 222              		.loc 1 94 0
+ 223 0198 250000EA 		b	.L12
+ 224              	.L19:
+  95:Dreh_motor.c  ****         if((cOutputGetCount(1)-(dreh_winkel[Tel_soll]+Old_Tel_referenz))<0){
+ 225              		.loc 1 95 0
+ 226 019c 0400A0E1 		mov	r0, r4
+ 227 01a0 FEFFFFEB 		bl	cOutputGetCount
+ 228              	.LVL31:
+ 229 01a4 000065E0 		rsb	r0, r5, r0
+ 230 01a8 000050E3 		cmp	r0, #0
+ 231 01ac 100000AA 		bge	.L13
+  96:Dreh_motor.c  ****             cOutputStart(MOTOR_PORT_B);
+ 232              		.loc 1 96 0
+ 233 01b0 0700A0E1 		mov	r0, r7
+ 234 01b4 2310A0E3 		mov	r1, #35
+ 235 01b8 FEFFFFEB 		bl	cOutputSpeed
+ 236              	.LVL32:
+  97:Dreh_motor.c  ****             while((cOutputGetCount(1)-(dreh_winkel[Tel_soll]+Old_Tel_referenz))<0)
+ 237              		.loc 1 97 0
+ 238 01bc 0700A0E1 		mov	r0, r7
+ 239 01c0 FEFFFFEB 		bl	cOutputStart
+ 240              	.LVL33:
+  98:Dreh_motor.c  ****             {
+ 241              		.loc 1 98 0
+ 242 01c4 010000EA 		b	.L14
+ 243              	.L15:
+ 100:Dreh_motor.c  ****             }
+ 244              		.loc 1 100 0
+ 245 01c8 0600A0E1 		mov	r0, r6
+ 246 01cc FEFFFFEB 		bl	usleep
+ 247              	.LVL34:
+ 248              	.L14:
+  98:Dreh_motor.c  ****             {
+ 249              		.loc 1 98 0 discriminator 1
+ 250 01d0 0400A0E1 		mov	r0, r4
+ 251 01d4 FEFFFFEB 		bl	cOutputGetCount
+ 252              	.LVL35:
+ 253 01d8 000065E0 		rsb	r0, r5, r0
+ 254 01dc 000050E3 		cmp	r0, #0
+ 255 01e0 F8FFFFBA 		blt	.L15
+ 102:Dreh_motor.c  ****         }else{
+ 256              		.loc 1 102 0
+ 257 01e4 0700A0E1 		mov	r0, r7
+ 258 01e8 0410A0E1 		mov	r1, r4
+ 259 01ec FEFFFFEB 		bl	cOutputStop
+ 260              	.LVL36:
+ 261 01f0 0F0000EA 		b	.L12
+ 262              	.L13:
+ 104:Dreh_motor.c  ****             cOutputStart(MOTOR_PORT_B);
+ 263              		.loc 1 104 0
+ 264 01f4 0700A0E1 		mov	r0, r7
+ 265 01f8 0B10A0E1 		mov	r1, fp
+ 266 01fc FEFFFFEB 		bl	cOutputSpeed
+ 267              	.LVL37:
+ 105:Dreh_motor.c  ****             while((cOutputGetCount(1)-(dreh_winkel[Tel_soll]+Old_Tel_referenz))>0)
+ 268              		.loc 1 105 0
+ 269 0200 0700A0E1 		mov	r0, r7
+ 270 0204 FEFFFFEB 		bl	cOutputStart
+ 271              	.LVL38:
+ 106:Dreh_motor.c  ****             {
+ 272              		.loc 1 106 0
+ 273 0208 010000EA 		b	.L17
+ 274              	.L18:
+ 275              		.loc 1 108 0
+ 276 020c 0600A0E1 		mov	r0, r6
+ 277 0210 FEFFFFEB 		bl	usleep
+ 278              	.LVL39:
+ 279              	.L17:
+ 106:Dreh_motor.c  ****             {
+ 280              		.loc 1 106 0 discriminator 1
+ 281 0214 0400A0E1 		mov	r0, r4
+ 282 0218 FEFFFFEB 		bl	cOutputGetCount
+ 283              	.LVL40:
+ 284 021c 000065E0 		rsb	r0, r5, r0
+ 285 0220 000050E3 		cmp	r0, #0
+ 286 0224 F8FFFFCA 		bgt	.L18
+ 109:Dreh_motor.c  ****             }
+ 110:Dreh_motor.c  ****             cOutputStop(MOTOR_PORT_B,1);
+ 287              		.loc 1 110 0
+ 288 0228 0700A0E1 		mov	r0, r7
+ 289 022c 0410A0E1 		mov	r1, r4
+ 290 0230 FEFFFFEB 		bl	cOutputStop
+ 291              	.LVL41:
+ 292              	.L12:
+  94:Dreh_motor.c  ****         if((cOutputGetCount(1)-(dreh_winkel[Tel_soll]+Old_Tel_referenz))<0){
+ 293              		.loc 1 94 0 discriminator 1
+ 294 0234 0400A0E1 		mov	r0, r4
+ 295 0238 FEFFFFEB 		bl	cOutputGetCount
+ 296              	.LVL42:
+ 297 023c 09519AE7 		ldr	r5, [r10, r9, asl #2]
+ 298 0240 055088E0 		add	r5, r8, r5
+ 299 0244 050050E1 		cmp	r0, r5
+ 300 0248 D3FFFF1A 		bne	.L19
+ 111:Dreh_motor.c  ****             
+ 112:Dreh_motor.c  ****         }
+ 113:Dreh_motor.c  ****     }
+ 114:Dreh_motor.c  **** 
+ 115:Dreh_motor.c  ****     Tel_ist=Tel_soll;
+ 301              		.loc 1 115 0
+ 302 024c 1C309FE5 		ldr	r3, .L20+4
+ 303 0250 049083E5 		str	r9, [r3, #4]
+ 116:Dreh_motor.c  ****     Old_Tel_referenz=cOutputGetCount(1);
+ 304              		.loc 1 116 0
+ 305 0254 0100A0E3 		mov	r0, #1
+ 306 0258 FEFFFFEB 		bl	cOutputGetCount
+ 307              	.LVL43:
+ 117:Dreh_motor.c  **** #else
+ 118:Dreh_motor.c  ****     Tel_referenz=cOutputGetCount(1);
+ 119:Dreh_motor.c  ****     cOutputStepSpeed(MOTOR_PORT_B,MOTOR_SPEED_B,((dreh_winkel[Tel_soll]+dreh_Korr_Winkel)/9),(((dre
+ 120:Dreh_motor.c  ****     usleep(1000);
+ 121:Dreh_motor.c  ****     cOutputStepSpeed(MOTOR_PORT_B,-MOTOR_SPEED_B,(dreh_Korr_Winkel/10),((dreh_Korr_Winkel/10)*8),(d
+ 122:Dreh_motor.c  ****     cOutputStop(MOTOR_PORT_B,1);
+ 123:Dreh_motor.c  ****     while(cOutputGetCount(1)!=dreh_winkel[Tel_soll]+Tel_referenz){
+ 124:Dreh_motor.c  ****         if((cOutputGetCount(1)-(dreh_winkel[Tel_soll]+Tel_referenz))<0){
+ 125:Dreh_motor.c  ****             cOutputSpeed(MOTOR_PORT_B,MOTOR_SPEED_B);
+ 126:Dreh_motor.c  ****             cOutputStart(MOTOR_PORT_B);
+ 127:Dreh_motor.c  ****             while((cOutputGetCount(1)-(dreh_winkel[Tel_soll]+Tel_referenz))<0)
+ 128:Dreh_motor.c  ****             {
+ 129:Dreh_motor.c  ****                 usleep(10);
+ 130:Dreh_motor.c  ****             }
+ 131:Dreh_motor.c  ****             cOutputStop(MOTOR_PORT_B,1);
+ 132:Dreh_motor.c  ****         }else{
+ 133:Dreh_motor.c  ****             cOutputSpeed(MOTOR_PORT_B,-MOTOR_SPEED_B);
+ 134:Dreh_motor.c  ****             cOutputStart(MOTOR_PORT_B);
+ 135:Dreh_motor.c  ****             while((cOutputGetCount(1)-(dreh_winkel[Tel_soll]+Tel_referenz))>0)
+ 136:Dreh_motor.c  ****             {
+ 137:Dreh_motor.c  ****                 usleep(10);
+ 138:Dreh_motor.c  ****             }
+ 139:Dreh_motor.c  ****             cOutputStop(MOTOR_PORT_B,1);
+ 140:Dreh_motor.c  ****             
+ 141:Dreh_motor.c  ****         }
+ 142:Dreh_motor.c  ****     }
+ 143:Dreh_motor.c  ****     Tel_ist=Tel_soll;
+ 144:Dreh_motor.c  ****     Tel_referenz=cOutputGetCount(1);
+ 145:Dreh_motor.c  ****     
+ 146:Dreh_motor.c  **** #endif
+ 147:Dreh_motor.c  ****     sleep(1);
+ 308              		.loc 1 147 0
+ 309 025c 0100A0E3 		mov	r0, #1
+ 310 0260 FEFFFFEB 		bl	sleep
+ 311              	.LVL44:
+ 148:Dreh_motor.c  **** #endif
+ 149:Dreh_motor.c  ****     return 0;
+ 150:Dreh_motor.c  **** }
+ 312              		.loc 1 150 0
+ 313 0264 0000A0E3 		mov	r0, #0
+ 314 0268 F88FBDE8 		ldmfd	sp!, {r3, r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 315              	.L21:
+ 316              		.align	2
+ 317              	.L20:
+ 318 026c 00000000 		.word	.LANCHOR0
+ 319 0270 00000000 		.word	.LANCHOR1
+ 320 0274 10270000 		.word	10000
+ 321              		.cfi_endproc
+ 322              	.LFE12:
+ 323              		.fnend
+ 325              		.align	2
+ 326              		.global	DrehTel_init
+ 328              	DrehTel_init:
+ 329              		.fnstart
+ 330              	.LFB11:
+  32:Dreh_motor.c  **** #ifdef __linux__
+ 331              		.loc 1 32 0
+ 332              		.cfi_startproc
+ 333              		@ args = 0, pretend = 0, frame = 0
+ 334              		@ frame_needed = 0, uses_anonymous_args = 0
+ 335 0278 10402DE9 		stmfd	sp!, {r4, lr}
+ 336              		.save {r4, lr}
+ 337              		.cfi_def_cfa_offset 8
+ 338              		.cfi_offset 4, -8
+ 339              		.cfi_offset 14, -4
+  34:Dreh_motor.c  ****     Tel_referenz=cOutputGetCount(1);
+ 340              		.loc 1 34 0
+ 341 027c FEFFFFEB 		bl	cOutputInit
+ 342              	.LVL45:
+  35:Dreh_motor.c  ****     Tel_ist=0;
+ 343              		.loc 1 35 0
+ 344 0280 0100A0E3 		mov	r0, #1
+ 345 0284 FEFFFFEB 		bl	cOutputGetCount
+ 346              	.LVL46:
+ 347 0288 18309FE5 		ldr	r3, .L23
+ 348 028c 000083E5 		str	r0, [r3]
+  36:Dreh_motor.c  ****     DrehTel_setpos(0);
+ 349              		.loc 1 36 0
+ 350 0290 0040A0E3 		mov	r4, #0
+ 351 0294 044083E5 		str	r4, [r3, #4]
+  37:Dreh_motor.c  **** #endif
+ 352              		.loc 1 37 0
+ 353 0298 0400A0E1 		mov	r0, r4
+ 354 029c FEFFFFEB 		bl	DrehTel_setpos
+ 355              	.LVL47:
+  40:Dreh_motor.c  **** 
+ 356              		.loc 1 40 0
+ 357 02a0 0400A0E1 		mov	r0, r4
+ 358 02a4 1080BDE8 		ldmfd	sp!, {r4, pc}
+ 359              	.L24:
+ 360              		.align	2
+ 361              	.L23:
+ 362 02a8 00000000 		.word	.LANCHOR1
+ 363              		.cfi_endproc
+ 364              	.LFE11:
+ 365              		.fnend
+ 367              		.align	2
+ 368              		.global	DrehTel_dreh
+ 370              	DrehTel_dreh:
+ 371              		.fnstart
+ 372              	.LFB13:
+ 151:Dreh_motor.c  **** #ifdef __linux__
+ 152:Dreh_motor.c  **** int DrehTel_dreh(){
+ 373              		.loc 1 152 0
+ 374              		.cfi_startproc
+ 375              		@ args = 0, pretend = 0, frame = 0
+ 376              		@ frame_needed = 0, uses_anonymous_args = 0
+ 377 02ac 04E02DE5 		str	lr, [sp, #-4]!
+ 378              		.save {lr}
+ 379              		.cfi_def_cfa_offset 4
+ 380              		.cfi_offset 14, -4
+ 381              		.pad #12
+ 382 02b0 0CD04DE2 		sub	sp, sp, #12
+ 383              		.cfi_def_cfa_offset 16
+ 153:Dreh_motor.c  ****     cOutputStepSpeed(MOTOR_PORT_B,MOTOR_SPEED_B, 15,105,15,1);
+ 384              		.loc 1 153 0
+ 385 02b4 0F20A0E3 		mov	r2, #15
+ 386 02b8 00208DE5 		str	r2, [sp]
+ 387 02bc 0130A0E3 		mov	r3, #1
+ 388 02c0 04308DE5 		str	r3, [sp, #4]
+ 389 02c4 0200A0E3 		mov	r0, #2
+ 390 02c8 2310A0E3 		mov	r1, #35
+ 391 02cc 6930A0E3 		mov	r3, #105
+ 392 02d0 FEFFFFEB 		bl	cOutputStepSpeed
+ 393              	.LVL48:
+ 154:Dreh_motor.c  ****     return 0;
+ 155:Dreh_motor.c  **** }
+ 394              		.loc 1 155 0
+ 395 02d4 0000A0E3 		mov	r0, #0
+ 396 02d8 0CD08DE2 		add	sp, sp, #12
+ 397              		@ sp needed
+ 398 02dc 04F09DE4 		ldr	pc, [sp], #4
+ 399              		.cfi_endproc
+ 400              	.LFE13:
+ 401              		.fnend
+ 403              		.align	2
+ 404              		.global	DrehTel_close
+ 406              	DrehTel_close:
+ 407              		.fnstart
+ 408              	.LFB14:
+ 156:Dreh_motor.c  **** 
+ 157:Dreh_motor.c  **** 
+ 158:Dreh_motor.c  **** int DrehTel_close(){
+ 409              		.loc 1 158 0
+ 410              		.cfi_startproc
+ 411              		@ args = 0, pretend = 0, frame = 0
+ 412              		@ frame_needed = 0, uses_anonymous_args = 0
+ 413 02e0 08402DE9 		stmfd	sp!, {r3, lr}
+ 414              		.save {r3, lr}
+ 415              		.cfi_def_cfa_offset 8
+ 416              		.cfi_offset 3, -8
+ 417              		.cfi_offset 14, -4
+ 159:Dreh_motor.c  ****     cOutputExit();
+ 418              		.loc 1 159 0
+ 419 02e4 FEFFFFEB 		bl	cOutputExit
+ 420              	.LVL49:
+ 160:Dreh_motor.c  ****     return 0;
+ 161:Dreh_motor.c  **** }
+ 421              		.loc 1 161 0
+ 422 02e8 0000A0E3 		mov	r0, #0
+ 423 02ec 0880BDE8 		ldmfd	sp!, {r3, pc}
+ 424              		.cfi_endproc
+ 425              	.LFE14:
+ 426              		.fnend
+ 428              		.global	dreh_Korr_Winkel
+ 429              		.global	dreh_winkel
+ 430              		.global	Tel_referenz
+ 431              		.global	Tel_soll
+ 432              		.global	Tel_ist
+ 433              		.comm	OutputInstance,64,4
+ 434              		.global	MOTOR_PORT_B
+ 435              		.global	MOTOR_SPEED_B
+ 436              		.section	.rodata
+ 437              		.align	2
+ 438              	.LANCHOR0 = . + 0
+ 441              	dreh_winkel:
+ 442 0000 00000000 		.word	0
+ 443 0004 0E010000 		.word	270
+ 444 0008 F2FEFFFF 		.word	-270
+ 445 000c 1C020000 		.word	540
+ 446 0010 E4FDFFFF 		.word	-540
+ 449              	dreh_Korr_Winkel:
+ 450 0014 1E000000 		.word	30
+ 453              	MOTOR_PORT_B:
+ 454 0018 02       		.byte	2
+ 455 0019 000000   		.space	3
+ 458              	MOTOR_SPEED_B:
+ 459 001c 23000000 		.word	35
+ 460              		.bss
+ 461              		.align	2
+ 462              	.LANCHOR1 = . + 0
+ 465              	Tel_referenz:
+ 466 0000 00000000 		.space	4
+ 469              	Tel_ist:
+ 470 0004 00000000 		.space	4
+ 473              	Tel_soll:
+ 474 0008 00000000 		.space	4
+ 475              		.text
+ 476              	.Letext0:
+ 477              		.file 2 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
+ 478              		.file 3 "/usr/local/carlson-minot/crosscompilers/lib/gcc/arm-none-linux-gnueabi/4.8.3/include/stdd
+ 479              		.file 4 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
+ 480              		.file 5 "lmstypes.h"
+ 481              		.file 6 "bytecodes.h"
+ 482              		.file 7 "lms2012.h"
+ 483              		.file 8 "../lms2012/c_output.h"
+ 484              		.file 9 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
+ 485              		.file 10 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/u
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 Dreh_motor.c
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccEQn2RF.s:16     .text:0000000000000000 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccEQn2RF.s:19     .text:0000000000000000 DrehTel_setpos
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccEQn2RF.s:238    .text:00000000000001d4 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc8GujXc.s:16     .text:0000000000000000 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc8GujXc.s:19     .text:0000000000000000 DrehTel_setpos
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc8GujXc.s:318    .text:000000000000026c $d
                        .ARM.exidx:0000000000000000 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccEQn2RF.s:247    .text:00000000000001e8 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccEQn2RF.s:250    .text:00000000000001e8 DrehTel_init
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccEQn2RF.s:291    .text:0000000000000224 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccEQn2RF.s:297    .text:000000000000022c $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccEQn2RF.s:300    .text:000000000000022c DrehTel_dreh
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccEQn2RF.s:336    .text:0000000000000260 DrehTel_close
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc8GujXc.s:325    .text:0000000000000278 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc8GujXc.s:328    .text:0000000000000278 DrehTel_init
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc8GujXc.s:362    .text:00000000000002a8 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc8GujXc.s:367    .text:00000000000002ac $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc8GujXc.s:370    .text:00000000000002ac DrehTel_dreh
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc8GujXc.s:406    .text:00000000000002e0 DrehTel_close
                        .ARM.extab:0000000000000000 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccEQn2RF.s:378    .rodata:0000000000000014 dreh_Korr_Winkel
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccEQn2RF.s:370    .rodata:0000000000000000 dreh_winkel
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccEQn2RF.s:405    .bss:0000000000000000 Tel_referenz
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccEQn2RF.s:409    .bss:0000000000000004 Tel_ist
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc8GujXc.s:449    .rodata:0000000000000014 dreh_Korr_Winkel
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc8GujXc.s:441    .rodata:0000000000000000 dreh_winkel
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc8GujXc.s:465    .bss:0000000000000000 Tel_referenz
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc8GujXc.s:473    .bss:0000000000000008 Tel_soll
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc8GujXc.s:469    .bss:0000000000000004 Tel_ist
                             *COM*:0000000000000040 OutputInstance
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccEQn2RF.s:382    .rodata:0000000000000018 MOTOR_PORT_B
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccEQn2RF.s:387    .rodata:000000000000001c MOTOR_SPEED_B
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccEQn2RF.s:366    .rodata:0000000000000000 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccEQn2RF.s:390    .rodata.str1.4:0000000000000000 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccEQn2RF.s:401    .bss:0000000000000000 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc8GujXc.s:453    .rodata:0000000000000018 MOTOR_PORT_B
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc8GujXc.s:458    .rodata:000000000000001c MOTOR_SPEED_B
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc8GujXc.s:437    .rodata:0000000000000000 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc8GujXc.s:461    .bss:0000000000000000 $d
                      .debug_frame:0000000000000010 $d
 
 UNDEFINED SYMBOLS
@@ -744,7 +680,6 @@ cOutputSpeed
 cOutputStart
 usleep
 cOutputStop
-printf
 sleep
 __aeabi_unwind_cpp_pr0
 cOutputInit

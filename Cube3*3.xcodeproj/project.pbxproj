@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2C3513CF1C185A6000B7D2BA /* OLL.c in Sources */ = {isa = PBXBuildFile; fileRef = 2C3513CD1C185A6000B7D2BA /* OLL.c */; };
+		2CA6A3B71C4FE58E00E3D07A /* Cube_monitor.c in Sources */ = {isa = PBXBuildFile; fileRef = 2CA6A3B51C4FE58E00E3D07A /* Cube_monitor.c */; };
 		2CD3DD4A1C3D214700D40C9C /* Test.c in Sources */ = {isa = PBXBuildFile; fileRef = 2CD3DD481C3D214700D40C9C /* Test.c */; };
 		2CF216731C2704BF008D8234 /* PLL.c in Sources */ = {isa = PBXBuildFile; fileRef = 2CF216711C2704BF008D8234 /* PLL.c */; };
 		7AD9AB241BF4D6260079E82F /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 7AD9AB231BF4D6260079E82F /* main.c */; };
@@ -38,6 +39,8 @@
 /* Begin PBXFileReference section */
 		2C3513CD1C185A6000B7D2BA /* OLL.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = OLL.c; sourceTree = "<group>"; };
 		2C3513CE1C185A6000B7D2BA /* OLL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OLL.h; sourceTree = "<group>"; };
+		2CA6A3B51C4FE58E00E3D07A /* Cube_monitor.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Cube_monitor.c; sourceTree = "<group>"; };
+		2CA6A3B61C4FE58E00E3D07A /* Cube_monitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cube_monitor.h; sourceTree = "<group>"; };
 		2CD3DD481C3D214700D40C9C /* Test.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Test.c; sourceTree = "<group>"; };
 		2CD3DD491C3D214700D40C9C /* Test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Test.h; sourceTree = "<group>"; };
 		2CF216711C2704BF008D8234 /* PLL.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PLL.c; sourceTree = "<group>"; };
@@ -102,6 +105,8 @@
 			children = (
 				7AD9AB231BF4D6260079E82F /* main.c */,
 				7AD9AB451BF4DA5D0079E82F /* main.h */,
+				2CA6A3B51C4FE58E00E3D07A /* Cube_monitor.c */,
+				2CA6A3B61C4FE58E00E3D07A /* Cube_monitor.h */,
 				7AD9AB461BF4DA9B0079E82F /* Top_Cross.c */,
 				7AD9AB471BF4DA9B0079E82F /* Top_Cross.h */,
 				7AD9AB491BF4DACC0079E82F /* F2L.c */,
@@ -203,6 +208,7 @@
 				7AD9AB241BF4D6260079E82F /* main.c in Sources */,
 				7AD9AB411BF4D9830079E82F /* print_mode.c in Sources */,
 				2C3513CF1C185A6000B7D2BA /* OLL.c in Sources */,
+				2CA6A3B71C4FE58E00E3D07A /* Cube_monitor.c in Sources */,
 				7AD9AB441BF4DA410079E82F /* Color_search.c in Sources */,
 				7AD9AB381BF4D7A90079E82F /* Farbe_sen.c in Sources */,
 			);

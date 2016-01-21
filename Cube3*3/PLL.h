@@ -11,6 +11,6 @@
 
 #include <stdio.h>
 
-void PLL();
+int PLL();
 
 #endif /* PLL_h */

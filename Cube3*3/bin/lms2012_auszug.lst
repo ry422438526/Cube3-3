@@ -430,14 +430,14 @@
  135              		.file 7 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 lms2012_auszug.c
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccSIgC6G.s:16     .text:0000000000000000 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccSIgC6G.s:19     .text:0000000000000000 LogErrorNumber
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccSIgC6G.s:43     .text:0000000000000014 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccbzEzWP.s:16     .text:0000000000000000 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccbzEzWP.s:19     .text:0000000000000000 LogErrorNumber
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccbzEzWP.s:43     .text:0000000000000014 $d
                        .ARM.extab:0000000000000000 $d
                        .ARM.exidx:0000000000000000 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccSIgC6G.s:55     .data:0000000000000000 ErrString
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccSIgC6G.s:51     .data:0000000000000000 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccSIgC6G.s:125    .rodata.str1.4:0000000000000000 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccbzEzWP.s:55     .data:0000000000000000 ErrString
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccbzEzWP.s:51     .data:0000000000000000 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccbzEzWP.s:125    .rodata.str1.4:0000000000000000 $d
                      .debug_frame:0000000000000010 $d
 
 UNDEFINED SYMBOLS

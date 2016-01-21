@@ -18,7 +18,7 @@ bin/OLL.o: OLL.c \
  /usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/usr/include/bits/stdio_lim.h \
  /usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/usr/include/bits/sys_errlist.h \
  /usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/usr/include/bits/stdio.h \
- Color_search.h Side_dreh.h print_mode.h main.h
+ Color_search.h Side_dreh.h main.h print_mode.h
 
 /usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/usr/include/stdc-predef.h:
 
@@ -62,6 +62,6 @@ Color_search.h:
 
 Side_dreh.h:
 
-print_mode.h:
-
 main.h:
+
+print_mode.h:

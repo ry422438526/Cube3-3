@@ -625,23 +625,23 @@
  436              		.file 13 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/u
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 print_mode.c
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cclGee1n.s:16     .text:0000000000000000 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cclGee1n.s:19     .text:0000000000000000 reset_terminal_mode
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cclGee1n.s:42     .text:0000000000000018 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccxggShO.s:16     .text:0000000000000000 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccxggShO.s:19     .text:0000000000000000 reset_terminal_mode
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccxggShO.s:42     .text:0000000000000018 $d
                             *COM*:000000000000003c orig_termios
                        .ARM.extab:0000000000000000 $d
                        .ARM.exidx:0000000000000000 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cclGee1n.s:47     .text:000000000000001c $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cclGee1n.s:50     .text:000000000000001c set_conio_terminal_mode
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cclGee1n.s:98     .text:000000000000006c $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cclGee1n.s:104    .text:0000000000000074 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cclGee1n.s:107    .text:0000000000000074 kbhit
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cclGee1n.s:162    .text:00000000000000d0 getch
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cclGee1n.s:197    .text:00000000000000f8 wuerfel_print
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cclGee1n.s:283    .text:000000000000019c $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cclGee1n.s:291    .text:00000000000001b4 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cclGee1n.s:371    .text:0000000000000244 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cclGee1n.s:391    .rodata.str1.4:0000000000000000 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccxggShO.s:47     .text:000000000000001c $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccxggShO.s:50     .text:000000000000001c set_conio_terminal_mode
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccxggShO.s:98     .text:000000000000006c $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccxggShO.s:104    .text:0000000000000074 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccxggShO.s:107    .text:0000000000000074 kbhit
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccxggShO.s:162    .text:00000000000000d0 getch
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccxggShO.s:197    .text:00000000000000f8 wuerfel_print
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccxggShO.s:283    .text:000000000000019c $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccxggShO.s:291    .text:00000000000001b4 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccxggShO.s:371    .text:0000000000000244 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccxggShO.s:391    .rodata.str1.4:0000000000000000 $d
                      .debug_frame:0000000000000010 $d
 
 UNDEFINED SYMBOLS

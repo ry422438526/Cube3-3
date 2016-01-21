@@ -65,8 +65,6 @@ int ColSen_init()
 int ColSen_getData()   //Center:zenteral Position
 {
 #ifdef __linux__
-    int MAX_Werte=0;
-    float rot,gruen,blau,blank;
     int Color_color =0;
     int Color_data_r=0;
     int Color_data_g=0;
@@ -81,11 +79,6 @@ int ColSen_getData()   //Center:zenteral Position
     usleep(100000);
     Color_color=Color_col(Color_data_r*1.0,Color_data_g*1.0,Color_data_b*1.0);
     printf("color_data is (%5d, %5d, %5d, %5d)",Color_data_r,Color_data_g,Color_data_b,Color_data_blank);
-    //MAX_Werte=MAX_RGB(MAX_RGB(Color_data_r, Color_data_g),Color_data_b);
-    /*rot   =(Color_data_r*1.0)/MAX_Werte;
-    gruen =(Color_data_g*1.0)/MAX_Werte;
-    blau  =(Color_data_b*1.0)/MAX_Werte;
-    Color_color=Color_col(rot,gruen,blau);*/
 
 #if 1
     switch(Color_color){
@@ -119,9 +112,7 @@ int ColSen_getData()   //Center:zenteral Position
     }
 #endif
     printf("\n\r");
-//    sleep(1);
     return Color_color;
-    // senden daten zu PC
 #endif
     
 #ifndef __linux__
@@ -146,13 +137,13 @@ FARBE Color_col(float rot, float gruen,float blau)
     if ((rot>=20)||(gruen>=20)||(blau>=20)){
         if ((rot>blau*1.35)&&(gruen>blau*1.35))
         {
-            if (((rot>gruen)&&(rot<gruen*1.2))||((gruen>=rot)&&(gruen<rot*1.2))){     //original werte 1.1
+            if (((rot>gruen)&&(rot<gruen*1.1))||((gruen>=rot)&&(gruen<rot*1.1))){     //original werte 1.2
             Farbe= WEISS;
             goto fertig;
                 
             }
         }
-        if ((rot>2.5*gruen)&&(rot>4*blau)&&(gruen>2*blau)&&(blau>10)){  //original grune>2*blue   1.9
+        if ((rot>2.5*gruen)&&(rot>4*blau)&&(gruen>2.1*blau)&&(blau>=10)){  //original grune>2.1*blue   1.9
             Farbe=  ORANGE;
             goto fertig;
         }
@@ -175,183 +166,3 @@ FARBE Color_col(float rot, float gruen,float blau)
     }
     fertig:return Farbe;
 }
-
-
-/*
-DATAF     cInputCalculateColor(COLORSTRUCT *pC)
-{
-    DATAF   Result ;
-    
-    
-    Result  =  DATAF_NAN;
-    
-    // Color Sensor values has been calculated -
-    // now calculate the color and put it in Sensor value
-    if (((pC->SensorRaw[RED]) > (pC->SensorRaw[BLUE] )) &&
-        ((pC->SensorRaw[RED]) > (pC->SensorRaw[GREEN])))
-    {
-        
-        // If all 3 colors are less than 65 OR (Less that 110 and bg less than 40)
-        if (((pC->SensorRaw[RED])   < 65) ||
-            (((pC->SensorRaw[BLANK]) < 40) && ((pC->SensorRaw[RED])  < 110)))
-        {
-            Result  =  (DATAF)BLACKCOLOR;
-        }
-        else
-        {
-            if (((((pC->SensorRaw[BLUE]) >> 2)  + ((pC->SensorRaw[BLUE]) >> 3) + (pC->SensorRaw[BLUE])) < (pC->SensorRaw[GREEN])) &&
-                ((((pC->SensorRaw[GREEN]) << 1)) > (pC->SensorRaw[RED])))
-            {
-                Result  =  (DATAF)YELLOWCOLOR;
-            }
-            else
-            {
-                
-                if ((((pC->SensorRaw[GREEN]) << 1) - ((pC->SensorRaw[GREEN]) >> 2)) < (pC->SensorRaw[RED]))
-                {
-                    
-                    Result  =  (DATAF)REDCOLOR;
-                }
-                else
-                {
-                    
-                    if ((((pC->SensorRaw[BLUE]) < 70) ||
-                         ((pC->SensorRaw[GREEN]) < 70)) ||
-                        (((pC->SensorRaw[BLANK]) < 140) && ((pC->SensorRaw[RED]) < 140)))
-                    {
-                        Result  =  (DATAF)BLACKCOLOR;
-                    }
-                    else
-                    {
-                        Result  =  (DATAF)WHITECOLOR;
-                    }
-                }
-            }
-        }
-    }
-    else
-    {
-        
-        // Red is not the dominant color
-        if ((pC->SensorRaw[GREEN]) > (pC->SensorRaw[BLUE]))
-        {
-            
-            // Green is the dominant color
-            // If all 3 colors are less than 40 OR (Less that 70 and bg less than 20)
-            if (((pC->SensorRaw[GREEN])  < 40) ||
-                (((pC->SensorRaw[BLANK]) < 30) && ((pC->SensorRaw[GREEN])  < 70)))
-            {
-                Result  =  (DATAF)BLACKCOLOR;
-            }
-            else
-            {
-                if ((((pC->SensorRaw[BLUE]) << 1)) < (pC->SensorRaw[RED]))
-                {
-                    Result  =  (DATAF)YELLOWCOLOR;
-                }
-                else
-                {
-                    if ((((pC->SensorRaw[RED]) + ((pC->SensorRaw[RED])>>2)) < (pC->SensorRaw[GREEN])) ||
-                        (((pC->SensorRaw[BLUE]) + ((pC->SensorRaw[BLUE])>>2)) < (pC->SensorRaw[GREEN])))
-                    {
-                        Result  =  (DATAF)GREENCOLOR;
-                    }
-                    else
-                    {
-                        if ((((pC->SensorRaw[RED]) < 70) ||
-                             ((pC->SensorRaw[BLUE]) < 70)) ||
-                            (((pC->SensorRaw[BLANK]) < 140) && ((pC->SensorRaw[GREEN]) < 140)))
-                        {
-                            Result  =  (DATAF)BLACKCOLOR;
-                        }
-                        else
-                        {
-                            Result  =  (DATAF)WHITECOLOR;
-                        }
-                    }
-                }
-            }
-        }
-        else
-        {
-            
-            // Blue is the most dominant color
-            // Colors can be blue, white or black
-            // If all 3 colors are less than 48 OR (Less that 85 and bg less than 25)
-            if (((pC->SensorRaw[BLUE])   < 48) ||
-                (((pC->SensorRaw[BLANK]) < 25) && ((pC->SensorRaw[BLUE])  < 85)))
-            {
-                Result  =  (DATAF)BLACKCOLOR;
-            }
-            else
-            {
-                if ((((((pC->SensorRaw[RED]) * 48) >> 5) < (pC->SensorRaw[BLUE])) &&
-                     ((((pC->SensorRaw[GREEN]) * 48) >> 5) < (pC->SensorRaw[BLUE])))
-                    ||
-                    (((((pC->SensorRaw[RED])   * 58) >> 5) < (pC->SensorRaw[BLUE])) ||
-                     ((((pC->SensorRaw[GREEN]) * 58) >> 5) < (pC->SensorRaw[BLUE]))))
-                {
-                    Result  =  (DATAF)BLUECOLOR;
-                }
-                else
-                {
-                    
-                    // Color is white or Black
-                    if ((((pC->SensorRaw[RED])  < 60) ||
-                         ((pC->SensorRaw[GREEN]) < 60)) ||
-                        (((pC->SensorRaw[BLANK]) < 110) && ((pC->SensorRaw[BLUE]) < 120)))
-                    {
-                        Result  =  (DATAF)BLACKCOLOR;
-                    }
-                    else
-                    {
-                        if ((((pC->SensorRaw[RED])  + ((pC->SensorRaw[RED])   >> 3)) < (pC->SensorRaw[BLUE])) ||
-                            (((pC->SensorRaw[GREEN]) + ((pC->SensorRaw[GREEN]) >> 3)) < (pC->SensorRaw[BLUE])))
-                        {
-                            Result  =  (DATAF)BLUECOLOR;
-                        }
-                        else
-                        {
-                            Result  =  (DATAF)WHITECOLOR;
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
-    
-    return (Result);
-}
-*/
-
-
-/*FARBE Color_col(float rot, float gruen,float blau)
- {
- 
- int Color_col=0;
- if (rot==1) {
- if(gruen>0.5)
- {
- Color_col=GELB;
- }else if ((gruen<0.3)&&(blau<0.1)){
- Color_col=ROT;
- }else{
- Color_col=ORANGE;
- }
- }
- if(gruen==1)
- {
- if((rot<0.4)||(blau<0.3))
- {
- Color_col=GRUEN;
- }else if (blau>0.8){
- Color_col=BLAU;
- }else{
- Color_col=WEISS;
- }
- }
- return Color_col;
- }
- */
-

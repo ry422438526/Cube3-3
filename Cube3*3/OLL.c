@@ -17,24 +17,6 @@ int OLL(){
     wuerfel_print(1);
     if ((color_data[0][1]!=2)&&(color_data[0][3]!=2)&&(color_data[0][5]!=2)&&(color_data[0][7]!=2))
     {
-        /*fs_dreh(1, 90);
-        fs_dreh(1, 90);
-        bs_dreh(1, 90);
-        rs_dreh(-1, 90);
-        ls_dreh(-1, 90);
-        bs_dreh(-1, 90);
-        us_dreh(1, 90);
-        fs_dreh(1, 90);
-        bs_dreh(1, 90);
-        rs_dreh(-1, 90);
-        ls_dreh(-1, 90);
-        bs_dreh(-1, 90);
-        us_dreh(1, 90);
-        fs_dreh(1, 90);
-        bs_dreh(1, 90);
-        rs_dreh(-1, 90);
-        ls_dreh(-1, 90);
-        bs_dreh(-1, 90);*/
         rs_dreh(-1, 90);
         fs_dreh(-1, 90);
         fs_dreh(-1, 90);
@@ -77,7 +59,7 @@ int OLL(){
         }
         if((color_data[0][1]!=2)&&(color_data[0][3]==2)&&(color_data[0][5]!=2)&&(color_data[0][7]==2)) //richtig
         {
-            drehen(1);              //??????????????????????1 or -1
+            drehen(1);
             rs_dreh(-1, 90);
             rs_dreh(-1, 90);
             fs_dreh(-1, 90);
@@ -88,7 +70,7 @@ int OLL(){
         }
         if((color_data[0][1]==2)&&(color_data[0][3]!=2)&&(color_data[0][5]==2)&&(color_data[0][7]!=2)) //richtig
         {
-            drehen(-1);              //??????????????????????1 or -1
+            drehen(-1);            
             rs_dreh(-1, 90);
             rs_dreh(-1, 90);
             fs_dreh(-1, 90);
@@ -135,6 +117,7 @@ int OLL(){
             ls_dreh(1, 90);
             rs_dreh(-1, 90);
             ls_dreh(-1, 90);
+            goto fertig;
         }
         if ((color_data[0][1]==2)&&(color_data[0][3]==2)&&(color_data[0][5]==2)&&(color_data[0][7]==2)&&(color_data[4][6]==2)&&(color_data[4][8]==2)&&(color_data[3][8]==2)&&(color_data[1][2]==2)) //fomular 22
         {
@@ -148,6 +131,7 @@ int OLL(){
             ls_dreh(-1, 180);
             rs_dreh(1, 180);
             ls_dreh(1, 90);
+            goto fertig;
         }
         if ((color_data[0][1]==2)&&(color_data[0][3]==2)&&(color_data[0][5]==2)&&(color_data[0][7]==2)&&(color_data[0][6]==2)&&(color_data[0][8]==2)&&(color_data[3][6]==2)&&(color_data[3][8]==2))//fomular 23
         {
@@ -162,6 +146,7 @@ int OLL(){
             rs_dreh(-1, 90);
             ds_dreh(-1, 90);
             ls_dreh(1, 90);
+            goto fertig;
         }
         if ((color_data[0][1]==2)&&(color_data[0][3]==2)&&(color_data[0][5]==2)&&(color_data[0][7]==2)&&(color_data[0][2]==2)&&(color_data[0][8]==2)&&(color_data[3][6]==2)&&(color_data[1][0]==2))//formular 24
         {
@@ -173,6 +158,7 @@ int OLL(){
             ls_dreh(1, 90); ///////////////////////
             ls_dreh(1, 90);
             rs_dreh(-1, 90);
+            goto fertig;
         }
         if((color_data[0][1]==2)&&(color_data[0][3]==2)&&(color_data[0][5]==2)&&(color_data[0][7]==2)&&(color_data[0][6]==2)&&(color_data[0][2]==2)&&(color_data[4][8]==2)&&(color_data[1][2]==2))
             //formular 25
@@ -185,6 +171,7 @@ int OLL(){
             ls_dreh(-1, 90);
             rs_dreh(1, 90);
             rs_dreh(1, 90);
+            goto fertig;
         }
         if((color_data[0][1]==2)&&(color_data[0][3]==2)&&(color_data[0][5]==2)&&(color_data[0][7]==2)&&(color_data[0][2]==2)&&(color_data[4][8]==2)&&(color_data[1][0]==2)&&(color_data[5][8]==2))//formular 26
         {
@@ -197,6 +184,7 @@ int OLL(){
             ls_dreh(1, 90);
             rs_dreh(-1, 90);
             ls_dreh(-1, 90);
+            goto fertig;
         }
         if((color_data[0][1]==2)&&(color_data[0][3]==2)&&(color_data[0][5]==2)&&(color_data[0][7]==2)&&(color_data[0][8]==2)&&(color_data[4][6]==2)&&(color_data[3][6]==2)&&(color_data[5][6]==2))
             //formular 27
@@ -209,9 +197,9 @@ int OLL(){
             ls_dreh(-1, 90);
             rs_dreh(1, 90);
             ls_dreh(1, 90);
+            goto fertig;
         }
-        wuerfel_print(1);
     }
-    return 0;
+       fertig:return 0;
 }
 

@@ -14,6 +14,7 @@
 
 int Top_Cross()
 {
+    
     int Getpos_k=0;
     int color_kanten[4]={1,4,3,5};
     int i;
@@ -21,9 +22,7 @@ int Top_Cross()
     for(i=0;i<=3;i++)
     {
         change_topface(0);
-        wuerfel_print(1);
         change_rightface(color_kanten[i]);
-        wuerfel_print(1);
         Getpos_k=Kantenstein_suchen(0, color_kanten[i]);
         switch (Getpos_k) {
             case 103:
@@ -39,11 +38,8 @@ int Top_Cross()
                     us_dreh(1, 180);
                 }else{
                     ls_dreh(1, 180);
-                    wuerfel_print(1);
                     rs_dreh(1, 180);
-                    wuerfel_print(1);
                     rs_dreh(1, 180);
-                    wuerfel_print(1);
                 }
                 break;
             case 140:
@@ -248,7 +244,17 @@ int Top_Cross()
             
         default:
             break;
-    }                             //überprüfen
-    wuerfel_print(1);
+    }
     return 0;
 }
+
+/*
+int TC_Test(){
+    int tc_test=-1;
+    if ((color_data[0][1]==color_data[0][4])&&(color_data[0][3]==color_data[0][4])&&(color_data[0][5]==color_data[0][4])&&(color_data[0][7]==color_data[0][4])&&(color_data[1][1]==color_data[1][4])&&(color_data[5][7]==color_data[5][4])&&(color_data[3][7]==color_data[3][4])&&(color_data[4][7]==color_data[4][4])){
+        tc_test=1;
+    }else{
+        tc_test=0;
+    }
+    return tc_test;
+}*/

@@ -12,7 +12,7 @@
 #include "print_mode.h"
 #include "main.h"
 
-void PLL()
+int PLL()
 {
     change_topface(2);
     change_rightface(4);
@@ -124,17 +124,12 @@ void PLL()
         }
     }
 }
-    wuerfel_print(1);//////////////////////
     for (i=0; i<=3; i++) {
         change_topface(2);
         change_rightface(Color_col[(i+1)%4]);
-      /*if ((color_data[3][6]==color_data[3][7]) && (color_data[3][7]==color_data[3][8])&&(color_data[3][7]==color_data[3][4])) {
-        }*/
-        wuerfel_print(1);//////////////////////
         if ((color_data[1][0]==color_data[1][1]) && (color_data[1][1]==color_data[1][2])&&(color_data[1][0]==color_data[1][4])) {
                 drehen(1);
                 drehen(1);
-            wuerfel_print(1);//////////////////////
             if ((color_data[1][1]==color_data[5][4])&&(color_data[5][7]==color_data[4][4])&&(color_data[4][7]==color_data[1][4])) {
                 rs_dreh(1, 90);
                 rs_dreh(-1, 90);
@@ -147,7 +142,7 @@ void PLL()
                 ls_dreh(-1, 90);
                 rs_dreh(-1, 90);
                 ls_dreh(1, 180);
-                wuerfel_print(1);//////////////////////            richtig
+                goto fertig;
             }
             
             
@@ -163,7 +158,7 @@ void PLL()
                 ls_dreh(-1, 90);
                 rs_dreh(1, 90);
                 ls_dreh(-1, 90);
-                wuerfel_print(1);//////////////////////  richtig
+                goto fertig;
             }
         
         }
@@ -180,11 +175,10 @@ void PLL()
             rs_dreh(1, 90);
             ls_dreh(1, 180);
             us_dreh(1, 180);
-            wuerfel_print(1);//////////////////////    richtig
+            goto fertig;
         }
         if ((color_data[1][1]==color_data[4][4])&&(color_data[4][7]==color_data[1][4])&&(color_data[3][7]==color_data[5][4])&&(color_data[5][7]==color_data[3][4])) {
             drehen(1);
-            wuerfel_print(1);//////////////////////
         }
         
         if ((color_data[1][1]==color_data[5][4])&&(color_data[4][7]==color_data[3][4])&&(color_data[3][7]==color_data[4][4])&&(color_data[5][7]==color_data[1][4])) {
@@ -203,9 +197,10 @@ void PLL()
             ls_dreh(-1, 90);
             us_dreh(1, 90);
             bs_dreh(1, 180);
-            wuerfel_print(1);////////////////////// richtig
+            goto fertig;
         }
         
     }
     
+fertig:return 0;
 }

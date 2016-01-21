@@ -59,8 +59,8 @@ int farbe_scan()
         usleep(10000);
         wuerfel_print(1);
         klappen();
-        arm_setpos(3);
-        arm_setpos(4);
+        //arm_setpos(3);
+        //arm_setpos(4);
     }
     usleep(100000);
     drehen(-1);
@@ -103,8 +103,8 @@ int farbe_scan()
         wuerfel_print(1);
         usleep(10000);
         klappen();
-        arm_setpos(3);
-        arm_setpos(4);
+       // arm_setpos(3);
+        //arm_setpos(4);
     }
     return color_data[6][9];
 #endif
