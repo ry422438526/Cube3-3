@@ -59,7 +59,7 @@
   18:Top_Cross.c   ****     int Getpos_k=0;
   19:Top_Cross.c   ****     int color_kanten[4]={1,4,3,5};
   43              		.loc 1 19 0
-  44 0008 7C379FE5 		ldr	r3, .L54
+  44 0008 64379FE5 		ldr	r3, .L54
   45 000c 0F0093E8 		ldmia	r3, {r0, r1, r2, r3}
   46 0010 10C08DE2 		add	ip, sp, #16
   47 0014 0F000CE9 		stmdb	ip, {r0, r1, r2, r3}
@@ -90,201 +90,198 @@
   38:Top_Cross.c   ****                     us_dreh(1, 180);
   39:Top_Cross.c   ****                 }else{
   40:Top_Cross.c   ****                     ls_dreh(1, 180);
-  41:Top_Cross.c   ****                     wuerfel_print(1);
+  41:Top_Cross.c   ****                     rs_dreh(1, 180);
   42:Top_Cross.c   ****                     rs_dreh(1, 180);
-  43:Top_Cross.c   ****                     wuerfel_print(1);
-  44:Top_Cross.c   ****                     rs_dreh(1, 180);
-  45:Top_Cross.c   ****                     wuerfel_print(1);
-  46:Top_Cross.c   ****                 }
-  47:Top_Cross.c   ****                 break;
-  48:Top_Cross.c   ****             case 140:
-  49:Top_Cross.c   ****                 ls_dreh(1, 90);
-  50:Top_Cross.c   ****                 fs_dreh(-1, 90);
-  51:Top_Cross.c   ****                 fs_dreh(1, 90);
-  52:Top_Cross.c   ****                 bs_dreh(1, 180);
-  53:Top_Cross.c   ****                 
-  54:Top_Cross.c   ****                 break;
-  55:Top_Cross.c   ****             case 105:
-  56:Top_Cross.c   ****                 break;
-  57:Top_Cross.c   ****             case 150:
-  58:Top_Cross.c   ****                 
-  59:Top_Cross.c   ****                 if (i==0) {
-  60:Top_Cross.c   ****                     rs_dreh(-1, 90);
-  61:Top_Cross.c   ****                     fs_dreh(-1, 90);
-  62:Top_Cross.c   ****                     fs_dreh(-1, 90);
-  63:Top_Cross.c   ****                 }else{
-  64:Top_Cross.c   ****                     rs_dreh(-1, 180);
-  65:Top_Cross.c   ****                     ls_dreh(-1, 90);
-  66:Top_Cross.c   ****                     fs_dreh(-1, 90);
-  67:Top_Cross.c   ****                     fs_dreh(1, 90);
-  68:Top_Cross.c   ****                     rs_dreh(1, 90);
-  69:Top_Cross.c   ****                 }
-  70:Top_Cross.c   ****                 break;
-  71:Top_Cross.c   ****             case 101:
-  72:Top_Cross.c   ****                 if (i==0)
-  73:Top_Cross.c   ****                 {
-  74:Top_Cross.c   ****                     us_dreh(-1, 90);
-  75:Top_Cross.c   ****                 }else{
-  76:Top_Cross.c   ****                     fs_dreh(1, 180);
-  77:Top_Cross.c   ****                     rs_dreh(1, 90);
-  78:Top_Cross.c   ****                     fs_dreh(1, 180);
-  79:Top_Cross.c   ****                 }
-  80:Top_Cross.c   ****                 
-  81:Top_Cross.c   ****                 break;
-  82:Top_Cross.c   ****             case 110:
-  83:Top_Cross.c   ****                 fs_dreh(1, 90);
-  84:Top_Cross.c   ****                 fs_dreh(1, 90);
-  85:Top_Cross.c   ****                 
-  86:Top_Cross.c   ****                 break;
-  87:Top_Cross.c   ****             case 241:
-  88:Top_Cross.c   ****                 if (i==0) {
-  89:Top_Cross.c   ****                     fs_dreh(1, 90);
-  90:Top_Cross.c   ****                     ls_dreh(-1,90);
-  91:Top_Cross.c   ****                 }else{
-  92:Top_Cross.c   ****                     fs_dreh(-1, 90);
-  93:Top_Cross.c   ****                     rs_dreh(1, 90);
-  94:Top_Cross.c   ****                     ls_dreh(1, 90);
-  95:Top_Cross.c   ****                     fs_dreh(1, 180);
-  96:Top_Cross.c   ****                 }
-  97:Top_Cross.c   ****                 break;
-  98:Top_Cross.c   ****             case 214:
-  99:Top_Cross.c   ****                 if (i<2) {
+  43:Top_Cross.c   ****                 }
+  44:Top_Cross.c   ****                 break;
+  45:Top_Cross.c   ****             case 140:
+  46:Top_Cross.c   ****                 ls_dreh(1, 90);
+  47:Top_Cross.c   ****                 fs_dreh(-1, 90);
+  48:Top_Cross.c   ****                 fs_dreh(1, 90);
+  49:Top_Cross.c   ****                 bs_dreh(1, 180);
+  50:Top_Cross.c   ****                 
+  51:Top_Cross.c   ****                 break;
+  52:Top_Cross.c   ****             case 105:
+  53:Top_Cross.c   ****                 break;
+  54:Top_Cross.c   ****             case 150:
+  55:Top_Cross.c   ****                 
+  56:Top_Cross.c   ****                 if (i==0) {
+  57:Top_Cross.c   ****                     rs_dreh(-1, 90);
+  58:Top_Cross.c   ****                     fs_dreh(-1, 90);
+  59:Top_Cross.c   ****                     fs_dreh(-1, 90);
+  60:Top_Cross.c   ****                 }else{
+  61:Top_Cross.c   ****                     rs_dreh(-1, 180);
+  62:Top_Cross.c   ****                     ls_dreh(-1, 90);
+  63:Top_Cross.c   ****                     fs_dreh(-1, 90);
+  64:Top_Cross.c   ****                     fs_dreh(1, 90);
+  65:Top_Cross.c   ****                     rs_dreh(1, 90);
+  66:Top_Cross.c   ****                 }
+  67:Top_Cross.c   ****                 break;
+  68:Top_Cross.c   ****             case 101:
+  69:Top_Cross.c   ****                 if (i==0)
+  70:Top_Cross.c   ****                 {
+  71:Top_Cross.c   ****                     us_dreh(-1, 90);
+  72:Top_Cross.c   ****                 }else{
+  73:Top_Cross.c   ****                     fs_dreh(1, 180);
+  74:Top_Cross.c   ****                     rs_dreh(1, 90);
+  75:Top_Cross.c   ****                     fs_dreh(1, 180);
+  76:Top_Cross.c   ****                 }
+  77:Top_Cross.c   ****                 
+  78:Top_Cross.c   ****                 break;
+  79:Top_Cross.c   ****             case 110:
+  80:Top_Cross.c   ****                 fs_dreh(1, 90);
+  81:Top_Cross.c   ****                 fs_dreh(1, 90);
+  82:Top_Cross.c   ****                 
+  83:Top_Cross.c   ****                 break;
+  84:Top_Cross.c   ****             case 241:
+  85:Top_Cross.c   ****                 if (i==0) {
+  86:Top_Cross.c   ****                     fs_dreh(1, 90);
+  87:Top_Cross.c   ****                     ls_dreh(-1,90);
+  88:Top_Cross.c   ****                 }else{
+  89:Top_Cross.c   ****                     fs_dreh(-1, 90);
+  90:Top_Cross.c   ****                     rs_dreh(1, 90);
+  91:Top_Cross.c   ****                     ls_dreh(1, 90);
+  92:Top_Cross.c   ****                     fs_dreh(1, 180);
+  93:Top_Cross.c   ****                 }
+  94:Top_Cross.c   ****                 break;
+  95:Top_Cross.c   ****             case 214:
+  96:Top_Cross.c   ****                 if (i<2) {
+  97:Top_Cross.c   ****                     fs_dreh(1, 180);
+  98:Top_Cross.c   ****                     fs_dreh(1, 90);
+  99:Top_Cross.c   ****                 }else{
  100:Top_Cross.c   ****                     fs_dreh(1, 180);
  101:Top_Cross.c   ****                     fs_dreh(1, 90);
- 102:Top_Cross.c   ****                 }else{
- 103:Top_Cross.c   ****                     fs_dreh(1, 180);
- 104:Top_Cross.c   ****                     fs_dreh(1, 90);
- 105:Top_Cross.c   ****                     rs_dreh(1, 180);
- 106:Top_Cross.c   ****                 }
+ 102:Top_Cross.c   ****                     rs_dreh(1, 180);
+ 103:Top_Cross.c   ****                 }
+ 104:Top_Cross.c   ****                 break;
+ 105:Top_Cross.c   ****             case 215:      //pruefen
+ 106:Top_Cross.c   ****                 rs_dreh(1, 90);
  107:Top_Cross.c   ****                 break;
- 108:Top_Cross.c   ****             case 215:      //pruefen
- 109:Top_Cross.c   ****                 rs_dreh(1, 90);
- 110:Top_Cross.c   ****                 break;
- 111:Top_Cross.c   ****             case 251:
- 112:Top_Cross.c   ****                 if (i==0) {
- 113:Top_Cross.c   ****                     fs_dreh(1, 90);
- 114:Top_Cross.c   ****                     rs_dreh(1, 90);
- 115:Top_Cross.c   ****                     fs_dreh(1, 180);
- 116:Top_Cross.c   ****                 }else{
- 117:Top_Cross.c   ****                     fs_dreh(1, 90);
- 118:Top_Cross.c   ****                     rs_dreh(1, 90);
- 119:Top_Cross.c   ****                     ls_dreh(-1, 90);
- 120:Top_Cross.c   ****                     fs_dreh(1, 180);
- 121:Top_Cross.c   ****                 }
- 122:Top_Cross.c   ****                 
- 123:Top_Cross.c   ****                 break;
- 124:Top_Cross.c   ****             case 253:      //pruefen
- 125:Top_Cross.c   ****                 if (i<2) {
- 126:Top_Cross.c   ****                     rs_dreh(1, 180);
- 127:Top_Cross.c   ****                     fs_dreh(1, 90);
- 128:Top_Cross.c   ****                     bs_dreh(1, 90);
- 129:Top_Cross.c   ****                     bs_dreh(1, 180);
- 130:Top_Cross.c   ****                 }else{
- 131:Top_Cross.c   ****                     rs_dreh(1, 180);
- 132:Top_Cross.c   ****                     fs_dreh(1, 90);
- 133:Top_Cross.c   ****                     bs_dreh(1, 90);
- 134:Top_Cross.c   ****                     rs_dreh(-1, 90);
- 135:Top_Cross.c   ****                     bs_dreh(1, 180);
- 136:Top_Cross.c   ****                 }
+ 108:Top_Cross.c   ****             case 251:
+ 109:Top_Cross.c   ****                 if (i==0) {
+ 110:Top_Cross.c   ****                     fs_dreh(1, 90);
+ 111:Top_Cross.c   ****                     rs_dreh(1, 90);
+ 112:Top_Cross.c   ****                     fs_dreh(1, 180);
+ 113:Top_Cross.c   ****                 }else{
+ 114:Top_Cross.c   ****                     fs_dreh(1, 90);
+ 115:Top_Cross.c   ****                     rs_dreh(1, 90);
+ 116:Top_Cross.c   ****                     ls_dreh(-1, 90);
+ 117:Top_Cross.c   ****                     fs_dreh(1, 180);
+ 118:Top_Cross.c   ****                 }
+ 119:Top_Cross.c   ****                 
+ 120:Top_Cross.c   ****                 break;
+ 121:Top_Cross.c   ****             case 253:      //pruefen
+ 122:Top_Cross.c   ****                 if (i<2) {
+ 123:Top_Cross.c   ****                     rs_dreh(1, 180);
+ 124:Top_Cross.c   ****                     fs_dreh(1, 90);
+ 125:Top_Cross.c   ****                     bs_dreh(1, 90);
+ 126:Top_Cross.c   ****                     bs_dreh(1, 180);
+ 127:Top_Cross.c   ****                 }else{
+ 128:Top_Cross.c   ****                     rs_dreh(1, 180);
+ 129:Top_Cross.c   ****                     fs_dreh(1, 90);
+ 130:Top_Cross.c   ****                     bs_dreh(1, 90);
+ 131:Top_Cross.c   ****                     rs_dreh(-1, 90);
+ 132:Top_Cross.c   ****                     bs_dreh(1, 180);
+ 133:Top_Cross.c   ****                 }
+ 134:Top_Cross.c   ****                 break;
+ 135:Top_Cross.c   ****             case 235:     //pruefen
+ 136:Top_Cross.c   ****                 rs_dreh(-1, 90);
  137:Top_Cross.c   ****                 break;
- 138:Top_Cross.c   ****             case 235:     //pruefen
- 139:Top_Cross.c   ****                 rs_dreh(-1, 90);
- 140:Top_Cross.c   ****                 break;
- 141:Top_Cross.c   ****             case 234:     //pruefen
- 142:Top_Cross.c   ****                 if (i==0) {
+ 138:Top_Cross.c   ****             case 234:     //pruefen
+ 139:Top_Cross.c   ****                 if (i==0) {
+ 140:Top_Cross.c   ****                     bs_dreh(-1, 180);
+ 141:Top_Cross.c   ****                     bs_dreh(-1, 90);
+ 142:Top_Cross.c   ****                 }else{
  143:Top_Cross.c   ****                     bs_dreh(-1, 180);
  144:Top_Cross.c   ****                     bs_dreh(-1, 90);
- 145:Top_Cross.c   ****                 }else{
- 146:Top_Cross.c   ****                     bs_dreh(-1, 180);
- 147:Top_Cross.c   ****                     bs_dreh(-1, 90);
- 148:Top_Cross.c   ****                     rs_dreh(1, 180);
- 149:Top_Cross.c   ****                 }
- 150:Top_Cross.c   ****                 break;
- 151:Top_Cross.c   ****             case 243:     //pruefen
- 152:Top_Cross.c   ****                 if (i==0) {
- 153:Top_Cross.c   ****                     bs_dreh(1, 90);
- 154:Top_Cross.c   ****                     rs_dreh(-1, 90);
- 155:Top_Cross.c   ****                     bs_dreh(-1, 180);
- 156:Top_Cross.c   ****                 }else{
- 157:Top_Cross.c   ****                     bs_dreh(1, 90);
- 158:Top_Cross.c   ****                     rs_dreh(-1, 90);
- 159:Top_Cross.c   ****                     bs_dreh(-1, 180);
- 160:Top_Cross.c   ****                     fs_dreh(-1, 90);
- 161:Top_Cross.c   ****                 }
- 162:Top_Cross.c   ****                 break;
- 163:Top_Cross.c   ****             case 312:     //pruefen
- 164:Top_Cross.c   ****                 if (i==0) {
+ 145:Top_Cross.c   ****                     rs_dreh(1, 180);
+ 146:Top_Cross.c   ****                 }
+ 147:Top_Cross.c   ****                 break;
+ 148:Top_Cross.c   ****             case 243:     //pruefen
+ 149:Top_Cross.c   ****                 if (i==0) {
+ 150:Top_Cross.c   ****                     bs_dreh(1, 90);
+ 151:Top_Cross.c   ****                     rs_dreh(-1, 90);
+ 152:Top_Cross.c   ****                     bs_dreh(-1, 180);
+ 153:Top_Cross.c   ****                 }else{
+ 154:Top_Cross.c   ****                     bs_dreh(1, 90);
+ 155:Top_Cross.c   ****                     rs_dreh(-1, 90);
+ 156:Top_Cross.c   ****                     bs_dreh(-1, 180);
+ 157:Top_Cross.c   ****                     fs_dreh(-1, 90);
+ 158:Top_Cross.c   ****                 }
+ 159:Top_Cross.c   ****                 break;
+ 160:Top_Cross.c   ****             case 312:     //pruefen
+ 161:Top_Cross.c   ****                 if (i==0) {
+ 162:Top_Cross.c   ****                     fs_dreh(-1, 90);
+ 163:Top_Cross.c   ****                     fs_dreh(1, 90);
+ 164:Top_Cross.c   ****                 }else{
  165:Top_Cross.c   ****                     fs_dreh(-1, 90);
  166:Top_Cross.c   ****                     fs_dreh(1, 90);
- 167:Top_Cross.c   ****                 }else{
- 168:Top_Cross.c   ****                     fs_dreh(-1, 90);
- 169:Top_Cross.c   ****                     fs_dreh(1, 90);
- 170:Top_Cross.c   ****                     rs_dreh(1, 90);
- 171:Top_Cross.c   ****                 }
- 172:Top_Cross.c   ****                 
- 173:Top_Cross.c   ****                 break;
- 174:Top_Cross.c   ****             case 321:      //pruefen
- 175:Top_Cross.c   ****                 ds_dreh(1, 90);
- 176:Top_Cross.c   ****                 rs_dreh(1, 180);
- 177:Top_Cross.c   ****                 
- 178:Top_Cross.c   ****                 break;
- 179:Top_Cross.c   ****             case 352:      //pruefen
- 180:Top_Cross.c   ****                 if (i<2) {
- 181:Top_Cross.c   ****                     ds_dreh(-1, 90);
- 182:Top_Cross.c   ****                     fs_dreh(-1, 90);
- 183:Top_Cross.c   ****                     fs_dreh(1, 90);
- 184:Top_Cross.c   ****                 }else{
- 185:Top_Cross.c   ****                     ds_dreh(-1, 90);
- 186:Top_Cross.c   ****                     fs_dreh(-1, 90);
- 187:Top_Cross.c   ****                     fs_dreh(1, 90);
- 188:Top_Cross.c   ****                     rs_dreh(1, 90);
- 189:Top_Cross.c   ****                 }
+ 167:Top_Cross.c   ****                     rs_dreh(1, 90);
+ 168:Top_Cross.c   ****                 }
+ 169:Top_Cross.c   ****                 
+ 170:Top_Cross.c   ****                 break;
+ 171:Top_Cross.c   ****             case 321:      //pruefen
+ 172:Top_Cross.c   ****                 ds_dreh(1, 90);
+ 173:Top_Cross.c   ****                 rs_dreh(1, 180);
+ 174:Top_Cross.c   ****                 
+ 175:Top_Cross.c   ****                 break;
+ 176:Top_Cross.c   ****             case 352:      //pruefen
+ 177:Top_Cross.c   ****                 if (i<2) {
+ 178:Top_Cross.c   ****                     ds_dreh(-1, 90);
+ 179:Top_Cross.c   ****                     fs_dreh(-1, 90);
+ 180:Top_Cross.c   ****                     fs_dreh(1, 90);
+ 181:Top_Cross.c   ****                 }else{
+ 182:Top_Cross.c   ****                     ds_dreh(-1, 90);
+ 183:Top_Cross.c   ****                     fs_dreh(-1, 90);
+ 184:Top_Cross.c   ****                     fs_dreh(1, 90);
+ 185:Top_Cross.c   ****                     rs_dreh(1, 90);
+ 186:Top_Cross.c   ****                 }
+ 187:Top_Cross.c   ****                 break;
+ 188:Top_Cross.c   ****             case 325:        //pruefen
+ 189:Top_Cross.c   ****                 rs_dreh(1, 180);
  190:Top_Cross.c   ****                 break;
- 191:Top_Cross.c   ****             case 325:        //pruefen
- 192:Top_Cross.c   ****                 rs_dreh(1, 180);
- 193:Top_Cross.c   ****                 break;
- 194:Top_Cross.c   ****             case 323:       //pruefen
- 195:Top_Cross.c   ****                 ds_dreh(-1, 90);
- 196:Top_Cross.c   ****                 rs_dreh(1, 180);
- 197:Top_Cross.c   ****                 break;
- 198:Top_Cross.c   ****             case 332:       //pruefen
- 199:Top_Cross.c   ****                 if (i==0) {
+ 191:Top_Cross.c   ****             case 323:       //pruefen
+ 192:Top_Cross.c   ****                 ds_dreh(-1, 90);
+ 193:Top_Cross.c   ****                 rs_dreh(1, 180);
+ 194:Top_Cross.c   ****                 break;
+ 195:Top_Cross.c   ****             case 332:       //pruefen
+ 196:Top_Cross.c   ****                 if (i==0) {
+ 197:Top_Cross.c   ****                     bs_dreh(1, 90);
+ 198:Top_Cross.c   ****                     bs_dreh(-1, 90);
+ 199:Top_Cross.c   ****                 }else{
  200:Top_Cross.c   ****                     bs_dreh(1, 90);
  201:Top_Cross.c   ****                     bs_dreh(-1, 90);
- 202:Top_Cross.c   ****                 }else{
- 203:Top_Cross.c   ****                     bs_dreh(1, 90);
- 204:Top_Cross.c   ****                     bs_dreh(-1, 90);
- 205:Top_Cross.c   ****                     rs_dreh(-1, 90);
- 206:Top_Cross.c   ****                 }
- 207:Top_Cross.c   ****                 break;
- 208:Top_Cross.c   ****             case 342:       //pruefen
- 209:Top_Cross.c   ****                 if (i<2) {
- 210:Top_Cross.c   ****                     ds_dreh(1, 90);
- 211:Top_Cross.c   ****                     fs_dreh(-1, 90);
- 212:Top_Cross.c   ****                     fs_dreh(1, 90);
- 213:Top_Cross.c   ****                 }else{
- 214:Top_Cross.c   ****                     ds_dreh(1, 90);
- 215:Top_Cross.c   ****                     fs_dreh(-1, 90);
- 216:Top_Cross.c   ****                     fs_dreh(1, 90);
- 217:Top_Cross.c   ****                     rs_dreh(1, 90);
- 218:Top_Cross.c   ****                 }
- 219:Top_Cross.c   ****                 
- 220:Top_Cross.c   ****                 break;
- 221:Top_Cross.c   ****             case 324:       //pruefen
- 222:Top_Cross.c   ****                 ds_dreh(1, 180);
- 223:Top_Cross.c   ****                 rs_dreh(1, 180);
- 224:Top_Cross.c   ****                 
- 225:Top_Cross.c   ****                 break;
- 226:Top_Cross.c   ****             default:
- 227:Top_Cross.c   ****                 break;
- 228:Top_Cross.c   ****         }
- 229:Top_Cross.c   ****         printf("Getpos_k=%d",Getpos_k);
-  54              		.loc 1 229 0
-  55 0028 60979FE5 		ldr	r9, .L54+4
+ 202:Top_Cross.c   ****                     rs_dreh(-1, 90);
+ 203:Top_Cross.c   ****                 }
+ 204:Top_Cross.c   ****                 break;
+ 205:Top_Cross.c   ****             case 342:       //pruefen
+ 206:Top_Cross.c   ****                 if (i<2) {
+ 207:Top_Cross.c   ****                     ds_dreh(1, 90);
+ 208:Top_Cross.c   ****                     fs_dreh(-1, 90);
+ 209:Top_Cross.c   ****                     fs_dreh(1, 90);
+ 210:Top_Cross.c   ****                 }else{
+ 211:Top_Cross.c   ****                     ds_dreh(1, 90);
+ 212:Top_Cross.c   ****                     fs_dreh(-1, 90);
+ 213:Top_Cross.c   ****                     fs_dreh(1, 90);
+ 214:Top_Cross.c   ****                     rs_dreh(1, 90);
+ 215:Top_Cross.c   ****                 }
+ 216:Top_Cross.c   ****                 
+ 217:Top_Cross.c   ****                 break;
+ 218:Top_Cross.c   ****             case 324:       //pruefen
+ 219:Top_Cross.c   ****                 ds_dreh(1, 180);
+ 220:Top_Cross.c   ****                 rs_dreh(1, 180);
+ 221:Top_Cross.c   ****                 
+ 222:Top_Cross.c   ****                 break;
+ 223:Top_Cross.c   ****             default:
+ 224:Top_Cross.c   ****                 break;
+ 225:Top_Cross.c   ****         }
+ 226:Top_Cross.c   ****         printf("Getpos_k=%d",Getpos_k);
+  54              		.loc 1 226 0
+  55 0028 48979FE5 		ldr	r9, .L54+4
   27:Top_Cross.c   ****             case 103:
   56              		.loc 1 27 0
-  57 002c 60A79FE5 		ldr	r10, .L54+8
-  58 0030 60B79FE5 		ldr	fp, .L54+12
+  57 002c 48A79FE5 		ldr	r10, .L54+8
+  58 0030 48B79FE5 		ldr	fp, .L54+12
   59 0034 010000EA 		b	.L2
   60              	.LVL2:
   61              	.L48:
@@ -314,75 +311,75 @@
   27:Top_Cross.c   ****             case 103:
   82              		.loc 1 27 0
   83 0064 F10050E3 		cmp	r0, #241
-  84 0068 9D00000A 		beq	.L4
+  84 0068 9700000A 		beq	.L4
   85 006c 1C0000CA 		bgt	.L5
   86 0070 8C0050E3 		cmp	r0, #140
-  87 0074 5A00000A 		beq	.L6
+  87 0074 5400000A 		beq	.L6
   88 0078 0C0000CA 		bgt	.L7
   89 007c 680050E3 		cmp	r0, #104
   90 0080 4100000A 		beq	.L8
   91 0084 040000CA 		bgt	.L9
   92 0088 650050E3 		cmp	r0, #101
-  93 008c 7D00000A 		beq	.L10
+  93 008c 7700000A 		beq	.L10
   94 0090 670050E3 		cmp	r0, #103
   95 0094 3100000A 		beq	.L11
-  96 0098 960100EA 		b	.L3
+  96 0098 900100EA 		b	.L3
   97              	.L9:
   98 009c 6E0050E3 		cmp	r0, #110
-  99 00a0 8800000A 		beq	.L12
+  99 00a0 8200000A 		beq	.L12
  100 00a4 820050E3 		cmp	r0, #130
  101 00a8 3000000A 		beq	.L13
- 102 00ac 910100EA 		b	.L3
+ 102 00ac 8B0100EA 		b	.L3
  103              	.L7:
  104 00b0 D70050E3 		cmp	r0, #215
- 105 00b4 B300000A 		beq	.L14
+ 105 00b4 AD00000A 		beq	.L14
  106 00b8 040000CA 		bgt	.L15
  107 00bc 960050E3 		cmp	r0, #150
- 108 00c0 5400000A 		beq	.L16
+ 108 00c0 4E00000A 		beq	.L16
  109 00c4 D60050E3 		cmp	r0, #214
- 110 00c8 9B00000A 		beq	.L17
- 111 00cc 890100EA 		b	.L3
+ 110 00c8 9500000A 		beq	.L17
+ 111 00cc 830100EA 		b	.L3
  112              	.L15:
  113 00d0 EA0050E3 		cmp	r0, #234
- 114 00d4 EB00000A 		beq	.L18
+ 114 00d4 E500000A 		beq	.L18
  115 00d8 EB0050E3 		cmp	r0, #235
- 116 00dc E500000A 		beq	.L19
- 117 00e0 840100EA 		b	.L3
+ 116 00dc DF00000A 		beq	.L19
+ 117 00e0 7E0100EA 		b	.L3
  118              	.L5:
  119 00e4 0A0050E1 		cmp	r0, r10
- 120 00e8 4901000A 		beq	.L20
+ 120 00e8 4301000A 		beq	.L20
  121 00ec 0D0000CA 		bgt	.L21
  122 00f0 FD0050E3 		cmp	r0, #253
- 123 00f4 C000000A 		beq	.L22
+ 123 00f4 BA00000A 		beq	.L22
  124 00f8 040000CA 		bgt	.L23
  125 00fc F30050E3 		cmp	r0, #243
- 126 0100 F300000A 		beq	.L24
+ 126 0100 ED00000A 		beq	.L24
  127 0104 FB0050E3 		cmp	r0, #251
- 128 0108 A200000A 		beq	.L25
- 129 010c 790100EA 		b	.L3
+ 128 0108 9C00000A 		beq	.L25
+ 129 010c 730100EA 		b	.L3
  130              	.L23:
  131 0110 4E0F50E3 		cmp	r0, #312
- 132 0114 0701000A 		beq	.L26
- 133 0118 7C369FE5 		ldr	r3, .L54+16
+ 132 0114 0101000A 		beq	.L26
+ 133 0118 64369FE5 		ldr	r3, .L54+16
  134 011c 030050E1 		cmp	r0, r3
- 135 0120 1701000A 		beq	.L27
- 136 0124 730100EA 		b	.L3
+ 135 0120 1101000A 		beq	.L27
+ 136 0124 6D0100EA 		b	.L3
  137              	.L21:
  138 0128 530F50E3 		cmp	r0, #332
- 139 012c 3F01000A 		beq	.L28
+ 139 012c 3901000A 		beq	.L28
  140 0130 050000CA 		bgt	.L29
  141 0134 510F50E3 		cmp	r0, #324
- 142 0138 6801000A 		beq	.L30
- 143 013c 5CC69FE5 		ldr	ip, .L54+20
+ 142 0138 6201000A 		beq	.L30
+ 143 013c 44C69FE5 		ldr	ip, .L54+20
  144 0140 0C0050E1 		cmp	r0, ip
- 145 0144 2E01000A 		beq	.L31
- 146 0148 6A0100EA 		b	.L3
+ 145 0144 2801000A 		beq	.L31
+ 146 0148 640100EA 		b	.L3
  147              	.L29:
  148 014c 0B0050E1 		cmp	r0, fp
- 149 0150 4901000A 		beq	.L32
+ 149 0150 4301000A 		beq	.L32
  150 0154 160E50E3 		cmp	r0, #352
- 151 0158 1001000A 		beq	.L33
- 152 015c 650100EA 		b	.L3
+ 151 0158 0A01000A 		beq	.L33
+ 152 015c 5F0100EA 		b	.L3
  153              	.L11:
   29:Top_Cross.c   ****                 break;
  154              		.loc 1 29 0
@@ -393,7 +390,7 @@
  159              	.LVL9:
   30:Top_Cross.c   ****             case 130:
  160              		.loc 1 30 0
- 161 016c 610100EA 		b	.L3
+ 161 016c 5B0100EA 		b	.L3
  162              	.LVL10:
  163              	.L13:
   32:Top_Cross.c   ****                 bs_dreh(-1, 90);
@@ -411,7 +408,7 @@
  174              	.LVL13:
   34:Top_Cross.c   ****             case 104:
  175              		.loc 1 34 0
- 176 0188 5A0100EA 		b	.L3
+ 176 0188 540100EA 		b	.L3
  177              	.LVL14:
  178              	.L8:
   36:Top_Cross.c   ****                 {
@@ -425,10 +422,10 @@
  185 0198 B410A0E3 		mov	r1, #180
  186 019c FEFFFFEB 		bl	us_dreh
  187              	.LVL16:
- 188 01a0 720100EA 		b	.L35
+ 188 01a0 6C0100EA 		b	.L35
  189              	.LVL17:
  190              	.L34:
-  40:Top_Cross.c   ****                     wuerfel_print(1);
+  40:Top_Cross.c   ****                     rs_dreh(1, 180);
  191              		.loc 1 40 0
  192 01a4 0100A0E3 		mov	r0, #1
  193              	.LVL18:
@@ -438,899 +435,883 @@
   41:Top_Cross.c   ****                     rs_dreh(1, 180);
  197              		.loc 1 41 0
  198 01b0 0100A0E3 		mov	r0, #1
- 199 01b4 FEFFFFEB 		bl	wuerfel_print
- 200              	.LVL20:
-  42:Top_Cross.c   ****                     wuerfel_print(1);
- 201              		.loc 1 42 0
- 202 01b8 0100A0E3 		mov	r0, #1
- 203 01bc B410A0E3 		mov	r1, #180
- 204 01c0 FEFFFFEB 		bl	rs_dreh
- 205              	.LVL21:
-  43:Top_Cross.c   ****                     rs_dreh(1, 180);
- 206              		.loc 1 43 0
- 207 01c4 0100A0E3 		mov	r0, #1
- 208 01c8 FEFFFFEB 		bl	wuerfel_print
- 209              	.LVL22:
-  44:Top_Cross.c   ****                     wuerfel_print(1);
- 210              		.loc 1 44 0
+ 199 01b4 B410A0E3 		mov	r1, #180
+ 200 01b8 FEFFFFEB 		bl	rs_dreh
+ 201              	.LVL20:
+  42:Top_Cross.c   ****                 }
+ 202              		.loc 1 42 0
+ 203 01bc 0100A0E3 		mov	r0, #1
+ 204 01c0 B410A0E3 		mov	r1, #180
+ 205 01c4 FEFFFFEB 		bl	rs_dreh
+ 206              	.LVL21:
+ 207 01c8 440100EA 		b	.L3
+ 208              	.LVL22:
+ 209              	.L6:
+  46:Top_Cross.c   ****                 fs_dreh(-1, 90);
+ 210              		.loc 1 46 0
  211 01cc 0100A0E3 		mov	r0, #1
- 212 01d0 B410A0E3 		mov	r1, #180
- 213 01d4 FEFFFFEB 		bl	rs_dreh
- 214              	.LVL23:
-  45:Top_Cross.c   ****                 }
- 215              		.loc 1 45 0
- 216 01d8 0100A0E3 		mov	r0, #1
- 217 01dc FEFFFFEB 		bl	wuerfel_print
- 218              	.LVL24:
- 219 01e0 440100EA 		b	.L3
+ 212              	.LVL23:
+ 213 01d0 5A10A0E3 		mov	r1, #90
+ 214 01d4 FEFFFFEB 		bl	ls_dreh
+ 215              	.LVL24:
+  47:Top_Cross.c   ****                 fs_dreh(1, 90);
+ 216              		.loc 1 47 0
+ 217 01d8 0000E0E3 		mvn	r0, #0
+ 218 01dc 5A10A0E3 		mov	r1, #90
+ 219 01e0 FEFFFFEB 		bl	fs_dreh
  220              	.LVL25:
- 221              	.L6:
-  49:Top_Cross.c   ****                 fs_dreh(-1, 90);
- 222              		.loc 1 49 0
- 223 01e4 0100A0E3 		mov	r0, #1
- 224              	.LVL26:
- 225 01e8 5A10A0E3 		mov	r1, #90
- 226 01ec FEFFFFEB 		bl	ls_dreh
- 227              	.LVL27:
-  50:Top_Cross.c   ****                 fs_dreh(1, 90);
- 228              		.loc 1 50 0
- 229 01f0 0000E0E3 		mvn	r0, #0
- 230 01f4 5A10A0E3 		mov	r1, #90
- 231 01f8 FEFFFFEB 		bl	fs_dreh
- 232              	.LVL28:
-  51:Top_Cross.c   ****                 bs_dreh(1, 180);
- 233              		.loc 1 51 0
- 234 01fc 0100A0E3 		mov	r0, #1
- 235 0200 5A10A0E3 		mov	r1, #90
- 236 0204 FEFFFFEB 		bl	fs_dreh
- 237              	.LVL29:
-  52:Top_Cross.c   ****                 
- 238              		.loc 1 52 0
- 239 0208 0100A0E3 		mov	r0, #1
- 240 020c B410A0E3 		mov	r1, #180
- 241 0210 FEFFFFEB 		bl	bs_dreh
- 242              	.LVL30:
-  54:Top_Cross.c   ****             case 105:
- 243              		.loc 1 54 0
- 244 0214 370100EA 		b	.L3
- 245              	.LVL31:
- 246              	.L16:
-  59:Top_Cross.c   ****                     rs_dreh(-1, 90);
- 247              		.loc 1 59 0
- 248 0218 000056E3 		cmp	r6, #0
- 249 021c 0900001A 		bne	.L36
-  60:Top_Cross.c   ****                     fs_dreh(-1, 90);
- 250              		.loc 1 60 0
- 251 0220 0000E0E3 		mvn	r0, #0
- 252              	.LVL32:
- 253 0224 5A10A0E3 		mov	r1, #90
- 254 0228 FEFFFFEB 		bl	rs_dreh
+  48:Top_Cross.c   ****                 bs_dreh(1, 180);
+ 221              		.loc 1 48 0
+ 222 01e4 0100A0E3 		mov	r0, #1
+ 223 01e8 5A10A0E3 		mov	r1, #90
+ 224 01ec FEFFFFEB 		bl	fs_dreh
+ 225              	.LVL26:
+  49:Top_Cross.c   ****                 
+ 226              		.loc 1 49 0
+ 227 01f0 0100A0E3 		mov	r0, #1
+ 228 01f4 B410A0E3 		mov	r1, #180
+ 229 01f8 FEFFFFEB 		bl	bs_dreh
+ 230              	.LVL27:
+  51:Top_Cross.c   ****             case 105:
+ 231              		.loc 1 51 0
+ 232 01fc 370100EA 		b	.L3
+ 233              	.LVL28:
+ 234              	.L16:
+  56:Top_Cross.c   ****                     rs_dreh(-1, 90);
+ 235              		.loc 1 56 0
+ 236 0200 000056E3 		cmp	r6, #0
+ 237 0204 0900001A 		bne	.L36
+  57:Top_Cross.c   ****                     fs_dreh(-1, 90);
+ 238              		.loc 1 57 0
+ 239 0208 0000E0E3 		mvn	r0, #0
+ 240              	.LVL29:
+ 241 020c 5A10A0E3 		mov	r1, #90
+ 242 0210 FEFFFFEB 		bl	rs_dreh
+ 243              	.LVL30:
+  58:Top_Cross.c   ****                     fs_dreh(-1, 90);
+ 244              		.loc 1 58 0
+ 245 0214 0000E0E3 		mvn	r0, #0
+ 246 0218 5A10A0E3 		mov	r1, #90
+ 247 021c FEFFFFEB 		bl	fs_dreh
+ 248              	.LVL31:
+  59:Top_Cross.c   ****                 }else{
+ 249              		.loc 1 59 0
+ 250 0220 0000E0E3 		mvn	r0, #0
+ 251 0224 5A10A0E3 		mov	r1, #90
+ 252 0228 FEFFFFEB 		bl	fs_dreh
+ 253              	.LVL32:
+ 254 022c 490100EA 		b	.L35
  255              	.LVL33:
-  61:Top_Cross.c   ****                     fs_dreh(-1, 90);
- 256              		.loc 1 61 0
- 257 022c 0000E0E3 		mvn	r0, #0
- 258 0230 5A10A0E3 		mov	r1, #90
- 259 0234 FEFFFFEB 		bl	fs_dreh
- 260              	.LVL34:
-  62:Top_Cross.c   ****                 }else{
- 261              		.loc 1 62 0
- 262 0238 0000E0E3 		mvn	r0, #0
- 263 023c 5A10A0E3 		mov	r1, #90
- 264 0240 FEFFFFEB 		bl	fs_dreh
- 265              	.LVL35:
- 266 0244 490100EA 		b	.L35
+ 256              	.L36:
+  61:Top_Cross.c   ****                     ls_dreh(-1, 90);
+ 257              		.loc 1 61 0
+ 258 0230 0000E0E3 		mvn	r0, #0
+ 259              	.LVL34:
+ 260 0234 B410A0E3 		mov	r1, #180
+ 261 0238 FEFFFFEB 		bl	rs_dreh
+ 262              	.LVL35:
+  62:Top_Cross.c   ****                     fs_dreh(-1, 90);
+ 263              		.loc 1 62 0
+ 264 023c 0000E0E3 		mvn	r0, #0
+ 265 0240 5A10A0E3 		mov	r1, #90
+ 266 0244 FEFFFFEB 		bl	ls_dreh
  267              	.LVL36:
- 268              	.L36:
-  64:Top_Cross.c   ****                     ls_dreh(-1, 90);
- 269              		.loc 1 64 0
- 270 0248 0000E0E3 		mvn	r0, #0
- 271              	.LVL37:
- 272 024c B410A0E3 		mov	r1, #180
- 273 0250 FEFFFFEB 		bl	rs_dreh
- 274              	.LVL38:
-  65:Top_Cross.c   ****                     fs_dreh(-1, 90);
- 275              		.loc 1 65 0
- 276 0254 0000E0E3 		mvn	r0, #0
- 277 0258 5A10A0E3 		mov	r1, #90
- 278 025c FEFFFFEB 		bl	ls_dreh
- 279              	.LVL39:
-  66:Top_Cross.c   ****                     fs_dreh(1, 90);
- 280              		.loc 1 66 0
- 281 0260 0000E0E3 		mvn	r0, #0
- 282 0264 5A10A0E3 		mov	r1, #90
- 283 0268 FEFFFFEB 		bl	fs_dreh
+  63:Top_Cross.c   ****                     fs_dreh(1, 90);
+ 268              		.loc 1 63 0
+ 269 0248 0000E0E3 		mvn	r0, #0
+ 270 024c 5A10A0E3 		mov	r1, #90
+ 271 0250 FEFFFFEB 		bl	fs_dreh
+ 272              	.LVL37:
+  64:Top_Cross.c   ****                     rs_dreh(1, 90);
+ 273              		.loc 1 64 0
+ 274 0254 0100A0E3 		mov	r0, #1
+ 275 0258 5A10A0E3 		mov	r1, #90
+ 276 025c FEFFFFEB 		bl	fs_dreh
+ 277              	.LVL38:
+  65:Top_Cross.c   ****                 }
+ 278              		.loc 1 65 0
+ 279 0260 0100A0E3 		mov	r0, #1
+ 280 0264 5A10A0E3 		mov	r1, #90
+ 281 0268 FEFFFFEB 		bl	rs_dreh
+ 282              	.LVL39:
+ 283 026c 1B0100EA 		b	.L3
  284              	.LVL40:
-  67:Top_Cross.c   ****                     rs_dreh(1, 90);
- 285              		.loc 1 67 0
- 286 026c 0100A0E3 		mov	r0, #1
- 287 0270 5A10A0E3 		mov	r1, #90
- 288 0274 FEFFFFEB 		bl	fs_dreh
- 289              	.LVL41:
-  68:Top_Cross.c   ****                 }
- 290              		.loc 1 68 0
- 291 0278 0100A0E3 		mov	r0, #1
+ 285              	.L10:
+  69:Top_Cross.c   ****                 {
+ 286              		.loc 1 69 0
+ 287 0270 000056E3 		cmp	r6, #0
+ 288 0274 0300001A 		bne	.L37
+  71:Top_Cross.c   ****                 }else{
+ 289              		.loc 1 71 0
+ 290 0278 0000E0E3 		mvn	r0, #0
+ 291              	.LVL41:
  292 027c 5A10A0E3 		mov	r1, #90
- 293 0280 FEFFFFEB 		bl	rs_dreh
+ 293 0280 FEFFFFEB 		bl	us_dreh
  294              	.LVL42:
- 295 0284 1B0100EA 		b	.L3
+ 295 0284 330100EA 		b	.L35
  296              	.LVL43:
- 297              	.L10:
-  72:Top_Cross.c   ****                 {
- 298              		.loc 1 72 0
- 299 0288 000056E3 		cmp	r6, #0
- 300 028c 0300001A 		bne	.L37
-  74:Top_Cross.c   ****                 }else{
- 301              		.loc 1 74 0
- 302 0290 0000E0E3 		mvn	r0, #0
- 303              	.LVL44:
- 304 0294 5A10A0E3 		mov	r1, #90
- 305 0298 FEFFFFEB 		bl	us_dreh
- 306              	.LVL45:
- 307 029c 330100EA 		b	.L35
+ 297              	.L37:
+  73:Top_Cross.c   ****                     rs_dreh(1, 90);
+ 298              		.loc 1 73 0
+ 299 0288 0100A0E3 		mov	r0, #1
+ 300              	.LVL44:
+ 301 028c B410A0E3 		mov	r1, #180
+ 302 0290 FEFFFFEB 		bl	fs_dreh
+ 303              	.LVL45:
+  74:Top_Cross.c   ****                     fs_dreh(1, 180);
+ 304              		.loc 1 74 0
+ 305 0294 0100A0E3 		mov	r0, #1
+ 306 0298 5A10A0E3 		mov	r1, #90
+ 307 029c FEFFFFEB 		bl	rs_dreh
  308              	.LVL46:
- 309              	.L37:
-  76:Top_Cross.c   ****                     rs_dreh(1, 90);
- 310              		.loc 1 76 0
- 311 02a0 0100A0E3 		mov	r0, #1
- 312              	.LVL47:
- 313 02a4 B410A0E3 		mov	r1, #180
- 314 02a8 FEFFFFEB 		bl	fs_dreh
+  75:Top_Cross.c   ****                 }
+ 309              		.loc 1 75 0
+ 310 02a0 0100A0E3 		mov	r0, #1
+ 311 02a4 B410A0E3 		mov	r1, #180
+ 312 02a8 FEFFFFEB 		bl	fs_dreh
+ 313              	.LVL47:
+ 314 02ac 0B0100EA 		b	.L3
  315              	.LVL48:
-  77:Top_Cross.c   ****                     fs_dreh(1, 180);
- 316              		.loc 1 77 0
- 317 02ac 0100A0E3 		mov	r0, #1
- 318 02b0 5A10A0E3 		mov	r1, #90
- 319 02b4 FEFFFFEB 		bl	rs_dreh
- 320              	.LVL49:
-  78:Top_Cross.c   ****                 }
- 321              		.loc 1 78 0
- 322 02b8 0100A0E3 		mov	r0, #1
- 323 02bc B410A0E3 		mov	r1, #180
- 324 02c0 FEFFFFEB 		bl	fs_dreh
- 325              	.LVL50:
- 326 02c4 0B0100EA 		b	.L3
+ 316              	.L12:
+  80:Top_Cross.c   ****                 fs_dreh(1, 90);
+ 317              		.loc 1 80 0
+ 318 02b0 0100A0E3 		mov	r0, #1
+ 319              	.LVL49:
+ 320 02b4 5A10A0E3 		mov	r1, #90
+ 321 02b8 FEFFFFEB 		bl	fs_dreh
+ 322              	.LVL50:
+  81:Top_Cross.c   ****                 
+ 323              		.loc 1 81 0
+ 324 02bc 0100A0E3 		mov	r0, #1
+ 325 02c0 5A10A0E3 		mov	r1, #90
+ 326 02c4 FEFFFFEB 		bl	fs_dreh
  327              	.LVL51:
- 328              	.L12:
-  83:Top_Cross.c   ****                 fs_dreh(1, 90);
- 329              		.loc 1 83 0
- 330 02c8 0100A0E3 		mov	r0, #1
- 331              	.LVL52:
- 332 02cc 5A10A0E3 		mov	r1, #90
- 333 02d0 FEFFFFEB 		bl	fs_dreh
- 334              	.LVL53:
-  84:Top_Cross.c   ****                 
- 335              		.loc 1 84 0
+  83:Top_Cross.c   ****             case 241:
+ 328              		.loc 1 83 0
+ 329 02c8 040100EA 		b	.L3
+ 330              	.LVL52:
+ 331              	.L4:
+  85:Top_Cross.c   ****                     fs_dreh(1, 90);
+ 332              		.loc 1 85 0
+ 333 02cc 000056E3 		cmp	r6, #0
+ 334 02d0 0600001A 		bne	.L38
+  86:Top_Cross.c   ****                     ls_dreh(-1,90);
+ 335              		.loc 1 86 0
  336 02d4 0100A0E3 		mov	r0, #1
- 337 02d8 5A10A0E3 		mov	r1, #90
- 338 02dc FEFFFFEB 		bl	fs_dreh
- 339              	.LVL54:
-  86:Top_Cross.c   ****             case 241:
- 340              		.loc 1 86 0
- 341 02e0 040100EA 		b	.L3
- 342              	.LVL55:
- 343              	.L4:
-  88:Top_Cross.c   ****                     fs_dreh(1, 90);
- 344              		.loc 1 88 0
- 345 02e4 000056E3 		cmp	r6, #0
- 346 02e8 0600001A 		bne	.L38
-  89:Top_Cross.c   ****                     ls_dreh(-1,90);
- 347              		.loc 1 89 0
- 348 02ec 0100A0E3 		mov	r0, #1
- 349              	.LVL56:
- 350 02f0 5A10A0E3 		mov	r1, #90
- 351 02f4 FEFFFFEB 		bl	fs_dreh
- 352              	.LVL57:
-  90:Top_Cross.c   ****                 }else{
- 353              		.loc 1 90 0
- 354 02f8 0000E0E3 		mvn	r0, #0
- 355 02fc 5A10A0E3 		mov	r1, #90
- 356 0300 FEFFFFEB 		bl	ls_dreh
- 357              	.LVL58:
- 358 0304 190100EA 		b	.L35
+ 337              	.LVL53:
+ 338 02d8 5A10A0E3 		mov	r1, #90
+ 339 02dc FEFFFFEB 		bl	fs_dreh
+ 340              	.LVL54:
+  87:Top_Cross.c   ****                 }else{
+ 341              		.loc 1 87 0
+ 342 02e0 0000E0E3 		mvn	r0, #0
+ 343 02e4 5A10A0E3 		mov	r1, #90
+ 344 02e8 FEFFFFEB 		bl	ls_dreh
+ 345              	.LVL55:
+ 346 02ec 190100EA 		b	.L35
+ 347              	.LVL56:
+ 348              	.L38:
+  89:Top_Cross.c   ****                     rs_dreh(1, 90);
+ 349              		.loc 1 89 0
+ 350 02f0 0000E0E3 		mvn	r0, #0
+ 351              	.LVL57:
+ 352 02f4 5A10A0E3 		mov	r1, #90
+ 353 02f8 FEFFFFEB 		bl	fs_dreh
+ 354              	.LVL58:
+  90:Top_Cross.c   ****                     ls_dreh(1, 90);
+ 355              		.loc 1 90 0
+ 356 02fc 0100A0E3 		mov	r0, #1
+ 357 0300 5A10A0E3 		mov	r1, #90
+ 358 0304 FEFFFFEB 		bl	rs_dreh
  359              	.LVL59:
- 360              	.L38:
-  92:Top_Cross.c   ****                     rs_dreh(1, 90);
- 361              		.loc 1 92 0
- 362 0308 0000E0E3 		mvn	r0, #0
- 363              	.LVL60:
- 364 030c 5A10A0E3 		mov	r1, #90
- 365 0310 FEFFFFEB 		bl	fs_dreh
- 366              	.LVL61:
-  93:Top_Cross.c   ****                     ls_dreh(1, 90);
- 367              		.loc 1 93 0
- 368 0314 0100A0E3 		mov	r0, #1
- 369 0318 5A10A0E3 		mov	r1, #90
- 370 031c FEFFFFEB 		bl	rs_dreh
+  91:Top_Cross.c   ****                     fs_dreh(1, 180);
+ 360              		.loc 1 91 0
+ 361 0308 0100A0E3 		mov	r0, #1
+ 362 030c 5A10A0E3 		mov	r1, #90
+ 363 0310 FEFFFFEB 		bl	ls_dreh
+ 364              	.LVL60:
+  92:Top_Cross.c   ****                 }
+ 365              		.loc 1 92 0
+ 366 0314 0100A0E3 		mov	r0, #1
+ 367 0318 B410A0E3 		mov	r1, #180
+ 368 031c FEFFFFEB 		bl	fs_dreh
+ 369              	.LVL61:
+ 370 0320 EE0000EA 		b	.L3
  371              	.LVL62:
-  94:Top_Cross.c   ****                     fs_dreh(1, 180);
- 372              		.loc 1 94 0
- 373 0320 0100A0E3 		mov	r0, #1
- 374 0324 5A10A0E3 		mov	r1, #90
- 375 0328 FEFFFFEB 		bl	ls_dreh
- 376              	.LVL63:
-  95:Top_Cross.c   ****                 }
- 377              		.loc 1 95 0
- 378 032c 0100A0E3 		mov	r0, #1
+ 372              	.L17:
+  96:Top_Cross.c   ****                     fs_dreh(1, 180);
+ 373              		.loc 1 96 0
+ 374 0324 010056E3 		cmp	r6, #1
+ 375 0328 060000CA 		bgt	.L39
+  97:Top_Cross.c   ****                     fs_dreh(1, 90);
+ 376              		.loc 1 97 0
+ 377 032c 0100A0E3 		mov	r0, #1
+ 378              	.LVL63:
  379 0330 B410A0E3 		mov	r1, #180
  380 0334 FEFFFFEB 		bl	fs_dreh
  381              	.LVL64:
- 382 0338 EE0000EA 		b	.L3
- 383              	.LVL65:
- 384              	.L17:
-  99:Top_Cross.c   ****                     fs_dreh(1, 180);
- 385              		.loc 1 99 0
- 386 033c 010056E3 		cmp	r6, #1
- 387 0340 060000CA 		bgt	.L39
+  98:Top_Cross.c   ****                 }else{
+ 382              		.loc 1 98 0
+ 383 0338 0100A0E3 		mov	r0, #1
+ 384 033c 5A10A0E3 		mov	r1, #90
+ 385 0340 FEFFFFEB 		bl	fs_dreh
+ 386              	.LVL65:
+ 387 0344 E50000EA 		b	.L3
+ 388              	.LVL66:
+ 389              	.L39:
  100:Top_Cross.c   ****                     fs_dreh(1, 90);
- 388              		.loc 1 100 0
- 389 0344 0100A0E3 		mov	r0, #1
- 390              	.LVL66:
- 391 0348 B410A0E3 		mov	r1, #180
- 392 034c FEFFFFEB 		bl	fs_dreh
- 393              	.LVL67:
- 101:Top_Cross.c   ****                 }else{
- 394              		.loc 1 101 0
- 395 0350 0100A0E3 		mov	r0, #1
- 396 0354 5A10A0E3 		mov	r1, #90
- 397 0358 FEFFFFEB 		bl	fs_dreh
- 398              	.LVL68:
- 399 035c E50000EA 		b	.L3
+ 390              		.loc 1 100 0
+ 391 0348 0100A0E3 		mov	r0, #1
+ 392              	.LVL67:
+ 393 034c B410A0E3 		mov	r1, #180
+ 394 0350 FEFFFFEB 		bl	fs_dreh
+ 395              	.LVL68:
+ 101:Top_Cross.c   ****                     rs_dreh(1, 180);
+ 396              		.loc 1 101 0
+ 397 0354 0100A0E3 		mov	r0, #1
+ 398 0358 5A10A0E3 		mov	r1, #90
+ 399 035c FEFFFFEB 		bl	fs_dreh
  400              	.LVL69:
- 401              	.L39:
- 103:Top_Cross.c   ****                     fs_dreh(1, 90);
- 402              		.loc 1 103 0
- 403 0360 0100A0E3 		mov	r0, #1
- 404              	.LVL70:
- 405 0364 B410A0E3 		mov	r1, #180
- 406 0368 FEFFFFEB 		bl	fs_dreh
+ 102:Top_Cross.c   ****                 }
+ 401              		.loc 1 102 0
+ 402 0360 0100A0E3 		mov	r0, #1
+ 403 0364 B410A0E3 		mov	r1, #180
+ 404 0368 FEFFFFEB 		bl	rs_dreh
+ 405              	.LVL70:
+ 406 036c DB0000EA 		b	.L3
  407              	.LVL71:
- 104:Top_Cross.c   ****                     rs_dreh(1, 180);
- 408              		.loc 1 104 0
- 409 036c 0100A0E3 		mov	r0, #1
- 410 0370 5A10A0E3 		mov	r1, #90
- 411 0374 FEFFFFEB 		bl	fs_dreh
- 412              	.LVL72:
- 105:Top_Cross.c   ****                 }
- 413              		.loc 1 105 0
- 414 0378 0100A0E3 		mov	r0, #1
- 415 037c B410A0E3 		mov	r1, #180
- 416 0380 FEFFFFEB 		bl	rs_dreh
- 417              	.LVL73:
- 418 0384 DB0000EA 		b	.L3
- 419              	.LVL74:
- 420              	.L14:
- 109:Top_Cross.c   ****                 break;
- 421              		.loc 1 109 0
- 422 0388 0100A0E3 		mov	r0, #1
- 423              	.LVL75:
- 424 038c 5A10A0E3 		mov	r1, #90
- 425 0390 FEFFFFEB 		bl	rs_dreh
- 426              	.LVL76:
- 110:Top_Cross.c   ****             case 251:
- 427              		.loc 1 110 0
- 428 0394 D70000EA 		b	.L3
- 429              	.LVL77:
- 430              	.L25:
- 112:Top_Cross.c   ****                     fs_dreh(1, 90);
- 431              		.loc 1 112 0
- 432 0398 000056E3 		cmp	r6, #0
- 433 039c 0900001A 		bne	.L40
- 113:Top_Cross.c   ****                     rs_dreh(1, 90);
- 434              		.loc 1 113 0
- 435 03a0 0100A0E3 		mov	r0, #1
- 436              	.LVL78:
- 437 03a4 5A10A0E3 		mov	r1, #90
- 438 03a8 FEFFFFEB 		bl	fs_dreh
+ 408              	.L14:
+ 106:Top_Cross.c   ****                 break;
+ 409              		.loc 1 106 0
+ 410 0370 0100A0E3 		mov	r0, #1
+ 411              	.LVL72:
+ 412 0374 5A10A0E3 		mov	r1, #90
+ 413 0378 FEFFFFEB 		bl	rs_dreh
+ 414              	.LVL73:
+ 107:Top_Cross.c   ****             case 251:
+ 415              		.loc 1 107 0
+ 416 037c D70000EA 		b	.L3
+ 417              	.LVL74:
+ 418              	.L25:
+ 109:Top_Cross.c   ****                     fs_dreh(1, 90);
+ 419              		.loc 1 109 0
+ 420 0380 000056E3 		cmp	r6, #0
+ 421 0384 0900001A 		bne	.L40
+ 110:Top_Cross.c   ****                     rs_dreh(1, 90);
+ 422              		.loc 1 110 0
+ 423 0388 0100A0E3 		mov	r0, #1
+ 424              	.LVL75:
+ 425 038c 5A10A0E3 		mov	r1, #90
+ 426 0390 FEFFFFEB 		bl	fs_dreh
+ 427              	.LVL76:
+ 111:Top_Cross.c   ****                     fs_dreh(1, 180);
+ 428              		.loc 1 111 0
+ 429 0394 0100A0E3 		mov	r0, #1
+ 430 0398 5A10A0E3 		mov	r1, #90
+ 431 039c FEFFFFEB 		bl	rs_dreh
+ 432              	.LVL77:
+ 112:Top_Cross.c   ****                 }else{
+ 433              		.loc 1 112 0
+ 434 03a0 0100A0E3 		mov	r0, #1
+ 435 03a4 B410A0E3 		mov	r1, #180
+ 436 03a8 FEFFFFEB 		bl	fs_dreh
+ 437              	.LVL78:
+ 438 03ac E90000EA 		b	.L35
  439              	.LVL79:
- 114:Top_Cross.c   ****                     fs_dreh(1, 180);
- 440              		.loc 1 114 0
- 441 03ac 0100A0E3 		mov	r0, #1
- 442 03b0 5A10A0E3 		mov	r1, #90
- 443 03b4 FEFFFFEB 		bl	rs_dreh
- 444              	.LVL80:
- 115:Top_Cross.c   ****                 }else{
- 445              		.loc 1 115 0
- 446 03b8 0100A0E3 		mov	r0, #1
- 447 03bc B410A0E3 		mov	r1, #180
- 448 03c0 FEFFFFEB 		bl	fs_dreh
- 449              	.LVL81:
- 450 03c4 E90000EA 		b	.L35
+ 440              	.L40:
+ 114:Top_Cross.c   ****                     rs_dreh(1, 90);
+ 441              		.loc 1 114 0
+ 442 03b0 0100A0E3 		mov	r0, #1
+ 443              	.LVL80:
+ 444 03b4 5A10A0E3 		mov	r1, #90
+ 445 03b8 FEFFFFEB 		bl	fs_dreh
+ 446              	.LVL81:
+ 115:Top_Cross.c   ****                     ls_dreh(-1, 90);
+ 447              		.loc 1 115 0
+ 448 03bc 0100A0E3 		mov	r0, #1
+ 449 03c0 5A10A0E3 		mov	r1, #90
+ 450 03c4 FEFFFFEB 		bl	rs_dreh
  451              	.LVL82:
- 452              	.L40:
- 117:Top_Cross.c   ****                     rs_dreh(1, 90);
- 453              		.loc 1 117 0
- 454 03c8 0100A0E3 		mov	r0, #1
- 455              	.LVL83:
- 456 03cc 5A10A0E3 		mov	r1, #90
- 457 03d0 FEFFFFEB 		bl	fs_dreh
- 458              	.LVL84:
- 118:Top_Cross.c   ****                     ls_dreh(-1, 90);
- 459              		.loc 1 118 0
- 460 03d4 0100A0E3 		mov	r0, #1
- 461 03d8 5A10A0E3 		mov	r1, #90
- 462 03dc FEFFFFEB 		bl	rs_dreh
+ 116:Top_Cross.c   ****                     fs_dreh(1, 180);
+ 452              		.loc 1 116 0
+ 453 03c8 0000E0E3 		mvn	r0, #0
+ 454 03cc 5A10A0E3 		mov	r1, #90
+ 455 03d0 FEFFFFEB 		bl	ls_dreh
+ 456              	.LVL83:
+ 117:Top_Cross.c   ****                 }
+ 457              		.loc 1 117 0
+ 458 03d4 0100A0E3 		mov	r0, #1
+ 459 03d8 B410A0E3 		mov	r1, #180
+ 460 03dc FEFFFFEB 		bl	fs_dreh
+ 461              	.LVL84:
+ 462 03e0 BE0000EA 		b	.L3
  463              	.LVL85:
- 119:Top_Cross.c   ****                     fs_dreh(1, 180);
- 464              		.loc 1 119 0
- 465 03e0 0000E0E3 		mvn	r0, #0
- 466 03e4 5A10A0E3 		mov	r1, #90
- 467 03e8 FEFFFFEB 		bl	ls_dreh
- 468              	.LVL86:
- 120:Top_Cross.c   ****                 }
- 469              		.loc 1 120 0
- 470 03ec 0100A0E3 		mov	r0, #1
+ 464              	.L22:
+ 122:Top_Cross.c   ****                     rs_dreh(1, 180);
+ 465              		.loc 1 122 0
+ 466 03e4 010056E3 		cmp	r6, #1
+ 467 03e8 0C0000CA 		bgt	.L41
+ 123:Top_Cross.c   ****                     fs_dreh(1, 90);
+ 468              		.loc 1 123 0
+ 469 03ec 0100A0E3 		mov	r0, #1
+ 470              	.LVL86:
  471 03f0 B410A0E3 		mov	r1, #180
- 472 03f4 FEFFFFEB 		bl	fs_dreh
+ 472 03f4 FEFFFFEB 		bl	rs_dreh
  473              	.LVL87:
- 474 03f8 BE0000EA 		b	.L3
- 475              	.LVL88:
- 476              	.L22:
- 125:Top_Cross.c   ****                     rs_dreh(1, 180);
- 477              		.loc 1 125 0
- 478 03fc 010056E3 		cmp	r6, #1
- 479 0400 0C0000CA 		bgt	.L41
- 126:Top_Cross.c   ****                     fs_dreh(1, 90);
- 480              		.loc 1 126 0
- 481 0404 0100A0E3 		mov	r0, #1
- 482              	.LVL89:
- 483 0408 B410A0E3 		mov	r1, #180
- 484 040c FEFFFFEB 		bl	rs_dreh
- 485              	.LVL90:
- 127:Top_Cross.c   ****                     bs_dreh(1, 90);
- 486              		.loc 1 127 0
- 487 0410 0100A0E3 		mov	r0, #1
- 488 0414 5A10A0E3 		mov	r1, #90
- 489 0418 FEFFFFEB 		bl	fs_dreh
+ 124:Top_Cross.c   ****                     bs_dreh(1, 90);
+ 474              		.loc 1 124 0
+ 475 03f8 0100A0E3 		mov	r0, #1
+ 476 03fc 5A10A0E3 		mov	r1, #90
+ 477 0400 FEFFFFEB 		bl	fs_dreh
+ 478              	.LVL88:
+ 125:Top_Cross.c   ****                     bs_dreh(1, 180);
+ 479              		.loc 1 125 0
+ 480 0404 0100A0E3 		mov	r0, #1
+ 481 0408 5A10A0E3 		mov	r1, #90
+ 482 040c FEFFFFEB 		bl	bs_dreh
+ 483              	.LVL89:
+ 126:Top_Cross.c   ****                 }else{
+ 484              		.loc 1 126 0
+ 485 0410 0100A0E3 		mov	r0, #1
+ 486 0414 B410A0E3 		mov	r1, #180
+ 487 0418 FEFFFFEB 		bl	bs_dreh
+ 488              	.LVL90:
+ 489 041c AF0000EA 		b	.L3
  490              	.LVL91:
- 128:Top_Cross.c   ****                     bs_dreh(1, 180);
- 491              		.loc 1 128 0
- 492 041c 0100A0E3 		mov	r0, #1
- 493 0420 5A10A0E3 		mov	r1, #90
- 494 0424 FEFFFFEB 		bl	bs_dreh
- 495              	.LVL92:
- 129:Top_Cross.c   ****                 }else{
- 496              		.loc 1 129 0
- 497 0428 0100A0E3 		mov	r0, #1
- 498 042c B410A0E3 		mov	r1, #180
- 499 0430 FEFFFFEB 		bl	bs_dreh
- 500              	.LVL93:
- 501 0434 AF0000EA 		b	.L3
+ 491              	.L41:
+ 128:Top_Cross.c   ****                     fs_dreh(1, 90);
+ 492              		.loc 1 128 0
+ 493 0420 0100A0E3 		mov	r0, #1
+ 494              	.LVL92:
+ 495 0424 B410A0E3 		mov	r1, #180
+ 496 0428 FEFFFFEB 		bl	rs_dreh
+ 497              	.LVL93:
+ 129:Top_Cross.c   ****                     bs_dreh(1, 90);
+ 498              		.loc 1 129 0
+ 499 042c 0100A0E3 		mov	r0, #1
+ 500 0430 5A10A0E3 		mov	r1, #90
+ 501 0434 FEFFFFEB 		bl	fs_dreh
  502              	.LVL94:
- 503              	.L41:
- 131:Top_Cross.c   ****                     fs_dreh(1, 90);
- 504              		.loc 1 131 0
- 505 0438 0100A0E3 		mov	r0, #1
- 506              	.LVL95:
- 507 043c B410A0E3 		mov	r1, #180
- 508 0440 FEFFFFEB 		bl	rs_dreh
- 509              	.LVL96:
- 132:Top_Cross.c   ****                     bs_dreh(1, 90);
- 510              		.loc 1 132 0
- 511 0444 0100A0E3 		mov	r0, #1
- 512 0448 5A10A0E3 		mov	r1, #90
- 513 044c FEFFFFEB 		bl	fs_dreh
- 514              	.LVL97:
- 133:Top_Cross.c   ****                     rs_dreh(-1, 90);
- 515              		.loc 1 133 0
- 516 0450 0100A0E3 		mov	r0, #1
- 517 0454 5A10A0E3 		mov	r1, #90
- 518 0458 FEFFFFEB 		bl	bs_dreh
+ 130:Top_Cross.c   ****                     rs_dreh(-1, 90);
+ 503              		.loc 1 130 0
+ 504 0438 0100A0E3 		mov	r0, #1
+ 505 043c 5A10A0E3 		mov	r1, #90
+ 506 0440 FEFFFFEB 		bl	bs_dreh
+ 507              	.LVL95:
+ 131:Top_Cross.c   ****                     bs_dreh(1, 180);
+ 508              		.loc 1 131 0
+ 509 0444 0000E0E3 		mvn	r0, #0
+ 510 0448 5A10A0E3 		mov	r1, #90
+ 511 044c FEFFFFEB 		bl	rs_dreh
+ 512              	.LVL96:
+ 132:Top_Cross.c   ****                 }
+ 513              		.loc 1 132 0
+ 514 0450 0100A0E3 		mov	r0, #1
+ 515 0454 B410A0E3 		mov	r1, #180
+ 516 0458 FEFFFFEB 		bl	bs_dreh
+ 517              	.LVL97:
+ 518 045c 9F0000EA 		b	.L3
  519              	.LVL98:
- 134:Top_Cross.c   ****                     bs_dreh(1, 180);
- 520              		.loc 1 134 0
- 521 045c 0000E0E3 		mvn	r0, #0
- 522 0460 5A10A0E3 		mov	r1, #90
- 523 0464 FEFFFFEB 		bl	rs_dreh
- 524              	.LVL99:
- 135:Top_Cross.c   ****                 }
- 525              		.loc 1 135 0
- 526 0468 0100A0E3 		mov	r0, #1
- 527 046c B410A0E3 		mov	r1, #180
- 528 0470 FEFFFFEB 		bl	bs_dreh
- 529              	.LVL100:
- 530 0474 9F0000EA 		b	.L3
- 531              	.LVL101:
- 532              	.L19:
- 139:Top_Cross.c   ****                 break;
- 533              		.loc 1 139 0
- 534 0478 0000E0E3 		mvn	r0, #0
- 535              	.LVL102:
- 536 047c 5A10A0E3 		mov	r1, #90
- 537 0480 FEFFFFEB 		bl	rs_dreh
- 538              	.LVL103:
- 140:Top_Cross.c   ****             case 234:     //pruefen
- 539              		.loc 1 140 0
- 540 0484 9B0000EA 		b	.L3
- 541              	.LVL104:
- 542              	.L18:
- 142:Top_Cross.c   ****                     bs_dreh(-1, 180);
- 543              		.loc 1 142 0
- 544 0488 000056E3 		cmp	r6, #0
- 545 048c 0600001A 		bne	.L42
+ 520              	.L19:
+ 136:Top_Cross.c   ****                 break;
+ 521              		.loc 1 136 0
+ 522 0460 0000E0E3 		mvn	r0, #0
+ 523              	.LVL99:
+ 524 0464 5A10A0E3 		mov	r1, #90
+ 525 0468 FEFFFFEB 		bl	rs_dreh
+ 526              	.LVL100:
+ 137:Top_Cross.c   ****             case 234:     //pruefen
+ 527              		.loc 1 137 0
+ 528 046c 9B0000EA 		b	.L3
+ 529              	.LVL101:
+ 530              	.L18:
+ 139:Top_Cross.c   ****                     bs_dreh(-1, 180);
+ 531              		.loc 1 139 0
+ 532 0470 000056E3 		cmp	r6, #0
+ 533 0474 0600001A 		bne	.L42
+ 140:Top_Cross.c   ****                     bs_dreh(-1, 90);
+ 534              		.loc 1 140 0
+ 535 0478 0000E0E3 		mvn	r0, #0
+ 536              	.LVL102:
+ 537 047c B410A0E3 		mov	r1, #180
+ 538 0480 FEFFFFEB 		bl	bs_dreh
+ 539              	.LVL103:
+ 141:Top_Cross.c   ****                 }else{
+ 540              		.loc 1 141 0
+ 541 0484 0000E0E3 		mvn	r0, #0
+ 542 0488 5A10A0E3 		mov	r1, #90
+ 543 048c FEFFFFEB 		bl	bs_dreh
+ 544              	.LVL104:
+ 545 0490 B00000EA 		b	.L35
+ 546              	.LVL105:
+ 547              	.L42:
  143:Top_Cross.c   ****                     bs_dreh(-1, 90);
- 546              		.loc 1 143 0
- 547 0490 0000E0E3 		mvn	r0, #0
- 548              	.LVL105:
- 549 0494 B410A0E3 		mov	r1, #180
- 550 0498 FEFFFFEB 		bl	bs_dreh
- 551              	.LVL106:
- 144:Top_Cross.c   ****                 }else{
- 552              		.loc 1 144 0
- 553 049c 0000E0E3 		mvn	r0, #0
- 554 04a0 5A10A0E3 		mov	r1, #90
- 555 04a4 FEFFFFEB 		bl	bs_dreh
- 556              	.LVL107:
- 557 04a8 B00000EA 		b	.L35
+ 548              		.loc 1 143 0
+ 549 0494 0000E0E3 		mvn	r0, #0
+ 550              	.LVL106:
+ 551 0498 B410A0E3 		mov	r1, #180
+ 552 049c FEFFFFEB 		bl	bs_dreh
+ 553              	.LVL107:
+ 144:Top_Cross.c   ****                     rs_dreh(1, 180);
+ 554              		.loc 1 144 0
+ 555 04a0 0000E0E3 		mvn	r0, #0
+ 556 04a4 5A10A0E3 		mov	r1, #90
+ 557 04a8 FEFFFFEB 		bl	bs_dreh
  558              	.LVL108:
- 559              	.L42:
- 146:Top_Cross.c   ****                     bs_dreh(-1, 90);
- 560              		.loc 1 146 0
- 561 04ac 0000E0E3 		mvn	r0, #0
- 562              	.LVL109:
- 563 04b0 B410A0E3 		mov	r1, #180
- 564 04b4 FEFFFFEB 		bl	bs_dreh
+ 145:Top_Cross.c   ****                 }
+ 559              		.loc 1 145 0
+ 560 04ac 0100A0E3 		mov	r0, #1
+ 561 04b0 B410A0E3 		mov	r1, #180
+ 562 04b4 FEFFFFEB 		bl	rs_dreh
+ 563              	.LVL109:
+ 564 04b8 880000EA 		b	.L3
  565              	.LVL110:
- 147:Top_Cross.c   ****                     rs_dreh(1, 180);
- 566              		.loc 1 147 0
- 567 04b8 0000E0E3 		mvn	r0, #0
- 568 04bc 5A10A0E3 		mov	r1, #90
- 569 04c0 FEFFFFEB 		bl	bs_dreh
- 570              	.LVL111:
- 148:Top_Cross.c   ****                 }
- 571              		.loc 1 148 0
- 572 04c4 0100A0E3 		mov	r0, #1
- 573 04c8 B410A0E3 		mov	r1, #180
- 574 04cc FEFFFFEB 		bl	rs_dreh
+ 566              	.L24:
+ 149:Top_Cross.c   ****                     bs_dreh(1, 90);
+ 567              		.loc 1 149 0
+ 568 04bc 000056E3 		cmp	r6, #0
+ 569 04c0 0900001A 		bne	.L43
+ 150:Top_Cross.c   ****                     rs_dreh(-1, 90);
+ 570              		.loc 1 150 0
+ 571 04c4 0100A0E3 		mov	r0, #1
+ 572              	.LVL111:
+ 573 04c8 5A10A0E3 		mov	r1, #90
+ 574 04cc FEFFFFEB 		bl	bs_dreh
  575              	.LVL112:
- 576 04d0 880000EA 		b	.L3
- 577              	.LVL113:
- 578              	.L24:
- 152:Top_Cross.c   ****                     bs_dreh(1, 90);
- 579              		.loc 1 152 0
- 580 04d4 000056E3 		cmp	r6, #0
- 581 04d8 0900001A 		bne	.L43
- 153:Top_Cross.c   ****                     rs_dreh(-1, 90);
- 582              		.loc 1 153 0
- 583 04dc 0100A0E3 		mov	r0, #1
- 584              	.LVL114:
- 585 04e0 5A10A0E3 		mov	r1, #90
- 586 04e4 FEFFFFEB 		bl	bs_dreh
+ 151:Top_Cross.c   ****                     bs_dreh(-1, 180);
+ 576              		.loc 1 151 0
+ 577 04d0 0000E0E3 		mvn	r0, #0
+ 578 04d4 5A10A0E3 		mov	r1, #90
+ 579 04d8 FEFFFFEB 		bl	rs_dreh
+ 580              	.LVL113:
+ 152:Top_Cross.c   ****                 }else{
+ 581              		.loc 1 152 0
+ 582 04dc 0000E0E3 		mvn	r0, #0
+ 583 04e0 B410A0E3 		mov	r1, #180
+ 584 04e4 FEFFFFEB 		bl	bs_dreh
+ 585              	.LVL114:
+ 586 04e8 9A0000EA 		b	.L35
  587              	.LVL115:
- 154:Top_Cross.c   ****                     bs_dreh(-1, 180);
- 588              		.loc 1 154 0
- 589 04e8 0000E0E3 		mvn	r0, #0
- 590 04ec 5A10A0E3 		mov	r1, #90
- 591 04f0 FEFFFFEB 		bl	rs_dreh
- 592              	.LVL116:
- 155:Top_Cross.c   ****                 }else{
- 593              		.loc 1 155 0
- 594 04f4 0000E0E3 		mvn	r0, #0
- 595 04f8 B410A0E3 		mov	r1, #180
- 596 04fc FEFFFFEB 		bl	bs_dreh
- 597              	.LVL117:
- 598 0500 9A0000EA 		b	.L35
+ 588              	.L43:
+ 154:Top_Cross.c   ****                     rs_dreh(-1, 90);
+ 589              		.loc 1 154 0
+ 590 04ec 0100A0E3 		mov	r0, #1
+ 591              	.LVL116:
+ 592 04f0 5A10A0E3 		mov	r1, #90
+ 593 04f4 FEFFFFEB 		bl	bs_dreh
+ 594              	.LVL117:
+ 155:Top_Cross.c   ****                     bs_dreh(-1, 180);
+ 595              		.loc 1 155 0
+ 596 04f8 0000E0E3 		mvn	r0, #0
+ 597 04fc 5A10A0E3 		mov	r1, #90
+ 598 0500 FEFFFFEB 		bl	rs_dreh
  599              	.LVL118:
- 600              	.L43:
- 157:Top_Cross.c   ****                     rs_dreh(-1, 90);
- 601              		.loc 1 157 0
- 602 0504 0100A0E3 		mov	r0, #1
- 603              	.LVL119:
- 604 0508 5A10A0E3 		mov	r1, #90
- 605 050c FEFFFFEB 		bl	bs_dreh
- 606              	.LVL120:
- 158:Top_Cross.c   ****                     bs_dreh(-1, 180);
- 607              		.loc 1 158 0
- 608 0510 0000E0E3 		mvn	r0, #0
- 609 0514 5A10A0E3 		mov	r1, #90
- 610 0518 FEFFFFEB 		bl	rs_dreh
+ 156:Top_Cross.c   ****                     fs_dreh(-1, 90);
+ 600              		.loc 1 156 0
+ 601 0504 0000E0E3 		mvn	r0, #0
+ 602 0508 B410A0E3 		mov	r1, #180
+ 603 050c FEFFFFEB 		bl	bs_dreh
+ 604              	.LVL119:
+ 157:Top_Cross.c   ****                 }
+ 605              		.loc 1 157 0
+ 606 0510 0000E0E3 		mvn	r0, #0
+ 607 0514 5A10A0E3 		mov	r1, #90
+ 608 0518 FEFFFFEB 		bl	fs_dreh
+ 609              	.LVL120:
+ 610 051c 6F0000EA 		b	.L3
  611              	.LVL121:
- 159:Top_Cross.c   ****                     fs_dreh(-1, 90);
- 612              		.loc 1 159 0
- 613 051c 0000E0E3 		mvn	r0, #0
- 614 0520 B410A0E3 		mov	r1, #180
- 615 0524 FEFFFFEB 		bl	bs_dreh
- 616              	.LVL122:
- 160:Top_Cross.c   ****                 }
- 617              		.loc 1 160 0
- 618 0528 0000E0E3 		mvn	r0, #0
+ 612              	.L26:
+ 161:Top_Cross.c   ****                     fs_dreh(-1, 90);
+ 613              		.loc 1 161 0
+ 614 0520 000056E3 		cmp	r6, #0
+ 615 0524 0600001A 		bne	.L44
+ 162:Top_Cross.c   ****                     fs_dreh(1, 90);
+ 616              		.loc 1 162 0
+ 617 0528 0000E0E3 		mvn	r0, #0
+ 618              	.LVL122:
  619 052c 5A10A0E3 		mov	r1, #90
  620 0530 FEFFFFEB 		bl	fs_dreh
  621              	.LVL123:
- 622 0534 6F0000EA 		b	.L3
- 623              	.LVL124:
- 624              	.L26:
- 164:Top_Cross.c   ****                     fs_dreh(-1, 90);
- 625              		.loc 1 164 0
- 626 0538 000056E3 		cmp	r6, #0
- 627 053c 0600001A 		bne	.L44
+ 163:Top_Cross.c   ****                 }else{
+ 622              		.loc 1 163 0
+ 623 0534 0100A0E3 		mov	r0, #1
+ 624 0538 5A10A0E3 		mov	r1, #90
+ 625 053c FEFFFFEB 		bl	fs_dreh
+ 626              	.LVL124:
+ 627 0540 840000EA 		b	.L35
+ 628              	.LVL125:
+ 629              	.L44:
  165:Top_Cross.c   ****                     fs_dreh(1, 90);
- 628              		.loc 1 165 0
- 629 0540 0000E0E3 		mvn	r0, #0
- 630              	.LVL125:
- 631 0544 5A10A0E3 		mov	r1, #90
- 632 0548 FEFFFFEB 		bl	fs_dreh
- 633              	.LVL126:
- 166:Top_Cross.c   ****                 }else{
- 634              		.loc 1 166 0
- 635 054c 0100A0E3 		mov	r0, #1
- 636 0550 5A10A0E3 		mov	r1, #90
- 637 0554 FEFFFFEB 		bl	fs_dreh
- 638              	.LVL127:
- 639 0558 840000EA 		b	.L35
+ 630              		.loc 1 165 0
+ 631 0544 0000E0E3 		mvn	r0, #0
+ 632              	.LVL126:
+ 633 0548 5A10A0E3 		mov	r1, #90
+ 634 054c FEFFFFEB 		bl	fs_dreh
+ 635              	.LVL127:
+ 166:Top_Cross.c   ****                     rs_dreh(1, 90);
+ 636              		.loc 1 166 0
+ 637 0550 0100A0E3 		mov	r0, #1
+ 638 0554 5A10A0E3 		mov	r1, #90
+ 639 0558 FEFFFFEB 		bl	fs_dreh
  640              	.LVL128:
- 641              	.L44:
- 168:Top_Cross.c   ****                     fs_dreh(1, 90);
- 642              		.loc 1 168 0
- 643 055c 0000E0E3 		mvn	r0, #0
- 644              	.LVL129:
- 645 0560 5A10A0E3 		mov	r1, #90
- 646 0564 FEFFFFEB 		bl	fs_dreh
+ 167:Top_Cross.c   ****                 }
+ 641              		.loc 1 167 0
+ 642 055c 0100A0E3 		mov	r0, #1
+ 643 0560 5A10A0E3 		mov	r1, #90
+ 644 0564 FEFFFFEB 		bl	rs_dreh
+ 645              	.LVL129:
+ 646 0568 5C0000EA 		b	.L3
  647              	.LVL130:
- 169:Top_Cross.c   ****                     rs_dreh(1, 90);
- 648              		.loc 1 169 0
- 649 0568 0100A0E3 		mov	r0, #1
- 650 056c 5A10A0E3 		mov	r1, #90
- 651 0570 FEFFFFEB 		bl	fs_dreh
- 652              	.LVL131:
- 170:Top_Cross.c   ****                 }
- 653              		.loc 1 170 0
- 654 0574 0100A0E3 		mov	r0, #1
- 655 0578 5A10A0E3 		mov	r1, #90
- 656 057c FEFFFFEB 		bl	rs_dreh
- 657              	.LVL132:
- 658 0580 5C0000EA 		b	.L3
+ 648              	.L27:
+ 172:Top_Cross.c   ****                 rs_dreh(1, 180);
+ 649              		.loc 1 172 0
+ 650 056c 0100A0E3 		mov	r0, #1
+ 651              	.LVL131:
+ 652 0570 5A10A0E3 		mov	r1, #90
+ 653 0574 FEFFFFEB 		bl	ds_dreh
+ 654              	.LVL132:
+ 173:Top_Cross.c   ****                 
+ 655              		.loc 1 173 0
+ 656 0578 0100A0E3 		mov	r0, #1
+ 657 057c B410A0E3 		mov	r1, #180
+ 658 0580 FEFFFFEB 		bl	rs_dreh
  659              	.LVL133:
- 660              	.L27:
- 175:Top_Cross.c   ****                 rs_dreh(1, 180);
- 661              		.loc 1 175 0
- 662 0584 0100A0E3 		mov	r0, #1
- 663              	.LVL134:
- 664 0588 5A10A0E3 		mov	r1, #90
- 665 058c FEFFFFEB 		bl	ds_dreh
- 666              	.LVL135:
- 176:Top_Cross.c   ****                 
- 667              		.loc 1 176 0
- 668 0590 0100A0E3 		mov	r0, #1
- 669 0594 B410A0E3 		mov	r1, #180
- 670 0598 FEFFFFEB 		bl	rs_dreh
- 671              	.LVL136:
- 178:Top_Cross.c   ****             case 352:      //pruefen
- 672              		.loc 1 178 0
- 673 059c 550000EA 		b	.L3
- 674              	.LVL137:
- 675              	.L33:
- 180:Top_Cross.c   ****                     ds_dreh(-1, 90);
- 676              		.loc 1 180 0
- 677 05a0 010056E3 		cmp	r6, #1
- 678 05a4 090000CA 		bgt	.L45
- 181:Top_Cross.c   ****                     fs_dreh(-1, 90);
- 679              		.loc 1 181 0
- 680 05a8 0000E0E3 		mvn	r0, #0
- 681              	.LVL138:
- 682 05ac 5A10A0E3 		mov	r1, #90
- 683 05b0 FEFFFFEB 		bl	ds_dreh
+ 175:Top_Cross.c   ****             case 352:      //pruefen
+ 660              		.loc 1 175 0
+ 661 0584 550000EA 		b	.L3
+ 662              	.LVL134:
+ 663              	.L33:
+ 177:Top_Cross.c   ****                     ds_dreh(-1, 90);
+ 664              		.loc 1 177 0
+ 665 0588 010056E3 		cmp	r6, #1
+ 666 058c 090000CA 		bgt	.L45
+ 178:Top_Cross.c   ****                     fs_dreh(-1, 90);
+ 667              		.loc 1 178 0
+ 668 0590 0000E0E3 		mvn	r0, #0
+ 669              	.LVL135:
+ 670 0594 5A10A0E3 		mov	r1, #90
+ 671 0598 FEFFFFEB 		bl	ds_dreh
+ 672              	.LVL136:
+ 179:Top_Cross.c   ****                     fs_dreh(1, 90);
+ 673              		.loc 1 179 0
+ 674 059c 0000E0E3 		mvn	r0, #0
+ 675 05a0 5A10A0E3 		mov	r1, #90
+ 676 05a4 FEFFFFEB 		bl	fs_dreh
+ 677              	.LVL137:
+ 180:Top_Cross.c   ****                 }else{
+ 678              		.loc 1 180 0
+ 679 05a8 0100A0E3 		mov	r0, #1
+ 680 05ac 5A10A0E3 		mov	r1, #90
+ 681 05b0 FEFFFFEB 		bl	fs_dreh
+ 682              	.LVL138:
+ 683 05b4 490000EA 		b	.L3
  684              	.LVL139:
- 182:Top_Cross.c   ****                     fs_dreh(1, 90);
- 685              		.loc 1 182 0
- 686 05b4 0000E0E3 		mvn	r0, #0
- 687 05b8 5A10A0E3 		mov	r1, #90
- 688 05bc FEFFFFEB 		bl	fs_dreh
- 689              	.LVL140:
- 183:Top_Cross.c   ****                 }else{
- 690              		.loc 1 183 0
- 691 05c0 0100A0E3 		mov	r0, #1
- 692 05c4 5A10A0E3 		mov	r1, #90
- 693 05c8 FEFFFFEB 		bl	fs_dreh
- 694              	.LVL141:
- 695 05cc 490000EA 		b	.L3
+ 685              	.L45:
+ 182:Top_Cross.c   ****                     fs_dreh(-1, 90);
+ 686              		.loc 1 182 0
+ 687 05b8 0000E0E3 		mvn	r0, #0
+ 688              	.LVL140:
+ 689 05bc 5A10A0E3 		mov	r1, #90
+ 690 05c0 FEFFFFEB 		bl	ds_dreh
+ 691              	.LVL141:
+ 183:Top_Cross.c   ****                     fs_dreh(1, 90);
+ 692              		.loc 1 183 0
+ 693 05c4 0000E0E3 		mvn	r0, #0
+ 694 05c8 5A10A0E3 		mov	r1, #90
+ 695 05cc FEFFFFEB 		bl	fs_dreh
  696              	.LVL142:
- 697              	.L45:
- 185:Top_Cross.c   ****                     fs_dreh(-1, 90);
- 698              		.loc 1 185 0
- 699 05d0 0000E0E3 		mvn	r0, #0
- 700              	.LVL143:
- 701 05d4 5A10A0E3 		mov	r1, #90
- 702 05d8 FEFFFFEB 		bl	ds_dreh
- 703              	.LVL144:
- 186:Top_Cross.c   ****                     fs_dreh(1, 90);
- 704              		.loc 1 186 0
- 705 05dc 0000E0E3 		mvn	r0, #0
- 706 05e0 5A10A0E3 		mov	r1, #90
- 707 05e4 FEFFFFEB 		bl	fs_dreh
+ 184:Top_Cross.c   ****                     rs_dreh(1, 90);
+ 697              		.loc 1 184 0
+ 698 05d0 0100A0E3 		mov	r0, #1
+ 699 05d4 5A10A0E3 		mov	r1, #90
+ 700 05d8 FEFFFFEB 		bl	fs_dreh
+ 701              	.LVL143:
+ 185:Top_Cross.c   ****                 }
+ 702              		.loc 1 185 0
+ 703 05dc 0100A0E3 		mov	r0, #1
+ 704 05e0 5A10A0E3 		mov	r1, #90
+ 705 05e4 FEFFFFEB 		bl	rs_dreh
+ 706              	.LVL144:
+ 707 05e8 3C0000EA 		b	.L3
  708              	.LVL145:
- 187:Top_Cross.c   ****                     rs_dreh(1, 90);
- 709              		.loc 1 187 0
- 710 05e8 0100A0E3 		mov	r0, #1
- 711 05ec 5A10A0E3 		mov	r1, #90
- 712 05f0 FEFFFFEB 		bl	fs_dreh
- 713              	.LVL146:
- 188:Top_Cross.c   ****                 }
- 714              		.loc 1 188 0
- 715 05f4 0100A0E3 		mov	r0, #1
- 716 05f8 5A10A0E3 		mov	r1, #90
- 717 05fc FEFFFFEB 		bl	rs_dreh
- 718              	.LVL147:
- 719 0600 3C0000EA 		b	.L3
- 720              	.LVL148:
- 721              	.L31:
- 192:Top_Cross.c   ****                 break;
- 722              		.loc 1 192 0
- 723 0604 0100A0E3 		mov	r0, #1
- 724              	.LVL149:
- 725 0608 B410A0E3 		mov	r1, #180
- 726 060c FEFFFFEB 		bl	rs_dreh
- 727              	.LVL150:
- 193:Top_Cross.c   ****             case 323:       //pruefen
- 728              		.loc 1 193 0
- 729 0610 380000EA 		b	.L3
+ 709              	.L31:
+ 189:Top_Cross.c   ****                 break;
+ 710              		.loc 1 189 0
+ 711 05ec 0100A0E3 		mov	r0, #1
+ 712              	.LVL146:
+ 713 05f0 B410A0E3 		mov	r1, #180
+ 714 05f4 FEFFFFEB 		bl	rs_dreh
+ 715              	.LVL147:
+ 190:Top_Cross.c   ****             case 323:       //pruefen
+ 716              		.loc 1 190 0
+ 717 05f8 380000EA 		b	.L3
+ 718              	.LVL148:
+ 719              	.L20:
+ 192:Top_Cross.c   ****                 rs_dreh(1, 180);
+ 720              		.loc 1 192 0
+ 721 05fc 0000E0E3 		mvn	r0, #0
+ 722              	.LVL149:
+ 723 0600 5A10A0E3 		mov	r1, #90
+ 724 0604 FEFFFFEB 		bl	ds_dreh
+ 725              	.LVL150:
+ 193:Top_Cross.c   ****                 break;
+ 726              		.loc 1 193 0
+ 727 0608 0100A0E3 		mov	r0, #1
+ 728 060c B410A0E3 		mov	r1, #180
+ 729 0610 FEFFFFEB 		bl	rs_dreh
  730              	.LVL151:
- 731              	.L20:
- 195:Top_Cross.c   ****                 rs_dreh(1, 180);
- 732              		.loc 1 195 0
- 733 0614 0000E0E3 		mvn	r0, #0
- 734              	.LVL152:
- 735 0618 5A10A0E3 		mov	r1, #90
- 736 061c FEFFFFEB 		bl	ds_dreh
- 737              	.LVL153:
- 196:Top_Cross.c   ****                 break;
- 738              		.loc 1 196 0
+ 194:Top_Cross.c   ****             case 332:       //pruefen
+ 731              		.loc 1 194 0
+ 732 0614 310000EA 		b	.L3
+ 733              	.LVL152:
+ 734              	.L28:
+ 196:Top_Cross.c   ****                     bs_dreh(1, 90);
+ 735              		.loc 1 196 0
+ 736 0618 000056E3 		cmp	r6, #0
+ 737 061c 0600001A 		bne	.L46
+ 197:Top_Cross.c   ****                     bs_dreh(-1, 90);
+ 738              		.loc 1 197 0
  739 0620 0100A0E3 		mov	r0, #1
- 740 0624 B410A0E3 		mov	r1, #180
- 741 0628 FEFFFFEB 		bl	rs_dreh
- 742              	.LVL154:
- 197:Top_Cross.c   ****             case 332:       //pruefen
- 743              		.loc 1 197 0
- 744 062c 310000EA 		b	.L3
- 745              	.LVL155:
- 746              	.L28:
- 199:Top_Cross.c   ****                     bs_dreh(1, 90);
- 747              		.loc 1 199 0
- 748 0630 000056E3 		cmp	r6, #0
- 749 0634 0600001A 		bne	.L46
+ 740              	.LVL153:
+ 741 0624 5A10A0E3 		mov	r1, #90
+ 742 0628 FEFFFFEB 		bl	bs_dreh
+ 743              	.LVL154:
+ 198:Top_Cross.c   ****                 }else{
+ 744              		.loc 1 198 0
+ 745 062c 0000E0E3 		mvn	r0, #0
+ 746 0630 5A10A0E3 		mov	r1, #90
+ 747 0634 FEFFFFEB 		bl	bs_dreh
+ 748              	.LVL155:
+ 749 0638 460000EA 		b	.L35
+ 750              	.LVL156:
+ 751              	.L46:
  200:Top_Cross.c   ****                     bs_dreh(-1, 90);
- 750              		.loc 1 200 0
- 751 0638 0100A0E3 		mov	r0, #1
- 752              	.LVL156:
- 753 063c 5A10A0E3 		mov	r1, #90
- 754 0640 FEFFFFEB 		bl	bs_dreh
- 755              	.LVL157:
- 201:Top_Cross.c   ****                 }else{
- 756              		.loc 1 201 0
- 757 0644 0000E0E3 		mvn	r0, #0
- 758 0648 5A10A0E3 		mov	r1, #90
- 759 064c FEFFFFEB 		bl	bs_dreh
- 760              	.LVL158:
- 761 0650 460000EA 		b	.L35
+ 752              		.loc 1 200 0
+ 753 063c 0100A0E3 		mov	r0, #1
+ 754              	.LVL157:
+ 755 0640 5A10A0E3 		mov	r1, #90
+ 756 0644 FEFFFFEB 		bl	bs_dreh
+ 757              	.LVL158:
+ 201:Top_Cross.c   ****                     rs_dreh(-1, 90);
+ 758              		.loc 1 201 0
+ 759 0648 0000E0E3 		mvn	r0, #0
+ 760 064c 5A10A0E3 		mov	r1, #90
+ 761 0650 FEFFFFEB 		bl	bs_dreh
  762              	.LVL159:
- 763              	.L46:
- 203:Top_Cross.c   ****                     bs_dreh(-1, 90);
- 764              		.loc 1 203 0
- 765 0654 0100A0E3 		mov	r0, #1
- 766              	.LVL160:
- 767 0658 5A10A0E3 		mov	r1, #90
- 768 065c FEFFFFEB 		bl	bs_dreh
+ 202:Top_Cross.c   ****                 }
+ 763              		.loc 1 202 0
+ 764 0654 0000E0E3 		mvn	r0, #0
+ 765 0658 5A10A0E3 		mov	r1, #90
+ 766 065c FEFFFFEB 		bl	rs_dreh
+ 767              	.LVL160:
+ 768 0660 1E0000EA 		b	.L3
  769              	.LVL161:
- 204:Top_Cross.c   ****                     rs_dreh(-1, 90);
- 770              		.loc 1 204 0
- 771 0660 0000E0E3 		mvn	r0, #0
- 772 0664 5A10A0E3 		mov	r1, #90
- 773 0668 FEFFFFEB 		bl	bs_dreh
- 774              	.LVL162:
- 205:Top_Cross.c   ****                 }
- 775              		.loc 1 205 0
- 776 066c 0000E0E3 		mvn	r0, #0
+ 770              	.L32:
+ 206:Top_Cross.c   ****                     ds_dreh(1, 90);
+ 771              		.loc 1 206 0
+ 772 0664 010056E3 		cmp	r6, #1
+ 773 0668 090000CA 		bgt	.L47
+ 207:Top_Cross.c   ****                     fs_dreh(-1, 90);
+ 774              		.loc 1 207 0
+ 775 066c 0100A0E3 		mov	r0, #1
+ 776              	.LVL162:
  777 0670 5A10A0E3 		mov	r1, #90
- 778 0674 FEFFFFEB 		bl	rs_dreh
+ 778 0674 FEFFFFEB 		bl	ds_dreh
  779              	.LVL163:
- 780 0678 1E0000EA 		b	.L3
- 781              	.LVL164:
- 782              	.L32:
- 209:Top_Cross.c   ****                     ds_dreh(1, 90);
- 783              		.loc 1 209 0
- 784 067c 010056E3 		cmp	r6, #1
- 785 0680 090000CA 		bgt	.L47
- 210:Top_Cross.c   ****                     fs_dreh(-1, 90);
- 786              		.loc 1 210 0
- 787 0684 0100A0E3 		mov	r0, #1
- 788              	.LVL165:
- 789 0688 5A10A0E3 		mov	r1, #90
- 790 068c FEFFFFEB 		bl	ds_dreh
+ 208:Top_Cross.c   ****                     fs_dreh(1, 90);
+ 780              		.loc 1 208 0
+ 781 0678 0000E0E3 		mvn	r0, #0
+ 782 067c 5A10A0E3 		mov	r1, #90
+ 783 0680 FEFFFFEB 		bl	fs_dreh
+ 784              	.LVL164:
+ 209:Top_Cross.c   ****                 }else{
+ 785              		.loc 1 209 0
+ 786 0684 0100A0E3 		mov	r0, #1
+ 787 0688 5A10A0E3 		mov	r1, #90
+ 788 068c FEFFFFEB 		bl	fs_dreh
+ 789              	.LVL165:
+ 790 0690 120000EA 		b	.L3
  791              	.LVL166:
- 211:Top_Cross.c   ****                     fs_dreh(1, 90);
- 792              		.loc 1 211 0
- 793 0690 0000E0E3 		mvn	r0, #0
- 794 0694 5A10A0E3 		mov	r1, #90
- 795 0698 FEFFFFEB 		bl	fs_dreh
- 796              	.LVL167:
- 212:Top_Cross.c   ****                 }else{
- 797              		.loc 1 212 0
- 798 069c 0100A0E3 		mov	r0, #1
- 799 06a0 5A10A0E3 		mov	r1, #90
- 800 06a4 FEFFFFEB 		bl	fs_dreh
- 801              	.LVL168:
- 802 06a8 120000EA 		b	.L3
+ 792              	.L47:
+ 211:Top_Cross.c   ****                     fs_dreh(-1, 90);
+ 793              		.loc 1 211 0
+ 794 0694 0100A0E3 		mov	r0, #1
+ 795              	.LVL167:
+ 796 0698 5A10A0E3 		mov	r1, #90
+ 797 069c FEFFFFEB 		bl	ds_dreh
+ 798              	.LVL168:
+ 212:Top_Cross.c   ****                     fs_dreh(1, 90);
+ 799              		.loc 1 212 0
+ 800 06a0 0000E0E3 		mvn	r0, #0
+ 801 06a4 5A10A0E3 		mov	r1, #90
+ 802 06a8 FEFFFFEB 		bl	fs_dreh
  803              	.LVL169:
- 804              	.L47:
- 214:Top_Cross.c   ****                     fs_dreh(-1, 90);
- 805              		.loc 1 214 0
- 806 06ac 0100A0E3 		mov	r0, #1
- 807              	.LVL170:
- 808 06b0 5A10A0E3 		mov	r1, #90
- 809 06b4 FEFFFFEB 		bl	ds_dreh
- 810              	.LVL171:
- 215:Top_Cross.c   ****                     fs_dreh(1, 90);
- 811              		.loc 1 215 0
- 812 06b8 0000E0E3 		mvn	r0, #0
- 813 06bc 5A10A0E3 		mov	r1, #90
- 814 06c0 FEFFFFEB 		bl	fs_dreh
+ 213:Top_Cross.c   ****                     rs_dreh(1, 90);
+ 804              		.loc 1 213 0
+ 805 06ac 0100A0E3 		mov	r0, #1
+ 806 06b0 5A10A0E3 		mov	r1, #90
+ 807 06b4 FEFFFFEB 		bl	fs_dreh
+ 808              	.LVL170:
+ 214:Top_Cross.c   ****                 }
+ 809              		.loc 1 214 0
+ 810 06b8 0100A0E3 		mov	r0, #1
+ 811 06bc 5A10A0E3 		mov	r1, #90
+ 812 06c0 FEFFFFEB 		bl	rs_dreh
+ 813              	.LVL171:
+ 814 06c4 050000EA 		b	.L3
  815              	.LVL172:
- 216:Top_Cross.c   ****                     rs_dreh(1, 90);
- 816              		.loc 1 216 0
- 817 06c4 0100A0E3 		mov	r0, #1
- 818 06c8 5A10A0E3 		mov	r1, #90
- 819 06cc FEFFFFEB 		bl	fs_dreh
- 820              	.LVL173:
- 217:Top_Cross.c   ****                 }
- 821              		.loc 1 217 0
- 822 06d0 0100A0E3 		mov	r0, #1
- 823 06d4 5A10A0E3 		mov	r1, #90
- 824 06d8 FEFFFFEB 		bl	rs_dreh
- 825              	.LVL174:
- 826 06dc 050000EA 		b	.L3
+ 816              	.L30:
+ 219:Top_Cross.c   ****                 rs_dreh(1, 180);
+ 817              		.loc 1 219 0
+ 818 06c8 0100A0E3 		mov	r0, #1
+ 819              	.LVL173:
+ 820 06cc B410A0E3 		mov	r1, #180
+ 821 06d0 FEFFFFEB 		bl	ds_dreh
+ 822              	.LVL174:
+ 220:Top_Cross.c   ****                 
+ 823              		.loc 1 220 0
+ 824 06d4 0100A0E3 		mov	r0, #1
+ 825 06d8 B410A0E3 		mov	r1, #180
+ 826 06dc FEFFFFEB 		bl	rs_dreh
  827              	.LVL175:
- 828              	.L30:
- 222:Top_Cross.c   ****                 rs_dreh(1, 180);
- 829              		.loc 1 222 0
- 830 06e0 0100A0E3 		mov	r0, #1
- 831              	.LVL176:
- 832 06e4 B410A0E3 		mov	r1, #180
- 833 06e8 FEFFFFEB 		bl	ds_dreh
- 834              	.LVL177:
- 223:Top_Cross.c   ****                 
- 835              		.loc 1 223 0
- 836 06ec 0100A0E3 		mov	r0, #1
- 837 06f0 B410A0E3 		mov	r1, #180
- 838 06f4 FEFFFFEB 		bl	rs_dreh
- 839              	.LVL178:
- 840              	.L3:
- 841              		.loc 1 229 0
- 842 06f8 0900A0E1 		mov	r0, r9
- 843 06fc 0410A0E1 		mov	r1, r4
- 844 0700 FEFFFFEB 		bl	printf
- 845              	.LVL179:
+ 828              	.L3:
+ 829              		.loc 1 226 0
+ 830 06e0 0900A0E1 		mov	r0, r9
+ 831 06e4 0410A0E1 		mov	r1, r4
+ 832 06e8 FEFFFFEB 		bl	printf
+ 833              	.LVL176:
   22:Top_Cross.c   ****     {
- 846              		.loc 1 22 0
- 847 0704 030055E3 		cmp	r5, #3
- 848 0708 4AFEFFDA 		ble	.L48
- 230:Top_Cross.c   ****     }
- 231:Top_Cross.c   ****     change_topface(0);
- 849              		.loc 1 231 0
- 850 070c 0000A0E3 		mov	r0, #0
- 851 0710 FEFFFFEB 		bl	change_topface
- 852              	.LVL180:
- 232:Top_Cross.c   ****     change_rightface(5);
- 853              		.loc 1 232 0
- 854 0714 0500A0E3 		mov	r0, #5
- 855 0718 FEFFFFEB 		bl	change_rightface
- 856              	.LVL181:
- 233:Top_Cross.c   ****     int Getpos_k1=0;
- 234:Top_Cross.c   ****     Getpos_k1=Kantenstein_suchen(0, 5);
+ 834              		.loc 1 22 0
+ 835 06ec 030055E3 		cmp	r5, #3
+ 836 06f0 50FEFFDA 		ble	.L48
+ 227:Top_Cross.c   ****     }
+ 228:Top_Cross.c   ****     change_topface(0);
+ 837              		.loc 1 228 0
+ 838 06f4 0000A0E3 		mov	r0, #0
+ 839 06f8 FEFFFFEB 		bl	change_topface
+ 840              	.LVL177:
+ 229:Top_Cross.c   ****     change_rightface(5);
+ 841              		.loc 1 229 0
+ 842 06fc 0500A0E3 		mov	r0, #5
+ 843 0700 FEFFFFEB 		bl	change_rightface
+ 844              	.LVL178:
+ 230:Top_Cross.c   ****     int Getpos_k1=0;
+ 231:Top_Cross.c   ****     Getpos_k1=Kantenstein_suchen(0, 5);
+ 845              		.loc 1 231 0
+ 846 0704 0000A0E3 		mov	r0, #0
+ 847 0708 0510A0E3 		mov	r1, #5
+ 848 070c FEFFFFEB 		bl	Kantenstein_suchen
+ 849              	.LVL179:
+ 232:Top_Cross.c   ****     switch (Getpos_k1) {
+ 850              		.loc 1 232 0
+ 851 0710 670050E3 		cmp	r0, #103
+ 852 0714 0700000A 		beq	.L50
+ 853 0718 680050E3 		cmp	r0, #104
+ 854 071c 0900000A 		beq	.L51
+ 855 0720 650050E3 		cmp	r0, #101
+ 856 0724 0F00001A 		bne	.L53
+ 233:Top_Cross.c   ****         case 101:
+ 234:Top_Cross.c   ****             us_dreh(-1, 90);
  857              		.loc 1 234 0
- 858 071c 0000A0E3 		mov	r0, #0
- 859 0720 0510A0E3 		mov	r1, #5
- 860 0724 FEFFFFEB 		bl	Kantenstein_suchen
- 861              	.LVL182:
- 235:Top_Cross.c   ****     switch (Getpos_k1) {
- 862              		.loc 1 235 0
- 863 0728 670050E3 		cmp	r0, #103
- 864 072c 0700000A 		beq	.L50
- 865 0730 680050E3 		cmp	r0, #104
- 866 0734 0900000A 		beq	.L51
- 867 0738 650050E3 		cmp	r0, #101
- 868 073c 0F00001A 		bne	.L53
- 236:Top_Cross.c   ****         case 101:
- 237:Top_Cross.c   ****             us_dreh(-1, 90);
- 869              		.loc 1 237 0
- 870 0740 0000E0E3 		mvn	r0, #0
- 871              	.LVL183:
- 872 0744 5A10A0E3 		mov	r1, #90
- 873 0748 FEFFFFEB 		bl	us_dreh
- 874              	.LVL184:
+ 858 0728 0000E0E3 		mvn	r0, #0
+ 859              	.LVL180:
+ 860 072c 5A10A0E3 		mov	r1, #90
+ 861 0730 FEFFFFEB 		bl	us_dreh
+ 862              	.LVL181:
+ 235:Top_Cross.c   ****             break;
+ 863              		.loc 1 235 0
+ 864 0734 0B0000EA 		b	.L53
+ 865              	.LVL182:
+ 866              	.L50:
+ 236:Top_Cross.c   ****         case 103:
+ 237:Top_Cross.c   ****             us_dreh(1, 90);
+ 867              		.loc 1 237 0
+ 868 0738 0100A0E3 		mov	r0, #1
+ 869              	.LVL183:
+ 870 073c 5A10A0E3 		mov	r1, #90
+ 871 0740 FEFFFFEB 		bl	us_dreh
+ 872              	.LVL184:
  238:Top_Cross.c   ****             break;
- 875              		.loc 1 238 0
- 876 074c 0B0000EA 		b	.L53
- 877              	.LVL185:
- 878              	.L50:
- 239:Top_Cross.c   ****         case 103:
- 240:Top_Cross.c   ****             us_dreh(1, 90);
- 879              		.loc 1 240 0
- 880 0750 0100A0E3 		mov	r0, #1
- 881              	.LVL186:
- 882 0754 5A10A0E3 		mov	r1, #90
- 883 0758 FEFFFFEB 		bl	us_dreh
- 884              	.LVL187:
+ 873              		.loc 1 238 0
+ 874 0744 070000EA 		b	.L53
+ 875              	.LVL185:
+ 876              	.L51:
+ 239:Top_Cross.c   ****         case 104:
+ 240:Top_Cross.c   ****             us_dreh(1, 180);
+ 877              		.loc 1 240 0
+ 878 0748 0100A0E3 		mov	r0, #1
+ 879              	.LVL186:
+ 880 074c B410A0E3 		mov	r1, #180
+ 881 0750 FEFFFFEB 		bl	us_dreh
+ 882              	.LVL187:
+ 883 0754 030000EA 		b	.L53
+ 884              	.LVL188:
+ 885              	.L35:
+ 226:Top_Cross.c   ****     }
+ 886              		.loc 1 226 0
+ 887 0758 0900A0E1 		mov	r0, r9
+ 888 075c 0410A0E1 		mov	r1, r4
+ 889 0760 FEFFFFEB 		bl	printf
+ 890              	.LVL189:
+ 891 0764 33FEFFEA 		b	.L48
+ 892              	.L53:
  241:Top_Cross.c   ****             break;
- 885              		.loc 1 241 0
- 886 075c 070000EA 		b	.L53
- 887              	.LVL188:
- 888              	.L51:
- 242:Top_Cross.c   ****         case 104:
- 243:Top_Cross.c   ****             us_dreh(1, 180);
- 889              		.loc 1 243 0
- 890 0760 0100A0E3 		mov	r0, #1
- 891              	.LVL189:
- 892 0764 B410A0E3 		mov	r1, #180
- 893 0768 FEFFFFEB 		bl	us_dreh
- 894              	.LVL190:
- 895 076c 030000EA 		b	.L53
- 896              	.LVL191:
- 897              	.L35:
- 229:Top_Cross.c   ****     }
- 898              		.loc 1 229 0
- 899 0770 0900A0E1 		mov	r0, r9
- 900 0774 0410A0E1 		mov	r1, r4
- 901 0778 FEFFFFEB 		bl	printf
- 902              	.LVL192:
- 903 077c 2DFEFFEA 		b	.L48
- 904              	.L53:
- 244:Top_Cross.c   ****             break;
- 245:Top_Cross.c   ****         case 105:
+ 242:Top_Cross.c   ****         case 105:
+ 243:Top_Cross.c   ****             break;
+ 244:Top_Cross.c   ****             
+ 245:Top_Cross.c   ****         default:
  246:Top_Cross.c   ****             break;
- 247:Top_Cross.c   ****             
- 248:Top_Cross.c   ****         default:
- 249:Top_Cross.c   ****             break;
- 250:Top_Cross.c   ****     }
- 251:Top_Cross.c   ****     return 0;
- 252:Top_Cross.c   **** }
- 905              		.loc 1 252 0
- 906 0780 0000A0E3 		mov	r0, #0
- 907 0784 14D08DE2 		add	sp, sp, #20
- 908              		@ sp needed
- 909 0788 F08FBDE8 		ldmfd	sp!, {r4, r5, r6, r7, r8, r9, r10, fp, pc}
- 910              	.LVL193:
- 911              	.L55:
- 912              		.align	2
- 913              	.L54:
- 914 078c 00000000 		.word	.LANCHOR0
- 915 0790 00000000 		.word	.LC1
- 916 0794 43010000 		.word	323
- 917 0798 56010000 		.word	342
- 918 079c 41010000 		.word	321
- 919 07a0 45010000 		.word	325
- 920              		.cfi_endproc
- 921              	.LFE11:
- 922              		.fnend
- 924              		.section	.rodata
- 925              		.align	2
- 926              	.LANCHOR0 = . + 0
- 927              	.LC0:
- 928 0000 01000000 		.word	1
- 929 0004 04000000 		.word	4
- 930 0008 03000000 		.word	3
- 931 000c 05000000 		.word	5
- 932              		.section	.rodata.str1.4,"aMS",%progbits,1
- 933              		.align	2
- 934              	.LC1:
- 935 0000 47657470 		.ascii	"Getpos_k=%d\000"
- 935      6F735F6B 
- 935      3D256400 
- 936              		.text
- 937              	.Letext0:
- 938              		.file 2 "/usr/local/carlson-minot/crosscompilers/lib/gcc/arm-none-linux-gnueabi/4.8.3/include/stdd
- 939              		.file 3 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
- 940              		.file 4 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
- 941              		.file 5 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
- 942              		.file 6 "Side_dreh.h"
- 943              		.file 7 "Color_search.h"
- 944              		.file 8 "print_mode.h"
+ 247:Top_Cross.c   ****     }
+ 248:Top_Cross.c   ****     return 0;
+ 249:Top_Cross.c   **** }
+ 893              		.loc 1 249 0
+ 894 0768 0000A0E3 		mov	r0, #0
+ 895 076c 14D08DE2 		add	sp, sp, #20
+ 896              		@ sp needed
+ 897 0770 F08FBDE8 		ldmfd	sp!, {r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 898              	.LVL190:
+ 899              	.L55:
+ 900              		.align	2
+ 901              	.L54:
+ 902 0774 00000000 		.word	.LANCHOR0
+ 903 0778 00000000 		.word	.LC1
+ 904 077c 43010000 		.word	323
+ 905 0780 56010000 		.word	342
+ 906 0784 41010000 		.word	321
+ 907 0788 45010000 		.word	325
+ 908              		.cfi_endproc
+ 909              	.LFE11:
+ 910              		.fnend
+ 912              		.section	.rodata
+ 913              		.align	2
+ 914              	.LANCHOR0 = . + 0
+ 915              	.LC0:
+ 916 0000 01000000 		.word	1
+ 917 0004 04000000 		.word	4
+ 918 0008 03000000 		.word	3
+ 919 000c 05000000 		.word	5
+ 920              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 921              		.align	2
+ 922              	.LC1:
+ 923 0000 47657470 		.ascii	"Getpos_k=%d\000"
+ 923      6F735F6B 
+ 923      3D256400 
+ 924              		.text
+ 925              	.Letext0:
+ 926              		.file 2 "/usr/local/carlson-minot/crosscompilers/lib/gcc/arm-none-linux-gnueabi/4.8.3/include/stdd
+ 927              		.file 3 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
+ 928              		.file 4 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
+ 929              		.file 5 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
+ 930              		.file 6 "Side_dreh.h"
+ 931              		.file 7 "Color_search.h"
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 Top_Cross.c
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccEjHGpD.s:16     .text:0000000000000000 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccEjHGpD.s:19     .text:0000000000000000 Top_Cross
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccEjHGpD.s:914    .text:000000000000078c $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYv00BR.s:16     .text:0000000000000000 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYv00BR.s:19     .text:0000000000000000 Top_Cross
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYv00BR.s:902    .text:0000000000000774 $d
                        .ARM.exidx:0000000000000000 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccEjHGpD.s:925    .rodata:0000000000000000 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccEjHGpD.s:933    .rodata.str1.4:0000000000000000 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYv00BR.s:913    .rodata:0000000000000000 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYv00BR.s:921    .rodata.str1.4:0000000000000000 $d
                      .debug_frame:0000000000000010 $d
 
 UNDEFINED SYMBOLS
@@ -1340,7 +1321,6 @@ Kantenstein_suchen
 us_dreh
 bs_dreh
 ls_dreh
-wuerfel_print
 rs_dreh
 fs_dreh
 ds_dreh

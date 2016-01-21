@@ -46,7 +46,7 @@
   32              		.cfi_offset 4, -8
   33              		.cfi_offset 5, -4
   34              	.LVL1:
-  16:Color_search.c ****     int kantPos=0; //kantPos=100*Schicht+10*ErsteCentrale+zweiteCentrale
+  16:Color_search.c ****     int kantPos=0; //kantPos=100*Schicht+10*Richtung erster Seite+Richtung zweiter Seite
   17:Color_search.c ****     int c1=0,c2=0;
   18:Color_search.c ****     
   19:Color_search.c ****     //Erste_schicht
@@ -63,7 +63,7 @@
   43 0014 01005C01 		cmpeq	ip, r1
   44 0018 0030A013 		movne	r3, #0
   45 001c 0130A003 		moveq	r3, #1
-  16:Color_search.c ****     int kantPos=0; //kantPos=100*Schicht+10*ErsteCentrale+zweiteCentrale
+  16:Color_search.c ****     int kantPos=0; //kantPos=100*Schicht+10*Richtung erster Seite+Richtung zweiter Seite
   46              		.loc 1 16 0
   47 0020 000053E3 		cmp	r3, #0
   48 0024 6730A013 		movne	r3, #103
@@ -478,7 +478,7 @@
  401              		.cfi_offset 4, -8
  402              		.cfi_offset 5, -4
  403              	.LVL80:
-  81:Color_search.c ****     int eckPos=0; //EckPos= 1000*Schicht+100*ErsteCenterale+10*zweiteCenterale+dritteCentrale
+  81:Color_search.c ****     int eckPos=0; //EckPos= 1000*Schicht+100*Richtung erster Seite+10*Richtung zweiter Seite+Richtu
   82:Color_search.c ****     int Color_eck=100*Color1+10*Color2+Color3;
  404              		.loc 1 82 0
  405 033c 6450A0E3 		mov	r5, #100
@@ -500,7 +500,7 @@
  418 0364 943525E0 		mla	r5, r4, r5, r3
  419 0368 0C5085E0 		add	r5, r5, ip
  420 036c 021081E0 		add	r1, r1, r2
-  81:Color_search.c ****     int eckPos=0; //EckPos= 1000*Schicht+100*ErsteCenterale+10*zweiteCenterale+dritteCentrale
+  81:Color_search.c ****     int eckPos=0; //EckPos= 1000*Schicht+100*Richtung erster Seite+10*Richtung zweiter Seite+Richtu
  421              		.loc 1 81 0
  422 0370 54339FE5 		ldr	r3, .L109+4
  423 0374 010055E1 		cmp	r5, r1
@@ -882,16 +882,16 @@
  741              		.file 6 "main.h"
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 Color_search.c
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccku1SPO.s:16     .text:0000000000000000 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccku1SPO.s:19     .text:0000000000000000 Kantenstein_suchen
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccku1SPO.s:335    .text:00000000000002f4 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccTuSR9w.s:16     .text:0000000000000000 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccTuSR9w.s:19     .text:0000000000000000 Kantenstein_suchen
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccTuSR9w.s:335    .text:00000000000002f4 $d
                        .ARM.exidx:0000000000000000 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccku1SPO.s:343    .text:0000000000000304 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccku1SPO.s:346    .text:0000000000000304 Mittelstein_suchen
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccku1SPO.s:381    .text:0000000000000334 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccku1SPO.s:386    .text:0000000000000338 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccku1SPO.s:389    .text:0000000000000338 Eckenstein_suchen
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccku1SPO.s:710    .text:00000000000006c8 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccTuSR9w.s:343    .text:0000000000000304 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccTuSR9w.s:346    .text:0000000000000304 Mittelstein_suchen
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccTuSR9w.s:381    .text:0000000000000334 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccTuSR9w.s:386    .text:0000000000000338 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccTuSR9w.s:389    .text:0000000000000338 Eckenstein_suchen
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccTuSR9w.s:710    .text:00000000000006c8 $d
                      .debug_frame:0000000000000010 $d
 
 UNDEFINED SYMBOLS

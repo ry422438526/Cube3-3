@@ -1115,32 +1115,32 @@
  874              		.file 13 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/u
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 Farbe_sen.c
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccrxVsL7.s:16     .text:0000000000000000 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccrxVsL7.s:19     .text:0000000000000000 ColSen_init
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccrxVsL7.s:106    .text:00000000000000bc $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccSv9laQ.s:16     .text:0000000000000000 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccSv9laQ.s:19     .text:0000000000000000 ColSen_init
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccSv9laQ.s:106    .text:00000000000000bc $d
                             *COM*:0000000000000004 file
                             *COM*:0000000000000004 pColorSensor
                             *COM*:000000000000000c DevCon
                        .ARM.exidx:0000000000000000 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccrxVsL7.s:121    .text:00000000000000e8 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccrxVsL7.s:124    .text:00000000000000e8 ColSen_close
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccrxVsL7.s:151    .text:0000000000000108 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccSv9laQ.s:121    .text:00000000000000e8 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccSv9laQ.s:124    .text:00000000000000e8 ColSen_close
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccSv9laQ.s:151    .text:0000000000000108 $d
                        .ARM.extab:0000000000000000 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccrxVsL7.s:168    .text:0000000000000110 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccrxVsL7.s:171    .text:0000000000000110 Color_col
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccrxVsL7.s:578    .text:0000000000000558 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccrxVsL7.s:600    .text:0000000000000598 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccrxVsL7.s:603    .text:0000000000000598 ColSen_getData
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccrxVsL7.s:700    .text:0000000000000660 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccrxVsL7.s:708    .text:0000000000000678 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccrxVsL7.s:773    .text:00000000000006f4 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccrxVsL7.s:802    .rodata:0000000000000000 MAX_SAMPLES
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccrxVsL7.s:806    .rodata:0000000000000004 COLOR_SENSOR_TYPE
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccrxVsL7.s:810    .rodata:0000000000000005 RGB_RAW
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccrxVsL7.s:859    .bss:0000000000000000 PORT
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccrxVsL7.s:799    .rodata:0000000000000000 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccrxVsL7.s:813    .rodata.str1.4:0000000000000000 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccrxVsL7.s:855    .bss:0000000000000000 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccSv9laQ.s:168    .text:0000000000000110 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccSv9laQ.s:171    .text:0000000000000110 Color_col
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccSv9laQ.s:578    .text:0000000000000558 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccSv9laQ.s:600    .text:0000000000000598 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccSv9laQ.s:603    .text:0000000000000598 ColSen_getData
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccSv9laQ.s:700    .text:0000000000000660 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccSv9laQ.s:708    .text:0000000000000678 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccSv9laQ.s:773    .text:00000000000006f4 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccSv9laQ.s:802    .rodata:0000000000000000 MAX_SAMPLES
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccSv9laQ.s:806    .rodata:0000000000000004 COLOR_SENSOR_TYPE
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccSv9laQ.s:810    .rodata:0000000000000005 RGB_RAW
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccSv9laQ.s:859    .bss:0000000000000000 PORT
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccSv9laQ.s:799    .rodata:0000000000000000 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccSv9laQ.s:813    .rodata.str1.4:0000000000000000 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccSv9laQ.s:855    .bss:0000000000000000 $d
                      .debug_frame:0000000000000010 $d
 
 UNDEFINED SYMBOLS

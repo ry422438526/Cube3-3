@@ -892,781 +892,720 @@
  684 058c FEFFFFEB 		bl	klappen
  685              	.LVL74:
  189:Side_dreh.c   **** #ifdef __linux__
- 190:Side_dreh.c   ****     sleep(1);
- 686              		.loc 1 190 0
- 687 0590 0100A0E3 		mov	r0, #1
- 688 0594 FEFFFFEB 		bl	sleep
- 689              	.LVL75:
- 191:Side_dreh.c   **** #endif
- 192:Side_dreh.c   ****     klappen();
- 690              		.loc 1 192 0
- 691 0598 FEFFFFEB 		bl	klappen
- 692              	.LVL76:
- 193:Side_dreh.c   **** #ifdef __linux__
- 194:Side_dreh.c   ****     sleep(1);
- 693              		.loc 1 194 0
- 694 059c 0100A0E3 		mov	r0, #1
- 695 05a0 FEFFFFEB 		bl	sleep
- 696              	.LVL77:
- 195:Side_dreh.c   **** #endif
- 196:Side_dreh.c   ****     drehen_unter(dir, dreh_Angel_u);
- 697              		.loc 1 196 0
- 698 05a4 0500A0E1 		mov	r0, r5
- 699 05a8 0410A0E1 		mov	r1, r4
- 700 05ac FEFFFFEB 		bl	drehen_unter
- 701              	.LVL78:
- 197:Side_dreh.c   ****     Count++;
- 702              		.loc 1 197 0
- 703 05b0 1C309FE5 		ldr	r3, .L53
- 704 05b4 001093E5 		ldr	r1, [r3]
- 705 05b8 011081E2 		add	r1, r1, #1
- 706 05bc 001083E5 		str	r1, [r3]
- 198:Side_dreh.c   ****     printf("Count=%d",Count);
- 707              		.loc 1 198 0
- 708 05c0 10009FE5 		ldr	r0, .L53+4
- 709 05c4 FEFFFFEB 		bl	printf
- 710              	.LVL79:
- 199:Side_dreh.c   ****     wuerfel_print(1);
- 711              		.loc 1 199 0
- 712 05c8 0100A0E3 		mov	r0, #1
- 713 05cc FEFFFFEB 		bl	wuerfel_print
- 714              	.LVL80:
- 715 05d0 3880BDE8 		ldmfd	sp!, {r3, r4, r5, pc}
- 716              	.L54:
+ 190:Side_dreh.c   **** #endif
+ 191:Side_dreh.c   ****     klappen();
+ 686              		.loc 1 191 0
+ 687 0590 FEFFFFEB 		bl	klappen
+ 688              	.LVL75:
+ 192:Side_dreh.c   **** #ifdef __linux__
+ 193:Side_dreh.c   **** #endif
+ 194:Side_dreh.c   ****     drehen_unter(dir, dreh_Angel_u);
+ 689              		.loc 1 194 0
+ 690 0594 0500A0E1 		mov	r0, r5
+ 691 0598 0410A0E1 		mov	r1, r4
+ 692 059c FEFFFFEB 		bl	drehen_unter
+ 693              	.LVL76:
+ 195:Side_dreh.c   ****     Count++;
+ 694              		.loc 1 195 0
+ 695 05a0 1C309FE5 		ldr	r3, .L53
+ 696 05a4 001093E5 		ldr	r1, [r3]
+ 697 05a8 011081E2 		add	r1, r1, #1
+ 698 05ac 001083E5 		str	r1, [r3]
+ 196:Side_dreh.c   ****     printf("Count=%d",Count);
+ 699              		.loc 1 196 0
+ 700 05b0 10009FE5 		ldr	r0, .L53+4
+ 701 05b4 FEFFFFEB 		bl	printf
+ 702              	.LVL77:
+ 197:Side_dreh.c   ****     wuerfel_print(1);
+ 703              		.loc 1 197 0
+ 704 05b8 0100A0E3 		mov	r0, #1
+ 705 05bc FEFFFFEB 		bl	wuerfel_print
+ 706              	.LVL78:
+ 707 05c0 3880BDE8 		ldmfd	sp!, {r3, r4, r5, pc}
+ 708              	.L54:
+ 709              		.align	2
+ 710              	.L53:
+ 711 05c4 00000000 		.word	.LANCHOR0
+ 712 05c8 00000000 		.word	.LC0
+ 713              		.cfi_endproc
+ 714              	.LFE14:
+ 715              		.fnend
  717              		.align	2
- 718              	.L53:
- 719 05d4 00000000 		.word	.LANCHOR0
- 720 05d8 00000000 		.word	.LC0
- 721              		.cfi_endproc
- 722              	.LFE14:
- 723              		.fnend
- 725              		.align	2
- 726              		.global	ds_dreh
- 728              	ds_dreh:
- 729              		.fnstart
- 730              	.LFB15:
- 200:Side_dreh.c   **** }
- 201:Side_dreh.c   **** 
- 202:Side_dreh.c   **** void ds_dreh(int dir,int dreh_Angel_d)                        //Untern_Schicht
- 203:Side_dreh.c   **** {
- 731              		.loc 1 203 0
- 732              		.cfi_startproc
- 733              		@ args = 0, pretend = 0, frame = 0
- 734              		@ frame_needed = 0, uses_anonymous_args = 0
- 735              	.LVL81:
- 736 05dc 08402DE9 		stmfd	sp!, {r3, lr}
- 737              		.save {r3, lr}
- 738              		.cfi_def_cfa_offset 8
- 739              		.cfi_offset 3, -8
- 740              		.cfi_offset 14, -4
- 204:Side_dreh.c   ****     drehen_unter(dir, dreh_Angel_d);
- 741              		.loc 1 204 0
- 742 05e0 FEFFFFEB 		bl	drehen_unter
- 743              	.LVL82:
- 205:Side_dreh.c   ****     wuerfel_print(1);
- 744              		.loc 1 205 0
- 745 05e4 0100A0E3 		mov	r0, #1
- 746 05e8 FEFFFFEB 		bl	wuerfel_print
- 747              	.LVL83:
- 206:Side_dreh.c   ****     Count++;
- 748              		.loc 1 206 0
- 749 05ec 14309FE5 		ldr	r3, .L56
- 750 05f0 001093E5 		ldr	r1, [r3]
- 751 05f4 011081E2 		add	r1, r1, #1
- 752 05f8 001083E5 		str	r1, [r3]
- 207:Side_dreh.c   ****     printf("Count=%d",Count);
- 753              		.loc 1 207 0
- 754 05fc 08009FE5 		ldr	r0, .L56+4
- 755 0600 FEFFFFEB 		bl	printf
- 756              	.LVL84:
- 757 0604 0880BDE8 		ldmfd	sp!, {r3, pc}
- 758              	.L57:
+ 718              		.global	ds_dreh
+ 720              	ds_dreh:
+ 721              		.fnstart
+ 722              	.LFB15:
+ 198:Side_dreh.c   **** }
+ 199:Side_dreh.c   **** 
+ 200:Side_dreh.c   **** void ds_dreh(int dir,int dreh_Angel_d)                        //Untern_Schicht
+ 201:Side_dreh.c   **** {
+ 723              		.loc 1 201 0
+ 724              		.cfi_startproc
+ 725              		@ args = 0, pretend = 0, frame = 0
+ 726              		@ frame_needed = 0, uses_anonymous_args = 0
+ 727              	.LVL79:
+ 728 05cc 08402DE9 		stmfd	sp!, {r3, lr}
+ 729              		.save {r3, lr}
+ 730              		.cfi_def_cfa_offset 8
+ 731              		.cfi_offset 3, -8
+ 732              		.cfi_offset 14, -4
+ 202:Side_dreh.c   ****     drehen_unter(dir, dreh_Angel_d);
+ 733              		.loc 1 202 0
+ 734 05d0 FEFFFFEB 		bl	drehen_unter
+ 735              	.LVL80:
+ 203:Side_dreh.c   ****     wuerfel_print(1);
+ 736              		.loc 1 203 0
+ 737 05d4 0100A0E3 		mov	r0, #1
+ 738 05d8 FEFFFFEB 		bl	wuerfel_print
+ 739              	.LVL81:
+ 204:Side_dreh.c   ****     Count++;
+ 740              		.loc 1 204 0
+ 741 05dc 14309FE5 		ldr	r3, .L56
+ 742 05e0 001093E5 		ldr	r1, [r3]
+ 743 05e4 011081E2 		add	r1, r1, #1
+ 744 05e8 001083E5 		str	r1, [r3]
+ 205:Side_dreh.c   ****     printf("Count=%d",Count);
+ 745              		.loc 1 205 0
+ 746 05ec 08009FE5 		ldr	r0, .L56+4
+ 747 05f0 FEFFFFEB 		bl	printf
+ 748              	.LVL82:
+ 749 05f4 0880BDE8 		ldmfd	sp!, {r3, pc}
+ 750              	.L57:
+ 751              		.align	2
+ 752              	.L56:
+ 753 05f8 00000000 		.word	.LANCHOR0
+ 754 05fc 00000000 		.word	.LC0
+ 755              		.cfi_endproc
+ 756              	.LFE15:
+ 757              		.fnend
  759              		.align	2
- 760              	.L56:
- 761 0608 00000000 		.word	.LANCHOR0
- 762 060c 00000000 		.word	.LC0
- 763              		.cfi_endproc
- 764              	.LFE15:
- 765              		.fnend
- 767              		.align	2
- 768              		.global	fs_dreh
- 770              	fs_dreh:
- 771              		.fnstart
- 772              	.LFB16:
- 208:Side_dreh.c   ****     
- 209:Side_dreh.c   **** }
- 210:Side_dreh.c   **** 
- 211:Side_dreh.c   **** void fs_dreh(int dir,int dreh_Angel_f)                         //Vornen_Schicht
- 212:Side_dreh.c   **** {
- 773              		.loc 1 212 0
- 774              		.cfi_startproc
- 775              		@ args = 0, pretend = 0, frame = 0
- 776              		@ frame_needed = 0, uses_anonymous_args = 0
- 777              	.LVL85:
- 778 0610 38402DE9 		stmfd	sp!, {r3, r4, r5, lr}
- 779              		.save {r3, r4, r5, lr}
- 780              		.cfi_def_cfa_offset 16
- 781              		.cfi_offset 3, -16
- 782              		.cfi_offset 4, -12
- 783              		.cfi_offset 5, -8
- 784              		.cfi_offset 14, -4
- 785 0614 0050A0E1 		mov	r5, r0
- 786 0618 0140A0E1 		mov	r4, r1
- 213:Side_dreh.c   **** #ifdef __linux__
- 214:Side_dreh.c   ****     arm_setpos(4);
- 787              		.loc 1 214 0
- 788 061c 0400A0E3 		mov	r0, #4
- 789              	.LVL86:
- 790 0620 FEFFFFEB 		bl	arm_setpos
- 791              	.LVL87:
- 215:Side_dreh.c   ****     sleep(1);
- 792              		.loc 1 215 0
- 793 0624 0100A0E3 		mov	r0, #1
- 794 0628 FEFFFFEB 		bl	sleep
- 795              	.LVL88:
+ 760              		.global	fs_dreh
+ 762              	fs_dreh:
+ 763              		.fnstart
+ 764              	.LFB16:
+ 206:Side_dreh.c   ****     
+ 207:Side_dreh.c   **** }
+ 208:Side_dreh.c   **** 
+ 209:Side_dreh.c   **** void fs_dreh(int dir,int dreh_Angel_f)                         //Vornen_Schicht
+ 210:Side_dreh.c   **** {
+ 765              		.loc 1 210 0
+ 766              		.cfi_startproc
+ 767              		@ args = 0, pretend = 0, frame = 0
+ 768              		@ frame_needed = 0, uses_anonymous_args = 0
+ 769              	.LVL83:
+ 770 0600 38402DE9 		stmfd	sp!, {r3, r4, r5, lr}
+ 771              		.save {r3, r4, r5, lr}
+ 772              		.cfi_def_cfa_offset 16
+ 773              		.cfi_offset 3, -16
+ 774              		.cfi_offset 4, -12
+ 775              		.cfi_offset 5, -8
+ 776              		.cfi_offset 14, -4
+ 777 0604 0050A0E1 		mov	r5, r0
+ 778 0608 0140A0E1 		mov	r4, r1
+ 211:Side_dreh.c   **** #ifdef __linux__
+ 212:Side_dreh.c   ****     arm_setpos(4);
+ 779              		.loc 1 212 0
+ 780 060c 0400A0E3 		mov	r0, #4
+ 781              	.LVL84:
+ 782 0610 FEFFFFEB 		bl	arm_setpos
+ 783              	.LVL85:
+ 213:Side_dreh.c   **** #endif
+ 214:Side_dreh.c   ****     drehen(1);
+ 784              		.loc 1 214 0
+ 785 0614 0100A0E3 		mov	r0, #1
+ 786 0618 FEFFFFEB 		bl	drehen
+ 787              	.LVL86:
+ 215:Side_dreh.c   **** #ifdef __linux__
  216:Side_dreh.c   **** #endif
- 217:Side_dreh.c   ****     drehen(1);
- 796              		.loc 1 217 0
- 797 062c 0100A0E3 		mov	r0, #1
- 798 0630 FEFFFFEB 		bl	drehen
- 799              	.LVL89:
+ 217:Side_dreh.c   ****     klappen();
+ 788              		.loc 1 217 0
+ 789 061c FEFFFFEB 		bl	klappen
+ 790              	.LVL87:
  218:Side_dreh.c   **** #ifdef __linux__
- 219:Side_dreh.c   ****     sleep(1);
- 800              		.loc 1 219 0
- 801 0634 0100A0E3 		mov	r0, #1
- 802 0638 FEFFFFEB 		bl	sleep
- 803              	.LVL90:
- 220:Side_dreh.c   **** #endif
- 221:Side_dreh.c   ****     klappen();
- 804              		.loc 1 221 0
- 805 063c FEFFFFEB 		bl	klappen
- 806              	.LVL91:
- 222:Side_dreh.c   **** #ifdef __linux__
- 223:Side_dreh.c   ****     sleep(1);
- 807              		.loc 1 223 0
- 808 0640 0100A0E3 		mov	r0, #1
- 809 0644 FEFFFFEB 		bl	sleep
- 810              	.LVL92:
- 224:Side_dreh.c   **** #endif
- 225:Side_dreh.c   ****     drehen_unter(dir, dreh_Angel_f);
- 811              		.loc 1 225 0
- 812 0648 0500A0E1 		mov	r0, r5
- 813 064c 0410A0E1 		mov	r1, r4
- 814 0650 FEFFFFEB 		bl	drehen_unter
- 815              	.LVL93:
- 226:Side_dreh.c   ****     Count++;
- 816              		.loc 1 226 0
- 817 0654 1C309FE5 		ldr	r3, .L59
- 818 0658 001093E5 		ldr	r1, [r3]
- 819 065c 011081E2 		add	r1, r1, #1
- 820 0660 001083E5 		str	r1, [r3]
- 227:Side_dreh.c   ****     printf("Count=%d",Count);
- 821              		.loc 1 227 0
- 822 0664 10009FE5 		ldr	r0, .L59+4
- 823 0668 FEFFFFEB 		bl	printf
- 824              	.LVL94:
- 228:Side_dreh.c   ****     wuerfel_print(1);
- 825              		.loc 1 228 0
- 826 066c 0100A0E3 		mov	r0, #1
- 827 0670 FEFFFFEB 		bl	wuerfel_print
- 828              	.LVL95:
- 829 0674 3880BDE8 		ldmfd	sp!, {r3, r4, r5, pc}
- 830              	.L60:
- 831              		.align	2
- 832              	.L59:
- 833 0678 00000000 		.word	.LANCHOR0
- 834 067c 00000000 		.word	.LC0
- 835              		.cfi_endproc
- 836              	.LFE16:
- 837              		.fnend
- 839              		.align	2
- 840              		.global	bs_dreh
- 842              	bs_dreh:
- 843              		.fnstart
- 844              	.LFB17:
- 229:Side_dreh.c   **** }
- 230:Side_dreh.c   **** 
- 231:Side_dreh.c   **** void bs_dreh(int dir,int dreh_Angel_b)                         //Hintern_Schicht
- 232:Side_dreh.c   **** {
- 845              		.loc 1 232 0
- 846              		.cfi_startproc
- 847              		@ args = 0, pretend = 0, frame = 0
- 848              		@ frame_needed = 0, uses_anonymous_args = 0
- 849              	.LVL96:
- 850 0680 38402DE9 		stmfd	sp!, {r3, r4, r5, lr}
- 851              		.save {r3, r4, r5, lr}
- 852              		.cfi_def_cfa_offset 16
- 853              		.cfi_offset 3, -16
- 854              		.cfi_offset 4, -12
- 855              		.cfi_offset 5, -8
- 856              		.cfi_offset 14, -4
- 857 0684 0050A0E1 		mov	r5, r0
- 858 0688 0140A0E1 		mov	r4, r1
- 233:Side_dreh.c   **** #ifdef __linux__
- 234:Side_dreh.c   ****     arm_setpos(4);
- 859              		.loc 1 234 0
- 860 068c 0400A0E3 		mov	r0, #4
- 861              	.LVL97:
- 862 0690 FEFFFFEB 		bl	arm_setpos
- 863              	.LVL98:
- 235:Side_dreh.c   ****     sleep(1);
- 864              		.loc 1 235 0
- 865 0694 0100A0E3 		mov	r0, #1
- 866 0698 FEFFFFEB 		bl	sleep
- 867              	.LVL99:
+ 219:Side_dreh.c   **** #endif
+ 220:Side_dreh.c   ****     drehen_unter(dir, dreh_Angel_f);
+ 791              		.loc 1 220 0
+ 792 0620 0500A0E1 		mov	r0, r5
+ 793 0624 0410A0E1 		mov	r1, r4
+ 794 0628 FEFFFFEB 		bl	drehen_unter
+ 795              	.LVL88:
+ 221:Side_dreh.c   ****     Count++;
+ 796              		.loc 1 221 0
+ 797 062c 1C309FE5 		ldr	r3, .L59
+ 798 0630 001093E5 		ldr	r1, [r3]
+ 799 0634 011081E2 		add	r1, r1, #1
+ 800 0638 001083E5 		str	r1, [r3]
+ 222:Side_dreh.c   ****     printf("Count=%d",Count);
+ 801              		.loc 1 222 0
+ 802 063c 10009FE5 		ldr	r0, .L59+4
+ 803 0640 FEFFFFEB 		bl	printf
+ 804              	.LVL89:
+ 223:Side_dreh.c   ****     wuerfel_print(1);
+ 805              		.loc 1 223 0
+ 806 0644 0100A0E3 		mov	r0, #1
+ 807 0648 FEFFFFEB 		bl	wuerfel_print
+ 808              	.LVL90:
+ 809 064c 3880BDE8 		ldmfd	sp!, {r3, r4, r5, pc}
+ 810              	.L60:
+ 811              		.align	2
+ 812              	.L59:
+ 813 0650 00000000 		.word	.LANCHOR0
+ 814 0654 00000000 		.word	.LC0
+ 815              		.cfi_endproc
+ 816              	.LFE16:
+ 817              		.fnend
+ 819              		.align	2
+ 820              		.global	bs_dreh
+ 822              	bs_dreh:
+ 823              		.fnstart
+ 824              	.LFB17:
+ 224:Side_dreh.c   **** }
+ 225:Side_dreh.c   **** 
+ 226:Side_dreh.c   **** void bs_dreh(int dir,int dreh_Angel_b)                         //Hintern_Schicht
+ 227:Side_dreh.c   **** {
+ 825              		.loc 1 227 0
+ 826              		.cfi_startproc
+ 827              		@ args = 0, pretend = 0, frame = 0
+ 828              		@ frame_needed = 0, uses_anonymous_args = 0
+ 829              	.LVL91:
+ 830 0658 38402DE9 		stmfd	sp!, {r3, r4, r5, lr}
+ 831              		.save {r3, r4, r5, lr}
+ 832              		.cfi_def_cfa_offset 16
+ 833              		.cfi_offset 3, -16
+ 834              		.cfi_offset 4, -12
+ 835              		.cfi_offset 5, -8
+ 836              		.cfi_offset 14, -4
+ 837 065c 0050A0E1 		mov	r5, r0
+ 838 0660 0140A0E1 		mov	r4, r1
+ 228:Side_dreh.c   **** #ifdef __linux__
+ 229:Side_dreh.c   ****     arm_setpos(4);
+ 839              		.loc 1 229 0
+ 840 0664 0400A0E3 		mov	r0, #4
+ 841              	.LVL92:
+ 842 0668 FEFFFFEB 		bl	arm_setpos
+ 843              	.LVL93:
+ 230:Side_dreh.c   **** #endif
+ 231:Side_dreh.c   ****     drehen(-1);
+ 844              		.loc 1 231 0
+ 845 066c 0000E0E3 		mvn	r0, #0
+ 846 0670 FEFFFFEB 		bl	drehen
+ 847              	.LVL94:
+ 232:Side_dreh.c   **** #ifdef __linux__
+ 233:Side_dreh.c   **** #endif
+ 234:Side_dreh.c   ****     klappen();
+ 848              		.loc 1 234 0
+ 849 0674 FEFFFFEB 		bl	klappen
+ 850              	.LVL95:
+ 235:Side_dreh.c   **** #ifdef __linux__
  236:Side_dreh.c   **** #endif
- 237:Side_dreh.c   ****     drehen(-1);
- 868              		.loc 1 237 0
- 869 069c 0000E0E3 		mvn	r0, #0
- 870 06a0 FEFFFFEB 		bl	drehen
- 871              	.LVL100:
- 238:Side_dreh.c   **** #ifdef __linux__
- 239:Side_dreh.c   ****     sleep(1);
- 872              		.loc 1 239 0
- 873 06a4 0100A0E3 		mov	r0, #1
- 874 06a8 FEFFFFEB 		bl	sleep
- 875              	.LVL101:
- 240:Side_dreh.c   **** #endif
- 241:Side_dreh.c   ****     klappen();
- 876              		.loc 1 241 0
- 877 06ac FEFFFFEB 		bl	klappen
- 878              	.LVL102:
- 242:Side_dreh.c   **** #ifdef __linux__
- 243:Side_dreh.c   ****     sleep(1);
- 879              		.loc 1 243 0
- 880 06b0 0100A0E3 		mov	r0, #1
- 881 06b4 FEFFFFEB 		bl	sleep
- 882              	.LVL103:
- 244:Side_dreh.c   **** #endif
- 245:Side_dreh.c   ****     drehen_unter(dir, dreh_Angel_b);
- 883              		.loc 1 245 0
- 884 06b8 0500A0E1 		mov	r0, r5
- 885 06bc 0410A0E1 		mov	r1, r4
- 886 06c0 FEFFFFEB 		bl	drehen_unter
- 887              	.LVL104:
- 246:Side_dreh.c   ****     Count++;
- 888              		.loc 1 246 0
- 889 06c4 1C309FE5 		ldr	r3, .L62
- 890 06c8 001093E5 		ldr	r1, [r3]
- 891 06cc 011081E2 		add	r1, r1, #1
- 892 06d0 001083E5 		str	r1, [r3]
- 247:Side_dreh.c   ****     printf("Count=%d",Count);
- 893              		.loc 1 247 0
- 894 06d4 10009FE5 		ldr	r0, .L62+4
- 895 06d8 FEFFFFEB 		bl	printf
- 896              	.LVL105:
- 248:Side_dreh.c   ****     wuerfel_print(1);
- 897              		.loc 1 248 0
- 898 06dc 0100A0E3 		mov	r0, #1
- 899 06e0 FEFFFFEB 		bl	wuerfel_print
- 900              	.LVL106:
- 901 06e4 3880BDE8 		ldmfd	sp!, {r3, r4, r5, pc}
- 902              	.L63:
- 903              		.align	2
- 904              	.L62:
- 905 06e8 00000000 		.word	.LANCHOR0
- 906 06ec 00000000 		.word	.LC0
- 907              		.cfi_endproc
- 908              	.LFE17:
- 909              		.fnend
- 911              		.align	2
- 912              		.global	ls_dreh
- 914              	ls_dreh:
- 915              		.fnstart
- 916              	.LFB18:
- 249:Side_dreh.c   ****     
- 250:Side_dreh.c   **** }
- 251:Side_dreh.c   **** 
- 252:Side_dreh.c   **** void ls_dreh(int dir,int dreh_Angel_l)                         //linken_Schicht
- 253:Side_dreh.c   **** {
- 917              		.loc 1 253 0
- 918              		.cfi_startproc
- 919              		@ args = 0, pretend = 0, frame = 0
- 920              		@ frame_needed = 0, uses_anonymous_args = 0
- 921              	.LVL107:
- 922 06f0 38402DE9 		stmfd	sp!, {r3, r4, r5, lr}
- 923              		.save {r3, r4, r5, lr}
- 924              		.cfi_def_cfa_offset 16
- 925              		.cfi_offset 3, -16
- 926              		.cfi_offset 4, -12
- 927              		.cfi_offset 5, -8
- 928              		.cfi_offset 14, -4
- 929 06f4 0050A0E1 		mov	r5, r0
- 930 06f8 0140A0E1 		mov	r4, r1
- 254:Side_dreh.c   ****     klappen();
- 931              		.loc 1 254 0
- 932 06fc FEFFFFEB 		bl	klappen
- 933              	.LVL108:
- 255:Side_dreh.c   **** #ifdef __linux__
- 256:Side_dreh.c   ****     sleep(1);
- 934              		.loc 1 256 0
- 935 0700 0100A0E3 		mov	r0, #1
- 936 0704 FEFFFFEB 		bl	sleep
- 937              	.LVL109:
- 257:Side_dreh.c   **** #endif
- 258:Side_dreh.c   ****     drehen_unter(dir, dreh_Angel_l);
- 938              		.loc 1 258 0
- 939 0708 0500A0E1 		mov	r0, r5
- 940 070c 0410A0E1 		mov	r1, r4
- 941 0710 FEFFFFEB 		bl	drehen_unter
- 942              	.LVL110:
- 259:Side_dreh.c   ****     Count++;
- 943              		.loc 1 259 0
- 944 0714 1C309FE5 		ldr	r3, .L65
- 945 0718 001093E5 		ldr	r1, [r3]
- 946 071c 011081E2 		add	r1, r1, #1
- 947 0720 001083E5 		str	r1, [r3]
- 260:Side_dreh.c   ****     printf("Count=%d",Count);
- 948              		.loc 1 260 0
- 949 0724 10009FE5 		ldr	r0, .L65+4
- 950 0728 FEFFFFEB 		bl	printf
- 951              	.LVL111:
- 261:Side_dreh.c   ****     wuerfel_print(1);
- 952              		.loc 1 261 0
- 953 072c 0100A0E3 		mov	r0, #1
- 954 0730 FEFFFFEB 		bl	wuerfel_print
- 955              	.LVL112:
- 956 0734 3880BDE8 		ldmfd	sp!, {r3, r4, r5, pc}
- 957              	.L66:
- 958              		.align	2
- 959              	.L65:
- 960 0738 00000000 		.word	.LANCHOR0
- 961 073c 00000000 		.word	.LC0
- 962              		.cfi_endproc
- 963              	.LFE18:
- 964              		.fnend
- 966              		.align	2
- 967              		.global	rs_dreh
- 969              	rs_dreh:
- 970              		.fnstart
- 971              	.LFB19:
- 262:Side_dreh.c   ****     
- 263:Side_dreh.c   **** }
- 264:Side_dreh.c   **** 
- 265:Side_dreh.c   **** void rs_dreh(int dir,int dreh_Angel_r)                          //rechten_Schicht
- 266:Side_dreh.c   **** {
- 972              		.loc 1 266 0
- 973              		.cfi_startproc
- 974              		@ args = 0, pretend = 0, frame = 0
- 975              		@ frame_needed = 0, uses_anonymous_args = 0
- 976              	.LVL113:
- 977 0740 38402DE9 		stmfd	sp!, {r3, r4, r5, lr}
- 978              		.save {r3, r4, r5, lr}
- 979              		.cfi_def_cfa_offset 16
- 980              		.cfi_offset 3, -16
- 981              		.cfi_offset 4, -12
- 982              		.cfi_offset 5, -8
- 983              		.cfi_offset 14, -4
- 984 0744 0050A0E1 		mov	r5, r0
- 985 0748 0140A0E1 		mov	r4, r1
- 267:Side_dreh.c   ****     klappen();
- 986              		.loc 1 267 0
- 987 074c FEFFFFEB 		bl	klappen
- 988              	.LVL114:
- 268:Side_dreh.c   **** #ifdef __linux__
- 269:Side_dreh.c   ****     sleep(1);
- 989              		.loc 1 269 0
- 990 0750 0100A0E3 		mov	r0, #1
- 991 0754 FEFFFFEB 		bl	sleep
- 992              	.LVL115:
- 270:Side_dreh.c   **** #endif
- 271:Side_dreh.c   ****     klappen();
- 993              		.loc 1 271 0
- 994 0758 FEFFFFEB 		bl	klappen
- 995              	.LVL116:
- 272:Side_dreh.c   **** #ifdef __linux__
- 273:Side_dreh.c   ****     sleep(1);
- 996              		.loc 1 273 0
- 997 075c 0100A0E3 		mov	r0, #1
- 998 0760 FEFFFFEB 		bl	sleep
- 999              	.LVL117:
- 274:Side_dreh.c   **** #endif
- 275:Side_dreh.c   ****     klappen();
- 1000              		.loc 1 275 0
- 1001 0764 FEFFFFEB 		bl	klappen
- 1002              	.LVL118:
- 276:Side_dreh.c   **** #ifdef __linux__
- 277:Side_dreh.c   ****     sleep(1);
- 1003              		.loc 1 277 0
- 1004 0768 0100A0E3 		mov	r0, #1
- 1005 076c FEFFFFEB 		bl	sleep
- 1006              	.LVL119:
- 278:Side_dreh.c   **** #endif
- 279:Side_dreh.c   ****     drehen_unter(dir, dreh_Angel_r);
- 1007              		.loc 1 279 0
- 1008 0770 0500A0E1 		mov	r0, r5
- 1009 0774 0410A0E1 		mov	r1, r4
- 1010 0778 FEFFFFEB 		bl	drehen_unter
- 1011              	.LVL120:
- 280:Side_dreh.c   ****     Count++;
- 1012              		.loc 1 280 0
- 1013 077c 1C309FE5 		ldr	r3, .L68
- 1014 0780 001093E5 		ldr	r1, [r3]
- 1015 0784 011081E2 		add	r1, r1, #1
- 1016 0788 001083E5 		str	r1, [r3]
- 281:Side_dreh.c   ****     printf("Count=%d",Count);
- 1017              		.loc 1 281 0
- 1018 078c 10009FE5 		ldr	r0, .L68+4
- 1019 0790 FEFFFFEB 		bl	printf
- 1020              	.LVL121:
- 282:Side_dreh.c   ****     wuerfel_print(1);
- 1021              		.loc 1 282 0
- 1022 0794 0100A0E3 		mov	r0, #1
- 1023 0798 FEFFFFEB 		bl	wuerfel_print
- 1024              	.LVL122:
- 1025 079c 3880BDE8 		ldmfd	sp!, {r3, r4, r5, pc}
- 1026              	.L69:
- 1027              		.align	2
- 1028              	.L68:
- 1029 07a0 00000000 		.word	.LANCHOR0
- 1030 07a4 00000000 		.word	.LC0
- 1031              		.cfi_endproc
- 1032              	.LFE19:
- 1033              		.fnend
- 1035              		.align	2
- 1036              		.global	change_topface
- 1038              	change_topface:
- 1039              		.fnstart
- 1040              	.LFB20:
- 283:Side_dreh.c   **** }
- 284:Side_dreh.c   **** 
- 285:Side_dreh.c   **** int change_topface(int center_color)
- 286:Side_dreh.c   **** {   int i;
- 1041              		.loc 1 286 0
- 1042              		.cfi_startproc
- 1043              		@ args = 0, pretend = 0, frame = 0
- 1044              		@ frame_needed = 0, uses_anonymous_args = 0
- 1045              	.LVL123:
- 1046 07a8 F0412DE9 		stmfd	sp!, {r4, r5, r6, r7, r8, lr}
- 1047              		.save {r4, r5, r6, r7, r8, lr}
- 1048              		.cfi_def_cfa_offset 24
- 1049              		.cfi_offset 4, -24
- 1050              		.cfi_offset 5, -20
- 1051              		.cfi_offset 6, -16
- 1052              		.cfi_offset 7, -12
- 1053              		.cfi_offset 8, -8
- 1054              		.cfi_offset 14, -4
- 1055 07ac 0060A0E1 		mov	r6, r0
- 1056              	.LVL124:
- 1057 07b0 98509FE5 		ldr	r5, .L82
- 1058              		.loc 1 286 0
- 1059 07b4 0140A0E3 		mov	r4, #1
- 287:Side_dreh.c   ****     for (i=0; i<=5; i++) {
- 288:Side_dreh.c   ****         if (color_data[i][4]==center_color)
- 289:Side_dreh.c   ****         {
- 290:Side_dreh.c   ****             switch (i) {
- 291:Side_dreh.c   ****                 case 0://ober Seite
+ 237:Side_dreh.c   ****     drehen_unter(dir, dreh_Angel_b);
+ 851              		.loc 1 237 0
+ 852 0678 0500A0E1 		mov	r0, r5
+ 853 067c 0410A0E1 		mov	r1, r4
+ 854 0680 FEFFFFEB 		bl	drehen_unter
+ 855              	.LVL96:
+ 238:Side_dreh.c   ****     Count++;
+ 856              		.loc 1 238 0
+ 857 0684 1C309FE5 		ldr	r3, .L62
+ 858 0688 001093E5 		ldr	r1, [r3]
+ 859 068c 011081E2 		add	r1, r1, #1
+ 860 0690 001083E5 		str	r1, [r3]
+ 239:Side_dreh.c   ****     printf("Count=%d",Count);
+ 861              		.loc 1 239 0
+ 862 0694 10009FE5 		ldr	r0, .L62+4
+ 863 0698 FEFFFFEB 		bl	printf
+ 864              	.LVL97:
+ 240:Side_dreh.c   ****     wuerfel_print(1);
+ 865              		.loc 1 240 0
+ 866 069c 0100A0E3 		mov	r0, #1
+ 867 06a0 FEFFFFEB 		bl	wuerfel_print
+ 868              	.LVL98:
+ 869 06a4 3880BDE8 		ldmfd	sp!, {r3, r4, r5, pc}
+ 870              	.L63:
+ 871              		.align	2
+ 872              	.L62:
+ 873 06a8 00000000 		.word	.LANCHOR0
+ 874 06ac 00000000 		.word	.LC0
+ 875              		.cfi_endproc
+ 876              	.LFE17:
+ 877              		.fnend
+ 879              		.align	2
+ 880              		.global	ls_dreh
+ 882              	ls_dreh:
+ 883              		.fnstart
+ 884              	.LFB18:
+ 241:Side_dreh.c   ****     
+ 242:Side_dreh.c   **** }
+ 243:Side_dreh.c   **** 
+ 244:Side_dreh.c   **** void ls_dreh(int dir,int dreh_Angel_l)                         //linken_Schicht
+ 245:Side_dreh.c   **** {
+ 885              		.loc 1 245 0
+ 886              		.cfi_startproc
+ 887              		@ args = 0, pretend = 0, frame = 0
+ 888              		@ frame_needed = 0, uses_anonymous_args = 0
+ 889              	.LVL99:
+ 890 06b0 38402DE9 		stmfd	sp!, {r3, r4, r5, lr}
+ 891              		.save {r3, r4, r5, lr}
+ 892              		.cfi_def_cfa_offset 16
+ 893              		.cfi_offset 3, -16
+ 894              		.cfi_offset 4, -12
+ 895              		.cfi_offset 5, -8
+ 896              		.cfi_offset 14, -4
+ 897 06b4 0050A0E1 		mov	r5, r0
+ 898 06b8 0140A0E1 		mov	r4, r1
+ 246:Side_dreh.c   ****     klappen();
+ 899              		.loc 1 246 0
+ 900 06bc FEFFFFEB 		bl	klappen
+ 901              	.LVL100:
+ 247:Side_dreh.c   **** #ifdef __linux__
+ 248:Side_dreh.c   **** #endif
+ 249:Side_dreh.c   ****     drehen_unter(dir, dreh_Angel_l);
+ 902              		.loc 1 249 0
+ 903 06c0 0500A0E1 		mov	r0, r5
+ 904 06c4 0410A0E1 		mov	r1, r4
+ 905 06c8 FEFFFFEB 		bl	drehen_unter
+ 906              	.LVL101:
+ 250:Side_dreh.c   ****     Count++;
+ 907              		.loc 1 250 0
+ 908 06cc 1C309FE5 		ldr	r3, .L65
+ 909 06d0 001093E5 		ldr	r1, [r3]
+ 910 06d4 011081E2 		add	r1, r1, #1
+ 911 06d8 001083E5 		str	r1, [r3]
+ 251:Side_dreh.c   ****     printf("Count=%d",Count);
+ 912              		.loc 1 251 0
+ 913 06dc 10009FE5 		ldr	r0, .L65+4
+ 914 06e0 FEFFFFEB 		bl	printf
+ 915              	.LVL102:
+ 252:Side_dreh.c   ****     wuerfel_print(1);
+ 916              		.loc 1 252 0
+ 917 06e4 0100A0E3 		mov	r0, #1
+ 918 06e8 FEFFFFEB 		bl	wuerfel_print
+ 919              	.LVL103:
+ 920 06ec 3880BDE8 		ldmfd	sp!, {r3, r4, r5, pc}
+ 921              	.L66:
+ 922              		.align	2
+ 923              	.L65:
+ 924 06f0 00000000 		.word	.LANCHOR0
+ 925 06f4 00000000 		.word	.LC0
+ 926              		.cfi_endproc
+ 927              	.LFE18:
+ 928              		.fnend
+ 930              		.align	2
+ 931              		.global	rs_dreh
+ 933              	rs_dreh:
+ 934              		.fnstart
+ 935              	.LFB19:
+ 253:Side_dreh.c   ****     
+ 254:Side_dreh.c   **** }
+ 255:Side_dreh.c   **** 
+ 256:Side_dreh.c   **** void rs_dreh(int dir,int dreh_Angel_r)                          //rechten_Schicht
+ 257:Side_dreh.c   **** {
+ 936              		.loc 1 257 0
+ 937              		.cfi_startproc
+ 938              		@ args = 0, pretend = 0, frame = 0
+ 939              		@ frame_needed = 0, uses_anonymous_args = 0
+ 940              	.LVL104:
+ 941 06f8 38402DE9 		stmfd	sp!, {r3, r4, r5, lr}
+ 942              		.save {r3, r4, r5, lr}
+ 943              		.cfi_def_cfa_offset 16
+ 944              		.cfi_offset 3, -16
+ 945              		.cfi_offset 4, -12
+ 946              		.cfi_offset 5, -8
+ 947              		.cfi_offset 14, -4
+ 948 06fc 0050A0E1 		mov	r5, r0
+ 949 0700 0140A0E1 		mov	r4, r1
+ 258:Side_dreh.c   ****     klappen();
+ 950              		.loc 1 258 0
+ 951 0704 FEFFFFEB 		bl	klappen
+ 952              	.LVL105:
+ 259:Side_dreh.c   **** #ifdef __linux__
+ 260:Side_dreh.c   **** #endif
+ 261:Side_dreh.c   ****     klappen();
+ 953              		.loc 1 261 0
+ 954 0708 FEFFFFEB 		bl	klappen
+ 955              	.LVL106:
+ 262:Side_dreh.c   **** #ifdef __linux__
+ 263:Side_dreh.c   **** #endif
+ 264:Side_dreh.c   ****     klappen();
+ 956              		.loc 1 264 0
+ 957 070c FEFFFFEB 		bl	klappen
+ 958              	.LVL107:
+ 265:Side_dreh.c   **** #ifdef __linux__
+ 266:Side_dreh.c   **** #endif
+ 267:Side_dreh.c   ****     drehen_unter(dir, dreh_Angel_r);
+ 959              		.loc 1 267 0
+ 960 0710 0500A0E1 		mov	r0, r5
+ 961 0714 0410A0E1 		mov	r1, r4
+ 962 0718 FEFFFFEB 		bl	drehen_unter
+ 963              	.LVL108:
+ 268:Side_dreh.c   ****     Count++;
+ 964              		.loc 1 268 0
+ 965 071c 1C309FE5 		ldr	r3, .L68
+ 966 0720 001093E5 		ldr	r1, [r3]
+ 967 0724 011081E2 		add	r1, r1, #1
+ 968 0728 001083E5 		str	r1, [r3]
+ 269:Side_dreh.c   ****     printf("Count=%d",Count);
+ 969              		.loc 1 269 0
+ 970 072c 10009FE5 		ldr	r0, .L68+4
+ 971 0730 FEFFFFEB 		bl	printf
+ 972              	.LVL109:
+ 270:Side_dreh.c   ****     wuerfel_print(1);
+ 973              		.loc 1 270 0
+ 974 0734 0100A0E3 		mov	r0, #1
+ 975 0738 FEFFFFEB 		bl	wuerfel_print
+ 976              	.LVL110:
+ 977 073c 3880BDE8 		ldmfd	sp!, {r3, r4, r5, pc}
+ 978              	.L69:
+ 979              		.align	2
+ 980              	.L68:
+ 981 0740 00000000 		.word	.LANCHOR0
+ 982 0744 00000000 		.word	.LC0
+ 983              		.cfi_endproc
+ 984              	.LFE19:
+ 985              		.fnend
+ 987              		.align	2
+ 988              		.global	change_topface
+ 990              	change_topface:
+ 991              		.fnstart
+ 992              	.LFB20:
+ 271:Side_dreh.c   **** }
+ 272:Side_dreh.c   **** 
+ 273:Side_dreh.c   **** int change_topface(int center_color)
+ 274:Side_dreh.c   **** {   int i;
+ 993              		.loc 1 274 0
+ 994              		.cfi_startproc
+ 995              		@ args = 0, pretend = 0, frame = 0
+ 996              		@ frame_needed = 0, uses_anonymous_args = 0
+ 997              	.LVL111:
+ 998 0748 F0412DE9 		stmfd	sp!, {r4, r5, r6, r7, r8, lr}
+ 999              		.save {r4, r5, r6, r7, r8, lr}
+ 1000              		.cfi_def_cfa_offset 24
+ 1001              		.cfi_offset 4, -24
+ 1002              		.cfi_offset 5, -20
+ 1003              		.cfi_offset 6, -16
+ 1004              		.cfi_offset 7, -12
+ 1005              		.cfi_offset 8, -8
+ 1006              		.cfi_offset 14, -4
+ 1007 074c 0060A0E1 		mov	r6, r0
+ 1008              	.LVL112:
+ 1009 0750 98509FE5 		ldr	r5, .L82
+ 1010              		.loc 1 274 0
+ 1011 0754 0140A0E3 		mov	r4, #1
+ 275:Side_dreh.c   ****     for (i=0; i<=5; i++) {
+ 276:Side_dreh.c   ****         if (color_data[i][4]==center_color)
+ 277:Side_dreh.c   ****         {
+ 278:Side_dreh.c   ****             switch (i) {
+ 279:Side_dreh.c   ****                 case 0://ober Seite
+ 280:Side_dreh.c   ****                     break;
+ 281:Side_dreh.c   ****                 case 1://vorne Seite
+ 282:Side_dreh.c   ****                     drehen(-1);
+ 283:Side_dreh.c   ****                     klappen();
+ 284:Side_dreh.c   ****                     break;
+ 285:Side_dreh.c   ****                 case 2://untere Seite
+ 286:Side_dreh.c   ****                     klappen();
+ 287:Side_dreh.c   ****                     klappen();
+ 288:Side_dreh.c   ****                     break;
+ 289:Side_dreh.c   ****                 case 3://hintere Seite
+ 290:Side_dreh.c   ****                     drehen(1);
+ 1012              		.loc 1 290 0
+ 1013 0758 0480A0E1 		mov	r8, r4
+ 282:Side_dreh.c   ****                     klappen();
+ 1014              		.loc 1 282 0
+ 1015 075c 0070E0E3 		mvn	r7, #0
+ 1016 0760 010000EA 		b	.L71
+ 1017              	.LVL113:
+ 1018              	.L81:
+ 1019 0764 095085E2 		add	r5, r5, #9
+ 1020 0768 014084E2 		add	r4, r4, #1
+ 1021              	.L71:
+ 1022              	.LVL114:
+ 276:Side_dreh.c   ****         {
+ 1023              		.loc 1 276 0
+ 1024 076c 0430D5E5 		ldrb	r3, [r5, #4]	@ zero_extendqisi2
+ 1025 0770 060053E1 		cmp	r3, r6
+ 1026 0774 1900001A 		bne	.L72
+ 278:Side_dreh.c   ****                 case 0://ober Seite
+ 1027              		.loc 1 278 0
+ 1028 0778 022044E2 		sub	r2, r4, #2
+ 1029 077c 040052E3 		cmp	r2, #4
+ 1030 0780 02F19F97 		ldrls	pc, [pc, r2, asl #2]
+ 1031 0784 150000EA 		b	.L72
+ 1032              	.L74:
+ 1033 0788 9C070000 		.word	.L73
+ 1034 078c AC070000 		.word	.L75
+ 1035 0790 B8070000 		.word	.L76
+ 1036 0794 C8070000 		.word	.L77
+ 1037 0798 D8070000 		.word	.L78
+ 1038              	.L73:
+ 282:Side_dreh.c   ****                     klappen();
+ 1039              		.loc 1 282 0
+ 1040 079c 0700A0E1 		mov	r0, r7
+ 1041 07a0 FEFFFFEB 		bl	drehen
+ 1042              	.LVL115:
+ 283:Side_dreh.c   ****                     break;
+ 1043              		.loc 1 283 0
+ 1044 07a4 FEFFFFEB 		bl	klappen
+ 1045              	.LVL116:
+ 284:Side_dreh.c   ****                 case 2://untere Seite
+ 1046              		.loc 1 284 0
+ 1047 07a8 EDFFFFEA 		b	.L81
+ 1048              	.L75:
+ 286:Side_dreh.c   ****                     klappen();
+ 1049              		.loc 1 286 0
+ 1050 07ac FEFFFFEB 		bl	klappen
+ 1051              	.LVL117:
+ 287:Side_dreh.c   ****                     break;
+ 1052              		.loc 1 287 0
+ 1053 07b0 FEFFFFEB 		bl	klappen
+ 1054              	.LVL118:
+ 288:Side_dreh.c   ****                 case 3://hintere Seite
+ 1055              		.loc 1 288 0
+ 1056 07b4 EAFFFFEA 		b	.L81
+ 1057              	.L76:
+ 1058              		.loc 1 290 0
+ 1059 07b8 0800A0E1 		mov	r0, r8
+ 1060 07bc FEFFFFEB 		bl	drehen
+ 1061              	.LVL119:
+ 291:Side_dreh.c   ****                     klappen();
+ 1062              		.loc 1 291 0
+ 1063 07c0 FEFFFFEB 		bl	klappen
+ 1064              	.LVL120:
  292:Side_dreh.c   ****                     break;
- 293:Side_dreh.c   ****                 case 1://vorne Seite
- 294:Side_dreh.c   ****                     drehen(-1);
+ 1065              		.loc 1 292 0
+ 1066 07c4 E6FFFFEA 		b	.L81
+ 1067              	.L77:
+ 293:Side_dreh.c   ****                 case 4://linke Seite
+ 294:Side_dreh.c   ****                     klappen();
+ 1068              		.loc 1 294 0
+ 1069 07c8 FEFFFFEB 		bl	klappen
+ 1070              	.LVL121:
  295:Side_dreh.c   ****                     klappen();
- 296:Side_dreh.c   ****                     break;
- 297:Side_dreh.c   ****                 case 2://untere Seite
- 298:Side_dreh.c   ****                     klappen();
+ 1071              		.loc 1 295 0
+ 1072 07cc FEFFFFEB 		bl	klappen
+ 1073              	.LVL122:
+ 296:Side_dreh.c   ****                     klappen();
+ 1074              		.loc 1 296 0
+ 1075 07d0 FEFFFFEB 		bl	klappen
+ 1076              	.LVL123:
+ 297:Side_dreh.c   ****                     break;
+ 1077              		.loc 1 297 0
+ 1078 07d4 E2FFFFEA 		b	.L81
+ 1079              	.L78:
+ 298:Side_dreh.c   ****                 case 5://rechte Seite
  299:Side_dreh.c   ****                     klappen();
+ 1080              		.loc 1 299 0
+ 1081 07d8 FEFFFFEB 		bl	klappen
+ 1082              	.LVL124:
+ 1083 07dc 010000EA 		b	.L80
+ 1084              	.LVL125:
+ 1085              	.L72:
+ 275:Side_dreh.c   ****         if (color_data[i][4]==center_color)
+ 1086              		.loc 1 275 0
+ 1087 07e0 050054E3 		cmp	r4, #5
+ 1088 07e4 DEFFFFDA 		ble	.L81
+ 1089              	.LVL126:
+ 1090              	.L80:
  300:Side_dreh.c   ****                     break;
- 301:Side_dreh.c   ****                 case 3://hintere Seite
- 302:Side_dreh.c   ****                     drehen(1);
- 1060              		.loc 1 302 0
- 1061 07b8 0480A0E1 		mov	r8, r4
- 294:Side_dreh.c   ****                     klappen();
- 1062              		.loc 1 294 0
- 1063 07bc 0070E0E3 		mvn	r7, #0
- 1064 07c0 010000EA 		b	.L71
- 1065              	.LVL125:
- 1066              	.L81:
- 1067 07c4 095085E2 		add	r5, r5, #9
- 1068 07c8 014084E2 		add	r4, r4, #1
- 1069              	.L71:
- 1070              	.LVL126:
- 288:Side_dreh.c   ****         {
- 1071              		.loc 1 288 0
- 1072 07cc 0430D5E5 		ldrb	r3, [r5, #4]	@ zero_extendqisi2
- 1073 07d0 060053E1 		cmp	r3, r6
- 1074 07d4 1900001A 		bne	.L72
- 290:Side_dreh.c   ****                 case 0://ober Seite
- 1075              		.loc 1 290 0
- 1076 07d8 022044E2 		sub	r2, r4, #2
- 1077 07dc 040052E3 		cmp	r2, #4
- 1078 07e0 02F19F97 		ldrls	pc, [pc, r2, asl #2]
- 1079 07e4 150000EA 		b	.L72
- 1080              	.L74:
- 1081 07e8 FC070000 		.word	.L73
- 1082 07ec 0C080000 		.word	.L75
- 1083 07f0 18080000 		.word	.L76
- 1084 07f4 28080000 		.word	.L77
- 1085 07f8 38080000 		.word	.L78
- 1086              	.L73:
- 294:Side_dreh.c   ****                     klappen();
- 1087              		.loc 1 294 0
- 1088 07fc 0700A0E1 		mov	r0, r7
- 1089 0800 FEFFFFEB 		bl	drehen
- 1090              	.LVL127:
- 295:Side_dreh.c   ****                     break;
- 1091              		.loc 1 295 0
- 1092 0804 FEFFFFEB 		bl	klappen
- 1093              	.LVL128:
- 296:Side_dreh.c   ****                 case 2://untere Seite
- 1094              		.loc 1 296 0
- 1095 0808 EDFFFFEA 		b	.L81
- 1096              	.L75:
- 298:Side_dreh.c   ****                     klappen();
- 1097              		.loc 1 298 0
- 1098 080c FEFFFFEB 		bl	klappen
- 1099              	.LVL129:
- 299:Side_dreh.c   ****                     break;
- 1100              		.loc 1 299 0
- 1101 0810 FEFFFFEB 		bl	klappen
- 1102              	.LVL130:
- 300:Side_dreh.c   ****                 case 3://hintere Seite
- 1103              		.loc 1 300 0
- 1104 0814 EAFFFFEA 		b	.L81
- 1105              	.L76:
- 1106              		.loc 1 302 0
- 1107 0818 0800A0E1 		mov	r0, r8
- 1108 081c FEFFFFEB 		bl	drehen
- 1109              	.LVL131:
- 303:Side_dreh.c   ****                     klappen();
- 1110              		.loc 1 303 0
- 1111 0820 FEFFFFEB 		bl	klappen
- 1112              	.LVL132:
- 304:Side_dreh.c   ****                     break;
- 1113              		.loc 1 304 0
- 1114 0824 E6FFFFEA 		b	.L81
- 1115              	.L77:
- 305:Side_dreh.c   ****                 case 4://linke Seite
- 306:Side_dreh.c   ****                     klappen();
- 1116              		.loc 1 306 0
- 1117 0828 FEFFFFEB 		bl	klappen
- 1118              	.LVL133:
- 307:Side_dreh.c   ****                     klappen();
- 1119              		.loc 1 307 0
- 1120 082c FEFFFFEB 		bl	klappen
- 1121              	.LVL134:
- 308:Side_dreh.c   ****                     klappen();
- 1122              		.loc 1 308 0
- 1123 0830 FEFFFFEB 		bl	klappen
- 1124              	.LVL135:
- 309:Side_dreh.c   ****                     break;
- 1125              		.loc 1 309 0
- 1126 0834 E2FFFFEA 		b	.L81
- 1127              	.L78:
- 310:Side_dreh.c   ****                 case 5://rechte Seite
- 311:Side_dreh.c   ****                     klappen();
- 1128              		.loc 1 311 0
- 1129 0838 FEFFFFEB 		bl	klappen
- 1130              	.LVL136:
- 1131 083c 010000EA 		b	.L80
- 1132              	.LVL137:
- 1133              	.L72:
- 287:Side_dreh.c   ****         if (color_data[i][4]==center_color)
- 1134              		.loc 1 287 0
- 1135 0840 050054E3 		cmp	r4, #5
- 1136 0844 DEFFFFDA 		ble	.L81
- 1137              	.LVL138:
- 1138              	.L80:
- 312:Side_dreh.c   ****                     break;
- 313:Side_dreh.c   ****                     
- 314:Side_dreh.c   ****                 default:
- 315:Side_dreh.c   ****                     break;
- 316:Side_dreh.c   ****             }
- 317:Side_dreh.c   ****         }
- 318:Side_dreh.c   ****     }
- 319:Side_dreh.c   ****     return 0;
- 320:Side_dreh.c   **** }
- 1139              		.loc 1 320 0
- 1140 0848 0000A0E3 		mov	r0, #0
- 1141 084c F081BDE8 		ldmfd	sp!, {r4, r5, r6, r7, r8, pc}
- 1142              	.L83:
- 1143              		.align	2
- 1144              	.L82:
- 1145 0850 00000000 		.word	color_data
- 1146              		.cfi_endproc
- 1147              	.LFE20:
- 1148              		.fnend
- 1150              		.align	2
- 1151              		.global	change_rightface
- 1153              	change_rightface:
- 1154              		.fnstart
- 1155              	.LFB21:
- 321:Side_dreh.c   **** 
- 322:Side_dreh.c   **** int change_rightface(int rightface)
- 323:Side_dreh.c   **** {
- 1156              		.loc 1 323 0
- 1157              		.cfi_startproc
- 1158              		@ args = 0, pretend = 0, frame = 0
- 1159              		@ frame_needed = 0, uses_anonymous_args = 0
- 1160              	.LVL139:
- 1161 0854 F0412DE9 		stmfd	sp!, {r4, r5, r6, r7, r8, lr}
- 1162              		.save {r4, r5, r6, r7, r8, lr}
- 1163              		.cfi_def_cfa_offset 24
- 1164              		.cfi_offset 4, -24
- 1165              		.cfi_offset 5, -20
- 1166              		.cfi_offset 6, -16
- 1167              		.cfi_offset 7, -12
- 1168              		.cfi_offset 8, -8
- 1169              		.cfi_offset 14, -4
- 1170 0858 0060A0E1 		mov	r6, r0
- 1171              	.LVL140:
- 1172 085c 78509FE5 		ldr	r5, .L92
- 1173              		.loc 1 323 0
- 1174 0860 0140A0E3 		mov	r4, #1
- 324:Side_dreh.c   ****     int i;
- 325:Side_dreh.c   ****     for (i=0; i<=5; i++) {
- 326:Side_dreh.c   ****         if (color_data[i][4]==rightface) {
- 327:Side_dreh.c   ****             switch (i) {
- 328:Side_dreh.c   ****                 case 1://vorne Seite
- 329:Side_dreh.c   ****                     drehen(-1);
- 330:Side_dreh.c   ****                     break;
- 331:Side_dreh.c   ****                 case 3://hintere Seite
- 332:Side_dreh.c   ****                     drehen(1);
- 1175              		.loc 1 332 0
- 1176 0864 0470A0E1 		mov	r7, r4
- 329:Side_dreh.c   ****                     break;
- 1177              		.loc 1 329 0
- 1178 0868 0080E0E3 		mvn	r8, #0
- 1179 086c 010000EA 		b	.L85
- 1180              	.LVL141:
- 1181              	.L91:
- 1182 0870 095085E2 		add	r5, r5, #9
- 1183 0874 014084E2 		add	r4, r4, #1
- 1184              	.L85:
- 1185 0878 012044E2 		sub	r2, r4, #1
- 1186              	.LVL142:
- 326:Side_dreh.c   ****             switch (i) {
- 1187              		.loc 1 326 0
- 1188 087c 0430D5E5 		ldrb	r3, [r5, #4]	@ zero_extendqisi2
- 1189 0880 060053E1 		cmp	r3, r6
- 1190 0884 1000001A 		bne	.L86
- 327:Side_dreh.c   ****                 case 1://vorne Seite
- 1191              		.loc 1 327 0
- 1192 0888 030052E3 		cmp	r2, #3
- 1193 088c 0600000A 		beq	.L87
- 1194 0890 040052E3 		cmp	r2, #4
- 1195 0894 0700000A 		beq	.L88
- 1196 0898 010052E3 		cmp	r2, #1
- 1197 089c 0A00001A 		bne	.L86
- 329:Side_dreh.c   ****                     break;
- 1198              		.loc 1 329 0
- 1199 08a0 0800A0E1 		mov	r0, r8
- 1200 08a4 FEFFFFEB 		bl	drehen
- 1201              	.LVL143:
- 330:Side_dreh.c   ****                 case 3://hintere Seite
- 1202              		.loc 1 330 0
- 1203 08a8 F0FFFFEA 		b	.L91
- 1204              	.LVL144:
- 1205              	.L87:
- 1206              		.loc 1 332 0
- 1207 08ac 0700A0E1 		mov	r0, r7
- 1208 08b0 FEFFFFEB 		bl	drehen
- 1209              	.LVL145:
- 333:Side_dreh.c   ****                     break;
- 1210              		.loc 1 333 0
- 1211 08b4 EDFFFFEA 		b	.L91
- 1212              	.LVL146:
- 1213              	.L88:
- 334:Side_dreh.c   ****                 case 4://linke Seite
- 335:Side_dreh.c   ****                     drehen(1);
- 1214              		.loc 1 335 0
- 1215 08b8 0700A0E1 		mov	r0, r7
- 1216 08bc FEFFFFEB 		bl	drehen
- 1217              	.LVL147:
- 336:Side_dreh.c   ****                     drehen(1);
- 1218              		.loc 1 336 0
- 1219 08c0 0700A0E1 		mov	r0, r7
- 1220 08c4 FEFFFFEB 		bl	drehen
- 1221              	.LVL148:
- 337:Side_dreh.c   ****                     break;
- 1222              		.loc 1 337 0
- 1223 08c8 E8FFFFEA 		b	.L91
- 1224              	.LVL149:
- 1225              	.L86:
- 325:Side_dreh.c   ****         if (color_data[i][4]==rightface) {
- 1226              		.loc 1 325 0
- 1227 08cc 050054E3 		cmp	r4, #5
- 1228 08d0 E6FFFFDA 		ble	.L91
- 338:Side_dreh.c   ****                 default:
- 339:Side_dreh.c   ****                     break;
- 340:Side_dreh.c   ****             }
- 341:Side_dreh.c   ****         }
- 342:Side_dreh.c   ****     }
- 343:Side_dreh.c   ****     return 0;
- 344:Side_dreh.c   **** }
- 1229              		.loc 1 344 0
- 1230 08d4 0000A0E3 		mov	r0, #0
- 1231 08d8 F081BDE8 		ldmfd	sp!, {r4, r5, r6, r7, r8, pc}
- 1232              	.L93:
- 1233              		.align	2
- 1234              	.L92:
- 1235 08dc 00000000 		.word	color_data
- 1236              		.cfi_endproc
- 1237              	.LFE21:
- 1238              		.fnend
- 1240              		.global	Count
- 1241              		.section	.rodata.str1.4,"aMS",%progbits,1
- 1242              		.align	2
- 1243              	.LC0:
- 1244 0000 436F756E 		.ascii	"Count=%d\000"
- 1244      743D2564 
- 1244      00
- 1245 0009 000000   		.bss
- 1246              		.align	2
- 1247              	.LANCHOR0 = . + 0
- 1250              	Count:
- 1251 0000 00000000 		.space	4
- 1252              		.text
- 1253              	.Letext0:
- 1254              		.file 2 "/usr/local/carlson-minot/crosscompilers/lib/gcc/arm-none-linux-gnueabi/4.8.3/include/stdd
- 1255              		.file 3 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
- 1256              		.file 4 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
- 1257              		.file 5 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
- 1258              		.file 6 "main.h"
- 1259              		.file 7 "Arm_motor.h"
- 1260              		.file 8 "Dreh_motor.h"
- 1261              		.file 9 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
- 1262              		.file 10 "print_mode.h"
+ 301:Side_dreh.c   ****                     
+ 302:Side_dreh.c   ****                 default:
+ 303:Side_dreh.c   ****                     break;
+ 304:Side_dreh.c   ****             }
+ 305:Side_dreh.c   ****         }
+ 306:Side_dreh.c   ****     }
+ 307:Side_dreh.c   ****     return 0;
+ 308:Side_dreh.c   **** }
+ 1091              		.loc 1 308 0
+ 1092 07e8 0000A0E3 		mov	r0, #0
+ 1093 07ec F081BDE8 		ldmfd	sp!, {r4, r5, r6, r7, r8, pc}
+ 1094              	.L83:
+ 1095              		.align	2
+ 1096              	.L82:
+ 1097 07f0 00000000 		.word	color_data
+ 1098              		.cfi_endproc
+ 1099              	.LFE20:
+ 1100              		.fnend
+ 1102              		.align	2
+ 1103              		.global	change_rightface
+ 1105              	change_rightface:
+ 1106              		.fnstart
+ 1107              	.LFB21:
+ 309:Side_dreh.c   **** 
+ 310:Side_dreh.c   **** int change_rightface(int rightface)
+ 311:Side_dreh.c   **** {
+ 1108              		.loc 1 311 0
+ 1109              		.cfi_startproc
+ 1110              		@ args = 0, pretend = 0, frame = 0
+ 1111              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1112              	.LVL127:
+ 1113 07f4 F0412DE9 		stmfd	sp!, {r4, r5, r6, r7, r8, lr}
+ 1114              		.save {r4, r5, r6, r7, r8, lr}
+ 1115              		.cfi_def_cfa_offset 24
+ 1116              		.cfi_offset 4, -24
+ 1117              		.cfi_offset 5, -20
+ 1118              		.cfi_offset 6, -16
+ 1119              		.cfi_offset 7, -12
+ 1120              		.cfi_offset 8, -8
+ 1121              		.cfi_offset 14, -4
+ 1122 07f8 0060A0E1 		mov	r6, r0
+ 1123              	.LVL128:
+ 1124 07fc 78509FE5 		ldr	r5, .L92
+ 1125              		.loc 1 311 0
+ 1126 0800 0140A0E3 		mov	r4, #1
+ 312:Side_dreh.c   ****     int i;
+ 313:Side_dreh.c   ****     for (i=0; i<=5; i++) {
+ 314:Side_dreh.c   ****         if (color_data[i][4]==rightface) {
+ 315:Side_dreh.c   ****             switch (i) {
+ 316:Side_dreh.c   ****                 case 1://vorne Seite
+ 317:Side_dreh.c   ****                     drehen(-1);
+ 318:Side_dreh.c   ****                     break;
+ 319:Side_dreh.c   ****                 case 3://hintere Seite
+ 320:Side_dreh.c   ****                     drehen(1);
+ 1127              		.loc 1 320 0
+ 1128 0804 0470A0E1 		mov	r7, r4
+ 317:Side_dreh.c   ****                     break;
+ 1129              		.loc 1 317 0
+ 1130 0808 0080E0E3 		mvn	r8, #0
+ 1131 080c 010000EA 		b	.L85
+ 1132              	.LVL129:
+ 1133              	.L91:
+ 1134 0810 095085E2 		add	r5, r5, #9
+ 1135 0814 014084E2 		add	r4, r4, #1
+ 1136              	.L85:
+ 1137 0818 012044E2 		sub	r2, r4, #1
+ 1138              	.LVL130:
+ 314:Side_dreh.c   ****             switch (i) {
+ 1139              		.loc 1 314 0
+ 1140 081c 0430D5E5 		ldrb	r3, [r5, #4]	@ zero_extendqisi2
+ 1141 0820 060053E1 		cmp	r3, r6
+ 1142 0824 1000001A 		bne	.L86
+ 315:Side_dreh.c   ****                 case 1://vorne Seite
+ 1143              		.loc 1 315 0
+ 1144 0828 030052E3 		cmp	r2, #3
+ 1145 082c 0600000A 		beq	.L87
+ 1146 0830 040052E3 		cmp	r2, #4
+ 1147 0834 0700000A 		beq	.L88
+ 1148 0838 010052E3 		cmp	r2, #1
+ 1149 083c 0A00001A 		bne	.L86
+ 317:Side_dreh.c   ****                     break;
+ 1150              		.loc 1 317 0
+ 1151 0840 0800A0E1 		mov	r0, r8
+ 1152 0844 FEFFFFEB 		bl	drehen
+ 1153              	.LVL131:
+ 318:Side_dreh.c   ****                 case 3://hintere Seite
+ 1154              		.loc 1 318 0
+ 1155 0848 F0FFFFEA 		b	.L91
+ 1156              	.LVL132:
+ 1157              	.L87:
+ 1158              		.loc 1 320 0
+ 1159 084c 0700A0E1 		mov	r0, r7
+ 1160 0850 FEFFFFEB 		bl	drehen
+ 1161              	.LVL133:
+ 321:Side_dreh.c   ****                     break;
+ 1162              		.loc 1 321 0
+ 1163 0854 EDFFFFEA 		b	.L91
+ 1164              	.LVL134:
+ 1165              	.L88:
+ 322:Side_dreh.c   ****                 case 4://linke Seite
+ 323:Side_dreh.c   ****                     drehen(1);
+ 1166              		.loc 1 323 0
+ 1167 0858 0700A0E1 		mov	r0, r7
+ 1168 085c FEFFFFEB 		bl	drehen
+ 1169              	.LVL135:
+ 324:Side_dreh.c   ****                     drehen(1);
+ 1170              		.loc 1 324 0
+ 1171 0860 0700A0E1 		mov	r0, r7
+ 1172 0864 FEFFFFEB 		bl	drehen
+ 1173              	.LVL136:
+ 325:Side_dreh.c   ****                     break;
+ 1174              		.loc 1 325 0
+ 1175 0868 E8FFFFEA 		b	.L91
+ 1176              	.LVL137:
+ 1177              	.L86:
+ 313:Side_dreh.c   ****         if (color_data[i][4]==rightface) {
+ 1178              		.loc 1 313 0
+ 1179 086c 050054E3 		cmp	r4, #5
+ 1180 0870 E6FFFFDA 		ble	.L91
+ 326:Side_dreh.c   ****                 default:
+ 327:Side_dreh.c   ****                     break;
+ 328:Side_dreh.c   ****             }
+ 329:Side_dreh.c   ****         }
+ 330:Side_dreh.c   ****     }
+ 331:Side_dreh.c   ****     return 0;
+ 332:Side_dreh.c   **** }
+ 1181              		.loc 1 332 0
+ 1182 0874 0000A0E3 		mov	r0, #0
+ 1183 0878 F081BDE8 		ldmfd	sp!, {r4, r5, r6, r7, r8, pc}
+ 1184              	.L93:
+ 1185              		.align	2
+ 1186              	.L92:
+ 1187 087c 00000000 		.word	color_data
+ 1188              		.cfi_endproc
+ 1189              	.LFE21:
+ 1190              		.fnend
+ 1192              		.global	Count
+ 1193              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 1194              		.align	2
+ 1195              	.LC0:
+ 1196 0000 436F756E 		.ascii	"Count=%d\000"
+ 1196      743D2564 
+ 1196      00
+ 1197 0009 000000   		.bss
+ 1198              		.align	2
+ 1199              	.LANCHOR0 = . + 0
+ 1202              	Count:
+ 1203 0000 00000000 		.space	4
+ 1204              		.text
+ 1205              	.Letext0:
+ 1206              		.file 2 "/usr/local/carlson-minot/crosscompilers/lib/gcc/arm-none-linux-gnueabi/4.8.3/include/stdd
+ 1207              		.file 3 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
+ 1208              		.file 4 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
+ 1209              		.file 5 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
+ 1210              		.file 6 "main.h"
+ 1211              		.file 7 "Arm_motor.h"
+ 1212              		.file 8 "Dreh_motor.h"
+ 1213              		.file 9 "print_mode.h"
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 Side_dreh.c
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYM0AMP.s:16     .text:0000000000000000 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYM0AMP.s:19     .text:0000000000000000 klappen
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYM0AMP.s:158    .text:0000000000000128 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHIw8Fy.s:16     .text:0000000000000000 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHIw8Fy.s:19     .text:0000000000000000 klappen
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHIw8Fy.s:158    .text:0000000000000128 $d
                        .ARM.exidx:0000000000000000 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYM0AMP.s:164    .text:0000000000000130 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYM0AMP.s:167    .text:0000000000000130 drehen_unter
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYM0AMP.s:445    .text:00000000000003a8 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYM0AMP.s:453    .text:00000000000003b8 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYM0AMP.s:456    .text:00000000000003b8 drehen
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYM0AMP.s:658    .text:000000000000057c $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYM0AMP.s:663    .text:0000000000000580 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYM0AMP.s:666    .text:0000000000000580 us_dreh
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYM0AMP.s:719    .text:00000000000005d4 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYM0AMP.s:725    .text:00000000000005dc $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYM0AMP.s:728    .text:00000000000005dc ds_dreh
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYM0AMP.s:761    .text:0000000000000608 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHIw8Fy.s:164    .text:0000000000000130 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHIw8Fy.s:167    .text:0000000000000130 drehen_unter
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHIw8Fy.s:445    .text:00000000000003a8 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHIw8Fy.s:453    .text:00000000000003b8 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHIw8Fy.s:456    .text:00000000000003b8 drehen
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHIw8Fy.s:658    .text:000000000000057c $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHIw8Fy.s:663    .text:0000000000000580 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHIw8Fy.s:666    .text:0000000000000580 us_dreh
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHIw8Fy.s:711    .text:00000000000005c4 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHIw8Fy.s:717    .text:00000000000005cc $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHIw8Fy.s:720    .text:00000000000005cc ds_dreh
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHIw8Fy.s:753    .text:00000000000005f8 $d
                        .ARM.extab:0000000000000000 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYM0AMP.s:767    .text:0000000000000610 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYM0AMP.s:770    .text:0000000000000610 fs_dreh
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYM0AMP.s:833    .text:0000000000000678 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYM0AMP.s:839    .text:0000000000000680 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYM0AMP.s:842    .text:0000000000000680 bs_dreh
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYM0AMP.s:905    .text:00000000000006e8 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYM0AMP.s:911    .text:00000000000006f0 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYM0AMP.s:914    .text:00000000000006f0 ls_dreh
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYM0AMP.s:960    .text:0000000000000738 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYM0AMP.s:966    .text:0000000000000740 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYM0AMP.s:969    .text:0000000000000740 rs_dreh
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYM0AMP.s:1029   .text:00000000000007a0 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYM0AMP.s:1035   .text:00000000000007a8 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYM0AMP.s:1038   .text:00000000000007a8 change_topface
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYM0AMP.s:1081   .text:00000000000007e8 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYM0AMP.s:1088   .text:00000000000007fc $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYM0AMP.s:1145   .text:0000000000000850 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYM0AMP.s:1150   .text:0000000000000854 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYM0AMP.s:1153   .text:0000000000000854 change_rightface
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYM0AMP.s:1235   .text:00000000000008dc $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYM0AMP.s:1250   .bss:0000000000000000 Count
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYM0AMP.s:1242   .rodata.str1.4:0000000000000000 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYM0AMP.s:1246   .bss:0000000000000000 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHIw8Fy.s:759    .text:0000000000000600 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHIw8Fy.s:762    .text:0000000000000600 fs_dreh
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHIw8Fy.s:813    .text:0000000000000650 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHIw8Fy.s:819    .text:0000000000000658 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHIw8Fy.s:822    .text:0000000000000658 bs_dreh
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHIw8Fy.s:873    .text:00000000000006a8 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHIw8Fy.s:879    .text:00000000000006b0 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHIw8Fy.s:882    .text:00000000000006b0 ls_dreh
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHIw8Fy.s:924    .text:00000000000006f0 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHIw8Fy.s:930    .text:00000000000006f8 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHIw8Fy.s:933    .text:00000000000006f8 rs_dreh
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHIw8Fy.s:981    .text:0000000000000740 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHIw8Fy.s:987    .text:0000000000000748 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHIw8Fy.s:990    .text:0000000000000748 change_topface
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHIw8Fy.s:1033   .text:0000000000000788 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHIw8Fy.s:1040   .text:000000000000079c $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHIw8Fy.s:1097   .text:00000000000007f0 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHIw8Fy.s:1102   .text:00000000000007f4 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHIw8Fy.s:1105   .text:00000000000007f4 change_rightface
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHIw8Fy.s:1187   .text:000000000000087c $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHIw8Fy.s:1202   .bss:0000000000000000 Count
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHIw8Fy.s:1194   .rodata.str1.4:0000000000000000 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccHIw8Fy.s:1198   .bss:0000000000000000 $d
                      .debug_frame:0000000000000010 $d
 
 UNDEFINED SYMBOLS
@@ -1675,6 +1614,5 @@ wuerfel_print
 color_data
 __aeabi_unwind_cpp_pr0
 DrehTel_setpos
-sleep
 printf
 __aeabi_unwind_cpp_pr1

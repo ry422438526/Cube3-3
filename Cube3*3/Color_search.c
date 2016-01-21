@@ -13,7 +13,7 @@
 
 int Kantenstein_suchen(int Color1,int Color2)
 {
-    int kantPos=0; //kantPos=100*Schicht+10*ErsteCentrale+zweiteCentrale
+    int kantPos=0; //kantPos=100*Schicht+10*Richtung erster Seite+Richtung zweiter Seite
     int c1=0,c2=0;
     
     //Erste_schicht
@@ -78,7 +78,7 @@ int Mittelstein_suchen(int Color)
 
 int Eckenstein_suchen(int Color1, int Color2, int Color3 )
 {
-    int eckPos=0; //EckPos= 1000*Schicht+100*ErsteCenterale+10*zweiteCenterale+dritteCentrale
+    int eckPos=0; //EckPos= 1000*Schicht+100*Richtung erster Seite+10*Richtung zweiter Seite+Richtung dritte Seite
     int Color_eck=100*Color1+10*Color2+Color3;
     
     //Erste Schichte

@@ -405,24 +405,24 @@
  306              		.file 10 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/u
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 Arm_motor.c
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccP6HnWy.s:16     .text:0000000000000000 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccP6HnWy.s:19     .text:0000000000000000 arm_setpos
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccP6HnWy.s:130    .text:00000000000000d4 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc7IOpqo.s:16     .text:0000000000000000 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc7IOpqo.s:19     .text:0000000000000000 arm_setpos
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc7IOpqo.s:130    .text:00000000000000d4 $d
                        .ARM.exidx:0000000000000000 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccP6HnWy.s:138    .text:00000000000000e4 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccP6HnWy.s:141    .text:00000000000000e4 arm_init
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccP6HnWy.s:227    .text:0000000000000178 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccP6HnWy.s:234    .text:0000000000000184 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccP6HnWy.s:237    .text:0000000000000184 arm_close
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc7IOpqo.s:138    .text:00000000000000e4 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc7IOpqo.s:141    .text:00000000000000e4 arm_init
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc7IOpqo.s:227    .text:0000000000000178 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc7IOpqo.s:234    .text:0000000000000184 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc7IOpqo.s:237    .text:0000000000000184 arm_close
                        .ARM.extab:0000000000000000 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccP6HnWy.s:270    .rodata:0000000000000000 arm_winkel
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccP6HnWy.s:290    .bss:0000000000000000 arm_ist
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccP6HnWy.s:294    .bss:0000000000000004 arm_referenz
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc7IOpqo.s:270    .rodata:0000000000000000 arm_winkel
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc7IOpqo.s:290    .bss:0000000000000000 arm_ist
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc7IOpqo.s:294    .bss:0000000000000004 arm_referenz
                             *COM*:0000000000000040 OutputInstance
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccP6HnWy.s:278    .rodata:0000000000000014 MOTOR_PORT_A
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccP6HnWy.s:283    .rodata:0000000000000018 MOTOR_SPEED
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccP6HnWy.s:266    .rodata:0000000000000000 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccP6HnWy.s:286    .bss:0000000000000000 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc7IOpqo.s:278    .rodata:0000000000000014 MOTOR_PORT_A
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc7IOpqo.s:283    .rodata:0000000000000018 MOTOR_SPEED
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc7IOpqo.s:266    .rodata:0000000000000000 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc7IOpqo.s:286    .bss:0000000000000000 $d
                      .debug_frame:0000000000000010 $d
 
 UNDEFINED SYMBOLS

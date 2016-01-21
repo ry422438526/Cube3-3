@@ -92,8 +92,6 @@ int OLL(){
             change_topface(2);
         }
     
-    wuerfel_print(1);
-    
     int color_kanten[]={1,5,3,4};
     // durch Formular
     int i;

@@ -113,34 +113,34 @@ int F2L(){
         if (Getpos_e==1510) {
             switch (Getpos_k) {
                 case 101:
-                    Formular6_9();
+                    Formular2_2();
                     break;
                 case 110:
-                    Formular6_10();
+                    Basis_3();
                     break;
                 case 103:
-                    Formular6_6();
+                    Basis_1();
                     break;
                 case 130:
-                    Formular6_5();
+                    Formular3_3();
                     break;
                 case 104:
-                    Formular6_8();
+                    Formular2_1();
                     break;
                 case 140:
-                    Formular6_7();
+                    Formular3_4();
                     break;
                 case 105:
-                    Formular6_3();
+                    Formular2_3();
                     break;
                 case 150:
-                    Formular6_4();
+                    Formular8_1();
                     break;
                 case 215:
-                    Formular6_1();
+                    Formular6_3();
                     break;
                 case 251:
-                    Formular6_2();
+                    Formular6_1();
                     break;
                 default:
                     break;
@@ -151,34 +151,34 @@ int F2L(){
         if (Getpos_e==1105) {
             switch (Getpos_k) {
                 case 101:
-                    Formular5_10();
+                    Formular8_2();
                     break;
                 case 110:
-                    Formular5_9();
+                    Formular2_6();
                     break;
                 case 103:
-                    Formular5_5();
+                    Formular3_2();
                     break;
                 case 130:
-                    Formular5_6();
+                    Formular2_4();
                     break;
                 case 104:
-                    Formular5_8();
+                    Formular3_1();
                     break;
                 case 140:
-                    Formular5_7();
+                    Basis_2();
                     break;
                 case 105:
-                    Formular5_3();
+                    Basis_4();
                     break;
                 case 150:
-                    Formular5_4();
+                    Formular2_5();
                     break;
                 case 215:
-                    Formular5_1();
+                    Formular6_4();
                     break;
                 case 251:
-                    Formular5_2();
+                    Formular6_2();
                     break;
                 default:
                     break;
@@ -188,34 +188,34 @@ int F2L(){
         if (Getpos_e==1051) {
             switch (Getpos_k) {
                 case 101:
-                    Formular4_8();
+                    Formular11_2();
                     break;
                 case 110:
-                    Formular4_7();
+                    Formular7_2();
                     break;
                 case 103:
-                    Formular4_3();
+                    Formular4_2();
                     break;
                 case 130:
                     Formular4_4();
                     break;
                 case 104:
-                    Formular4_5();
+                    Formular4_3();
                     break;
                 case 140:
-                    Formular4_6();
-                    break;
-                case 105:
-                    Formular4_9();
-                    break;
-                case 150:
-                    Formular4_10();
-                    break;
-                case 215:
                     Formular4_1();
                     break;
+                case 105:
+                    Formular7_1();
+                    break;
+                case 150:
+                    Formular11_1();
+                    break;
+                case 215:
+                    Formular9_2();
+                    break;
                 case 251:
-                    Formular4_2();
+                    Formular9_1();
                     break;
                 default:
                     break;
@@ -225,13 +225,13 @@ int F2L(){
         if(Getpos_e==3215){
             switch (Getpos_k) {
                 case 110:
-                    Formular1_1();
+                    Formular5_1();
                     break;
                 case 105:
-                    Formular1_2();
+                    Formular5_2();
                     break;
                 case 251:
-                    Formular1_3();
+                    Formular12_5();
                     break;
                 default:
                     break;
@@ -241,16 +241,16 @@ int F2L(){
         if(Getpos_e==3152){
             switch (Getpos_k) {
                 case 110:
-                    Formular3_3();
+                    Formular10_4();
                     break;
                 case 105:
-                    Formular3_4();
+                    Formular10_1();
                     break;
                 case 215:
-                    Formular3_1();
+                    Formular12_3();
                     break;
                 case 251:
-                    Formular3_2();
+                    Formular12_4();
                     break;
                 default:
                     break;
@@ -259,16 +259,16 @@ int F2L(){
         if(Getpos_e==3521){
             switch (Getpos_k) {
                 case 110:
-                    Formular2_4();
+                    Formular10_2();
                     break;
                 case 105:
-                    Formular2_3();
+                    Formular10_3();
                     break;
                 case 215:
-                    Formular2_1();
+                    Formular12_1();
                     break;
                 case 251:
-                    Formular2_2();
+                    Formular12_2();
                     break;
                 default:
                     break;
@@ -282,155 +282,331 @@ int F2L(){
     return 0;
 }
 
-void Formular1_1()        //Getpos_e==3215 && Getpos_k==110
+int Basis_1()      //Getpos_e==1510 && Getpos_k==103
+{
+    rs_dreh(1, 90);
+    rs_dreh(1,90);
+    ls_dreh(-1, 90);
+    return 0;
+}
+
+int Basis_2()       //Getpos_e==1105 && Getpos_k==140
+{
+    
+    drehen(-1);
+    rs_dreh(-1, 90);
+    rs_dreh(-1,90);
+    ls_dreh(1, 90);
+    return 0;
+}
+
+int Basis_3()     //Getpos_e==1510 && Getpos_k==110
+{
+    drehen(-1);
+    us_dreh(-1, 90);
+    ls_dreh(-1, 90);
+    rs_dreh(1, 90);
+    ls_dreh(1, 90);
+    
+    return 0;
+}
+
+int Basis_4()         //Getpos_e==1105 && Getpos_k==105
 {
     us_dreh(1, 90);
     ls_dreh(1, 90);
     rs_dreh(-1, 90);
     ls_dreh(-1, 90);
-    change_topface(2);
-    change_rightface(color_ecken[i]);
-    Formular6_10();
+    return 0;
 }
 
-void Formular1_2()         //Getpos_e==3215 && Getpos_k==105
+void Formular2_1()            //Getpos_e==1510 && Getpos_k==104
 {
     us_dreh(-1, 90);
-    fs_dreh(-1, 90);
-    rs_dreh(1, 90);
     ls_dreh(1, 90);
-    change_topface(2);
-    change_rightface(color_ecken[i]);
-    Formular5_3();
-}
-
-void Formular1_3()        //Getpos_e==3215 && Getpos_k==251
-{
     rs_dreh(1, 90);
-    rs_dreh(-1, 90);
-    ds_dreh(-1, 90);
-    ls_dreh(-1, 90);
-    rs_dreh(1, 90);
-    ls_dreh(1, 90);
-    rs_dreh(-1, 90);
-    ds_dreh(-1, 90);
     ls_dreh(-1, 90);
     rs_dreh(1, 90);
     change_topface(2);
     change_rightface(color_ecken[i]);
-    Formular5_7();
+    Basis_1();
 }
 
-void Formular2_1()     //Getpos_e==3521 && Getpos_k==215
+void Formular2_2()                 //Getpos_e==1510 && Getpos_k==101
 {
-    rs_dreh(1, 90);
+    us_dreh(1, 90);
+    drehen(1);
+    ls_dreh(-1, 90);
+    rs_dreh(1, 180);
+    ls_dreh(1, 90);
+    rs_dreh(-1, 90);
+    change_topface(2);
+    change_rightface(color_ecken[i]);
+    Basis_1();
+}
+
+void Formular2_3()               //Getpos_e==1510 && Getpos_k==105
+{
+    us_dreh(-1, 90);
+    ls_dreh(1, 90);
     rs_dreh(-1, 90);
     ls_dreh(-1, 90);
     rs_dreh(1, 90);
+    change_topface(2);
+    change_rightface(color_ecken[i]);
+    Basis_1();
+}
+
+void Formular2_4()        //Getpos_e==1105 && Getpos_k==130
+{
+    us_dreh(1, 90);
+    drehen(-1);           //ACHTEN
+    rs_dreh(-1, 90);
+    ls_dreh(-1, 90);
+    rs_dreh(1, 90);
+    ls_dreh(-1, 90);
+    change_topface(2);
+    change_rightface(color_ecken[i]);
+    Basis_2();
+}
+
+void Formular2_5()             //Getpos_e==1105 && Getpos_k==150
+{
+    us_dreh(-1, 90);
     ls_dreh(1, 90);
     rs_dreh(-1, 180);
     ls_dreh(-1, 90);
+    rs_dreh(1, 90);
     change_topface(2);
     change_rightface(color_ecken[i]);
-    Formular5_3();
-    
+    Basis_2();
 }
 
-void Formular2_2()           //Getpos_e==3521 && Getpos_k==251
+void Formular2_6()                   //Getpos_e==1105 && Getpos_k==110
+{
+    us_dreh(-1, 90);
+    drehen(-1);
+    ls_dreh(-1, 90);
+    rs_dreh(1, 90);
+    ls_dreh(1, 90);
+    rs_dreh(1, 90);         //?????????????????????????????????????????????????????????????
+    change_topface(2);
+    change_rightface(color_ecken[i]);
+    Basis_2();
+}
+
+void Formular3_1()         //Getpos_e==1105 && Getpos_k==104
+{
+    us_dreh(-1, 90);
+    ls_dreh(1, 90);
+    rs_dreh(-1, 180);
+    ls_dreh(-1, 90);
+    rs_dreh(1, 90);
+    change_topface(2);
+    change_rightface(color_ecken[i]);
+    Basis_4();
+}
+
+void Formular3_2()           //Getpos_e==1105 && Getpos_k==103
+{
+    us_dreh(-1, 90);
+    ls_dreh(1, 90);
+    rs_dreh(1, 90);
+    ls_dreh(-1, 90);
+    rs_dreh(1, 90);
+    change_topface(2);
+    change_rightface(color_ecken[i]);
+    Basis_4();
+}
+
+void Formular3_3()            //Getpos_e==1510 && Getpos_k==130
+{
+    us_dreh(-1, 90);
+    drehen(-1);
+    ls_dreh(-1, 90);
+    rs_dreh(1, 180);
+    ls_dreh(1, 90);
+    rs_dreh(1, 90);
+    change_topface(2);
+    change_rightface(color_ecken[i]);
+    Basis_3();
+}
+
+void Formular3_4()           //Getpos_e==1510 && Getpos_k==140
+{
+    us_dreh(1, 90);
+    drehen(1);
+    ls_dreh(-1, 90);
+    rs_dreh(-1, 90);
+    ls_dreh(1, 90);
+    rs_dreh(-1, 90);
+    change_topface(2);
+    change_rightface(color_ecken[i]);
+    Basis_3();
+}
+
+void Formular4_1()           //Getpos_e==1051 && Getpos_k==140
+{
+    drehen(-1);    //
+    us_dreh(-1, 90);
+    ls_dreh(-1, 90);
+    rs_dreh(1, 180);
+    ls_dreh(1, 90);
+    change_topface(2);
+    change_rightface(color_ecken[i]);
+    Basis_3();
+}
+
+
+void Formular4_2()         //Getpos_e==1051 && Getpos_k==103
+{
+    us_dreh(1, 90);
+    ls_dreh(1, 90);
+    rs_dreh(1, 180);
+    ls_dreh(-1, 90);
+    change_topface(2);
+    change_rightface(color_ecken[i]);
+    Basis_4();
+}
+
+void Formular4_3()               //Getpos_e==1051 && Getpos_k==104
+{
+    rs_dreh(1, 90);
+    rs_dreh(-1, 90);
+    ls_dreh(-1, 90);
+    rs_dreh(1, 180);
+    change_topface(2);
+    change_rightface(color_ecken[i]);
+    Basis_1();
+}
+
+void Formular4_4()             //Getpos_e==1051 && Getpos_k==130
+{
+    drehen(-1);
+    rs_dreh(-1, 90);
+    rs_dreh(1, 90);
+    ls_dreh(1, 90);
+    rs_dreh(1, 180);
+    change_topface(2);
+    change_rightface(color_ecken[i]);
+    Basis_2();
+}
+
+void Formular6_1()      //Getpos_e==1510 && Getpos_k==251
+{
+    drehen(-1);
+    us_dreh(1, 90);
+    ls_dreh(-1, 90);
+    rs_dreh(-1, 90);
+    ls_dreh(1, 90);
+    rs_dreh(-1, 90);
+    drehen(1);
+    change_topface(2);
+    change_rightface(color_ecken[i]);
+    Basis_1();
+}
+
+
+void Formular6_2()               //Getpos_e==1105 && Getpos_k==251
+{
+    us_dreh(-1, 90);
+    ls_dreh(1, 90);
+    rs_dreh(1, 90);
+    ls_dreh(-1, 90);
+    rs_dreh(1, 90);
+    change_topface(2);
+    change_rightface(color_ecken[i]);
+    Basis_2();
+}
+
+
+void Formular6_3()               //Getpos_e==1510 && Getpos_k==215
+{
+    us_dreh(-1, 90);
+    ls_dreh(1, 90);
+    rs_dreh(-1, 180);
+    ls_dreh(-1, 90);
+    rs_dreh(1, 90);
+    change_topface(2);
+    change_rightface(color_ecken[i]);
+    Basis_1();
+}
+
+void Formular6_4()               //Getpos_e==1105 && Getpos_k==215
+{
+    us_dreh(-1, 90);
+    ls_dreh(1, 90);
+    rs_dreh(-1, 90);
+    ls_dreh(-1, 90);
+    rs_dreh(1, 90);
+    change_topface(2);
+    change_rightface(color_ecken[i]);
+    Basis_4();
+}
+
+void Formular7_1()               //Getpos_e==1051 && Getpos_k==105
+{
+    rs_dreh(1, 90);
+    rs_dreh(-1, 180);
+    ls_dreh(-1, 90);
+    rs_dreh(-1, 90);
+    change_topface(2);
+    change_rightface(color_ecken[i]);
+    Basis_1();
+}
+
+
+void Formular7_2()             //Getpos_e==1051 && Getpos_k==110
+{
+    drehen(-1);
+    rs_dreh(-1, 90);
+    rs_dreh(1, 180);
+    ls_dreh(1, 90);
+    rs_dreh(1, 90);
+    change_topface(2);
+    change_rightface(color_ecken[i]);
+    Basis_2();
+}
+
+void Formular8_1()            //Getpos_e==1510 && Getpos_k==150
 {
     rs_dreh(1, 90);
     rs_dreh(-1, 90);
     ls_dreh(-1, 90);
     rs_dreh(1, 90);
     ds_dreh(1, 90);
-    drehen(1);
-    ls_dreh(-1, 90);
-    rs_dreh(-1, 90);
-    ls_dreh(1, 90);
     change_topface(2);
     change_rightface(color_ecken[i]);
-    Formular6_10();
-    
+    Basis_2();
 }
 
-void Formular2_3()         //Getpos_e==3521 && Getpos_k==105
-{
-    rs_dreh(1, 90);
-    rs_dreh(1, 90);
-    ls_dreh(-1, 90);
-    rs_dreh(-1, 90);
-    change_topface(2);
-    change_rightface(color_ecken[i]);
-    Formular6_6();
-}
-
-void Formular2_4()           //Getpos_e==3521 && Getpos_k==110
+void Formular8_2()           //Getpos_e==1105 && Getpos_k==101
 {
     drehen(-1);
     rs_dreh(-1, 90);
     rs_dreh(1, 90);
     ls_dreh(1, 90);
-    change_topface(2);
-    change_rightface(color_ecken[i]);
-    Formular6_10();
-}
-
-void Formular3_1()        //Getpos_e==3152 && Getpos_k==215
-{
-    rs_dreh(1, 90);
     rs_dreh(-1, 90);
-    ls_dreh(-1, 90);
-    rs_dreh(-1, 90);
-    ls_dreh(1, 90);
-    rs_dreh(1, 90);
-    ls_dreh(-1, 90);
-    rs_dreh(1, 90);
-    change_topface(2);
-    change_rightface(color_ecken[i]);
-    Formular5_3();
-    
-}
-
-void Formular3_2()     //Getpos_e==3152 && Getpos_k==251
-{
-    rs_dreh(1, 90);
-    rs_dreh(-1, 90);
-    ls_dreh(-1, 90);
-    rs_dreh(-1, 90);
-    ls_dreh(1, 90);
-    rs_dreh(-1, 90);
-    ls_dreh(-1, 90);
-    rs_dreh(1, 90);
-    fs_dreh(-1, 90);
-    rs_dreh(-1, 90);
-    ls_dreh(1, 90);
-}
-
-void Formular3_3()     //Getpos_e==3152 && Getpos_k==110
-{
+    ds_dreh(-1, 90);
     drehen(-1);
-    rs_dreh(-1, 90);
-    rs_dreh(-1, 90);
-    ls_dreh(1, 90);
-    rs_dreh(1, 90);
     change_topface(2);
     change_rightface(color_ecken[i]);
-    Formular5_7();
+    Basis_1();
 }
 
-void Formular3_4()          //Getpos_e==3152 && Getpos_k==105
+void Formular9_1()          //Getpos_e==1051 && Getpos_k==251
 {
     rs_dreh(1, 90);
     rs_dreh(-1, 90);
     ls_dreh(-1, 90);
-    rs_dreh(1, 90);
-    ls_dreh(1, 90);
-    rs_dreh(-1, 90);
-    ls_dreh(-1, 90);
-    
+    rs_dreh(-1, 180);
+    drehen(-1);
+    change_topface(2);
+    change_rightface(color_ecken[i]);
+    Basis_3();
 }
 
-void Formular4_1()       //Getpos_e==1051 && Getpos_k==215
+void Formular9_2()       //Getpos_e==1051 && Getpos_k==215
 {
     int i;
     us_dreh(1,90);
@@ -445,76 +621,23 @@ void Formular4_1()       //Getpos_e==1051 && Getpos_k==215
     }
 }
 
-void Formular4_2()          //Getpos_e==1051 && Getpos_k==251
+void Formular11_1()  //Getpos_e==1051 && Getpos_k==150
 {
     rs_dreh(1, 90);
-    rs_dreh(-1, 90);
+    rs_dreh(1, 90);
     ls_dreh(-1, 90);
-    rs_dreh(-1, 180);
-    drehen(-1);
-    change_topface(2);
-    change_rightface(color_ecken[i]);
-    Formular6_10();
-}
-
-void Formular4_3()         //Getpos_e==1051 && Getpos_k==103
-{
-    us_dreh(1, 90);
-    ls_dreh(1, 90);
-    rs_dreh(1, 180);
+    rs_dreh(1, 90);
+    drehen(1);
     ls_dreh(-1, 90);
-    change_topface(2);
-    change_rightface(color_ecken[i]);
-    Formular5_3();
-}
-
-void Formular4_4()             //Getpos_e==1051 && Getpos_k==130
-{
-    drehen(-1);
-    rs_dreh(-1, 90);
     rs_dreh(1, 90);
     ls_dreh(1, 90);
-    rs_dreh(1, 180);
     change_topface(2);
     change_rightface(color_ecken[i]);
-    Formular5_7();
+    Basis_3();
 }
 
-void Formular4_5()               //Getpos_e==1051 && Getpos_k==104
-{
-    rs_dreh(1, 90);
-    rs_dreh(-1, 90);
-    ls_dreh(-1, 90);
-    rs_dreh(1, 180);
-    change_topface(2);
-    change_rightface(color_ecken[i]);
-    Formular6_6();
-}
 
-void Formular4_6()           //Getpos_e==1051 && Getpos_k==140
-{
-    drehen(-1);    //
-    us_dreh(-1, 90);
-    ls_dreh(-1, 90);
-    rs_dreh(1, 180);
-    ls_dreh(1, 90);
-    change_topface(2);
-    change_rightface(color_ecken[i]);
-    Formular6_10();
-}
-
-void Formular4_7()             //Getpos_e==1051 && Getpos_k==110
-{
-    drehen(-1);
-    rs_dreh(-1, 90);
-    rs_dreh(1, 180);
-    ls_dreh(1, 90);
-    rs_dreh(1, 90);
-    change_topface(2);
-    change_rightface(color_ecken[i]);
-    Formular5_7();
-}
-void Formular4_8()         //Getpos_e==1051 && Getpos_k==101
+void Formular11_2()         //Getpos_e==1051 && Getpos_k==101
 {
     us_dreh(1, 180);
     ls_dreh(1, 180);
@@ -526,264 +649,160 @@ void Formular4_8()         //Getpos_e==1051 && Getpos_k==101
     ls_dreh(1, 180);
 }
 
-void Formular4_9()               //Getpos_e==1051 && Getpos_k==105
-{
-    rs_dreh(1, 90);
-    rs_dreh(-1, 180);
-    ls_dreh(-1, 90);
-    rs_dreh(-1, 90);
-    change_topface(2);
-    change_rightface(color_ecken[i]);
-    Formular6_6();
-}
 
-void Formular4_10()  //Getpos_e==1051 && Getpos_k==150
-{
-    rs_dreh(1, 90);
-    rs_dreh(1, 90);
-    ls_dreh(-1, 90);
-    rs_dreh(1, 90);
-    drehen(1);
-    ls_dreh(-1, 90);
-    rs_dreh(1, 90);
-    ls_dreh(1, 90);
-    change_topface(2);
-    change_rightface(color_ecken[i]);
-    Formular6_10();
-}
-
-void Formular5_1()               //Getpos_e==1105 && Getpos_k==215
-{
-    us_dreh(-1, 90);
-    ls_dreh(1, 90);
-    rs_dreh(-1, 90);
-    ls_dreh(-1, 90);
-    rs_dreh(1, 90);
-    change_topface(2);
-    change_rightface(color_ecken[i]);
-    Formular5_3();
-}
-void Formular5_2()               //Getpos_e==1105 && Getpos_k==251
-{
-    us_dreh(-1, 90);
-    ls_dreh(1, 90);
-    rs_dreh(1, 90);
-    ls_dreh(-1, 90);
-    rs_dreh(1, 90);
-    change_topface(2);
-    change_rightface(color_ecken[i]);
-    Formular5_7();
-}
-
-void Formular5_3()         //Getpos_e==1105 && Getpos_k==105
+void Formular5_1()        //Getpos_e==3215 && Getpos_k==110
 {
     us_dreh(1, 90);
     ls_dreh(1, 90);
     rs_dreh(-1, 90);
     ls_dreh(-1, 90);
-}
-
-void Formular5_4()             //Getpos_e==1105 && Getpos_k==150
-{
-    us_dreh(-1, 90);
-    ls_dreh(1, 90);
-    rs_dreh(-1, 180);
-    ls_dreh(-1, 90);
-    rs_dreh(1, 90);
     change_topface(2);
     change_rightface(color_ecken[i]);
-    Formular5_7();
+    Basis_3();
 }
 
-void Formular5_5()           //Getpos_e==1105 && Getpos_k==103
+void Formular5_2()         //Getpos_e==3215 && Getpos_k==105
 {
     us_dreh(-1, 90);
+    fs_dreh(-1, 90);
+    rs_dreh(1, 90);
     ls_dreh(1, 90);
-    rs_dreh(1, 90);
-    ls_dreh(-1, 90);
-    rs_dreh(1, 90);
     change_topface(2);
     change_rightface(color_ecken[i]);
-    Formular5_3();
+    Basis_4();
 }
 
-void Formular5_6()        //Getpos_e==1105 && Getpos_k==130
+
+void Formular10_1()          //Getpos_e==3152 && Getpos_k==105
 {
-    us_dreh(1, 90);
-    drehen(-1);           //ACHTEN
+    rs_dreh(1, 90);
     rs_dreh(-1, 90);
     ls_dreh(-1, 90);
     rs_dreh(1, 90);
+    ls_dreh(1, 90);
+    rs_dreh(-1, 90);
     ls_dreh(-1, 90);
-    change_topface(2);
-    change_rightface(color_ecken[i]);
-    Formular5_7();
-}
-
-void Formular5_7()       //Getpos_e==1105 && Getpos_k==140
-{
     
-    drehen(-1);
-    rs_dreh(-1, 90);
-    rs_dreh(-1,90);
-    ls_dreh(1, 90);
 }
 
-void Formular5_8()         //Getpos_e==1105 && Getpos_k==104
+void Formular10_2()           //Getpos_e==3521 && Getpos_k==110
 {
-    us_dreh(-1, 90);
+    drehen(-1);
+    rs_dreh(-1, 90);
+    rs_dreh(1, 90);
+    ls_dreh(1, 90);
+    change_topface(2);
+    change_rightface(color_ecken[i]);
+    Basis_3();
+}
+
+void Formular10_3()         //Getpos_e==3521 && Getpos_k==105
+{
+    rs_dreh(1, 90);
+    rs_dreh(1, 90);
+    ls_dreh(-1, 90);
+    rs_dreh(-1, 90);
+    change_topface(2);
+    change_rightface(color_ecken[i]);
+    Basis_1();
+}
+
+
+void Formular10_4()     //Getpos_e==3152 && Getpos_k==110
+{
+    drehen(-1);
+    rs_dreh(-1, 90);
+    rs_dreh(-1, 90);
+    ls_dreh(1, 90);
+    rs_dreh(1, 90);
+    change_topface(2);
+    change_rightface(color_ecken[i]);
+    Basis_2();
+}
+
+void Formular12_1()     //Getpos_e==3521 && Getpos_k==215
+{
+    rs_dreh(1, 90);
+    rs_dreh(-1, 90);
+    ls_dreh(-1, 90);
+    rs_dreh(1, 90);
     ls_dreh(1, 90);
     rs_dreh(-1, 180);
     ls_dreh(-1, 90);
-    rs_dreh(1, 90);
     change_topface(2);
     change_rightface(color_ecken[i]);
-    Formular5_3();
+    Basis_4();
+    
 }
 
-void Formular5_9()                   //Getpos_e==1105 && Getpos_k==110
-{
-    us_dreh(-1, 90);
-    drehen(-1);
-    ls_dreh(-1, 90);
-    rs_dreh(1, 90);
-    ls_dreh(1, 90);
-    rs_dreh(1, 90);         //?????????????????????????????????????????????????????????????
-    change_topface(2);
-    change_rightface(color_ecken[i]);
-    Formular5_7();
-}
 
-void Formular5_10()           //Getpos_e==1105 && Getpos_k==101
-{
-    drehen(-1);
-    rs_dreh(-1, 90);
-    rs_dreh(1, 90);
-    ls_dreh(1, 90);
-    rs_dreh(-1, 90);
-    ds_dreh(-1, 90);
-    drehen(-1);
-    change_topface(2);
-    change_rightface(color_ecken[i]);
-    Formular6_6();
-}
-
-void Formular6_1()               //Getpos_e==1510 && Getpos_k==215
-{
-    us_dreh(-1, 90);
-    ls_dreh(1, 90);
-    rs_dreh(-1, 180);
-    ls_dreh(-1, 90);
-    rs_dreh(1, 90);
-    change_topface(2);
-    change_rightface(color_ecken[i]);
-    Formular6_6();
-}
-
-void Formular6_2()      //Getpos_e==1510 && Getpos_k==251
-{
-    drehen(-1);
-    us_dreh(1, 90);
-    ls_dreh(-1, 90);
-    rs_dreh(-1, 90);
-    ls_dreh(1, 90);
-    rs_dreh(-1, 90);
-    drehen(1);
-    change_topface(2);
-    change_rightface(color_ecken[i]);
-    Formular6_6();
-}
-
-void Formular6_3()               //Getpos_e==1510 && Getpos_k==105
-{
-    us_dreh(-1, 90);
-    ls_dreh(1, 90);
-    rs_dreh(-1, 90);
-    ls_dreh(-1, 90);
-    rs_dreh(1, 90);
-    change_topface(2);
-    change_rightface(color_ecken[i]);
-    Formular6_6();
-}
-
-void Formular6_4()            //Getpos_e==1510 && Getpos_k==150
+void Formular12_2()           //Getpos_e==3521 && Getpos_k==251
 {
     rs_dreh(1, 90);
     rs_dreh(-1, 90);
     ls_dreh(-1, 90);
     rs_dreh(1, 90);
     ds_dreh(1, 90);
-    change_topface(2);
-    change_rightface(color_ecken[i]);
-    Formular5_7();
-}
-
-void Formular6_5()            //Getpos_e==1510 && Getpos_k==130
-{
-    us_dreh(-1, 90);
-    drehen(-1);
-    ls_dreh(-1, 90);
-    rs_dreh(1, 180);
-    ls_dreh(1, 90);
-    rs_dreh(1, 90);
-    change_topface(2);
-    change_rightface(color_ecken[i]);
-    Formular6_10();
-}
-
-void Formular6_6()      //Getpos_e==1510 && Getpos_k==103
-{
-    rs_dreh(1, 90);
-    rs_dreh(1,90);
-    ls_dreh(-1, 90);
-}
-
-void Formular6_7()           //Getpos_e==1510 && Getpos_k==140
-{
-    us_dreh(1, 90);
     drehen(1);
     ls_dreh(-1, 90);
     rs_dreh(-1, 90);
     ls_dreh(1, 90);
-    rs_dreh(-1, 90);
     change_topface(2);
     change_rightface(color_ecken[i]);
-    Formular6_10();
-}
-
-void Formular6_8()            //Getpos_e==1510 && Getpos_k==104
-{
-    us_dreh(-1, 90);
-    ls_dreh(1, 90);
-    rs_dreh(1, 90);
-    ls_dreh(-1, 90);
-    rs_dreh(1, 90);
-    change_topface(2);
-    change_rightface(color_ecken[i]);
-    Formular6_6();
-}
-void Formular6_9()                 //Getpos_e==1510 && Getpos_k==101
-{
-    us_dreh(1, 90);
-    drehen(1);
-    ls_dreh(-1, 90);
-    rs_dreh(1, 180);
-    ls_dreh(1, 90);
-    rs_dreh(-1, 90);
-    change_topface(2);
-    change_rightface(color_ecken[i]);
-    Formular6_6();
-}
-
-void Formular6_10()     //Getpos_e==1510 && Getpos_k==110
-{
-    drehen(-1);
-    us_dreh(-1, 90);
-    ls_dreh(-1, 90);
-    rs_dreh(1, 90);
-    ls_dreh(1, 90);
+    Basis_3();
     
 }
+
+void Formular12_3()        //Getpos_e==3152 && Getpos_k==215
+{
+    rs_dreh(1, 90);
+    rs_dreh(-1, 90);
+    ls_dreh(-1, 90);
+    rs_dreh(-1, 90);
+    ls_dreh(1, 90);
+    rs_dreh(1, 90);
+    ls_dreh(-1, 90);
+    rs_dreh(1, 90);
+    change_topface(2);
+    change_rightface(color_ecken[i]);
+    Basis_4();
+    
+}
+
+
+void Formular12_4()     //Getpos_e==3152 && Getpos_k==251
+{
+    rs_dreh(1, 90);
+    rs_dreh(-1, 90);
+    ls_dreh(-1, 90);
+    rs_dreh(-1, 90);
+    ls_dreh(1, 90);
+    rs_dreh(-1, 90);
+    ls_dreh(-1, 90);
+    rs_dreh(1, 90);
+    fs_dreh(-1, 90);
+    rs_dreh(-1, 90);
+    ls_dreh(1, 90);
+}
+
+
+void Formular12_5()        //Getpos_e==3215 && Getpos_k==251
+{
+    rs_dreh(1, 90);
+    rs_dreh(-1, 90);
+    ds_dreh(-1, 90);
+    ls_dreh(-1, 90);
+    rs_dreh(1, 90);
+    ls_dreh(1, 90);
+    rs_dreh(-1, 90);
+    ds_dreh(-1, 90);
+    ls_dreh(-1, 90);
+    rs_dreh(1, 90);
+    change_topface(2);
+    change_rightface(color_ecken[i]);
+    Basis_2();
+}
+
 /*
 int F2L_Test(){
     int f2l_test=-1;

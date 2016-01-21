@@ -49,12 +49,10 @@ int PLL()
         }
         
     }else{
-    wuerfel_print(1);        /////////////
     for (i=0; i<=3; i++)
     {
         change_topface(2);
         change_rightface(Color_col[(i+1)%4]);
-        wuerfel_print(1);////////////////
         if(color_data[1][0]==color_data[1][2])
         {
             for (j=0; j<=3; j++)
@@ -67,26 +65,22 @@ int PLL()
                     {
                         case 0:
                             change_rightface(color_c);
-                            wuerfel_print(1);/////////////////
                             break;
                         case 1:
                             us_dreh(1, 90);
                             change_topface(2);
                             change_rightface(color_c);
-                            wuerfel_print(1);/////////////////
                             break;
                         case 2:
                             us_dreh(1, 180);
                             change_topface(2);
                             wuerfel_print(1);
                             change_rightface(color_c);
-                            wuerfel_print(1);////////////////
                             break;
                         case 3:
                             us_dreh(-1, 90);
                             change_topface(2);
                             change_rightface(color_c);
-                            wuerfel_print(1);////////////////
                             break;
                         default:
                             break;

@@ -66,20 +66,20 @@
   50              	.LVL2:
   18:OLL.c         ****     if ((color_data[0][1]!=2)&&(color_data[0][3]!=2)&&(color_data[0][5]!=2)&&(color_data[0][7]!=2))
   51              		.loc 1 18 0
-  52 0020 A4399FE5 		ldr	r3, .L30
+  52 0020 9C399FE5 		ldr	r3, .L30
   53 0024 0130D3E5 		ldrb	r3, [r3, #1]	@ zero_extendqisi2
   54 0028 020053E3 		cmp	r3, #2
   55 002c 2300000A 		beq	.L2
   56              		.loc 1 18 0 is_stmt 0 discriminator 1
-  57 0030 94399FE5 		ldr	r3, .L30
+  57 0030 8C399FE5 		ldr	r3, .L30
   58 0034 0330D3E5 		ldrb	r3, [r3, #3]	@ zero_extendqisi2
   59 0038 020053E3 		cmp	r3, #2
   60 003c 4500000A 		beq	.L18
-  61 0040 84399FE5 		ldr	r3, .L30
+  61 0040 7C399FE5 		ldr	r3, .L30
   62 0044 0530D3E5 		ldrb	r3, [r3, #5]	@ zero_extendqisi2
   63 0048 020053E3 		cmp	r3, #2
   64 004c 4100000A 		beq	.L18
-  65 0050 74399FE5 		ldr	r3, .L30
+  65 0050 6C399FE5 		ldr	r3, .L30
   66 0054 0730D3E5 		ldrb	r3, [r3, #7]	@ zero_extendqisi2
   67 0058 020053E3 		cmp	r3, #2
   68 005c 3D00000A 		beq	.L18
@@ -128,21 +128,21 @@
   27:OLL.c         ****     }
   28:OLL.c         ****         if((color_data[0][1]==2)&&(color_data[0][3]!=2)&&(color_data[0][5]!=2)&&(color_data[0][7]==
  103              		.loc 1 28 0
- 104 00b0 14399FE5 		ldr	r3, .L30
+ 104 00b0 0C399FE5 		ldr	r3, .L30
  105 00b4 0130D3E5 		ldrb	r3, [r3, #1]	@ zero_extendqisi2
  106 00b8 020053E3 		cmp	r3, #2
  107 00bc 2500001A 		bne	.L18
  108              	.L2:
  109              		.loc 1 28 0 is_stmt 0 discriminator 1
- 110 00c0 04399FE5 		ldr	r3, .L30
+ 110 00c0 FC389FE5 		ldr	r3, .L30
  111 00c4 0330D3E5 		ldrb	r3, [r3, #3]	@ zero_extendqisi2
  112 00c8 020053E3 		cmp	r3, #2
  113 00cc 4700000A 		beq	.L19
- 114 00d0 F4389FE5 		ldr	r3, .L30
+ 114 00d0 EC389FE5 		ldr	r3, .L30
  115 00d4 0530D3E5 		ldrb	r3, [r3, #5]	@ zero_extendqisi2
  116 00d8 020053E3 		cmp	r3, #2
  117 00dc 4300000A 		beq	.L19
- 118 00e0 E4389FE5 		ldr	r3, .L30
+ 118 00e0 DC389FE5 		ldr	r3, .L30
  119 00e4 0730D3E5 		ldrb	r3, [r3, #7]	@ zero_extendqisi2
  120 00e8 020053E3 		cmp	r3, #2
  121 00ec 3F00001A 		bne	.L19
@@ -196,21 +196,21 @@
   38:OLL.c         ****         }
   39:OLL.c         ****         if ((color_data[0][1]!=2)&&(color_data[0][3]==2)&&(color_data[0][5]==2)&&(color_data[0][7]!
  160              		.loc 1 39 0
- 161 0148 7C389FE5 		ldr	r3, .L30
+ 161 0148 74389FE5 		ldr	r3, .L30
  162 014c 0130D3E5 		ldrb	r3, [r3, #1]	@ zero_extendqisi2
  163 0150 020053E3 		cmp	r3, #2
  164 0154 2500000A 		beq	.L19
  165              	.L18:
  166              		.loc 1 39 0 is_stmt 0 discriminator 1
- 167 0158 6C389FE5 		ldr	r3, .L30
+ 167 0158 64389FE5 		ldr	r3, .L30
  168 015c 0330D3E5 		ldrb	r3, [r3, #3]	@ zero_extendqisi2
  169 0160 020053E3 		cmp	r3, #2
  170 0164 4500001A 		bne	.L20
- 171 0168 5C389FE5 		ldr	r3, .L30
+ 171 0168 54389FE5 		ldr	r3, .L30
  172 016c 0530D3E5 		ldrb	r3, [r3, #5]	@ zero_extendqisi2
  173 0170 020053E3 		cmp	r3, #2
  174 0174 4100001A 		bne	.L20
- 175 0178 4C389FE5 		ldr	r3, .L30
+ 175 0178 44389FE5 		ldr	r3, .L30
  176 017c 0730D3E5 		ldrb	r3, [r3, #7]	@ zero_extendqisi2
  177 0180 020053E3 		cmp	r3, #2
  178 0184 3D00000A 		beq	.L20
@@ -264,21 +264,21 @@
   49:OLL.c         ****         }
   50:OLL.c         ****         if ((color_data[0][1]==2)&&(color_data[0][3]==2)&&(color_data[0][5]!=2)&&(color_data[0][7]!
  217              		.loc 1 50 0
- 218 01e0 E4379FE5 		ldr	r3, .L30
+ 218 01e0 DC379FE5 		ldr	r3, .L30
  219 01e4 0130D3E5 		ldrb	r3, [r3, #1]	@ zero_extendqisi2
  220 01e8 020053E3 		cmp	r3, #2
  221 01ec 2300001A 		bne	.L20
  222              	.L19:
  223              		.loc 1 50 0 is_stmt 0 discriminator 1
- 224 01f0 D4379FE5 		ldr	r3, .L30
+ 224 01f0 CC379FE5 		ldr	r3, .L30
  225 01f4 0330D3E5 		ldrb	r3, [r3, #3]	@ zero_extendqisi2
  226 01f8 020053E3 		cmp	r3, #2
  227 01fc 4500001A 		bne	.L21
- 228 0200 C4379FE5 		ldr	r3, .L30
+ 228 0200 BC379FE5 		ldr	r3, .L30
  229 0204 0530D3E5 		ldrb	r3, [r3, #5]	@ zero_extendqisi2
  230 0208 020053E3 		cmp	r3, #2
  231 020c 4100000A 		beq	.L21
- 232 0210 B4379FE5 		ldr	r3, .L30
+ 232 0210 AC379FE5 		ldr	r3, .L30
  233 0214 0730D3E5 		ldrb	r3, [r3, #7]	@ zero_extendqisi2
  234 0218 020053E3 		cmp	r3, #2
  235 021c 3D00000A 		beq	.L21
@@ -327,21 +327,21 @@
   59:OLL.c         ****         }
   60:OLL.c         ****         if((color_data[0][1]!=2)&&(color_data[0][3]==2)&&(color_data[0][5]!=2)&&(color_data[0][7]==
  270              		.loc 1 60 0
- 271 0270 54379FE5 		ldr	r3, .L30
+ 271 0270 4C379FE5 		ldr	r3, .L30
  272 0274 0130D3E5 		ldrb	r3, [r3, #1]	@ zero_extendqisi2
  273 0278 020053E3 		cmp	r3, #2
  274 027c 2500000A 		beq	.L21
  275              	.L20:
  276              		.loc 1 60 0 is_stmt 0 discriminator 1
- 277 0280 44379FE5 		ldr	r3, .L30
+ 277 0280 3C379FE5 		ldr	r3, .L30
  278 0284 0330D3E5 		ldrb	r3, [r3, #3]	@ zero_extendqisi2
  279 0288 020053E3 		cmp	r3, #2
  280 028c 4700001A 		bne	.L22
- 281 0290 34379FE5 		ldr	r3, .L30
+ 281 0290 2C379FE5 		ldr	r3, .L30
  282 0294 0530D3E5 		ldrb	r3, [r3, #5]	@ zero_extendqisi2
  283 0298 020053E3 		cmp	r3, #2
  284 029c 4300000A 		beq	.L22
- 285 02a0 24379FE5 		ldr	r3, .L30
+ 285 02a0 1C379FE5 		ldr	r3, .L30
  286 02a4 0730D3E5 		ldrb	r3, [r3, #7]	@ zero_extendqisi2
  287 02a8 020053E3 		cmp	r3, #2
  288 02ac 3F00001A 		bne	.L22
@@ -395,21 +395,21 @@
   70:OLL.c         ****         }
   71:OLL.c         ****         if((color_data[0][1]==2)&&(color_data[0][3]!=2)&&(color_data[0][5]==2)&&(color_data[0][7]!=
  327              		.loc 1 71 0
- 328 0308 BC369FE5 		ldr	r3, .L30
+ 328 0308 B4369FE5 		ldr	r3, .L30
  329 030c 0130D3E5 		ldrb	r3, [r3, #1]	@ zero_extendqisi2
  330 0310 020053E3 		cmp	r3, #2
  331 0314 2500001A 		bne	.L22
  332              	.L21:
  333              		.loc 1 71 0 is_stmt 0 discriminator 1
- 334 0318 AC369FE5 		ldr	r3, .L30
+ 334 0318 A4369FE5 		ldr	r3, .L30
  335 031c 0330D3E5 		ldrb	r3, [r3, #3]	@ zero_extendqisi2
  336 0320 020053E3 		cmp	r3, #2
  337 0324 4500000A 		beq	.L8
- 338 0328 9C369FE5 		ldr	r3, .L30
+ 338 0328 94369FE5 		ldr	r3, .L30
  339 032c 0530D3E5 		ldrb	r3, [r3, #5]	@ zero_extendqisi2
  340 0330 020053E3 		cmp	r3, #2
  341 0334 4100001A 		bne	.L8
- 342 0338 8C369FE5 		ldr	r3, .L30
+ 342 0338 84369FE5 		ldr	r3, .L30
  343 033c 0730D3E5 		ldrb	r3, [r3, #7]	@ zero_extendqisi2
  344 0340 020053E3 		cmp	r3, #2
  345 0344 3D00000A 		beq	.L8
@@ -463,21 +463,21 @@
   81:OLL.c         ****         }
   82:OLL.c         ****         if((color_data[0][1]!=2)&&(color_data[0][3]!=2)&&(color_data[0][5]==2)&&(color_data[0][7]==
  384              		.loc 1 82 0
- 385 03a0 24369FE5 		ldr	r3, .L30
+ 385 03a0 1C369FE5 		ldr	r3, .L30
  386 03a4 0130D3E5 		ldrb	r3, [r3, #1]	@ zero_extendqisi2
  387 03a8 020053E3 		cmp	r3, #2
  388 03ac 2300000A 		beq	.L8
  389              	.L22:
  390              		.loc 1 82 0 is_stmt 0 discriminator 1
- 391 03b0 14369FE5 		ldr	r3, .L30
+ 391 03b0 0C369FE5 		ldr	r3, .L30
  392 03b4 0330D3E5 		ldrb	r3, [r3, #3]	@ zero_extendqisi2
  393 03b8 020053E3 		cmp	r3, #2
  394 03bc 1F00000A 		beq	.L8
- 395 03c0 04369FE5 		ldr	r3, .L30
+ 395 03c0 FC359FE5 		ldr	r3, .L30
  396 03c4 0530D3E5 		ldrb	r3, [r3, #5]	@ zero_extendqisi2
  397 03c8 020053E3 		cmp	r3, #2
  398 03cc 1B00001A 		bne	.L8
- 399 03d0 F4359FE5 		ldr	r3, .L30
+ 399 03d0 EC359FE5 		ldr	r3, .L30
  400 03d4 0730D3E5 		ldrb	r3, [r3, #7]	@ zero_extendqisi2
  401 03d8 020053E3 		cmp	r3, #2
  402 03dc 1700001A 		bne	.L8
@@ -536,695 +536,689 @@
  445              	.L8:
   93:OLL.c         ****         }
   94:OLL.c         ****     
-  95:OLL.c         ****     wuerfel_print(1);
+  95:OLL.c         ****     int color_kanten[]={1,5,3,4};
  446              		.loc 1 95 0
- 447 0440 0100A0E3 		mov	r0, #1
- 448 0444 FEFFFFEB 		bl	wuerfel_print
- 449              	.LVL58:
-  96:OLL.c         ****     
-  97:OLL.c         ****     int color_kanten[]={1,5,3,4};
- 450              		.loc 1 97 0
- 451 0448 80359FE5 		ldr	r3, .L30+4
- 452 044c 0F0093E8 		ldmia	r3, {r0, r1, r2, r3}
- 453 0450 10C08DE2 		add	ip, sp, #16
- 454 0454 0F000CE9 		stmdb	ip, {r0, r1, r2, r3}
- 455              	.LVL59:
- 456 0458 04404DE2 		sub	r4, sp, #4
- 457 045c 0C808DE2 		add	r8, sp, #12
-  98:OLL.c         ****     // durch Formular
-  99:OLL.c         ****     int i;
- 100:OLL.c         ****     for(i=0;i<=3;i++){
- 101:OLL.c         ****         
- 102:OLL.c         ****         change_topface(2);
- 458              		.loc 1 102 0
- 459 0460 0270A0E3 		mov	r7, #2
- 103:OLL.c         ****         change_rightface(color_kanten[i]);
- 104:OLL.c         ****         wuerfel_print(1);
- 460              		.loc 1 104 0
- 461 0464 0160A0E3 		mov	r6, #1
- 105:OLL.c         ****         
- 106:OLL.c         ****         if((color_data[0][1]==2)&&(color_data[0][3]==2)&&(color_data[0][5]==2)&&(color_data[0][7]==
- 462              		.loc 1 106 0
- 463 0468 5C559FE5 		ldr	r5, .L30
- 464              	.LVL60:
- 465              	.L17:
- 102:OLL.c         ****         change_rightface(color_kanten[i]);
- 466              		.loc 1 102 0
- 467 046c 0700A0E1 		mov	r0, r7
- 468 0470 FEFFFFEB 		bl	change_topface
+ 447 0440 80359FE5 		ldr	r3, .L30+4
+ 448 0444 0F0093E8 		ldmia	r3, {r0, r1, r2, r3}
+ 449 0448 10C08DE2 		add	ip, sp, #16
+ 450 044c 0F000CE9 		stmdb	ip, {r0, r1, r2, r3}
+ 451              	.LVL58:
+ 452 0450 04404DE2 		sub	r4, sp, #4
+ 453 0454 0C808DE2 		add	r8, sp, #12
+  96:OLL.c         ****     // durch Formular
+  97:OLL.c         ****     int i;
+  98:OLL.c         ****     for(i=0;i<=3;i++){
+  99:OLL.c         ****         
+ 100:OLL.c         ****         change_topface(2);
+ 454              		.loc 1 100 0
+ 455 0458 0270A0E3 		mov	r7, #2
+ 101:OLL.c         ****         change_rightface(color_kanten[i]);
+ 102:OLL.c         ****         wuerfel_print(1);
+ 456              		.loc 1 102 0
+ 457 045c 0160A0E3 		mov	r6, #1
+ 103:OLL.c         ****         
+ 104:OLL.c         ****         if((color_data[0][1]==2)&&(color_data[0][3]==2)&&(color_data[0][5]==2)&&(color_data[0][7]==
+ 458              		.loc 1 104 0
+ 459 0460 5C559FE5 		ldr	r5, .L30
+ 460              	.LVL59:
+ 461              	.L17:
+ 100:OLL.c         ****         change_rightface(color_kanten[i]);
+ 462              		.loc 1 100 0
+ 463 0464 0700A0E1 		mov	r0, r7
+ 464 0468 FEFFFFEB 		bl	change_topface
+ 465              	.LVL60:
+ 101:OLL.c         ****         change_rightface(color_kanten[i]);
+ 466              		.loc 1 101 0
+ 467 046c 0400B4E5 		ldr	r0, [r4, #4]!
+ 468 0470 FEFFFFEB 		bl	change_rightface
  469              	.LVL61:
- 103:OLL.c         ****         change_rightface(color_kanten[i]);
- 470              		.loc 1 103 0
- 471 0474 0400B4E5 		ldr	r0, [r4, #4]!
- 472 0478 FEFFFFEB 		bl	change_rightface
+ 102:OLL.c         ****         
+ 470              		.loc 1 102 0
+ 471 0474 0600A0E1 		mov	r0, r6
+ 472 0478 FEFFFFEB 		bl	wuerfel_print
  473              	.LVL62:
- 104:OLL.c         ****         
  474              		.loc 1 104 0
- 475 047c 0600A0E1 		mov	r0, r6
- 476 0480 FEFFFFEB 		bl	wuerfel_print
- 477              	.LVL63:
- 478              		.loc 1 106 0
- 479 0484 0130D5E5 		ldrb	r3, [r5, #1]	@ zero_extendqisi2
- 480 0488 020053E3 		cmp	r3, #2
- 481 048c 3501001A 		bne	.L9
- 482              		.loc 1 106 0 is_stmt 0 discriminator 1
- 483 0490 0330D5E5 		ldrb	r3, [r5, #3]	@ zero_extendqisi2
- 484 0494 020053E3 		cmp	r3, #2
- 485 0498 3201001A 		bne	.L9
- 486 049c 0530D5E5 		ldrb	r3, [r5, #5]	@ zero_extendqisi2
- 487 04a0 020053E3 		cmp	r3, #2
- 488 04a4 3201001A 		bne	.L10
- 489 04a8 0730D5E5 		ldrb	r3, [r5, #7]	@ zero_extendqisi2
- 490 04ac 020053E3 		cmp	r3, #2
- 491 04b0 2F01001A 		bne	.L10
- 492 04b4 0930D5E5 		ldrb	r3, [r5, #9]	@ zero_extendqisi2
- 493 04b8 020053E3 		cmp	r3, #2
- 494 04bc 2C01001A 		bne	.L10
- 495 04c0 0B30D5E5 		ldrb	r3, [r5, #11]	@ zero_extendqisi2
- 496 04c4 020053E3 		cmp	r3, #2
- 497 04c8 2901001A 		bne	.L10
- 498 04cc 2130D5E5 		ldrb	r3, [r5, #33]	@ zero_extendqisi2
- 499 04d0 020053E3 		cmp	r3, #2
- 500 04d4 2601001A 		bne	.L10
- 501 04d8 2330D5E5 		ldrb	r3, [r5, #35]	@ zero_extendqisi2
- 502 04dc 020053E3 		cmp	r3, #2
- 503 04e0 2301001A 		bne	.L10
- 107:OLL.c         ****         {
- 108:OLL.c         ****             rs_dreh(1, 90);
- 504              		.loc 1 108 0 is_stmt 1
- 505 04e4 0100A0E3 		mov	r0, #1
- 506 04e8 5A10A0E3 		mov	r1, #90
- 507 04ec FEFFFFEB 		bl	rs_dreh
- 508              	.LVL64:
- 109:OLL.c         ****             rs_dreh(1, 90);
- 509              		.loc 1 109 0
- 510 04f0 0100A0E3 		mov	r0, #1
- 511 04f4 5A10A0E3 		mov	r1, #90
- 512 04f8 FEFFFFEB 		bl	rs_dreh
- 513              	.LVL65:
- 110:OLL.c         ****             ds_dreh(1, 90);
- 514              		.loc 1 110 0
- 515 04fc 0100A0E3 		mov	r0, #1
- 516 0500 5A10A0E3 		mov	r1, #90
- 517 0504 FEFFFFEB 		bl	ds_dreh
- 518              	.LVL66:
- 111:OLL.c         ****             ls_dreh(-1, 90);
- 519              		.loc 1 111 0
- 520 0508 0000E0E3 		mvn	r0, #0
- 521 050c 5A10A0E3 		mov	r1, #90
- 522 0510 FEFFFFEB 		bl	ls_dreh
- 523              	.LVL67:
- 112:OLL.c         ****             rs_dreh(-1, 90);
- 524              		.loc 1 112 0
- 525 0514 0000E0E3 		mvn	r0, #0
- 526 0518 5A10A0E3 		mov	r1, #90
- 527 051c FEFFFFEB 		bl	rs_dreh
- 528              	.LVL68:
- 113:OLL.c         ****             ls_dreh(1, 90);
- 529              		.loc 1 113 0
- 530 0520 0100A0E3 		mov	r0, #1
- 531 0524 5A10A0E3 		mov	r1, #90
- 532 0528 FEFFFFEB 		bl	ls_dreh
- 533              	.LVL69:
- 114:OLL.c         ****             rs_dreh(1, 90);
- 534              		.loc 1 114 0
- 535 052c 0100A0E3 		mov	r0, #1
- 536 0530 5A10A0E3 		mov	r1, #90
- 537 0534 FEFFFFEB 		bl	rs_dreh
- 538              	.LVL70:
- 115:OLL.c         ****             ls_dreh(-1, 90);
- 539              		.loc 1 115 0
- 540 0538 0000E0E3 		mvn	r0, #0
- 541 053c 5A10A0E3 		mov	r1, #90
- 542 0540 FEFFFFEB 		bl	ls_dreh
- 543              	.LVL71:
+ 475 047c 0130D5E5 		ldrb	r3, [r5, #1]	@ zero_extendqisi2
+ 476 0480 020053E3 		cmp	r3, #2
+ 477 0484 3501001A 		bne	.L9
+ 478              		.loc 1 104 0 is_stmt 0 discriminator 1
+ 479 0488 0330D5E5 		ldrb	r3, [r5, #3]	@ zero_extendqisi2
+ 480 048c 020053E3 		cmp	r3, #2
+ 481 0490 3201001A 		bne	.L9
+ 482 0494 0530D5E5 		ldrb	r3, [r5, #5]	@ zero_extendqisi2
+ 483 0498 020053E3 		cmp	r3, #2
+ 484 049c 3201001A 		bne	.L10
+ 485 04a0 0730D5E5 		ldrb	r3, [r5, #7]	@ zero_extendqisi2
+ 486 04a4 020053E3 		cmp	r3, #2
+ 487 04a8 2F01001A 		bne	.L10
+ 488 04ac 0930D5E5 		ldrb	r3, [r5, #9]	@ zero_extendqisi2
+ 489 04b0 020053E3 		cmp	r3, #2
+ 490 04b4 2C01001A 		bne	.L10
+ 491 04b8 0B30D5E5 		ldrb	r3, [r5, #11]	@ zero_extendqisi2
+ 492 04bc 020053E3 		cmp	r3, #2
+ 493 04c0 2901001A 		bne	.L10
+ 494 04c4 2130D5E5 		ldrb	r3, [r5, #33]	@ zero_extendqisi2
+ 495 04c8 020053E3 		cmp	r3, #2
+ 496 04cc 2601001A 		bne	.L10
+ 497 04d0 2330D5E5 		ldrb	r3, [r5, #35]	@ zero_extendqisi2
+ 498 04d4 020053E3 		cmp	r3, #2
+ 499 04d8 2301001A 		bne	.L10
+ 105:OLL.c         ****         {
+ 106:OLL.c         ****             rs_dreh(1, 90);
+ 500              		.loc 1 106 0 is_stmt 1
+ 501 04dc 0100A0E3 		mov	r0, #1
+ 502 04e0 5A10A0E3 		mov	r1, #90
+ 503 04e4 FEFFFFEB 		bl	rs_dreh
+ 504              	.LVL63:
+ 107:OLL.c         ****             rs_dreh(1, 90);
+ 505              		.loc 1 107 0
+ 506 04e8 0100A0E3 		mov	r0, #1
+ 507 04ec 5A10A0E3 		mov	r1, #90
+ 508 04f0 FEFFFFEB 		bl	rs_dreh
+ 509              	.LVL64:
+ 108:OLL.c         ****             ds_dreh(1, 90);
+ 510              		.loc 1 108 0
+ 511 04f4 0100A0E3 		mov	r0, #1
+ 512 04f8 5A10A0E3 		mov	r1, #90
+ 513 04fc FEFFFFEB 		bl	ds_dreh
+ 514              	.LVL65:
+ 109:OLL.c         ****             ls_dreh(-1, 90);
+ 515              		.loc 1 109 0
+ 516 0500 0000E0E3 		mvn	r0, #0
+ 517 0504 5A10A0E3 		mov	r1, #90
+ 518 0508 FEFFFFEB 		bl	ls_dreh
+ 519              	.LVL66:
+ 110:OLL.c         ****             rs_dreh(-1, 90);
+ 520              		.loc 1 110 0
+ 521 050c 0000E0E3 		mvn	r0, #0
+ 522 0510 5A10A0E3 		mov	r1, #90
+ 523 0514 FEFFFFEB 		bl	rs_dreh
+ 524              	.LVL67:
+ 111:OLL.c         ****             ls_dreh(1, 90);
+ 525              		.loc 1 111 0
+ 526 0518 0100A0E3 		mov	r0, #1
+ 527 051c 5A10A0E3 		mov	r1, #90
+ 528 0520 FEFFFFEB 		bl	ls_dreh
+ 529              	.LVL68:
+ 112:OLL.c         ****             rs_dreh(1, 90);
+ 530              		.loc 1 112 0
+ 531 0524 0100A0E3 		mov	r0, #1
+ 532 0528 5A10A0E3 		mov	r1, #90
+ 533 052c FEFFFFEB 		bl	rs_dreh
+ 534              	.LVL69:
+ 113:OLL.c         ****             ls_dreh(-1, 90);
+ 535              		.loc 1 113 0
+ 536 0530 0000E0E3 		mvn	r0, #0
+ 537 0534 5A10A0E3 		mov	r1, #90
+ 538 0538 FEFFFFEB 		bl	ls_dreh
+ 539              	.LVL70:
+ 114:OLL.c         ****             rs_dreh(-1, 90);
+ 540              		.loc 1 114 0
+ 541 053c 0000E0E3 		mvn	r0, #0
+ 542 0540 5A10A0E3 		mov	r1, #90
+ 543 0544 FEFFFFEB 		bl	rs_dreh
+ 544              	.LVL71:
+ 115:OLL.c         ****             ls_dreh(1, 90);
+ 545              		.loc 1 115 0
+ 546 0548 0100A0E3 		mov	r0, #1
+ 547 054c 5A10A0E3 		mov	r1, #90
+ 548 0550 FEFFFFEB 		bl	ls_dreh
+ 549              	.LVL72:
  116:OLL.c         ****             rs_dreh(-1, 90);
- 544              		.loc 1 116 0
- 545 0544 0000E0E3 		mvn	r0, #0
- 546 0548 5A10A0E3 		mov	r1, #90
- 547 054c FEFFFFEB 		bl	rs_dreh
- 548              	.LVL72:
- 117:OLL.c         ****             ls_dreh(1, 90);
- 549              		.loc 1 117 0
- 550 0550 0100A0E3 		mov	r0, #1
- 551 0554 5A10A0E3 		mov	r1, #90
- 552 0558 FEFFFFEB 		bl	ls_dreh
- 553              	.LVL73:
- 118:OLL.c         ****             rs_dreh(-1, 90);
- 554              		.loc 1 118 0
- 555 055c 0000E0E3 		mvn	r0, #0
- 556 0560 5A10A0E3 		mov	r1, #90
- 557 0564 FEFFFFEB 		bl	rs_dreh
- 558              	.LVL74:
- 119:OLL.c         ****             ls_dreh(-1, 90);
- 559              		.loc 1 119 0
- 560 0568 0000E0E3 		mvn	r0, #0
- 561 056c 5A10A0E3 		mov	r1, #90
- 562 0570 FEFFFFEB 		bl	ls_dreh
- 563              	.LVL75:
- 120:OLL.c         ****             goto fertig;
- 564              		.loc 1 120 0
- 565 0574 110100EA 		b	.L29
- 566              	.L23:
- 121:OLL.c         ****         }
- 122:OLL.c         ****         if ((color_data[0][1]==2)&&(color_data[0][3]==2)&&(color_data[0][5]==2)&&(color_data[0][7]=
- 567              		.loc 1 122 0 discriminator 1
- 568 0578 0730D5E5 		ldrb	r3, [r5, #7]	@ zero_extendqisi2
- 569 057c 020053E3 		cmp	r3, #2
- 570 0580 FE00001A 		bne	.L12
- 571 0584 2A30D5E5 		ldrb	r3, [r5, #42]	@ zero_extendqisi2
- 572 0588 020053E3 		cmp	r3, #2
- 573 058c FB00001A 		bne	.L12
- 574 0590 2C30D5E5 		ldrb	r3, [r5, #44]	@ zero_extendqisi2
- 575 0594 020053E3 		cmp	r3, #2
- 576 0598 F800001A 		bne	.L12
- 577 059c 2330D5E5 		ldrb	r3, [r5, #35]	@ zero_extendqisi2
- 578 05a0 020053E3 		cmp	r3, #2
- 579 05a4 F500001A 		bne	.L12
- 580 05a8 0B30D5E5 		ldrb	r3, [r5, #11]	@ zero_extendqisi2
- 581 05ac 020053E3 		cmp	r3, #2
- 582 05b0 F200001A 		bne	.L12
- 123:OLL.c         ****         {
- 124:OLL.c         ****             rs_dreh(1, 90);
- 583              		.loc 1 124 0
- 584 05b4 0100A0E3 		mov	r0, #1
- 585 05b8 5A10A0E3 		mov	r1, #90
- 586 05bc FEFFFFEB 		bl	rs_dreh
- 587              	.LVL76:
- 125:OLL.c         ****             rs_dreh(-1, 90);
- 588              		.loc 1 125 0
- 589 05c0 0000E0E3 		mvn	r0, #0
- 590 05c4 5A10A0E3 		mov	r1, #90
- 591 05c8 FEFFFFEB 		bl	rs_dreh
- 592              	.LVL77:
- 126:OLL.c         ****             ds_dreh(-1, 90);
- 593              		.loc 1 126 0
- 594 05cc 0000E0E3 		mvn	r0, #0
- 595 05d0 5A10A0E3 		mov	r1, #90
- 596 05d4 FEFFFFEB 		bl	ds_dreh
- 597              	.LVL78:
- 127:OLL.c         ****             ls_dreh(-1, 180);
- 598              		.loc 1 127 0
- 599 05d8 0000E0E3 		mvn	r0, #0
- 600 05dc B410A0E3 		mov	r1, #180
- 601 05e0 FEFFFFEB 		bl	ls_dreh
- 602              	.LVL79:
+ 550              		.loc 1 116 0
+ 551 0554 0000E0E3 		mvn	r0, #0
+ 552 0558 5A10A0E3 		mov	r1, #90
+ 553 055c FEFFFFEB 		bl	rs_dreh
+ 554              	.LVL73:
+ 117:OLL.c         ****             ls_dreh(-1, 90);
+ 555              		.loc 1 117 0
+ 556 0560 0000E0E3 		mvn	r0, #0
+ 557 0564 5A10A0E3 		mov	r1, #90
+ 558 0568 FEFFFFEB 		bl	ls_dreh
+ 559              	.LVL74:
+ 118:OLL.c         ****             goto fertig;
+ 560              		.loc 1 118 0
+ 561 056c 110100EA 		b	.L29
+ 562              	.L23:
+ 119:OLL.c         ****         }
+ 120:OLL.c         ****         if ((color_data[0][1]==2)&&(color_data[0][3]==2)&&(color_data[0][5]==2)&&(color_data[0][7]=
+ 563              		.loc 1 120 0 discriminator 1
+ 564 0570 0730D5E5 		ldrb	r3, [r5, #7]	@ zero_extendqisi2
+ 565 0574 020053E3 		cmp	r3, #2
+ 566 0578 FE00001A 		bne	.L12
+ 567 057c 2A30D5E5 		ldrb	r3, [r5, #42]	@ zero_extendqisi2
+ 568 0580 020053E3 		cmp	r3, #2
+ 569 0584 FB00001A 		bne	.L12
+ 570 0588 2C30D5E5 		ldrb	r3, [r5, #44]	@ zero_extendqisi2
+ 571 058c 020053E3 		cmp	r3, #2
+ 572 0590 F800001A 		bne	.L12
+ 573 0594 2330D5E5 		ldrb	r3, [r5, #35]	@ zero_extendqisi2
+ 574 0598 020053E3 		cmp	r3, #2
+ 575 059c F500001A 		bne	.L12
+ 576 05a0 0B30D5E5 		ldrb	r3, [r5, #11]	@ zero_extendqisi2
+ 577 05a4 020053E3 		cmp	r3, #2
+ 578 05a8 F200001A 		bne	.L12
+ 121:OLL.c         ****         {
+ 122:OLL.c         ****             rs_dreh(1, 90);
+ 579              		.loc 1 122 0
+ 580 05ac 0100A0E3 		mov	r0, #1
+ 581 05b0 5A10A0E3 		mov	r1, #90
+ 582 05b4 FEFFFFEB 		bl	rs_dreh
+ 583              	.LVL75:
+ 123:OLL.c         ****             rs_dreh(-1, 90);
+ 584              		.loc 1 123 0
+ 585 05b8 0000E0E3 		mvn	r0, #0
+ 586 05bc 5A10A0E3 		mov	r1, #90
+ 587 05c0 FEFFFFEB 		bl	rs_dreh
+ 588              	.LVL76:
+ 124:OLL.c         ****             ds_dreh(-1, 90);
+ 589              		.loc 1 124 0
+ 590 05c4 0000E0E3 		mvn	r0, #0
+ 591 05c8 5A10A0E3 		mov	r1, #90
+ 592 05cc FEFFFFEB 		bl	ds_dreh
+ 593              	.LVL77:
+ 125:OLL.c         ****             ls_dreh(-1, 180);
+ 594              		.loc 1 125 0
+ 595 05d0 0000E0E3 		mvn	r0, #0
+ 596 05d4 B410A0E3 		mov	r1, #180
+ 597 05d8 FEFFFFEB 		bl	ls_dreh
+ 598              	.LVL78:
+ 126:OLL.c         ****             rs_dreh(-1, 90);
+ 599              		.loc 1 126 0
+ 600 05dc 0000E0E3 		mvn	r0, #0
+ 601 05e0 5A10A0E3 		mov	r1, #90
+ 602 05e4 FEFFFFEB 		bl	rs_dreh
+ 603              	.LVL79:
+ 127:OLL.c         ****             ls_dreh(1, 180);
+ 604              		.loc 1 127 0
+ 605 05e8 0100A0E3 		mov	r0, #1
+ 606 05ec B410A0E3 		mov	r1, #180
+ 607 05f0 FEFFFFEB 		bl	ls_dreh
+ 608              	.LVL80:
  128:OLL.c         ****             rs_dreh(-1, 90);
- 603              		.loc 1 128 0
- 604 05e4 0000E0E3 		mvn	r0, #0
- 605 05e8 5A10A0E3 		mov	r1, #90
- 606 05ec FEFFFFEB 		bl	rs_dreh
- 607              	.LVL80:
- 129:OLL.c         ****             ls_dreh(1, 180);
- 608              		.loc 1 129 0
- 609 05f0 0100A0E3 		mov	r0, #1
- 610 05f4 B410A0E3 		mov	r1, #180
- 611 05f8 FEFFFFEB 		bl	ls_dreh
- 612              	.LVL81:
- 130:OLL.c         ****             rs_dreh(-1, 90);
- 613              		.loc 1 130 0
- 614 05fc 0000E0E3 		mvn	r0, #0
- 615 0600 5A10A0E3 		mov	r1, #90
- 616 0604 FEFFFFEB 		bl	rs_dreh
- 617              	.LVL82:
- 131:OLL.c         ****             ls_dreh(-1, 180);
- 618              		.loc 1 131 0
- 619 0608 0000E0E3 		mvn	r0, #0
- 620 060c B410A0E3 		mov	r1, #180
- 621 0610 FEFFFFEB 		bl	ls_dreh
- 622              	.LVL83:
- 132:OLL.c         ****             rs_dreh(1, 180);
- 623              		.loc 1 132 0
- 624 0614 0100A0E3 		mov	r0, #1
- 625 0618 B410A0E3 		mov	r1, #180
- 626 061c FEFFFFEB 		bl	rs_dreh
- 627              	.LVL84:
- 133:OLL.c         ****             ls_dreh(1, 90);
- 628              		.loc 1 133 0
- 629 0620 0100A0E3 		mov	r0, #1
- 630 0624 5A10A0E3 		mov	r1, #90
- 631 0628 FEFFFFEB 		bl	ls_dreh
- 632              	.LVL85:
- 134:OLL.c         ****             goto fertig;
- 633              		.loc 1 134 0
- 634 062c E30000EA 		b	.L29
- 635              	.L24:
- 135:OLL.c         ****         }
- 136:OLL.c         ****         if ((color_data[0][1]==2)&&(color_data[0][3]==2)&&(color_data[0][5]==2)&&(color_data[0][7]=
- 636              		.loc 1 136 0 discriminator 1
- 637 0630 0730D5E5 		ldrb	r3, [r5, #7]	@ zero_extendqisi2
- 638 0634 020053E3 		cmp	r3, #2
- 639 0638 D300001A 		bne	.L13
- 640 063c 0630D5E5 		ldrb	r3, [r5, #6]	@ zero_extendqisi2
- 641 0640 020053E3 		cmp	r3, #2
- 642 0644 D000001A 		bne	.L13
- 643 0648 0830D5E5 		ldrb	r3, [r5, #8]	@ zero_extendqisi2
- 644 064c 020053E3 		cmp	r3, #2
- 645 0650 CD00001A 		bne	.L13
- 646 0654 2130D5E5 		ldrb	r3, [r5, #33]	@ zero_extendqisi2
- 647 0658 020053E3 		cmp	r3, #2
- 648 065c CA00001A 		bne	.L13
- 649 0660 2330D5E5 		ldrb	r3, [r5, #35]	@ zero_extendqisi2
- 650 0664 020053E3 		cmp	r3, #2
- 651 0668 C700001A 		bne	.L13
- 137:OLL.c         ****         {
- 138:OLL.c         ****             rs_dreh(1, 180);
- 652              		.loc 1 138 0
- 653 066c 0100A0E3 		mov	r0, #1
- 654 0670 B410A0E3 		mov	r1, #180
- 655 0674 FEFFFFEB 		bl	rs_dreh
- 656              	.LVL86:
- 139:OLL.c         ****             ls_dreh(-1, 90);
- 657              		.loc 1 139 0
- 658 0678 0000E0E3 		mvn	r0, #0
- 659 067c 5A10A0E3 		mov	r1, #90
- 660 0680 FEFFFFEB 		bl	ls_dreh
- 661              	.LVL87:
- 140:OLL.c         ****             rs_dreh(1, 90);
- 662              		.loc 1 140 0
- 663 0684 0100A0E3 		mov	r0, #1
- 664 0688 5A10A0E3 		mov	r1, #90
- 665 068c FEFFFFEB 		bl	rs_dreh
- 666              	.LVL88:
- 141:OLL.c         ****             rs_dreh(-1, 90);
- 667              		.loc 1 141 0
- 668 0690 0000E0E3 		mvn	r0, #0
- 669 0694 5A10A0E3 		mov	r1, #90
- 670 0698 FEFFFFEB 		bl	rs_dreh
- 671              	.LVL89:
- 142:OLL.c         ****             ds_dreh(-1, 90);
- 672              		.loc 1 142 0
- 673 069c 0000E0E3 		mvn	r0, #0
- 674 06a0 5A10A0E3 		mov	r1, #90
- 675 06a4 FEFFFFEB 		bl	ds_dreh
- 676              	.LVL90:
- 143:OLL.c         ****             ls_dreh(-1, 90);
- 677              		.loc 1 143 0
- 678 06a8 0000E0E3 		mvn	r0, #0
- 679 06ac 5A10A0E3 		mov	r1, #90
- 680 06b0 FEFFFFEB 		bl	ls_dreh
- 681              	.LVL91:
- 144:OLL.c         ****             ls_dreh(1, 90);
- 682              		.loc 1 144 0
- 683 06b4 0100A0E3 		mov	r0, #1
- 684 06b8 5A10A0E3 		mov	r1, #90
- 685 06bc FEFFFFEB 		bl	ls_dreh
- 686              	.LVL92:
- 145:OLL.c         ****             rs_dreh(1, 90);
- 687              		.loc 1 145 0
- 688 06c0 0100A0E3 		mov	r0, #1
- 689 06c4 5A10A0E3 		mov	r1, #90
- 690 06c8 FEFFFFEB 		bl	rs_dreh
- 691              	.LVL93:
- 146:OLL.c         ****             rs_dreh(-1, 90);
- 692              		.loc 1 146 0
- 693 06cc 0000E0E3 		mvn	r0, #0
- 694 06d0 5A10A0E3 		mov	r1, #90
- 695 06d4 FEFFFFEB 		bl	rs_dreh
- 696              	.LVL94:
- 147:OLL.c         ****             ds_dreh(-1, 90);
- 697              		.loc 1 147 0
- 698 06d8 0000E0E3 		mvn	r0, #0
- 699 06dc 5A10A0E3 		mov	r1, #90
- 700 06e0 FEFFFFEB 		bl	ds_dreh
- 701              	.LVL95:
- 148:OLL.c         ****             ls_dreh(1, 90);
- 702              		.loc 1 148 0
- 703 06e4 0100A0E3 		mov	r0, #1
- 704 06e8 5A10A0E3 		mov	r1, #90
- 705 06ec FEFFFFEB 		bl	ls_dreh
- 706              	.LVL96:
- 149:OLL.c         ****             goto fertig;
- 707              		.loc 1 149 0
- 708 06f0 B20000EA 		b	.L29
- 709              	.L25:
- 150:OLL.c         ****         }
- 151:OLL.c         ****         if ((color_data[0][1]==2)&&(color_data[0][3]==2)&&(color_data[0][5]==2)&&(color_data[0][7]=
- 710              		.loc 1 151 0 discriminator 1
- 711 06f4 0730D5E5 		ldrb	r3, [r5, #7]	@ zero_extendqisi2
- 712 06f8 020053E3 		cmp	r3, #2
- 713 06fc A500001A 		bne	.L14
- 714 0700 0230D5E5 		ldrb	r3, [r5, #2]	@ zero_extendqisi2
- 715 0704 020053E3 		cmp	r3, #2
- 716 0708 A200001A 		bne	.L14
- 717 070c 0830D5E5 		ldrb	r3, [r5, #8]	@ zero_extendqisi2
- 718 0710 020053E3 		cmp	r3, #2
- 719 0714 9F00001A 		bne	.L14
- 720 0718 2130D5E5 		ldrb	r3, [r5, #33]	@ zero_extendqisi2
- 721 071c 020053E3 		cmp	r3, #2
- 722 0720 9C00001A 		bne	.L14
- 723 0724 0930D5E5 		ldrb	r3, [r5, #9]	@ zero_extendqisi2
- 724 0728 020053E3 		cmp	r3, #2
- 725 072c 9900001A 		bne	.L14
- 152:OLL.c         ****         {
- 153:OLL.c         ****             ls_dreh(1, 90);
- 726              		.loc 1 153 0
- 727 0730 0100A0E3 		mov	r0, #1
- 728 0734 5A10A0E3 		mov	r1, #90
- 729 0738 FEFFFFEB 		bl	ls_dreh
- 730              	.LVL97:
- 154:OLL.c         ****             fs_dreh(1, 90);
- 731              		.loc 1 154 0
- 732 073c 0100A0E3 		mov	r0, #1
- 733 0740 5A10A0E3 		mov	r1, #90
- 734 0744 FEFFFFEB 		bl	fs_dreh
- 735              	.LVL98:
- 155:OLL.c         ****             ls_dreh(-1, 90);
- 736              		.loc 1 155 0
- 737 0748 0000E0E3 		mvn	r0, #0
- 738 074c 5A10A0E3 		mov	r1, #90
- 739 0750 FEFFFFEB 		bl	ls_dreh
- 740              	.LVL99:
- 156:OLL.c         ****             rs_dreh(-1, 90);
- 741              		.loc 1 156 0
- 742 0754 0000E0E3 		mvn	r0, #0
- 743 0758 5A10A0E3 		mov	r1, #90
- 744 075c FEFFFFEB 		bl	rs_dreh
- 745              	.LVL100:
- 157:OLL.c         ****             rs_dreh(-1, 90);
- 746              		.loc 1 157 0
- 747 0760 0000E0E3 		mvn	r0, #0
- 748 0764 5A10A0E3 		mov	r1, #90
- 749 0768 FEFFFFEB 		bl	rs_dreh
- 750              	.LVL101:
- 158:OLL.c         ****             ls_dreh(1, 90); ///////////////////////
- 751              		.loc 1 158 0
- 752 076c 0100A0E3 		mov	r0, #1
- 753 0770 5A10A0E3 		mov	r1, #90
- 754 0774 FEFFFFEB 		bl	ls_dreh
- 755              	.LVL102:
- 159:OLL.c         ****             ls_dreh(1, 90);
- 756              		.loc 1 159 0
- 757 0778 0100A0E3 		mov	r0, #1
- 758 077c 5A10A0E3 		mov	r1, #90
- 759 0780 FEFFFFEB 		bl	ls_dreh
- 760              	.LVL103:
- 160:OLL.c         ****             rs_dreh(-1, 90);
- 761              		.loc 1 160 0
- 762 0784 0000E0E3 		mvn	r0, #0
- 763 0788 5A10A0E3 		mov	r1, #90
- 764 078c FEFFFFEB 		bl	rs_dreh
- 765              	.LVL104:
- 161:OLL.c         ****             goto fertig;
- 766              		.loc 1 161 0
- 767 0790 8A0000EA 		b	.L29
- 768              	.L26:
- 162:OLL.c         ****         }
- 163:OLL.c         ****         if((color_data[0][1]==2)&&(color_data[0][3]==2)&&(color_data[0][5]==2)&&(color_data[0][7]==
- 769              		.loc 1 163 0 discriminator 1
- 770 0794 0730D5E5 		ldrb	r3, [r5, #7]	@ zero_extendqisi2
- 771 0798 020053E3 		cmp	r3, #2
- 772 079c 8000001A 		bne	.L15
- 773 07a0 0630D5E5 		ldrb	r3, [r5, #6]	@ zero_extendqisi2
- 774 07a4 020053E3 		cmp	r3, #2
- 775 07a8 7D00001A 		bne	.L15
- 776 07ac 0230D5E5 		ldrb	r3, [r5, #2]	@ zero_extendqisi2
- 777 07b0 020053E3 		cmp	r3, #2
- 778 07b4 7A00001A 		bne	.L15
- 779 07b8 2C30D5E5 		ldrb	r3, [r5, #44]	@ zero_extendqisi2
- 780 07bc 020053E3 		cmp	r3, #2
- 781 07c0 7700001A 		bne	.L15
- 782 07c4 0B30D5E5 		ldrb	r3, [r5, #11]	@ zero_extendqisi2
- 783 07c8 020053E3 		cmp	r3, #2
- 784 07cc 7400001A 		bne	.L15
- 164:OLL.c         ****             //formular 25
- 165:OLL.c         ****         {
- 166:OLL.c         ****             fs_dreh(-1, 90);
- 785              		.loc 1 166 0
- 786 07d0 0000E0E3 		mvn	r0, #0
- 787 07d4 5A10A0E3 		mov	r1, #90
- 788 07d8 FEFFFFEB 		bl	fs_dreh
- 789              	.LVL105:
- 167:OLL.c         ****             bs_dreh(1, 90);
- 790              		.loc 1 167 0
- 791 07dc 0100A0E3 		mov	r0, #1
- 792 07e0 5A10A0E3 		mov	r1, #90
- 793 07e4 FEFFFFEB 		bl	bs_dreh
- 794              	.LVL106:
- 168:OLL.c         ****             rs_dreh(1, 90);
- 795              		.loc 1 168 0
- 796 07e8 0100A0E3 		mov	r0, #1
- 797 07ec 5A10A0E3 		mov	r1, #90
- 798 07f0 FEFFFFEB 		bl	rs_dreh
- 799              	.LVL107:
- 169:OLL.c         ****             rs_dreh(-1, 90);
- 800              		.loc 1 169 0
- 801 07f4 0000E0E3 		mvn	r0, #0
- 802 07f8 5A10A0E3 		mov	r1, #90
- 803 07fc FEFFFFEB 		bl	rs_dreh
- 804              	.LVL108:
- 170:OLL.c         ****             ls_dreh(-1, 90);
- 805              		.loc 1 170 0
- 806 0800 0000E0E3 		mvn	r0, #0
- 807 0804 5A10A0E3 		mov	r1, #90
- 808 0808 FEFFFFEB 		bl	ls_dreh
- 809              	.LVL109:
- 171:OLL.c         ****             ls_dreh(-1, 90);
- 810              		.loc 1 171 0
- 811 080c 0000E0E3 		mvn	r0, #0
- 812 0810 5A10A0E3 		mov	r1, #90
- 813 0814 FEFFFFEB 		bl	ls_dreh
- 814              	.LVL110:
- 172:OLL.c         ****             rs_dreh(1, 90);
- 815              		.loc 1 172 0
- 816 0818 0100A0E3 		mov	r0, #1
- 817 081c 5A10A0E3 		mov	r1, #90
- 818 0820 FEFFFFEB 		bl	rs_dreh
- 819              	.LVL111:
- 173:OLL.c         ****             rs_dreh(1, 90);
- 820              		.loc 1 173 0
- 821 0824 0100A0E3 		mov	r0, #1
- 822 0828 5A10A0E3 		mov	r1, #90
- 823 082c FEFFFFEB 		bl	rs_dreh
- 824              	.LVL112:
- 174:OLL.c         ****             goto fertig;
- 825              		.loc 1 174 0
- 826 0830 620000EA 		b	.L29
- 827              	.L27:
- 175:OLL.c         ****         }
- 176:OLL.c         ****         if((color_data[0][1]==2)&&(color_data[0][3]==2)&&(color_data[0][5]==2)&&(color_data[0][7]==
- 828              		.loc 1 176 0 discriminator 1
- 829 0834 0730D5E5 		ldrb	r3, [r5, #7]	@ zero_extendqisi2
- 830 0838 020053E3 		cmp	r3, #2
- 831 083c 5B00001A 		bne	.L16
- 832 0840 0230D5E5 		ldrb	r3, [r5, #2]	@ zero_extendqisi2
- 833 0844 020053E3 		cmp	r3, #2
- 834 0848 5800001A 		bne	.L16
- 835 084c 2C30D5E5 		ldrb	r3, [r5, #44]	@ zero_extendqisi2
- 836 0850 020053E3 		cmp	r3, #2
- 837 0854 5500001A 		bne	.L16
- 838 0858 0930D5E5 		ldrb	r3, [r5, #9]	@ zero_extendqisi2
- 839 085c 020053E3 		cmp	r3, #2
- 840 0860 5200001A 		bne	.L16
- 841 0864 3530D5E5 		ldrb	r3, [r5, #53]	@ zero_extendqisi2
- 842 0868 020053E3 		cmp	r3, #2
- 843 086c 4F00001A 		bne	.L16
- 177:OLL.c         ****         {
- 178:OLL.c         ****             
- 179:OLL.c         ****             rs_dreh(1, 90);
- 844              		.loc 1 179 0
- 845 0870 0100A0E3 		mov	r0, #1
- 846 0874 5A10A0E3 		mov	r1, #90
- 847 0878 FEFFFFEB 		bl	rs_dreh
- 848              	.LVL113:
- 180:OLL.c         ****             rs_dreh(-1, 90);
- 849              		.loc 1 180 0
- 850 087c 0000E0E3 		mvn	r0, #0
- 851 0880 5A10A0E3 		mov	r1, #90
- 852 0884 FEFFFFEB 		bl	rs_dreh
- 853              	.LVL114:
- 181:OLL.c         ****             ds_dreh(-1, 90);
- 854              		.loc 1 181 0
- 855 0888 0000E0E3 		mvn	r0, #0
- 856 088c 5A10A0E3 		mov	r1, #90
- 857 0890 FEFFFFEB 		bl	ds_dreh
- 858              	.LVL115:
- 182:OLL.c         ****             ls_dreh(-1, 90);
- 859              		.loc 1 182 0
- 860 0894 0000E0E3 		mvn	r0, #0
- 861 0898 5A10A0E3 		mov	r1, #90
- 862 089c FEFFFFEB 		bl	ls_dreh
- 863              	.LVL116:
+ 609              		.loc 1 128 0
+ 610 05f4 0000E0E3 		mvn	r0, #0
+ 611 05f8 5A10A0E3 		mov	r1, #90
+ 612 05fc FEFFFFEB 		bl	rs_dreh
+ 613              	.LVL81:
+ 129:OLL.c         ****             ls_dreh(-1, 180);
+ 614              		.loc 1 129 0
+ 615 0600 0000E0E3 		mvn	r0, #0
+ 616 0604 B410A0E3 		mov	r1, #180
+ 617 0608 FEFFFFEB 		bl	ls_dreh
+ 618              	.LVL82:
+ 130:OLL.c         ****             rs_dreh(1, 180);
+ 619              		.loc 1 130 0
+ 620 060c 0100A0E3 		mov	r0, #1
+ 621 0610 B410A0E3 		mov	r1, #180
+ 622 0614 FEFFFFEB 		bl	rs_dreh
+ 623              	.LVL83:
+ 131:OLL.c         ****             ls_dreh(1, 90);
+ 624              		.loc 1 131 0
+ 625 0618 0100A0E3 		mov	r0, #1
+ 626 061c 5A10A0E3 		mov	r1, #90
+ 627 0620 FEFFFFEB 		bl	ls_dreh
+ 628              	.LVL84:
+ 132:OLL.c         ****             goto fertig;
+ 629              		.loc 1 132 0
+ 630 0624 E30000EA 		b	.L29
+ 631              	.L24:
+ 133:OLL.c         ****         }
+ 134:OLL.c         ****         if ((color_data[0][1]==2)&&(color_data[0][3]==2)&&(color_data[0][5]==2)&&(color_data[0][7]=
+ 632              		.loc 1 134 0 discriminator 1
+ 633 0628 0730D5E5 		ldrb	r3, [r5, #7]	@ zero_extendqisi2
+ 634 062c 020053E3 		cmp	r3, #2
+ 635 0630 D300001A 		bne	.L13
+ 636 0634 0630D5E5 		ldrb	r3, [r5, #6]	@ zero_extendqisi2
+ 637 0638 020053E3 		cmp	r3, #2
+ 638 063c D000001A 		bne	.L13
+ 639 0640 0830D5E5 		ldrb	r3, [r5, #8]	@ zero_extendqisi2
+ 640 0644 020053E3 		cmp	r3, #2
+ 641 0648 CD00001A 		bne	.L13
+ 642 064c 2130D5E5 		ldrb	r3, [r5, #33]	@ zero_extendqisi2
+ 643 0650 020053E3 		cmp	r3, #2
+ 644 0654 CA00001A 		bne	.L13
+ 645 0658 2330D5E5 		ldrb	r3, [r5, #35]	@ zero_extendqisi2
+ 646 065c 020053E3 		cmp	r3, #2
+ 647 0660 C700001A 		bne	.L13
+ 135:OLL.c         ****         {
+ 136:OLL.c         ****             rs_dreh(1, 180);
+ 648              		.loc 1 136 0
+ 649 0664 0100A0E3 		mov	r0, #1
+ 650 0668 B410A0E3 		mov	r1, #180
+ 651 066c FEFFFFEB 		bl	rs_dreh
+ 652              	.LVL85:
+ 137:OLL.c         ****             ls_dreh(-1, 90);
+ 653              		.loc 1 137 0
+ 654 0670 0000E0E3 		mvn	r0, #0
+ 655 0674 5A10A0E3 		mov	r1, #90
+ 656 0678 FEFFFFEB 		bl	ls_dreh
+ 657              	.LVL86:
+ 138:OLL.c         ****             rs_dreh(1, 90);
+ 658              		.loc 1 138 0
+ 659 067c 0100A0E3 		mov	r0, #1
+ 660 0680 5A10A0E3 		mov	r1, #90
+ 661 0684 FEFFFFEB 		bl	rs_dreh
+ 662              	.LVL87:
+ 139:OLL.c         ****             rs_dreh(-1, 90);
+ 663              		.loc 1 139 0
+ 664 0688 0000E0E3 		mvn	r0, #0
+ 665 068c 5A10A0E3 		mov	r1, #90
+ 666 0690 FEFFFFEB 		bl	rs_dreh
+ 667              	.LVL88:
+ 140:OLL.c         ****             ds_dreh(-1, 90);
+ 668              		.loc 1 140 0
+ 669 0694 0000E0E3 		mvn	r0, #0
+ 670 0698 5A10A0E3 		mov	r1, #90
+ 671 069c FEFFFFEB 		bl	ds_dreh
+ 672              	.LVL89:
+ 141:OLL.c         ****             ls_dreh(-1, 90);
+ 673              		.loc 1 141 0
+ 674 06a0 0000E0E3 		mvn	r0, #0
+ 675 06a4 5A10A0E3 		mov	r1, #90
+ 676 06a8 FEFFFFEB 		bl	ls_dreh
+ 677              	.LVL90:
+ 142:OLL.c         ****             ls_dreh(1, 90);
+ 678              		.loc 1 142 0
+ 679 06ac 0100A0E3 		mov	r0, #1
+ 680 06b0 5A10A0E3 		mov	r1, #90
+ 681 06b4 FEFFFFEB 		bl	ls_dreh
+ 682              	.LVL91:
+ 143:OLL.c         ****             rs_dreh(1, 90);
+ 683              		.loc 1 143 0
+ 684 06b8 0100A0E3 		mov	r0, #1
+ 685 06bc 5A10A0E3 		mov	r1, #90
+ 686 06c0 FEFFFFEB 		bl	rs_dreh
+ 687              	.LVL92:
+ 144:OLL.c         ****             rs_dreh(-1, 90);
+ 688              		.loc 1 144 0
+ 689 06c4 0000E0E3 		mvn	r0, #0
+ 690 06c8 5A10A0E3 		mov	r1, #90
+ 691 06cc FEFFFFEB 		bl	rs_dreh
+ 692              	.LVL93:
+ 145:OLL.c         ****             ds_dreh(-1, 90);
+ 693              		.loc 1 145 0
+ 694 06d0 0000E0E3 		mvn	r0, #0
+ 695 06d4 5A10A0E3 		mov	r1, #90
+ 696 06d8 FEFFFFEB 		bl	ds_dreh
+ 697              	.LVL94:
+ 146:OLL.c         ****             ls_dreh(1, 90);
+ 698              		.loc 1 146 0
+ 699 06dc 0100A0E3 		mov	r0, #1
+ 700 06e0 5A10A0E3 		mov	r1, #90
+ 701 06e4 FEFFFFEB 		bl	ls_dreh
+ 702              	.LVL95:
+ 147:OLL.c         ****             goto fertig;
+ 703              		.loc 1 147 0
+ 704 06e8 B20000EA 		b	.L29
+ 705              	.L25:
+ 148:OLL.c         ****         }
+ 149:OLL.c         ****         if ((color_data[0][1]==2)&&(color_data[0][3]==2)&&(color_data[0][5]==2)&&(color_data[0][7]=
+ 706              		.loc 1 149 0 discriminator 1
+ 707 06ec 0730D5E5 		ldrb	r3, [r5, #7]	@ zero_extendqisi2
+ 708 06f0 020053E3 		cmp	r3, #2
+ 709 06f4 A500001A 		bne	.L14
+ 710 06f8 0230D5E5 		ldrb	r3, [r5, #2]	@ zero_extendqisi2
+ 711 06fc 020053E3 		cmp	r3, #2
+ 712 0700 A200001A 		bne	.L14
+ 713 0704 0830D5E5 		ldrb	r3, [r5, #8]	@ zero_extendqisi2
+ 714 0708 020053E3 		cmp	r3, #2
+ 715 070c 9F00001A 		bne	.L14
+ 716 0710 2130D5E5 		ldrb	r3, [r5, #33]	@ zero_extendqisi2
+ 717 0714 020053E3 		cmp	r3, #2
+ 718 0718 9C00001A 		bne	.L14
+ 719 071c 0930D5E5 		ldrb	r3, [r5, #9]	@ zero_extendqisi2
+ 720 0720 020053E3 		cmp	r3, #2
+ 721 0724 9900001A 		bne	.L14
+ 150:OLL.c         ****         {
+ 151:OLL.c         ****             ls_dreh(1, 90);
+ 722              		.loc 1 151 0
+ 723 0728 0100A0E3 		mov	r0, #1
+ 724 072c 5A10A0E3 		mov	r1, #90
+ 725 0730 FEFFFFEB 		bl	ls_dreh
+ 726              	.LVL96:
+ 152:OLL.c         ****             fs_dreh(1, 90);
+ 727              		.loc 1 152 0
+ 728 0734 0100A0E3 		mov	r0, #1
+ 729 0738 5A10A0E3 		mov	r1, #90
+ 730 073c FEFFFFEB 		bl	fs_dreh
+ 731              	.LVL97:
+ 153:OLL.c         ****             ls_dreh(-1, 90);
+ 732              		.loc 1 153 0
+ 733 0740 0000E0E3 		mvn	r0, #0
+ 734 0744 5A10A0E3 		mov	r1, #90
+ 735 0748 FEFFFFEB 		bl	ls_dreh
+ 736              	.LVL98:
+ 154:OLL.c         ****             rs_dreh(-1, 90);
+ 737              		.loc 1 154 0
+ 738 074c 0000E0E3 		mvn	r0, #0
+ 739 0750 5A10A0E3 		mov	r1, #90
+ 740 0754 FEFFFFEB 		bl	rs_dreh
+ 741              	.LVL99:
+ 155:OLL.c         ****             rs_dreh(-1, 90);
+ 742              		.loc 1 155 0
+ 743 0758 0000E0E3 		mvn	r0, #0
+ 744 075c 5A10A0E3 		mov	r1, #90
+ 745 0760 FEFFFFEB 		bl	rs_dreh
+ 746              	.LVL100:
+ 156:OLL.c         ****             ls_dreh(1, 90); ///////////////////////
+ 747              		.loc 1 156 0
+ 748 0764 0100A0E3 		mov	r0, #1
+ 749 0768 5A10A0E3 		mov	r1, #90
+ 750 076c FEFFFFEB 		bl	ls_dreh
+ 751              	.LVL101:
+ 157:OLL.c         ****             ls_dreh(1, 90);
+ 752              		.loc 1 157 0
+ 753 0770 0100A0E3 		mov	r0, #1
+ 754 0774 5A10A0E3 		mov	r1, #90
+ 755 0778 FEFFFFEB 		bl	ls_dreh
+ 756              	.LVL102:
+ 158:OLL.c         ****             rs_dreh(-1, 90);
+ 757              		.loc 1 158 0
+ 758 077c 0000E0E3 		mvn	r0, #0
+ 759 0780 5A10A0E3 		mov	r1, #90
+ 760 0784 FEFFFFEB 		bl	rs_dreh
+ 761              	.LVL103:
+ 159:OLL.c         ****             goto fertig;
+ 762              		.loc 1 159 0
+ 763 0788 8A0000EA 		b	.L29
+ 764              	.L26:
+ 160:OLL.c         ****         }
+ 161:OLL.c         ****         if((color_data[0][1]==2)&&(color_data[0][3]==2)&&(color_data[0][5]==2)&&(color_data[0][7]==
+ 765              		.loc 1 161 0 discriminator 1
+ 766 078c 0730D5E5 		ldrb	r3, [r5, #7]	@ zero_extendqisi2
+ 767 0790 020053E3 		cmp	r3, #2
+ 768 0794 8000001A 		bne	.L15
+ 769 0798 0630D5E5 		ldrb	r3, [r5, #6]	@ zero_extendqisi2
+ 770 079c 020053E3 		cmp	r3, #2
+ 771 07a0 7D00001A 		bne	.L15
+ 772 07a4 0230D5E5 		ldrb	r3, [r5, #2]	@ zero_extendqisi2
+ 773 07a8 020053E3 		cmp	r3, #2
+ 774 07ac 7A00001A 		bne	.L15
+ 775 07b0 2C30D5E5 		ldrb	r3, [r5, #44]	@ zero_extendqisi2
+ 776 07b4 020053E3 		cmp	r3, #2
+ 777 07b8 7700001A 		bne	.L15
+ 778 07bc 0B30D5E5 		ldrb	r3, [r5, #11]	@ zero_extendqisi2
+ 779 07c0 020053E3 		cmp	r3, #2
+ 780 07c4 7400001A 		bne	.L15
+ 162:OLL.c         ****             //formular 25
+ 163:OLL.c         ****         {
+ 164:OLL.c         ****             fs_dreh(-1, 90);
+ 781              		.loc 1 164 0
+ 782 07c8 0000E0E3 		mvn	r0, #0
+ 783 07cc 5A10A0E3 		mov	r1, #90
+ 784 07d0 FEFFFFEB 		bl	fs_dreh
+ 785              	.LVL104:
+ 165:OLL.c         ****             bs_dreh(1, 90);
+ 786              		.loc 1 165 0
+ 787 07d4 0100A0E3 		mov	r0, #1
+ 788 07d8 5A10A0E3 		mov	r1, #90
+ 789 07dc FEFFFFEB 		bl	bs_dreh
+ 790              	.LVL105:
+ 166:OLL.c         ****             rs_dreh(1, 90);
+ 791              		.loc 1 166 0
+ 792 07e0 0100A0E3 		mov	r0, #1
+ 793 07e4 5A10A0E3 		mov	r1, #90
+ 794 07e8 FEFFFFEB 		bl	rs_dreh
+ 795              	.LVL106:
+ 167:OLL.c         ****             rs_dreh(-1, 90);
+ 796              		.loc 1 167 0
+ 797 07ec 0000E0E3 		mvn	r0, #0
+ 798 07f0 5A10A0E3 		mov	r1, #90
+ 799 07f4 FEFFFFEB 		bl	rs_dreh
+ 800              	.LVL107:
+ 168:OLL.c         ****             ls_dreh(-1, 90);
+ 801              		.loc 1 168 0
+ 802 07f8 0000E0E3 		mvn	r0, #0
+ 803 07fc 5A10A0E3 		mov	r1, #90
+ 804 0800 FEFFFFEB 		bl	ls_dreh
+ 805              	.LVL108:
+ 169:OLL.c         ****             ls_dreh(-1, 90);
+ 806              		.loc 1 169 0
+ 807 0804 0000E0E3 		mvn	r0, #0
+ 808 0808 5A10A0E3 		mov	r1, #90
+ 809 080c FEFFFFEB 		bl	ls_dreh
+ 810              	.LVL109:
+ 170:OLL.c         ****             rs_dreh(1, 90);
+ 811              		.loc 1 170 0
+ 812 0810 0100A0E3 		mov	r0, #1
+ 813 0814 5A10A0E3 		mov	r1, #90
+ 814 0818 FEFFFFEB 		bl	rs_dreh
+ 815              	.LVL110:
+ 171:OLL.c         ****             rs_dreh(1, 90);
+ 816              		.loc 1 171 0
+ 817 081c 0100A0E3 		mov	r0, #1
+ 818 0820 5A10A0E3 		mov	r1, #90
+ 819 0824 FEFFFFEB 		bl	rs_dreh
+ 820              	.LVL111:
+ 172:OLL.c         ****             goto fertig;
+ 821              		.loc 1 172 0
+ 822 0828 620000EA 		b	.L29
+ 823              	.L27:
+ 173:OLL.c         ****         }
+ 174:OLL.c         ****         if((color_data[0][1]==2)&&(color_data[0][3]==2)&&(color_data[0][5]==2)&&(color_data[0][7]==
+ 824              		.loc 1 174 0 discriminator 1
+ 825 082c 0730D5E5 		ldrb	r3, [r5, #7]	@ zero_extendqisi2
+ 826 0830 020053E3 		cmp	r3, #2
+ 827 0834 5B00001A 		bne	.L16
+ 828 0838 0230D5E5 		ldrb	r3, [r5, #2]	@ zero_extendqisi2
+ 829 083c 020053E3 		cmp	r3, #2
+ 830 0840 5800001A 		bne	.L16
+ 831 0844 2C30D5E5 		ldrb	r3, [r5, #44]	@ zero_extendqisi2
+ 832 0848 020053E3 		cmp	r3, #2
+ 833 084c 5500001A 		bne	.L16
+ 834 0850 0930D5E5 		ldrb	r3, [r5, #9]	@ zero_extendqisi2
+ 835 0854 020053E3 		cmp	r3, #2
+ 836 0858 5200001A 		bne	.L16
+ 837 085c 3530D5E5 		ldrb	r3, [r5, #53]	@ zero_extendqisi2
+ 838 0860 020053E3 		cmp	r3, #2
+ 839 0864 4F00001A 		bne	.L16
+ 175:OLL.c         ****         {
+ 176:OLL.c         ****             
+ 177:OLL.c         ****             rs_dreh(1, 90);
+ 840              		.loc 1 177 0
+ 841 0868 0100A0E3 		mov	r0, #1
+ 842 086c 5A10A0E3 		mov	r1, #90
+ 843 0870 FEFFFFEB 		bl	rs_dreh
+ 844              	.LVL112:
+ 178:OLL.c         ****             rs_dreh(-1, 90);
+ 845              		.loc 1 178 0
+ 846 0874 0000E0E3 		mvn	r0, #0
+ 847 0878 5A10A0E3 		mov	r1, #90
+ 848 087c FEFFFFEB 		bl	rs_dreh
+ 849              	.LVL113:
+ 179:OLL.c         ****             ds_dreh(-1, 90);
+ 850              		.loc 1 179 0
+ 851 0880 0000E0E3 		mvn	r0, #0
+ 852 0884 5A10A0E3 		mov	r1, #90
+ 853 0888 FEFFFFEB 		bl	ds_dreh
+ 854              	.LVL114:
+ 180:OLL.c         ****             ls_dreh(-1, 90);
+ 855              		.loc 1 180 0
+ 856 088c 0000E0E3 		mvn	r0, #0
+ 857 0890 5A10A0E3 		mov	r1, #90
+ 858 0894 FEFFFFEB 		bl	ls_dreh
+ 859              	.LVL115:
+ 181:OLL.c         ****             rs_dreh(-1, 90);
+ 860              		.loc 1 181 0
+ 861 0898 0000E0E3 		mvn	r0, #0
+ 862 089c 5A10A0E3 		mov	r1, #90
+ 863 08a0 FEFFFFEB 		bl	rs_dreh
+ 864              	.LVL116:
+ 182:OLL.c         ****             ls_dreh(1, 90);
+ 865              		.loc 1 182 0
+ 866 08a4 0100A0E3 		mov	r0, #1
+ 867 08a8 5A10A0E3 		mov	r1, #90
+ 868 08ac FEFFFFEB 		bl	ls_dreh
+ 869              	.LVL117:
  183:OLL.c         ****             rs_dreh(-1, 90);
- 864              		.loc 1 183 0
- 865 08a0 0000E0E3 		mvn	r0, #0
- 866 08a4 5A10A0E3 		mov	r1, #90
- 867 08a8 FEFFFFEB 		bl	rs_dreh
- 868              	.LVL117:
- 184:OLL.c         ****             ls_dreh(1, 90);
- 869              		.loc 1 184 0
- 870 08ac 0100A0E3 		mov	r0, #1
- 871 08b0 5A10A0E3 		mov	r1, #90
- 872 08b4 FEFFFFEB 		bl	ls_dreh
- 873              	.LVL118:
- 185:OLL.c         ****             rs_dreh(-1, 90);
- 874              		.loc 1 185 0
- 875 08b8 0000E0E3 		mvn	r0, #0
- 876 08bc 5A10A0E3 		mov	r1, #90
- 877 08c0 FEFFFFEB 		bl	rs_dreh
- 878              	.LVL119:
- 186:OLL.c         ****             ls_dreh(-1, 90);
- 879              		.loc 1 186 0
- 880 08c4 0000E0E3 		mvn	r0, #0
- 881 08c8 5A10A0E3 		mov	r1, #90
- 882 08cc FEFFFFEB 		bl	ls_dreh
- 883              	.LVL120:
- 187:OLL.c         ****             goto fertig;
- 884              		.loc 1 187 0
- 885 08d0 3A0000EA 		b	.L29
- 886              	.L28:
- 188:OLL.c         ****         }
- 189:OLL.c         ****         if((color_data[0][1]==2)&&(color_data[0][3]==2)&&(color_data[0][5]==2)&&(color_data[0][7]==
- 887              		.loc 1 189 0 discriminator 1
- 888 08d4 0730D5E5 		ldrb	r3, [r5, #7]	@ zero_extendqisi2
- 889 08d8 020053E3 		cmp	r3, #2
- 890 08dc 2100001A 		bne	.L9
- 891 08e0 0830D5E5 		ldrb	r3, [r5, #8]	@ zero_extendqisi2
- 892 08e4 020053E3 		cmp	r3, #2
- 893 08e8 1E00001A 		bne	.L9
- 894 08ec 2A30D5E5 		ldrb	r3, [r5, #42]	@ zero_extendqisi2
- 895 08f0 020053E3 		cmp	r3, #2
- 896 08f4 1B00001A 		bne	.L9
- 897 08f8 2130D5E5 		ldrb	r3, [r5, #33]	@ zero_extendqisi2
- 898 08fc 020053E3 		cmp	r3, #2
- 899 0900 1800001A 		bne	.L9
- 900 0904 3330D5E5 		ldrb	r3, [r5, #51]	@ zero_extendqisi2
- 901 0908 020053E3 		cmp	r3, #2
- 902 090c 1500001A 		bne	.L9
- 190:OLL.c         ****             //formular 27
- 191:OLL.c         ****         {
- 192:OLL.c         ****             
- 193:OLL.c         ****             rs_dreh(-1, 90);
- 903              		.loc 1 193 0
- 904 0910 0000E0E3 		mvn	r0, #0
- 905 0914 5A10A0E3 		mov	r1, #90
- 906 0918 FEFFFFEB 		bl	rs_dreh
- 907              	.LVL121:
- 194:OLL.c         ****             rs_dreh(1, 180);
- 908              		.loc 1 194 0
- 909 091c 0100A0E3 		mov	r0, #1
- 910 0920 B410A0E3 		mov	r1, #180
- 911 0924 FEFFFFEB 		bl	rs_dreh
- 912              	.LVL122:
- 195:OLL.c         ****             ls_dreh(1, 90);
- 913              		.loc 1 195 0
- 914 0928 0100A0E3 		mov	r0, #1
- 915 092c 5A10A0E3 		mov	r1, #90
- 916 0930 FEFFFFEB 		bl	ls_dreh
- 917              	.LVL123:
+ 870              		.loc 1 183 0
+ 871 08b0 0000E0E3 		mvn	r0, #0
+ 872 08b4 5A10A0E3 		mov	r1, #90
+ 873 08b8 FEFFFFEB 		bl	rs_dreh
+ 874              	.LVL118:
+ 184:OLL.c         ****             ls_dreh(-1, 90);
+ 875              		.loc 1 184 0
+ 876 08bc 0000E0E3 		mvn	r0, #0
+ 877 08c0 5A10A0E3 		mov	r1, #90
+ 878 08c4 FEFFFFEB 		bl	ls_dreh
+ 879              	.LVL119:
+ 185:OLL.c         ****             goto fertig;
+ 880              		.loc 1 185 0
+ 881 08c8 3A0000EA 		b	.L29
+ 882              	.L28:
+ 186:OLL.c         ****         }
+ 187:OLL.c         ****         if((color_data[0][1]==2)&&(color_data[0][3]==2)&&(color_data[0][5]==2)&&(color_data[0][7]==
+ 883              		.loc 1 187 0 discriminator 1
+ 884 08cc 0730D5E5 		ldrb	r3, [r5, #7]	@ zero_extendqisi2
+ 885 08d0 020053E3 		cmp	r3, #2
+ 886 08d4 2100001A 		bne	.L9
+ 887 08d8 0830D5E5 		ldrb	r3, [r5, #8]	@ zero_extendqisi2
+ 888 08dc 020053E3 		cmp	r3, #2
+ 889 08e0 1E00001A 		bne	.L9
+ 890 08e4 2A30D5E5 		ldrb	r3, [r5, #42]	@ zero_extendqisi2
+ 891 08e8 020053E3 		cmp	r3, #2
+ 892 08ec 1B00001A 		bne	.L9
+ 893 08f0 2130D5E5 		ldrb	r3, [r5, #33]	@ zero_extendqisi2
+ 894 08f4 020053E3 		cmp	r3, #2
+ 895 08f8 1800001A 		bne	.L9
+ 896 08fc 3330D5E5 		ldrb	r3, [r5, #51]	@ zero_extendqisi2
+ 897 0900 020053E3 		cmp	r3, #2
+ 898 0904 1500001A 		bne	.L9
+ 188:OLL.c         ****             //formular 27
+ 189:OLL.c         ****         {
+ 190:OLL.c         ****             
+ 191:OLL.c         ****             rs_dreh(-1, 90);
+ 899              		.loc 1 191 0
+ 900 0908 0000E0E3 		mvn	r0, #0
+ 901 090c 5A10A0E3 		mov	r1, #90
+ 902 0910 FEFFFFEB 		bl	rs_dreh
+ 903              	.LVL120:
+ 192:OLL.c         ****             rs_dreh(1, 180);
+ 904              		.loc 1 192 0
+ 905 0914 0100A0E3 		mov	r0, #1
+ 906 0918 B410A0E3 		mov	r1, #180
+ 907 091c FEFFFFEB 		bl	rs_dreh
+ 908              	.LVL121:
+ 193:OLL.c         ****             ls_dreh(1, 90);
+ 909              		.loc 1 193 0
+ 910 0920 0100A0E3 		mov	r0, #1
+ 911 0924 5A10A0E3 		mov	r1, #90
+ 912 0928 FEFFFFEB 		bl	ls_dreh
+ 913              	.LVL122:
+ 194:OLL.c         ****             rs_dreh(1, 90);
+ 914              		.loc 1 194 0
+ 915 092c 0100A0E3 		mov	r0, #1
+ 916 0930 5A10A0E3 		mov	r1, #90
+ 917 0934 FEFFFFEB 		bl	rs_dreh
+ 918              	.LVL123:
+ 195:OLL.c         ****             ls_dreh(-1, 90);
+ 919              		.loc 1 195 0
+ 920 0938 0000E0E3 		mvn	r0, #0
+ 921 093c 5A10A0E3 		mov	r1, #90
+ 922 0940 FEFFFFEB 		bl	ls_dreh
+ 923              	.LVL124:
  196:OLL.c         ****             rs_dreh(1, 90);
- 918              		.loc 1 196 0
- 919 0934 0100A0E3 		mov	r0, #1
- 920 0938 5A10A0E3 		mov	r1, #90
- 921 093c FEFFFFEB 		bl	rs_dreh
- 922              	.LVL124:
- 197:OLL.c         ****             ls_dreh(-1, 90);
- 923              		.loc 1 197 0
- 924 0940 0000E0E3 		mvn	r0, #0
- 925 0944 5A10A0E3 		mov	r1, #90
- 926 0948 FEFFFFEB 		bl	ls_dreh
- 927              	.LVL125:
- 198:OLL.c         ****             rs_dreh(1, 90);
- 928              		.loc 1 198 0
- 929 094c 0100A0E3 		mov	r0, #1
- 930 0950 5A10A0E3 		mov	r1, #90
- 931 0954 FEFFFFEB 		bl	rs_dreh
- 932              	.LVL126:
- 199:OLL.c         ****             ls_dreh(1, 90);
- 933              		.loc 1 199 0
- 934 0958 0100A0E3 		mov	r0, #1
- 935 095c 5A10A0E3 		mov	r1, #90
- 936 0960 FEFFFFEB 		bl	ls_dreh
- 937              	.LVL127:
- 200:OLL.c         ****             goto fertig;
- 938              		.loc 1 200 0
- 939 0964 150000EA 		b	.L29
- 940              	.L9:
- 100:OLL.c         ****         
- 941              		.loc 1 100 0
- 942 0968 080054E1 		cmp	r4, r8
- 943 096c BEFEFF1A 		bne	.L17
- 944              	.L11:
- 945 0970 120000EA 		b	.L29
- 946              	.L10:
- 122:OLL.c         ****         {
- 947              		.loc 1 122 0
- 948 0974 0530D5E5 		ldrb	r3, [r5, #5]	@ zero_extendqisi2
- 949 0978 020053E3 		cmp	r3, #2
- 950 097c FDFEFF0A 		beq	.L23
- 951              	.L12:
- 136:OLL.c         ****         {
- 952              		.loc 1 136 0
- 953 0980 0530D5E5 		ldrb	r3, [r5, #5]	@ zero_extendqisi2
- 954 0984 020053E3 		cmp	r3, #2
- 955 0988 28FFFF0A 		beq	.L24
- 956              	.L13:
- 151:OLL.c         ****         {
- 957              		.loc 1 151 0
- 958 098c 0530D5E5 		ldrb	r3, [r5, #5]	@ zero_extendqisi2
- 959 0990 020053E3 		cmp	r3, #2
- 960 0994 56FFFF0A 		beq	.L25
- 961              	.L14:
- 163:OLL.c         ****             //formular 25
- 962              		.loc 1 163 0
- 963 0998 0530D5E5 		ldrb	r3, [r5, #5]	@ zero_extendqisi2
- 964 099c 020053E3 		cmp	r3, #2
- 965 09a0 7BFFFF0A 		beq	.L26
- 966              	.L15:
- 176:OLL.c         ****         {
- 967              		.loc 1 176 0
- 968 09a4 0530D5E5 		ldrb	r3, [r5, #5]	@ zero_extendqisi2
- 969 09a8 020053E3 		cmp	r3, #2
- 970 09ac A0FFFF0A 		beq	.L27
- 971              	.L16:
- 189:OLL.c         ****             //formular 27
- 972              		.loc 1 189 0
- 973 09b0 0530D5E5 		ldrb	r3, [r5, #5]	@ zero_extendqisi2
- 974 09b4 020053E3 		cmp	r3, #2
- 975 09b8 EAFFFF1A 		bne	.L9
- 976 09bc C4FFFFEA 		b	.L28
- 977              	.L29:
- 201:OLL.c         ****         }
- 202:OLL.c         ****     }
- 203:OLL.c         ****        fertig:return 0;
- 204:OLL.c         **** }
- 978              		.loc 1 204 0
- 979 09c0 0000A0E3 		mov	r0, #0
- 980 09c4 10D08DE2 		add	sp, sp, #16
- 981              		@ sp needed
- 982 09c8 F081BDE8 		ldmfd	sp!, {r4, r5, r6, r7, r8, pc}
- 983              	.L31:
- 984              		.align	2
- 985              	.L30:
- 986 09cc 00000000 		.word	color_data
- 987 09d0 00000000 		.word	.LANCHOR0
- 988              		.cfi_endproc
- 989              	.LFE11:
- 990              		.fnend
- 992              		.section	.rodata
- 993              		.align	2
- 994              	.LANCHOR0 = . + 0
- 995              	.LC0:
- 996 0000 01000000 		.word	1
- 997 0004 05000000 		.word	5
- 998 0008 03000000 		.word	3
- 999 000c 04000000 		.word	4
- 1000              		.text
- 1001              	.Letext0:
- 1002              		.file 2 "/usr/local/carlson-minot/crosscompilers/lib/gcc/arm-none-linux-gnueabi/4.8.3/include/stdd
- 1003              		.file 3 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
- 1004              		.file 4 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
- 1005              		.file 5 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
- 1006              		.file 6 "main.h"
- 1007              		.file 7 "Side_dreh.h"
- 1008              		.file 8 "print_mode.h"
+ 924              		.loc 1 196 0
+ 925 0944 0100A0E3 		mov	r0, #1
+ 926 0948 5A10A0E3 		mov	r1, #90
+ 927 094c FEFFFFEB 		bl	rs_dreh
+ 928              	.LVL125:
+ 197:OLL.c         ****             ls_dreh(1, 90);
+ 929              		.loc 1 197 0
+ 930 0950 0100A0E3 		mov	r0, #1
+ 931 0954 5A10A0E3 		mov	r1, #90
+ 932 0958 FEFFFFEB 		bl	ls_dreh
+ 933              	.LVL126:
+ 198:OLL.c         ****             goto fertig;
+ 934              		.loc 1 198 0
+ 935 095c 150000EA 		b	.L29
+ 936              	.L9:
+  98:OLL.c         ****         
+ 937              		.loc 1 98 0
+ 938 0960 080054E1 		cmp	r4, r8
+ 939 0964 BEFEFF1A 		bne	.L17
+ 940              	.L11:
+ 941 0968 120000EA 		b	.L29
+ 942              	.L10:
+ 120:OLL.c         ****         {
+ 943              		.loc 1 120 0
+ 944 096c 0530D5E5 		ldrb	r3, [r5, #5]	@ zero_extendqisi2
+ 945 0970 020053E3 		cmp	r3, #2
+ 946 0974 FDFEFF0A 		beq	.L23
+ 947              	.L12:
+ 134:OLL.c         ****         {
+ 948              		.loc 1 134 0
+ 949 0978 0530D5E5 		ldrb	r3, [r5, #5]	@ zero_extendqisi2
+ 950 097c 020053E3 		cmp	r3, #2
+ 951 0980 28FFFF0A 		beq	.L24
+ 952              	.L13:
+ 149:OLL.c         ****         {
+ 953              		.loc 1 149 0
+ 954 0984 0530D5E5 		ldrb	r3, [r5, #5]	@ zero_extendqisi2
+ 955 0988 020053E3 		cmp	r3, #2
+ 956 098c 56FFFF0A 		beq	.L25
+ 957              	.L14:
+ 161:OLL.c         ****             //formular 25
+ 958              		.loc 1 161 0
+ 959 0990 0530D5E5 		ldrb	r3, [r5, #5]	@ zero_extendqisi2
+ 960 0994 020053E3 		cmp	r3, #2
+ 961 0998 7BFFFF0A 		beq	.L26
+ 962              	.L15:
+ 174:OLL.c         ****         {
+ 963              		.loc 1 174 0
+ 964 099c 0530D5E5 		ldrb	r3, [r5, #5]	@ zero_extendqisi2
+ 965 09a0 020053E3 		cmp	r3, #2
+ 966 09a4 A0FFFF0A 		beq	.L27
+ 967              	.L16:
+ 187:OLL.c         ****             //formular 27
+ 968              		.loc 1 187 0
+ 969 09a8 0530D5E5 		ldrb	r3, [r5, #5]	@ zero_extendqisi2
+ 970 09ac 020053E3 		cmp	r3, #2
+ 971 09b0 EAFFFF1A 		bne	.L9
+ 972 09b4 C4FFFFEA 		b	.L28
+ 973              	.L29:
+ 199:OLL.c         ****         }
+ 200:OLL.c         ****     }
+ 201:OLL.c         ****        fertig:return 0;
+ 202:OLL.c         **** }
+ 974              		.loc 1 202 0
+ 975 09b8 0000A0E3 		mov	r0, #0
+ 976 09bc 10D08DE2 		add	sp, sp, #16
+ 977              		@ sp needed
+ 978 09c0 F081BDE8 		ldmfd	sp!, {r4, r5, r6, r7, r8, pc}
+ 979              	.L31:
+ 980              		.align	2
+ 981              	.L30:
+ 982 09c4 00000000 		.word	color_data
+ 983 09c8 00000000 		.word	.LANCHOR0
+ 984              		.cfi_endproc
+ 985              	.LFE11:
+ 986              		.fnend
+ 988              		.section	.rodata
+ 989              		.align	2
+ 990              	.LANCHOR0 = . + 0
+ 991              	.LC0:
+ 992 0000 01000000 		.word	1
+ 993 0004 05000000 		.word	5
+ 994 0008 03000000 		.word	3
+ 995 000c 04000000 		.word	4
+ 996              		.text
+ 997              	.Letext0:
+ 998              		.file 2 "/usr/local/carlson-minot/crosscompilers/lib/gcc/arm-none-linux-gnueabi/4.8.3/include/stdd
+ 999              		.file 3 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
+ 1000              		.file 4 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
+ 1001              		.file 5 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/us
+ 1002              		.file 6 "main.h"
+ 1003              		.file 7 "Side_dreh.h"
+ 1004              		.file 8 "print_mode.h"
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 OLL.c
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cchgM80U.s:16     .text:0000000000000000 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cchgM80U.s:19     .text:0000000000000000 OLL
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cchgM80U.s:986    .text:00000000000009cc $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccykbdmH.s:16     .text:0000000000000000 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccykbdmH.s:19     .text:0000000000000000 OLL
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccykbdmH.s:982    .text:00000000000009c4 $d
                        .ARM.exidx:0000000000000000 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cchgM80U.s:993    .rodata:0000000000000000 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccykbdmH.s:989    .rodata:0000000000000000 $d
                      .debug_frame:0000000000000010 $d
 
 UNDEFINED SYMBOLS

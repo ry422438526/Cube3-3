@@ -187,11 +187,9 @@ void us_dreh(int dir,int dreh_Angel_u)                        //Oben_Schicht
 {
     klappen();
 #ifdef __linux__
-    sleep(1);
 #endif
     klappen();
 #ifdef __linux__
-    sleep(1);
 #endif
     drehen_unter(dir, dreh_Angel_u);
     Count++;
@@ -212,15 +210,12 @@ void fs_dreh(int dir,int dreh_Angel_f)                         //Vornen_Schicht
 {
 #ifdef __linux__
     arm_setpos(4);
-    sleep(1);
 #endif
     drehen(1);
 #ifdef __linux__
-    sleep(1);
 #endif
     klappen();
 #ifdef __linux__
-    sleep(1);
 #endif
     drehen_unter(dir, dreh_Angel_f);
     Count++;
@@ -232,15 +227,12 @@ void bs_dreh(int dir,int dreh_Angel_b)                         //Hintern_Schicht
 {
 #ifdef __linux__
     arm_setpos(4);
-    sleep(1);
 #endif
     drehen(-1);
 #ifdef __linux__
-    sleep(1);
 #endif
     klappen();
 #ifdef __linux__
-    sleep(1);
 #endif
     drehen_unter(dir, dreh_Angel_b);
     Count++;
@@ -253,7 +245,6 @@ void ls_dreh(int dir,int dreh_Angel_l)                         //linken_Schicht
 {
     klappen();
 #ifdef __linux__
-    sleep(1);
 #endif
     drehen_unter(dir, dreh_Angel_l);
     Count++;
@@ -266,15 +257,12 @@ void rs_dreh(int dir,int dreh_Angel_r)                          //rechten_Schich
 {
     klappen();
 #ifdef __linux__
-    sleep(1);
 #endif
     klappen();
 #ifdef __linux__
-    sleep(1);
 #endif
     klappen();
 #ifdef __linux__
-    sleep(1);
 #endif
     drehen_unter(dir, dreh_Angel_r);
     Count++;

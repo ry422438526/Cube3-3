@@ -140,7 +140,6 @@ int main(int argc, const char * argv[]) {
     arm_init();
     DrehTel_init();
     ColSen_init();
-    monitor();
     color_data[6][9]=farbe_scan();
     if (test()==0) {
         arm_close();
@@ -157,7 +156,7 @@ int main(int argc, const char * argv[]) {
         F2L();
         OLL();
         PLL();
-        arm_setpos
+        arm_setpos(4);
     }
     exit(0);
 #endif

@@ -144,7 +144,7 @@ int DrehTel_setpos(int Tel_soll)
     Tel_referenz=cOutputGetCount(1);
     
 #endif
-    sleep(1);
+   usleep(10000);
 #endif
     return 0;
 }

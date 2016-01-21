@@ -246,13 +246,13 @@
  170              		.file 7 "print_mode.h"
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 Test.c
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc5l2Jdu.s:16     .text:0000000000000000 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc5l2Jdu.s:19     .text:0000000000000000 test
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc5l2Jdu.s:57     .text:000000000000003c $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc5l2Jdu.s:65     .text:0000000000000054 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc5l2Jdu.s:152    .text:00000000000000ec $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cczvYf0s.s:16     .text:0000000000000000 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cczvYf0s.s:19     .text:0000000000000000 test
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cczvYf0s.s:57     .text:000000000000003c $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cczvYf0s.s:65     .text:0000000000000054 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cczvYf0s.s:152    .text:00000000000000ec $d
                        .ARM.exidx:0000000000000000 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cc5l2Jdu.s:159    .rodata.str1.4:0000000000000000 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//cczvYf0s.s:159    .rodata.str1.4:0000000000000000 $d
                      .debug_frame:0000000000000010 $d
 
 UNDEFINED SYMBOLS

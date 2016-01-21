@@ -380,24 +380,24 @@
  301              		.file 10 "/usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot/u
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 Farbe_motor.c
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccvlTPqx.s:16     .text:0000000000000000 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccvlTPqx.s:19     .text:0000000000000000 Farbe_init
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccvlTPqx.s:106    .text:0000000000000094 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYWxzub.s:16     .text:0000000000000000 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYWxzub.s:19     .text:0000000000000000 Farbe_init
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYWxzub.s:106    .text:0000000000000094 $d
                        .ARM.exidx:0000000000000000 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccvlTPqx.s:112    .text:000000000000009c $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccvlTPqx.s:115    .text:000000000000009c Farbe_setpos
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccvlTPqx.s:221    .text:0000000000000168 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccvlTPqx.s:227    .text:0000000000000170 $a
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccvlTPqx.s:230    .text:0000000000000170 Farbe_close
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYWxzub.s:112    .text:000000000000009c $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYWxzub.s:115    .text:000000000000009c Farbe_setpos
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYWxzub.s:221    .text:0000000000000168 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYWxzub.s:227    .text:0000000000000170 $a
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYWxzub.s:230    .text:0000000000000170 Farbe_close
                        .ARM.extab:0000000000000000 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccvlTPqx.s:263    .rodata:0000000000000000 Farbe_winkel
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccvlTPqx.s:289    .bss:0000000000000004 Farbe_ist
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccvlTPqx.s:285    .bss:0000000000000000 Farbe_referenz
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYWxzub.s:263    .rodata:0000000000000000 Farbe_winkel
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYWxzub.s:289    .bss:0000000000000004 Farbe_ist
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYWxzub.s:285    .bss:0000000000000000 Farbe_referenz
                             *COM*:0000000000000040 OutputInstance
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccvlTPqx.s:273    .rodata:000000000000001c MOTOR_PORT_D
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccvlTPqx.s:278    .rodata:0000000000000020 MOTOR_SPEED_D
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccvlTPqx.s:259    .rodata:0000000000000000 $d
-/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccvlTPqx.s:281    .bss:0000000000000000 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYWxzub.s:273    .rodata:000000000000001c MOTOR_PORT_D
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYWxzub.s:278    .rodata:0000000000000020 MOTOR_SPEED_D
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYWxzub.s:259    .rodata:0000000000000000 $d
+/var/folders/x0/118sfpkj75v4t4_qgl0ndwr00000gn/T//ccYWxzub.s:281    .bss:0000000000000000 $d
                      .debug_frame:0000000000000010 $d
 
 UNDEFINED SYMBOLS
